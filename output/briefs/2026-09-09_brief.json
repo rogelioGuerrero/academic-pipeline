@@ -1,0 +1,70 @@
+{
+  "suggestions": [
+    {
+      "titulo": "El Niño y el aumento del desempleo juvenil en América Latina",
+      "noticia_inspiradora": "Fri 4 Sept 2026 - BoM forecasts strongest El Niño on record as research points to ‘alarming’ climate change influence",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "GDP growth (annual %)",
+        "Employment in agriculture (% of total employment)",
+        "Vulnerable employment (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Intensidad del El Niño ↔ caída del empleo agrícola",
+        "Intensidad del El Niño ↔ aumento del desempleo juvenil",
+        "Empleo vulnerable ↔ variaciones del PIB durante eventos climáticos"
+      ],
+      "justificacion": "Disponemos de indicadores de empleo juvenil, empleo agrícola y empleo vulnerable que permiten cuantificar cómo un fenómeno climático extremo como el El Niño afecta al mercado laboral y al crecimiento económico en la región."
+    },
+    {
+      "titulo": "Conectividad digital como amortiguador frente a choques climáticos",
+      "noticia_inspiradora": "Spain calls for EU climate resilience overhaul with tougher rules and new funding",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "GDP per capita (current US$)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Government expenditure on education (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Penetración de internet ↔ resiliencia del PIB ante eventos de El Niño",
+        "Uso de internet ↔ reducción del aumento del desempleo juvenil en crisis climáticas",
+        "Gasto en educación + conectividad ↔ mitigación de impactos económicos"
+      ],
+      "justificacion": "Al combinar datos de tecnología, economía y educación, se puede analizar si la mayor digitalización ayuda a amortiguar los efectos negativos de fenómenos climáticos sobre el empleo y el ingreso per cápita."
+    },
+    {
+      "titulo": "Inversión en educación y su efecto mitigador en la vulnerabilidad laboral ante el El Niño",
+      "noticia_inspiradora": "Spain calls for EU climate resilience overhaul with tougher rules and new funding",
+      "indicadores_respaldan": [
+        "Government expenditure on education (% of GDP)",
+        "Youth literacy rate (% of people 15-24)",
+        "Vulnerable employment (% of total employment)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Mayor gasto en educación ↔ disminución del empleo vulnerable durante eventos climáticos",
+        "Alfabetización juvenil ↔ menor aumento del desempleo juvenil bajo choques de El Niño",
+        "Educación + crecimiento del PIB ↔ mayor capacidad de recuperación"
+      ],
+      "justificacion": "Los indicadores de gasto educativo y alfabetización juvenil permiten evaluar si la inversión en capital humano reduce la exposición de los trabajadores vulnerables a los impactos económicos del El Niño."
+    },
+    {
+      "titulo": "Desigualdad y empleo vulnerable en la era post‑El Niño",
+      "noticia_inspiradora": "Fri 4 Sept 2026 - BoM forecasts strongest El Niño on record as research points to ‘alarming’ climate change influence",
+      "indicadores_respaldan": [
+        "Gini index (inequality, index, Brazil)",
+        "Vulnerable employment (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Índice de Gini ↔ proporción de empleo vulnerable",
+        "Desigualdad ↔ impacto del El Niño en el PIB per cápita",
+        "Desigualdad ↔ variación del desempleo juvenil tras eventos climáticos"
+      ],
+      "justificacion": "Al cruzar datos de desigualdad con empleo vulnerable y PIB per cápita, se puede evidenciar cómo la distribución del ingreso influye en la capacidad de los países latinoamericanos para absorber choques climáticos extremos."
+    }
+  ],
+  "topic": "Impacto del récord de El Niño 2026 en el mercado laboral juvenil y vulnerable de América Latina",
+  "angle": "Analizar, con datos reales, cómo la mayor intensidad del El Niño proyectada para 2026 está incrementando el desempleo juvenil y desplazando a los trabajadores vulnerables fuera del sector agrícola, y evaluar el papel mitigador de la educación y la conectividad digital en la resiliencia económica de la región."
+}

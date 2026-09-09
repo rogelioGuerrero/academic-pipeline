@@ -1,0 +1,74 @@
+name: Daily Research Pipeline
+
+on:
+  schedule:
+    # 8am GMT-6 = 14:00 UTC — runs after job-hunter's 7am run
+    - cron: '0 14 * * *'
+  workflow_dispatch: {}
+  repository_dispatch:
+    types: [news-ready]
+
+concurrency:
+  group: daily-research
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: |
+          pip install numpy scipy
+
+      - name: Fetch news_found.json from job-hunter
+        run: |
+          mkdir -p ../job-hunter
+          # Try downloading from job-hunter repo (raw file on main branch)
+          curl -sL "https://raw.githubusercontent.com/rogelioGuerrero/job-hunter/main/news_found.json" -o ../job-hunter/news_found.json
+          # Verify it's valid JSON
+          python -c "import json; json.load(open('../job-hunter/news_found.json')); print('news_found.json OK')"
+        continue-on-error: false
+
+      - name: Restore fetch cache
+        uses: actions/cache@v5
+        with:
+          path: output/raw/fetched-data.json
+          key: fetch-cache-${{ hashFiles('scripts/fetch-sources.mjs') }}
+          restore-keys: |
+            fetch-cache-
+
+      - name: Run research pipeline
+        run: node scripts/research.mjs
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+
+      - name: Commit artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add output/briefs/ output/papers/ output/raw/compute-results.json 2>/dev/null || true
+          git commit -m "Daily research paper - $(date -u +%Y-%m-%d)" || echo "No changes to commit"
+          git push
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: research-${{ github.run_id }}
+          path: |
+            output/briefs/
+            output/papers/
+            output/raw/compute-results.json
+          retention-days: 30

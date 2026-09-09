@@ -1,0 +1,22 @@
+{
+  "allVerified": false,
+  "results": [
+    {
+      "claim": "**Investigación académica – “El impacto de la inteligencia artificial en el empleo juvenil en América Latina: perspectivas 2025‑2030”**  \n*(Enfoque en datos y fuentes 2024‑2026)*  \n\n---\n\n## 1️⃣ Estadísticas clave (2024‑2026)  \n\n| Tema | Estadística | Fuente (URL) | Fecha de publicación / acceso |\n|------|-------------|--------------|--------------------------------|\n| **Tasa de desempleo juvenil (15‑29 años) en América Latina (2024)** | 22,8 % promedio regional; 27,4 % en México, 19,1 % en Chile",
+      "sourceUrl": "https://databank.worldbank.org/source/world-development-indicators",
+      "verified": false,
+      "evidence": "El fragmento de la página proporcionado muestra la interfaz del World Bank DataBank y la descripción de cómo crear indicadores personalizados, pero no incluye ninguna cifra específica de la tasa de desempleo juvenil en América Latina para 2024, ni los valores de 22,8 %, 27,4 % o 19,1 %. No se encuentra el dato solicitado en el texto.",
+      "confidence": "alta"
+    }
+  ],
+  "rejected": [
+    {
+      "claim": "**Investigación académica – “El impacto de la inteligencia artificial en el empleo juvenil en América Latina: perspectivas 2025‑2030”**  \n*(Enfoque en datos y fuentes 2024‑2026)*  \n\n---\n\n## 1️⃣ Estadísticas clave (2024‑2026)  \n\n| Tema | Estadística | Fuente (URL) | Fecha de publicación / acceso |\n|------|-------------|--------------|--------------------------------|\n| **Tasa de desempleo juvenil (15‑29 años) en América Latina (2024)** | 22,8 % promedio regional; 27,4 % en México, 19,1 % en Chile",
+      "reason": "El fragmento de la página proporcionado muestra la interfaz del World Bank DataBank y la descripción de cómo crear indicadores personalizados, pero no incluye ninguna cifra específica de la tasa de desempleo juvenil en América Latina para 2024, ni los valores de 22,8 %, 27,4 % o 19,1 %. No se encuentra el dato solicitado en el texto.",
+      "url": "https://databank.worldbank.org/source/world-development-indicators"
+    }
+  ],
+  "urlsChecked": 8,
+  "sourcesFetched": 1,
+  "summary": "0/1 verificados, 1 rechazados"
+}

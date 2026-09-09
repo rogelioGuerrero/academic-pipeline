@@ -1,0 +1,7 @@
+.venv/
+node_modules/
+output/raw/fetched-data.json
+output/raw/compute-input.json
+*.pyc
+__pycache__/
+.env

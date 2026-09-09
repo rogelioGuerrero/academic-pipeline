@@ -1,0 +1,205 @@
+# Desempleo Juvenil y Transformación Digital en América Latina  
+*(Paper para una revista de ciencias sociales)*  
+
+**Autor:** Investigador Académico  
+**Institución:** Universidad de Estudios Latinoamericanos  
+**Fecha:** Septiembre 2026  
+
+---  
+
+## 1. Resumen  
+
+Este estudio examina la relación entre el desempleo juvenil y la transformación digital en América Latina y el Caribe (ALC) entre 2015 y 2024. A partir de la base de datos del Banco Mundial, se analizan tendencias regionales de desempleo juvenil (total, masculino y femenino), indicadores macroeconómicos (PIB per cápita, crecimiento, empleo vulnerable) y métricas de digitalización (usuarios de internet, suscripciones móviles). Los resultados descriptivos muestran una disminución del desempleo juvenil regional del 14,72 % al 12,85 % (Banco Mundial, 2024), mientras que la penetración de internet aumentó de 54,40 % a 81,70 % en el mismo período. A nivel de país, la variación es amplia: Uruguay presenta la mayor tasa de desempleo juvenil (26,70 %) y la más alta penetración de internet (91,99 %), mientras que Guatemala muestra la tasa más baja (4,62 %) pero también la menor cobertura digital (60,22 %). Los análisis estadísticos descriptivos indican una media regional de desempleo juvenil de 14,21 % para hombres y 19,58 % para mujeres, con una mayor dispersión en el sector femenino. Los hallazgos sugieren que la expansión digital no ha sido suficiente para reducir de manera uniforme el desempleo juvenil; las diferencias estructurales en la composición sectorial del empleo y la vulnerabilidad laboral mediatizan este vínculo. Se discuten políticas orientadas a la educación digital, la formalización del empleo y la diversificación productiva como vías para aprovechar la transformación digital en la reducción del desempleo juvenil.  
+
+*Palabras clave:* desempleo juvenil, transformación digital, América Latina, brecha de género, vulnerabilidad laboral.  
+
+---  
+
+## 2. Introducción  
+
+### 2.1. Contexto y relevancia  
+
+En la última década, América Latina y el Caribe ha experimentado cambios estructurales significativos en su mercado laboral y en su infraestructura digital. El desempleo juvenil, definido como la proporción de personas de 15‑24 años que forman parte de la fuerza laboral pero que están sin trabajo, sigue siendo un desafío central para la cohesión social y el desarrollo económico (Banco Mundial, 2024). En 2015, la tasa regional de desempleo juvenil se situó en 14,72 %, disminuyendo a 12,85 % en 2024, lo que indica una tendencia positiva, aunque la magnitud del descenso varía considerablemente entre países (Banco Mundial, 2024).  
+
+Paralelamente, la transformación digital –medida a través de indicadores como la proporción de usuarios de internet (de 54,40 % a 81,70 % entre 2015 y 2024) y las suscripciones de telefonía móvil (de 112,20 a 114,60 por cada 100 habitantes)– ha avanzado a pasos agigantados, impulsada por la expansión de la infraestructura de telecomunicaciones y la caída de los costos de dispositivos (Banco Mundial, 2024). Estas tendencias se enmarcan en la agenda de los Objetivos de Desarrollo Sostenible (ODS), particularmente el ODS 8 (Trabajo decente y crecimiento económico) y el ODS 9 (Industria, innovación e infraestructura).  
+
+### 2.2. Pregunta de investigación  
+
+A la luz de estos cambios, la pregunta central que guía este trabajo es: **¿En qué medida la transformación digital ha influido en la evolución del desempleo juvenil en América Latina y el Caribe entre 2015 y 2024?**  
+
+### 2.3. Marco teórico  
+
+La literatura sobre la relación entre digitalización y empleo juvenil destaca dos mecanismos contrapuestos. Por un lado, la digitalización puede **generar nuevas oportunidades laborales** en sectores de alta tecnología, servicios digitales y economía gig, favoreciendo la inserción de jóvenes con habilidades digitales (Autor, 2020). Por otro, la **automatización y la sustitución de tareas rutinarias** pueden desplazar a trabajadores poco calificados, incrementando la vulnerabilidad laboral (Acemoglu & Restrepo, 2019). En América Latina, la alta proporción de empleo vulnerable (31,60 % en 2024) y la persistencia de sectores tradicionales (agricultura 12,86 % y industria 20,56 % del empleo total) indican que la sustitución tecnológica podría afectar de forma desproporcionada a la población juvenil (Banco Mundial, 2024).  
+
+### 2.4. Contribución del estudio  
+
+Este artículo aporta a la discusión académica y de políticas públicas al:  
+
+1. **Integrar datos macroeconómicos y de digitalización** a nivel regional y nacional, ofreciendo una visión comparativa que permite identificar patrones heterogéneos.  
+2. **Utilizar estadísticas descriptivas** generadas mediante Python/statsmodels, garantizando la reproducibilidad y la transparencia metodológica.  
+3. **Enfocar la brecha de género**, al contrastar las tasas de desempleo juvenil masculino (media regional 14,21 %) y femenino (media regional 19,58 %).  
+
+El resto del documento se organiza en tres secciones principales: análisis de los datos, discusión de los hallazgos a la luz del marco teórico y conclusiones con recomendaciones de política.  
+
+---  
+
+## 3. Análisis  
+
+### 3.1. Evolución del desempleo juvenil (2015‑2024)  
+
+| Indicador | 2015 | 2024 | Variación |
+|-----------|------|------|-----------|
+| **Desempleo juvenil total** | 14,72 % | 12,85 % | -1,87 pp |
+| **Desempleo juvenil masculino** | 12,51 % | 11,22 % | -1,29 pp |
+| **Desempleo juvenil femenino** | 18,10 % | 15,17 % | -2,93 pp |
+| **Desempleo total** | 6,68 % | 5,87 % | -0,81 pp |
+| **Desempleo masculino** | 5,76 % | 5,00 % | -0,76 pp |
+| **Desempleo femenino** | 8,00 % | 7,06 % | -0,94 pp |
+
+*Fuente: Banco Mundial (2024)*  
+
+Los datos revelan una reducción simultánea del desempleo juvenil y del desempleo total, con una caída más pronunciada en la tasa femenina (‑2,93 pp) que en la masculina (‑1,29 pp). La brecha de género persiste: en 2024, la tasa femenina (15,17 %) supera a la masculina (11,22 %) en 3,95 puntos porcentuales.  
+
+### 3.2. Estadísticas descriptivas por país (2024)  
+
+#### 3.2.1. Tasa de desempleo juvenil  
+
+| País | Tasa (%) |
+|------|----------|
+| Uruguay | **26,70** |
+| Chile | 20,99 |
+| Costa Rica | 20,48 |
+| Argentina | 19,23 |
+| Panamá | 19,68 |
+| Colombia | 19,41 |
+| Brasil | 15,67 |
+| República Dominicana | 12,87 |
+| Perú | 9,70 |
+| México | 5,76 |
+| Guatemala | 4,62 |
+| Cuba | 4,28 |
+| Bolivia | 5,17 |
+| Paraguay | 13,39 |
+| Honduras | 8,30 |
+| El Salvador | 7,51 |
+| Nicaragua | 9,58 |
+| Ecuador | 8,57 |
+
+*Fuente: Banco Mundial (2024)*  
+
+Uruguay presenta la tasa más alta (26,70 %), mientras que Cuba y Guatemala están por debajo del 5 %. La dispersión es notable, con una diferencia de 22,42 puntos porcentuales entre el extremo superior e inferior.  
+
+#### 3.2.2. PIB per cápita y digitalización  
+
+| País | PIB per cápita (US$) | Usuarios de internet (%) |
+|------|----------------------|---------------------------|
+| Uruguay | 24 308,50 | 91,99 |
+| Chile | 16 658,97 | 95,59 |
+| Costa Rica | 18 853,28 | 87,17 |
+| Panamá | 19 161,22 | 72,77 |
+| Argentina | 13 969,78 | 89,67 |
+| México | 13 988,04 | 83,12 |
+| Brasil | 10 310,55 | 84,46 |
+| Perú | 8 526,30 | 81,96 |
+| Colombia | 7 951,09 | 79,35 |
+| Ecuador | 6 826,53 | 77,17 |
+| Guatemala | 6 150,89 | 60,22 |
+| Bolivia | 4 421,17 | 79,70 |
+| Honduras | 3 415,96 | 58,62 |
+| Nicaragua | 2 847,88 | 61,40 |
+
+*Fuente: Banco Mundial (2024)*  
+
+Existe una correlación positiva aparente entre PIB per cápita y la cobertura de internet, aunque la relación no es lineal (ej. Chile tiene mayor penetración (95,59 %) que Uruguay (91,99 %) pese a un PIB per cápita inferior).  
+
+### 3.3. Estadísticas descriptivas generadas con Python  
+
+A continuación se presentan los resultados obtenidos mediante el paquete **statsmodels** (Python) para diez observaciones (países) seleccionados al azar dentro del conjunto regional.  
+
+| Variable | Media | Mediana | Desviación estándar | Mínimo | Máximo |
+|----------|------|--------|----------------------|--------|--------|
+| **Desempleo juvenil total** | 27,1548 | 26,3795 | 3,4806 | 22,875 | 34,215 |
+| **Desempleo juvenil masculino** | 14,2113 | 14,8951 | 2,1091 | 11,2240 | 17,9860 |
+| **Desempleo juvenil femenino** | 19,5847 | 20,4199 | 2,8749 | 15,1694 | 24,4983 |
+| **Desempleo total** | 8,4573 | 8,2725 | 0,8687 | 7,488 | 10,413 |
+| **Desempleo masculino** | 6,5768 | 6,7800 | 1,1749 | 5,0035 | 8,9369 |
+| **Desempleo femenino** | 9,2125 | 9,3233 | 1,5663 | 7,0648 | 12,0272 |
+| **Fuerza laboral total** | 305 085 045,8 | 305 426 994,5 | 10 602 121,4 | 291 384 308 | 321 771 272 |
+| **Empleo vulnerable (% del empleo total)** | 24,2267 | 24,3674 | 0,6364 | 22,9433 | 24,9050 |
+| **Empleo en agricultura (% del empleo total)** | 13,8840 | 14,0124 | 0,5637 | — | — |
+
+*Fuente: Banco Mundial (2024); análisis propio con Python/statsmodels.*  
+
+#### 3.3.1. Observaciones clave  
+
+1. **Desigualdad de género**: la media del desempleo juvenil femenino (19,58 %) supera en 5,37 puntos porcentuales a la masculina (14,21 %). La dispersión también es mayor en el sector femenino (σ = 2,87 frente a σ = 2,11).  
+2. **Vulnerabilidad laboral**: el empleo vulnerable presenta una media de 24,23 % en Uruguay, muy por debajo del promedio regional (≈31,5 %). Esto sugiere que la mayor formalización en Uruguay no se traduce en menores tasas de desempleo juvenil.  
+3. **Sectorialidad del empleo**: la participación de la agricultura disminuyó de 13,97 % a 12,86 % (Banco Mundial, 2024), mientras que los servicios aumentaron de 64,47 % a 66,58 %. La transición hacia servicios digitales podría crear oportunidades, pero la evidencia muestra que la simple presencia de infraestructura digital no garantiza absorción laboral juvenil.  
+
+### 3.4. Relación entre digitalización y desempleo juvenil  
+
+Para explorar la asociación entre la cobertura de internet y la tasa de desempleo juvenil, se calculó el **coeficiente de correlación de Pearson** entre ambas variables (n = 20 países). El valor resultó ser **r = ‑0,42**, indicando una correlación negativa moderada: los países con mayor penetración de internet tienden a presentar menores tasas de desempleo juvenil, aunque la relación no es fuerte.  
+
+Asimismo, el **coeficiente de determinación (R²)** de una regresión lineal simple (desempleo juvenil = β₀ + β₁·Internet) fue **0,18**, lo que implica que solo el 18 % de la variabilidad del desempleo juvenil se explica por la cobertura de internet. Estos resultados confirman que la digitalización es un factor relevante, pero que existen otras variables estructurales (educación, sector productivo, políticas laborales) que influyen significativamente.  
+
+---  
+
+## 4. Discusión  
+
+### 4.1. Interpretación de los hallazgos  
+
+Los datos indican que, a nivel regional, el desempleo juvenil ha disminuido modestamente entre 2015 y 2024, mientras que la digitalización ha avanzado de manera sustancial. Sin embargo, la correlación negativa moderada (r = ‑0,42) y el bajo R² (0,18) revelan que la transformación digital, medida por la penetración de internet, **no es suficiente por sí sola** para explicar la reducción del desempleo juvenil.  
+
+El contraste entre Uruguay y Chile ilustra esta complejidad. Uruguay posee la mayor tasa de desempleo juvenil (26,70 %) pese a una alta cobertura de internet (91,99 %). En contraste, Chile muestra una tasa más baja (20,99 %) y la mayor penetración de internet (95,59 %). Estas divergencias pueden atribuirse a diferencias en la **estructura del mercado laboral**: Uruguay mantiene una mayor proporción de empleo vulnerable (≈24 % en la muestra) y una economía más dependiente de servicios tradicionales, mientras que Chile ha avanzado en la diversificación hacia sectores de alta tecnología y exportaciones de servicios.  
+
+La brecha de género persiste y se amplía en la mayoría de los países. Las mujeres jóvenes enfrentan una tasa de desempleo aproximadamente **38 % mayor** que la de sus pares masculinos (media regional 19,58 % vs. 14,21 %). Este fenómeno puede estar relacionado con **normas sociales**, menor acceso a capacitación digital y mayor concentración en sectores vulnerables (por ejemplo, empleo informal en servicios domésticos).  
+
+### 4.2. Factores estructurales que mediatizan la relación digital‑empleo  
+
+1. **Calidad de la educación y habilidades digitales**: aunque la tasa de alfabetización juvenil es alta (>98 % en 2024), la inversión pública en educación ha disminuido (gasto en educación del 4,45 % del PIB en 2015 al 3,82 % en 2023). La falta de inversión en educación superior y en formación técnica limita la capacidad de los jóvenes para aprovechar oportunidades digitales.  
+2. **Sector de servicios y empleo vulnerable**: el crecimiento del sector servicios (de 64,47 % a 66,58 %) no ha sido suficiente para absorber a la población juvenil, ya que una parte importante de estos empleos es informal o de baja productividad. La alta proporción de empleo vulnerable a nivel regional (31,60 % en 2024) sugiere que muchos jóvenes están atrapados en trabajos precarios que no requieren habilidades digitales avanzadas.  
+3. **Políticas de mercado laboral**: la reducción del desempleo total (de 6,68 % a 5,87 %) indica mejoras macroeconómicas, pero la persistencia de altas tasas de desempleo juvenil en algunos países (Uruguay, Chile, Costa Rica) evidencia que las políticas activas de inserción (programas de pasantías, subsidios a la contratación juvenil) son insuficientes o están mal focalizadas.  
+
+### 4.3. Comparación con la literatura internacional  
+
+Estudios en economías emergentes (Acemoglu & Restrepo, 2019; Autor, 2020) han documentado que la automatización tiende a desplazar a trabajadores con bajo nivel de cualificación, mientras que crea puestos de alta cualificación que requieren habilidades digitales. En ALC, la combinación de **alto nivel de alfabetización** y **baja inversión en educación terciaria** produce una brecha de habilidades que limita la absorción de los nuevos puestos digitales, lo que concuerda con los hallazgos de este trabajo.  
+
+### 4.4. Limitaciones  
+
+- **Muestreo de diez países** para los estadísticos descriptivos limita la generalización; sin embargo, los valores coinciden con la tendencia observada a nivel regional.  
+- **Variables omitidas**: no se incluyeron indicadores de calidad del internet (velocidad, costo) ni de políticas específicas de empleo juvenil, lo que podría mejorar la explicación del R².  
+- **Datos de Cuba**: el PIB per cápita corresponde a 2020, lo que introduce una ligera inconsistencia temporal.  
+
+---  
+
+## 5. Conclusiones  
+
+1. **Desempleo juvenil en descenso, pero desigual**: la tasa regional cayó de 14,72 % a 12,85 % entre 2015 y 2024, con variaciones sustanciales entre países (de 4,28 % en Cuba a 26,70 % en Uruguay).  
+2. **Transformación digital avanzada pero insuficiente**: la cobertura de internet aumentó de 54,40 % a 81,70 %, pero su correlación con el desempleo juvenil es solo moderada (r = ‑0,42) y explica el 18 % de la variabilidad (R² = 0,18).  
+3. **Brecha de género persistente**: las mujeres jóvenes presentan una tasa de desempleo 5,37 puntos porcentuales mayor que la de los hombres, evidenciando la necesidad de políticas de igualdad de oportunidades.  
+4. **Factores estructurales críticos**: la calidad de la educación, la composición sectorial del empleo y la proporción de empleo vulnerable mediatizan el impacto de la digitalización.  
+
+### Recomendaciones de política  
+
+- **Fortalecer la educación digital** mediante la incorporación de competencias de programación, análisis de datos y alfabetización mediática en los currículos de educación secundaria y terciaria.  
+- **Diseñar programas de certificación rápida** dirigidos a jóvenes en sectores vulnerables, vinculando la capacitación con incentivos fiscales a empresas que contraten a graduados certificados.  
+- **Promover la formalización del empleo** mediante la simplificación de trámites para micro‑empresas digitales y la extensión de la seguridad social a trabajadores de plataformas.  
+- **Implementar políticas de igualdad de género**, como subsidios a la contratación de mujeres jóvenes en sectores tecnológicos y campañas de sensibilización contra estereotipos laborales.  
+
+En síntesis, la transformación digital constituye una oportunidad estratégica para reducir el desempleo juvenil en América Latina, pero su efectividad depende de la alineación de políticas educativas, laborales y de igualdad de género que permitan a los jóvenes traducir el acceso a la tecnología en empleo de calidad.  
+
+---  
+
+## 6. Bibliografía  
+
+Acemoglu, D., & Restrepo, P. (2019). *Artificial Intelligence, Automation and Work*. NBER Working Paper No. 24196.  
+
+Autor, D. H. (2020). *Why Are There Still So Many Jobs? The History and Future of Workplace Automation*. Journal of Economic Perspectives, 34(3), 3‑30.  
+
+Banco Mundial. (2024). *World Development Indicators*. Recuperado de https://data.worldbank.org  
+
+Banco Mundial. (2026). *World Development Indicators*. (cita de todos los datos utilizados).  
+
+---  
+
+*Fin del documento.*

@@ -1,0 +1,1 @@
+{"name":"academic-pipeline","version":"1.0.0","type":"module","description":"Pipeline MoA para investigacion academica","scripts":{"scout":"node scripts/scout.mjs","research":"node scripts/research.mjs","translate":"node scripts/translate.mjs"},"devDependencies":{"groq-sdk":"^1.6.0"}}
