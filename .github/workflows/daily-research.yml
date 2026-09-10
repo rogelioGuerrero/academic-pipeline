@@ -8,6 +8,9 @@ on:
   repository_dispatch:
     types: [news-ready]
 
+permissions:
+  contents: write
+
 concurrency:
   group: daily-research
   cancel-in-progress: false
@@ -29,17 +32,40 @@ jobs:
           python-version: '3.12'
 
       - name: Install Python dependencies
-        run: |
-          pip install numpy scipy
+        run: pip install numpy scipy
+
+      - name: Install Node dependencies
+        run: npm ci || npm install
 
       - name: Fetch news_found.json from job-hunter
         run: |
           mkdir -p ../job-hunter
-          # Try downloading from job-hunter repo (raw file on main branch)
+          # job-hunter is private — try raw URL first, then API with GITHUB_TOKEN
           curl -sL "https://raw.githubusercontent.com/rogelioGuerrero/job-hunter/main/news_found.json" -o ../job-hunter/news_found.json
-          # Verify it's valid JSON
-          python -c "import json; json.load(open('../job-hunter/news_found.json')); print('news_found.json OK')"
-        continue-on-error: false
+          if python -c "import json; json.load(open('../job-hunter/news_found.json'))" 2>/dev/null; then
+            echo "news_found.json OK (public)"
+          else
+            echo "Raw fetch failed (private repo). Trying GitHub API..."
+            curl -sL -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/rogelioGuerrero/job-hunter/contents/news_found.json" \
+              -o ../job-hunter/api-response.json
+            python -c "
+          import json, base64, sys
+          try:
+              r = json.load(open('../job-hunter/api-response.json'))
+              if 'content' in r:
+                  decoded = base64.b64decode(r['content']).decode('utf-8')
+                  open('../job-hunter/news_found.json','w',encoding='utf-8').write(decoded)
+                  print('news_found.json OK (API)')
+              else:
+                  print('API error:', r.get('message','unknown'))
+                  sys.exit(1)
+          except Exception as e:
+              print('Failed:', e)
+              sys.exit(1)
+            "
+          fi
+        continue-on-error: true
 
       - name: Restore fetch cache
         uses: actions/cache@v5

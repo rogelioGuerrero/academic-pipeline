@@ -283,6 +283,114 @@
   },
   "correlations": [
     {
+      "x": "Vulnerable employment (% of total employment)",
+      "y": "Youth unemployment (% of labor force 15-24)",
+      "pearson_r": 0.7296115583068858,
+      "pearson_p": 0.016618916232800086,
+      "pearson_ci_95": [
+        0.18493329159467248,
+        0.9313804804775083
+      ],
+      "spearman_rho": 0.7696969696969697,
+      "spearman_p": 0.009221952722215994,
+      "significant": true,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %"
+    },
+    {
+      "x": "Vulnerable employment (% of total employment)",
+      "y": "Total unemployment (% of total labor force)",
+      "pearson_r": 0.6754476921038688,
+      "pearson_p": 0.032074671210471195,
+      "pearson_ci_95": [
+        0.07971462389208066,
+        0.9156639148093717
+      ],
+      "spearman_rho": 0.7333333333333332,
+      "spearman_p": 0.015800596250571577,
+      "significant": true,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %"
+    },
+    {
+      "x": "Vulnerable employment (% of total employment)",
+      "y": "GDP per capita (current US$)",
+      "pearson_r": 0.31826307069221604,
+      "pearson_p": 0.3701362140168525,
+      "pearson_ci_95": [
+        -0.38940385665895505,
+        0.7896584021884331
+      ],
+      "spearman_rho": 0.12727272727272726,
+      "spearman_p": 0.7260570147627894,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs USD"
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24)",
+      "y": "Total unemployment (% of total labor force)",
+      "pearson_r": 0.9844197044530445,
+      "pearson_p": 2.5301008303424067e-7,
+      "pearson_ci_95": [
+        0.9332145398055329,
+        0.9964376367625085
+      ],
+      "spearman_rho": 0.9393939393939393,
+      "spearman_p": 0.00005484052998513669,
+      "significant": true,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %"
+    },
+    {
       "x": "Youth unemployment (% of labor force 15-24)",
       "y": "GDP per capita (current US$)",
       "pearson_r": -0.29385369988423704,
@@ -310,18 +418,40 @@
       "units": "% vs USD"
     },
     {
-      "x": "Youth unemployment, male (% of male labor force 15-24)",
+      "x": "Total unemployment (% of total labor force)",
       "y": "GDP per capita (current US$)",
-      "error": "country mismatch: LCN vs URY"
+      "pearson_r": -0.3480992242343829,
+      "pearson_p": 0.32428745510143175,
+      "pearson_ci_95": [
+        -0.8019632216449943,
+        0.3605614518148475
+      ],
+      "spearman_rho": -0.07878787878787878,
+      "spearman_p": 0.8287173946974606,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs USD"
     },
     {
-      "x": "Youth unemployment, female (% of female labor force 15-24)",
-      "y": "GDP per capita (current US$)",
-      "error": "country mismatch: LCN vs URY"
+      "x": "Internet users (% of population)",
+      "y": "Mobile cellular subscriptions (per 100 people)",
+      "error": "country mismatch: URY vs LCN"
     },
     {
-      "x": "Youth unemployment (% of labor force 15-24)",
-      "y": "Internet users (% of population)",
+      "x": "Internet users (% of population)",
+      "y": "Youth unemployment (% of labor force 15-24)",
       "pearson_r": 0.5232527615380832,
       "pearson_p": 0.1206466749732221,
       "pearson_ci_95": [
@@ -347,99 +477,16 @@
       "units": "% vs %"
     },
     {
-      "x": "Youth unemployment, male (% of male labor force 15-24)",
-      "y": "Internet users (% of population)",
-      "error": "country mismatch: LCN vs URY"
-    },
-    {
-      "x": "Youth unemployment, female (% of female labor force 15-24)",
-      "y": "Internet users (% of population)",
-      "error": "country mismatch: LCN vs URY"
-    },
-    {
-      "x": "Youth unemployment (% of labor force 15-24)",
-      "y": "Government expenditure on education (% of GDP)",
-      "pearson_r": 0.39666587350079235,
-      "pearson_p": 0.2905150016715283,
+      "x": "Internet users (% of population)",
+      "y": "GDP per capita (current US$)",
+      "pearson_r": 0.5900256258214495,
+      "pearson_p": 0.07256925532176989,
       "pearson_ci_95": [
-        -0.36312480880129544,
-        0.8396107055446215
+        -0.06302135581250386,
+        0.8892888793165122
       ],
-      "spearman_rho": 0.6333333333333333,
-      "spearman_p": 0.0670857868923457,
-      "significant": false,
-      "n": 9,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023
-      ],
-      "units": "% vs %"
-    },
-    {
-      "x": "Youth unemployment, male (% of male labor force 15-24)",
-      "y": "Government expenditure on education (% of GDP)",
-      "error": "country mismatch: LCN vs URY"
-    },
-    {
-      "x": "Youth unemployment, female (% of female labor force 15-24)",
-      "y": "Government expenditure on education (% of GDP)",
-      "error": "country mismatch: LCN vs URY"
-    },
-    {
-      "x": "Youth unemployment (% of labor force 15-24)",
-      "y": "Vulnerable employment (% of total employment)",
-      "pearson_r": 0.7296115583068858,
-      "pearson_p": 0.016618916232800086,
-      "pearson_ci_95": [
-        0.18493329159467248,
-        0.9313804804775083
-      ],
-      "spearman_rho": 0.7696969696969697,
-      "spearman_p": 0.009221952722215994,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %"
-    },
-    {
-      "x": "Youth unemployment, male (% of male labor force 15-24)",
-      "y": "Vulnerable employment (% of total employment)",
-      "error": "country mismatch: LCN vs URY"
-    },
-    {
-      "x": "Youth unemployment, female (% of female labor force 15-24)",
-      "y": "Vulnerable employment (% of total employment)",
-      "error": "country mismatch: LCN vs URY"
-    },
-    {
-      "x": "Youth unemployment (% of labor force 15-24)",
-      "y": "Manufacturing, value added (% of GDP)",
-      "pearson_r": -0.571598897445658,
-      "pearson_p": 0.0842998637922595,
-      "pearson_ci_95": [
-        -0.883325855790798,
-        0.09066626079491576
-      ],
-      "spearman_rho": -0.5393939393939393,
-      "spearman_p": 0.1075931877824148,
+      "spearman_rho": 0.6606060606060605,
+      "spearman_p": 0.03758837757140934,
       "significant": false,
       "n": 10,
       "years": [
@@ -454,48 +501,83 @@
         2023,
         2024
       ],
-      "units": "% vs %"
+      "units": "% vs USD"
     },
     {
-      "x": "Youth unemployment, male (% of male labor force 15-24)",
-      "y": "Manufacturing, value added (% of GDP)",
+      "x": "Internet users (% of population)",
+      "y": "Employment in services (% of total employment)",
+      "error": "country mismatch: URY vs LCN"
+    },
+    {
+      "x": "Mobile cellular subscriptions (per 100 people)",
+      "y": "Youth unemployment (% of labor force 15-24)",
       "error": "country mismatch: LCN vs URY"
     },
     {
-      "x": "Youth unemployment, female (% of female labor force 15-24)",
-      "y": "Manufacturing, value added (% of GDP)",
+      "x": "Mobile cellular subscriptions (per 100 people)",
+      "y": "GDP per capita (current US$)",
       "error": "country mismatch: LCN vs URY"
     },
     {
-      "x": "Youth unemployment (% of labor force 15-24)",
-      "y": "Gini index",
-      "pearson_r": 0.2822741180472645,
-      "pearson_p": 0.4294174572673897,
-      "pearson_ci_95": [
-        -0.42244055961035193,
-        0.7742937686152628
-      ],
-      "spearman_rho": 0.27609440361293197,
-      "spearman_p": 0.44001452222946114,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs index"
+      "x": "Mobile cellular subscriptions (per 100 people)",
+      "y": "Employment in services (% of total employment)",
+      "error": "incompatible units: per100 vs %"
     },
     {
       "x": "Youth unemployment (% of labor force 15-24)",
+      "y": "Employment in services (% of total employment)",
+      "error": "country mismatch: URY vs LCN"
+    },
+    {
+      "x": "GDP per capita (current US$)",
+      "y": "Employment in services (% of total employment)",
+      "error": "country mismatch: URY vs LCN"
+    },
+    {
+      "x": "Internet users (% of population)",
       "y": "GDP growth (annual %)",
+      "pearson_r": 0.1274657041145476,
+      "pearson_p": 0.725655091302404,
+      "pearson_ci_95": [
+        -0.5459880716240714,
+        0.7008520711822741
+      ],
+      "spearman_rho": 0.3696969696969697,
+      "spearman_p": 0.29305007529282234,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %"
+    },
+    {
+      "x": "Mobile cellular subscriptions (per 100 people)",
+      "y": "GDP growth (annual %)",
+      "error": "country mismatch: LCN vs URY"
+    },
+    {
+      "x": "Employment in services (% of total employment)",
+      "y": "GDP growth (annual %)",
+      "error": "country mismatch: LCN vs URY"
+    },
+    {
+      "x": "Employment in services (% of total employment)",
+      "y": "Youth unemployment (% of labor force 15-24)",
+      "error": "country mismatch: LCN vs URY"
+    },
+    {
+      "x": "GDP growth (annual %)",
+      "y": "Youth unemployment (% of labor force 15-24)",
       "pearson_r": -0.3982102359068057,
       "pearson_p": 0.2543984316805931,
       "pearson_ci_95": [
@@ -519,114 +601,104 @@
         2024
       ],
       "units": "% vs %"
-    },
-    {
-      "x": "Youth unemployment, male (% of male labor force 15-24)",
-      "y": "GDP growth (annual %)",
-      "error": "country mismatch: LCN vs URY"
-    },
-    {
-      "x": "Youth unemployment, female (% of female labor force 15-24)",
-      "y": "GDP growth (annual %)",
-      "error": "country mismatch: LCN vs URY"
     }
   ],
   "regression": {
-    "dependent": "Youth unemployment (% of labor force 15-24)",
+    "dependent": "Vulnerable employment (% of total employment)",
     "independent": [
-      "GDP per capita (current US$)",
-      "Internet users (% of population)",
-      "Government expenditure on education (% of GDP)"
+      "Youth unemployment (% of labor force 15-24)",
+      "Total unemployment (% of total labor force)",
+      "GDP per capita (current US$)"
     ],
-    "n": 9,
-    "r_squared": 0.8928007215607525,
-    "adj_r_squared": 0.828481154497204,
-    "f_statistic": 13.880701663906654,
-    "f_p_value": 0.0073650997756862235,
+    "n": 10,
+    "r_squared": 0.8455416104203924,
+    "adj_r_squared": 0.7683124156305886,
+    "f_statistic": 10.948471141279148,
+    "f_p_value": 0.007578543980330976,
     "vif": {
-      "GDP per capita (current US$)": 1.5059706793898988,
-      "Internet users (% of population)": 2.5492228705492455,
-      "Government expenditure on education (% of GDP)": 2.8698067577425728
+      "Youth unemployment (% of labor force 15-24)": 35.4539478054419,
+      "Total unemployment (% of total labor force)": 36.85879257007169,
+      "GDP per capita (current US$)": 1.2472986916297588
     },
     "white_test": null,
     "robust_se": true,
     "coefficients": [
       {
         "name": "intercept",
-        "beta": 1.4499658003284321,
-        "se": 19.322987317530266,
-        "t": 0.07503838699997434,
-        "p_value": 0.94309392305804,
+        "beta": 17.714608512003355,
+        "se": 2.075785908616844,
+        "t": 8.533928493525186,
+        "p_value": 0.00014192755647490785,
         "ci_95": [
-          -36.423089342030885,
-          39.323020942687755
+          13.64606813111434,
+          21.78314889289237
         ],
-        "robust_se": 7.002646710716767,
-        "robust_t": 0.2070596818927652,
-        "robust_p": 0.8441317598781384,
+        "robust_se": 0.7818608483296156,
+        "robust_t": 22.656983720120056,
+        "robust_p": 4.839959877322997e-7,
         "robust_ci_95": [
-          -12.275221752676432,
-          15.175153353333295
+          16.18216124927731,
+          19.2470557747294
+        ]
+      },
+      {
+        "name": "Youth unemployment (% of labor force 15-24)",
+        "beta": 0.22002841369206297,
+        "se": 0.17466325422329182,
+        "t": 1.2597292697339517,
+        "p_value": 0.25454950811206434,
+        "significant": false,
+        "ci_95": [
+          -0.12231156458558898,
+          0.5623683919697149
+        ],
+        "robust_se": 0.06027376060477446,
+        "robust_t": 3.6504842486074094,
+        "robust_p": 0.010700142291516945,
+        "robust_significant": true,
+        "robust_ci_95": [
+          0.10189184290670503,
+          0.33816498447742094
+        ]
+      },
+      {
+        "name": "Total unemployment (% of total labor force)",
+        "beta": -0.22956079227573034,
+        "se": 0.7135921740498934,
+        "t": -0.3216974633744789,
+        "p_value": 0.7585940766668875,
+        "significant": false,
+        "ci_95": [
+          -1.6282014534135214,
+          1.1690798688620607
+        ],
+        "robust_se": 0.26569162623525777,
+        "robust_t": -0.8640121464440312,
+        "robust_p": 0.4207744575012762,
+        "robust_significant": false,
+        "robust_ci_95": [
+          -0.7503163796968355,
+          0.29119479514537483
         ]
       },
       {
         "name": "GDP per capita (current US$)",
-        "beta": -0.001451055426459507,
-        "se": 0.000287408292398821,
-        "t": -5.048759777765756,
-        "p_value": 0.003937433903637766,
+        "beta": 0.00012828304958480835,
+        "se": 0.000040842096692352394,
+        "t": 3.140951615464666,
+        "p_value": 0.020043657573714402,
         "significant": true,
         "ci_95": [
-          -0.002014375679561196,
-          -0.0008877351733578179
+          0.00004823254006779766,
+          0.00020833355910181904
         ],
-        "robust_se": 0.0000972977519946108,
-        "robust_t": -14.913555521199289,
-        "robust_p": 0.000024530202693329173,
+        "robust_se": 0.000015403996440815508,
+        "robust_t": 8.327906986845349,
+        "robust_p": 0.00016270410291441273,
         "robust_significant": true,
         "robust_ci_95": [
-          -0.0016417590203689442,
-          -0.0012603518325500697
-        ]
-      },
-      {
-        "name": "Internet users (% of population)",
-        "beta": 0.2903000369078194,
-        "se": 0.08446026511317328,
-        "t": 3.43711965051056,
-        "p_value": 0.018492781660674362,
-        "significant": true,
-        "ci_95": [
-          0.12475791728599978,
-          0.45584215652963905
-        ],
-        "robust_se": 0.04121194823242915,
-        "robust_t": 7.044074579308194,
-        "robust_p": 0.000890633672937291,
-        "robust_significant": true,
-        "robust_ci_95": [
-          0.20952461837225828,
-          0.37107545544338055
-        ]
-      },
-      {
-        "name": "Government expenditure on education (% of GDP)",
-        "beta": 6.623068216777089,
-        "se": 5.603971302247165,
-        "t": 1.181852629067046,
-        "p_value": 0.2904048010309608,
-        "significant": false,
-        "ci_95": [
-          -4.360715535627353,
-          17.60685196918153
-        ],
-        "robust_se": 2.2116073096373885,
-        "robust_t": 2.9946854434402264,
-        "robust_p": 0.030283682181948546,
-        "robust_significant": true,
-        "robust_ci_95": [
-          2.288317889887807,
-          10.95781854366637
+          0.00009809121656080995,
+          0.00015847488260880676
         ]
       }
     ]

@@ -447,7 +447,10 @@ async function agentCompute(fetchedData, suggestDecision = null) {
   const inputPath = resolve(__dirname, "..", "output", "raw", "compute-input.json");
   mkdirSync(dirname(inputPath), { recursive: true });
   writeFileSync(inputPath, JSON.stringify(dataset, null, 2), "utf-8");
-  const pythonPath = resolve(__dirname, "..", ".venv", "Scripts", "python.exe");
+  const isWindows = process.platform === "win32";
+  const pythonPath = isWindows
+    ? resolve(__dirname, "..", ".venv", "Scripts", "python.exe")
+    : "python3";
   const scriptPath = resolve(__dirname, "compute.py");
   try {
     console.log("  Ejecutando: python compute.py");
@@ -513,21 +516,22 @@ ${angleSection}
 ${feedbackSection}
 
 ESTRUCTURA OBLIGATORIA:
-1. **Resumen** (150-200 palabras)
-2. **Introduccion** (400-600 palabras)
-3. **Analisis** (1000-1500 palabras): usa datos REALES y resultados de Python
-4. **Discusion** (500-800 palabras)
-5. **Conclusiones** (300-500 palabras)
-6. **Bibliografia**: formato APA
+1. **Resumen** (100-150 palabras)
+2. **Introduccion** (300-400 palabras)
+3. **Analisis** (600-900 palabras): usa datos REALES y resultados de Python
+4. **Discusion** (300-500 palabras)
+5. **Conclusiones** (200-300 palabras)
+6. **Bibliografia**: formato APA, incluye World Bank API como fuente
 
 REGLAS CRITICAS:
 - NO inventes estadisticas. Solo usa los datos reales y resultados de Python.
 - Si Python dice R2=0.43, escribes 0.43. NO cambies el numero.
 - Cita cada dato: (Banco Mundial, 2024)
-- Total: 2500-4000 palabras
+- Total: 1500-2500 palabras
+- La Bibliografia es OBLIGATORIA, no la omitas ni la dejes para el final si vas corto de espacio.
 
 Devuelve el paper completo en Markdown.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 5000, temperature: 0.7 });
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 8000, temperature: 0.7 });
   return data.choices[0]?.message?.content || "";
 }
 
@@ -575,7 +579,7 @@ ${truncate(typeof review === "string" ? review : JSON.stringify(review), 1500)}
 
 Aplica correcciones, mejora flujo, verifica APA. Manten estructura y formato Markdown.
 Devuelve SOLO el paper final en Markdown.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 6000, temperature: 0.5 });
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 8000, temperature: 0.5 });
   return data.choices[0]?.message?.content || "";
 }
 
@@ -622,7 +626,7 @@ class MoAGraph {
   async nodeCompute() { this.logNode("COMPUTE"); this.state.computeResults = await this.runWithGuardrails("COMPUTE", () => agentCompute(this.state.fetchedData, this.state.suggestDecision)); mkdirSync("output/raw", { recursive: true }); writeFileSync("output/raw/compute-results.json", JSON.stringify(this.state.computeResults, null, 2), "utf-8"); return resolveTransition("COMPUTE", this.state); }
   async nodeWrite() { this.logNode("WRITE"); this.state.currentDraft = await this.runWithGuardrails("WRITE", () => agentWrite(this.state.fetchedData, this.state.computeResults, this.state.writeFeedback, this.state.topic, this.state.angle)); this.state.drafts.push(this.state.currentDraft); this.state.writeFeedback = null; await delay(20); return resolveTransition("WRITE", this.state); }
   async nodeReview() { this.logNode("REVIEW"); this.state.reviewDecision = await this.runWithGuardrails("REVIEW", () => agentReview(this.state.fetchedData, this.state.computeResults, this.state.currentDraft)); await delay(20); return resolveTransition("REVIEW", this.state); }
-  async nodeEdit() { this.logNode("EDIT"); this.state.editedArticle = await this.runWithGuardrails("EDIT", () => agentEdit(this.state.currentDraft, this.state.editFeedback || "")); await delay(20); return resolveTransition("EDIT", this.state); }
+  async nodeEdit() { this.logNode("EDIT"); try { this.state.editedArticle = await this.runWithGuardrails("EDIT", () => agentEdit(this.state.currentDraft, this.state.editFeedback || "")); } catch (e) { console.log(`  EDIT fallo (${e.message}). Usando draft original.`); this.state.editedArticle = this.state.currentDraft; } await delay(20); return resolveTransition("EDIT", this.state); }
   async nodeApprove() {
     this.logNode("APPROVE"); await delay(40);
     try { this.state.qaDecision = await this.runWithGuardrails("APPROVE", () => agentApprove(this.state.editedArticle)); }

@@ -1,70 +1,57 @@
 {
   "suggestions": [
     {
-      "titulo": "El Niño y el aumento del desempleo juvenil en América Latina",
-      "noticia_inspiradora": "Fri 4 Sept 2026 - BoM forecasts strongest El Niño on record as research points to ‘alarming’ climate change influence",
+      "titulo": "Empleos vulnerables y presión migratoria: cómo la precariedad laboral impulsa la migración latinoamericana hacia Europa",
+      "noticia_inspiradora": "Five EU countries aim to send migrants to return hubs by 2027",
       "indicadores_respaldan": [
-        "Youth unemployment (% of labor force 15-24)",
-        "GDP growth (annual %)",
-        "Employment in agriculture (% of total employment)",
-        "Vulnerable employment (% of total employment)"
-      ],
-      "correlaciones_relevantes": [
-        "Intensidad del El Niño ↔ caída del empleo agrícola",
-        "Intensidad del El Niño ↔ aumento del desempleo juvenil",
-        "Empleo vulnerable ↔ variaciones del PIB durante eventos climáticos"
-      ],
-      "justificacion": "Disponemos de indicadores de empleo juvenil, empleo agrícola y empleo vulnerable que permiten cuantificar cómo un fenómeno climático extremo como el El Niño afecta al mercado laboral y al crecimiento económico en la región."
-    },
-    {
-      "titulo": "Conectividad digital como amortiguador frente a choques climáticos",
-      "noticia_inspiradora": "Spain calls for EU climate resilience overhaul with tougher rules and new funding",
-      "indicadores_respaldan": [
-        "Internet users (% of population)",
-        "GDP per capita (current US$)",
-        "Youth unemployment (% of labor force 15-24)",
-        "Government expenditure on education (% of GDP)"
-      ],
-      "correlaciones_relevantes": [
-        "Penetración de internet ↔ resiliencia del PIB ante eventos de El Niño",
-        "Uso de internet ↔ reducción del aumento del desempleo juvenil en crisis climáticas",
-        "Gasto en educación + conectividad ↔ mitigación de impactos económicos"
-      ],
-      "justificacion": "Al combinar datos de tecnología, economía y educación, se puede analizar si la mayor digitalización ayuda a amortiguar los efectos negativos de fenómenos climáticos sobre el empleo y el ingreso per cápita."
-    },
-    {
-      "titulo": "Inversión en educación y su efecto mitigador en la vulnerabilidad laboral ante el El Niño",
-      "noticia_inspiradora": "Spain calls for EU climate resilience overhaul with tougher rules and new funding",
-      "indicadores_respaldan": [
-        "Government expenditure on education (% of GDP)",
-        "Youth literacy rate (% of people 15-24)",
-        "Vulnerable employment (% of total employment)",
-        "GDP growth (annual %)"
-      ],
-      "correlaciones_relevantes": [
-        "Mayor gasto en educación ↔ disminución del empleo vulnerable durante eventos climáticos",
-        "Alfabetización juvenil ↔ menor aumento del desempleo juvenil bajo choques de El Niño",
-        "Educación + crecimiento del PIB ↔ mayor capacidad de recuperación"
-      ],
-      "justificacion": "Los indicadores de gasto educativo y alfabetización juvenil permiten evaluar si la inversión en capital humano reduce la exposición de los trabajadores vulnerables a los impactos económicos del El Niño."
-    },
-    {
-      "titulo": "Desigualdad y empleo vulnerable en la era post‑El Niño",
-      "noticia_inspiradora": "Fri 4 Sept 2026 - BoM forecasts strongest El Niño on record as research points to ‘alarming’ climate change influence",
-      "indicadores_respaldan": [
-        "Gini index (inequality, index, Brazil)",
         "Vulnerable employment (% of total employment)",
         "Youth unemployment (% of labor force 15-24)",
+        "Total unemployment (% of total labor force)",
+        "Gini index (inequality, index)",
         "GDP per capita (current US$)"
       ],
       "correlaciones_relevantes": [
-        "Índice de Gini ↔ proporción de empleo vulnerable",
-        "Desigualdad ↔ impacto del El Niño en el PIB per cápita",
-        "Desigualdad ↔ variación del desempleo juvenil tras eventos climáticos"
+        "Vulnerable employment ↔ net migration outflows",
+        "Youth unemployment ↔ intent to migrate (survey data)",
+        "Gini index ↔ propensity to seek opportunities abroad"
       ],
-      "justificacion": "Al cruzar datos de desigualdad con empleo vulnerable y PIB per cápita, se puede evidenciar cómo la distribución del ingreso influye en la capacidad de los países latinoamericanos para absorber choques climáticos extremos."
+      "justificacion": "La noticia europea sobre centros de devolución permite analizar los factores de empuje en América Latina. Con los indicadores del Banco Mundial podemos cuantificar la relación entre empleo precario, desigualdad y la decisión de emigrar, ofreciendo un marco empírico para la discusión."
+    },
+    {
+      "titulo": "Brecha digital y desempleo juvenil en América Latina: ¿las interrupciones tecnológicas agravan la exclusión laboral?",
+      "noticia_inspiradora": "Major U. S. Artificial Intelligence Platforms Hit by Near-Simultaneous Outages (IA & Tech)",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "Youth unemployment (% of labor force 15-24)",
+        "GDP per capita (current US$)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet penetration ↔ youth unemployment rate",
+        "Mobile subscriptions ↔ share of employment in services",
+        "GDP per capita ↔ resilience of digital infrastructure"
+      ],
+      "justificacion": "Los cortes de plataformas de IA resaltan la dependencia de la economía digital. Al cruzar datos de conectividad y empleo juvenil en la región, podemos evaluar si la falta de acceso digital intensifica el desempleo entre los jóvenes."
+    },
+    {
+      "titulo": "El auge del comercio electrónico y su impacto en el mercado laboral de servicios en América Latina",
+      "noticia_inspiradora": "How can African retailers compete with Shein and Temu? (Internacional)",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "Employment in services (% of total employment)",
+        "GDP growth (annual %)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet usage ↔ growth of e‑commerce sector",
+        "Mobile subscriptions ↔ employment shifts to services",
+        "GDP growth ↔ expansion of online retail"
+      ],
+      "justificacion": "Aunque la noticia se centra en África, el fenómeno de plataformas como Shein y Temu es global y afecta a América Latina. Los indicadores permiten medir cómo la digitalización del comercio está reconfigurando el empleo en el sector servicios y la situación de los jóvenes desempleados."
     }
   ],
-  "topic": "Impacto del récord de El Niño 2026 en el mercado laboral juvenil y vulnerable de América Latina",
-  "angle": "Analizar, con datos reales, cómo la mayor intensidad del El Niño proyectada para 2026 está incrementando el desempleo juvenil y desplazando a los trabajadores vulnerables fuera del sector agrícola, y evaluar el papel mitigador de la educación y la conectividad digital en la resiliencia económica de la región."
+  "topic": "Empleos vulnerables y presión migratoria: cómo la precariedad laboral impulsa la migración latinoamericana hacia Europa",
+  "angle": "Analizar, mediante regresiones multivariables, la relación entre la proporción de empleo vulnerable, los índices de desigualdad y el desempleo juvenil en los países latinoamericanos, y cómo estos factores explican los flujos migratorios recientes hacia Europa, contextualizados en la política de centros de devolución de la UE."
 }
