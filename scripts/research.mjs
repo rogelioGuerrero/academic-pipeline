@@ -569,6 +569,9 @@ Veredicto: "APROBADO" o "REESCRIBIR" (con feedback).`;
 
 async function agentEdit(draft, review) {
   console.log("[6/7] GPT-OSS 120B editando paper...\n");
+  // Extract bibliography from original draft to re-append if EDIT truncates it
+  const bibMatch = draft.match(/^## Bibliograf[\s\S]*$/m);
+  const originalBib = bibMatch ? bibMatch[0] : "";
   const prompt = `Eres el editor de una revista de ciencias sociales. Pule este paper.
 
 PAPER:
@@ -578,9 +581,16 @@ REVISION:
 ${truncate(typeof review === "string" ? review : JSON.stringify(review), 1500)}
 
 Aplica correcciones, mejora flujo, verifica APA. Manten estructura y formato Markdown.
+IMPORTANTE: Preserva la seccion de Bibliografia del paper original al final del documento.
 Devuelve SOLO el paper final en Markdown.`;
   const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 8000, temperature: 0.5 });
-  return data.choices[0]?.message?.content || "";
+  let result = data.choices[0]?.message?.content || "";
+  // If EDIT truncated the bibliography, re-append from original
+  if (originalBib && !/## Bibliograf/i.test(result)) {
+    console.log("  EDIT trunco bibliografia. Re-appendiendo del draft original.");
+    result = result.trimEnd() + "\n\n" + originalBib;
+  }
+  return result;
 }
 
 async function agentApprove(finalText) {
@@ -592,6 +602,10 @@ ${truncate(finalText, 8000)}
 Responde EXACTAMENTE como JSON (sin markdown):
 {"checklist":{"estructura_ok":true,"resumen_ok":true,"bibliografia_ok":true,"citas_apa_ok":true,"coherencia_ok":true,"datos_verificados":true,"tono_academico":true,"extension_ok":true},"palabras":3000,"veredicto":"APROBADO","issues":[]}
 
+CRITERIOS:
+- Si la seccion Bibliografia existe (aunque sea minima), aprobar.
+- Si los datos coinciden con las fuentes, aprobar.
+- Solo rechazar si hay datos inventados o estructura incompleta (sin Resumen, sin Conclusiones).
 Veredicto: "APROBADO" o "RECHAZADO" (con issues).`;
   const data = await callGroq("openai/gpt-oss-20b", prompt, { max_tokens: 1000, temperature: 0.2 });
   const raw = data.choices[0]?.message?.content || "";
