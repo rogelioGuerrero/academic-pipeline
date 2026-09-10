@@ -5,3 +5,4 @@ output/raw/compute-input.json
 *.pyc
 __pycache__/
 .env
+.commit-msg.txt
