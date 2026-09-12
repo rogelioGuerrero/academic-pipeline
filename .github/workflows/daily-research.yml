@@ -40,25 +40,18 @@ jobs:
       - name: Fetch news_found.json from job-hunter
         run: |
           mkdir -p ../job-hunter
-          # job-hunter is private — use PAT to fetch via GitHub API
-          curl -sL -H "Authorization: token ${{ secrets.JOB_HUNTER_PAT }}" \
-            -H "Accept: application/vnd.github.v3.raw" \
-            "https://api.github.com/repos/rogelioGuerrero/job-hunter/contents/news_found.json" \
+          # news_found.json nunca se commitea a job-hunter (solo se deploya a Netlify).
+          # Se baja del dashboard publico de Netlify, que se actualiza en cada run de job-hunter.
+          curl -sL --fail \
+            "https://job-hunter-dashboard.netlify.app/news_found.json" \
             -o ../job-hunter/news_found.json
-          if python -c "import json; json.load(open('../job-hunter/news_found.json'))" 2>/dev/null; then
-            echo "news_found.json OK"
+          if python -c "import json; d=json.load(open('../job-hunter/news_found.json')); assert isinstance(d, list)" 2>/dev/null; then
+            echo "news_found.json OK ($(python -c "import json; print(len(json.load(open('../job-hunter/news_found.json'))))") articulos)"
           else
-            echo "Failed to fetch news_found.json — continuing without news"
+            echo "news_found.json invalido o no es una lista. Continuando sin noticias."
+            echo "[]" > ../job-hunter/news_found.json
           fi
         continue-on-error: true
-
-      - name: Restore fetch cache
-        uses: actions/cache@v5
-        with:
-          path: output/raw/fetched-data.json
-          key: fetch-cache-${{ hashFiles('scripts/fetch-sources.mjs') }}
-          restore-keys: |
-            fetch-cache-
 
       - name: Run research pipeline
         run: node scripts/research.mjs
@@ -69,7 +62,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/briefs/ output/papers/ output/raw/compute-results.json 2>/dev/null || true
+          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/fetched-data.json 2>/dev/null || true
           git commit -m "Daily research paper - $(date -u +%Y-%m-%d)" || echo "No changes to commit"
           git push
 

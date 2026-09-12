@@ -167,22 +167,41 @@ async function fetchILOIndicator(indicator, refArea) {
 async function fetchSources(topic) {
   console.log("[FETCH] Obteniendo datos reales de APIs públicas...\n");
   console.log(`  Tema: ${topic}`);
-  console.log(`  Fuentes: World Bank API + ILO STAT (sin keys)`);
-  console.log(`  Paises: ${LAC_COUNTRIES.length} paises de America Latina + agregado regional`);
-  console.log(`  Indicadores: ${WB_INDICATORS.length} WB + ${ILO_INDICATORS.length} ILO`);
+  console.log(`  Fuente: World Bank API (agregado regional LCN)`);
+  console.log(`  Indicadores: 13 clave (modo PoC)`);
   console.log("  Rango: " + YEAR_RANGE + "\n");
 
   const results = {
     topic,
     fetchDate: new Date().toISOString(),
-    sources: ["World Bank API", "ILO STAT"],
+    sources: ["World Bank API"],
     indicators: [],
     summary: {},
   };
 
-  // Fetch regional aggregate (LCN) for all indicators
-  console.log("  [Regional LCN]");
-  for (const ind of WB_INDICATORS) {
+  // PoC: solo 13 indicadores clave para el agregado regional LCN.
+  // Suficiente para correlaciones/regresion sin agotar el limite de tokens de Groq free tier.
+  // Para datos por pais o ILO, correr manualmente con --no-cache cuando se necesite.
+  const KEY_INDICATORS = [
+    "SL.UEM.1524.ZS",
+    "SL.UEM.TOTL.ZS",
+    "NY.GDP.PCAP.CD",
+    "IT.NET.USER.ZS",
+    "SE.ADT.1524.LT.ZS",
+    "SE.XPD.TOTL.GD.ZS",
+    "SI.POV.GINI",
+    "SL.EMP.VULN.ZS",
+    "NV.IND.MANF.ZS",
+    "NY.GDP.MKTP.KD.ZG",
+    "LO.PISA.MAT",
+    "LO.PISA.REA",
+    "LO.PISA.SCI",
+  ];
+
+  console.log("  [Regional LCN — indicadores clave]");
+  for (const indCode of KEY_INDICATORS) {
+    const ind = WB_INDICATORS.find(i => i.code === indCode);
+    if (!ind) continue;
     const data = await fetchWBIndicator(ind.code, "LCN");
     if (data && data.length > 0) {
       results.indicators.push({
@@ -200,71 +219,6 @@ async function fetchSources(topic) {
       console.log(`    ${ind.code}: ${ind.label} => ${latest.year}: ${latest.value.toFixed(2)}`);
     }
     await new Promise(r => setTimeout(r, 100)); // rate limit
-  }
-
-  // Fetch key indicators for individual countries
-  const KEY_INDICATORS = [
-    "SL.UEM.1524.ZS",
-    "SL.UEM.TOTL.ZS",
-    "NY.GDP.PCAP.CD",
-    "IT.NET.USER.ZS",
-    "SE.ADT.1524.LT.ZS",
-    "SE.XPD.TOTL.GD.ZS",
-    "SI.POV.GINI",
-    "SL.EMP.VULN.ZS",
-    "NV.IND.MANF.ZS",
-    "NY.GDP.MKTP.KD.ZG",
-    "LO.PISA.MAT",
-    "LO.PISA.REA",
-    "LO.PISA.SCI",
-  ];
-
-  console.log("\n  [Paises individuales]");
-  for (const country of LAC_COUNTRIES) {
-    for (const indCode of KEY_INDICATORS) {
-      const ind = WB_INDICATORS.find(i => i.code === indCode);
-      const data = await fetchWBIndicator(indCode, country.code);
-      if (data && data.length > 0) {
-        results.indicators.push({
-          indicator_code: indCode,
-          indicator_label: ind.label,
-          category: ind.category,
-          unit: ind.unit,
-          country: country.name,
-          country_code: country.code,
-          series: data,
-          source: "World Bank API",
-          source_url: `https://data.worldbank.org/indicator/${indCode}`,
-        });
-      }
-      await new Promise(r => setTimeout(r, 80)); // rate limit
-    }
-    const count = results.indicators.filter(i => i.country_code === country.code).length;
-    if (count > 0) console.log(`    ${country.name}: ${count} indicadores`);
-  }
-
-  // Fetch ILO indicators for key countries
-  console.log("\n  [ILO STAT]");
-  for (const iloInd of ILO_INDICATORS) {
-    for (const country of ILO_COUNTRIES) {
-      const data = await fetchILOIndicator(iloInd.indicator, country.code);
-      if (data && data.length > 0) {
-        results.indicators.push({
-          indicator_code: iloInd.indicator,
-          indicator_label: iloInd.label,
-          category: iloInd.category,
-          unit: iloInd.unit,
-          country: country.name,
-          country_code: country.code,
-          series: data,
-          source: "ILO STAT",
-          source_url: "https://ilostat.ilo.org/data/",
-        });
-      }
-      await new Promise(r => setTimeout(r, 100));
-    }
-    const count = results.indicators.filter(i => i.indicator_code === iloInd.indicator).length;
-    if (count > 0) console.log(`    ${iloInd.label}: ${count} series`);
   }
 
   // Build summary

@@ -66,7 +66,7 @@ if (!GROQ_API_KEY) {
 const SUGGEST_ONLY = process.argv.includes("--suggest-only");
 const NO_CACHE = process.argv.includes("--no-cache");
 const CACHE_PATH = "output/raw/fetched-data.json";
-const CACHE_MAX_AGE_HOURS = 168; // 7 días: datos históricos no cambian
+const CACHE_MAX_AGE_HOURS = 8760; // 1 año: los datos del World Bank se actualizan anualmente
 
 async function callGroq(model, prompt, opts = {}) {
   const body = { model, messages: [{ role: "user", content: prompt }], ...opts };
@@ -229,7 +229,19 @@ async function agentSuggest(fetchedData) {
   let newsItems = [];
   try {
     const raw = readFileSync(NEWS_PATH, "utf-8");
-    newsItems = JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    // Aceptar array directo o envoltorio tipo {articles: [...]} / {items: [...]}
+    if (Array.isArray(parsed)) {
+      newsItems = parsed;
+    } else if (parsed && Array.isArray(parsed.articles)) {
+      newsItems = parsed.articles;
+    } else if (parsed && Array.isArray(parsed.items)) {
+      newsItems = parsed.items;
+    } else {
+      // Respuesta de error de la API de GitHub ({"message":"Not Found",...}) u otro objeto inesperado
+      console.log("  news_found.json no es una lista de articulos (posible error de descarga). Usando modo generico.");
+      newsItems = [];
+    }
     console.log(`  Noticias cargadas: ${newsItems.length} articulos de job-hunter`);
   } catch {
     console.log("  No se encontro news_found.json. Usando modo generico.");
@@ -531,7 +543,7 @@ REGLAS CRITICAS:
 - La Bibliografia es OBLIGATORIA, no la omitas ni la dejes para el final si vas corto de espacio.
 
 Devuelve el paper completo en Markdown.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 8000, temperature: 0.7 });
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4000, temperature: 0.7 });
   return data.choices[0]?.message?.content || "";
 }
 
@@ -583,7 +595,7 @@ ${truncate(typeof review === "string" ? review : JSON.stringify(review), 1500)}
 Aplica correcciones, mejora flujo, verifica APA. Manten estructura y formato Markdown.
 IMPORTANTE: Preserva la seccion de Bibliografia del paper original al final del documento.
 Devuelve SOLO el paper final en Markdown.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 8000, temperature: 0.5 });
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4000, temperature: 0.5 });
   let result = data.choices[0]?.message?.content || "";
   // If EDIT truncated the bibliography, re-append from original
   if (originalBib && !/## Bibliograf/i.test(result)) {
