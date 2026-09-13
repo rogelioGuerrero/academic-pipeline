@@ -795,7 +795,7 @@ function transparencyNote(state) {
     "",
     "## Nota de transparencia",
     "",
-    "**Contexto.** Este artículo fue generado automáticamente por AcademicPipeline, un pipeline de investigación asistida por IA.",
+    "**Contexto.** Este artículo fue generado automáticamente por AcademicPipeline, un pipeline multi-agente de investigación asistida por IA: agentes especializados proponen, calculan, redactan y se verifican mutuamente antes de publicar.",
     state.topic ? `Tema seleccionado: *${state.topic}*.` : "",
     inspiring?.noticia_inspiradora ? `Noticia que inspiró la línea editorial: *"${inspiring.noticia_inspiradora}"*${s.inspiringNews?.url ? ` ([${s.inspiringNews.source || "fuente"}](${s.inspiringNews.url}))` : ""}.` : "",
     inspiring?.justificacion ? `Justificación del sistema: ${inspiring.justificacion}` : "",

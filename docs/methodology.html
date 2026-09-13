@@ -26,7 +26,7 @@
   <a class="back" href="index.html">← Volver a los papers</a>
   <h1>Metodología</h1>
 
-  <p>AcademicPipeline es un sistema automatizado de investigación: cada día selecciona un tema a partir de noticias trending, lo cruza con indicadores socioeconómicos reales del Banco Mundial, ejecuta análisis estadístico determinístico en Python, y redacta un paper académico en español mediante un modelo de lenguaje. Cada paper incluye una <strong>Nota de transparencia</strong> que declara qué se calculó y con qué datos; esta página explica el método una sola vez.</p>
+  <p>AcademicPipeline es un sistema <strong>multi-agente</strong> de investigación automatizada: agentes especializados con roles separados —uno propone el tema desde noticias trending, otro cruza indicadores socioeconómicos del Banco Mundial, Python ejecuta el análisis estadístico determinístico, un LLM redacta el paper en español, y dos agentes más lo verifican antes de publicar—. La separación de funciones es deliberada: quien redacta no es quien valida, y quien valida ve los datos completos, no solo el texto. Cada paper incluye una <strong>Nota de transparencia</strong> que declara qué se calculó y con qué datos; esta página explica el método una sola vez.</p>
 
   <h2>El pipeline</h2>
   <p><code>FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE</code></p>
