@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metodología — Academic Pipeline</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; background: #faf9f7; color: #1a1a1a; max-width: 860px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 8px; margin-bottom: 24px; }
+    h2 { font-size: 1.25em; margin: 28px 0 10px; color: #333; }
+    h3 { font-size: 1.05em; margin: 18px 0 8px; color: #444; }
+    p, li { line-height: 1.7; margin-bottom: 12px; }
+    ul, ol { margin: 8px 0 12px 24px; }
+    li { margin-bottom: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9em; }
+    th, td { border: 1px solid #ddd; padding: 7px 10px; text-align: left; vertical-align: top; }
+    th { background: #f5f5f5; }
+    code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
+    .note { background: #e8f0fe; border-left: 3px solid #1a73e8; padding: 12px 16px; margin: 16px 0; font-size: 0.92em; }
+    .back { display: inline-block; margin-bottom: 16px; color: #1a73e8; text-decoration: none; font-size: 0.9em; }
+    .back:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <a class="back" href="index.html">← Volver a los papers</a>
+  <h1>Metodología</h1>
+
+  <p>AcademicPipeline es un sistema automatizado de investigación: cada día selecciona un tema a partir de noticias trending, lo cruza con indicadores socioeconómicos reales del Banco Mundial, ejecuta análisis estadístico determinístico en Python, y redacta un paper académico en español mediante un modelo de lenguaje. Cada paper incluye una <strong>Nota de transparencia</strong> que declara qué se calculó y con qué datos; esta página explica el método una sola vez.</p>
+
+  <h2>El pipeline</h2>
+  <p><code>FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE</code></p>
+  <table>
+    <tr><th>Nodo</th><th>Qué hace</th><th>Tipo</th></tr>
+    <tr><td>FETCH</td><td>Descarga series 2015-2024 de la API pública del Banco Mundial: ~25 indicadores × 7 regiones (agregado LCN + BRA, MEX, COL, ARG, CHL, GTM)</td><td>Determinístico</td></tr>
+    <tr><td>SUGGEST</td><td>Cruza noticias trending (score LLM ≥70, del pipeline job-hunter) con el catálogo de indicadores. Solo propone líneas editoriales que los datos pueden respaldar, y formula una <em>pregunta verificable</em> e <em>hipótesis falsable</em></td><td>LLM</td></tr>
+    <tr><td>COMPUTE</td><td>Estadística real con scipy/numpy: descriptivas, correlaciones, regresión OLS, tendencias, anomalías. También genera las figuras (matplotlib)</td><td>Determinístico</td></tr>
+    <tr><td>WRITE</td><td>Redacta el paper. Solo puede citar números que aparecen literalmente en los datos y resultados provistos</td><td>LLM</td></tr>
+    <tr><td>REVIEW</td><td>Compara el paper contra los datos completos: detecta cifras inventadas, tests no calculados, fuentes externas, afirmaciones de significancia falsas</td><td>LLM</td></tr>
+    <tr><td>EDIT</td><td>Pule estilo y formato APA, preservando números, tablas y figuras verificadas</td><td>LLM</td></tr>
+    <tr><td>APPROVE</td><td>QA final: estructura, coherencia, bibliografía</td><td>LLM</td></tr>
+  </table>
+  <p>Si REVIEW detecta datos inventados, el paper se reescribe (máx. 2 iteraciones). Si APPROVE rechaza, se reedita (máx. 2).</p>
+
+  <h2>Por qué estos métodos</h2>
+  <p>Las series tienen <strong>n≤10 observaciones anuales</strong> — muestras pequeñas donde los métodos paramétricos son frágiles. Por eso se combinan:</p>
+  <table>
+    <tr><th>Método</th><th>Para qué</th><th>Por qué es apropiado aquí</th></tr>
+    <tr><td>Correlación de <strong>Pearson</strong></td><td>Mide asociación lineal entre dos series</td><td>Es el estándar; con IC95% por transformación de Fisher se reporta la incertidumbre</td></tr>
+    <tr><td>Correlación de <strong>Spearman</strong></td><td>Mide asociación monotónica por rangos</td><td>Robusta a outliers y relaciones no lineales — el shock de 2020 (COVID) es exactamente el caso que Pearson exagera</td></tr>
+    <tr><td><strong>Regresión OLS</strong></td><td>Cuantifica la asociación de varias variables sobre una dependiente</td><td>Se reporta con errores estándar robustos (HC3), VIF para multicolinealidad y test de White para heterocedasticidad — los diagnósticos correctos para muestras pequeñas</td></tr>
+    <tr><td><strong>Mann-Kendall</strong></td><td>Detecta tendencia monotónica en el tiempo</td><td>No paramétrico: no asume normalidad ni linealidad, ideal para n=10 anual</td></tr>
+    <tr><td>Anomalías <strong>z-score / IQR</strong></td><td>Detecta observaciones atípicas por serie</td><td>Dos criterios independientes; el desfase 2020 aparece sistemáticamente</td></tr>
+    <tr><td><strong>Compatibilidad de unidades</strong></td><td>Solo correlaciona pares semánticamente comparables</td><td>Guardia explícita: impide correlaciones sin sentido (ej. población absoluta vs tasa %)</td></tr>
+  </table>
+
+  <h2>Qué puede y qué no puede afirmar un paper</h2>
+  <ul>
+    <li><strong>Puede:</strong> describir tendencias, reportar correlaciones con su r y p exactos, comparar países con datos listados, dar un veredicto sobre la hipótesis (apoyan / no apoyan / insuficientes).</li>
+    <li><strong>No puede:</strong> afirmar causalidad (correlación temporal no es causa), proyectar a años futuros, citar países o fuentes no provistos (CEPAL, OECD, IMF), reportar tests no ejecutados (Durbin-Watson, efectos fijos de panel) ni simulaciones.</li>
+  </ul>
+
+  <h2>Limitaciones</h2>
+  <ul>
+    <li><strong>n≤10:</strong> pocos grados de libertad → baja potencia estadística. Una correlación no significativa no prueba ausencia de relación.</li>
+    <li><strong>Agregados:</strong> LCN es un promedio ponderado dominado por las economías grandes; enmascara heterogeneidad entre países.</li>
+    <li><strong>Comparaciones múltiples:</strong> con muchas correlaciones, algunas serán "significativas" por azar. Las parejas se eligen por teoría (la sugiere SUGGEST según el tema), no por barrido exhaustivo.</li>
+    <li><strong>Redacción por LLM:</strong> el texto lo genera un modelo de lenguaje verificado automáticamente contra los datos. La revisión automática reduce alucinaciones pero no sustituye revisión humana.</li>
+  </ul>
+
+  <h2>Verificación</h2>
+  <p>Cada afirmación del paper es auditable contra los artefactos del repositorio:</p>
+  <ul>
+    <li><code>output/raw/fetched-data.json</code> — las series crudas tal como llegaron del API</li>
+    <li><code>output/raw/compute-results.json</code> — resultados completos: coeficientes, p-values, intervalos</li>
+    <li><code>output/briefs/YYYY-MM-DD_brief.json</code> — la decisión editorial: tema, ángulo, pregunta, hipótesis</li>
+    <li><code>output/papers/*.json</code> — metadata del run: historial de nodos, veredictos de revisión y QA</li>
+    <li><code>output/charts/</code> — las figuras, generadas con matplotlib sobre los datos (no ilustrativas)</li>
+  </ul>
+
+  <div class="note">
+    <strong>En síntesis:</strong> las noticias proponen el tema; los datos deciden si puede investigarse; Python calcula los números; el LLM solo redacta; y un revisor automático compara cada cifra contra la fuente. Lo que no puede verificarse, no se publica.
+  </div>
+</body>
+</html>

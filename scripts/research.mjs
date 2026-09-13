@@ -767,6 +767,8 @@ function transparencyNote(state) {
     `Iteraciones: ${it.rewrite} reescritura(s), ${it.edit} reedición(es).`,
     "",
     "**Limitaciones.** Las series tienen n≤10 observaciones anuales; las correlaciones no implican causalidad y las muestras pequeñas reducen la potencia estadística. El texto fue redactado por un modelo de lenguaje y verificado automáticamente contra los datos; no sustituye revisión humana. Artefactos verificables en el repositorio: `output/raw/fetched-data.json` (datos crudos), `output/raw/compute-results.json` (resultados completos), `output/briefs/` (decisión editorial).",
+    "",
+    "*Explicación completa de los métodos (por qué Pearson, Spearman, OLS, Mann-Kendall): [metodología](https://rogelioguerrero.github.io/academic-pipeline/methodology.html)*",
   ];
   return lines.filter(l => l !== "").join("\n");
 }
