@@ -17,7 +17,7 @@ La pregunta de investigación que guía este trabajo es: **¿Existe una correlac
 
 ## Metodología  
 
-Se emplearon los indicadores publicados por el *World Development Indicators* (World Bank, 2024) para la región América Latina y el Caribe (código LCN) y para cinco países representativos (Brasil, México, Colombia, Argentina y Chile). Los indicadores analizados fueron:  
+Se emplearon los indicadores publicados por el *World Development Indicators* (World Bank, 2024) para la región América Latina y el Caribe (código LCN) y para seis países representativos (Brasil, México, Colombia, Argentina, Chile y Guatemala). Los indicadores analizados fueron:  
 
 | Indicador | Unidad | Periodo 2015‑2024 |
 |-----------|--------|-------------------|
