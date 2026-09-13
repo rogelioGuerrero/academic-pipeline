@@ -44,19 +44,30 @@ def _get_variables(data):
             variables.append({"name": s["name"], "label": s.get("label", s["name"]), "values": s.get("values", []), "years": s.get("years", []), "unit": s.get("unit", "unknown"), "country": s.get("country", ""), "country_code": s.get("country_code", "")})
     return variables
 
-# Unit compatibility matrix: which units can be correlated together
+# Unit compatibility matrix: which units can be correlated together.
+# Pearson r es invariante a escala, pero el guardia evita pares sin sentido semantico.
 UNIT_COMPAT = {
     ("%", "%"): True,
     ("%", "index"): True,   # Gini index vs % is semantically comparable
     ("%", "USD"): True,     # % vs USD: correlation is scale-invariant (Pearson r)
     ("USD", "USD"): True,
     ("count", "count"): True,
+    ("count", "USD"): True,    # net migration vs remittances / GDP
+    ("count", "%"): True,      # net migration vs unemployment %
     ("per100", "per100"): True,
     ("per100", "%"): True,   # per100 and % are comparable (both rates)
+    ("per100", "USD"): True,   # mobile subs vs GDP per capita
     ("score", "score"): True,  # PISA scores
     ("score", "USD"): True,    # PISA score vs GDP per capita
     ("score", "%"): True,      # PISA score vs % indicators
     ("score", "index"): True,  # PISA score vs Gini index
+    ("years", "%"): True,      # life expectancy vs rates
+    ("years", "USD"): True,    # life expectancy vs GDP per capita
+    ("years", "count"): True,  # life expectancy vs population
+    ("t", "%"): True,          # CO2 per capita vs rates
+    ("t", "USD"): True,        # CO2 per capita vs GDP per capita
+    ("kWh", "%"): True,        # power consumption vs rates
+    ("kWh", "USD"): True,      # power consumption vs GDP per capita
 }
 
 def _units_compatible(unit_a, unit_b):

@@ -68,6 +68,20 @@ const WB_INDICATORS = [
   { code: "LO.PISA.MAT", label: "PISA Mathematics score", category: "education", unit: "score" },
   { code: "LO.PISA.REA", label: "PISA Reading score", category: "education", unit: "score" },
   { code: "LO.PISA.SCI", label: "PISA Science score", category: "education", unit: "score" },
+  // Migration & remittances
+  { code: "SM.POP.NETM", label: "Net migration (total people)", category: "demographics", unit: "count" },
+  { code: "BX.TRF.PWKR.CD.DT", label: "Personal remittances received (current US$)", category: "economy", unit: "USD" },
+  // Prices
+  { code: "FP.CPI.TOTL.ZG", label: "Inflation, consumer prices (annual %)", category: "economy", unit: "%" },
+  // Health
+  { code: "SP.DYN.LE00.IN", label: "Life expectancy at birth (years)", category: "health", unit: "years" },
+  { code: "SH.XPD.CHEX.GD.ZS", label: "Current health expenditure (% of GDP)", category: "health", unit: "%" },
+  // Environment & energy
+  { code: "EN.ATM.CO2E.PC", label: "CO2 emissions (metric tons per capita)", category: "environment", unit: "t" },
+  { code: "EG.USE.ELEC.KH.PC", label: "Electric power consumption (kWh per capita)", category: "environment", unit: "kWh" },
+  // Trade & investment
+  { code: "NE.TRD.GNFS.ZS", label: "Trade (% of GDP)", category: "economy", unit: "%" },
+  { code: "BX.KLT.DINV.WD.GD.ZS", label: "Foreign direct investment, net inflows (% of GDP)", category: "economy", unit: "%" },
 ];
 
 // ── ILO STAT indicator catalog (via ILO REST API) ──
@@ -168,7 +182,7 @@ async function fetchSources(topic) {
   console.log("[FETCH] Obteniendo datos reales de APIs públicas...\n");
   console.log(`  Tema: ${topic}`);
   console.log(`  Fuente: World Bank API (LCN + 6 paises)`);
-  console.log(`  Indicadores: 13 clave (modo PoC)`);
+  console.log(`  Indicadores: 25 (modo PoC ampliado)`);
   console.log("  Rango: " + YEAR_RANGE + "\n");
 
   const results = {
@@ -179,23 +193,46 @@ async function fetchSources(topic) {
     summary: {},
   };
 
-  // PoC: 13 indicadores clave para LCN + 6 paises representativos.
-  // ~91 series: permite comparaciones por pais reales sin agotar tokens de Groq.
-  // Para ampliar paises/indicadores, correr manualmente con --no-cache.
+  // PoC: 25 indicadores x 7 regiones = ~175 series.
+  // Cubre: empleo, economia, educacion, tecnologia, demografia, desigualdad,
+  // migracion/remesas, inflacion, salud, ambiente/energia, comercio/inversion.
+  // El prompt de WRITE solo inyecta los indicadores del tema elegido (filtro topico),
+  // asi el costo de tokens no crece con el catalogo.
   const KEY_INDICATORS = [
+    // Empleo y estructura laboral
     "SL.UEM.1524.ZS",
     "SL.UEM.TOTL.ZS",
+    "SL.EMP.1524.ZS",
     "SL.SRV.EMPL.ZS",
-    "NY.GDP.PCAP.CD",
-    "IT.NET.USER.ZS",
-    "IT.CEL.SETS.P2",
-    "SE.ADT.1524.LT.ZS",
-    "SE.XPD.TOTL.GD.ZS",
-    "SI.POV.GINI",
     "SL.EMP.VULN.ZS",
     "NV.IND.MANF.ZS",
+    // Economia
+    "NY.GDP.PCAP.CD",
     "NY.GDP.MKTP.KD.ZG",
+    "FP.CPI.TOTL.ZG",
+    "NE.TRD.GNFS.ZS",
+    "BX.KLT.DINV.WD.GD.ZS",
+    // Tecnologia
+    "IT.NET.USER.ZS",
+    "IT.CEL.SETS.P2",
+    // Educacion
+    "SE.ADT.1524.LT.ZS",
+    "SE.XPD.TOTL.GD.ZS",
+    "SE.SEC.ENRR",
+    // Demografia y migracion
     "SP.URB.TOTL.IN.ZS",
+    "SM.POP.NETM",
+    // Desigualdad
+    "SI.POV.GINI",
+    "SI.POV.NAHC",
+    // Remesas
+    "BX.TRF.PWKR.CD.DT",
+    // Salud
+    "SP.DYN.LE00.IN",
+    "SH.XPD.CHEX.GD.ZS",
+    // Ambiente y energia
+    "EN.ATM.CO2E.PC",
+    "EG.USE.ELEC.KH.PC",
   ];
 
   const FETCH_COUNTRIES = [

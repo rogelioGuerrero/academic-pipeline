@@ -500,13 +500,24 @@ async function agentCompute(fetchedData, suggestDecision = null) {
 }
 
 // ── Digests compartidos: WRITE y REVIEW deben ver exactamente los mismos datos ──
-function dataDigest(fetchedData) {
+// Filtro topico: solo inyecta series de los indicadores que las sugerencias usan.
+// El prompt no crece con el tamano del catalogo — escala con el tema elegido.
+function dataDigest(fetchedData, suggestDecision = null) {
+  let inds = fetchedData.indicators;
+  const used = new Set((suggestDecision?.suggestions || []).flatMap(s => s.indicadores_respaldan || []).map(u => u.toLowerCase()));
+  if (used.size) {
+    const filtered = inds.filter(i => {
+      const label = i.indicator_label.toLowerCase();
+      return [...used].some(u => label.includes(u) || u.includes(label));
+    });
+    if (filtered.length) inds = filtered; // si nada coincide, mostrar todo (fallback seguro)
+  }
   // Series LCN completas (año=valor) + países primer→último valor
-  const lcn = fetchedData.indicators.filter(i => i.country_code === "LCN").map(i => {
+  const lcn = inds.filter(i => i.country_code === "LCN").map(i => {
     const pts = i.series.map(s => `${s.year}=${s.value.toFixed(2)}`).join(", ");
     return `- ${i.indicator_label} [LCN] (${i.unit}): ${pts}`;
   }).join("\n");
-  const countries = fetchedData.indicators
+  const countries = inds
     .filter(i => i.country_code !== "LCN")
     .map(i => {
       const first = i.series[0]; const latest = i.series[i.series.length - 1];
@@ -567,7 +578,7 @@ async function agentWrite(fetchedData, computeResults, feedback = null, topic = 
   const questionSection = suggestDecision?.pregunta
     ? `PREGUNTA DE INVESTIGACION:\n${suggestDecision.pregunta}\n\nHIPOTESIS A VERIFICAR:\n${suggestDecision.hipotesis || "(derivar de la pregunta)"}\n`
     : "";
-  const { lcn, countries } = dataDigest(fetchedData);
+  const { lcn, countries } = dataDigest(fetchedData, suggestDecision);
   const digest = computeDigest(computeResults);
   const prompt = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
 
@@ -611,9 +622,9 @@ Devuelve el paper completo en Markdown.`;
   return data.choices[0]?.message?.content || "";
 }
 
-async function agentReview(fetchedData, computeResults, draft) {
+async function agentReview(fetchedData, computeResults, draft, suggestDecision = null) {
   console.log("[5/7] GPT-OSS 120B revisando rigor academico...\n");
-  const { lcn, countries } = dataDigest(fetchedData);
+  const { lcn, countries } = dataDigest(fetchedData, suggestDecision);
   const digest = computeDigest(computeResults);
   const prompt = `Eres un revisor academico riguroso y desconfiado. Tu trabajo es detectar DATOS INVENTADOS comparando el paper contra los datos reales.
 
@@ -784,7 +795,7 @@ class MoAGraph {
   async nodeSuggest() { this.logNode("SUGGEST"); this.state.suggestDecision = await this.runWithGuardrails("SUGGEST", () => agentSuggest(this.state.fetchedData)); if (this.state.suggestDecision?.topic) { this.state.topic = this.state.suggestDecision.topic; this.state.angle = this.state.suggestDecision.angle || this.state.angle; } await delay(20); return resolveTransition("SUGGEST", this.state); }
   async nodeCompute() { this.logNode("COMPUTE"); this.state.computeResults = await this.runWithGuardrails("COMPUTE", () => agentCompute(this.state.fetchedData, this.state.suggestDecision)); mkdirSync("output/raw", { recursive: true }); writeFileSync("output/raw/compute-results.json", JSON.stringify(this.state.computeResults, null, 2), "utf-8"); return resolveTransition("COMPUTE", this.state); }
   async nodeWrite() { this.logNode("WRITE"); this.state.currentDraft = await this.runWithGuardrails("WRITE", () => agentWrite(this.state.fetchedData, this.state.computeResults, this.state.writeFeedback, this.state.topic, this.state.angle, this.state.suggestDecision)); this.state.drafts.push(this.state.currentDraft); this.state.writeFeedback = null; await delay(20); return resolveTransition("WRITE", this.state); }
-  async nodeReview() { this.logNode("REVIEW"); this.state.reviewDecision = await this.runWithGuardrails("REVIEW", () => agentReview(this.state.fetchedData, this.state.computeResults, this.state.currentDraft)); await delay(20); return resolveTransition("REVIEW", this.state); }
+  async nodeReview() { this.logNode("REVIEW"); this.state.reviewDecision = await this.runWithGuardrails("REVIEW", () => agentReview(this.state.fetchedData, this.state.computeResults, this.state.currentDraft, this.state.suggestDecision)); await delay(20); return resolveTransition("REVIEW", this.state); }
   async nodeEdit() { this.logNode("EDIT"); try { this.state.editedArticle = await this.runWithGuardrails("EDIT", () => agentEdit(this.state.currentDraft, this.state.editFeedback || "")); } catch (e) { console.log(`  EDIT fallo (${e.message}). Usando draft original.`); this.state.editedArticle = this.state.currentDraft; } await delay(20); return resolveTransition("EDIT", this.state); }
   async nodeApprove() {
     this.logNode("APPROVE"); await delay(40);
