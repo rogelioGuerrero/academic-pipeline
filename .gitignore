@@ -5,3 +5,5 @@ output/raw/compute-input.json
 __pycache__/
 .env
 .commit-msg.txt
+run-log*.txt
+test-digest.mjs

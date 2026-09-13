@@ -500,16 +500,36 @@ async function agentCompute(fetchedData, suggestDecision = null) {
 }
 
 // ── Digests compartidos: WRITE y REVIEW deben ver exactamente los mismos datos ──
-// Filtro topico: solo inyecta series de los indicadores que las sugerencias usan.
-// El prompt no crece con el tamano del catalogo — escala con el tema elegido.
+// Filtro topico: solo inyecta series de los indicadores que la sugerencia ELEGIDA
+// usa (la que matchea decision.topic). El prompt no crece con el tamano del
+// catalogo ni con el numero de sugerencias — escala solo con el tema elegido.
+function chosenSuggestion(suggestDecision) {
+  const sugs = suggestDecision?.suggestions || [];
+  if (!sugs.length) return null;
+  const topic = (suggestDecision?.topic || "").toLowerCase().trim();
+  const match = topic && sugs.find(s => {
+    const t = (s.titulo || "").toLowerCase().trim();
+    return t === topic || topic.includes(t) || t.includes(topic);
+  });
+  return match || sugs[0];
+}
+
+function chosenIndicators(suggestDecision) {
+  const chosen = chosenSuggestion(suggestDecision);
+  const terms = (chosen?.indicadores_respaldan || []).map(u => u.toLowerCase());
+  return terms.length ? terms : null;
+}
+
+function matchesIndicator(seriesName, indicatorTerms) {
+  const label = seriesName.toLowerCase();
+  return indicatorTerms.some(u => label.includes(u) || u.includes(label));
+}
+
 function dataDigest(fetchedData, suggestDecision = null) {
   let inds = fetchedData.indicators;
-  const used = new Set((suggestDecision?.suggestions || []).flatMap(s => s.indicadores_respaldan || []).map(u => u.toLowerCase()));
-  if (used.size) {
-    const filtered = inds.filter(i => {
-      const label = i.indicator_label.toLowerCase();
-      return [...used].some(u => label.includes(u) || u.includes(label));
-    });
+  const used = chosenIndicators(suggestDecision);
+  if (used) {
+    const filtered = inds.filter(i => matchesIndicator(i.indicator_label, used));
     if (filtered.length) inds = filtered; // si nada coincide, mostrar todo (fallback seguro)
   }
   // Series LCN completas (año=valor) + países primer→último valor
@@ -526,8 +546,10 @@ function dataDigest(fetchedData, suggestDecision = null) {
   return { lcn, countries };
 }
 
-function computeDigest(computeResults) {
+function computeDigest(computeResults, suggestDecision = null) {
   if (!computeResults) return "Sin analisis estadistico.";
+  const inds = chosenIndicators(suggestDecision);
+  const relevant = (name) => !inds || matchesIndicator(name, inds);
   const parts = [];
   if (computeResults.regression && !computeResults.error && computeResults.regression.dependent) {
     const r = computeResults.regression;
@@ -539,23 +561,29 @@ function computeDigest(computeResults) {
     if (r.white_test) parts.push(`  White test: p=${r.white_test.p_value?.toFixed(4)} (${r.white_test.heteroscedastic ? "heterocedastico" : "homocedastico"})`);
     else parts.push(`  White test: NO calculado`);
   }
-  const corrs = (computeResults.correlations || []).filter(c => c.pearson_r !== undefined);
+  const corrs = (computeResults.correlations || []).filter(c => c.pearson_r !== undefined && relevant(c.x) && relevant(c.y));
   if (corrs.length) {
     parts.push(`CORRELACIONES (${corrs.length} calculadas):`);
     for (const c of corrs) {
-      parts.push(`  ${c.x} <-> ${c.y}: pearson_r=${c.pearson_r.toFixed(4)}, p=${c.pearson_p.toFixed(4)}, spearman=${c.spearman_rho.toFixed(4)}, n=${c.n}, significativa=${c.significant}`);
+      let line = `  ${c.x} <-> ${c.y}: pearson_r=${c.pearson_r.toFixed(4)}, p=${c.pearson_p.toFixed(4)}, spearman=${c.spearman_rho.toFixed(4)}, n=${c.n}, significativa=${c.significant}`;
+      if (c.diff_pearson_r !== undefined) {
+        line += ` | en diferencias (Δ año a año): r=${c.diff_pearson_r.toFixed(4)}, p=${c.diff_pearson_p.toFixed(4)}, n=${c.diff_n}`;
+      }
+      parts.push(line);
     }
+    parts.push(`  NOTA: correlaciones en niveles entre series con tendencia pueden ser espurias (co-tendencia). Las correlaciones "en diferencias" (cambios año a año) son el test mas honesto: si la relacion en niveles desaparece en diferencias, era co-tendencia, no asociacion real.`);
   }
-  const sigTrends = (computeResults.trends || []).filter(t => t.trend !== "no_trend");
+  const sigTrends = (computeResults.trends || []).filter(t => t.trend !== "no_trend" && relevant(t.indicator));
   if (sigTrends.length) {
     parts.push(`TENDENCIAS SIGNIFICATIVAS (Mann-Kendall p<0.05):`);
     for (const t of sigTrends.slice(0, 15)) {
       parts.push(`  ${t.indicator}: ${t.trend}, slope=${t.slope.toFixed(3)}/año, p=${t.mann_kendall_p.toFixed(4)}`);
     }
   }
-  if (computeResults.anomalies?.length) {
-    parts.push(`ANOMALIAS (${computeResults.anomalies.length}):`);
-    for (const a of computeResults.anomalies.slice(0, 5)) {
+  const anomalies = (computeResults.anomalies || []).filter(a => relevant(a.indicator));
+  if (anomalies.length) {
+    parts.push(`ANOMALIAS (${anomalies.length}):`);
+    for (const a of anomalies.slice(0, 5)) {
       parts.push(`  ${a.indicator} [${a.country_code}] ${a.year}: ${a.value.toFixed(2)} (z=${a.z_score.toFixed(1)})`);
     }
   }
@@ -579,7 +607,7 @@ async function agentWrite(fetchedData, computeResults, feedback = null, topic = 
     ? `PREGUNTA DE INVESTIGACION:\n${suggestDecision.pregunta}\n\nHIPOTESIS A VERIFICAR:\n${suggestDecision.hipotesis || "(derivar de la pregunta)"}\n`
     : "";
   const { lcn, countries } = dataDigest(fetchedData, suggestDecision);
-  const digest = computeDigest(computeResults);
+  const digest = computeDigest(computeResults, suggestDecision);
   const prompt = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
 
 DATOS REALES (World Bank API, unicos datos disponibles):
@@ -613,19 +641,20 @@ REGLAS CRITICAS (incumplir = rechazo):
 - NO existe informacion de paises fuera de la lista. NO uses fuentes que no sean World Bank (nada de CEPAL, OECD, IMF, ECLAC).
 - NO inventes tests diagnosticos (White, Durbin-Watson), simulaciones, escenarios futuros ni proyecciones: solo reporta lo que Python calculo.
 - Si un resultado no es significativo (p>0.05), dilo explicitamente; no lo presentes como evidencia solida.
+- Cuando una correlacion en niveles es significativa pero su correlacion "en diferencias" no lo es (o viceversa), dilo explicitamente: la primera puede ser co-tendencia espuria, la segunda es evidencia mas honesta de co-movimiento.
 - Referencia las figuras reales listadas: ![descripcion](charts/<file>). NO inventes figuras que no esten en la lista.
 - Cita cada dato como (Banco Mundial, 2024).
-- Total: 1500-2200 palabras. La Bibliografia es OBLIGATORIA.
+- Total: 1200-1800 palabras. La Bibliografia es OBLIGATORIA y va AL FINAL — si te quedas sin espacio, acorta el Analisis, nunca omitas la Bibliografia.
 
 Devuelve el paper completo en Markdown.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4000, temperature: 0.6 });
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4500, temperature: 0.6 });
   return data.choices[0]?.message?.content || "";
 }
 
 async function agentReview(fetchedData, computeResults, draft, suggestDecision = null) {
   console.log("[5/7] GPT-OSS 120B revisando rigor academico...\n");
   const { lcn, countries } = dataDigest(fetchedData, suggestDecision);
-  const digest = computeDigest(computeResults);
+  const digest = computeDigest(computeResults, suggestDecision);
   const prompt = `Eres un revisor academico riguroso y desconfiado. Tu trabajo es detectar DATOS INVENTADOS comparando el paper contra los datos reales.
 
 DATOS REALES (World Bank API — la unica fuente permitida):
@@ -755,7 +784,7 @@ function transparencyNote(state) {
     "",
     "**Métodos ejecutados (Python / scipy, determinísticos):**",
     `- Estadísticas descriptivas de ${ind.length} series.`,
-    `- ${corrs.length} correlaciones Pearson/Spearman calculadas; ${sigCorrs.length} significativas (p<0.05).`,
+    `- ${corrs.length} correlaciones Pearson/Spearman calculadas; ${sigCorrs.length} significativas (p<0.05). Cada una incluye su versión en primeras diferencias para distinguir co-movimiento de co-tendencia espuria.`,
     reg?.dependent ? `- Regresión OLS: ${reg.dependent} ~ ${reg.independent.join(" + ")} (n=${reg.n}, R²=${reg.r_squared?.toFixed(3)}).` : "- Sin regresión ejecutada.",
     sigTrends.length ? `- Test de tendencia Mann-Kendall: ${sigTrends.length} de ${trends.length} series con tendencia significativa.` : "",
     cr.anomalies?.length ? `- Detección de anomalías (z-score/IQR): ${cr.anomalies.length} observaciones atípicas.` : "",

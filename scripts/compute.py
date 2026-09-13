@@ -161,7 +161,7 @@ def correlation_analysis(data):
             ci_hi = float(np.tanh(z_hi))
         else:
             ci_lo = ci_hi = float(r)
-        results.append({
+        result = {
             "x": x_name,
             "y": y_name,
             "pearson_r": float(r),
@@ -173,7 +173,24 @@ def correlation_analysis(data):
             "n": int(len(x_arr)),
             "years": years,
             "units": f"{ua} vs {ub}",
-        })
+        }
+        # ── First-difference correlation: distinguishes real co-movement
+        # from spurious co-trending. Two series that both trend upward always
+        # correlate in levels; only diff correlation shows whether year-to-year
+        # changes actually move together. Only diff between consecutive years. ──
+        if years:
+            dx, dy = [], []
+            for i in range(1, len(years)):
+                if years[i] - years[i - 1] == 1:
+                    dx.append(x_arr[i] - x_arr[i - 1])
+                    dy.append(y_arr[i] - y_arr[i - 1])
+            if len(dx) >= 4:
+                r_d, p_d = stats.pearsonr(np.array(dx), np.array(dy))
+                result["diff_pearson_r"] = float(r_d)
+                result["diff_pearson_p"] = float(p_d)
+                result["diff_n"] = len(dx)
+                result["diff_significant"] = bool(p_d < 0.05)
+        results.append(result)
     return results
 
 def ols_regression(data):
