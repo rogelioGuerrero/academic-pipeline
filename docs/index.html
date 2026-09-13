@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academic Pipeline — Papers</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; background: #faf9f7; color: #1a1a1a; max-width: 860px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 8px; margin-bottom: 24px; }
+    .paper-list { list-style: none; }
+    .paper-item { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; cursor: pointer; transition: box-shadow 0.15s; }
+    .paper-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .paper-item .title { font-weight: 600; font-size: 1.1em; color: #1a73e8; }
+    .paper-item .meta { font-size: 0.85em; color: #777; margin-top: 4px; }
+    .paper-item .badge { display: inline-block; background: #e8f5e9; color: #2e7d32; font-size: 0.75em; padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
+    #viewer { display: none; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 32px; margin-top: 16px; }
+    #viewer.open { display: block; }
+    #viewer .back { display: inline-block; margin-bottom: 16px; color: #1a73e8; cursor: pointer; font-size: 0.9em; }
+    #viewer .back:hover { text-decoration: underline; }
+    #viewer h1 { font-size: 1.4em; border: none; margin-bottom: 16px; }
+    #viewer h2 { font-size: 1.2em; margin: 20px 0 10px; color: #333; }
+    #viewer h3 { font-size: 1.05em; margin: 16px 0 8px; color: #444; }
+    #viewer p { line-height: 1.7; margin-bottom: 12px; }
+    #viewer blockquote { border-left: 3px solid #1a73e8; padding-left: 16px; margin: 16px 0; color: #555; font-style: italic; }
+    #viewer table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9em; }
+    #viewer th, #viewer td { border: 1px solid #ddd; padding: 6px 10px; text-align: left; }
+    #viewer th { background: #f5f5f5; }
+    #viewer code { background: #f0f0f0; padding: 1px 4px; border-radius: 3px; font-size: 0.9em; }
+    #viewer pre { background: #f5f5f5; padding: 12px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
+    #viewer pre code { background: none; padding: 0; }
+    #viewer ul, #viewer ol { margin: 8px 0 12px 24px; }
+    #viewer li { margin-bottom: 4px; line-height: 1.6; }
+    #viewer strong { color: #222; }
+    .empty { color: #999; font-style: italic; padding: 40px 0; text-align: center; }
+    .loading { color: #999; text-align: center; padding: 40px 0; }
+    #status { font-size: 0.85em; color: #999; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h1>📄 Academic Pipeline</h1>
+  <div id="status">Cargando papers...</div>
+  <ul class="paper-list" id="list"></ul>
+  <div id="viewer"><span class="back" onclick="closePaper()">← Volver a la lista</span><div id="content"></div></div>
+
+  <script>
+    const list = document.getElementById('list');
+    const viewer = document.getElementById('viewer');
+    const content = document.getElementById('content');
+    const status = document.getElementById('status');
+
+    async function init() {
+      try {
+        const res = await fetch('index.json');
+        if (!res.ok) throw new Error('index.json not found');
+        const papers = await res.json();
+        renderList(papers);
+      } catch {
+        status.textContent = '';
+        list.innerHTML = '<p class="empty">No hay papers aún. El pipeline corre diariamente a las 8am.</p>';
+      }
+    }
+
+    function renderList(papers) {
+      status.textContent = `${papers.length} paper(s) generado(s)`;
+      if (!papers.length) {
+        list.innerHTML = '<p class="empty">No hay papers aún.</p>';
+        return;
+      }
+      // Sort newest first
+      papers.sort((a, b) => b.date.localeCompare(a.date));
+      list.innerHTML = papers.map((p, i) => `
+        <li class="paper-item" onclick="openPaper('${p.file}')">
+          <div class="title">${esc(p.topic || p.file)}</div>
+          <div class="meta">
+            ${p.date} · ${p.nodes || ''} nodos
+            ${p.mode === 'suggest' ? '<span class="badge">Auto</span>' : ''}
+          </div>
+        </li>
+      `).join('');
+    }
+
+    async function openPaper(filename) {
+      try {
+        const res = await fetch(`papers/${filename}`);
+        if (!res.ok) throw new Error('not found');
+        const md = await res.text();
+        content.innerHTML = renderMd(md);
+        list.style.display = 'none';
+        status.style.display = 'none';
+        viewer.classList.add('open');
+        window.scrollTo(0, 0);
+      } catch {
+        content.innerHTML = '<p class="empty">No se pudo cargar el paper.</p>';
+        viewer.classList.add('open');
+      }
+    }
+
+    function closePaper() {
+      viewer.classList.remove('open');
+      list.style.display = '';
+      status.style.display = '';
+    }
+
+    function esc(s) {
+      const d = document.createElement('div');
+      d.textContent = s || '';
+      return d.innerHTML;
+    }
+
+    // Minimal markdown renderer
+    function renderMd(md) {
+      let html = md
+        // Headers
+        .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+        .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+        // Bold + italic
+        .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        // Blockquote
+        .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+        // Horizontal rule
+        .replace(/^---+$/gm, '<hr>')
+        // Inline code
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        // Links
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+        // Paragraphs
+        .replace(/\n\n/g, '</p><p>')
+        // Line breaks within paragraphs
+        .replace(/\n/g, '<br>');
+
+      // Wrap in paragraph
+      html = '<p>' + html + '</p>';
+      // Clean up empty paragraphs
+      html = html.replace(/<p><\/p>/g, '');
+      html = html.replace(/<p>(<h[1-4]>)/g, '$1');
+      html = html.replace(/(<\/h[1-4]>)<\/p>/g, '$1');
+      html = html.replace(/<p>(<hr>)<\/p>/g, '$1');
+      html = html.replace(/<p>(<blockquote>)/g, '$1');
+      html = html.replace(/(<\/blockquote>)<\/p>/g, '$1');
+      // Lists
+      html = html.replace(/<p>- (.+?)<\/p>/g, '<ul><li>$1</li></ul>');
+      // Numbered lists
+      html = html.replace(/<p>(\d+)\. (.+?)<\/p>/g, '<ol><li>$1. $2</li></ol>');
+
+      return html;
+    }
+
+    init();
+  </script>
+</body>
+</html>

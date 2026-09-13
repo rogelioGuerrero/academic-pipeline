@@ -58,11 +58,37 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
 
+      - name: Copy papers to docs/ for GitHub Pages
+        run: |
+          mkdir -p docs/papers
+          for f in output/papers/*.md; do
+            [ -f "$f" ] && cp "$f" "docs/papers/$(basename $f)"
+          done
+          # Generate index.json listing all papers
+          python -c "
+            import json, os, glob
+            papers = []
+            for f in sorted(glob.glob('docs/papers/*.md'), reverse=True):
+                name = os.path.basename(f)
+                date = name[:10] if len(name) > 10 else ''
+                topic = 'Paper'
+                try:
+                    with open(f, encoding='utf-8') as fh:
+                        for line in fh:
+                            if line.startswith('# '):
+                                topic = line[2:].strip(); break
+                except: pass
+                papers.append({'file': name, 'date': date, 'topic': topic, 'nodes': 7, 'mode': 'suggest'})
+            with open('docs/index.json', 'w') as fh:
+                json.dump(papers, fh, indent=2)
+            print(f'index.json: {len(papers)} papers')
+          "
+
       - name: Commit artifacts
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/fetched-data.json 2>/dev/null || true
+          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/fetched-data.json docs/papers/ docs/index.json 2>/dev/null || true
           git commit -m "Daily research paper - $(date -u +%Y-%m-%d)" || echo "No changes to commit"
           git push
 
