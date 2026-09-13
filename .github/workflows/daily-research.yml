@@ -85,7 +85,7 @@ jobs:
                                 topic = line[2:].strip(); break
                 except: pass
                 entry = {'file': name, 'date': date, 'topic': topic, 'nodes': 7, 'mode': 'suggest'}
-                # Veredictos de revision/QA desde la metadata del paper (output/papers/<stem>.json)
+                # Veredictos + noticia inspiradora desde la metadata (output/papers/<stem>.json)
                 meta_path = os.path.join('output/papers', os.path.splitext(name)[0] + '.json')
                 try:
                     meta = json.load(open(meta_path, encoding='utf-8'))
@@ -93,6 +93,27 @@ jobs:
                         entry['review'] = meta['reviewDecision']['veredicto']
                     if meta.get('qaDecision', {}).get('veredicto'):
                         entry['qa'] = meta['qaDecision']['veredicto']
+                    news = meta.get('inspiringNews') or {}
+                    # Fallback: papers antiguos sin inspiringNews — matchear
+                    # suggestions[0].noticia_inspiradora contra news_found.json
+                    if not news.get('image'):
+                        try:
+                            items = json.load(open('../job-hunter/news_found.json', encoding='utf-8'))
+                            wanted = (meta.get('suggestions') or [{}])[0].get('noticia_inspiradora', '').lower()
+                            for it in items:
+                                t = (it.get('title') or '').lower()
+                                if wanted and (wanted in t or t in wanted):
+                                    news = {'image': it.get('url_to_image') or it.get('pexels_image'), 'section': it.get('section'), 'url': it.get('url')}
+                                    break
+                        except: pass
+                    if news.get('image'):
+                        entry['image'] = news['image']
+                    if news.get('section'):
+                        entry['section'] = news['section']
+                    if news.get('url'):
+                        entry['news_url'] = news['url']
+                    if meta.get('pregunta'):
+                        entry['pregunta'] = meta['pregunta']
                 except: pass
                 if not verified:
                     entry['warning'] = 'Borrador experimental generado antes de las correcciones de verificacion. Puede contener metodologia o estadisticas no verificadas.'

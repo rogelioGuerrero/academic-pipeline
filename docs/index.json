@@ -14,6 +14,10 @@
     "nodes": 7,
     "mode": "suggest",
     "review": "APROBADO",
-    "qa": "RECHAZADO"
+    "qa": "RECHAZADO",
+    "image": "https://images.pexels.com/photos/27451303/pexels-photo-27451303.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "section": "Internacional",
+    "news_url": "https://www.dw.com/en/anthropic-boss-dario-amodei-calls-for-ai-slowdown/a-79247690?maca=en-rss-en-all-1573-rdf",
+    "pregunta": "¿Existe una correlación negativa significativa entre la penetración digital (usuarios de internet y suscripciones móviles) y el porcentaje de empleo vulnerable en los países de América Latina?"
   }
 ]

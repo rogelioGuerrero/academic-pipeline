@@ -15,8 +15,8 @@
  *   Con argumento: usa el tema dado (modo v3)
  */
 
-import { writeFileSync, readFileSync, mkdirSync } from "fs";
-import { resolve, dirname } from "path";
+import { writeFileSync, readFileSync, mkdirSync, readdirSync } from "fs";
+import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { execFileSync } from "child_process";
 import { fetchSources } from "./fetch-sources.mjs";
@@ -194,6 +194,46 @@ function resolveTransition(node, state) {
   return "END";
 }
 
+// ── Dedup y noticias: helpers compartidos ──
+function loadNewsItems() {
+  try {
+    const parsed = JSON.parse(readFileSync(NEWS_PATH, "utf-8"));
+    if (Array.isArray(parsed)) return parsed;
+    if (parsed && Array.isArray(parsed.articles)) return parsed.articles;
+    if (parsed && Array.isArray(parsed.items)) return parsed.items;
+    return [];
+  } catch {
+    return [];
+  }
+}
+
+function normText(s) {
+  return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+// Similitud de temas: coeficiente de solapamiento sobre palabras significativas.
+// Containment (inter/min) en vez de Jaccard: detecta "X y Y" dentro de "X y Z".
+function topicSimilarity(a, b) {
+  const stop = new Set(["del", "los", "las", "una", "para", "con", "sobre", "entre", "ante", "bajo", "desde", "hacia", "como", "mas"]);
+  const words = s => new Set(normText(s).split(" ").filter(w => w.length > 3 && !stop.has(w)));
+  const A = words(a), B = words(b);
+  if (!A.size || !B.size) return 0;
+  const inter = [...A].filter(w => B.has(w)).length;
+  return inter / Math.min(A.size, B.size);
+}
+
+// Topics de papers ya generados (metadata json en output/papers/)
+function loadRecentTopics() {
+  try {
+    const files = readdirSync(OUTPUT_DIR).filter(f => f.endsWith(".json")).sort().reverse().slice(0, 10);
+    return files.map(f => {
+      try { return JSON.parse(readFileSync(join(OUTPUT_DIR, f), "utf-8")).topic; } catch { return null; }
+    }).filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
 async function agentFetch(topic) {
   // Caché: si existe y es reciente, usar sin refetch
   if (!NO_CACHE) {
@@ -226,26 +266,8 @@ async function agentSuggest(fetchedData) {
   }
 
   // Leer news_found.json de job-hunter
-  let newsItems = [];
-  try {
-    const raw = readFileSync(NEWS_PATH, "utf-8");
-    const parsed = JSON.parse(raw);
-    // Aceptar array directo o envoltorio tipo {articles: [...]} / {items: [...]}
-    if (Array.isArray(parsed)) {
-      newsItems = parsed;
-    } else if (parsed && Array.isArray(parsed.articles)) {
-      newsItems = parsed.articles;
-    } else if (parsed && Array.isArray(parsed.items)) {
-      newsItems = parsed.items;
-    } else {
-      // Respuesta de error de la API de GitHub ({"message":"Not Found",...}) u otro objeto inesperado
-      console.log("  news_found.json no es una lista de articulos (posible error de descarga). Usando modo generico.");
-      newsItems = [];
-    }
-    console.log(`  Noticias cargadas: ${newsItems.length} articulos de job-hunter`);
-  } catch {
-    console.log("  No se encontro news_found.json. Usando modo generico.");
-  }
+  const newsItems = loadNewsItems();
+  console.log(`  Noticias cargadas: ${newsItems.length} articulos de job-hunter`);
 
   // Construir catalogo de indicadores disponibles
   const catalog = [...new Map(fetchedData.indicators.map(i => [i.indicator_label, {
@@ -774,7 +796,7 @@ function transparencyNote(state) {
     "",
     "**Contexto.** Este artículo fue generado automáticamente por AcademicPipeline, un pipeline de investigación asistida por IA.",
     state.topic ? `Tema seleccionado: *${state.topic}*.` : "",
-    inspiring?.noticia_inspiradora ? `Noticia que inspiró la línea editorial: *"${inspiring.noticia_inspiradora}"*.` : "",
+    inspiring?.noticia_inspiradora ? `Noticia que inspiró la línea editorial: *"${inspiring.noticia_inspiradora}"*${s.inspiringNews?.url ? ` ([${s.inspiringNews.source || "fuente"}](${s.inspiringNews.url}))` : ""}.` : "",
     inspiring?.justificacion ? `Justificación del sistema: ${inspiring.justificacion}` : "",
     s.pregunta ? `**Pregunta de investigación:** ${s.pregunta}` : "",
     s.hipotesis ? `**Hipótesis planteada:** ${s.hipotesis}` : "",
@@ -823,7 +845,50 @@ class MoAGraph {
     }
   }
   async nodeFetch() { this.logNode("FETCH"); this.state.fetchedData = await this.runWithGuardrails("FETCH", () => agentFetch(this.state.topic)); return resolveTransition("FETCH", this.state); }
-  async nodeSuggest() { this.logNode("SUGGEST"); this.state.suggestDecision = await this.runWithGuardrails("SUGGEST", () => agentSuggest(this.state.fetchedData)); if (this.state.suggestDecision?.topic) { this.state.topic = this.state.suggestDecision.topic; this.state.angle = this.state.suggestDecision.angle || this.state.angle; } await delay(20); return resolveTransition("SUGGEST", this.state); }
+  async nodeSuggest() {
+    this.logNode("SUGGEST");
+    this.state.suggestDecision = await this.runWithGuardrails("SUGGEST", () => agentSuggest(this.state.fetchedData));
+    const decision = this.state.suggestDecision;
+    // ── Dedup: si el tema elegido repite un paper reciente, promover la
+    // siguiente sugerencia fresca; si todas repiten, saltar el run. ──
+    const sugs = decision?.suggestions || [];
+    const recent = loadRecentTopics();
+    if (recent.length && sugs.length) {
+      const scored = sugs.map(s => ({ s, sim: Math.max(0, ...recent.map(t => topicSimilarity(s.titulo, t))) }));
+      const fresh = scored.find(x => x.sim < 0.55);
+      if (!fresh) {
+        console.log(`  Dedup: todas las lineas propuestas repiten temas recientes (max sim ${Math.max(...scored.map(x => x.sim)).toFixed(2)}). Sin tema nuevo — run omitido.`);
+        process.exit(0);
+      }
+      const chosen = chosenSuggestion(decision);
+      if (chosen !== fresh.s) {
+        const dup = scored.find(x => x.s === chosen);
+        console.log(`  Dedup: "${chosen?.titulo || decision.topic}" ya cubierto (sim ${dup?.sim.toFixed(2)}). Promoviendo: "${fresh.s.titulo}"`);
+        decision.topic = fresh.s.titulo;
+        decision.angle = fresh.s.justificacion || decision.angle;
+        decision.pregunta = null;   // la pregunta original era de la linea descartada
+        decision.hipotesis = null;  // WRITE la derivara del nuevo tema
+      }
+    }
+    // ── Adjuntar noticia inspiradora (imagen/url) para metadata e index ──
+    const chosen = chosenSuggestion(decision);
+    if (chosen?.noticia_inspiradora) {
+      const news = loadNewsItems();
+      const item = news.find(n => {
+        const a = normText(n.title), b = normText(chosen.noticia_inspiradora);
+        return a && b && (a.includes(b) || b.includes(a) || topicSimilarity(a, b) > 0.6);
+      });
+      if (item) {
+        decision.inspiringNews = {
+          title: item.title, url: item.url, source: item.source,
+          section: item.section, image: item.url_to_image || item.pexels_image || null,
+        };
+        console.log(`  Noticia vinculada: "${item.title?.slice(0, 60)}" (${item.source})`);
+      }
+    }
+    if (decision?.topic) { this.state.topic = decision.topic; this.state.angle = decision.angle || this.state.angle; }
+    await delay(20); return resolveTransition("SUGGEST", this.state);
+  }
   async nodeCompute() { this.logNode("COMPUTE"); this.state.computeResults = await this.runWithGuardrails("COMPUTE", () => agentCompute(this.state.fetchedData, this.state.suggestDecision)); mkdirSync("output/raw", { recursive: true }); writeFileSync("output/raw/compute-results.json", JSON.stringify(this.state.computeResults, null, 2), "utf-8"); return resolveTransition("COMPUTE", this.state); }
   async nodeWrite() { this.logNode("WRITE"); this.state.currentDraft = await this.runWithGuardrails("WRITE", () => agentWrite(this.state.fetchedData, this.state.computeResults, this.state.writeFeedback, this.state.topic, this.state.angle, this.state.suggestDecision)); this.state.drafts.push(this.state.currentDraft); this.state.writeFeedback = null; await delay(20); return resolveTransition("WRITE", this.state); }
   async nodeReview() { this.logNode("REVIEW"); this.state.reviewDecision = await this.runWithGuardrails("REVIEW", () => agentReview(this.state.fetchedData, this.state.computeResults, this.state.currentDraft, this.state.suggestDecision)); await delay(20); return resolveTransition("REVIEW", this.state); }
@@ -865,6 +930,7 @@ class MoAGraph {
     writeFileSync(`${OUTPUT_DIR}/${date}_${slug}.json`, JSON.stringify({
       topic: this.state.topic, angle: this.state.angle, nodes: this.state.nodeHistory, iterations: this.state.iterations,
       pregunta: this.state.suggestDecision?.pregunta || null, hipotesis: this.state.suggestDecision?.hipotesis || null,
+      inspiringNews: this.state.suggestDecision?.inspiringNews || null,
       suggestMode: this.state.suggestDecision?.mode || "manual",
       suggestions: this.state.suggestDecision?.suggestions || [],
       reviewDecision: this.state.reviewDecision, qaDecision: this.state.qaDecision,

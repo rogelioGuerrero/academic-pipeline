@@ -3,57 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Academic Pipeline — Papers</title>
+  <title>Academic Pipeline — Investigación verificable con datos reales</title>
+  <meta name="description" content="Papers generados automáticamente desde noticias, verificados contra datos del Banco Mundial. Cada cifra es auditable.">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Georgia, 'Times New Roman', serif; background: #faf9f7; color: #1a1a1a; max-width: 860px; margin: 0 auto; padding: 24px; }
-    h1 { font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 8px; margin-bottom: 24px; }
-    .paper-list { list-style: none; }
-    .paper-item { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; cursor: pointer; transition: box-shadow 0.15s; }
-    .paper-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .paper-item .title { font-weight: 600; font-size: 1.1em; color: #1a73e8; }
-    .paper-item .meta { font-size: 0.85em; color: #777; margin-top: 4px; }
-    .paper-item .badge { display: inline-block; background: #e8f5e9; color: #2e7d32; font-size: 0.75em; padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
-    .paper-item .badge.warn, .warn-banner { background: #fff3e0; color: #e65100; }
-    .warn-banner { border: 1px solid #ffcc80; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 0.88em; }
-    #viewer { display: none; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 32px; margin-top: 16px; }
+    body { font-family: Georgia, 'Times New Roman', serif; background: #f4f2ee; color: #1a1a1a; }
+
+    /* ── Header ── */
+    header { background: #14213d; color: #fff; padding: 36px 24px 30px; }
+    header .wrap { max-width: 1000px; margin: 0 auto; }
+    header h1 { font-size: 1.75em; font-weight: 600; letter-spacing: 0.3px; }
+    header .sub { color: #b8c4d9; font-size: 0.95em; margin-top: 8px; max-width: 720px; line-height: 1.55; }
+    header .sub a { color: #9fc1ff; text-decoration: none; border-bottom: 1px dotted #9fc1ff; }
+    header .tags { margin-top: 14px; font-size: 0.78em; color: #8fa3c4; letter-spacing: 0.4px; }
+
+    main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+    #status { font-size: 0.85em; color: #888; margin: 4px 2px 16px; }
+
+    /* ── Cards ── */
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .card { background: #fff; border: 1px solid #e3e0da; border-radius: 10px; overflow: hidden; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.10); }
+    .card .thumb { height: 150px; background: #e8e5de center/cover no-repeat; position: relative; }
+    .card .thumb .section-chip { position: absolute; top: 10px; left: 10px; background: rgba(20,33,61,0.88); color: #fff; font-size: 0.7em; padding: 3px 10px; border-radius: 10px; letter-spacing: 0.4px; }
+    .card .body { padding: 16px 18px 14px; flex: 1; display: flex; flex-direction: column; }
+    .card .date { font-size: 0.75em; color: #999; letter-spacing: 0.5px; text-transform: uppercase; }
+    .card .title { font-weight: 600; font-size: 1.05em; color: #14213d; margin: 6px 0 8px; line-height: 1.35; }
+    .card .pregunta { font-size: 0.82em; color: #666; font-style: italic; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card .foot { margin-top: auto; padding-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .badge { display: inline-block; background: #e8f5e9; color: #2e7d32; font-size: 0.7em; padding: 2px 9px; border-radius: 10px; font-family: Verdana, sans-serif; }
+    .badge.warn { background: #fff3e0; color: #e65100; }
+    .badge.neutral { background: #eceff4; color: #54607a; }
+    .warn-banner { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 0.88em; }
+
+    /* ── Viewer ── */
+    #viewer { display: none; background: #fff; border: 1px solid #e3e0da; border-radius: 10px; padding: 36px 40px; margin-top: 8px; }
     #viewer.open { display: block; }
-    #viewer .back { display: inline-block; margin-bottom: 16px; color: #1a73e8; cursor: pointer; font-size: 0.9em; }
+    #viewer .back { display: inline-block; margin-bottom: 16px; color: #1a56db; cursor: pointer; font-size: 0.9em; font-family: Verdana, sans-serif; }
     #viewer .back:hover { text-decoration: underline; }
-    #viewer h1 { font-size: 1.4em; border: none; margin-bottom: 16px; }
-    #viewer h2 { font-size: 1.2em; margin: 20px 0 10px; color: #333; }
+    #viewer .news-link { display: inline-block; margin: 0 0 18px 14px; font-size: 0.82em; font-family: Verdana, sans-serif; }
+    #viewer .news-link a { color: #1a56db; text-decoration: none; }
+    #viewer h1 { font-size: 1.5em; border: none; margin-bottom: 16px; line-height: 1.3; }
+    #viewer h2 { font-size: 1.2em; margin: 22px 0 10px; color: #14213d; border-bottom: 1px solid #eee; padding-bottom: 4px; }
     #viewer h3 { font-size: 1.05em; margin: 16px 0 8px; color: #444; }
-    #viewer p { line-height: 1.7; margin-bottom: 12px; }
-    #viewer blockquote { border-left: 3px solid #1a73e8; padding-left: 16px; margin: 16px 0; color: #555; font-style: italic; }
-    #viewer table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9em; }
+    #viewer p { line-height: 1.75; margin-bottom: 12px; }
+    #viewer a { color: #1a56db; }
+    #viewer blockquote { border-left: 3px solid #1a56db; padding-left: 16px; margin: 16px 0; color: #555; font-style: italic; }
+    #viewer table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.88em; }
     #viewer th, #viewer td { border: 1px solid #ddd; padding: 6px 10px; text-align: left; }
-    #viewer th { background: #f5f5f5; }
+    #viewer th { background: #f5f4f1; }
     #viewer code { background: #f0f0f0; padding: 1px 4px; border-radius: 3px; font-size: 0.9em; }
     #viewer pre { background: #f5f5f5; padding: 12px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
     #viewer pre code { background: none; padding: 0; }
     #viewer ul, #viewer ol { margin: 8px 0 12px 24px; }
     #viewer li { margin-bottom: 4px; line-height: 1.6; }
-    #viewer strong { color: #222; }
     #viewer figure { margin: 20px 0; text-align: center; }
     #viewer figure img { max-width: 100%; border: 1px solid #e0e0e0; border-radius: 6px; }
     #viewer figcaption { font-size: 0.82em; color: #777; margin-top: 8px; font-style: italic; }
     #viewer hr { border: none; border-top: 1px solid #ddd; margin: 20px 0; }
+
+    footer { max-width: 1000px; margin: 40px auto 0; padding: 20px 24px 32px; font-size: 0.8em; color: #999; border-top: 1px solid #e3e0da; }
+    footer a { color: #1a56db; text-decoration: none; }
     .empty { color: #999; font-style: italic; padding: 40px 0; text-align: center; }
-    .loading { color: #999; text-align: center; padding: 40px 0; }
-    #status { font-size: 0.85em; color: #999; margin-top: 8px; }
+
+    @media (max-width: 640px) {
+      header { padding: 26px 18px 22px; }
+      #viewer { padding: 22px 18px; }
+    }
   </style>
 </head>
 <body>
-  <h1>📄 Academic Pipeline <a href="methodology.html" style="font-size:0.5em; font-weight:400; color:#1a73e8; text-decoration:none; margin-left:12px;">Metodología →</a></h1>
-  <div id="status">Cargando papers...</div>
-  <ul class="paper-list" id="list"></ul>
-  <div id="viewer"><span class="back" onclick="closePaper()">← Volver a la lista</span><div id="content"></div></div>
+  <header>
+    <div class="wrap">
+      <h1>Academic Pipeline</h1>
+      <p class="sub">Investigación automatizada y verificable: cada artículo nace de una noticia real, plantea una hipótesis falsable y la somete a datos públicos del Banco Mundial. Cada cifra es auditable contra los resultados estadísticos. <a href="methodology.html">Metodología →</a></p>
+      <div class="tags">WORLD BANK API · PYTHON/SCIPY · REVISIÓN AUTOMÁTICA ANTI-ALUCINACIÓN · NOTA DE TRANSPARENCIA EN CADA ARTÍCULO</div>
+    </div>
+  </header>
+
+  <main>
+    <div id="status">Cargando artículos...</div>
+    <div class="cards" id="list"></div>
+    <div id="viewer"><span class="back" onclick="closePaper()">← Volver a la lista</span><span class="news-link" id="newslink"></span><div id="content"></div></div>
+  </main>
+
+  <footer>
+    Generado por <a href="https://github.com/rogelioGuerrero/academic-pipeline">AcademicPipeline</a> — pipeline autónomo: noticias → hipótesis → datos reales → análisis estadístico → paper. Sin intervención humana por artículo; con verificación automática contra los datos.
+  </footer>
 
   <script>
     const list = document.getElementById('list');
     const viewer = document.getElementById('viewer');
     const content = document.getElementById('content');
     const status = document.getElementById('status');
+    const newslink = document.getElementById('newslink');
     let papersData = [];
 
     async function init() {
@@ -64,29 +107,33 @@
         renderList(papers);
       } catch {
         status.textContent = '';
-        list.innerHTML = '<p class="empty">No hay papers aún. El pipeline corre diariamente a las 8am.</p>';
+        list.innerHTML = '<p class="empty">No hay artículos aún. El pipeline corre a diario.</p>';
       }
     }
 
     function renderList(papers) {
-      status.textContent = `${papers.length} paper(s) generado(s)`;
+      status.textContent = `${papers.length} artículo(s) · más reciente primero`;
       if (!papers.length) {
-        list.innerHTML = '<p class="empty">No hay papers aún.</p>';
+        list.innerHTML = '<p class="empty">No hay artículos aún.</p>';
         return;
       }
-      // Sort newest first
-      papers.sort((a, b) => b.date.localeCompare(a.date));
+      // Newest first: date desc, luego por nombre de archivo (desempata mismo día)
+      papers.sort((a, b) => (b.date + (b.file || '')).localeCompare(a.date + (a.file || '')));
       papersData = papers;
       list.innerHTML = papers.map((p, i) => `
-        <li class="paper-item" onclick="openPaper(${i})">
-          <div class="title">${esc(p.topic || p.file)}</div>
-          <div class="meta">
-            ${p.date} · ${p.nodes || ''} nodos
-            ${p.warning ? '<span class="badge warn">⚠ No verificado</span>' : '<span class="badge">Auto</span>'}
-            ${p.review ? `<span class="badge" title="Revisión de rigor">Rev: ${esc(p.review)}</span>` : ''}
-            ${p.qa ? `<span class="badge ${p.qa === 'APROBADO' ? '' : 'warn'}" title="Control de calidad final">QA: ${esc(p.qa)}</span>` : ''}
+        <div class="card" onclick="openPaper(${i})">
+          ${p.image ? `<div class="thumb" style="background-image:url('${esc(p.image)}')">${p.section ? `<span class="section-chip">${esc(p.section)}</span>` : ''}</div>` : ''}
+          <div class="body">
+            <div class="date">${esc(p.date)}</div>
+            <div class="title">${esc(p.topic || p.file)}</div>
+            ${p.pregunta ? `<div class="pregunta">${esc(p.pregunta)}</div>` : ''}
+            <div class="foot">
+              ${p.warning ? '<span class="badge warn">No verificado</span>' : '<span class="badge">Verificado</span>'}
+              ${p.review ? `<span class="badge neutral" title="Revisión de rigor">Rev: ${esc(p.review)}</span>` : ''}
+              ${p.qa ? `<span class="badge ${p.qa === 'APROBADO' ? 'neutral' : 'warn'}" title="Control de calidad final">QA: ${esc(p.qa)}</span>` : ''}
+            </div>
           </div>
-        </li>
+        </div>
       `).join('');
     }
 
@@ -96,14 +143,15 @@
         const res = await fetch(`papers/${p.file}`);
         if (!res.ok) throw new Error('not found');
         const md = await res.text();
-        const banner = p.warning ? `<div class="warn-banner">⚠ ${esc(p.warning)}</div>` : '';
+        const banner = p.warning ? `<div class="warn-banner">${esc(p.warning)}</div>` : '';
+        newslink.innerHTML = p.news_url ? `Noticia origen: <a href="${esc(p.news_url)}" target="_blank" rel="noopener">${esc(p.news_url)}</a>` : '';
         content.innerHTML = banner + renderMd(md);
         list.style.display = 'none';
         status.style.display = 'none';
         viewer.classList.add('open');
         window.scrollTo(0, 0);
       } catch {
-        content.innerHTML = '<p class="empty">No se pudo cargar el paper.</p>';
+        content.innerHTML = '<p class="empty">No se pudo cargar el artículo.</p>';
         viewer.classList.add('open');
       }
     }
@@ -147,7 +195,6 @@
         const imgMatch = line.match(/^\s*!\[([^\]]*)\]\(([^)]+)\)/);
         if (imgMatch) {
           let src = imgMatch[2];
-          // charts/x.png referenciado desde paper en papers/ → ../charts/x.png relativo a index.html queda charts/x.png
           html += `<figure><img src="${src}" alt="${imgMatch[1]}" loading="lazy"><figcaption>${imgMatch[1]}</figcaption></figure>`;
           i++; continue;
         }
@@ -159,7 +206,7 @@
         // Blockquote
         if (/^\s*>\s?/.test(line)) {
           const quote = [];
-          while (i < lines.length && /^\s*>\s?/.test(lines[i])) { quote.push(lines[i].replace(/^\s*>\s?/, '')); i++; }
+          while (i + 1 < lines.length && /^\s*>\s?/.test(lines[i])) { i++; quote.push(lines[i].replace(/^\s*>\s?/, '')); }
           html += `<blockquote>${quote.map(inline).join('<br>')}</blockquote>`;
           continue;
         }
