@@ -83,6 +83,8 @@
           <div class="meta">
             ${p.date} · ${p.nodes || ''} nodos
             ${p.warning ? '<span class="badge warn">⚠ No verificado</span>' : '<span class="badge">Auto</span>'}
+            ${p.review ? `<span class="badge" title="Revisión de rigor">Rev: ${esc(p.review)}</span>` : ''}
+            ${p.qa ? `<span class="badge ${p.qa === 'APROBADO' ? '' : 'warn'}" title="Control de calidad final">QA: ${esc(p.qa)}</span>` : ''}
           </div>
         </li>
       `).join('');
