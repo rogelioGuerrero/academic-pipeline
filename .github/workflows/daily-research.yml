@@ -131,6 +131,15 @@ jobs:
           git commit -m "Daily research paper - $(date -u +%Y-%m-%d)" || echo "No changes to commit"
           git push
 
+      - name: Notify new paper via Resend
+        # Requiere secrets RESEND_API_KEY/RESEND_FROM/RESEND_TO y variable EMAIL_ON_PUBLISH=true
+        if: ${{ vars.EMAIL_ON_PUBLISH == 'true' }}
+        run: python scripts/notify-email.py
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_FROM: ${{ secrets.RESEND_FROM }}
+          RESEND_TO: ${{ secrets.RESEND_TO }}
+
       - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v5
