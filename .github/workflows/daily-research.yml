@@ -127,7 +127,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/fetched-data.json output/charts/ docs/papers/ docs/charts/ docs/index.json 2>/dev/null || true
+          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/fetched-data.json output/charts/ docs/papers/ docs/charts/ docs/index.json docs/knowledge.jsonl 2>/dev/null || true
           git commit -m "Daily research paper - $(date -u +%Y-%m-%d)" || echo "No changes to commit"
           git push
 
@@ -150,4 +150,5 @@ jobs:
             output/papers/
             output/charts/
             output/raw/compute-results.json
+            docs/knowledge.jsonl
           retention-days: 30

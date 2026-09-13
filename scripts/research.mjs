@@ -825,6 +825,49 @@ function transparencyNote(state) {
   return lines.filter(l => l !== "").join("\n");
 }
 
+// ── Knowledge base: un registro estructurado por paper (docs/knowledge.jsonl)
+// Se reconstruye desde todas las metadata — auto-sanante: sin duplicados,
+// sin borrados; crece ordenadamente con cada run. Base para un futuro
+// agente/RAG que pueda consultar "que se investigo y que se encontro".
+function rebuildKnowledge() {
+  try {
+    const files = readdirSync(OUTPUT_DIR).filter(f => f.endsWith(".json"));
+    const records = [];
+    for (const f of files) {
+      try {
+        const m = JSON.parse(readFileSync(join(OUTPUT_DIR, f), "utf-8"));
+        const md = f.replace(/\.json$/, ".md");
+        records.push({
+          date: f.slice(0, 10),
+          file: md,
+          link: `papers/${md}`,
+          topic: m.topic || null,
+          pregunta: m.pregunta || null,
+          hipotesis: m.hipotesis || null,
+          indicadores: (m.suggestions?.[0]?.indicadores_respaldan) || [],
+          noticia: m.inspiringNews ? { title: m.inspiringNews.title, url: m.inspiringNews.url, source: m.inspiringNews.source } : null,
+          stats: {
+            correlaciones: m.computeResults?.correlations ?? 0,
+            significativas: m.computeResults?.significantCorrelations?.length ?? 0,
+            top_significativas: m.computeResults?.significantCorrelations || [],
+            regresion: m.computeResults?.regression || null,
+          },
+          review: m.reviewDecision?.veredicto || null,
+          qa: m.qaDecision?.veredicto || null,
+          series: m.dataSources?.indicators ?? null,
+          paises: m.dataSources?.countries ?? null,
+        });
+      } catch {}
+    }
+    records.sort((a, b) => (b.date + b.file).localeCompare(a.date + a.file));
+    mkdirSync("docs", { recursive: true });
+    writeFileSync("docs/knowledge.jsonl", records.map(r => JSON.stringify(r)).join("\n") + "\n", "utf-8");
+    console.log(`  Knowledge base: ${records.length} registros en docs/knowledge.jsonl`);
+  } catch (e) {
+    console.log(`  Knowledge base skip: ${e.message}`);
+  }
+}
+
 class MoAGraph {
   constructor() {
     this.state = {
@@ -936,9 +979,14 @@ class MoAGraph {
       suggestions: this.state.suggestDecision?.suggestions || [],
       reviewDecision: this.state.reviewDecision, qaDecision: this.state.qaDecision,
       dataSources: { source: "World Bank API", url: "https://api.worldbank.org", indicators: this.state.fetchedData?.summary?.total_indicators || 0, countries: this.state.fetchedData?.summary?.total_countries || 0, latestYear: this.state.fetchedData?.summary?.latest_year_available || null },
-      computeResults: this.state.computeResults ? { regression: this.state.computeResults.regression ? { r_squared: this.state.computeResults.regression.r_squared, n: this.state.computeResults.regression.n } : null, correlations: this.state.computeResults.correlations?.length || 0 } : null,
+      computeResults: this.state.computeResults ? {
+        regression: this.state.computeResults.regression ? { r_squared: this.state.computeResults.regression.r_squared, n: this.state.computeResults.regression.n } : null,
+        correlations: this.state.computeResults.correlations?.length || 0,
+        significantCorrelations: (this.state.computeResults.correlations || []).filter(c => c.significant).slice(0, 8).map(c => ({ x: c.x, y: c.y, r: c.pearson_r, p: c.pearson_p, diff_r: c.diff_pearson_r, diff_p: c.diff_pearson_p })),
+      } : null,
       elapsed: parseFloat(((Date.now() - this.t0) / 1000).toFixed(1)),
     }, null, 2), "utf-8");
+    rebuildKnowledge();
     const elapsed = ((Date.now() - this.t0) / 1000).toFixed(1);
     console.log(`\n==================================================`);
     console.log(`  OK Paper guardado en ${OUTPUT_FILE}`);
