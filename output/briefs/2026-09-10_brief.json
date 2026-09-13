@@ -1,0 +1,83 @@
+{
+  "suggestions": [
+    {
+      "titulo": "El auge del comercio electrónico y su efecto sobre el desempleo juvenil y el empleo vulnerable en América Latina",
+      "noticia_inspiradora": "How can African retailers compete with Shein and Temu?",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Vulnerable employment (% of total employment)",
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)"
+      ],
+      "correlaciones_relevantes": [
+        "Correlación entre la penetración de internet y la variación del desempleo juvenil",
+        "Correlación entre suscripciones móviles y la proporción de empleo vulnerable"
+      ],
+      "justificacion": "La noticia muestra cómo plataformas de bajo costo están remodelando el retail en regiones emergentes. Con datos de internet, móvil y empleo podemos cuantificar si la expansión digital está reduciendo el desempleo juvenil o, por el contrario, aumentando la precariedad laboral."
+    },
+    {
+      "titulo": "Desastres climáticos y desigualdad: lecciones de las inundaciones en Nepal para América Latina",
+      "noticia_inspiradora": "Nepal flood disaster puts climate justice under spotlight",
+      "indicadores_respaldan": [
+        "GDP per capita (current US$)",
+        "Gini index (inequality, index)",
+        "Urban population (% of total)",
+        "Total population (demographics, count)"
+      ],
+      "correlaciones_relevantes": [
+        "Relación entre índice de Gini y la vulnerabilidad de la población urbana a inundaciones",
+        "Impacto del PIB per cápita en la capacidad de respuesta ante desastres"
+      ],
+      "justificacion": "Aunque el evento ocurrió en Asia, los indicadores disponibles permiten analizar cómo la desigualdad y la urbanización influyen en la exposición y la resiliencia de los países latinoamericanos frente a fenómenos climáticos extremos."
+    },
+    {
+      "titulo": "Infraestructura digital como motor de crecimiento económico: paralelismos entre el lanzamiento de satélites en India y la conectividad en América Latina",
+      "noticia_inspiradora": "India news: ISRO launches first imaging satellite into orbit",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "GDP growth (annual %)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Correlación entre usuarios de internet y crecimiento del PIB",
+        "Correlación entre suscripciones móviles y PIB per cápita"
+      ],
+      "justificacion": "El lanzamiento satelital simboliza la expansión de la capacidad de observación y datos. En América Latina, los indicadores de conectividad pueden servir para estimar su impacto sobre la productividad y el crecimiento económico."
+    },
+    {
+      "titulo": "Centros de retorno de migrantes en la UE y sus posibles repercusiones en el mercado laboral latinoamericano",
+      "noticia_inspiradora": "Five EU countries aim to send migrants to return hubs by 2027",
+      "indicadores_respaldan": [
+        "Total unemployment (% of total labor force)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Vulnerable employment (% of total employment)",
+        "Total labor force (total)"
+      ],
+      "correlaciones_relevantes": [
+        "Impacto de la reducción de flujos migratorios en la tasa de desempleo juvenil",
+        "Relación entre empleo vulnerable y disponibilidad de mano de obra en sectores dependientes de migrantes"
+      ],
+      "justificacion": "Los centros de retorno alteran la oferta de trabajo en sectores que tradicionalmente emplean migrantes. Los indicadores laborales de América Latina permiten proyectar cómo cambios similares podrían afectar sus mercados internos."
+    },
+    {
+      "titulo": "Desmitificando narrativas económicas regionales: el caso de Sajonia-Anhalt y su paralela en regiones latinoamericanas",
+      "noticia_inspiradora": "Germany: Is Saxony-Anhalt's economy really struggling?",
+      "indicadores_respaldan": [
+        "GDP growth (annual %)",
+        "Unemployment, male (% of male labor force)",
+        "Unemployment, female (% of female labor force)",
+        "Employment in agriculture (% of total employment)",
+        "Employment in industry (% of total employment)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Correlación entre composición sectorial del empleo y tasas de desempleo por género",
+        "Relación entre crecimiento del PIB y variaciones en la estructura sectorial"
+      ],
+      "justificacion": "Al comparar la percepción de estancamiento económico de una región europea con datos objetivos, podemos aplicar la misma metodología a regiones latinoamericanas, usando los indicadores disponibles para validar o refutar narrativas locales."
+    }
+  ],
+  "topic": "El auge del comercio electrónico y su efecto sobre el desempleo juvenil y el empleo vulnerable en América Latina",
+  "angle": "Analizar, mediante correlaciones empíricas, cómo la expansión del acceso a internet y la proliferación de plataformas de venta en línea están modificando la estructura del mercado laboral latinoamericano, reduciendo o intensificando la precariedad entre los jóvenes."
+}
