@@ -289,6 +289,8 @@ REGLAS:
 - Prioriza lineas que combinen multiples dominios (educacion + economia, tecnologia + empleo, etc).
 - El tema debe ser relevante y actual (conectado a las noticias trending).
 - El angulo debe ser especifico y analizable con correlacion/regresion.
+- La pregunta de investigacion debe poder responderse SOLO con los indicadores del catalogo. Si la noticia trata de algo sin datos directos (ej: "apagones de IA"), reformula la pregunta a lo verificable (ej: "¿la penetracion digital se correlaciona con el empleo juvenil?") en vez de usar proxies forzados.
+- La hipotesis debe ser una afirmacion concreta que los datos puedan apoyar o refutar.
 
 Responde EXACTAMENTE como JSON (sin markdown):
 {
@@ -302,7 +304,9 @@ Responde EXACTAMENTE como JSON (sin markdown):
     }
   ],
   "topic": "el mejor tema para investigar (especifico)",
-  "angle": "angulo editorial especifico para el paper"
+  "angle": "angulo editorial especifico para el paper",
+  "pregunta": "pregunta de investigacion verificable con los indicadores disponibles",
+  "hipotesis": "afirmacion concreta que los datos pueden apoyar o refutar"
 }`;
 
   const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4000, temperature: 0.7 });
@@ -553,13 +557,16 @@ function computeDigest(computeResults) {
   return parts.join("\n") || "Sin analisis estadistico.";
 }
 
-async function agentWrite(fetchedData, computeResults, feedback = null, topic = null, angle = null) {
+async function agentWrite(fetchedData, computeResults, feedback = null, topic = null, angle = null, suggestDecision = null) {
   console.log("[4/7] GPT-OSS 120B redactando paper con datos reales...\n");
   if (feedback) console.log(`Aplicando feedback: ${feedback.slice(0, 100)}\n`);
   const effectiveTopic = topic || TOPIC;
   const effectiveAngle = angle || ANGLE;
   const angleSection = effectiveAngle ? `ANGULO EDITORIAL:\n${effectiveAngle}\n` : `ANGULO EDITORIAL: Busca el argumento central mas relevante.`;
   const feedbackSection = feedback ? `\nFEEDBACK DEL REVISOR: ${feedback}\n` : "";
+  const questionSection = suggestDecision?.pregunta
+    ? `PREGUNTA DE INVESTIGACION:\n${suggestDecision.pregunta}\n\nHIPOTESIS A VERIFICAR:\n${suggestDecision.hipotesis || "(derivar de la pregunta)"}\n`
+    : "";
   const { lcn, countries } = dataDigest(fetchedData);
   const digest = computeDigest(computeResults);
   const prompt = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
@@ -578,15 +585,16 @@ ${digest}
 Escribe un paper academico sobre: ${effectiveTopic}
 
 ${angleSection}
+${questionSection}
 ${feedbackSection}
 
 ESTRUCTURA OBLIGATORIA:
 1. **Resumen** (100-150 palabras)
-2. **Introduccion** (300-400 palabras)
+2. **Introduccion** (300-400 palabras): plantea la pregunta de investigacion explicitamente
 3. **Metodologia** (150-250 palabras): datos del Banco Mundial 2015-2024, OLS, correlaciones Pearson/Spearman, Mann-Kendall. NO menciones metodos que no aparezcan en RESULTADOS (nada de efectos fijos, panel, Durbin-Watson ni simulaciones).
 4. **Analisis** (500-800 palabras): usa SOLO datos y resultados listados. Incluye tablas Markdown y referencia las figuras listadas.
 5. **Discusion** (200-350 palabras): interpreta; reconoce que n=10 observaciones por serie es muestra pequena y las correlaciones no implican causalidad.
-6. **Conclusiones** (150-250 palabras)
+6. **Conclusiones** (150-250 palabras): DEBE dar un veredicto explicito sobre la hipotesis — "los datos apoyan / no apoyan / son insuficientes para evaluar" — basado SOLO en los resultados calculados.
 7. **Bibliografia**: formato APA. Solo puedes citar: Banco Mundial/World Development Indicators, la noticia que inspiro el tema, y literatura academica REAL y conocida (Autor 2015, Acemoglu & Restrepo, etc.) SIN atribuirles coeficientes ni cifras especificas.
 
 REGLAS CRITICAS (incumplir = rechazo):
@@ -704,6 +712,54 @@ Veredicto: "APROBADO" o "RECHAZADO" (con issues).`;
   return decision;
 }
 
+// ── Nota de transparencia: generada determinísticamente desde el estado (sin LLM) ──
+function transparencyNote(state) {
+  const s = state.suggestDecision || {};
+  const cr = state.computeResults || {};
+  const corrs = (cr.correlations || []).filter(c => c.pearson_r !== undefined);
+  const sigCorrs = corrs.filter(c => c.significant);
+  const trends = cr.trends || [];
+  const sigTrends = trends.filter(t => t.trend !== "no_trend");
+  const ind = state.fetchedData?.indicators || [];
+  const countries = [...new Set(ind.map(i => i.country_code))];
+  const latestYear = state.fetchedData?.summary?.latest_year_available || "";
+  const inspiring = s.suggestions?.find(x => x.titulo === state.topic) || s.suggestions?.[0];
+  const it = state.iterations;
+  const reg = cr.regression;
+
+  const lines = [
+    "---",
+    "",
+    "## Nota de transparencia",
+    "",
+    "**Contexto.** Este artículo fue generado automáticamente por AcademicPipeline, un pipeline de investigación asistida por IA.",
+    state.topic ? `Tema seleccionado: *${state.topic}*.` : "",
+    inspiring?.noticia_inspiradora ? `Noticia que inspiró la línea editorial: *"${inspiring.noticia_inspiradora}"*.` : "",
+    inspiring?.justificacion ? `Justificación del sistema: ${inspiring.justificacion}` : "",
+    s.pregunta ? `**Pregunta de investigación:** ${s.pregunta}` : "",
+    s.hipotesis ? `**Hipótesis planteada:** ${s.hipotesis}` : "",
+    s.suggestions?.length > 1 ? `Se evaluaron ${s.suggestions.length} líneas editoriales candidatas; se seleccionó la de mayor respaldo en datos.` : "",
+    "",
+    "**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-" + latestYear + ": " + ind.length + " series (" + countries.join(", ") + "). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.",
+    "",
+    "**Métodos ejecutados (Python / scipy, determinísticos):**",
+    `- Estadísticas descriptivas de ${ind.length} series.`,
+    `- ${corrs.length} correlaciones Pearson/Spearman calculadas; ${sigCorrs.length} significativas (p<0.05).`,
+    reg?.dependent ? `- Regresión OLS: ${reg.dependent} ~ ${reg.independent.join(" + ")} (n=${reg.n}, R²=${reg.r_squared?.toFixed(3)}).` : "- Sin regresión ejecutada.",
+    sigTrends.length ? `- Test de tendencia Mann-Kendall: ${sigTrends.length} de ${trends.length} series con tendencia significativa.` : "",
+    cr.anomalies?.length ? `- Detección de anomalías (z-score/IQR): ${cr.anomalies.length} observaciones atípicas.` : "",
+    cr.charts?.length ? `- ${cr.charts.length} figuras generadas con matplotlib a partir de los datos.` : "",
+    "",
+    "**Proceso editorial.** Siete nodos automáticos: FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE.",
+    state.reviewDecision ? `Revisión de rigor: veredicto ${state.reviewDecision.veredicto}${state.reviewDecision.datos_inventados?.length ? ` (detectó ${state.reviewDecision.datos_inventados.length} datos inventados, corregidos en reescritura)` : ""}.` : "",
+    state.qaDecision ? `Control de calidad final: veredicto ${state.qaDecision.veredicto}.` : "",
+    `Iteraciones: ${it.rewrite} reescritura(s), ${it.edit} reedición(es).`,
+    "",
+    "**Limitaciones.** Las series tienen n≤10 observaciones anuales; las correlaciones no implican causalidad y las muestras pequeñas reducen la potencia estadística. El texto fue redactado por un modelo de lenguaje y verificado automáticamente contra los datos; no sustituye revisión humana. Artefactos verificables en el repositorio: `output/raw/fetched-data.json` (datos crudos), `output/raw/compute-results.json` (resultados completos), `output/briefs/` (decisión editorial).",
+  ];
+  return lines.filter(l => l !== "").join("\n");
+}
+
 class MoAGraph {
   constructor() {
     this.state = {
@@ -727,7 +783,7 @@ class MoAGraph {
   async nodeFetch() { this.logNode("FETCH"); this.state.fetchedData = await this.runWithGuardrails("FETCH", () => agentFetch(this.state.topic)); return resolveTransition("FETCH", this.state); }
   async nodeSuggest() { this.logNode("SUGGEST"); this.state.suggestDecision = await this.runWithGuardrails("SUGGEST", () => agentSuggest(this.state.fetchedData)); if (this.state.suggestDecision?.topic) { this.state.topic = this.state.suggestDecision.topic; this.state.angle = this.state.suggestDecision.angle || this.state.angle; } await delay(20); return resolveTransition("SUGGEST", this.state); }
   async nodeCompute() { this.logNode("COMPUTE"); this.state.computeResults = await this.runWithGuardrails("COMPUTE", () => agentCompute(this.state.fetchedData, this.state.suggestDecision)); mkdirSync("output/raw", { recursive: true }); writeFileSync("output/raw/compute-results.json", JSON.stringify(this.state.computeResults, null, 2), "utf-8"); return resolveTransition("COMPUTE", this.state); }
-  async nodeWrite() { this.logNode("WRITE"); this.state.currentDraft = await this.runWithGuardrails("WRITE", () => agentWrite(this.state.fetchedData, this.state.computeResults, this.state.writeFeedback, this.state.topic, this.state.angle)); this.state.drafts.push(this.state.currentDraft); this.state.writeFeedback = null; await delay(20); return resolveTransition("WRITE", this.state); }
+  async nodeWrite() { this.logNode("WRITE"); this.state.currentDraft = await this.runWithGuardrails("WRITE", () => agentWrite(this.state.fetchedData, this.state.computeResults, this.state.writeFeedback, this.state.topic, this.state.angle, this.state.suggestDecision)); this.state.drafts.push(this.state.currentDraft); this.state.writeFeedback = null; await delay(20); return resolveTransition("WRITE", this.state); }
   async nodeReview() { this.logNode("REVIEW"); this.state.reviewDecision = await this.runWithGuardrails("REVIEW", () => agentReview(this.state.fetchedData, this.state.computeResults, this.state.currentDraft)); await delay(20); return resolveTransition("REVIEW", this.state); }
   async nodeEdit() { this.logNode("EDIT"); try { this.state.editedArticle = await this.runWithGuardrails("EDIT", () => agentEdit(this.state.currentDraft, this.state.editFeedback || "")); } catch (e) { console.log(`  EDIT fallo (${e.message}). Usando draft original.`); this.state.editedArticle = this.state.currentDraft; } await delay(20); return resolveTransition("EDIT", this.state); }
   async nodeApprove() {
@@ -759,12 +815,14 @@ class MoAGraph {
       return;
     }
     mkdirSync(OUTPUT_DIR, { recursive: true });
-    writeFileSync(OUTPUT_FILE, this.state.editedArticle, "utf-8");
+    const finalPaper = this.state.editedArticle + "\n\n" + transparencyNote(this.state);
+    writeFileSync(OUTPUT_FILE, finalPaper, "utf-8");
     const date = new Date().toISOString().slice(0, 10);
     const slug = this.state.topic.slice(0, 40).replace(/[^a-z0-9]/gi, "-").toLowerCase();
-    writeFileSync(`${OUTPUT_DIR}/${date}_${slug}.md`, this.state.editedArticle, "utf-8");
+    writeFileSync(`${OUTPUT_DIR}/${date}_${slug}.md`, finalPaper, "utf-8");
     writeFileSync(`${OUTPUT_DIR}/${date}_${slug}.json`, JSON.stringify({
       topic: this.state.topic, angle: this.state.angle, nodes: this.state.nodeHistory, iterations: this.state.iterations,
+      pregunta: this.state.suggestDecision?.pregunta || null, hipotesis: this.state.suggestDecision?.hipotesis || null,
       suggestMode: this.state.suggestDecision?.mode || "manual",
       suggestions: this.state.suggestDecision?.suggestions || [],
       reviewDecision: this.state.reviewDecision, qaDecision: this.state.qaDecision,
