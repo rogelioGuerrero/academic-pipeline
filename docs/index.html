@@ -32,6 +32,10 @@
     #viewer ul, #viewer ol { margin: 8px 0 12px 24px; }
     #viewer li { margin-bottom: 4px; line-height: 1.6; }
     #viewer strong { color: #222; }
+    #viewer figure { margin: 20px 0; text-align: center; }
+    #viewer figure img { max-width: 100%; border: 1px solid #e0e0e0; border-radius: 6px; }
+    #viewer figcaption { font-size: 0.82em; color: #777; margin-top: 8px; font-style: italic; }
+    #viewer hr { border: none; border-top: 1px solid #ddd; margin: 20px 0; }
     .empty { color: #999; font-style: italic; padding: 40px 0; text-align: center; }
     .loading { color: #999; text-align: center; padding: 40px 0; }
     #status { font-size: 0.85em; color: #999; margin-top: 8px; }
@@ -108,46 +112,85 @@
       return d.innerHTML;
     }
 
-    // Minimal markdown renderer
+    // Markdown renderer: tables, images, lists, headers, blockquotes
     function renderMd(md) {
-      let html = md
+      // Normalizar: LaTeX delimiters a texto plano visible
+      md = md.replace(/\\\[([\s\S]*?)\\\]/g, '`$1`').replace(/\\\(([\s\S]*?)\\\)/g, '`$1`');
+      const lines = md.split('\n');
+      let html = '';
+      let i = 0;
+      while (i < lines.length) {
+        const line = lines[i];
+        // Tabla markdown: | a | b |\n|---|---|
+        if (/^\s*\|.*\|\s*$/.test(line) && i + 1 < lines.length && /^\s*\|[\s\-:|]+\|\s*$/.test(lines[i + 1])) {
+          const headers = line.split('|').slice(1, -1).map(c => c.trim());
+          i += 2;
+          const rows = [];
+          while (i < lines.length && /^\s*\|.*\|\s*$/.test(lines[i])) {
+            rows.push(lines[i].split('|').slice(1, -1).map(c => c.trim()));
+            i++;
+          }
+          html += '<table><thead><tr>' + headers.map(h => `<th>${inline(h)}</th>`).join('') + '</tr></thead><tbody>'
+            + rows.map(r => '<tr>' + r.map(c => `<td>${inline(c)}</td>`).join('') + '</tr>').join('')
+            + '</tbody></table>';
+          continue;
+        }
+        // Imagen
+        const imgMatch = line.match(/^\s*!\[([^\]]*)\]\(([^)]+)\)/);
+        if (imgMatch) {
+          let src = imgMatch[2];
+          // charts/x.png referenciado desde paper en papers/ → ../charts/x.png relativo a index.html queda charts/x.png
+          html += `<figure><img src="${src}" alt="${imgMatch[1]}" loading="lazy"><figcaption>${imgMatch[1]}</figcaption></figure>`;
+          i++; continue;
+        }
         // Headers
-        .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
-        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-        .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-        // Bold + italic
+        const h = line.match(/^(#{1,4})\s+(.+)$/);
+        if (h) { html += `<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`; i++; continue; }
+        // HR
+        if (/^\s*-{3,}\s*$/.test(line)) { html += '<hr>'; i++; continue; }
+        // Blockquote
+        if (/^\s*>\s?/.test(line)) {
+          const quote = [];
+          while (i < lines.length && /^\s*>\s?/.test(lines[i])) { quote.push(lines[i].replace(/^\s*>\s?/, '')); i++; }
+          html += `<blockquote>${quote.map(inline).join('<br>')}</blockquote>`;
+          continue;
+        }
+        // Lista con bullets
+        if (/^\s*[-*]\s+/.test(line)) {
+          const items = [];
+          while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) { items.push(lines[i].replace(/^\s*[-*]\s+/, '')); i++; }
+          html += '<ul>' + items.map(it => `<li>${inline(it)}</li>`).join('') + '</ul>';
+          continue;
+        }
+        // Lista numerada
+        if (/^\s*\d+[.)]\s+/.test(line)) {
+          const items = [];
+          while (i < lines.length && /^\s*\d+[.)]\s+/.test(lines[i])) { items.push(lines[i].replace(/^\s*\d+[.)]\s+/, '')); i++; }
+          html += '<ol>' + items.map(it => `<li>${inline(it)}</li>`).join('') + '</ol>';
+          continue;
+        }
+        // Párrafo
+        if (line.trim()) {
+          const para = [line];
+          while (i + 1 < lines.length && lines[i + 1].trim() && !/^\s*([#>|`-]|\d+[.)])/.test(lines[i + 1]) && !/!\[/.test(lines[i + 1])) {
+            i++;
+            para.push(lines[i]);
+          }
+          html += `<p>${para.map(inline).join('<br>')}</p>`;
+          i++; continue;
+        }
+        i++;
+      }
+      return html;
+    }
+
+    function inline(t) {
+      return esc(t)
         .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*(.+?)\*/g, '<em>$1</em>')
-        // Blockquote
-        .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
-        // Horizontal rule
-        .replace(/^---+$/gm, '<hr>')
-        // Inline code
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>')
         .replace(/`([^`]+)`/g, '<code>$1</code>')
-        // Links
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
-        // Paragraphs
-        .replace(/\n\n/g, '</p><p>')
-        // Line breaks within paragraphs
-        .replace(/\n/g, '<br>');
-
-      // Wrap in paragraph
-      html = '<p>' + html + '</p>';
-      // Clean up empty paragraphs
-      html = html.replace(/<p><\/p>/g, '');
-      html = html.replace(/<p>(<h[1-4]>)/g, '$1');
-      html = html.replace(/(<\/h[1-4]>)<\/p>/g, '$1');
-      html = html.replace(/<p>(<hr>)<\/p>/g, '$1');
-      html = html.replace(/<p>(<blockquote>)/g, '$1');
-      html = html.replace(/(<\/blockquote>)<\/p>/g, '$1');
-      // Lists
-      html = html.replace(/<p>- (.+?)<\/p>/g, '<ul><li>$1</li></ul>');
-      // Numbered lists
-      html = html.replace(/<p>(\d+)\. (.+?)<\/p>/g, '<ol><li>$1. $2</li></ol>');
-
-      return html;
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
     }
 
     init();

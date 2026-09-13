@@ -563,9 +563,137 @@ def trend_analysis(data):
         })
     return results
 
+def _short_label(name, maxlen=42):
+    """Shorten an indicator name for chart labels."""
+    name = name.split(" [")[0]  # drop [CC] suffix for display
+    return name if len(name) <= maxlen else name[:maxlen - 1] + "…"
+
+def make_charts(data, results, outdir):
+    """Generate real figures (matplotlib, Agg backend) from computed results.
+    Returns list of {file, caption}. Empty list if matplotlib unavailable or no data."""
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import numpy as np
+    except Exception:
+        return []
+    import os
+    os.makedirs(outdir, exist_ok=True)
+    variables = _get_variables(data)
+    var_map = {v["name"]: v for v in variables}
+    charts = []
+
+    # ── Fig 1: trends grid for LCN series ──
+    lcn_vars = [v for v in variables if v.get("country_code") == "LCN" and len(v.get("values", [])) >= 3]
+    if lcn_vars:
+        ncols = 3
+        nrows = int(np.ceil(len(lcn_vars) / ncols))
+        fig, axes = plt.subplots(nrows, ncols, figsize=(11, 2.6 * nrows))
+        axes = np.array(axes).reshape(-1)
+        for ax, var in zip(axes, lcn_vars):
+            yrs = var.get("years", [])[:len(var["values"])]
+            ax.plot(yrs, var["values"], marker="o", ms=3, lw=1.4, color="#1a73e8")
+            ax.set_title(_short_label(var["name"], 38), fontsize=8)
+            ax.tick_params(labelsize=7)
+            ax.grid(alpha=0.3)
+        for ax in axes[len(lcn_vars):]:
+            ax.axis("off")
+        fig.suptitle("Indicadores World Bank — América Latina y Caribe (agregado)", fontsize=11)
+        fig.tight_layout(rect=[0, 0, 1, 0.96])
+        fname = "fig1_trends.png"
+        fig.savefig(os.path.join(outdir, fname), dpi=140)
+        plt.close(fig)
+        charts.append({"file": fname, "caption": "Evolución temporal 2015-2024 de los indicadores regionales (América Latina y Caribe). Fuente: World Bank API."})
+
+    # ── Fig 2: scatter of top significant correlation ──
+    corr_results = [c for c in results.get("correlations", []) if c.get("significant")]
+    if corr_results:
+        best = max(corr_results, key=lambda c: abs(c["pearson_r"]))
+        va, vb = var_map.get(best["x"]), var_map.get(best["y"])
+        if va and vb:
+            x_vals, y_vals, years = _align_by_years(va, vb)
+            if len(x_vals) >= 3:
+                x_arr, y_arr = np.array(x_vals, dtype=float), np.array(y_vals, dtype=float)
+                fig, ax = plt.subplots(figsize=(6.5, 4.2))
+                ax.scatter(x_arr, y_arr, color="#1a73e8", s=45, zorder=3)
+                for x, y, yr in zip(x_arr, y_arr, years):
+                    ax.annotate(str(yr), (x, y), textcoords="offset points", xytext=(5, 4), fontsize=7, color="#666")
+                m, b = np.polyfit(x_arr, y_arr, 1)
+                xs = np.linspace(x_arr.min(), x_arr.max(), 50)
+                ax.plot(xs, m * xs + b, color="#d93025", lw=1.5, ls="--", label=f"r = {best['pearson_r']:.3f} (p = {best['pearson_p']:.4f})")
+                ax.set_xlabel(_short_label(best["x"], 55), fontsize=9)
+                ax.set_ylabel(_short_label(best["y"], 55), fontsize=9)
+                ax.legend(fontsize=8)
+                ax.grid(alpha=0.3)
+                fig.tight_layout()
+                fname = "fig2_correlation.png"
+                fig.savefig(os.path.join(outdir, fname), dpi=140)
+                plt.close(fig)
+                charts.append({"file": fname, "caption": f"Correlación de Pearson entre {_short_label(best['x'], 60)} y {_short_label(best['y'], 60)} (n={best['n']})."})
+
+    # ── Fig 3: regression actual vs fitted ──
+    reg = results.get("regression")
+    if reg and reg.get("dependent") and reg.get("coefficients"):
+        dep_var = var_map.get(reg["dependent"])
+        indep_vars = [var_map.get(n) for n in reg.get("independent", [])]
+        if dep_var and all(indep_vars):
+            all_vars = [dep_var] + indep_vars
+            year_sets = [set(y for y, v in zip(v.get("years", []), v.get("values", [])) if v is not None) for v in all_vars]
+            common = sorted(set.intersection(*year_sets)) if all(year_sets) else []
+            if len(common) >= 3:
+                y_arr = np.array([next(v for y, v in zip(dep_var["years"], dep_var["values"]) if y == yr) for yr in common], dtype=float)
+                X_cols = []
+                for iv in indep_vars:
+                    X_cols.append(np.array([next(v for y, v in zip(iv["years"], iv["values"]) if y == yr) for yr in common], dtype=float))
+                X_arr = np.column_stack(X_cols)
+                beta = np.array([c["beta"] for c in reg["coefficients"]], dtype=float)
+                y_pred = np.column_stack([np.ones(len(common)), X_arr]) @ beta
+                fig, ax = plt.subplots(figsize=(6.5, 4.2))
+                ax.plot(common, y_arr, marker="o", ms=4, lw=1.4, color="#1a73e8", label="Observado")
+                ax.plot(common, y_pred, marker="s", ms=4, lw=1.4, ls="--", color="#d93025", label=f"Ajustado (R² = {reg['r_squared']:.3f})")
+                ax.set_xlabel("Año", fontsize=9)
+                ax.set_ylabel(_short_label(reg["dependent"], 55), fontsize=9)
+                ax.set_title("Modelo OLS: valores observados vs ajustados", fontsize=10)
+                ax.legend(fontsize=8)
+                ax.grid(alpha=0.3)
+                fig.tight_layout()
+                fname = "fig3_regression.png"
+                fig.savefig(os.path.join(outdir, fname), dpi=140)
+                plt.close(fig)
+                charts.append({"file": fname, "caption": f"Ajuste del modelo de regresión OLS sobre {_short_label(reg['dependent'], 60)} (n={reg['n']}, R²={reg['r_squared']:.3f})."})
+
+    # ── Fig 4: country comparison bar chart (latest value of key indicator) ──
+    # Pick the indicator with most country coverage (excluding LCN)
+    by_ind = {}
+    for v in variables:
+        cc = v.get("country_code", "")
+        if cc and cc != "LCN" and v.get("values"):
+            base = v["name"].split(" [")[0]
+            by_ind.setdefault(base, []).append(v)
+    if by_ind:
+        base_name, vs = max(by_ind.items(), key=lambda kv: len(kv[1]))
+        if len(vs) >= 3:
+            labels = [v.get("country_code") for v in vs]
+            vals = [v["values"][-1] for v in vs]
+            years = [v["years"][-1] if v.get("years") else "" for v in vs]
+            order = np.argsort(vals)
+            fig, ax = plt.subplots(figsize=(6.5, 3.6))
+            ax.barh([labels[i] for i in order], [vals[i] for i in order], color="#1a73e8")
+            ax.set_xlabel(_short_label(base_name, 55), fontsize=9)
+            ax.set_title(f"Comparación por país ({years[0]})", fontsize=10)
+            ax.grid(axis="x", alpha=0.3)
+            fig.tight_layout()
+            fname = "fig4_countries.png"
+            fig.savefig(os.path.join(outdir, fname), dpi=140)
+            plt.close(fig)
+            charts.append({"file": fname, "caption": f"Comparación internacional de {_short_label(base_name, 60)} (último año disponible). Fuente: World Bank API."})
+
+    return charts
+
 def main():
     if len(sys.argv) < 2:
-        print(json.dumps({"error": "Usage: python compute.py input.json"}))
+        print(json.dumps({"error": "Usage: python compute.py input.json [charts_dir]"}))
         sys.exit(1)
     data = load_input(sys.argv[1])
     output = {
@@ -576,7 +704,11 @@ def main():
         "anomalies": anomaly_detection(data),
         "trends": trend_analysis(data),
     }
-    print(json.dumps(output, ensure_ascii=False, indent=2))
+    charts_dir = sys.argv[2] if len(sys.argv) > 2 else None
+    output["charts"] = make_charts(data, output, charts_dir) if charts_dir else []
+    # Escribir UTF-8 explicito: en Windows el stdout usa cp1252 y corrompe caracteres con tilde
+    sys.stdout.buffer.write(json.dumps(output, ensure_ascii=False, indent=2).encode("utf-8"))
+    sys.stdout.buffer.write(b"\n")
 
 if __name__ == "__main__":
     main()

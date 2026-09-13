@@ -342,7 +342,9 @@ async function agentCompute(fetchedData, suggestDecision = null) {
   for (const ind of fetchedData.indicators) {
     if (ind.series?.length >= 3) {
       dataset.series.push({
-        name: ind.indicator_label, code: ind.indicator_code,
+        // Sufijo [CC] para evitar colisiones de nombre entre paises en var_map de compute.py
+        name: `${ind.indicator_label} [${ind.country_code}]`,
+        code: ind.indicator_code,
         country: ind.country, country_code: ind.country_code, category: ind.category,
         unit: ind.unit || "unknown",
         years: ind.series.map(s => s.year), values: ind.series.map(s => s.value),
@@ -464,9 +466,10 @@ async function agentCompute(fetchedData, suggestDecision = null) {
     ? resolve(__dirname, "..", ".venv", "Scripts", "python.exe")
     : "python3";
   const scriptPath = resolve(__dirname, "compute.py");
+  const chartsDir = resolve(__dirname, "..", "output", "charts");
   try {
     console.log("  Ejecutando: python compute.py");
-    const output = execFileSync(pythonPath, [scriptPath, inputPath], { encoding: "utf-8", timeout: 30000, maxBuffer: 1024 * 1024 });
+    const output = execFileSync(pythonPath, [scriptPath, inputPath, chartsDir], { encoding: "utf-8", timeout: 60000, maxBuffer: 1024 * 1024 });
     const results = JSON.parse(output);
     console.log("  Python completado:");
     if (results.descriptive) console.log(`    Descriptivas: ${Object.keys(results.descriptive).length} variables`);
@@ -483,12 +486,71 @@ async function agentCompute(fetchedData, suggestDecision = null) {
       const sig = results.trends.filter(t => t.trend !== "no_trend");
       console.log(`    Tendencias: ${sig.length} significativas de ${results.trends.length}`);
     }
+    if (results.charts?.length) console.log(`    Gráficas: ${results.charts.map(c => c.file).join(", ")}`);
     return results;
   } catch (err) {
     console.error(`  Error Python: ${err.message}`);
     if (err.stderr) console.error(`  stderr: ${err.stderr.slice(0, 500)}`);
     return { descriptive: {}, correlations: [], regression: null, error: err.message, note: "Python fallo." };
   }
+}
+
+// ── Digests compartidos: WRITE y REVIEW deben ver exactamente los mismos datos ──
+function dataDigest(fetchedData) {
+  // Series LCN completas (año=valor) + países primer→último valor
+  const lcn = fetchedData.indicators.filter(i => i.country_code === "LCN").map(i => {
+    const pts = i.series.map(s => `${s.year}=${s.value.toFixed(2)}`).join(", ");
+    return `- ${i.indicator_label} [LCN] (${i.unit}): ${pts}`;
+  }).join("\n");
+  const countries = fetchedData.indicators
+    .filter(i => i.country_code !== "LCN")
+    .map(i => {
+      const first = i.series[0]; const latest = i.series[i.series.length - 1];
+      return `- ${i.indicator_label} [${i.country_code}] (${i.unit}): ${first.year}=${first.value.toFixed(2)} -> ${latest.year}=${latest.value.toFixed(2)}`;
+    }).join("\n");
+  return { lcn, countries };
+}
+
+function computeDigest(computeResults) {
+  if (!computeResults) return "Sin analisis estadistico.";
+  const parts = [];
+  if (computeResults.regression && !computeResults.error && computeResults.regression.dependent) {
+    const r = computeResults.regression;
+    parts.push(`REGRESION OLS: ${r.dependent} ~ ${r.independent.join(" + ")}`);
+    parts.push(`  n=${r.n}, R2=${r.r_squared?.toFixed(4)}, R2_adj=${r.adj_r_squared?.toFixed(4)}, F=${r.f_statistic?.toFixed(2)} (p=${r.f_p_value?.toFixed(4)})`);
+    for (const c of r.coefficients || []) {
+      parts.push(`  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}${c.robust_p !== undefined ? `, robust_p=${c.robust_p?.toFixed(4)}${c.robust_significant ? " *" : ""}` : ""}`);
+    }
+    if (r.white_test) parts.push(`  White test: p=${r.white_test.p_value?.toFixed(4)} (${r.white_test.heteroscedastic ? "heterocedastico" : "homocedastico"})`);
+    else parts.push(`  White test: NO calculado`);
+  }
+  const corrs = (computeResults.correlations || []).filter(c => c.pearson_r !== undefined);
+  if (corrs.length) {
+    parts.push(`CORRELACIONES (${corrs.length} calculadas):`);
+    for (const c of corrs) {
+      parts.push(`  ${c.x} <-> ${c.y}: pearson_r=${c.pearson_r.toFixed(4)}, p=${c.pearson_p.toFixed(4)}, spearman=${c.spearman_rho.toFixed(4)}, n=${c.n}, significativa=${c.significant}`);
+    }
+  }
+  const sigTrends = (computeResults.trends || []).filter(t => t.trend !== "no_trend");
+  if (sigTrends.length) {
+    parts.push(`TENDENCIAS SIGNIFICATIVAS (Mann-Kendall p<0.05):`);
+    for (const t of sigTrends.slice(0, 15)) {
+      parts.push(`  ${t.indicator}: ${t.trend}, slope=${t.slope.toFixed(3)}/año, p=${t.mann_kendall_p.toFixed(4)}`);
+    }
+  }
+  if (computeResults.anomalies?.length) {
+    parts.push(`ANOMALIAS (${computeResults.anomalies.length}):`);
+    for (const a of computeResults.anomalies.slice(0, 5)) {
+      parts.push(`  ${a.indicator} [${a.country_code}] ${a.year}: ${a.value.toFixed(2)} (z=${a.z_score.toFixed(1)})`);
+    }
+  }
+  if (computeResults.charts?.length) {
+    parts.push(`FIGURAS GENERADAS (archivos reales en output/charts/, referenciar como charts/<file>):`);
+    for (const c of computeResults.charts) {
+      parts.push(`  - charts/${c.file}: ${c.caption}`);
+    }
+  }
+  return parts.join("\n") || "Sin analisis estadistico.";
 }
 
 async function agentWrite(fetchedData, computeResults, feedback = null, topic = null, angle = null) {
@@ -498,29 +560,20 @@ async function agentWrite(fetchedData, computeResults, feedback = null, topic = 
   const effectiveAngle = angle || ANGLE;
   const angleSection = effectiveAngle ? `ANGULO EDITORIAL:\n${effectiveAngle}\n` : `ANGULO EDITORIAL: Busca el argumento central mas relevante.`;
   const feedbackSection = feedback ? `\nFEEDBACK DEL REVISOR: ${feedback}\n` : "";
-  const dataSummary = fetchedData.indicators.filter(i => i.country_code === "LCN").map(i => {
-    const latest = i.series[i.series.length - 1]; const first = i.series[0];
-    const trend = latest.value > first.value ? "aumento" : latest.value < first.value ? "disminuyo" : "estable";
-    return `- ${i.indicator_label} (America Latina): ${first.year}=${first.value.toFixed(2)} -> ${latest.year}=${latest.value.toFixed(2)} (${trend})`;
-  }).join("\n");
-  const countryData = fetchedData.indicators
-    .filter(i => i.country_code !== "LCN" && /youth.*unemploy|gdp.*per capita|internet users/i.test(i.indicator_label))
-    .map(i => { const latest = i.series[i.series.length - 1]; return `- ${i.country}: ${i.indicator_label} = ${latest.value.toFixed(2)} (${latest.year})`; }).join("\n");
-  const computeText = computeResults ? JSON.stringify(computeResults, null, 2) : "Sin analisis estadistico.";
+  const { lcn, countries } = dataDigest(fetchedData);
+  const digest = computeDigest(computeResults);
   const prompt = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
 
-DATOS REALES (de World Bank API, NO inventes ni modifiques estos numeros):
+DATOS REALES (World Bank API, unicos datos disponibles):
 
-Series regionales (America Latina & Caribe):
-${dataSummary}
+Series regionales America Latina & Caribe (serie completa):
+${lcn}
 
-Datos por pais:
-${countryData}
+Series por pais (primer y ultimo valor):
+${countries || "Sin datos por pais."}
 
-RESULTADOS ESTADISTICOS REALES (calculados con Python/statsmodels):
-${computeText.slice(0, 3000)}
-
-FUENTE: Todos los datos provienen de World Bank API (https://data.worldbank.org). Cita como (Banco Mundial, ${new Date().getFullYear()}).
+RESULTADOS ESTADISTICOS REALES (Python/statsmodels/scipy):
+${digest}
 
 Escribe un paper academico sobre: ${effectiveTopic}
 
@@ -530,51 +583,74 @@ ${feedbackSection}
 ESTRUCTURA OBLIGATORIA:
 1. **Resumen** (100-150 palabras)
 2. **Introduccion** (300-400 palabras)
-3. **Analisis** (600-900 palabras): usa datos REALES y resultados de Python
-4. **Discusion** (300-500 palabras)
-5. **Conclusiones** (200-300 palabras)
-6. **Bibliografia**: formato APA, incluye World Bank API como fuente
+3. **Metodologia** (150-250 palabras): datos del Banco Mundial 2015-2024, OLS, correlaciones Pearson/Spearman, Mann-Kendall. NO menciones metodos que no aparezcan en RESULTADOS (nada de efectos fijos, panel, Durbin-Watson ni simulaciones).
+4. **Analisis** (500-800 palabras): usa SOLO datos y resultados listados. Incluye tablas Markdown y referencia las figuras listadas.
+5. **Discusion** (200-350 palabras): interpreta; reconoce que n=10 observaciones por serie es muestra pequena y las correlaciones no implican causalidad.
+6. **Conclusiones** (150-250 palabras)
+7. **Bibliografia**: formato APA. Solo puedes citar: Banco Mundial/World Development Indicators, la noticia que inspiro el tema, y literatura academica REAL y conocida (Autor 2015, Acemoglu & Restrepo, etc.) SIN atribuirles coeficientes ni cifras especificas.
 
-REGLAS CRITICAS:
-- NO inventes estadisticas. Solo usa los datos reales y resultados de Python.
-- Si Python dice R2=0.43, escribes 0.43. NO cambies el numero.
-- Cita cada dato: (Banco Mundial, 2024)
-- Total: 1500-2500 palabras
-- La Bibliografia es OBLIGATORIA, no la omitas ni la dejes para el final si vas corto de espacio.
+REGLAS CRITICAS (incumplir = rechazo):
+- Todo numero citado debe aparecer LITERALMENTE en DATOS o RESULTADOS de arriba. Prohibido redondear a valores diferentes, inventar valores por pais no listados, o reportar estadisticos no calculados.
+- NO existe informacion de paises fuera de la lista. NO uses fuentes que no sean World Bank (nada de CEPAL, OECD, IMF, ECLAC).
+- NO inventes tests diagnosticos (White, Durbin-Watson), simulaciones, escenarios futuros ni proyecciones: solo reporta lo que Python calculo.
+- Si un resultado no es significativo (p>0.05), dilo explicitamente; no lo presentes como evidencia solida.
+- Referencia las figuras reales listadas: ![descripcion](charts/<file>). NO inventes figuras que no esten en la lista.
+- Cita cada dato como (Banco Mundial, 2024).
+- Total: 1500-2200 palabras. La Bibliografia es OBLIGATORIA.
 
 Devuelve el paper completo en Markdown.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4000, temperature: 0.7 });
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4000, temperature: 0.6 });
   return data.choices[0]?.message?.content || "";
 }
 
 async function agentReview(fetchedData, computeResults, draft) {
   console.log("[5/7] GPT-OSS 120B revisando rigor academico...\n");
-  const dataSummary = fetchedData.indicators.filter(i => i.country_code === "LCN").map(i => {
-    const latest = i.series[i.series.length - 1];
-    return `- ${i.indicator_label}: ${latest.value.toFixed(2)} (${latest.year})`;
-  }).join("\n");
-  const computeText = computeResults ? JSON.stringify(computeResults, null, 2).slice(0, 2000) : "Sin analisis.";
-  const prompt = `Eres un revisor academico riguroso. Compara el paper con los datos reales.
+  const { lcn, countries } = dataDigest(fetchedData);
+  const digest = computeDigest(computeResults);
+  const prompt = `Eres un revisor academico riguroso y desconfiado. Tu trabajo es detectar DATOS INVENTADOS comparando el paper contra los datos reales.
 
-DATOS REALES (World Bank API):
-${dataSummary}
+DATOS REALES (World Bank API — la unica fuente permitida):
+
+Series regionales America Latina & Caribe:
+${lcn}
+
+Series por pais:
+${countries || "Sin datos por pais."}
 
 RESULTADOS ESTADISTICOS REALES (Python):
-${computeText}
+${digest}
 
-PAPER:
+PAPER A REVISAR:
 ${truncate(draft, 8000)}
 
-Verifica: 1) Datos coinciden? 2) Resultados Python correctos? 3) Estructura ok? 4) Coherencia? 5) Citas APA?
+VERIFICACION OBLIGATORIA:
+1. Extrae TODOS los numeros/estadisticas que el paper afirma (porcentajes, coeficientes, r, p, R2, betas, medias).
+2. Para cada uno, buscalo en DATOS/RESULTADOS de arriba. Si no aparece literalmente (o no se deriva directamente), marcalo como INVENTADO en "datos_inventados".
+3. Senales de alucinacion frecuentes — rechaza si el paper:
+   - Menciona datos de paises NO listados arriba, o fuentes externas (CEPAL, OECD, IMF, ECLAC)
+   - Reporta tests no calculados (Durbin-Watson, White si dice "NO calculado"), efectos fijos, datos de panel, simulaciones o proyecciones
+   - Cita literatura con coeficientes/cifras especificas no presentes en RESULTADOS
+   - Afirma significancia estadistica cuando p>0.05
+   - Presenta correlaciones como causalidad sin matizar
+4. Verifica estructura (Resumen, Metodologia, Analisis, Discusion, Conclusiones, Bibliografia) y coherencia.
 
 Responde EXACTAMENTE como JSON (sin markdown):
-{"datos_correctos":true,"detalle_datos":"...","datos_inventados":[],"estructura_ok":true,"coherencia_ok":true,"correcciones":[],"datos_faltantes":null,"veredicto":"APROBADO","feedback":null}
+{"datos_correctos":true,"detalle_datos":"...","datos_inventados":["lista de cada valor fabricado"],"estructura_ok":true,"coherencia_ok":true,"correcciones":["..."],"datos_faltantes":null,"veredicto":"APROBADO","feedback":null}
 
-Veredicto: "APROBADO" o "REESCRIBIR" (con feedback).`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2000, temperature: 0.3 });
+Veredicto: "APROBADO" solo si datos_correctos=true Y datos_inventados esta vacio. Si hay CUALQUIER dato inventado: "REESCRIBIR" con feedback detallado listando cada correccion.`;
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2500, temperature: 0.2 });
   const raw = data.choices[0]?.message?.content || "";
   const decision = parseJSONResponse(raw);
-  if (!decision) { console.log("Review fallback:\n" + raw.slice(0, 500) + "\n"); return { veredicto: "APROBADO", datos_correctos: true, correcciones: [], feedback: raw.slice(0, 200) }; }
+  if (!decision) {
+    // No auto-aprobar: devolver objeto sin veredicto valido -> guardrails reintentan; si persisten, el pipeline falla honestamente
+    console.log("Review: respuesta no parseable (no se auto-aprueba):\n" + raw.slice(0, 500) + "\n");
+    return { veredicto: undefined, datos_correctos: false, correcciones: [], feedback: "review response unparseable" };
+  }
+  // Forzar consistencia: si reporta datos inventados, el veredicto no puede ser APROBADO
+  if (decision.veredicto === "APROBADO" && (decision.datos_inventados?.length || decision.datos_correctos === false)) {
+    decision.veredicto = "REESCRIBIR";
+    decision.feedback = decision.feedback || `Datos inventados detectados: ${(decision.datos_inventados || []).join("; ")}`;
+  }
   console.log("Review:\n" + JSON.stringify(decision, null, 2).slice(0, 500) + "\n");
   return decision;
 }
@@ -593,7 +669,8 @@ REVISION:
 ${truncate(typeof review === "string" ? review : JSON.stringify(review), 1500)}
 
 Aplica correcciones, mejora flujo, verifica APA. Manten estructura y formato Markdown.
-IMPORTANTE: Preserva la seccion de Bibliografia del paper original al final del documento.
+IMPORTANTE: Preserva la seccion de Bibliografia, las tablas Markdown y todas las referencias a figuras ![..](charts/..) del paper original.
+NO agregues numeros, estadisticos ni tests que la REVISION no haya verificado.
 Devuelve SOLO el paper final en Markdown.`;
   const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4000, temperature: 0.5 });
   let result = data.choices[0]?.message?.content || "";

@@ -167,7 +167,7 @@ async function fetchILOIndicator(indicator, refArea) {
 async function fetchSources(topic) {
   console.log("[FETCH] Obteniendo datos reales de APIs públicas...\n");
   console.log(`  Tema: ${topic}`);
-  console.log(`  Fuente: World Bank API (agregado regional LCN)`);
+  console.log(`  Fuente: World Bank API (LCN + 6 paises)`);
   console.log(`  Indicadores: 13 clave (modo PoC)`);
   console.log("  Rango: " + YEAR_RANGE + "\n");
 
@@ -179,46 +179,58 @@ async function fetchSources(topic) {
     summary: {},
   };
 
-  // PoC: solo 13 indicadores clave para el agregado regional LCN.
-  // Suficiente para correlaciones/regresion sin agotar el limite de tokens de Groq free tier.
-  // Para datos por pais o ILO, correr manualmente con --no-cache cuando se necesite.
+  // PoC: 13 indicadores clave para LCN + 6 paises representativos.
+  // ~91 series: permite comparaciones por pais reales sin agotar tokens de Groq.
+  // Para ampliar paises/indicadores, correr manualmente con --no-cache.
   const KEY_INDICATORS = [
     "SL.UEM.1524.ZS",
     "SL.UEM.TOTL.ZS",
+    "SL.SRV.EMPL.ZS",
     "NY.GDP.PCAP.CD",
     "IT.NET.USER.ZS",
+    "IT.CEL.SETS.P2",
     "SE.ADT.1524.LT.ZS",
     "SE.XPD.TOTL.GD.ZS",
     "SI.POV.GINI",
     "SL.EMP.VULN.ZS",
     "NV.IND.MANF.ZS",
     "NY.GDP.MKTP.KD.ZG",
-    "LO.PISA.MAT",
-    "LO.PISA.REA",
-    "LO.PISA.SCI",
+    "SP.URB.TOTL.IN.ZS",
   ];
 
-  console.log("  [Regional LCN — indicadores clave]");
-  for (const indCode of KEY_INDICATORS) {
-    const ind = WB_INDICATORS.find(i => i.code === indCode);
-    if (!ind) continue;
-    const data = await fetchWBIndicator(ind.code, "LCN");
-    if (data && data.length > 0) {
-      results.indicators.push({
-        indicator_code: ind.code,
-        indicator_label: ind.label,
-        category: ind.category,
-        unit: ind.unit,
-        country: "Latin America & Caribbean (regional)",
-        country_code: "LCN",
-        series: data,
-        source: "World Bank API",
-        source_url: `https://data.worldbank.org/indicator/${ind.code}`,
-      });
-      const latest = data[data.length - 1];
-      console.log(`    ${ind.code}: ${ind.label} => ${latest.year}: ${latest.value.toFixed(2)}`);
+  const FETCH_COUNTRIES = [
+    { code: "LCN", name: "Latin America & Caribbean (regional)" },
+    { code: "BRA", name: "Brazil" },
+    { code: "MEX", name: "Mexico" },
+    { code: "COL", name: "Colombia" },
+    { code: "ARG", name: "Argentina" },
+    { code: "CHL", name: "Chile" },
+    { code: "GTM", name: "Guatemala" },
+  ];
+
+  for (const country of FETCH_COUNTRIES) {
+    console.log(`  [${country.code} — ${country.name}]`);
+    for (const indCode of KEY_INDICATORS) {
+      const ind = WB_INDICATORS.find(i => i.code === indCode);
+      if (!ind) continue;
+      const data = await fetchWBIndicator(ind.code, country.code);
+      if (data && data.length > 0) {
+        results.indicators.push({
+          indicator_code: ind.code,
+          indicator_label: ind.label,
+          category: ind.category,
+          unit: ind.unit,
+          country: country.name,
+          country_code: country.code,
+          series: data,
+          source: "World Bank API",
+          source_url: `https://data.worldbank.org/indicator/${ind.code}`,
+        });
+        const latest = data[data.length - 1];
+        console.log(`    ${ind.code}: ${ind.label} => ${latest.year}: ${latest.value.toFixed(2)}`);
+      }
+      await new Promise(r => setTimeout(r, 100)); // rate limit
     }
-    await new Promise(r => setTimeout(r, 100)); // rate limit
   }
 
   // Build summary

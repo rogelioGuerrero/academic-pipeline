@@ -32,7 +32,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install Python dependencies
-        run: pip install numpy scipy
+        run: pip install numpy scipy matplotlib
 
       - name: Install Node dependencies
         run: npm ci || npm install
@@ -60,9 +60,12 @@ jobs:
 
       - name: Copy papers to docs/ for GitHub Pages
         run: |
-          mkdir -p docs/papers
+          mkdir -p docs/papers docs/charts
           for f in output/papers/*.md; do
             [ -f "$f" ] && cp "$f" "docs/papers/$(basename $f)"
+          done
+          for f in output/charts/*.png; do
+            [ -f "$f" ] && cp "$f" "docs/charts/$(basename $f)"
           done
           # Generate index.json listing all papers
           python -c "
@@ -88,7 +91,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/fetched-data.json docs/papers/ docs/index.json 2>/dev/null || true
+          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/fetched-data.json output/charts/ docs/papers/ docs/charts/ docs/index.json 2>/dev/null || true
           git commit -m "Daily research paper - $(date -u +%Y-%m-%d)" || echo "No changes to commit"
           git push
 
@@ -100,5 +103,6 @@ jobs:
           path: |
             output/briefs/
             output/papers/
+            output/charts/
             output/raw/compute-results.json
           retention-days: 30
