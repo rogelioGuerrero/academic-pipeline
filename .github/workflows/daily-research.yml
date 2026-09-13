@@ -81,7 +81,8 @@ jobs:
                             if line.startswith('# '):
                                 topic = line[2:].strip(); break
                 except: pass
-                papers.append({'file': name, 'date': date, 'topic': topic, 'nodes': 7, 'mode': 'suggest'})
+                papers.append({'file': name, 'date': date, 'topic': topic, 'nodes': 7, 'mode': 'suggest',
+                    **({'warning': 'Borrador experimental generado antes de las correcciones de verificacion. Puede contener metodologia o estadisticas no verificadas.'} if date <= '2026-09-13' else {})})
             with open('docs/index.json', 'w') as fh:
                 json.dump(papers, fh, indent=2)
             print(f'index.json: {len(papers)} papers')

@@ -1,9 +1,10 @@
 [
   {
-    "file": "2026-09-10_paper.md",
-    "date": "2026-09-10",
-    "topic": "Impacto de los apagones de plataformas de IA en la productividad y el empleo juvenil en Am\u00e9rica\u202fLatina",
+    "file": "2026-09-13_regulacion-ia-y-digitalizacion.md",
+    "date": "2026-09-13",
+    "topic": "Regulación de IA y digitalización: impacto en el empleo del sector servicios en América Latina",
     "nodes": 7,
-    "mode": "suggest"
+    "mode": "suggest",
+    "warning": "Borrador experimental generado antes de las correcciones de verificación. Puede contener metodología o estadísticas no verificadas."
   }
 ]
