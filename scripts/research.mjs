@@ -847,6 +847,33 @@ function transparencyNote(state) {
   return lines.filter(l => l !== "").join("\n");
 }
 
+// ── Columna editorial de datos: resumen llano del paper para lectura rapida.
+// Se genera post-APPROVE desde el paper final + resultados; solo puede usar
+// cifras literales del compute. Aparece en el PWA/archivo como "Datos al dia".
+async function agentEditorial(state) {
+  const s = state.suggestDecision || {};
+  const digest = computeDigest(state.computeResults, s);
+  const prompt = `Eres el editor de datos de un medio de analisis. Escribe una COLUMNA corta en espanol llano (150-220 palabras) titulada internamente "Datos al dia".
+
+CONTEXTO:
+- Noticia que inspiro el analisis: "${s.suggestions?.find(x => x.titulo === state.topic)?.noticia_inspiradora || "n/a"}"
+- Pregunta de investigacion: ${s.pregunta || state.topic}
+- Hipotesis evaluada: ${s.hipotesis || "n/a"}
+
+RESULTADOS REALES (unicas cifras permitidas):
+${truncate(digest, 2500)}
+
+ESTRUCTURA (sin encabezados, prosa continua):
+1. Primera frase: la pregunta que nacio de la noticia, en lenguaje de persona normal.
+2. Dos o tres cifras literales de RESULTADOS que responden (o no) la pregunta.
+3. Cierre honesto: que significa — incluyendo si la evidencia es insuficiente, heterogenea o contraria. Un "no se confirma" es un resultado valido y debe decirse sin dramatizar.
+
+PROHIBIDO: numeros que no aparezcan literalmente en RESULTADOS, opinion politica o ideologica, causas no probadas, jerga estadistica sin explicar, tono alarmista. No digas "paper" ni "pipeline" — habla de "el analisis" o "los datos del Banco Mundial".
+Devuelve SOLO el texto de la columna.`;
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 700, temperature: 0.5 });
+  return (data.choices[0]?.message?.content || "").trim();
+}
+
 // ── Knowledge base: un registro estructurado por paper (docs/knowledge.jsonl)
 // Se reconstruye desde todas las metadata — auto-sanante: sin duplicados,
 // sin borrados; crece ordenadamente con cada run. Base para un futuro
@@ -876,6 +903,7 @@ function rebuildKnowledge() {
           },
           review: m.reviewDecision?.veredicto || null,
           qa: m.qaDecision?.veredicto || null,
+          editorial: m.editorial || null,
           series: m.dataSources?.indicators ?? null,
           paises: m.dataSources?.countries ?? null,
         });
@@ -988,6 +1016,11 @@ class MoAGraph {
       return;
     }
     mkdirSync(OUTPUT_DIR, { recursive: true });
+    // Columna editorial "Datos al dia" — derivada del resultado final, tolerante a fallos
+    try {
+      this.state.editorial = await agentEditorial(this.state);
+      if (this.state.editorial) console.log(`  Editorial "Datos al dia": ${this.state.editorial.split(/\s+/).length} palabras`);
+    } catch (e) { console.log(`  Editorial skip: ${e.message}`); }
     const finalPaper = this.state.editedArticle + "\n\n" + transparencyNote(this.state);
     writeFileSync(OUTPUT_FILE, finalPaper, "utf-8");
     const date = new Date().toISOString().slice(0, 10);
@@ -1001,6 +1034,7 @@ class MoAGraph {
       suggestMode: this.state.suggestDecision?.mode || "manual",
       suggestions: this.state.suggestDecision?.suggestions || [],
       reviewDecision: this.state.reviewDecision, qaDecision: this.state.qaDecision,
+      editorial: this.state.editorial || null,
       dataSources: { source: "World Bank API", url: "https://api.worldbank.org", indicators: this.state.fetchedData?.summary?.total_indicators || 0, countries: this.state.fetchedData?.summary?.total_countries || 0, latestYear: this.state.fetchedData?.summary?.latest_year_available || null },
       computeResults: this.state.computeResults ? {
         regression: this.state.computeResults.regression ? { r_squared: this.state.computeResults.regression.r_squared, n: this.state.computeResults.regression.n } : null,
