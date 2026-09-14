@@ -773,6 +773,7 @@ def make_charts(data, results, outdir):
     variables = _get_variables(data)
     var_map = {v["name"]: v for v in variables}
     charts = []
+    chart_data = {"figures": {}}
 
     # ── Fig 1: trends grid for LCN series ──
     lcn_vars = [v for v in variables if v.get("country_code") == "LCN" and len(v.get("values", [])) >= 3]
@@ -796,6 +797,7 @@ def make_charts(data, results, outdir):
         fig.savefig(os.path.join(outdir, fname), dpi=150)
         plt.close(fig)
         charts.append({"file": fname, "caption": "Evolución temporal 2015-2024 de los indicadores regionales (América Latina y Caribe). Fuente: World Bank API."})
+        chart_data["figures"][fname] = {"type": "trends", "title": "Indicadores World Bank — América Latina y Caribe", "series": [{"name": v["name"], "years": v.get("years", []), "values": v["values"]} for v in lcn_vars]}
 
     # ── Fig 2: scatter of top significant correlation ──
     corr_results = [c for c in results.get("correlations", []) if c.get("significant")]
@@ -823,6 +825,7 @@ def make_charts(data, results, outdir):
                 fig.savefig(os.path.join(outdir, fname), dpi=150)
                 plt.close(fig)
                 charts.append({"file": fname, "caption": f"Correlación de Pearson entre {_short_label(best['x'], 60)} y {_short_label(best['y'], 60)} (n={best['n']})."})
+                chart_data["figures"][fname] = {"type": "scatter", "x_label": _short_label(best["x"], 60), "y_label": _short_label(best["y"], 60), "r": best["pearson_r"], "p": best["pearson_p"], "n": best["n"], "points": [[float(x), float(y), int(yr)] for x, y, yr in zip(x_arr, y_arr, years)], "fit": {"m": float(m), "b": float(b), "x_min": float(x_arr.min()), "x_max": float(x_arr.max())}}
 
     # ── Fig 3: regression actual vs fitted ──
     reg = results.get("regression")
@@ -855,6 +858,7 @@ def make_charts(data, results, outdir):
                 fig.savefig(os.path.join(outdir, fname), dpi=150)
                 plt.close(fig)
                 charts.append({"file": fname, "caption": f"Ajuste del modelo de regresión OLS sobre {_short_label(reg['dependent'], 60)} (n={reg['n']}, R²={reg['r_squared']:.3f})."})
+                chart_data["figures"][fname] = {"type": "fit", "dep": _short_label(reg["dependent"], 60), "r2": reg["r_squared"], "years": [int(y) for y in common], "observed": [float(v) for v in y_arr], "fitted": [float(v) for v in y_pred]}
 
     # ── Fig 4: country comparison bar chart (latest value of key indicator) ──
     # Pick the indicator with most country coverage (excluding LCN)
@@ -883,6 +887,7 @@ def make_charts(data, results, outdir):
             fig.savefig(os.path.join(outdir, fname), dpi=150)
             plt.close(fig)
             charts.append({"file": fname, "caption": f"Comparación internacional de {_short_label(base_name, 60)} (último año disponible). Fuente: World Bank API."})
+            chart_data["figures"][fname] = {"type": "bars", "indicator": _short_label(base_name, 60), "year": years[0], "items": [{"cc": labels[i], "value": float(vals[i])} for i in order]}
 
     # ── Fig 5: forest plot de coeficientes (OLS + panel FE) ──
     # Punto = beta, barra = IC95% (bootstrap si existe). Si la barra cruza
@@ -922,6 +927,7 @@ def make_charts(data, results, outdir):
         fig.savefig(os.path.join(outdir, fname), dpi=150)
         plt.close(fig)
         charts.append({"file": fname, "caption": "Forest plot: coeficientes OLS y de panel (efectos fijos por país) con intervalos de confianza 95%. Las barras que cruzan la línea del cero indican resultados frágiles (el intervalo incluye efecto nulo)."})
+        chart_data["figures"][fname] = {"type": "forest", "entries": [{"label": e["label"], "beta": float(e["beta"]), "lo": float(e["lo"]), "hi": float(e["hi"]), "model": e["model"]} for e in forest_entries]}
 
     # ── Fig 6: heatmap pais x par de indicadores (heterogeneidad visible) ──
     corr_all = [c for c in results.get("correlations", []) if c.get("pearson_r") is not None]
@@ -972,7 +978,23 @@ def make_charts(data, results, outdir):
             fig.savefig(os.path.join(outdir, fname), dpi=150)
             plt.close(fig)
             charts.append({"file": fname, "caption": "Mapa de calor de correlaciones Pearson por país: la heterogeneidad entre países se aprecia en las diferencias de signo e intensidad. * marca significancia (p<0.05)."})
+            cells = []
+            for pair in top_pairs:
+                row = []
+                for cc in ccs:
+                    cell = pair_cc[pair].get(cc)
+                    row.append({"r": float(cell["pearson_r"]), "sig": bool(cell.get("significant"))} if cell is not None else None)
+                cells.append(row)
+            chart_data["figures"][fname] = {"type": "heatmap", "pairs": top_pairs, "countries": ccs, "cells": cells}
 
+    # data.json: insumo de las figuras interactivas (ECharts) en el visor web.
+    # Los PNG siguen siendo el formato del documento .md; el JSON alimenta la web.
+    if chart_data["figures"]:
+        try:
+            with open(os.path.join(outdir, "data.json"), "w", encoding="utf-8") as fh:
+                json.dump(chart_data, fh, ensure_ascii=False)
+        except Exception:
+            pass
     return charts
 
 def main():

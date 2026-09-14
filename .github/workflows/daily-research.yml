@@ -125,6 +125,9 @@ jobs:
                         entry['pregunta'] = meta['pregunta']
                     if meta.get('editorial'):
                         entry['editorial'] = meta['editorial']
+                    cdir = (meta.get('computeResults') or {}).get('chartsDir')
+                    if cdir:
+                        entry['charts'] = cdir
                     entry['ts'] = meta.get('generated') or (date + 'T00:00:00Z')
                 except:
                     entry['ts'] = date + 'T00:00:00Z'

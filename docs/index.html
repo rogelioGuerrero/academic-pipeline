@@ -103,9 +103,14 @@
     footer a { color: #1a56db; text-decoration: none; }
     .empty { color: #999; font-style: italic; padding: 40px 0; text-align: center; }
 
+    .echart { width: 100%; height: 380px; margin: 0.4em 0 0.2em; }
+    figure.echart-fig { margin: 1.6em 0; }
+    figure.echart-fig figcaption { font-size: .78rem; color: #666; margin-top: 6px; font-family: 'Inter', sans-serif; }
+
     @media (max-width: 640px) {
       header { padding: 26px 18px 22px; }
       #viewer { padding: 22px 18px; }
+      .echart { height: 300px; }
     }
   </style>
 </head>
@@ -134,6 +139,7 @@
     Generado por <a href="https://github.com/rogelioGuerrero/academic-pipeline">AcademicPipeline</a> — pipeline multi-agente autónomo: noticias → hipótesis → datos reales → análisis estadístico → paper. Sin intervención humana por artículo; con verificación automática contra los datos.
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script>
     const list = document.getElementById('list');
     const viewer = document.getElementById('viewer');
@@ -266,6 +272,7 @@
         const ed = p.editorial ? `<div class="editorial-lead"><span class="ed-tag">DATOS AL DÍA — COLUMNA EDITORIAL</span><p>${esc(p.editorial)}</p></div>` : '';
         newslink.innerHTML = p.news_url ? `Noticia origen: <a href="${esc(p.news_url)}" target="_blank" rel="noopener">${esc(p.news_url)}</a>` : '';
         content.innerHTML = banner + vline + ed + renderMd(md);
+        enhanceFigures(p);
         list.style.display = 'none';
         hero.style.display = 'none';
         status.style.display = 'none';
@@ -281,6 +288,8 @@
     }
 
     function closePaper() {
+      liveCharts.forEach(c => { try { c.dispose(); } catch {} });
+      liveCharts = [];
       viewer.classList.remove('open');
       history.replaceState(null, '', location.pathname);
       list.style.display = '';
@@ -294,6 +303,116 @@
       const d = document.createElement('div');
       d.textContent = s || '';
       return d.innerHTML;
+    }
+
+    // ── Figuras interactivas (ECharts) ──
+    // Si el paper tiene charts/<stamp>/data.json, los PNG se reemplazan in-place
+    // por versiones interactivas (hover, zoom, leyendas). Si falta el JSON o el
+    // CDN, se quedan los PNG — fallback silencioso.
+    let liveCharts = [];
+    const EC = { navy: '#14213d', blue: '#1a56db', gold: '#b8860b', red: '#d93025', green: '#2e7d32', grid: '#e5e2db', txt: '#555' };
+    const AX = () => ({ axisLine: { lineStyle: { color: '#bbb' } }, axisLabel: { color: EC.txt, fontSize: 11 }, splitLine: { lineStyle: { color: EC.grid } }, nameTextStyle: { color: EC.txt } });
+
+    async function enhanceFigures(p) {
+      if (!p.charts || typeof echarts === 'undefined') return;
+      try {
+        const res = await fetch(`charts/${p.charts}/data.json`, { cache: 'no-cache' });
+        if (!res.ok) return;
+        const figs = (await res.json()).figures || {};
+        content.querySelectorAll('figure img').forEach(img => {
+          const fd = figs[(img.getAttribute('src') || '').split('/').pop()];
+          const opt = fd && buildChartOption(fd);
+          if (!opt) return;
+          const div = document.createElement('div');
+          div.className = 'echart';
+          if (fd.type === 'forest') div.style.height = Math.max(180, fd.entries.length * 38 + 90) + 'px';
+          if (fd.type === 'heatmap') div.style.height = Math.max(220, fd.pairs.length * 36 + 120) + 'px';
+          img.closest('figure').insertBefore(div, img);
+          img.remove();
+          const chart = echarts.init(div);
+          chart.setOption(opt);
+          liveCharts.push(chart);
+        });
+      } catch { /* fallback: quedan los PNG */ }
+    }
+    window.addEventListener('resize', () => liveCharts.forEach(c => c.resize()));
+
+    function buildChartOption(f) {
+      const tt = { backgroundColor: '#fff', borderColor: '#ddd', textStyle: { color: '#333', fontSize: 12 } };
+      if (f.type === 'scatter') {
+        return {
+          grid: { left: 80, right: 30, top: 36, bottom: 50 },
+          title: { text: `r = ${f.r.toFixed(3)}  (p = ${f.p.toFixed(4)}, n = ${f.n})`, textStyle: { fontSize: 12, color: '#888', fontWeight: 'normal' }, left: 'center', top: 4 },
+          tooltip: { ...tt, formatter: p2 => `${p2.data[2]} — x: ${p2.data[0].toFixed(2)}, y: ${p2.data[1].toFixed(2)}` },
+          xAxis: { type: 'value', name: f.x_label, nameLocation: 'middle', nameGap: 32, scale: true, ...AX() },
+          yAxis: { type: 'value', name: f.y_label, nameLocation: 'middle', nameGap: 55, scale: true, ...AX() },
+          series: [
+            { type: 'scatter', data: f.points, symbolSize: 13, itemStyle: { color: EC.blue } },
+            { type: 'line', data: [[f.fit.x_min, f.fit.m * f.fit.x_min + f.fit.b], [f.fit.x_max, f.fit.m * f.fit.x_max + f.fit.b]], showSymbol: false, lineStyle: { color: EC.red, type: 'dashed', width: 2 }, tooltip: { show: false }, silent: true }
+          ]
+        };
+      }
+      if (f.type === 'fit') {
+        return {
+          grid: { left: 80, right: 30, top: 36, bottom: 62 },
+          title: { text: `Observado vs ajustado — R² = ${f.r2.toFixed(3)}`, textStyle: { fontSize: 12, color: '#888', fontWeight: 'normal' }, left: 'center', top: 4 },
+          tooltip: { ...tt, trigger: 'axis' },
+          legend: { bottom: 4, textStyle: { color: EC.txt } },
+          xAxis: { type: 'category', data: f.years, name: 'Año', nameLocation: 'middle', nameGap: 28, ...AX(), splitLine: { show: false } },
+          yAxis: { type: 'value', name: f.dep, nameLocation: 'middle', nameGap: 55, scale: true, ...AX() },
+          series: [
+            { name: 'Observado', type: 'line', data: f.observed, symbolSize: 7, lineStyle: { width: 2.2, color: EC.blue }, itemStyle: { color: EC.blue } },
+            { name: 'Ajustado (OLS)', type: 'line', data: f.fitted, symbol: 'rect', symbolSize: 7, lineStyle: { width: 2, type: 'dashed', color: EC.red }, itemStyle: { color: EC.red } }
+          ]
+        };
+      }
+      if (f.type === 'bars') {
+        return {
+          grid: { left: 10, right: 40, top: 36, bottom: 44, containLabel: true },
+          title: { text: `${f.indicator} (${f.year})`, textStyle: { fontSize: 12, color: '#888', fontWeight: 'normal' }, left: 'center', top: 4 },
+          tooltip: { ...tt, formatter: p2 => `${p2.name}: ${(+p2.value).toFixed(2)}` },
+          xAxis: { type: 'value', ...AX() },
+          yAxis: { type: 'category', data: f.items.map(i => i.cc), ...AX(), splitLine: { show: false } },
+          series: [{ type: 'bar', data: f.items.map(i => i.value), barMaxWidth: 26, itemStyle: { color: EC.navy }, label: { show: true, position: 'right', color: EC.txt, formatter: p2 => (+p2.value).toFixed(1) } }]
+        };
+      }
+      if (f.type === 'forest') {
+        return {
+          grid: { left: 10, right: 50, top: 36, bottom: 44, containLabel: true },
+          title: { text: 'Coeficientes con IC 95% — las barras que cruzan 0 son frágiles', textStyle: { fontSize: 12, color: '#888', fontWeight: 'normal' }, left: 'center', top: 4 },
+          tooltip: { ...tt, formatter: p2 => { const e = f.entries[p2.dataIndex]; return `${e.label}<br>β = ${e.beta.toFixed(4)} · IC95% [${e.lo.toFixed(4)}, ${e.hi.toFixed(4)}]`; } },
+          xAxis: { type: 'value', ...AX() },
+          yAxis: { type: 'category', data: f.entries.map(e => e.label), ...AX(), splitLine: { show: false } },
+          series: [{
+            type: 'custom',
+            markLine: { silent: true, symbol: 'none', data: [{ xAxis: 0 }], lineStyle: { color: EC.navy, type: 'dashed' }, label: { show: false } },
+            renderItem: (params, api) => {
+              const beta = api.coord([api.value(0), params.dataIndex]);
+              const lo = api.coord([api.value(1), params.dataIndex]);
+              const hi = api.coord([api.value(2), params.dataIndex]);
+              const color = (api.value(1) > 0 || api.value(2) < 0) ? EC.green : '#888888';
+              return { type: 'group', children: [
+                { type: 'line', shape: { x1: lo[0], y1: beta[1], x2: hi[0], y2: beta[1] }, style: { stroke: color, lineWidth: 3 } },
+                { type: 'circle', shape: { cx: beta[0], cy: beta[1], r: 5.5 }, style: { fill: color } }
+              ] };
+            },
+            data: f.entries.map(e => [e.beta, e.lo, e.hi])
+          }]
+        };
+      }
+      if (f.type === 'heatmap') {
+        const cells = [];
+        f.cells.forEach((row, i) => row.forEach((c, j) => { if (c) cells.push([j, i, c.r, c.sig ? 1 : 0]); }));
+        return {
+          grid: { left: 10, right: 70, top: 16, bottom: 30, containLabel: true },
+          tooltip: { ...tt, formatter: p2 => `${f.countries[p2.data[0]]} · ${f.pairs[p2.data[1]]}<br>r = ${p2.data[2].toFixed(2)}${p2.data[3] ? ' *' : ''}` },
+          xAxis: { type: 'category', data: f.countries, ...AX(), splitLine: { show: false }, axisLabel: { color: EC.txt, fontSize: 11 } },
+          yAxis: { type: 'category', data: f.pairs, ...AX(), splitLine: { show: false }, axisLabel: { color: EC.txt, fontSize: 10 } },
+          visualMap: { min: -1, max: 1, calculable: true, orient: 'vertical', right: 0, top: 'center', textStyle: { color: EC.txt, fontSize: 10 }, inRange: { color: ['#b2182b', '#f7f7f7', '#2166ac'] } },
+          series: [{ type: 'heatmap', data: cells, label: { show: true, fontSize: 10, formatter: p2 => p2.data[2].toFixed(2) + (p2.data[3] ? '*' : '') }, itemStyle: { borderColor: '#fff', borderWidth: 1 } }]
+        };
+      }
+      return null; // 'trends' u otros: queda el PNG (unidades distintas → mosaico)
     }
 
     // Markdown renderer: tables, images, lists, headers, blockquotes
