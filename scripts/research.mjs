@@ -496,11 +496,15 @@ async function agentCompute(fetchedData, suggestDecision = null) {
     ? resolve(__dirname, "..", ".venv", "Scripts", "python.exe")
     : "python3";
   const scriptPath = resolve(__dirname, "compute.py");
-  const chartsDir = resolve(__dirname, "..", "output", "charts");
+  // Namespace por run: charts/<fecha-hora>/figN.png — un paper nuevo nunca
+  // sobrescribe las figuras de papers anteriores (los links quedan estables)
+  const stamp = new Date().toISOString().slice(0, 16).replace("T", "-").replace(/:/g, "-");
+  const chartsDir = resolve(__dirname, "..", "output", "charts", stamp);
   try {
     console.log("  Ejecutando: python compute.py");
     const output = execFileSync(pythonPath, [scriptPath, inputPath, chartsDir], { encoding: "utf-8", timeout: 60000, maxBuffer: 1024 * 1024 });
     const results = JSON.parse(output);
+    results.chartsDir = stamp;
     console.log("  Python completado:");
     if (results.descriptive) console.log(`    Descriptivas: ${Object.keys(results.descriptive).length} variables`);
     if (results.regression) {
@@ -630,9 +634,10 @@ function computeDigest(computeResults, suggestDecision = null) {
     }
   }
   if (computeResults.charts?.length) {
-    parts.push(`FIGURAS GENERADAS (archivos reales en output/charts/, referenciar como charts/<file>):`);
+    const cdir = computeResults.chartsDir ? `${computeResults.chartsDir}/` : "";
+    parts.push(`FIGURAS GENERADAS (referenciar exactamente con el path listado):`);
     for (const c of computeResults.charts) {
-      parts.push(`  - charts/${c.file}: ${c.caption}`);
+      parts.push(`  - charts/${cdir}${c.file}: ${c.caption}`);
     }
   }
   return parts.join("\n") || "Sin analisis estadistico.";
@@ -685,7 +690,7 @@ REGLAS CRITICAS (incumplir = rechazo):
 - Si un resultado no es significativo (p>0.05), dilo explicitamente; no lo presentes como evidencia solida. Si el IC95% bootstrap "incluye 0 -> fragil", reporta esa fragilidad.
 - Si aparece "REGRESION PANEL" en RESULTADOS, reportala: explica que usa variacion intra-pais (n paises x anos) y contrasta su veredicto con el OLS agregado. Si discrepan, dilo.
 - Cuando una correlacion en niveles es significativa pero su correlacion "en diferencias" no lo es (o viceversa), dilo explicitamente: la primera puede ser co-tendencia espuria, la segunda es evidencia mas honesta de co-movimiento.
-- Referencia las figuras reales listadas: ![descripcion](charts/<file>). NO inventes figuras que no esten en la lista.
+- Referencia las figuras reales listadas con el path EXACTO de la lista: ![descripcion](charts/<path-completo>). NO inventes figuras ni cambies los paths.
 - Cita cada dato como (Banco Mundial, 2024).
 - Total: 1200-1800 palabras. La Bibliografia es OBLIGATORIA y va AL FINAL — si te quedas sin espacio, acorta el Analisis, nunca omitas la Bibliografia.
 

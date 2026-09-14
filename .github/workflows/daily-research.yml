@@ -64,9 +64,8 @@ jobs:
           for f in output/papers/*.md; do
             [ -f "$f" ] && cp "$f" "docs/papers/$(basename $f)"
           done
-          for f in output/charts/*.png; do
-            [ -f "$f" ] && cp "$f" "docs/charts/$(basename $f)"
-          done
+          # Charts por run: output/charts/<stamp>/figN.png -> docs/charts/<stamp>/
+          cp -r output/charts/. docs/charts/ 2>/dev/null || true
           # Generate index.json listing all papers
           python -c "
             import json, os, glob
