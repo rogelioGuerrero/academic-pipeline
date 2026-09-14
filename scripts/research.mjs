@@ -291,6 +291,13 @@ async function agentSuggest(fetchedData) {
     }));
   const newsText = topNews.map(n => `- [${n.score}] ${n.title} (${n.section})\n  ${n.summary}`).join("\n");
 
+  // Temas recientes para que el LLM evite repetir dominio de forma proactiva
+  // (el dedup post-hoc queda como red de seguridad, no como unico mecanismo)
+  const recentTopics = loadRecentTopics();
+  const recentText = recentTopics.length
+    ? `TEMAS YA PUBLICADOS RECIENTEMENTE (evita repetir el mismo dominio/angulo):\n${recentTopics.map(t => `- ${t}`).join("\n")}\n`
+    : "";
+
   const prompt = `Eres un editor de una revista de ciencias sociales especializada en America Latina.
 
 NOTICIAS TENDING (de job-hunter, scored por LLM):
@@ -299,6 +306,7 @@ ${newsText || "Sin noticias disponibles."}
 CATALOGO DE INDICADORES DISPONIBLES (datos reales ya fetchados):
 ${catalogText}
 
+${recentText}
 TAREA:
 1. Cruza las noticias con los indicadores disponibles.
 2. Propone 3-5 lineas editoriales que PUEDEN respaldarse con datos reales.
@@ -311,7 +319,9 @@ REGLAS:
 - Prioriza lineas que combinen multiples dominios (educacion + economia, tecnologia + empleo, etc).
 - El tema debe ser relevante y actual (conectado a las noticias trending).
 - El angulo debe ser especifico y analizable con correlacion/regresion.
-- La pregunta de investigacion debe poder responderse SOLO con los indicadores del catalogo. Si la noticia trata de algo sin datos directos (ej: "apagones de IA"), reformula la pregunta a lo verificable (ej: "¿la penetracion digital se correlaciona con el empleo juvenil?") en vez de usar proxies forzados.
+- La pregunta de investigacion debe poder responderse SOLO con los indicadores del catalogo. Si la noticia trata de algo sin datos directos, reformula la pregunta a lo verificable — la reformulacion puede mapear a CUALQUIER dominio del catalogo, no solo tecnologia/empleo. Ejemplos de puentes validos (hay muchos mas): una noticia de IA puede derivar en empleo digital, en crecimiento economico o en productividad; una de inflacion en remesas o gasto publico; una de seguridad en inversion extranjera o comercio; una de clima en salud o migracion; una de conflicto geopolitico en comercio o PIB. Evalua que dominio tiene el puente mas directo a la noticia y los datos mas solidos.
+- Diversidad: las lineas propuestas deben cubrir dominios distintos entre si cuando el catalogo lo permita — no propongas 5 variantes del mismo tema. Si un tema publicado recientemente ya exploro un dominio, prefiere otro dominio con buen puente noticia-datos.
+- Justifica el puente: en "justificacion" explica por que ESE dominio (y no otro) es el que mejor conecta la noticia con los datos — esto evita mapear todo al mismo lugar por costumbre.
 - La hipotesis debe ser una afirmacion concreta que los datos puedan apoyar o refutar.
 
 Responde EXACTAMENTE como JSON (sin markdown):
