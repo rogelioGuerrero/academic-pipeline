@@ -334,6 +334,44 @@ def ols_regression(data):
             robust_p = 2 * (1 - stats.t.cdf(np.abs(robust_t), dof))
         except Exception:
             robust_se = None
+    # ── Bootstrap de coeficientes (case resampling, B=2000) ──
+    # Con n pequeno el p-value parametrico asume errores normales — supuesto
+    # inverificable. El bootstrap construye el IC95% desde la distribucion
+    # empirica: remuestrea las observaciones con reemplazo y re-ajusta.
+    boot_ci = None
+    boot_frac_zero = None
+    if dof > 0:
+        try:
+            rng = np.random.default_rng(42)
+            B = 2000
+            boot_betas = []
+            for _ in range(B):
+                idx = rng.integers(0, n, n)
+                # Evitar muestras degeneradas (todas las X constantes)
+                if np.unique(X_arr[idx], axis=0).shape[0] <= k:
+                    continue
+                try:
+                    b = np.linalg.lstsq(X_with_const[idx], y_arr[idx], rcond=None)[0]
+                    if np.all(np.isfinite(b)):
+                        boot_betas.append(b)
+                except np.linalg.LinAlgError:
+                    continue
+            if len(boot_betas) >= 500:
+                bb = np.array(boot_betas)  # (B_ok, k+1)
+                lo = np.percentile(bb, 2.5, axis=0)
+                hi = np.percentile(bb, 97.5, axis=0)
+                boot_ci = np.column_stack([lo, hi])  # (k+1, 2)
+                # Fraccion de replicas donde el signo del coeficiente se invierte
+                # o el IC incluye cero -> fragilidad del resultado
+                boot_frac_zero = []
+                for j in range(k + 1):
+                    col = bb[:, j]
+                    signs = np.sign(col[col != 0])
+                    flip = float(1 - abs(np.mean(signs))) / 2 if len(signs) else 0.5
+                    boot_frac_zero.append(bool(lo[j] <= 0 <= hi[j]) or flip > 0.15)
+        except Exception:
+            boot_ci = None
+            boot_frac_zero = None
     coefficients = [{"name": "intercept", "beta": float(beta[0]), "se": float(se[0]), "t": float(t_stats[0]), "p_value": float(p_values[0]),
                       "ci_95": [float(beta[0] - 1.96 * se[0]), float(beta[0] + 1.96 * se[0])]}]
     if robust_se is not None:
@@ -341,6 +379,9 @@ def ols_regression(data):
         coefficients[0]["robust_t"] = float(robust_t[0])
         coefficients[0]["robust_p"] = float(robust_p[0])
         coefficients[0]["robust_ci_95"] = [float(beta[0] - 1.96 * robust_se[0]), float(beta[0] + 1.96 * robust_se[0])]
+    if boot_ci is not None:
+        coefficients[0]["boot_ci_95"] = [float(boot_ci[0][0]), float(boot_ci[0][1])]
+        coefficients[0]["boot_includes_zero"] = boot_frac_zero[0]
     for i, name in enumerate(indep_names):
         coef = {
             "name": name,
@@ -357,6 +398,9 @@ def ols_regression(data):
             coef["robust_p"] = float(robust_p[i + 1])
             coef["robust_significant"] = bool(robust_p[i + 1] < 0.05)
             coef["robust_ci_95"] = [float(beta[i + 1] - 1.96 * robust_se[i + 1]), float(beta[i + 1] + 1.96 * robust_se[i + 1])]
+        if boot_ci is not None:
+            coef["boot_ci_95"] = [float(boot_ci[i + 1][0]), float(boot_ci[i + 1][1])]
+            coef["boot_includes_zero"] = boot_frac_zero[i + 1]
         coefficients.append(coef)
     return {
         "dependent": dep_name,
@@ -369,7 +413,108 @@ def ols_regression(data):
         "vif": vif if vif else None,
         "white_test": white_test,
         "robust_se": robust_se is not None,
+        "bootstrap": bool(boot_ci is not None),
         "coefficients": coefficients,
+    }
+
+def panel_regression(data):
+    """Regresion de panel con efectos fijos por pais (dummies de pais).
+    Usa todas las observaciones pais x anio (ej. 6 paises x 10 anios = 60 obs)
+    en vez del agregado regional — controla las diferencias estructurales
+    fijas entre paises y responde 'dentro de cada pais, cuando X subio,
+    se movio Y?'. Input: data['panel'] = {dependent, independent} con
+    nombres base de indicador (sin sufijo [CC]); se resuelven por pais."""
+    import numpy as np
+    from scipy import stats
+    spec = data.get("panel")
+    if not spec:
+        return None
+    variables = _get_variables(data)
+    countries = sorted(set(v.get("country_code", "") for v in variables
+                           if v.get("country_code", "") and v.get("country_code") != "LCN"))
+    if len(countries) < 3:
+        return {"error": "need >=3 countries for panel", "n_countries": len(countries)}
+    dep_pat = spec["dependent"].lower()
+    indep_pats = [p.lower() for p in spec.get("independent", [])]
+
+    def find_base(cc, pat):
+        for v in variables:
+            if v.get("country_code") == cc and pat in v["name"].split(" [")[0].lower():
+                return v
+        return None
+
+    rows = []  # (country_idx, y, x1, x2, ...)
+    used_countries = []
+    for ci, cc in enumerate(countries):
+        dep_v = find_base(cc, dep_pat)
+        indep_vs = [find_base(cc, p) for p in indep_pats]
+        if not dep_v or not all(indep_vs):
+            continue
+        used_countries.append(cc)
+        year_sets = []
+        for v in [dep_v] + indep_vs:
+            year_sets.append({y: val for y, val in zip(v.get("years", []), v.get("values", [])) if val is not None})
+        common = sorted(set.intersection(*[set(s.keys()) for s in year_sets]))
+        for yr in common:
+            rows.append([cc, year_sets[0][yr]] + [s[yr] for s in year_sets[1:]])
+    if len(used_countries) < 3 or len(rows) < len(indep_pats) + len(used_countries) + 2:
+        return {"error": f"insufficient panel data ({len(rows)} obs, {len(used_countries)} countries)"}
+    y_arr = np.array([r[1] for r in rows], dtype=float)
+    X_main = np.array([r[2:] for r in rows], dtype=float)
+    n = len(rows)
+    k = len(indep_pats)
+    nc = len(used_countries)
+    # Efectos fijos por pais: dummies para nc-1 paises (la primera es base)
+    cc_to_idx = {cc: i for i, cc in enumerate(used_countries)}
+    D = np.zeros((n, nc - 1))
+    for i, r in enumerate(rows):
+        j = cc_to_idx[r[0]]
+        if j > 0:
+            D[i, j - 1] = 1.0
+    X_full = np.column_stack([np.ones(n), X_main, D])
+    dof = n - X_full.shape[1]
+    if dof <= 0:
+        return {"error": f"dof <= 0 (n={n}, params={X_full.shape[1]})"}
+    try:
+        beta = np.linalg.lstsq(X_full, y_arr, rcond=None)[0]
+    except np.linalg.LinAlgError:
+        return {"error": "singular matrix"}
+    y_pred = X_full @ beta
+    residuals = y_arr - y_pred
+    ss_res = float(np.sum(residuals ** 2))
+    ss_tot = float(np.sum((y_arr - np.mean(y_arr)) ** 2))
+    r_squared = 1 - ss_res / ss_tot if ss_tot > 0 else 0.0
+    sigma2 = ss_res / dof
+    try:
+        cov = sigma2 * np.linalg.inv(X_full.T @ X_full)
+        se = np.sqrt(np.maximum(np.diag(cov), 0))
+        t_stats = np.where(se > 0, beta / se, float("nan"))
+        p_values = 2 * (1 - stats.t.cdf(np.abs(t_stats), dof))
+    except np.linalg.LinAlgError:
+        se = np.full(len(beta), float("nan")); t_stats = se.copy(); p_values = se.copy()
+    coefficients = []
+    for i, name in enumerate(spec["independent"]):
+        j = i + 1  # despues del intercepto
+        coefficients.append({
+            "name": name,
+            "beta": float(beta[j]),
+            "se": float(se[j]),
+            "t": float(t_stats[j]),
+            "p_value": float(p_values[j]),
+            "significant": bool(p_values[j] < 0.05) if np.isfinite(p_values[j]) else False,
+            "ci_95": [float(beta[j] - 1.96 * se[j]), float(beta[j] + 1.96 * se[j])],
+        })
+    return {
+        "type": "fixed_effects_country",
+        "dependent": spec["dependent"],
+        "independent": spec["independent"],
+        "n": n,
+        "n_countries": nc,
+        "countries": used_countries,
+        "r_squared": float(r_squared),
+        "dof": int(dof),
+        "coefficients": coefficients,
+        "note": "OLS con dummies de pais (efectos fijos). Controla caracteristicas fijas por pais; los coeficientes reflejan variacion intra-pais en el tiempo.",
     }
 
 def cluster_analysis(data, k_min=2, k_max=4):
@@ -728,6 +873,7 @@ def main():
         "descriptive": descriptive_stats(data),
         "correlations": correlation_analysis(data),
         "regression": ols_regression(data),
+        "panel": panel_regression(data),
         "clustering": cluster_analysis(data),
         "anomalies": anomaly_detection(data),
         "trends": trend_analysis(data),

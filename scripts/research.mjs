@@ -436,6 +436,9 @@ async function agentCompute(fetchedData, suggestDecision = null) {
       if (depSeries && indepNames.length >= 2) {
         dataset.regression = { dependent: depSeries.name, independent: indepNames };
         console.log(`  Regresión dinámica: ${depSeries.name} ~ ${indepNames.join(" + ")}`);
+        // Panel FE: mismos indicadores base resueltos por país (6 países × años)
+        dataset.panel = { dependent: topIndicators[0], independent: topIndicators.slice(1, 4) };
+        console.log(`  Panel FE: ${topIndicators[0]} ~ ${topIndicators.slice(1, 4).join(" + ")} (por país)`);
       }
     }
   }
@@ -478,6 +481,7 @@ async function agentCompute(fetchedData, suggestDecision = null) {
       if (education) indep.push(education.name);
       if (indep.length >= 2) {
         dataset.regression = { dependent: youthUnemp.name, independent: indep };
+        dataset.panel = { dependent: "youth unemployment", independent: ["gdp per capita", "internet users", "government expenditure education"] };
       }
     }
   }
@@ -504,6 +508,11 @@ async function agentCompute(fetchedData, suggestDecision = null) {
       results.regression.coefficients?.forEach(c => console.log(`    ${c.name}: β=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}`));
       if (results.regression.vif) console.log(`    VIF: ${Object.entries(results.regression.vif).map(([k,v]) => `${k}=${v.toFixed(1)}`).join(", ")}`);
       if (results.regression.white_test) console.log(`    White test: p=${results.regression.white_test.p_value?.toFixed(4)}${results.regression.white_test.heteroscedastic ? " (heterocedástico)" : ""}`);
+      if (results.regression.bootstrap) console.log(`    Bootstrap IC95%: ${results.regression.coefficients?.filter(c => c.boot_ci_95).map(c => `${c.name}=[${c.boot_ci_95[0].toFixed(3)},${c.boot_ci_95[1].toFixed(3)}]${c.boot_includes_zero ? " (incluye 0)" : ""}`).join(", ")}`);
+    }
+    if (results.panel?.coefficients?.length) {
+      console.log(`    Panel FE (${results.panel.n_countries} países, n=${results.panel.n}): R²=${results.panel.r_squared?.toFixed(4)}`);
+      results.panel.coefficients.forEach(c => console.log(`    ${c.name}: β=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}`));
     }
     results.correlations?.forEach(c => { if (c.pearson_r !== undefined) console.log(`    Corr(${c.x}, ${c.y}): r=${c.pearson_r?.toFixed(4)}, p=${c.pearson_p?.toFixed(4)}, Spearman ρ=${c.spearman_rho?.toFixed(4)}`); });
     if (results.clustering) console.log(`    Clustering: k=${results.clustering.best_k}, silhouette=${results.clustering.silhouette?.toFixed(3)}, ${results.clustering.n_countries} países`);
@@ -578,10 +587,21 @@ function computeDigest(computeResults, suggestDecision = null) {
     parts.push(`REGRESION OLS: ${r.dependent} ~ ${r.independent.join(" + ")}`);
     parts.push(`  n=${r.n}, R2=${r.r_squared?.toFixed(4)}, R2_adj=${r.adj_r_squared?.toFixed(4)}, F=${r.f_statistic?.toFixed(2)} (p=${r.f_p_value?.toFixed(4)})`);
     for (const c of r.coefficients || []) {
-      parts.push(`  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}${c.robust_p !== undefined ? `, robust_p=${c.robust_p?.toFixed(4)}${c.robust_significant ? " *" : ""}` : ""}`);
+      let line = `  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}${c.robust_p !== undefined ? `, robust_p=${c.robust_p?.toFixed(4)}${c.robust_significant ? " *" : ""}` : ""}`;
+      if (c.boot_ci_95) line += ` | IC95% bootstrap=[${c.boot_ci_95[0].toFixed(4)}, ${c.boot_ci_95[1].toFixed(4)}]${c.boot_includes_zero ? " (incluye 0 -> fragil)" : " (no incluye 0)"}`;
+      parts.push(line);
     }
     if (r.white_test) parts.push(`  White test: p=${r.white_test.p_value?.toFixed(4)} (${r.white_test.heteroscedastic ? "heterocedastico" : "homocedastico"})`);
     else parts.push(`  White test: NO calculado`);
+  }
+  const panel = computeResults.panel;
+  if (panel && panel.coefficients?.length) {
+    parts.push(`REGRESION PANEL (efectos fijos por pais): ${panel.dependent} ~ ${panel.independent.join(" + ")}`);
+    parts.push(`  n=${panel.n} obs (${panel.n_countries} paises x anos), R2=${panel.r_squared?.toFixed(4)}, dof=${panel.dof}`);
+    for (const c of panel.coefficients) {
+      parts.push(`  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}, IC95%=[${c.ci_95[0].toFixed(4)}, ${c.ci_95[1].toFixed(4)}]`);
+    }
+    parts.push(`  NOTA: el panel usa variacion INTRA-pais en el tiempo (controla caracteristicas fijas por pais). Si el OLS agregado y el panel discrepan, reportar ambos — la discrepancia es informacion (el agregado puede estar dominado por diferencias entre paises).`);
   }
   const corrs = (computeResults.correlations || []).filter(c => c.pearson_r !== undefined && relevant(c.x) && relevant(c.y));
   if (corrs.length) {
@@ -652,7 +672,7 @@ ${feedbackSection}
 ESTRUCTURA OBLIGATORIA:
 1. **Resumen** (100-150 palabras)
 2. **Introduccion** (300-400 palabras): plantea la pregunta de investigacion explicitamente
-3. **Metodologia** (150-250 palabras): datos del Banco Mundial 2015-2024, OLS, correlaciones Pearson/Spearman, Mann-Kendall. NO menciones metodos que no aparezcan en RESULTADOS (nada de efectos fijos, panel, Durbin-Watson ni simulaciones).
+3. **Metodologia** (150-250 palabras): datos del Banco Mundial 2015-2024, OLS, correlaciones Pearson/Spearman, Mann-Kendall. Menciona regresion de panel con efectos fijos por pais y/o intervalos bootstrap SOLO si aparecen en RESULTADOS. NO menciones metodos que no aparezcan en RESULTADOS (nada de Durbin-Watson, simulaciones ni proyecciones).
 4. **Analisis** (500-800 palabras): usa SOLO datos y resultados listados. Incluye tablas Markdown y referencia las figuras listadas.
 5. **Discusion** (200-350 palabras): interpreta; reconoce que n=10 observaciones por serie es muestra pequena y las correlaciones no implican causalidad.
 6. **Conclusiones** (150-250 palabras): DEBE dar un veredicto explicito sobre la hipotesis — "los datos apoyan / no apoyan / son insuficientes para evaluar" — basado SOLO en los resultados calculados.
@@ -662,7 +682,8 @@ REGLAS CRITICAS (incumplir = rechazo):
 - Todo numero citado debe aparecer LITERALMENTE en DATOS o RESULTADOS de arriba. Prohibido redondear a valores diferentes, inventar valores por pais no listados, o reportar estadisticos no calculados.
 - NO existe informacion de paises fuera de la lista. NO uses fuentes que no sean World Bank (nada de CEPAL, OECD, IMF, ECLAC).
 - NO inventes tests diagnosticos (White, Durbin-Watson), simulaciones, escenarios futuros ni proyecciones: solo reporta lo que Python calculo.
-- Si un resultado no es significativo (p>0.05), dilo explicitamente; no lo presentes como evidencia solida.
+- Si un resultado no es significativo (p>0.05), dilo explicitamente; no lo presentes como evidencia solida. Si el IC95% bootstrap "incluye 0 -> fragil", reporta esa fragilidad.
+- Si aparece "REGRESION PANEL" en RESULTADOS, reportala: explica que usa variacion intra-pais (n paises x anos) y contrasta su veredicto con el OLS agregado. Si discrepan, dilo.
 - Cuando una correlacion en niveles es significativa pero su correlacion "en diferencias" no lo es (o viceversa), dilo explicitamente: la primera puede ser co-tendencia espuria, la segunda es evidencia mas honesta de co-movimiento.
 - Referencia las figuras reales listadas: ![descripcion](charts/<file>). NO inventes figuras que no esten en la lista.
 - Cita cada dato como (Banco Mundial, 2024).
@@ -698,7 +719,7 @@ VERIFICACION OBLIGATORIA:
 2. Para cada uno, buscalo en DATOS/RESULTADOS de arriba. Si no aparece literalmente (o no se deriva directamente), marcalo como INVENTADO en "datos_inventados".
 3. Senales de alucinacion frecuentes — rechaza si el paper:
    - Menciona datos de paises NO listados arriba, o fuentes externas (CEPAL, OECD, IMF, ECLAC)
-   - Reporta tests no calculados (Durbin-Watson, White si dice "NO calculado"), efectos fijos, datos de panel, simulaciones o proyecciones
+   - Reporta tests no calculados (Durbin-Watson, White si dice "NO calculado"), simulaciones o proyecciones. Efectos fijos / regresion de panel solo son validos si "REGRESION PANEL" aparece en RESULTADOS; si no aparece, mencionarlos es inventado.
    - Cita literatura con coeficientes/cifras especificas no presentes en RESULTADOS
    - Afirma significancia estadistica cuando p>0.05
    - Presenta correlaciones como causalidad sin matizar
@@ -808,7 +829,8 @@ function transparencyNote(state) {
     "**Métodos ejecutados (Python / scipy, determinísticos):**",
     `- Estadísticas descriptivas de ${ind.length} series.`,
     `- ${corrs.length} correlaciones Pearson/Spearman calculadas; ${sigCorrs.length} significativas (p<0.05). Cada una incluye su versión en primeras diferencias para distinguir co-movimiento de co-tendencia espuria.`,
-    reg?.dependent ? `- Regresión OLS: ${reg.dependent} ~ ${reg.independent.join(" + ")} (n=${reg.n}, R²=${reg.r_squared?.toFixed(3)}).` : "- Sin regresión ejecutada.",
+    reg?.dependent ? `- Regresión OLS: ${reg.dependent} ~ ${reg.independent.join(" + ")} (n=${reg.n}, R²=${reg.r_squared?.toFixed(3)})${reg.bootstrap ? ", con intervalos de confianza bootstrap (2000 réplicas)" : ""}.` : "- Sin regresión ejecutada.",
+    cr.panel?.coefficients?.length ? `- Regresión de panel con efectos fijos por país: ${cr.panel.dependent} ~ ${cr.panel.independent.join(" + ")} (n=${cr.panel.n} obs, ${cr.panel.n_countries} países).` : "",
     sigTrends.length ? `- Test de tendencia Mann-Kendall: ${sigTrends.length} de ${trends.length} series con tendencia significativa.` : "",
     cr.anomalies?.length ? `- Detección de anomalías (z-score/IQR): ${cr.anomalies.length} observaciones atípicas.` : "",
     cr.charts?.length ? `- ${cr.charts.length} figuras generadas con matplotlib a partir de los datos.` : "",

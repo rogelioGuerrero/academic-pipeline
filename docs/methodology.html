@@ -50,6 +50,8 @@
     <tr><td>Correlación de <strong>Spearman</strong></td><td>Mide asociación monotónica por rangos</td><td>Robusta a outliers y relaciones no lineales — el shock de 2020 (COVID) es exactamente el caso que Pearson exagera</td></tr>
     <tr><td>Correlación en <strong>primeras diferencias</strong></td><td>Correlaciona los cambios año a año (Δ), no los niveles</td><td>Distingue co-movimiento real de co-tendencia espuria: dos series que ambas suben siempre correlacionan en niveles; si la relación desaparece en diferencias, era tendencia común, no asociación</td></tr>
     <tr><td><strong>Regresión OLS</strong></td><td>Cuantifica la asociación de varias variables sobre una dependiente</td><td>Se reporta con errores estándar robustos (HC3), VIF para multicolinealidad y test de White para heterocedasticidad — los diagnósticos correctos para muestras pequeñas</td></tr>
+    <tr><td><strong>IC95% bootstrap</strong></td><td>Remuestrea las observaciones con reemplazo (2000 réplicas) y reconstruye el intervalo de confianza desde la distribución empírica del coeficiente</td><td>Con n=10 el p-value paramétrico asume normalidad — supuesto inverificable. El bootstrap no asume nada; si el IC95% incluye 0, el coeficiente es frágil y el paper debe decirlo</td></tr>
+    <tr><td><strong>Panel con efectos fijos por país</strong></td><td>OLS sobre todas las observaciones país×año (~6 países × 10 años = 60 obs) con una dummy por país</td><td>Responde "dentro de cada país, cuando X subió, ¿se movió Y?" — controla las características estructurales fijas de cada país que el agregado regional esconde, y multiplica el n efectivo</td></tr>
     <tr><td><strong>Mann-Kendall</strong></td><td>Detecta tendencia monotónica en el tiempo</td><td>No paramétrico: no asume normalidad ni linealidad, ideal para n=10 anual</td></tr>
     <tr><td>Anomalías <strong>z-score / IQR</strong></td><td>Detecta observaciones atípicas por serie</td><td>Dos criterios independientes; el desfase 2020 aparece sistemáticamente</td></tr>
     <tr><td><strong>Compatibilidad de unidades</strong></td><td>Solo correlaciona pares semánticamente comparables</td><td>Guardia explícita: impide correlaciones sin sentido (ej. población absoluta vs tasa %)</td></tr>
@@ -58,7 +60,7 @@
   <h2>Qué puede y qué no puede afirmar un paper</h2>
   <ul>
     <li><strong>Puede:</strong> describir tendencias, reportar correlaciones con su r y p exactos, comparar países con datos listados, dar un veredicto sobre la hipótesis (apoyan / no apoyan / insuficientes).</li>
-    <li><strong>No puede:</strong> afirmar causalidad (correlación temporal no es causa), proyectar a años futuros, citar países o fuentes no provistos (CEPAL, OECD, IMF), reportar tests no ejecutados (Durbin-Watson, efectos fijos de panel) ni simulaciones.</li>
+    <li><strong>No puede:</strong> afirmar causalidad (correlación temporal no es causa; el panel con efectos fijos controla diferencias fijas entre países pero no establece causalidad), proyectar a años futuros, citar países o fuentes no provistos (CEPAL, OECD, IMF), reportar tests no ejecutados (Durbin-Watson) ni simulaciones.</li>
   </ul>
 
   <h2>Limitaciones</h2>
