@@ -753,6 +753,23 @@ def make_charts(data, results, outdir):
         return []
     import os
     os.makedirs(outdir, exist_ok=True)
+    # ── Estilo editorial consistente (paleta del sitio) ──
+    NAVY, BLUE, GOLD, RED, GREEN = "#14213d", "#1a56db", "#b8860b", "#d93025", "#2e7d32"
+    plt.rcParams.update({
+        "font.family": "DejaVu Sans", "font.size": 8.5,
+        "axes.edgecolor": "#cccccc", "axes.linewidth": 0.8,
+        "axes.titlesize": 9.5, "axes.titleweight": "bold",
+        "figure.facecolor": "white", "axes.facecolor": "white",
+        "axes.grid": True, "grid.color": "#e5e2db", "grid.linewidth": 0.6,
+    })
+
+    def _despine(ax):
+        for s in ("top", "right"):
+            ax.spines[s].set_visible(False)
+
+    def _watermark(fig):
+        fig.text(0.99, 0.005, "AcademicPipeline · World Bank API", ha="right", va="bottom", fontsize=5.5, color="#aaaaaa")
+
     variables = _get_variables(data)
     var_map = {v["name"]: v for v in variables}
     charts = []
@@ -766,16 +783,17 @@ def make_charts(data, results, outdir):
         axes = np.array(axes).reshape(-1)
         for ax, var in zip(axes, lcn_vars):
             yrs = var.get("years", [])[:len(var["values"])]
-            ax.plot(yrs, var["values"], marker="o", ms=3, lw=1.4, color="#1a73e8")
-            ax.set_title(_short_label(var["name"], 38), fontsize=8)
+            ax.plot(yrs, var["values"], marker="o", ms=3, lw=1.4, color=BLUE)
+            ax.set_title(_short_label(var["name"], 38), fontsize=7.5, fontweight="normal")
             ax.tick_params(labelsize=7)
-            ax.grid(alpha=0.3)
+            _despine(ax)
         for ax in axes[len(lcn_vars):]:
             ax.axis("off")
-        fig.suptitle("Indicadores World Bank — América Latina y Caribe (agregado)", fontsize=11)
+        fig.suptitle("Indicadores World Bank — América Latina y Caribe (agregado)", fontsize=11, fontweight="bold")
         fig.tight_layout(rect=[0, 0, 1, 0.96])
+        _watermark(fig)
         fname = "fig1_trends.png"
-        fig.savefig(os.path.join(outdir, fname), dpi=140)
+        fig.savefig(os.path.join(outdir, fname), dpi=150)
         plt.close(fig)
         charts.append({"file": fname, "caption": "Evolución temporal 2015-2024 de los indicadores regionales (América Latina y Caribe). Fuente: World Bank API."})
 
@@ -789,19 +807,20 @@ def make_charts(data, results, outdir):
             if len(x_vals) >= 3:
                 x_arr, y_arr = np.array(x_vals, dtype=float), np.array(y_vals, dtype=float)
                 fig, ax = plt.subplots(figsize=(6.5, 4.2))
-                ax.scatter(x_arr, y_arr, color="#1a73e8", s=45, zorder=3)
+                ax.scatter(x_arr, y_arr, color=BLUE, s=45, zorder=3)
                 for x, y, yr in zip(x_arr, y_arr, years):
                     ax.annotate(str(yr), (x, y), textcoords="offset points", xytext=(5, 4), fontsize=7, color="#666")
                 m, b = np.polyfit(x_arr, y_arr, 1)
                 xs = np.linspace(x_arr.min(), x_arr.max(), 50)
-                ax.plot(xs, m * xs + b, color="#d93025", lw=1.5, ls="--", label=f"r = {best['pearson_r']:.3f} (p = {best['pearson_p']:.4f})")
+                ax.plot(xs, m * xs + b, color=RED, lw=1.5, ls="--", label=f"r = {best['pearson_r']:.3f} (p = {best['pearson_p']:.4f})")
                 ax.set_xlabel(_short_label(best["x"], 55), fontsize=9)
                 ax.set_ylabel(_short_label(best["y"], 55), fontsize=9)
                 ax.legend(fontsize=8)
-                ax.grid(alpha=0.3)
+                _despine(ax)
                 fig.tight_layout()
+                _watermark(fig)
                 fname = "fig2_correlation.png"
-                fig.savefig(os.path.join(outdir, fname), dpi=140)
+                fig.savefig(os.path.join(outdir, fname), dpi=150)
                 plt.close(fig)
                 charts.append({"file": fname, "caption": f"Correlación de Pearson entre {_short_label(best['x'], 60)} y {_short_label(best['y'], 60)} (n={best['n']})."})
 
@@ -823,16 +842,17 @@ def make_charts(data, results, outdir):
                 beta = np.array([c["beta"] for c in reg["coefficients"]], dtype=float)
                 y_pred = np.column_stack([np.ones(len(common)), X_arr]) @ beta
                 fig, ax = plt.subplots(figsize=(6.5, 4.2))
-                ax.plot(common, y_arr, marker="o", ms=4, lw=1.4, color="#1a73e8", label="Observado")
-                ax.plot(common, y_pred, marker="s", ms=4, lw=1.4, ls="--", color="#d93025", label=f"Ajustado (R² = {reg['r_squared']:.3f})")
+                ax.plot(common, y_arr, marker="o", ms=4, lw=1.4, color=BLUE, label="Observado")
+                ax.plot(common, y_pred, marker="s", ms=4, lw=1.4, ls="--", color=RED, label=f"Ajustado (R² = {reg['r_squared']:.3f})")
                 ax.set_xlabel("Año", fontsize=9)
                 ax.set_ylabel(_short_label(reg["dependent"], 55), fontsize=9)
                 ax.set_title("Modelo OLS: valores observados vs ajustados", fontsize=10)
                 ax.legend(fontsize=8)
-                ax.grid(alpha=0.3)
+                _despine(ax)
                 fig.tight_layout()
+                _watermark(fig)
                 fname = "fig3_regression.png"
-                fig.savefig(os.path.join(outdir, fname), dpi=140)
+                fig.savefig(os.path.join(outdir, fname), dpi=150)
                 plt.close(fig)
                 charts.append({"file": fname, "caption": f"Ajuste del modelo de regresión OLS sobre {_short_label(reg['dependent'], 60)} (n={reg['n']}, R²={reg['r_squared']:.3f})."})
 
@@ -852,15 +872,106 @@ def make_charts(data, results, outdir):
             years = [v["years"][-1] if v.get("years") else "" for v in vs]
             order = np.argsort(vals)
             fig, ax = plt.subplots(figsize=(6.5, 3.6))
-            ax.barh([labels[i] for i in order], [vals[i] for i in order], color="#1a73e8")
+            ax.barh([labels[i] for i in order], [vals[i] for i in order], color=NAVY)
             ax.set_xlabel(_short_label(base_name, 55), fontsize=9)
             ax.set_title(f"Comparación por país ({years[0]})", fontsize=10)
             ax.grid(axis="x", alpha=0.3)
+            _despine(ax)
             fig.tight_layout()
+            _watermark(fig)
             fname = "fig4_countries.png"
-            fig.savefig(os.path.join(outdir, fname), dpi=140)
+            fig.savefig(os.path.join(outdir, fname), dpi=150)
             plt.close(fig)
             charts.append({"file": fname, "caption": f"Comparación internacional de {_short_label(base_name, 60)} (último año disponible). Fuente: World Bank API."})
+
+    # ── Fig 5: forest plot de coeficientes (OLS + panel FE) ──
+    # Punto = beta, barra = IC95% (bootstrap si existe). Si la barra cruza
+    # el cero, la fragilidad se ve sin leer p-values.
+    forest_entries = []
+    reg = results.get("regression")
+    if reg and reg.get("coefficients"):
+        for c in reg["coefficients"]:
+            if c["name"] == "intercept":
+                continue
+            ci = c.get("boot_ci_95") or c.get("ci_95")
+            if ci:
+                forest_entries.append({"label": f"OLS · {_short_label(c['name'].split(' [')[0], 34)}", "beta": c["beta"], "lo": ci[0], "hi": ci[1], "model": "OLS"})
+    panel = results.get("panel")
+    if panel and panel.get("coefficients"):
+        for c in panel["coefficients"]:
+            ci = c.get("ci_95")
+            if ci:
+                forest_entries.append({"label": f"Panel FE · {_short_label(c['name'], 34)}", "beta": c["beta"], "lo": ci[0], "hi": ci[1], "model": "Panel"})
+    if forest_entries:
+        forest_entries.sort(key=lambda e: e["beta"])
+        fig, ax = plt.subplots(figsize=(6.5, 0.9 + 0.55 * len(forest_entries)))
+        ys = np.arange(len(forest_entries))
+        for i, e in enumerate(forest_entries):
+            color = GREEN if e["lo"] > 0 or e["hi"] < 0 else "#888888"
+            marker = "s" if e["model"] == "Panel" else "o"
+            ax.plot([e["lo"], e["hi"]], [i, i], color=color, lw=2.2, zorder=2)
+            ax.scatter([e["beta"]], [i], color=color, marker=marker, s=46, zorder=3)
+        ax.axvline(0, color=NAVY, lw=1, ls="--", alpha=0.7)
+        ax.set_yticks(ys, [e["label"] for e in forest_entries], fontsize=8)
+        ax.set_xlabel("Coeficiente (IC 95%) — intervalos que cruzan 0 son frágiles", fontsize=8.5)
+        ax.set_title("Coeficientes del modelo", fontsize=9.5)
+        _despine(ax)
+        fig.tight_layout()
+        _watermark(fig)
+        fname = "fig5_forest.png"
+        fig.savefig(os.path.join(outdir, fname), dpi=150)
+        plt.close(fig)
+        charts.append({"file": fname, "caption": "Forest plot: coeficientes OLS y de panel (efectos fijos por país) con intervalos de confianza 95%. Las barras que cruzan la línea del cero indican resultados frágiles (el intervalo incluye efecto nulo)."})
+
+    # ── Fig 6: heatmap pais x par de indicadores (heterogeneidad visible) ──
+    corr_all = [c for c in results.get("correlations", []) if c.get("pearson_r") is not None]
+    if corr_all:
+        pair_cc = {}
+        for c in corr_all:
+            cc = c["x"].split("[")[-1].rstrip("]") if "[" in c["x"] else ""
+            if not cc:
+                continue
+            pair = f"{_short_label(c['x'].split(' [')[0], 30)} ↔ {_short_label(c['y'].split(' [')[0], 30)}"
+            pair_cc.setdefault(pair, {})[cc] = c
+        # Top pares: los que tienen al menos una celda significativa, orden por max |r|
+        scored = []
+        for pair, cells in pair_cc.items():
+            max_r = max(abs(v["pearson_r"]) for v in cells.values())
+            any_sig = any(v.get("significant") for v in cells.values())
+            scored.append((any_sig, max_r, pair))
+        scored.sort(key=lambda t: (t[0], t[1]), reverse=True)
+        top_pairs = [p for _, _, p in scored[:10]]
+        ccs = sorted(set(cc for cells in pair_cc.values() for cc in cells.keys()))
+        if top_pairs and len(ccs) >= 2:
+            M = np.full((len(top_pairs), len(ccs)), np.nan)
+            for i, pair in enumerate(top_pairs):
+                for j, cc in enumerate(ccs):
+                    cell = pair_cc[pair].get(cc)
+                    if cell is not None:
+                        M[i, j] = cell["pearson_r"]
+            fig, ax = plt.subplots(figsize=(max(5.5, 0.8 * len(ccs) + 2), 0.6 * len(top_pairs) + 1.6))
+            masked = np.ma.masked_invalid(M)
+            im = ax.imshow(masked, cmap="RdBu_r", vmin=-1, vmax=1, aspect="auto")
+            ax.set_xticks(range(len(ccs)), ccs, fontsize=8)
+            ax.set_yticks(range(len(top_pairs)), top_pairs, fontsize=7.5)
+            for i, pair in enumerate(top_pairs):
+                for j, cc in enumerate(ccs):
+                    cell = pair_cc[pair].get(cc)
+                    if cell is not None:
+                        star = "*" if cell.get("significant") else ""
+                        txt_col = "white" if abs(cell["pearson_r"]) > 0.6 else "#333333"
+                        ax.text(j, i, f"{cell['pearson_r']:.2f}{star}", ha="center", va="center", fontsize=7, color=txt_col)
+            ax.set_title("Correlaciones por país (r de Pearson) — * p<0.05", fontsize=9.5)
+            ax.grid(False)
+            for s in ax.spines.values():
+                s.set_visible(False)
+            fig.colorbar(im, ax=ax, shrink=0.7, label="r")
+            fig.tight_layout()
+            _watermark(fig)
+            fname = "fig6_heatmap.png"
+            fig.savefig(os.path.join(outdir, fname), dpi=150)
+            plt.close(fig)
+            charts.append({"file": fname, "caption": "Mapa de calor de correlaciones Pearson por país: la heterogeneidad entre países se aprecia en las diferencias de signo e intensidad. * marca significancia (p<0.05)."})
 
     return charts
 
