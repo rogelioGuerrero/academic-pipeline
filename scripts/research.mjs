@@ -858,22 +858,22 @@ function transparencyNote(state) {
 async function agentEditorial(state) {
   const s = state.suggestDecision || {};
   const digest = computeDigest(state.computeResults, s);
-  const prompt = `Eres el editor de datos de un medio de analisis. Escribe una COLUMNA corta en espanol llano (150-220 palabras) titulada internamente "Datos al dia".
+  const prompt = `Eres un columnista de datos que escribe para lectores sin formacion estadistica. Escribe una COLUMNA corta en espanol (150-220 palabras) que cuente una historia, no que reporte estadisticas.
 
 CONTEXTO:
 - Noticia que inspiro el analisis: "${s.suggestions?.find(x => x.titulo === state.topic)?.noticia_inspiradora || "n/a"}"
 - Pregunta de investigacion: ${s.pregunta || state.topic}
 - Hipotesis evaluada: ${s.hipotesis || "n/a"}
 
-RESULTADOS REALES (unicas cifras permitidas):
+RESULTADOS REALES (la unica evidencia permitida — el lector experto vera el detalle tecnico en el documento completo):
 ${truncate(digest, 2500)}
 
-ESTRUCTURA (sin encabezados, prosa continua):
-1. Primera frase: la pregunta que nacio de la noticia, en lenguaje de persona normal.
-2. Dos o tres cifras literales de RESULTADOS que responden (o no) la pregunta.
-3. Cierre honesto: que significa — incluyendo si la evidencia es insuficiente, heterogenea o contraria. Un "no se confirma" es un resultado valido y debe decirse sin dramatizar.
+ESTRUCTURA (prosa continua, sin encabezados):
+1. Primera frase: la pregunta que nacio de la noticia, como se la haria una persona normal.
+2. Que encontramos al mirar los datos — contado como historia: que subio, que bajo, que no cambio, en que paises paso algo distinto. Puedes usar magnitudes concretas simples (porcentajes, años, paises) pero TRADUCE todo: en vez de "coeficiente -0.1150, p=0.04" di "cuando crecen las suscripciones moviles, el empleo vulnerable tiende a bajar un poco".
+3. Cierre honesto y claro: que significa para el lector — incluyendo si los datos no confirman, son heterogeneos o contradicen la idea inicial. "No se confirma" es un resultado util, dilo con naturalidad.
 
-PROHIBIDO: numeros que no aparezcan literalmente en RESULTADOS, opinion politica o ideologica, causas no probadas, jerga estadistica sin explicar, tono alarmista. No digas "paper" ni "pipeline" — habla de "el analisis" o "los datos del Banco Mundial".
+PROHIBIDO TERMINOS TECNICOS: no uses "coeficiente", "p-valor", "correlacion r", "regresion", "significativo", "R2" ni ninguna notacion estadistica. Si un resultado es debil o incierto, dilo en lenguaje normal ("los datos no son concluyentes", "puede ser casualidad"). No inventes cantidades (numero de paises, de años, de observaciones) — usa solo las que aparezcan en RESULTADOS; no confundas el n de observaciones con el numero de paises. Prohibidos tambien: numeros no listados, opinion politica, causas no probadas ("coincide con", no "causa"), alarmismo, las palabras "paper" y "pipeline" — di "el analisis" o "los datos del Banco Mundial".
 Devuelve SOLO el texto de la columna.`;
   // gpt-oss consume tokens en razonamiento — 2000 de margen para que la
   // columna de ~200 palabras no quede truncada a mitad de frase
