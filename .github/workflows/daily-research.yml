@@ -100,11 +100,21 @@ jobs:
                         try:
                             items = json.load(open('../job-hunter/news_found.json', encoding='utf-8'))
                             wanted = (meta.get('suggestions') or [{}])[0].get('noticia_inspiradora', '').lower()
+                            # Match robusto: substring O solapamiento de tokens >= 0.5
+                            # (news_found.json rota 3x/dia; la misma historia puede
+                            # reaparecer con titulo distinto en otra fuente)
+                            wanted_toks = set(wanted.split()) - {'a','de','the','for','in','on','to','y','el','la','en','los','las','por','con'}
+                            best, best_score = None, 0.0
                             for it in items:
                                 t = (it.get('title') or '').lower()
                                 if wanted and (wanted in t or t in wanted):
-                                    news = {'image': it.get('url_to_image') or it.get('pexels_image'), 'section': it.get('section'), 'url': it.get('url')}
-                                    break
+                                    best = it; break
+                                t_toks = set(t.split())
+                                score = len(wanted_toks & t_toks) / len(wanted_toks) if wanted_toks else 0
+                                if score > best_score:
+                                    best, best_score = it, score
+                            if best and best_score >= 0.5:
+                                news = {'image': best.get('url_to_image') or best.get('pexels_image'), 'section': best.get('section'), 'url': best.get('url')}
                         except: pass
                     if news.get('image'):
                         entry['image'] = news['image']
