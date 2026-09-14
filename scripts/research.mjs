@@ -68,8 +68,24 @@ const NO_CACHE = process.argv.includes("--no-cache");
 const CACHE_PATH = "output/raw/fetched-data.json";
 const CACHE_MAX_AGE_HOURS = 8760; // 1 año: los datos del World Bank se actualizan anualmente
 
+// Estimacion de tokens: Groq tokeniza ~4 chars/token para espanol, pero
+// con razonamiento interno el consumo real puede ser mayor. Usamos 3.5 como
+// estimacion conservadora. Si el prompt excede el umbral, se trunca.
+const TOKEN_BUDGET = 7000; // margen seguro bajo 8000 TPM del free tier
+function estimateTokens(text) { return Math.ceil(text.length / 3.5); }
+
 async function callGroq(model, prompt, opts = {}) {
-  const body = { model, messages: [{ role: "user", content: prompt }], ...opts };
+  let safePrompt = prompt;
+  const tok = estimateTokens(prompt);
+  if (tok > TOKEN_BUDGET) {
+    // Truncar preservando el inicio (instrucciones + datos) y el final (formato JSON)
+    const overflow = (tok - TOKEN_BUDGET) * 3.5;
+    const cutStart = Math.floor(safePrompt.length * 0.6);
+    const cutEnd = Math.floor(safePrompt.length - overflow - (safePrompt.length - cutStart) * 0.3);
+    safePrompt = safePrompt.slice(0, cutStart) + "\n[...contenido recortado por limite de tokens...]\n" + safePrompt.slice(cutEnd);
+    console.log(`  Prompt ${tok} tokens > ${TOKEN_BUDGET}. Recortado a ~${estimateTokens(safePrompt)} tokens.`);
+  }
+  const body = { model, messages: [{ role: "user", content: safePrompt }], ...opts };
   for (let attempt = 1; attempt <= 4; attempt++) {
     const res = await fetch(GROQ_API_URL, {
       method: "POST",
