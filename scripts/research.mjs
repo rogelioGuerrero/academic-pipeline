@@ -972,6 +972,7 @@ class MoAGraph {
     const slug = this.state.topic.slice(0, 40).replace(/[^a-z0-9]/gi, "-").toLowerCase();
     writeFileSync(`${OUTPUT_DIR}/${date}_${slug}.md`, finalPaper, "utf-8");
     writeFileSync(`${OUTPUT_DIR}/${date}_${slug}.json`, JSON.stringify({
+      generated: new Date().toISOString(),
       topic: this.state.topic, angle: this.state.angle, nodes: this.state.nodeHistory, iterations: this.state.iterations,
       pregunta: this.state.suggestDecision?.pregunta || null, hipotesis: this.state.suggestDecision?.hipotesis || null,
       inspiringNews: this.state.suggestDecision?.inspiringNews || null,

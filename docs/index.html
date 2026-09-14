@@ -144,8 +144,8 @@
     const sectionSel = document.getElementById('sectionFilter');
 
     function renderList(papers) {
-      // Newest first: date desc, luego por nombre de archivo (desempata mismo día)
-      papers.sort((a, b) => (b.date + (b.file || '')).localeCompare(a.date + (a.file || '')));
+      // Newest first: timestamp real de generación (los papers sin ts quedan al inicio del día)
+      papers.sort((a, b) => ((b.ts || b.date + 'T00:00:00Z') + '|' + (b.file || '')).localeCompare((a.ts || a.date + 'T00:00:00Z') + '|' + (a.file || '')));
       allPapers = papers;
       // Poblar filtro de secciones
       const sections = [...new Set(papers.map(p => p.section).filter(Boolean))].sort();

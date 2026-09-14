@@ -114,12 +114,16 @@ jobs:
                         entry['news_url'] = news['url']
                     if meta.get('pregunta'):
                         entry['pregunta'] = meta['pregunta']
-                except: pass
+                    entry['ts'] = meta.get('generated') or (date + 'T00:00:00Z')
+                except:
+                    entry['ts'] = date + 'T00:00:00Z'
                 if not verified:
                     entry['warning'] = 'Borrador experimental generado antes de las correcciones de verificacion. Puede contener metodologia o estadisticas no verificadas.'
                 papers.append(entry)
-            with open('docs/index.json', 'w') as fh:
-                json.dump(papers, fh, indent=2)
+            # Mas reciente primero: por timestamp real de generacion, no por filename
+            papers.sort(key=lambda p: (p.get('ts') or p['date']) + '|' + p['file'], reverse=True)
+            with open('docs/index.json', 'w', encoding='utf-8') as fh:
+                json.dump(papers, fh, indent=2, ensure_ascii=False)
             print(f'index.json: {len(papers)} papers')
           "
 

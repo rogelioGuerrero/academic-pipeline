@@ -1,13 +1,5 @@
 [
   {
-    "file": "2026-09-13_regulacion-ia-y-digitalizacion.md",
-    "date": "2026-09-13",
-    "topic": "Impacto de los apagones de plataformas de IA en la productividad y el empleo juvenil en América Latina",
-    "nodes": 7,
-    "mode": "suggest",
-    "warning": "Borrador experimental generado antes de las correcciones de verificacion. Puede contener metodologia o estadisticas no verificadas."
-  },
-  {
     "file": "2026-09-13_penetraci-n-digital-y-empleo-vulnerable-.md",
     "date": "2026-09-13",
     "topic": "Penetración digital y empleo vulnerable en América Latina",
@@ -15,9 +7,16 @@
     "mode": "suggest",
     "review": "APROBADO",
     "qa": "RECHAZADO",
-    "image": "https://images.pexels.com/photos/27451303/pexels-photo-27451303.jpeg?auto=compress&cs=tinysrgb&h=350",
-    "section": "Internacional",
-    "news_url": "https://www.dw.com/en/anthropic-boss-dario-amodei-calls-for-ai-slowdown/a-79247690?maca=en-rss-en-all-1573-rdf",
-    "pregunta": "¿Existe una correlación negativa significativa entre la penetración digital (usuarios de internet y suscripciones móviles) y el porcentaje de empleo vulnerable en los países de América Latina?"
+    "pregunta": "¿Existe una correlación negativa significativa entre la penetración digital (usuarios de internet y suscripciones móviles) y el porcentaje de empleo vulnerable en los países de América Latina?",
+    "ts": "2026-09-13T15:59:10Z"
+  },
+  {
+    "file": "2026-09-13_regulacion-ia-y-digitalizacion.md",
+    "date": "2026-09-13",
+    "topic": "Impacto de los apagones de plataformas de IA en la productividad y el empleo juvenil en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "ts": "2026-09-13T00:00:00Z",
+    "warning": "Borrador experimental generado antes de las correcciones de verificacion. Puede contener metodologia o estadisticas no verificadas."
   }
 ]
