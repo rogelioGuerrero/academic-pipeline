@@ -577,13 +577,16 @@ function dataDigest(fetchedData, suggestDecision = null) {
     const filtered = inds.filter(i => matchesIndicator(i.indicator_label, used));
     if (filtered.length) inds = filtered; // si nada coincide, mostrar todo (fallback seguro)
   }
-  // Series LCN completas (año=valor) + países primer→último valor
-  const lcn = inds.filter(i => i.country_code === "LCN").map(i => {
+  // Series LCN: comprimir a primero/ultimo (no todos los años) + cap duro
+  const lcnInds = inds.filter(i => i.country_code === "LCN").slice(0, 12);
+  const lcn = lcnInds.map(i => {
     const pts = i.series.map(s => `${s.year}=${s.value.toFixed(2)}`).join(", ");
     return `- ${i.indicator_label} [LCN] (${i.unit}): ${pts}`;
   }).join("\n");
+  // Series por pais: cap duro a 35 entradas
   const countries = inds
     .filter(i => i.country_code !== "LCN")
+    .slice(0, 35)
     .map(i => {
       const first = i.series[0]; const latest = i.series[i.series.length - 1];
       return `- ${i.indicator_label} [${i.country_code}] (${i.unit}): ${first.year}=${first.value.toFixed(2)} -> ${latest.year}=${latest.value.toFixed(2)}`;
@@ -619,8 +622,11 @@ function computeDigest(computeResults, suggestDecision = null) {
   }
   const corrs = (computeResults.correlations || []).filter(c => c.pearson_r !== undefined && relevant(c.x) && relevant(c.y));
   if (corrs.length) {
-    parts.push(`CORRELACIONES (${corrs.length} calculadas):`);
-    for (const c of corrs) {
+    // Top correlaciones: significativas primero, luego por |r| — evita inflar
+    // el digest con 100+ pares irrelevantes que rompen el limite TPM de Groq.
+    const top = [...corrs].sort((a, b) => (b.significant - a.significant) || (Math.abs(b.pearson_r) - Math.abs(a.pearson_r))).slice(0, 20);
+    parts.push(`CORRELACIONES (${corrs.length} calculadas, top ${top.length} mostradas):`);
+    for (const c of top) {
       let line = `  ${c.x} <-> ${c.y}: pearson_r=${c.pearson_r.toFixed(4)}, p=${c.pearson_p.toFixed(4)}, spearman=${c.spearman_rho.toFixed(4)}, n=${c.n}, significativa=${c.significant}`;
       if (c.diff_pearson_r !== undefined) {
         line += ` | en diferencias (Δ año a año): r=${c.diff_pearson_r.toFixed(4)}, p=${c.diff_pearson_p.toFixed(4)}, n=${c.diff_n}`;
@@ -632,7 +638,7 @@ function computeDigest(computeResults, suggestDecision = null) {
   const sigTrends = (computeResults.trends || []).filter(t => t.trend !== "no_trend" && relevant(t.indicator));
   if (sigTrends.length) {
     parts.push(`TENDENCIAS SIGNIFICATIVAS (Mann-Kendall p<0.05):`);
-    for (const t of sigTrends.slice(0, 15)) {
+    for (const t of sigTrends.slice(0, 10)) {
       parts.push(`  ${t.indicator}: ${t.trend}, slope=${t.slope.toFixed(3)}/año, p=${t.mann_kendall_p.toFixed(4)}`);
     }
   }
@@ -727,7 +733,7 @@ RESULTADOS ESTADISTICOS REALES (Python):
 ${digest}
 
 PAPER A REVISAR:
-${truncate(draft, 8000)}
+${truncate(draft, 5000)}
 
 VERIFICACION OBLIGATORIA:
 1. Extrae TODOS los numeros/estadisticas que el paper afirma (porcentajes, coeficientes, r, p, R2, betas, medias).

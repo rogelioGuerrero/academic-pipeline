@@ -1,0 +1,69 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Conducción autónoma: posible impulso al sector manufacturero y a la inversión extranjera en América Latina",
+      "noticia_inspiradora": "Hyundai targets Tesla FSD with Artria AI autonomous driving by 2029",
+      "indicadores_respaldan": [
+        "Manufacturing, value added (% of GDP)",
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP per capita (current US$)",
+        "Internet users (% of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Valor agregado manufacturero vs ingresos netos de IED",
+        "Penetración de internet vs ingresos netos de IED",
+        "GDP per capita vs adopción potencial de tecnologías de conducción autónoma"
+      ],
+      "justificacion": "La conducción autónoma requiere una cadena de suministro avanzada y capacidades de fabricación de alta tecnología; por tanto, su desarrollo está vinculado al valor agregado manufacturero y a la atracción de inversión extranjera. La disponibilidad de internet es un proxy de la preparación digital de cada país, lo que permite medir la capacidad de absorción de esta tecnología con datos reales del Banco Mundial."
+    },
+    {
+      "titulo": "Desaceleración de la IA y su efecto en el empleo vulnerable y la tasa de desempleo juvenil",
+      "noticia_inspiradora": "Anthropic boss Dario Amodei calls for AI slowdown",
+      "indicadores_respaldan": [
+        "Vulnerable employment (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Employment in services (% of total employment)",
+        "Internet users (% of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Empleo vulnerable vs desempleo juvenil",
+        "Penetración de internet vs empleo en servicios"
+      ],
+      "justificacion": "Una ralentización del desarrollo de IA puede limitar la creación de empleos digitales de alta cualificación, lo que se reflejaría en mayores tasas de empleo vulnerable y desempleo juvenil. Los indicadores disponibles permiten cuantificar estas dimensiones y explorar su relación."
+    },
+    {
+      "titulo": "Desplazamiento interno y pobreza: cómo los IDPs afectan la vulnerabilidad laboral en Nigeria",
+      "noticia_inspiradora": "2027: Parties court IDPs as insecurity threatens voting",
+      "indicadores_respaldan": [
+        "Net migration (total people)",
+        "Poverty headcount at national poverty line (% of population)",
+        "Vulnerable employment (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Migración neta vs tasa de pobreza",
+        "Migración neta vs empleo vulnerable",
+        "Migración neta vs desempleo juvenil"
+      ],
+      "justificacion": "Los desplazados internos (IDPs) pueden ser aproximados mediante flujos netos de migración. Estos flujos suelen asociarse a mayores niveles de pobreza y empleo precario; los indicadores del Banco Mundial permiten medir esas relaciones de forma cuantitativa."
+    },
+    {
+      "titulo": "Penetración móvil como catalizador de la inversión extranjera en sectores de alta tecnología",
+      "noticia_inspiradora": "Anthropic boss Dario Amodei calls for AI slowdown",
+      "indicadores_respaldan": [
+        "Mobile cellular subscriptions (per 100 people)",
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Suscripciones móviles vs ingresos netos de IED",
+        "Suscripciones móviles vs crecimiento del PIB"
+      ],
+      "justificacion": "La disponibilidad de conectividad móvil es un requisito básico para la adopción de tecnologías de IA y otras innovaciones de alta tecnología. Al relacionar este indicador con los flujos de IED y el crecimiento del PIB, se puede evaluar el papel de la infraestructura móvil como motor de inversión."
+    }
+  ],
+  "topic": "Impacto potencial de la conducción autónoma en el valor agregado manufacturero y la inversión extranjera directa en América Latina",
+  "angle": "Analizar si los países latinoamericanos con mayor penetración digital (internet) y mayor predisposición a adoptar tecnologías de conducción autónoma presentan un mayor valor agregado en la manufactura y mayores ingresos netos de inversión extranjera directa.",
+  "pregunta": "¿Existe una relación positiva entre la penetración de internet (como proxy de capacidad para adoptar conducción autónoma) y el valor agregado de la manufactura y los flujos netos de inversión extranjera directa en los países de América Latina?",
+  "hipotesis": "Los países latinoamericanos con mayor penetración de internet y mayor predisposición a adoptar tecnologías de conducción autónoma muestran un valor agregado manufacturero más alto y mayores ingresos netos de inversión extranjera directa."
+}

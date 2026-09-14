@@ -1006,7 +1006,7 @@ def make_charts(data, results, outdir):
         box_vs = [v for v in vs2 if len(v.get("values", [])) >= 4]
         if len(box_vs) >= 3:
             fig, ax = plt.subplots(figsize=(6.5, 3.8))
-            ax.boxplot([v["values"] for v in box_vs], labels=[v.get("country_code") for v in box_vs],
+            ax.boxplot([v["values"] for v in box_vs], tick_labels=[v.get("country_code") for v in box_vs],
                        patch_artist=True, boxprops=dict(facecolor="#dbe4f5", color=NAVY),
                        medianprops=dict(color=RED, lw=1.8), whiskerprops=dict(color=NAVY),
                        capprops=dict(color=NAVY), flierprops=dict(marker="o", ms=3, color=GOLD, markerfacecolor=GOLD))
