@@ -645,16 +645,14 @@ function computeDigest(computeResults, suggestDecision = null) {
   const anomalies = (computeResults.anomalies || []).filter(a => relevant(a.indicator));
   if (anomalies.length) {
     parts.push(`ANOMALIAS (${anomalies.length}):`);
-    for (const a of anomalies.slice(0, 5)) {
+    for (const a of anomalies.slice(0, 3)) {
       parts.push(`  ${a.indicator} [${a.country_code}] ${a.year}: ${a.value.toFixed(2)} (z=${a.z_score.toFixed(1)})`);
     }
   }
   if (computeResults.charts?.length) {
     const cdir = computeResults.chartsDir ? `${computeResults.chartsDir}/` : "";
-    parts.push(`FIGURAS GENERADAS (referenciar exactamente con el path listado):`);
-    for (const c of computeResults.charts) {
-      parts.push(`  - charts/${cdir}${c.file}: ${c.caption}`);
-    }
+    // Solo paths, no captions — el LLM solo necesita referenciar, no leer el caption
+    parts.push(`FIGURAS (referenciar con path exacto): ${computeResults.charts.map(c => `charts/${cdir}${c.file}`).join(", ")}`);
   }
   return parts.join("\n") || "Sin analisis estadistico.";
 }
@@ -776,7 +774,7 @@ async function agentEdit(draft, review) {
   const prompt = `Eres el editor de una revista de ciencias sociales. Pule este paper.
 
 PAPER:
-${truncate(draft, 8000)}
+${truncate(draft, 5000)}
 
 REVISION:
 ${truncate(typeof review === "string" ? review : JSON.stringify(review), 1500)}
@@ -799,7 +797,7 @@ async function agentApprove(finalText) {
   console.log("[7/7] GPT-OSS 20B QA final...\n");
   const prompt = `Eres control de calidad de una revista de ciencias sociales. Verifica:
 
-${truncate(finalText, 8000)}
+${truncate(finalText, 4000)}
 
 Responde EXACTAMENTE como JSON (sin markdown):
 {"checklist":{"estructura_ok":true,"resumen_ok":true,"bibliografia_ok":true,"citas_apa_ok":true,"coherencia_ok":true,"datos_verificados":true,"tono_academico":true,"extension_ok":true},"palabras":3000,"veredicto":"APROBADO","issues":[]}
@@ -882,7 +880,7 @@ CONTEXTO:
 - Hipotesis evaluada: ${s.hipotesis || "n/a"}
 
 RESULTADOS REALES (la unica evidencia permitida — el lector experto vera el detalle tecnico en el documento completo):
-${truncate(digest, 2500)}
+${truncate(digest, 1500)}
 
 ESTRUCTURA (prosa continua, sin encabezados):
 1. Primera frase: la pregunta que nacio de la noticia, como se la haria una persona normal.
