@@ -128,6 +128,8 @@ jobs:
                     cdir = (meta.get('computeResults') or {}).get('chartsDir')
                     if cdir:
                         entry['charts'] = cdir
+                    if meta.get('truncations'):
+                        entry['truncations'] = meta['truncations']
                     entry['ts'] = meta.get('generated') or (date + 'T00:00:00Z')
                 except:
                     entry['ts'] = date + 'T00:00:00Z'

@@ -74,6 +74,10 @@ const CACHE_MAX_AGE_HOURS = 8760; // 1 año: los datos del World Bank se actuali
 const TOKEN_BUDGET = 7000; // margen seguro bajo 8000 TPM del free tier
 function estimateTokens(text) { return Math.ceil(text.length / 3.5); }
 
+// Registro de truncamientos para transparencia: si el safety net se activa,
+// el paper sale pero la metadata lo dice — asi sabemos si hay que ajustar.
+const truncationLog = [];
+
 async function callGroq(model, prompt, opts = {}) {
   let safePrompt = prompt;
   const tok = estimateTokens(prompt);
@@ -82,8 +86,11 @@ async function callGroq(model, prompt, opts = {}) {
     const overflow = (tok - TOKEN_BUDGET) * 3.5;
     const cutStart = Math.floor(safePrompt.length * 0.6);
     const cutEnd = Math.floor(safePrompt.length - overflow - (safePrompt.length - cutStart) * 0.3);
+    const cutChars = cutEnd - cutStart;
     safePrompt = safePrompt.slice(0, cutStart) + "\n[...contenido recortado por limite de tokens...]\n" + safePrompt.slice(cutEnd);
-    console.log(`  Prompt ${tok} tokens > ${TOKEN_BUDGET}. Recortado a ~${estimateTokens(safePrompt)} tokens.`);
+    const after = estimateTokens(safePrompt);
+    console.log(`  ⚠ Prompt ${tok} tokens > ${TOKEN_BUDGET}. Recortado a ~${after} tokens (${cutChars} chars cortados).`);
+    truncationLog.push({ model, before: tok, after, cutChars });
   }
   const body = { model, messages: [{ role: "user", content: safePrompt }], ...opts };
   for (let attempt = 1; attempt <= 4; attempt++) {
@@ -1078,6 +1085,7 @@ class MoAGraph {
         correlations: this.state.computeResults.correlations?.length || 0,
         significantCorrelations: (this.state.computeResults.correlations || []).filter(c => c.significant).slice(0, 8).map(c => ({ x: c.x, y: c.y, r: c.pearson_r, p: c.pearson_p, diff_r: c.diff_pearson_r, diff_p: c.diff_pearson_p })),
       } : null,
+      truncations: truncationLog.length ? truncationLog : null,
       elapsed: parseFloat(((Date.now() - this.t0) / 1000).toFixed(1)),
     }, null, 2), "utf-8");
     rebuildKnowledge();
