@@ -7,3 +7,9 @@ __pycache__/
 .commit-msg.txt
 run-log*.txt
 test-digest.mjs
+# Harness de pruebas locales (ECharts preview)
+test-charts/
+test-in.json
+docs/test-echarts.html
+docs/test-frag.js
+docs/charts/test-echarts/
