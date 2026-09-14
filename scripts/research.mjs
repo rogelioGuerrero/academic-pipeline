@@ -875,7 +875,9 @@ ESTRUCTURA (sin encabezados, prosa continua):
 
 PROHIBIDO: numeros que no aparezcan literalmente en RESULTADOS, opinion politica o ideologica, causas no probadas, jerga estadistica sin explicar, tono alarmista. No digas "paper" ni "pipeline" — habla de "el analisis" o "los datos del Banco Mundial".
 Devuelve SOLO el texto de la columna.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 700, temperature: 0.5 });
+  // gpt-oss consume tokens en razonamiento — 2000 de margen para que la
+  // columna de ~200 palabras no quede truncada a mitad de frase
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2000, temperature: 0.5 });
   return (data.choices[0]?.message?.content || "").trim();
 }
 
