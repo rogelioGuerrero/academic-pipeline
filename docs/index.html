@@ -104,6 +104,7 @@
     .empty { color: #999; font-style: italic; padding: 40px 0; text-align: center; }
 
     .echart { width: 100%; height: 380px; margin: 0.4em 0 0.2em; }
+    .fig-hint { font-size: .8rem; color: #8a7a4a; font-style: italic; margin: 1.2em 0 0.2em; font-family: 'Inter', sans-serif; }
     figure.echart-fig { margin: 1.6em 0; }
     figure.echart-fig figcaption { font-size: .78rem; color: #666; margin-top: 6px; font-family: 'Inter', sans-serif; }
 
@@ -309,6 +310,21 @@
     // Si el paper tiene charts/<stamp>/data.json, los PNG se reemplazan in-place
     // por versiones interactivas (hover, zoom, leyendas). Si falta el JSON o el
     // CDN, se quedan los PNG — fallback silencioso.
+    // Guía de lectura en lenguaje llano — una línea por tipo de figura.
+    const FIG_HINTS = {
+      scatter: 'Cada punto es un año. Si los puntos se ordenan cerca de la línea punteada, las dos variables tienden a moverse juntas.',
+      fit: 'Azul = lo que los datos muestran; roja punteada = lo que el modelo esperaba. Donde se separan, el modelo no captura bien la realidad.',
+      bars: 'Más oscuro o más larga la barra = valor más alto en ese país.',
+      map: 'Más oscuro = valor más alto en ese país. Pasa el cursor para ver el número exacto.',
+      forest: 'Cada fila es una estimación: la bolita es el valor central y la barra el rango plausible. Verde = el rango no toca el cero (robusto); gris = lo toca (frágil).',
+      heatmap: 'Azul = las dos variables se mueven juntas; rojo = se mueven al revés; casi blanco = sin relación clara. * = estadísticamente significativo.',
+      box: 'Cada caja resume un país: la línea del medio es el valor típico; una caja alta significa que el indicador varía mucho de año en año.',
+      boot: 'Las barras muestran dónde cayó la estimación en 2000 remuestreos. Si la distribución no toca la línea roja (cero = sin efecto), el resultado es estable.',
+      resid: 'Puntos regados sin orden cerca del cero = el modelo está bien. Si forman un dibujo o patrón = el modelo se perdió algo.',
+      panels: 'La misma pregunta hecha dentro de cada país. Si las líneas punteadas apuntan en direcciones distintas, la respuesta depende del país.',
+      anomaly: 'El pin rojo marca un año estadísticamente atípico — un choque externo (como 2020) que debe leerse como contexto, no como tendencia.',
+      trends: 'Cada mini-gráfico es un indicador regional a lo largo del tiempo.'
+    };
     let liveCharts = [];
     const EC = { navy: '#14213d', blue: '#1a56db', gold: '#b8860b', red: '#d93025', green: '#2e7d32', grid: '#e5e2db', txt: '#555' };
     const AX = () => ({ axisLine: { lineStyle: { color: '#bbb' } }, axisLabel: { color: EC.txt, fontSize: 11 }, splitLine: { lineStyle: { color: EC.grid } }, nameTextStyle: { color: EC.txt } });
@@ -333,6 +349,14 @@
         for (const img of content.querySelectorAll('figure img')) {
           const fd = figs[(img.getAttribute('src') || '').split('/').pop()];
           if (!fd) continue;
+          const figEl = img.closest('figure');
+          const hint = FIG_HINTS[fd.type];
+          if (hint) {
+            const h = document.createElement('p');
+            h.className = 'fig-hint';
+            h.textContent = 'Cómo leerlo: ' + hint;
+            figEl.insertAdjacentElement('beforebegin', h);
+          }
           let opt = null;
           // Mapa coropletico: mejora las barras de paises; si el GeoJSON no
           // carga, cae al bar chart normal (mismo data.json).
@@ -346,7 +370,7 @@
           if (fd.type === 'forest') div.style.height = Math.max(180, fd.entries.length * 38 + 90) + 'px';
           if (fd.type === 'heatmap') div.style.height = Math.max(220, fd.pairs.length * 36 + 120) + 'px';
           if (fd.type === 'panels') { const rows = Math.ceil(fd.panels.length / 3); div.style.height = Math.max(240, rows * 190 + 40) + 'px'; }
-          img.closest('figure').insertBefore(div, img);
+          figEl.insertBefore(div, img);
           img.remove();
           const chart = echarts.init(div);
           chart.setOption(opt);
