@@ -340,6 +340,7 @@ def ols_regression(data):
     # empirica: remuestrea las observaciones con reemplazo y re-ajusta.
     boot_ci = None
     boot_frac_zero = None
+    boot_hists = None
     if dof > 0:
         try:
             rng = np.random.default_rng(42)
@@ -364,14 +365,18 @@ def ols_regression(data):
                 # Fraccion de replicas donde el signo del coeficiente se invierte
                 # o el IC incluye cero -> fragilidad del resultado
                 boot_frac_zero = []
+                boot_hists = []
                 for j in range(k + 1):
                     col = bb[:, j]
                     signs = np.sign(col[col != 0])
                     flip = float(1 - abs(np.mean(signs))) / 2 if len(signs) else 0.5
                     boot_frac_zero.append(bool(lo[j] <= 0 <= hi[j]) or flip > 0.15)
+                    cnt, edges = np.histogram(col, bins=20)
+                    boot_hists.append({"counts": [int(c) for c in cnt], "edges": [float(e) for e in edges]})
         except Exception:
             boot_ci = None
             boot_frac_zero = None
+            boot_hists = None
     coefficients = [{"name": "intercept", "beta": float(beta[0]), "se": float(se[0]), "t": float(t_stats[0]), "p_value": float(p_values[0]),
                       "ci_95": [float(beta[0] - 1.96 * se[0]), float(beta[0] + 1.96 * se[0])]}]
     if robust_se is not None:
@@ -382,6 +387,7 @@ def ols_regression(data):
     if boot_ci is not None:
         coefficients[0]["boot_ci_95"] = [float(boot_ci[0][0]), float(boot_ci[0][1])]
         coefficients[0]["boot_includes_zero"] = boot_frac_zero[0]
+        coefficients[0]["boot_hist"] = boot_hists[0]
     for i, name in enumerate(indep_names):
         coef = {
             "name": name,
@@ -401,6 +407,7 @@ def ols_regression(data):
         if boot_ci is not None:
             coef["boot_ci_95"] = [float(boot_ci[i + 1][0]), float(boot_ci[i + 1][1])]
             coef["boot_includes_zero"] = boot_frac_zero[i + 1]
+            coef["boot_hist"] = boot_hists[i + 1]
         coefficients.append(coef)
     return {
         "dependent": dep_name,
@@ -887,7 +894,7 @@ def make_charts(data, results, outdir):
             fig.savefig(os.path.join(outdir, fname), dpi=150)
             plt.close(fig)
             charts.append({"file": fname, "caption": f"Comparación internacional de {_short_label(base_name, 60)} (último año disponible). Fuente: World Bank API."})
-            chart_data["figures"][fname] = {"type": "bars", "indicator": _short_label(base_name, 60), "year": years[0], "items": [{"cc": labels[i], "value": float(vals[i])} for i in order]}
+            chart_data["figures"][fname] = {"type": "bars", "indicator": _short_label(base_name, 60), "year": years[0], "items": [{"cc": labels[i], "geo": vs[i].get("country") or labels[i], "value": float(vals[i])} for i in order]}
 
     # ── Fig 5: forest plot de coeficientes (OLS + panel FE) ──
     # Punto = beta, barra = IC95% (bootstrap si existe). Si la barra cruza
@@ -986,6 +993,160 @@ def make_charts(data, results, outdir):
                     row.append({"r": float(cell["pearson_r"]), "sig": bool(cell.get("significant"))} if cell is not None else None)
                 cells.append(row)
             chart_data["figures"][fname] = {"type": "heatmap", "pairs": top_pairs, "countries": ccs, "cells": cells}
+
+    # ── Fig 7: boxplot por pais — la dispersion entre paises visible ──
+    # Trigger: el indicador con mas cobertura (mismo de fig4) tiene >=3 paises
+    # con >=4 observaciones.
+    if by_ind:
+        base_name2, vs2 = max(by_ind.items(), key=lambda kv: len(kv[1]))
+        box_vs = [v for v in vs2 if len(v.get("values", [])) >= 4]
+        if len(box_vs) >= 3:
+            fig, ax = plt.subplots(figsize=(6.5, 3.8))
+            ax.boxplot([v["values"] for v in box_vs], labels=[v.get("country_code") for v in box_vs],
+                       patch_artist=True, boxprops=dict(facecolor="#dbe4f5", color=NAVY),
+                       medianprops=dict(color=RED, lw=1.8), whiskerprops=dict(color=NAVY),
+                       capprops=dict(color=NAVY), flierprops=dict(marker="o", ms=3, color=GOLD, markerfacecolor=GOLD))
+            ax.set_ylabel(_short_label(base_name2, 45), fontsize=8.5)
+            ax.set_title("Distribución por país — el rango importa tanto como el nivel", fontsize=9.5)
+            ax.grid(axis="y", alpha=0.3)
+            ax.grid(axis="x", visible=False)
+            _despine(ax)
+            fig.tight_layout()
+            _watermark(fig)
+            fname = "fig7_boxplot.png"
+            fig.savefig(os.path.join(outdir, fname), dpi=150)
+            plt.close(fig)
+            charts.append({"file": fname, "caption": f"Distribución de {_short_label(base_name2, 60)} por país (2015-2024): caja = rango intercuartílico, línea = mediana. La dispersión revela heterogeneidad que el promedio esconde."})
+            chart_data["figures"][fname] = {"type": "box", "indicator": _short_label(base_name2, 60), "countries": [{"cc": v.get("country_code"), "values": [float(x) for x in v["values"]]} for v in box_vs]}
+
+    # ── Fig 8: distribucion bootstrap del coeficiente principal ──
+    # Trigger: el primer coeficiente independiente tiene boot_hist.
+    if reg and reg.get("coefficients"):
+        coef1 = next((c for c in reg["coefficients"] if c["name"] != "intercept" and c.get("boot_hist")), None)
+        if coef1:
+            h = coef1["boot_hist"]
+            edges, counts = np.array(h["edges"]), np.array(h["counts"])
+            fig, ax = plt.subplots(figsize=(6.5, 3.8))
+            ax.bar((edges[:-1] + edges[1:]) / 2, counts, width=np.diff(edges) * 0.95, color="#9db4dd", edgecolor=NAVY, lw=0.5)
+            ci = coef1["boot_ci_95"]
+            ax.axvspan(ci[0], ci[1], color=GOLD, alpha=0.25, label=f"IC95% [{ci[0]:.3f}, {ci[1]:.3f}]")
+            ax.axvline(coef1["beta"], color=NAVY, lw=1.8, label=f"β = {coef1['beta']:.3f}")
+            ax.axvline(0, color=RED, lw=1.4, ls="--", label="Efecto nulo")
+            ax.set_xlabel(_short_label(coef1["name"].split(" [")[0], 50), fontsize=9)
+            ax.set_ylabel("Frecuencia", fontsize=9)
+            ax.set_title("Distribución bootstrap del coeficiente (2000 réplicas)", fontsize=9.5)
+            ax.legend(fontsize=8)
+            _despine(ax)
+            fig.tight_layout()
+            _watermark(fig)
+            fname = "fig8_bootdist.png"
+            fig.savefig(os.path.join(outdir, fname), dpi=150)
+            plt.close(fig)
+            charts.append({"file": fname, "caption": f"Distribución bootstrap del coeficiente de {_short_label(coef1['name'], 60)}: la banda dorada es el IC95% empírico; si toca la línea roja (cero), el resultado es frágil."})
+            chart_data["figures"][fname] = {"type": "boot", "label": _short_label(coef1["name"].split(" [")[0], 60), "counts": h["counts"], "edges": h["edges"], "beta": coef1["beta"], "ci": ci}
+
+    # ── Fig 9: residuos vs ajustados — diagnostico honesto del modelo ──
+    # Trigger: la regresion corrio (reutiliza el calculo de fig3 si existe).
+    if reg and reg.get("dependent") and reg.get("coefficients"):
+        dep_var = var_map.get(reg["dependent"])
+        indep_vars_r = [var_map.get(n) for n in reg.get("independent", [])]
+        if dep_var and all(indep_vars_r):
+            all_vars_r = [dep_var] + indep_vars_r
+            year_sets_r = [set(y for y, v in zip(v.get("years", []), v.get("values", [])) if v is not None) for v in all_vars_r]
+            common_r = sorted(set.intersection(*year_sets_r)) if all(year_sets_r) else []
+            if len(common_r) >= 4:
+                y_r = np.array([next(v for y, v in zip(dep_var["years"], dep_var["values"]) if y == yr) for yr in common_r], dtype=float)
+                Xr = np.column_stack([np.array([next(v for y, v in zip(iv["years"], iv["values"]) if y == yr) for yr in common_r], dtype=float) for iv in indep_vars_r])
+                beta_r = np.array([c["beta"] for c in reg["coefficients"]], dtype=float)
+                fitted = np.column_stack([np.ones(len(common_r)), Xr]) @ beta_r
+                resid = y_r - fitted
+                fig, ax = plt.subplots(figsize=(6.5, 3.8))
+                ax.scatter(fitted, resid, color=BLUE, s=40, zorder=3)
+                for xv, yv, yr in zip(fitted, resid, common_r):
+                    ax.annotate(str(yr), (xv, yv), textcoords="offset points", xytext=(4, 4), fontsize=7, color="#666")
+                ax.axhline(0, color=RED, lw=1.4, ls="--")
+                ax.set_xlabel("Valor ajustado", fontsize=9)
+                ax.set_ylabel("Residuo", fontsize=9)
+                ax.set_title("Residuos vs ajustados — patrón visible = modelo incompleto", fontsize=9.5)
+                _despine(ax)
+                fig.tight_layout()
+                _watermark(fig)
+                fname = "fig9_residuals.png"
+                fig.savefig(os.path.join(outdir, fname), dpi=150)
+                plt.close(fig)
+                charts.append({"file": fname, "caption": "Diagnóstico de residuos del modelo OLS: puntos dispersos alrededor del cero indican ajuste razonable; patrones sistemáticos revelan limitaciones del modelo."})
+                chart_data["figures"][fname] = {"type": "resid", "dep": _short_label(reg["dependent"], 60), "points": [[float(f2), float(r2), int(yr)] for f2, r2, yr in zip(fitted, resid, common_r)]}
+
+    # ── Fig 10: small multiples por pais — la heterogeneidad contada en paneles ──
+    # Trigger: el par dependiente~independiente tiene >=3 paises con >=4 puntos.
+    if reg and reg.get("independent"):
+        dep_base = reg["dependent"].split(" [")[0]
+        indep_base = reg["independent"][0].split(" [")[0]
+        country_ccs = sorted(set(v.get("country_code") for v in variables if v.get("country_code") not in (None, "", "LCN")))
+        panels = []
+        for cc in country_ccs:
+            vd = var_map.get(f"{dep_base} [{cc}]")
+            vi = var_map.get(f"{indep_base} [{cc}]")
+            if vd and vi:
+                xs, ys, yrs = _align_by_years(vi, vd)
+                if len(xs) >= 4:
+                    panels.append({"cc": cc, "x": xs, "y": ys, "years": yrs})
+        if len(panels) >= 3:
+            ncols2 = 3
+            nrows2 = int(np.ceil(len(panels) / ncols2))
+            fig, axes = plt.subplots(nrows2, ncols2, figsize=(9, 2.4 * nrows2), sharex=False, sharey=False)
+            axes = np.array(axes).reshape(-1)
+            for ax, p in zip(axes, panels):
+                xa, ya = np.array(p["x"], dtype=float), np.array(p["y"], dtype=float)
+                ax.scatter(xa, ya, color=BLUE, s=22, zorder=3)
+                m2, b2 = np.polyfit(xa, ya, 1)
+                xs2 = np.linspace(xa.min(), xa.max(), 30)
+                ax.plot(xs2, m2 * xs2 + b2, color=RED, lw=1.2, ls="--")
+                ax.set_title(f"{p['cc']} (pendiente {m2:+.2f})", fontsize=8)
+                ax.tick_params(labelsize=7)
+                _despine(ax)
+            for ax in axes[len(panels):]:
+                ax.axis("off")
+            fig.suptitle(f"{_short_label(dep_base, 40)} vs {_short_label(indep_base, 40)} — por país", fontsize=10, fontweight="bold")
+            fig.tight_layout(rect=[0, 0, 1, 0.95])
+            _watermark(fig)
+            fname = "fig10_panels.png"
+            fig.savefig(os.path.join(outdir, fname), dpi=150)
+            plt.close(fig)
+            charts.append({"file": fname, "caption": f"Relación {_short_label(dep_base, 50)} vs {_short_label(indep_base, 50)} dentro de cada país: las pendientes de signo distinto evidencian heterogeneidad que el agregado regional oculta."})
+            chart_data["figures"][fname] = {"type": "panels", "x_label": _short_label(indep_base, 50), "y_label": _short_label(dep_base, 50), "panels": [{"cc": p["cc"], "points": [[float(a), float(b), int(c)] for a, b, c in zip(p["x"], p["y"], p["years"])]} for p in panels]}
+
+    # ── Fig 11: anomalias marcadas en la serie — el contexto visible ──
+    # Trigger: anomaly_detection encontro algun ano con |z|>2 en una serie clave.
+    anomalies = results.get("anomalies") or []
+    if anomalies:
+        # Serie con la anomalia mas extrema
+        top_anom = max(anomalies, key=lambda a: abs(a.get("z_score") or 0))
+        anom_var = var_map.get(top_anom.get("indicator", ""))
+        if anom_var and len(anom_var.get("values", [])) >= 4:
+            yrs = anom_var.get("years", [])[:len(anom_var["values"])]
+            vals = anom_var["values"]
+            marks = [a for a in anomalies if a.get("indicator") == anom_var["name"]]
+            fig, ax = plt.subplots(figsize=(6.5, 3.8))
+            ax.plot(yrs, vals, marker="o", ms=4, lw=1.4, color=BLUE)
+            for a in marks:
+                yr_a = a.get("year")
+                if yr_a in yrs:
+                    v_a = vals[yrs.index(yr_a)]
+                    ax.axvspan(yr_a - 0.4, yr_a + 0.4, color=RED, alpha=0.12)
+                    ax.scatter([yr_a], [v_a], color=RED, s=60, zorder=4, marker="D")
+                    ax.annotate(f"z={a['z_score']:+.1f}", (yr_a, v_a), textcoords="offset points", xytext=(6, 8), fontsize=7.5, color=RED)
+            ax.set_xlabel("Año", fontsize=9)
+            ax.set_ylabel(_short_label(anom_var["name"], 45), fontsize=8.5)
+            ax.set_title("Años atípicos marcados (|z|>2)", fontsize=9.5)
+            _despine(ax)
+            fig.tight_layout()
+            _watermark(fig)
+            fname = "fig11_anomaly.png"
+            fig.savefig(os.path.join(outdir, fname), dpi=150)
+            plt.close(fig)
+            charts.append({"file": fname, "caption": f"Años estadísticamente atípicos en {_short_label(anom_var['name'], 60)} (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia."})
+            chart_data["figures"][fname] = {"type": "anomaly", "label": _short_label(anom_var["name"], 60), "years": [int(y) for y in yrs], "values": [float(v) for v in vals], "marks": [{"year": int(a["year"]), "z": float(a["z_score"]), "type": a.get("type")} for a in marks if a.get("year") in yrs]}
 
     # data.json: insumo de las figuras interactivas (ECharts) en el visor web.
     # Los PNG siguen siendo el formato del documento .md; el JSON alimenta la web.
