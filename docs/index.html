@@ -447,11 +447,16 @@
       }
       if (f.type === 'boot') {
         const centers = f.edges.slice(0, -1).map((e, i) => (e + f.edges[i + 1]) / 2);
+        const span = f.edges[f.edges.length - 1] - f.edges[0];
+        const xMin = Math.min(f.edges[0], f.ci[0], 0) - span * 0.15, xMax = Math.max(f.edges[f.edges.length - 1], f.ci[1]) + span * 0.15;
         return {
-          grid: { left: 60, right: 30, top: 36, bottom: 50 },
-          title: { text: `Bootstrap de ${f.label} — IC95% [${f.ci[0].toFixed(3)}, ${f.ci[1].toFixed(3)}]`, textStyle: { fontSize: 12, color: '#888', fontWeight: 'normal' }, left: 'center', top: 4 },
+          grid: { left: 60, right: 30, top: 44, bottom: 50 },
+          title: [
+            { text: '¿Qué tan estable es el resultado?', textStyle: { fontSize: 13, color: '#333', fontWeight: 'bold' }, left: 'center', top: 4 },
+            { text: `En 2000 remuestreos el coeficiente de ${f.label} cayó casi siempre en este rango — la banda dorada es el IC95%; si toca la línea roja (cero = sin efecto), es frágil`, textStyle: { fontSize: 10.5, color: '#888', fontWeight: 'normal' }, left: 'center', top: 22 }
+          ],
           tooltip: { ...tt, trigger: 'axis' },
-          xAxis: { type: 'value', name: 'Coeficiente', nameLocation: 'middle', nameGap: 30, ...AX() },
+          xAxis: { type: 'value', min: xMin, max: xMax, name: 'Coeficiente', nameLocation: 'middle', nameGap: 30, ...AX() },
           yAxis: { type: 'value', name: 'Frecuencia', ...AX() },
           series: [{
             type: 'bar', data: centers.map((c, i) => [c, f.counts[i]]), barCategoryGap: '8%', itemStyle: { color: '#9db4dd', borderColor: EC.navy, borderWidth: 0.5 },

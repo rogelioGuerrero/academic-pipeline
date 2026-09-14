@@ -371,7 +371,11 @@ def ols_regression(data):
                     signs = np.sign(col[col != 0])
                     flip = float(1 - abs(np.mean(signs))) / 2 if len(signs) else 0.5
                     boot_frac_zero.append(bool(lo[j] <= 0 <= hi[j]) or flip > 0.15)
-                    cnt, edges = np.histogram(col, bins=20)
+                    # Histograma recortado al 99% central: con n~10, replicas
+                    # degeneradas pueden dar betas extremos que aplanarian
+                    # la distribucion visible en un solo bin.
+                    lo99, hi99 = np.percentile(col, [0.5, 99.5])
+                    cnt, edges = np.histogram(col, bins=20, range=(float(lo99), float(hi99)))
                     boot_hists.append({"counts": [int(c) for c in cnt], "edges": [float(e) for e in edges]})
         except Exception:
             boot_ci = None
@@ -1034,15 +1038,18 @@ def make_charts(data, results, outdir):
             ax.axvline(0, color=RED, lw=1.4, ls="--", label="Efecto nulo")
             ax.set_xlabel(_short_label(coef1["name"].split(" [")[0], 50), fontsize=9)
             ax.set_ylabel("Frecuencia", fontsize=9)
-            ax.set_title("Distribución bootstrap del coeficiente (2000 réplicas)", fontsize=9.5)
+            ax.set_title("¿Qué tan estable es el coeficiente? (2000 remuestreos)", fontsize=9.5)
             ax.legend(fontsize=8)
+            pad = max((edges[-1] - edges[0]) * 0.3, abs(edges[-1] - edges[0]) * 0.05 + 1e-6)
+            lo_x = min(edges[0], 0) - pad * 0.4 if edges[0] > 0 else edges[0] - pad
+            ax.set_xlim(lo_x, edges[-1] + pad)
             _despine(ax)
             fig.tight_layout()
             _watermark(fig)
             fname = "fig8_bootdist.png"
             fig.savefig(os.path.join(outdir, fname), dpi=150)
             plt.close(fig)
-            charts.append({"file": fname, "caption": f"Distribución bootstrap del coeficiente de {_short_label(coef1['name'], 60)}: la banda dorada es el IC95% empírico; si toca la línea roja (cero), el resultado es frágil."})
+            charts.append({"file": fname, "caption": f"Estabilidad del coeficiente de {_short_label(coef1['name'], 60)} tras 2000 remuestreos (rango recortado al 99% central): las barras muestran dónde cayó la estimación en cada réplica; si toca la línea roja (cero = sin efecto), el resultado es frágil."})
             chart_data["figures"][fname] = {"type": "boot", "label": _short_label(coef1["name"].split(" [")[0], 60), "counts": h["counts"], "edges": h["edges"], "beta": coef1["beta"], "ci": ci}
 
     # ── Fig 9: residuos vs ajustados — diagnostico honesto del modelo ──
