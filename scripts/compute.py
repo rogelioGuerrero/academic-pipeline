@@ -381,13 +381,14 @@ def ols_regression(data):
             boot_ci = None
             boot_frac_zero = None
             boot_hists = None
+    t_crit = float(stats.t.ppf(0.975, dof)) if dof > 0 else 1.96
     coefficients = [{"name": "intercept", "beta": float(beta[0]), "se": float(se[0]), "t": float(t_stats[0]), "p_value": float(p_values[0]),
-                      "ci_95": [float(beta[0] - 1.96 * se[0]), float(beta[0] + 1.96 * se[0])]}]
+                      "ci_95": [float(beta[0] - t_crit * se[0]), float(beta[0] + t_crit * se[0])]}]
     if robust_se is not None:
         coefficients[0]["robust_se"] = float(robust_se[0])
         coefficients[0]["robust_t"] = float(robust_t[0])
         coefficients[0]["robust_p"] = float(robust_p[0])
-        coefficients[0]["robust_ci_95"] = [float(beta[0] - 1.96 * robust_se[0]), float(beta[0] + 1.96 * robust_se[0])]
+        coefficients[0]["robust_ci_95"] = [float(beta[0] - t_crit * robust_se[0]), float(beta[0] + t_crit * robust_se[0])]
     if boot_ci is not None:
         coefficients[0]["boot_ci_95"] = [float(boot_ci[0][0]), float(boot_ci[0][1])]
         coefficients[0]["boot_includes_zero"] = boot_frac_zero[0]
@@ -400,14 +401,14 @@ def ols_regression(data):
             "t": float(t_stats[i + 1]),
             "p_value": float(p_values[i + 1]),
             "significant": bool(p_values[i + 1] < 0.05),
-            "ci_95": [float(beta[i + 1] - 1.96 * se[i + 1]), float(beta[i + 1] + 1.96 * se[i + 1])],
+            "ci_95": [float(beta[i + 1] - t_crit * se[i + 1]), float(beta[i + 1] + t_crit * se[i + 1])],
         }
         if robust_se is not None:
             coef["robust_se"] = float(robust_se[i + 1])
             coef["robust_t"] = float(robust_t[i + 1])
             coef["robust_p"] = float(robust_p[i + 1])
             coef["robust_significant"] = bool(robust_p[i + 1] < 0.05)
-            coef["robust_ci_95"] = [float(beta[i + 1] - 1.96 * robust_se[i + 1]), float(beta[i + 1] + 1.96 * robust_se[i + 1])]
+            coef["robust_ci_95"] = [float(beta[i + 1] - t_crit * robust_se[i + 1]), float(beta[i + 1] + t_crit * robust_se[i + 1])]
         if boot_ci is not None:
             coef["boot_ci_95"] = [float(boot_ci[i + 1][0]), float(boot_ci[i + 1][1])]
             coef["boot_includes_zero"] = boot_frac_zero[i + 1]
@@ -506,6 +507,7 @@ def panel_regression(data):
     coefficients = []
     for i, name in enumerate(spec["independent"]):
         j = i + 1  # despues del intercepto
+        t_crit_fe = float(stats.t.ppf(0.975, dof)) if dof > 0 else 1.96
         coefficients.append({
             "name": name,
             "beta": float(beta[j]),
@@ -513,7 +515,7 @@ def panel_regression(data):
             "t": float(t_stats[j]),
             "p_value": float(p_values[j]),
             "significant": bool(p_values[j] < 0.05) if np.isfinite(p_values[j]) else False,
-            "ci_95": [float(beta[j] - 1.96 * se[j]), float(beta[j] + 1.96 * se[j])],
+            "ci_95": [float(beta[j] - t_crit_fe * se[j]), float(beta[j] + t_crit_fe * se[j])],
         })
     return {
         "type": "fixed_effects_country",
@@ -720,8 +722,14 @@ def trend_analysis(data):
                     s += 1
                 elif arr[j] < arr[i]:
                     s -= 1
-        # Variance of S
+        # Variance of S (with ties correction)
         var_s = n * (n - 1) * (2 * n + 5) / 18
+        # Ties correction: subtract sum of t_i*(t_i-1)*(2t_i+5)/18 for each tied group
+        unique_vals, counts = np.unique(arr, return_counts=True)
+        ties = counts[counts > 1]
+        if len(ties) > 0:
+            tie_adj = np.sum(ties * (ties - 1) * (2 * ties + 5)) / 18
+            var_s -= tie_adj
         if var_s > 0:
             if s > 0:
                 z_mk = (s - 1) / np.sqrt(var_s)

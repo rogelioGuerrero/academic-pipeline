@@ -171,7 +171,10 @@ function truncate(text, maxChars) {
 const GUARDRAILS = {
   FETCH: [{ check: out => out && out.indicators && out.indicators.length > 0, msg: "No se obtuvieron indicadores" }],
   SUGGEST: [{ check: out => out && out.topic && out.topic.length > 10, msg: "SUGGEST no genero tema" }],
-  COMPUTE: [{ check: out => out !== null, msg: "Python no respondio" }],
+  COMPUTE: [
+    { check: out => out !== null, msg: "Python no respondio" },
+    { check: out => out && (out.regression || (out.correlations && out.correlations.length > 0)), msg: "Compute no produjo resultados estadisticos (sin regresion ni correlaciones)" },
+  ],
   WRITE: [
     { check: out => out && out.length > 1000, msg: "Paper muy corto" },
     { check: out => out && /Resumen|Abstract/i.test(out), msg: "Falta Resumen" },
