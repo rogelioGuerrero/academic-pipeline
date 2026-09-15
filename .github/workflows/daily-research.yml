@@ -55,6 +55,7 @@ jobs:
         run: node scripts/research.mjs
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
 
       - name: Copy papers to docs/ for GitHub Pages
         run: |

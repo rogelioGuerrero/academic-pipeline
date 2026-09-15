@@ -38,6 +38,9 @@ loadEnv();
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+const CEREBRAS_API_KEY = process.env.CEREBRAS_API_KEY;
+const CEREBRAS_API_URL = "https://api.cerebras.ai/v1/chat/completions";
+const CEREBRAS_MODEL = process.env.CEREBRAS_MODEL || "gpt-oss-120b";
 const OUTPUT_DIR = "output/papers";
 const OUTPUT_FILE = `${OUTPUT_DIR}/paper.txt`;
 const BRIEF_DIR = "output/briefs";
@@ -54,8 +57,8 @@ const ANGLE = ANGLE_RAW.startsWith("@")
   ? readFileSync(ANGLE_RAW.slice(1), "utf-8").trim()
   : ANGLE_RAW;
 
-if (!GROQ_API_KEY) {
-  console.error("Error: GROQ_API_KEY no encontrada.");
+if (!GROQ_API_KEY && !CEREBRAS_API_KEY) {
+  console.error("Error: Ni GROQ_API_KEY ni CEREBRAS_API_KEY encontradas.");
   process.exit(1);
 }
 
@@ -78,7 +81,7 @@ function estimateTokens(text) { return Math.ceil(text.length / 3.5); }
 // el paper sale pero la metadata lo dice — asi sabemos si hay que ajustar.
 const truncationLog = [];
 
-async function callGroq(model, prompt, opts = {}) {
+async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
   let safePrompt = prompt;
   const tok = estimateTokens(prompt);
   if (tok > TOKEN_BUDGET) {
@@ -94,9 +97,9 @@ async function callGroq(model, prompt, opts = {}) {
   }
   const body = { model, messages: [{ role: "user", content: safePrompt }], ...opts };
   for (let attempt = 1; attempt <= 4; attempt++) {
-    const res = await fetch(GROQ_API_URL, {
+    const res = await fetch(apiUrl, {
       method: "POST",
-      headers: { Authorization: `Bearer ${GROQ_API_KEY}`, "Content-Type": "application/json" },
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
     if (res.ok) {
@@ -131,9 +134,24 @@ async function callGroq(model, prompt, opts = {}) {
     const err = await res.text();
     console.error(`Error ${model}: ${res.status}`);
     console.error(err.slice(0, 500));
-    throw new Error(`Groq API error ${res.status}`);
+    throw new Error(`API error ${res.status} on ${model}`);
   }
-  throw new Error("Groq API: max retries exceeded");
+  throw new Error(`API: max retries exceeded on ${model}`);
+}
+
+async function callGroq(model, prompt, opts = {}) {
+  // Intentar Groq primero, Cerebras como fallback
+  if (GROQ_API_KEY) {
+    try {
+      return await callLLM(GROQ_API_KEY, GROQ_API_URL, model, prompt, opts);
+    } catch (e) {
+      console.log(`  Groq fallo (${e.message}). Intentando Cerebras...`);
+    }
+  }
+  if (CEREBRAS_API_KEY) {
+    return await callLLM(CEREBRAS_API_KEY, CEREBRAS_API_URL, CEREBRAS_MODEL, prompt, opts);
+  }
+  throw new Error("No LLM provider available (Groq and Cerebras both missing/failed)");
 }
 
 function parseJSONResponse(text) {
