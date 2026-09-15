@@ -40,13 +40,13 @@ jobs:
           mkdir -p ../job-hunter
           # news_found.json nunca se commitea a job-hunter (solo se deploya a Netlify).
           # Se baja del dashboard publico de Netlify, que se actualiza en cada run de job-hunter.
-          curl -sL --fail \
+          if curl -sL --fail --max-time 15 \
             "https://job-hunter-dashboard.netlify.app/news_found.json" \
-            -o ../job-hunter/news_found.json
-          if python -c "import json; d=json.load(open('../job-hunter/news_found.json')); assert isinstance(d, list)" 2>/dev/null; then
+            -o ../job-hunter/news_found.json 2>/dev/null && \
+             python -c "import json; d=json.load(open('../job-hunter/news_found.json')); assert isinstance(d, list)" 2>/dev/null; then
             echo "news_found.json OK ($(python -c "import json; print(len(json.load(open('../job-hunter/news_found.json'))))") articulos)"
           else
-            echo "news_found.json invalido o no es una lista. Continuando sin noticias."
+            echo "news_found.json invalido o no descargable. Continuando sin noticias."
             echo "[]" > ../job-hunter/news_found.json
           fi
         continue-on-error: true
@@ -59,10 +59,13 @@ jobs:
       - name: Copy papers to docs/ for GitHub Pages
         run: |
           mkdir -p docs/papers docs/charts
+          # Limpiar papers obsoletos antes de copiar (evita slugs viejos colgados)
+          rm -f docs/papers/*.md
           for f in output/papers/*.md; do
             [ -f "$f" ] && cp "$f" "docs/papers/$(basename $f)"
           done
           # Charts por run: output/charts/<stamp>/figN.png -> docs/charts/<stamp>/
+          rm -rf docs/charts/*
           cp -r output/charts/. docs/charts/ 2>/dev/null || true
           # Generate index.json listing all papers
           python -c "

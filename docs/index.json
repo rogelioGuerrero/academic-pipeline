@@ -3,7 +3,7 @@
     "file": "2026-09-13_penetraci-n-digital-y-empleo-vulnerable-.md",
     "date": "2026-09-13",
     "topic": "Penetración digital y empleo vulnerable en América Latina",
-    "nodes": 7,
+    "nodes": 11,
     "mode": "suggest",
     "review": "APROBADO",
     "qa": "RECHAZADO",
@@ -11,16 +11,18 @@
     "section": "IA & Tech",
     "news_url": "https://www.wsbradio.com/news/business/anthropic-ceo-dario/JOYRNP5J4Y5VZKDCR6ECGFQW2I/",
     "pregunta": "¿Existe una correlación negativa significativa entre la penetración digital (usuarios de internet y suscripciones móviles) y el porcentaje de empleo vulnerable en los países de América Latina?",
+    "hipotesis": "A mayor penetración digital, menor porcentaje de empleo vulnerable en América Latina.",
     "editorial": "¿Se puede decir que, mientras más gente usa internet y más teléfonos móviles hay en un país, menos personas están atrapadas en trabajos inseguros? Esa fue la duda que surgió al escuchar al jefe de Anthropic pedir una pausa en el desarrollo de la IA.\n\nAl revisar los datos del Banco Mundial, la historia no es tan sencilla. En los seis países latinoamericanos analizados, el nivel de empleo vulnerable empezó alrededor del 42 % y mostró una ligera tendencia a bajar cuando aumentaron las suscripciones móviles; cada vez que se sumó una unidad de suscripciones por cada cien habitantes, el porcentaje de empleo vulnerable descendió un poco. En cambio, el número de usuarios de internet no mostró una relación clara: al crecer, el empleo vulnerable apenas cambió, y en algunos casos pareció subir ligeramente. Argentina y Chile fueron los casos más curiosos: allí, más usuarios de internet coincidieron con un aumento del empleo vulnerable, mientras que en el resto de la región la tendencia fue más neutra.\n\nEn conclusión, los datos no confirman la idea de que la digitalización reduzca de forma consistente los trabajos precarios en América Latina. La relación parece depender de cada país y, por ahora, sigue siendo una cuestión abierta que requiere más investigación.",
     "ts": "2026-09-13T15:59:10Z"
   },
   {
-    "file": "2026-09-13_regulacion-ia-y-digitalizacion.md",
+    "file": "2026-09-13_regulaci-n-de-ia-y-digitalizaci-n--impac.md",
     "date": "2026-09-13",
-    "topic": "Impacto de los apagones de plataformas de IA en la productividad y el empleo juvenil en América Latina",
-    "nodes": 7,
+    "topic": "Regulación de IA y digitalización: impacto en el empleo del sector servicios en América Latina",
+    "nodes": 11,
     "mode": "suggest",
-    "ts": "2026-09-13T00:00:00Z",
-    "warning": "Borrador experimental generado antes de las correcciones de verificacion. Puede contener metodologia o estadisticas no verificadas."
+    "review": "APROBADO",
+    "qa": "RECHAZADO",
+    "ts": "2026-09-13T04:21:22Z"
   }
 ]

@@ -117,6 +117,17 @@ async function callGroq(model, prompt, opts = {}) {
       await new Promise((r) => setTimeout(r, waitSec * 1000));
       continue;
     }
+    if (res.status === 413 && attempt < 4) {
+      console.log(`  Prompt demasiado largo (413). Recortando y reintentando... (${attempt}/4)`);
+      const overflow = estimateTokens(safePrompt) - 5000;
+      if (overflow > 0) {
+        const cutStart = Math.floor(safePrompt.length * 0.5);
+        safePrompt = safePrompt.slice(0, cutStart) + "\n[...contenido recortado por limite 413...]\n" + safePrompt.slice(safePrompt.length - 500);
+        body.messages = [{ role: "user", content: safePrompt }];
+      }
+      await new Promise((r) => setTimeout(r, 3000));
+      continue;
+    }
     const err = await res.text();
     console.error(`Error ${model}: ${res.status}`);
     console.error(err.slice(0, 500));
@@ -1081,6 +1092,7 @@ class MoAGraph {
       editorial: this.state.editorial || null,
       dataSources: { source: "World Bank API", url: "https://api.worldbank.org", indicators: this.state.fetchedData?.summary?.total_indicators || 0, countries: this.state.fetchedData?.summary?.total_countries || 0, latestYear: this.state.fetchedData?.summary?.latest_year_available || null },
       computeResults: this.state.computeResults ? {
+        chartsDir: this.state.computeResults.chartsDir || null,
         regression: this.state.computeResults.regression ? { r_squared: this.state.computeResults.regression.r_squared, n: this.state.computeResults.regression.n } : null,
         correlations: this.state.computeResults.correlations?.length || 0,
         significantCorrelations: (this.state.computeResults.correlations || []).filter(c => c.significant).slice(0, 8).map(c => ({ x: c.x, y: c.y, r: c.pearson_r, p: c.pearson_p, diff_r: c.diff_pearson_r, diff_p: c.diff_pearson_p })),

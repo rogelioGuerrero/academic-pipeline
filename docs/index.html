@@ -266,7 +266,7 @@
         if (!res.ok) throw new Error('not found');
         const md = await res.text();
         const truncWarn = p.truncations?.length ? `<div class="warn-banner">⚠ Este paper tuvo ${p.truncations.length} recorte(s) de contenido por límites de tokens del modelo (${p.truncations.map(t => t.model.split('/').pop() + ': ' + t.cutChars + ' chars').join(', ')}). El análisis puede tener menos contexto del ideal.</div>` : '';
-        const banner = p.warning ? `<div class="warn-banner">${esc(p.warning)}</div>` : '' + truncWarn;
+        const banner = (p.warning ? `<div class="warn-banner">${esc(p.warning)}</div>` : '') + truncWarn;
         const verdicts = [];
         if (p.review) verdicts.push(`Revisión de rigor: <span class="${p.review === 'APROBADO' ? 'v-ok' : 'v-warn'}">${esc(p.review)}</span>`);
         if (p.qa) verdicts.push(`Control de calidad: <span class="${p.qa === 'APROBADO' ? 'v-ok' : 'v-warn'}">${esc(p.qa)}</span>`);
