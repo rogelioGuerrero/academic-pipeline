@@ -2,9 +2,9 @@ name: Daily Research Pipeline
 
 on:
   schedule:
-    # 8am GMT-6 = 14:00 UTC — cada 48h (días impares del mes)
-    # Corre después de job-hunter's 7am run, ve ~48h de noticias acumuladas
-    - cron: '0 14 */2 * *'
+    # 6am GMT-6 = 12:00 UTC — diario, antes del news run de 7am
+    # Ve las 2 corridas de noticias del día anterior
+    - cron: '0 12 * * *'
   workflow_dispatch: {}
 
 permissions:
