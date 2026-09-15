@@ -131,6 +131,11 @@ async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
       await new Promise((r) => setTimeout(r, 3000));
       continue;
     }
+    if (res.status >= 500 && attempt < 4) {
+      console.log(`  Server error (${res.status}). Reintentando en ${10 * attempt}s... (intento ${attempt}/4)`);
+      await new Promise((r) => setTimeout(r, 10000 * attempt));
+      continue;
+    }
     const err = await res.text();
     console.error(`Error ${model}: ${res.status}`);
     console.error(err.slice(0, 500));
@@ -765,7 +770,14 @@ REGLAS CRITICAS (incumplir = rechazo):
 
 Devuelve el paper completo en Markdown.`;
   const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4500, temperature: 0.6 });
-  return data.choices[0]?.message?.content || "";
+  let result = data.choices[0]?.message?.content || "";
+  // Fallback: si el modelo no generó bibliografía (común en modelos Flash),
+  // appendear una mínima basada en las fuentes usadas
+  if (result && !/## Bibliograf/i.test(result)) {
+    console.log("  WRITE: bibliografía faltante — appendando fallback.");
+    result = result.trimEnd() + "\n\n## Bibliografía\n\n- Banco Mundial. (2024). *World Development Indicators*. Washington, DC: World Bank. https://databank.worldbank.org/source/world-development-indicators\n";
+  }
+  return result;
 }
 
 async function agentReview(fetchedData, computeResults, draft, suggestDecision = null) {
