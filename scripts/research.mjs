@@ -38,9 +38,9 @@ loadEnv();
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
-const CEREBRAS_API_KEY = process.env.CEREBRAS_API_KEY;
-const CEREBRAS_API_URL = "https://api.cerebras.ai/v1/chat/completions";
-const CEREBRAS_MODEL = process.env.CEREBRAS_MODEL || "gpt-oss-120b";
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 const OUTPUT_DIR = "output/papers";
 const OUTPUT_FILE = `${OUTPUT_DIR}/paper.txt`;
 const BRIEF_DIR = "output/briefs";
@@ -57,8 +57,8 @@ const ANGLE = ANGLE_RAW.startsWith("@")
   ? readFileSync(ANGLE_RAW.slice(1), "utf-8").trim()
   : ANGLE_RAW;
 
-if (!GROQ_API_KEY && !CEREBRAS_API_KEY) {
-  console.error("Error: Ni GROQ_API_KEY ni CEREBRAS_API_KEY encontradas.");
+if (!GROQ_API_KEY && !GEMINI_API_KEY) {
+  console.error("Error: Ni GROQ_API_KEY ni GEMINI_API_KEY encontradas.");
   process.exit(1);
 }
 
@@ -140,18 +140,18 @@ async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
 }
 
 async function callGroq(model, prompt, opts = {}) {
-  // Intentar Groq primero, Cerebras como fallback
+  // Intentar Groq primero, Gemini como fallback
   if (GROQ_API_KEY) {
     try {
       return await callLLM(GROQ_API_KEY, GROQ_API_URL, model, prompt, opts);
     } catch (e) {
-      console.log(`  Groq fallo (${e.message}). Intentando Cerebras...`);
+      console.log(`  Groq fallo (${e.message}). Intentando Gemini...`);
     }
   }
-  if (CEREBRAS_API_KEY) {
-    return await callLLM(CEREBRAS_API_KEY, CEREBRAS_API_URL, CEREBRAS_MODEL, prompt, opts);
+  if (GEMINI_API_KEY) {
+    return await callLLM(GEMINI_API_KEY, GEMINI_API_URL, GEMINI_MODEL, prompt, opts);
   }
-  throw new Error("No LLM provider available (Groq and Cerebras both missing/failed)");
+  throw new Error("No LLM provider available (Groq and Gemini both missing/failed)");
 }
 
 function parseJSONResponse(text) {
