@@ -56,6 +56,7 @@ def main():
         headers={
             "Authorization": "Bearer " + os.environ["RESEND_API_KEY"],
             "Content-Type": "application/json",
+            "User-Agent": "AcademicPipeline/1.0 (Mozilla/5.0)",
         },
     )
     try:
