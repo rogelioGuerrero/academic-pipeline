@@ -807,6 +807,7 @@ REGLAS CRITICAS (incumplir = rechazo):
 - NO existe informacion de paises fuera de la lista. NO uses fuentes que no sean World Bank (nada de CEPAL, OECD, IMF, ECLAC).
 - NO inventes tests diagnosticos (White, Durbin-Watson), simulaciones, escenarios futuros ni proyecciones: solo reporta lo que Python calculo.
 - Si un resultado no es significativo (p>0.05), dilo explicitamente; no lo presentes como evidencia solida. Si el IC95% bootstrap "incluye 0 -> fragil", reporta esa fragilidad.
+- Si aparece "REGRESION ROBUSTA DE PANEL EN R" en RESULTADOS, menciónala explícitamente en Metodología y Análisis como estimación econométrica de efectos fijos bidireccionales (país + año) ejecutada en R 4.x, contrastándola con las correlaciones y OLS de Python. Si solo aparece Python, reporta solo Python.
 - Si aparece "REGRESION PANEL" en RESULTADOS, reportala: explica que usa variacion intra-pais (n paises x anos) y contrasta su veredicto con el OLS agregado. Si discrepan, dilo.
 - Cuando una correlacion en niveles es significativa pero su correlacion "en diferencias" no lo es (o viceversa), dilo explicitamente: la primera puede ser co-tendencia espuria, la segunda es evidencia mas honesta de co-movimiento.
 - Referencia las figuras reales listadas con el path EXACTO de la lista: ![descripcion](charts/<path-completo>). NO inventes figuras ni cambies los paths.
@@ -957,11 +958,10 @@ function transparencyNote(state) {
     "",
     "**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-" + latestYear + ": " + ind.length + " series (" + countries.join(", ") + "). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.",
     "",
-    "**Métodos ejecutados (Python / scipy, determinísticos):**",
-    `- Estadísticas descriptivas de ${ind.length} series.`,
-    `- ${corrs.length} correlaciones Pearson/Spearman calculadas; ${sigCorrs.length} significativas (p<0.05). Cada una incluye su versión en primeras diferencias para distinguir co-movimiento de co-tendencia espuria.`,
-    reg?.dependent ? `- Regresión OLS: ${reg.dependent} ~ ${reg.independent.join(" + ")} (n=${reg.n}, R²=${reg.r_squared?.toFixed(3)})${reg.bootstrap ? ", con intervalos de confianza bootstrap (2000 réplicas)" : ""}.` : "- Sin regresión ejecutada.",
-    cr.panel?.coefficients?.length ? `- Regresión de panel con efectos fijos por país: ${cr.panel.dependent} ~ ${cr.panel.independent.join(" + ")} (n=${cr.panel.n} obs, ${cr.panel.n_countries} países).` : "",
+    "**Métodos analíticos ejecutados (Cómputo Determinístico):**",
+    `- Python 3.12 (scipy/statsmodels): Estadísticas descriptivas de ${ind.length} series, ${corrs.length} correlaciones Pearson/Spearman (${sigCorrs.length} sig. p<0.05).`,
+    reg?.dependent ? `- Python 3.12 (Regresión OLS): ${reg.dependent} ~ ${reg.independent.join(" + ")} (n=${reg.n}, R²=${reg.r_squared?.toFixed(3)})${reg.bootstrap ? ", con intervalos de confianza bootstrap (2000 réplicas)" : ""}.` : "- Sin regresión OLS ejecutada.",
+    cr.r_econometrics?.coefficients?.length ? `- R 4.x (Panel Econometrics): Estimación de Efectos Fijos Bidireccionales (${cr.r_econometrics.formula}), R²=${cr.r_econometrics.r_squared?.toFixed(3)}, F=${cr.r_econometrics.f_statistic?.toFixed(2)} (n=${cr.r_econometrics.n}, ${cr.r_econometrics.n_countries} países).` : (cr.panel?.coefficients?.length ? `- Regresión de panel con efectos fijos por país: ${cr.panel.dependent} ~ ${cr.panel.independent.join(" + ")} (n=${cr.panel.n} obs, ${cr.panel.n_countries} países).` : ""),
     sigTrends.length ? `- Test de tendencia Mann-Kendall: ${sigTrends.length} de ${trends.length} series con tendencia significativa.` : "",
     cr.anomalies?.length ? `- Detección de anomalías (z-score/IQR): ${cr.anomalies.length} observaciones atípicas.` : "",
     cr.charts?.length ? `- ${cr.charts.length} figuras generadas con matplotlib a partir de los datos.` : "",

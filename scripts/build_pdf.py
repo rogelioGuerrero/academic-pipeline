@@ -327,6 +327,8 @@ def convert_md_to_typst(md_content: str, meta: dict, paper_filename: str) -> str
 """
 
     color_veredicto = "#166534" if "APROBADO" in veredicto_rev else "#b91c1c"
+    has_r = bool(meta.get("computeResults", {}).get("r_econometrics")) or ("R 4.x" in md_content)
+    engine_label = "Python + R (Two-Way FE)" if has_r else "Python 3.12 (scipy)"
 
     # Template maestro Typst
     typst_doc = f"""
@@ -420,8 +422,8 @@ def convert_md_to_typst(md_content: str, meta: dict, paper_filename: str) -> str
           #text(8.2pt, fill: rgb("#0f172a"))[{date_str} · v1.0]
         ],
         [
-          #text(7.2pt, fill: rgb("#64748b"))[*MOTOR ANALÍTICO*]\\
-          #text(8.2pt, fill: rgb("#0f172a"))[MoA 5 Agentes (Groq)]
+          #text(7.2pt, fill: rgb("#64748b"))[*CÓMPUTO REAL*]\\
+          #text(8.2pt, fill: rgb("#0f172a"))[{engine_label}]
         ],
         [
           #text(7.2pt, fill: rgb("#64748b"))[*VALIDACIÓN RIGOR*]\\
