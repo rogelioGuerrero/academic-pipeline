@@ -91,8 +91,14 @@ run_analysis <- function() {
     return(NULL)
   }
   
-  # Convertir a data.frame
-  df <- do.call(rbind, lapply(records, function(x) as.data.frame(x, stringsAsFactors = FALSE)))
+  # Convertir a data.frame garantizando todas las columnas (union de keys)
+  all_keys <- unique(unlist(lapply(records, names)))
+  records_padded <- lapply(records, function(x) {
+    missing_keys <- setdiff(all_keys, names(x))
+    for (k in missing_keys) x[[k]] <- NA
+    as.data.frame(x[all_keys], stringsAsFactors = FALSE)
+  })
+  df <- do.call(rbind, records_padded)
   
   # Identificar columnas dependiente e independientes
   dep_clean <- trimws(gsub("\\[.*?\\]", "", dep_name))
@@ -129,11 +135,17 @@ run_analysis <- function() {
   coefs <- list()
   for (ind in col_indeps) {
     r_name <- paste0("`", ind, "`")
-    if (!r_name %in% rownames(s$coefficients)) {
-      r_name <- ind
-    }
+    row_c <- NULL
     if (r_name %in% rownames(s$coefficients)) {
       row_c <- s$coefficients[r_name, ]
+    } else if (ind %in% rownames(s$coefficients)) {
+      row_c <- s$coefficients[ind, ]
+    } else {
+      idx <- which(sapply(rownames(s$coefficients), function(rn) grepl(substr(ind, 1, 10), rn, fixed = TRUE)))[1]
+      if (!is.na(idx)) row_c <- s$coefficients[idx, ]
+    }
+    
+    if (!is.null(row_c)) {
       coefs[[length(coefs) + 1]] <- list(
         name = ind,
         estimate = as.numeric(row_c[1]),

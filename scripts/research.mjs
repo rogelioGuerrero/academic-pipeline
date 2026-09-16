@@ -706,24 +706,24 @@ function computeDigest(computeResults, suggestDecision = null) {
     if (r.white_test) parts.push(`  White test: p=${r.white_test.p_value?.toFixed(4)} (${r.white_test.heteroscedastic ? "heterocedastico" : "homocedastico"})`);
     else parts.push(`  White test: NO calculado`);
   }
-  const panel = computeResults.panel;
-  if (panel && panel.coefficients?.length) {
-    parts.push(`REGRESION PANEL (efectos fijos por pais): ${panel.dependent} ~ ${panel.independent.join(" + ")}`);
-    parts.push(`  n=${panel.n} obs (${panel.n_countries} paises x anos), R2=${panel.r_squared?.toFixed(4)}, dof=${panel.dof}`);
-    for (const c of panel.coefficients) {
-      parts.push(`  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}, IC95%=[${c.ci_95[0].toFixed(4)}, ${c.ci_95[1].toFixed(4)}]`);
-    }
-    parts.push(`  NOTA: el panel usa variacion INTRA-pais en el tiempo (controla caracteristicas fijas por pais). Si el OLS agregado y el panel discrepan, reportar ambos — la discrepancia es informacion (el agregado puede estar dominado por diferencias entre paises).`);
-  }
+  // Panel econométrico: R sustituye a Python para evitar duplicidad de tokens y redundancia
   const rEcon = computeResults.r_econometrics;
+  const panel = computeResults.panel;
   if (rEcon && rEcon.coefficients?.length) {
-    parts.push(`REGRESION ROBUSTA DE PANEL EN R (Efectos Fijos Bidireccionales - Pais + Año):`);
+    parts.push(`REGRESION PANEL EN R (Efectos Fijos Bidireccionales - Pais + Año):`);
     parts.push(`  Especificación: ${rEcon.formula}`);
     parts.push(`  R2=${rEcon.r_squared?.toFixed(4)}, R2_adj=${rEcon.adj_r_squared?.toFixed(4)}, F=${rEcon.f_statistic?.toFixed(2)} (p=${rEcon.f_p_value?.toFixed(4)}), n=${rEcon.n} (${rEcon.n_countries} países)`);
     for (const c of rEcon.coefficients) {
       parts.push(`  ${c.name}: estimate=${c.estimate?.toFixed(4)}, std_error=${c.std_error?.toFixed(4)}, t=${c.t_stat?.toFixed(2)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}`);
     }
     parts.push(`  NOTA METODOLOGICA (R): Controla simultaneamente por shocks globales de año (tendencias compartidas) y caracteristicas fijas de cada pais.`);
+  } else if (panel && panel.coefficients?.length) {
+    parts.push(`REGRESION PANEL (efectos fijos por pais): ${panel.dependent} ~ ${panel.independent.join(" + ")}`);
+    parts.push(`  n=${panel.n} obs (${panel.n_countries} paises x anos), R2=${panel.r_squared?.toFixed(4)}, dof=${panel.dof}`);
+    for (const c of panel.coefficients) {
+      parts.push(`  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}, IC95%=[${c.ci_95[0].toFixed(4)}, ${c.ci_95[1].toFixed(4)}]`);
+    }
+    parts.push(`  NOTA: el panel usa variacion INTRA-pais en el tiempo (controla caracteristicas fijas por pais). Si el OLS agregado y el panel discrepan, reportar ambos — la discrepancia es informacion (el agregado puede estar dominado por diferencias entre paises).`);
   }
   const corrs = (computeResults.correlations || []).filter(c => c.pearson_r !== undefined && relevant(c.x) && relevant(c.y));
   if (corrs.length) {
@@ -807,7 +807,7 @@ REGLAS CRITICAS (incumplir = rechazo):
 - NO existe informacion de paises fuera de la lista. NO uses fuentes que no sean World Bank (nada de CEPAL, OECD, IMF, ECLAC).
 - NO inventes tests diagnosticos (White, Durbin-Watson), simulaciones, escenarios futuros ni proyecciones: solo reporta lo que Python calculo.
 - Si un resultado no es significativo (p>0.05), dilo explicitamente; no lo presentes como evidencia solida. Si el IC95% bootstrap "incluye 0 -> fragil", reporta esa fragilidad.
-- Si aparece "REGRESION ROBUSTA DE PANEL EN R" en RESULTADOS, menciónala explícitamente en Metodología y Análisis como estimación econométrica de efectos fijos bidireccionales (país + año) ejecutada en R 4.x, contrastándola con las correlaciones y OLS de Python. Si solo aparece Python, reporta solo Python.
+- Si aparece "REGRESION PANEL EN R" en RESULTADOS, menciónala explícitamente en Metodología y Análisis como estimación econométrica de efectos fijos bidireccionales (país + año) ejecutada en R 4.x, contrastándola con las correlaciones y OLS de Python. Si solo aparece Python, reporta solo Python.
 - Si aparece "REGRESION PANEL" en RESULTADOS, reportala: explica que usa variacion intra-pais (n paises x anos) y contrasta su veredicto con el OLS agregado. Si discrepan, dilo.
 - Cuando una correlacion en niveles es significativa pero su correlacion "en diferencias" no lo es (o viceversa), dilo explicitamente: la primera puede ser co-tendencia espuria, la segunda es evidencia mas honesta de co-movimiento.
 - Referencia las figuras reales listadas con el path EXACTO de la lista: ![descripcion](charts/<path-completo>). NO inventes figuras ni cambies los paths.
