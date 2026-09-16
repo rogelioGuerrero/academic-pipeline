@@ -1060,7 +1060,11 @@ function transparencyNote(state) {
   const trends = cr.trends || [];
   const sigTrends = trends.filter(t => t.trend !== "no_trend");
   const ind = state.fetchedData?.indicators || [];
-  const countries = [...new Set(ind.map(i => i.country_code))];
+  const allCountries = [...new Set(ind.map(i => i.country_code))];
+  const sampleCountries = cr.panel?.countries?.length
+    ? cr.panel.countries
+    : [...new Set((cr.correlations || []).map(c => c.x.split(' [')[1]?.replace(']', '')).filter(c => c && c !== 'LCN'))];
+  const sampleStr = sampleCountries.length ? sampleCountries.join(", ") : allCountries.filter(c => c !== "LCN").join(", ");
   const latestYear = state.fetchedData?.summary?.latest_year_available || "";
   const inspiring = s.suggestions?.find(x => x.titulo === state.topic) || s.suggestions?.[0];
   const it = state.iterations;
@@ -1079,7 +1083,7 @@ function transparencyNote(state) {
     s.hipotesis ? `**Hipótesis planteada:** ${s.hipotesis}` : "",
     s.suggestions?.length > 1 ? `Se evaluaron ${s.suggestions.length} líneas editoriales candidatas; se seleccionó la de mayor respaldo en datos.` : "",
     "",
-    "**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-" + latestYear + ": " + ind.length + " series (" + countries.join(", ") + "). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.",
+    "**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-" + latestYear + ". Muestra analizada: " + sampleStr + " (referencia regional agregada: LCN). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.",
     "",
     "**Métodos analíticos ejecutados (Cómputo Determinístico):**",
     `- Python 3.12 (scipy/statsmodels): Estadísticas descriptivas de ${ind.length} series, ${corrs.length} correlaciones Pearson/Spearman (${sigCorrs.length} sig. p<0.05).`,

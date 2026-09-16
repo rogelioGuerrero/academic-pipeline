@@ -908,10 +908,9 @@ def make_charts(data, results, outdir):
             charts.append({"file": fname, "caption": f"Comparación internacional de {_short_label(base_name, 60)} (último año disponible). Fuente: World Bank API."})
             chart_data["figures"][fname] = {"type": "bars", "indicator": _short_label(base_name, 60), "year": years[0], "items": [{"cc": labels[i], "geo": vs[i].get("country") or labels[i], "value": float(vals[i])} for i in order]}
 
-    # ── Fig 5: forest plot de coeficientes (OLS + panel FE) ──
-    # Punto = beta, barra = IC95% (bootstrap si existe). Si la barra cruza
-    # el cero, la fragilidad se ve sin leer p-values.
-    forest_entries = []
+    # ── Fig 5: gráfico facetado de coeficientes con intervalos de confianza legibles ──
+    ols_entries = []
+    panel_entries = []
     reg = results.get("regression")
     if reg and reg.get("coefficients"):
         for c in reg["coefficients"]:
@@ -919,34 +918,77 @@ def make_charts(data, results, outdir):
                 continue
             ci = c.get("boot_ci_95") or c.get("ci_95")
             if ci:
-                forest_entries.append({"label": f"OLS · {_short_label(c['name'].split(' [')[0], 34)}", "beta": c["beta"], "lo": ci[0], "hi": ci[1], "model": "OLS"})
+                ols_entries.append({"name": c["name"].split(" [")[0], "beta": float(c["beta"]), "lo": float(ci[0]), "hi": float(ci[1]), "p": float(c.get("p_value", 1.0))})
     panel = results.get("panel")
     if panel and panel.get("coefficients"):
         for c in panel["coefficients"]:
             ci = c.get("ci_95")
             if ci:
-                forest_entries.append({"label": f"Panel FE · {_short_label(c['name'], 34)}", "beta": c["beta"], "lo": ci[0], "hi": ci[1], "model": "Panel"})
-    if forest_entries:
-        forest_entries.sort(key=lambda e: e["beta"])
-        fig, ax = plt.subplots(figsize=(6.5, 0.9 + 0.55 * len(forest_entries)))
-        ys = np.arange(len(forest_entries))
-        for i, e in enumerate(forest_entries):
-            color = GREEN if e["lo"] > 0 or e["hi"] < 0 else "#888888"
-            marker = "s" if e["model"] == "Panel" else "o"
-            ax.plot([e["lo"], e["hi"]], [i, i], color=color, lw=2.2, zorder=2)
-            ax.scatter([e["beta"]], [i], color=color, marker=marker, s=46, zorder=3)
-        ax.axvline(0, color=NAVY, lw=1, ls="--", alpha=0.7)
-        ax.set_yticks(ys, [e["label"] for e in forest_entries], fontsize=8)
-        ax.set_xlabel("Coeficiente (IC 95%) — intervalos que cruzan 0 son frágiles", fontsize=8.5)
-        ax.set_title("Coeficientes del modelo", fontsize=9.5)
-        _despine(ax)
+                panel_entries.append({"name": c["name"].split(" [")[0], "beta": float(c["beta"]), "lo": float(ci[0]), "hi": float(ci[1]), "p": float(c.get("p_value", 1.0))})
+
+    if ols_entries or panel_entries:
+        n_plots = (1 if panel_entries else 0) + (1 if ols_entries else 0)
+        fig, axes = plt.subplots(n_plots, 1, figsize=(7.2, 2.4 * n_plots), sharex=False)
+        if n_plots == 1:
+            axes = [axes]
+
+        ax_idx = 0
+        all_forest_entries = []
+        if panel_entries:
+            ax = axes[ax_idx]
+            ys = np.arange(len(panel_entries))
+            labels = [_short_label(e["name"], 32) for e in panel_entries]
+            ax.axvline(0, color=NAVY, lw=1.2, ls="--", alpha=0.7)
+            for i, e in enumerate(panel_entries):
+                includes_zero = (e["lo"] <= 0 <= e["hi"])
+                color = GREEN if not includes_zero else "#d97706"
+                ax.errorbar([e["beta"]], [i], xerr=[[e["beta"] - e["lo"]], [e["hi"] - e["beta"]]], fmt="s",
+                            color=color, ecolor=color, elinewidth=2.5, capsize=6, capthick=2, ms=7, zorder=3)
+                p_str = f"p={e['p']:.3f}" if e['p'] >= 0.001 else "p<0.001"
+                status = "Robusto" if not includes_zero else "Incluye 0 (Frágil)"
+                badge = f"β={e['beta']:+.2f} ({p_str}) | IC95% [{e['lo']:.1f}, {e['hi']:.1f}] — {status}"
+                ax.annotate(badge, (e["beta"], i), textcoords="offset points", xytext=(0, 10),
+                            ha="center", fontsize=7.8, fontweight="bold", color="#1f2937",
+                            bbox=dict(boxstyle="round,pad=0.2", facecolor="#f8fafc", edgecolor="#cbd5e1", alpha=0.9))
+                all_forest_entries.append({"label": f"Panel FE · {e['name']}", "beta": e["beta"], "lo": e["lo"], "hi": e["hi"], "model": "Panel"})
+            ax.set_yticks(ys)
+            ax.set_yticklabels(labels, fontsize=8.5, fontweight="bold")
+            ax.set_title("Panel Efectos Fijos por País (Variación Intra-País)", fontsize=9.5, fontweight="bold", color=NAVY, pad=14)
+            ax.grid(axis="x", alpha=0.25, ls=":")
+            _despine(ax)
+            ax_idx += 1
+
+        if ols_entries:
+            ax = axes[ax_idx]
+            ys = np.arange(len(ols_entries))
+            labels = [_short_label(e["name"], 32) for e in ols_entries]
+            ax.axvline(0, color=NAVY, lw=1.2, ls="--", alpha=0.7)
+            for i, e in enumerate(ols_entries):
+                includes_zero = (e["lo"] <= 0 <= e["hi"])
+                color = GREEN if not includes_zero else "#d97706"
+                ax.errorbar([e["beta"]], [i], xerr=[[e["beta"] - e["lo"]], [e["hi"] - e["beta"]]], fmt="o",
+                            color=color, ecolor=color, elinewidth=2.5, capsize=6, capthick=2, ms=7, zorder=3)
+                p_str = f"p={e['p']:.3f}" if e['p'] >= 0.001 else "p<0.001"
+                status = "Robusto" if not includes_zero else "Incluye 0 (Frágil)"
+                badge = f"β={e['beta']:+.2f} ({p_str}) | IC95% [{e['lo']:.1f}, {e['hi']:.1f}] — {status}"
+                ax.annotate(badge, (e["beta"], i), textcoords="offset points", xytext=(0, 10),
+                            ha="center", fontsize=7.8, fontweight="bold", color="#1f2937",
+                            bbox=dict(boxstyle="round,pad=0.2", facecolor="#f8fafc", edgecolor="#cbd5e1", alpha=0.9))
+                all_forest_entries.append({"label": f"OLS · {e['name']}", "beta": e["beta"], "lo": e["lo"], "hi": e["hi"], "model": "OLS"})
+            ax.set_yticks(ys)
+            ax.set_yticklabels(labels, fontsize=8.5, fontweight="bold")
+            ax.set_title("Regresión OLS Agregada Regional (Bootstrap)", fontsize=9.5, fontweight="bold", color=NAVY, pad=14)
+            ax.set_xlabel("Magnitud del coeficiente e Intervalo de Confianza (IC 95%)", fontsize=8.5, color="#475569")
+            ax.grid(axis="x", alpha=0.25, ls=":")
+            _despine(ax)
+
         fig.tight_layout()
         _watermark(fig)
         fname = "fig5_forest.png"
         fig.savefig(os.path.join(outdir, fname), dpi=150)
         plt.close(fig)
-        charts.append({"file": fname, "caption": "Forest plot: coeficientes OLS y de panel (efectos fijos por país) con intervalos de confianza 95%. Las barras que cruzan la línea del cero indican resultados frágiles (el intervalo incluye efecto nulo)."})
-        chart_data["figures"][fname] = {"type": "forest", "entries": [{"label": e["label"], "beta": float(e["beta"]), "lo": float(e["lo"]), "hi": float(e["hi"]), "model": e["model"]} for e in forest_entries]}
+        charts.append({"file": fname, "caption": "Gráfico de coeficientes con intervalos de confianza al 95% (Panel FE y OLS agregado con escalas independientes y anotaciones de robustez)."})
+        chart_data["figures"][fname] = {"type": "forest", "entries": all_forest_entries}
 
     # ── Fig 6: heatmap pais x par de indicadores (heterogeneidad visible) ──
     corr_all = [c for c in results.get("correlations", []) if c.get("pearson_r") is not None]

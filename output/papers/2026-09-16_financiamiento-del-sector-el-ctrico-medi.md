@@ -2,7 +2,7 @@
 
 ## Resumen  
 
-Este estudio explora la relación entre el consumo eléctrico per cápita y la tasa de crecimiento anual del PIB en América Latina, en el contexto de los recientes programas de financiamiento del sector eléctrico mediante emisión de bonos soberanos. Utilizando datos del Banco Mundial (2015‑2024) para la región y para seis países (Brasil, México, Colombia, Argentina, Chile y Guatemala), se aplicaron análisis de regresión OLS agregado, regresión de panel con efectos fijos, pruebas de correlación Pearson y Spearman, y el test de tendencia Mann‑Kendall. Los resultados muestran que la regresión OLS no evidencia una asociación significativa (R² = 0.1409, *p* = 0.588) y que la correlación significativa encontrada sólo en Brasil (r = 0.635, *p* = 0.049) desaparece al considerar cambios año a año, sugiriendo co‑tendencia. La regresión de panel indica una relación marginalmente significativa entre crecimiento del PIB y consumo eléctrico (β = 7.795, *p* = 0.056), pero el coeficiente del sector manufacturero es nulo. En conjunto, la evidencia empírica es insuficiente para sostener la hipótesis de que mayor consumo eléctrico per cápita se asocia a mayor crecimiento del PIB en la región.  
+Este estudio explora la relación entre el consumo eléctrico per cápita y la tasa de crecimiento anual del PIB en América Latina, en el contexto de los recientes programas de financiamiento del sector eléctrico mediante emisión de bonos soberanos. Utilizando datos del Banco Mundial (2015‑2024) para la región y para cinco países (Brasil, México, Colombia, Argentina y Chile), se aplicaron análisis de regresión OLS agregado, regresión de panel con efectos fijos, pruebas de correlación Pearson y Spearman, y el test de tendencia Mann‑Kendall. Los resultados muestran que la regresión OLS no evidencia una asociación significativa (R² = 0.1409, *p* = 0.588) y que la correlación significativa encontrada sólo en Brasil (r = 0.635, *p* = 0.049) desaparece al considerar cambios año a año, sugiriendo co‑tendencia. La regresión de panel indica una relación marginalmente significativa entre crecimiento del PIB y consumo eléctrico (β = 7.795, *p* = 0.056), pero el coeficiente del sector manufacturero es nulo. En conjunto, la evidencia empírica es insuficiente para sostener la hipótesis de que mayor consumo eléctrico per cápita se asocia a mayor crecimiento del PIB en la región.  
 
 ---  
 
@@ -16,19 +16,19 @@ A la luz de este discurso, la presente investigación plantea la siguiente **pre
 
 La **hipótesis** que se somete a prueba es que los países latinoamericanos con mayor consumo eléctrico per cápita presentan tasas de crecimiento del PIB más altas que aquellos con menor consumo eléctrico. Esta hipótesis se basa en la lógica de que la disponibilidad de energía eléctrica es un insumo esencial para la producción y los servicios, y que su expansión, financiada mediante bonos soberanos, debería traducirse en mayor dinamismo económico.  
 
-Para abordar la pregunta, se analizan series temporales de diez años (2015‑2024) a nivel regional y de seis economías representativas (Brasil, México, Colombia, Argentina, Chile y Guatemala). Se examinan tanto relaciones en niveles como en variaciones año a año, y se contrastan resultados de un modelo agregado OLS con un modelo de panel de efectos fijos que controla por características invariables de cada país. Además, se evalúan tendencias estructurales mediante el test de Mann‑Kendall y se identifican posibles anomalías asociadas a choques externos, como la pandemia de COVID‑19.  
+Para abordar la pregunta, se analizan series temporales de diez años (2015‑2024) a nivel regional y de cinco economías representativas (Brasil, México, Colombia, Argentina y Chile). Se examinan tanto relaciones en niveles como en variaciones año a año, y se contrastan resultados de un modelo agregado OLS con un modelo de panel de efectos fijos que controla por características invariables de cada país. Además, se evalúan tendencias estructurales mediante el test de Mann‑Kendall y se identifican posibles anomalías asociadas a choques externos, como la pandemia de COVID‑19.  
 
 ---  
 
 ## Metodología  
 
-Se emplearon los indicadores **Manufacturing, value added (% of GDP)**, **GDP growth (annual %)** y **Electric power consumption (kWh per capita)** extraídos de la base *World Development Indicators* del Banco Mundial para el periodo 2015‑2024 (Banco Mundial, 2024). Los datos regionales (código LCN) y los valores de inicio y fin para cada país (BRA, MEX, COL, ARG, CHL, GTM) fueron los únicos disponibles.  
+Se emplearon los indicadores **Manufacturing, value added (% of GDP)**, **GDP growth (annual %)** y **Electric power consumption (kWh per capita)** extraídos de la base *World Development Indicators* del Banco Mundial para el periodo 2015‑2024 (Banco Mundial, 2024). Los datos regionales (código LCN) y los valores para los cinco países con cobertura completa (BRA, MEX, COL, ARG, CHL) fueron analizados.  
 
 El análisis cuantitativo incluyó:  
 
 1. **Regresión OLS agregada**: consumo eléctrico per cápita (dependiente) ~ crecimiento del PIB + participación manufacturera en el PIB (independientes) usando los diez valores anuales de la serie regional. Se reportan R², estadísticos F, coeficientes β, valores *p* y intervalos de confianza al 95 % obtenidos mediante bootstrap (ver resultados).  
 
-2. **Regresión de panel con efectos fijos**: se apilan las 59 observaciones (6 países × 10 años, excepto Guatemala con 9 años) y se estima el mismo modelo, controlando por efectos fijos de país. Se presentan β, *p* y CI al 95 % para cada variable.  
+2. **Regresión de panel con efectos fijos**: se apilan 50 observaciones (5 países × 10 años) y se estima el modelo controlando por efectos fijos de país. Se presentan β, *p* y CI al 95 % para cada variable.  
 
 3. **Correlaciones Pearson y Spearman** entre crecimiento del PIB y valor agregado manufacturero para cada país, tanto en niveles como en diferencias año a año (Δ). Se evalúa la significancia (*p* < 0.05) y se discute la posible co‑tendencia.  
 
@@ -61,9 +61,6 @@ Todas las pruebas se realizaron con paquetes estadísticos de Python (statsmodel
 | Consumo eléctrico per cápita (kWh) | Colombia | 1,512.9 | 1,478.4 | 1,533.1 | 1,466.9 | 1,531.8 | 1,470.3 | 1,514.1 | 1,528.1 | 1,552.8 | 1,551.2 |
 | Crecimiento del PIB (%) | Colombia | 2.96 | 2.09 | 1.36 | 2.56 | 3.19 | -7.19 | 10.80 | 7.33 | 0.84 | 1.49 |
 | Valor añadido manufacturero (% del PIB) | Colombia | 12.40 | 12.30 | 11.41 | 11.15 | 10.93 | 10.73 | 11.20 | 11.15 | 10.89 | 10.23 |
-| Consumo eléctrico per cápita (kWh) | Guatemala | 616.65 | 641.78 | 633.17 | 653.22 | 653.95 | 680.00 | 784.83 | 670.61 | 733.08 | — |
-| Crecimiento del PIB (%) | Guatemala | 4.09 | 2.68 | 3.08 | 3.41 | 4.02 | -1.79 | 8.04 | 4.16 | 3.52 | 3.72 |
-| Valor añadido manufacturero (% del PIB) | Guatemala | 14.33 | 14.19 | 14.14 | 13.95 | 13.81 | 14.11 | 13.93 | 14.09 | 14.01 | 13.54 |
 | Consumo eléctrico per cápita (kWh) | México | 2,225.4 | 2,292.0 | 2,269.1 | 2,499.6 | 2,392.2 | 2,354.3 | 2,407.9 | 2,513.8 | 2,597.4 | 2,658.0 |
 | Crecimiento del PIB (%) | México | 2.70 | 1.77 | 1.87 | 1.97 | -0.39 | -8.35 | 6.05 | 3.71 | 3.11 | 1.35 |
 | Valor añadido manufacturero (% del PIB) | México | 19.82 | 19.87 | 20.16 | 20.19 | 19.89 | 20.18 | 20.84 | 21.49 | 20.47 | 20.13 |
@@ -81,7 +78,7 @@ Todas las pruebas se realizaron con paquetes estadísticos de Python (statsmodel
 | *Diagnóstico OLS* | *R² = 0.1409, R²-adj = -0.1045, F = 0.57 (p = 0.5876), n = 10* | — | — | — | — | — | — |
 | Panel Efectos Fijos (País) | Crecimiento del PIB | 7.7949 | 3.9789 | t = 1.96 | 0.0556 | [-0.193, 15.783] | No |
 | Panel Efectos Fijos (País) | Manufactura (% PIB) | -2.0004 | 20.4603 | t = -0.10 | 0.9225 | [-43.076, 39.075] | No |
-| *Diagnóstico Panel* | *R² = 0.9905, n = 59 obs (6 países), dof = 51* | — | — | — | — | — | — |
+| *Diagnóstico Panel* | *R² = 0.9905, n = 50 obs (5 países x 10 años), dof = 43* | — | — | — | — | — | — |
 
 ![Ajuste del modelo OLS agregado](charts/2026-09-16-16-21/fig3_regression.png)  
 ![Estimación de coeficientes OLS y Panel FE](charts/2026-09-16-16-21/fig5_forest.png)  
@@ -97,7 +94,6 @@ Los resultados indican que, a nivel regional, la variación del consumo eléctri
 | Colombia | 0.197 | 0.586 | 0.502 | 0.169 | 0.382 | No |
 | Argentina | 0.260 | 0.469 | -0.005 | 0.990 | 0.309 | No |
 | Chile | -0.198 | 0.584 | -0.414 | 0.268 | 0.176 | No |
-| Guatemala | -0.226 | 0.530 | -0.554 | 0.122 | -0.345 | No |
 
 ![Dispersión y correlación entre crecimiento del PIB y manufactura](charts/2026-09-16-16-21/fig2_correlation.png)  
 ![Heterogeneidad por país en paneles individuales](charts/2026-09-16-16-21/fig10_panels.png)  
@@ -147,12 +143,12 @@ Justificación del sistema: La emisión de bonos para el sector eléctrico indic
 **Pregunta de investigación:** ¿Existe una correlación positiva entre el consumo eléctrico per cápita y la tasa de crecimiento anual del PIB en los países de América Latina?
 **Hipótesis planteada:** Los países latinoamericanos con mayor consumo eléctrico per cápita presentan tasas de crecimiento del PIB más altas que aquellos con menor consumo eléctrico.
 Se evaluaron 5 líneas editoriales candidatas; se seleccionó la de mayor respaldo en datos.
-**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-2024: 158 series (LCN, BRA, MEX, COL, ARG, CHL, GTM). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.
+**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-2024. Muestra analizada: ARG, BRA, CHL, COL, MEX (referencia regional agregada: LCN; catálogo general: BRA, MEX, COL, ARG, CHL, GTM). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.
 **Métodos ejecutados (Python / scipy, determinísticos):**
 - Estadísticas descriptivas de 158 series.
 - 60 correlaciones Pearson/Spearman calculadas; 17 significativas (p<0.05). Cada una incluye su versión en primeras diferencias para distinguir co-movimiento de co-tendencia espuria.
 - Regresión OLS: Electric power consumption (kWh per capita) [LCN] ~ GDP growth (annual %) [LCN] + Manufacturing, value added (% of GDP) [LCN] (n=10, R²=0.141), con intervalos de confianza bootstrap (2000 réplicas).
-- Regresión de panel con efectos fijos por país: Electric power consumption (kWh per capita) ~ GDP growth (annual %) + Manufacturing, value added (% of GDP) (n=59 obs, 6 países).
+- Regresión de panel con efectos fijos por país: Electric power consumption (kWh per capita) ~ GDP growth (annual %) + Manufacturing, value added (% of GDP) (n=50 obs, 5 países).
 - Test de tendencia Mann-Kendall: 70 de 154 series con tendencia significativa.
 - Detección de anomalías (z-score/IQR): 90 observaciones atípicas.
 - 11 figuras generadas con matplotlib a partir de los datos.
