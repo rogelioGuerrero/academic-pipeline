@@ -235,14 +235,10 @@ async function fetchSources(topic) {
     "EG.USE.ELEC.KH.PC",
   ];
 
+  // Países representativos de América Latina y Caribe (Sudamérica, Centroamérica y Caribe)
   const FETCH_COUNTRIES = [
     { code: "LCN", name: "Latin America & Caribbean (regional)" },
-    { code: "BRA", name: "Brazil" },
-    { code: "MEX", name: "Mexico" },
-    { code: "COL", name: "Colombia" },
-    { code: "ARG", name: "Argentina" },
-    { code: "CHL", name: "Chile" },
-    { code: "GTM", name: "Guatemala" },
+    ...LAC_COUNTRIES.filter(c => ["BRA", "MEX", "COL", "ARG", "CHL", "PER", "ECU", "URY", "CRI", "GTM", "DOM", "PAN"].includes(c.code))
   ];
 
   for (const country of FETCH_COUNTRIES) {

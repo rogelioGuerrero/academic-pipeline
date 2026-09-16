@@ -60,10 +60,27 @@ def init_db(db_path: str = DB_PATH) -> None:
     );
     """)
 
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS indicator_series (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        country_code TEXT NOT NULL,
+        country_name TEXT NOT NULL,
+        indicator_code TEXT NOT NULL,
+        indicator_label TEXT NOT NULL,
+        category TEXT,
+        unit TEXT,
+        year INTEGER NOT NULL,
+        value REAL NOT NULL,
+        UNIQUE(country_code, indicator_code, year)
+    );
+    """)
+
     cur.execute("CREATE INDEX IF NOT EXISTS idx_papers_date ON papers(date);")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_papers_topic ON papers(topic);")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_corr_p_value ON correlations(p_value);")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_corr_vars ON correlations(var_x, var_y);")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_ind_series_query ON indicator_series(indicator_code, country_code);")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_ind_series_label ON indicator_series(indicator_label, country_code);")
     
     conn.commit()
     conn.close()
@@ -245,11 +262,79 @@ def get_memory_context_for_suggest(db_path: str = DB_PATH, limit: int = 5) -> st
     conn.close()
     return "\n".join(lines)
 
+def sync_indicator_series_from_fetched(json_path: str = None) -> int:
+    """Ingesta las series temporales desde fetched-data.json hacia la tabla SQLite indicator_series."""
+    init_db()
+    if not json_path:
+        json_path = os.path.join(ROOT_DIR, "output", "raw", "fetched-data.json")
+    if not os.path.exists(json_path):
+        return 0
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    indicators = data.get("indicators", [])
+    if not indicators:
+        return 0
+    conn = get_connection()
+    cur = conn.cursor()
+    count = 0
+    for ind in indicators:
+        cc = ind.get("country_code")
+        cname = ind.get("country", cc)
+        icode = ind.get("indicator_code")
+        ilabel = ind.get("indicator_label")
+        cat = ind.get("category")
+        unit = ind.get("unit")
+        for pt in ind.get("series", []):
+            yr = pt.get("year")
+            val = pt.get("value")
+            if yr is not None and val is not None:
+                cur.execute("""
+                INSERT OR REPLACE INTO indicator_series
+                (country_code, country_name, indicator_code, indicator_label, category, unit, year, value)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """, (cc, cname, icode, ilabel, cat, unit, yr, val))
+                count += 1
+    conn.commit()
+    conn.close()
+    return count
+
+def get_top_countries_for_indicators(indicators: List[str], limit: int = 5) -> List[str]:
+    """
+    Selecciona de forma dinámica en SQLite la mejor muestra de países (default: 5)
+    que tengan datos completos y consistentes para los indicadores del estudio.
+    """
+    init_db()
+    if not indicators:
+        return []
+    conn = get_connection()
+    cur = conn.cursor()
+    
+    placeholders = ", ".join(["?"] * len(indicators))
+    sql = f"""
+    SELECT country_code, count(DISTINCT indicator_code) as n_indicators, count(*) as n_observations
+    FROM indicator_series
+    WHERE country_code != 'LCN'
+      AND (indicator_code IN ({placeholders}) OR indicator_label IN ({placeholders}))
+    GROUP BY country_code
+    ORDER BY n_indicators DESC, n_observations DESC
+    LIMIT ?;
+    """
+    params = indicators + indicators + [limit]
+    rows = cur.execute(sql, params).fetchall()
+    conn.close()
+    return [r["country_code"] for r in rows]
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "sync"
     if cmd == "sync":
         c = sync_all_from_files()
         print(f"Base de datos SQLite sincronizada con {c} papers en {DB_PATH}")
+    elif cmd == "sync-indicators":
+        n = sync_indicator_series_from_fetched()
+        print(f"Sincronizados {n} puntos de series temporales en SQLite indicator_series.")
+    elif cmd == "top-countries":
+        inds = sys.argv[2].split(",") if len(sys.argv) > 2 else []
+        print(json.dumps(get_top_countries_for_indicators(inds)))
     elif cmd == "context":
         print(get_memory_context_for_suggest())
     elif cmd == "query":

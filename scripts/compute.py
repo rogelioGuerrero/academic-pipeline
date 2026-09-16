@@ -1173,6 +1173,127 @@ def make_charts(data, results, outdir):
             pass
     return charts
 
+def generate_markdown_tables(data, results):
+    """
+    Genera tablas Markdown determinísticas con datos reales y resultados estadísticos.
+    Evita que el LLM tenga que transcribir números a mano o que coloque puntos suspensivos (...).
+    """
+    variables = _get_variables(data)
+    tables = {}
+
+    reg = results.get("regression")
+    panel = results.get("panel")
+
+    ind_candidates = []
+    if reg and isinstance(reg, dict) and "dependent" in reg:
+        ind_candidates.append(reg["dependent"].split(" [")[0])
+        for n in reg.get("independent", []):
+            ind_candidates.append(n.split(" [")[0])
+    elif panel and isinstance(panel, dict) and "dependent" in panel:
+        ind_candidates.append(panel["dependent"].split(" [")[0])
+        for n in panel.get("independent", []):
+            ind_candidates.append(n.split(" [")[0])
+
+    if not ind_candidates:
+        corrs = results.get("correlations", [])
+        for c in corrs[:5]:
+            ind_candidates.append(c["x"].split(" [")[0])
+            ind_candidates.append(c["y"].split(" [")[0])
+
+    ind_candidates = list(dict.fromkeys(ind_candidates))
+
+    all_years = set()
+    selected_vars = []
+    for cand in ind_candidates:
+        for v in variables:
+            base_name = v["name"].split(" [")[0]
+            if base_name.lower() == cand.lower() or cand.lower() in base_name.lower():
+                if v.get("values"):
+                    selected_vars.append(v)
+                    all_years.update(v.get("years", []))
+
+    years_list = sorted(all_years)
+    if years_list and selected_vars:
+        # LCN primero, luego por país
+        selected_vars.sort(key=lambda x: (0 if x.get("country_code") == "LCN" else 1, x.get("country_code", ""), x["name"]))
+        headers = ["Serie / Indicador", "País / Región"] + [str(y) for y in years_list]
+        sep = [":---", ":---:"] + [":---:" for _ in years_list]
+        rows = [
+            "| " + " | ".join(headers) + " |",
+            "| " + " | ".join(sep) + " |"
+        ]
+        for v in selected_vars:
+            label = v.get("label", v["name"].split(" [")[0])
+            cc = v.get("country", "") or v.get("country_code", "")
+            unit = f" ({v['unit']})" if v.get("unit") and v['unit'] != "unknown" else ""
+            y_map = dict(zip(v.get("years", []), v.get("values", [])))
+            row_vals = []
+            for y in years_list:
+                val = y_map.get(y)
+                if val is None:
+                    row_vals.append("—")
+                else:
+                    if abs(val) >= 1000:
+                        row_vals.append(f"{val:,.1f}")
+                    elif abs(val) >= 10:
+                        row_vals.append(f"{val:.2f}")
+                    else:
+                        row_vals.append(f"{val:.3f}")
+            rows.append(f"| {label}{unit} | {cc} | " + " | ".join(row_vals) + " |")
+        tables["descriptive"] = "\n".join(rows)
+
+    model_rows = [
+        "| Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Significativo |",
+        "|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|"
+    ]
+    has_model = False
+    if reg and isinstance(reg, dict) and "coefficients" in reg:
+        has_model = True
+        for c in reg["coefficients"]:
+            sig_mark = "Sí *" if c.get("significant") else "No"
+            boot_ci = c.get("boot_ci_95")
+            ci_str = f"[{boot_ci[0]:.3f}, {boot_ci[1]:.3f}]" if boot_ci else "—"
+            stat_str = f"t = {c.get('t_stat', 0):.2f}"
+            var_name = c['name'].split(" [")[0]
+            model_rows.append(f"| OLS Agregado (LCN) | {var_name} | {c.get('beta', 0):.4f} | {c.get('se', 0):.4f} | {stat_str} | {c.get('p_value', 1):.4f} | {ci_str} | {sig_mark} |")
+        model_rows.append(f"| *Diagnóstico OLS* | *R² = {reg.get('r_squared', 0):.4f}, R²-adj = {reg.get('adj_r_squared', 0):.4f}, F = {reg.get('f_statistic', 0):.2f} (p = {reg.get('f_p_value', 1):.4f}), n = {reg.get('n', 0)}* | — | — | — | — | — | — |")
+
+    if panel and isinstance(panel, dict) and "coefficients" in panel:
+        has_model = True
+        for c in panel["coefficients"]:
+            sig_mark = "Sí *" if c.get("significant") else "No"
+            ci = c.get("ci_95")
+            ci_str = f"[{ci[0]:.3f}, {ci[1]:.3f}]" if ci else "—"
+            stat_str = f"t = {c.get('t', 0):.2f}"
+            var_name = c['name'].split(" [")[0]
+            model_rows.append(f"| Panel Efectos Fijos (País) | {var_name} | {c.get('beta', 0):.4f} | {c.get('se', 0):.4f} | {stat_str} | {c.get('p_value', 1):.4f} | {ci_str} | {sig_mark} |")
+        model_rows.append(f"| *Diagnóstico Panel* | *R² = {panel.get('r_squared', 0):.4f}, n = {panel.get('n', 0)} obs ({panel.get('n_countries', 0)} países), dof = {panel.get('dof', 0)}* | — | — | — | — | — | — |")
+
+    if has_model:
+        tables["regression"] = "\n".join(model_rows)
+
+    corrs = results.get("correlations", [])
+    if corrs:
+        top_corrs = sorted(corrs, key=lambda c: (1 if c.get("significant") else 0, abs(c.get("pearson_r") or 0)), reverse=True)[:15]
+        corr_rows = [
+            "| Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Significativo |",
+            "|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|"
+        ]
+        for c in top_corrs:
+            vx = c["x"].split(" [")[0]
+            vy = c["y"].split(" [")[0]
+            cc = c["x"].split(" [")[-1].replace("]", "") if " [" in c["x"] else "Regional"
+            r_val = f"{c['pearson_r']:.3f}" if c.get("pearson_r") is not None else "—"
+            p_val = f"{c['pearson_p']:.3f}" if c.get("pearson_p") is not None else "—"
+            sp_val = f"{c['spearman_rho']:.3f}" if c.get("spearman_rho") is not None else "—"
+            diff_r = f"{c['diff_pearson_r']:.3f}" if c.get("diff_pearson_r") is not None else "—"
+            diff_p = f"{c['diff_pearson_p']:.3f}" if c.get("diff_pearson_p") is not None else "—"
+            sig = "Sí *" if c.get("significant") else "No"
+            corr_rows.append(f"| {vx} | {vy} | {cc} | {r_val} | {p_val} | {sp_val} | {diff_r} | {diff_p} | {sig} |")
+        tables["correlations"] = "\n".join(corr_rows)
+
+    return tables
+
 def main():
     if len(sys.argv) < 2:
         print(json.dumps({"error": "Usage: python compute.py input.json [charts_dir]"}))
@@ -1189,6 +1310,7 @@ def main():
     }
     charts_dir = sys.argv[2] if len(sys.argv) > 2 else None
     output["charts"] = make_charts(data, output, charts_dir) if charts_dir else []
+    output["tables"] = generate_markdown_tables(data, output)
     # Escribir UTF-8 explicito: en Windows el stdout usa cp1252 y corrompe caracteres con tilde
     sys.stdout.buffer.write(json.dumps(output, ensure_ascii=False, indent=2).encode("utf-8"))
     sys.stdout.buffer.write(b"\n")

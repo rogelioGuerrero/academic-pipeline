@@ -665,12 +665,26 @@ function matchesIndicator(seriesName, indicatorTerms) {
   return indicatorTerms.some(u => label.includes(u) || u.includes(label));
 }
 
+function getTopCountriesFromMemory(indicators, limit = 5) {
+  try {
+    const py = getPythonPath();
+    const script = resolve(__rootdirname, "memory.py");
+    const out = execFileSync(py, [script, "top-countries", indicators.join(",")], { encoding: "utf-8", timeout: 10000 });
+    const parsed = JSON.parse(out.trim());
+    return Array.isArray(parsed) && parsed.length ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
 function dataDigest(fetchedData, suggestDecision = null) {
   let inds = fetchedData.indicators;
   const used = chosenIndicators(suggestDecision);
+  let topCcs = [];
   if (used) {
     const filtered = inds.filter(i => matchesIndicator(i.indicator_label, used));
     if (filtered.length) inds = filtered; // si nada coincide, mostrar todo (fallback seguro)
+    topCcs = getTopCountriesFromMemory(used, 5);
   }
   // Series LCN: comprimir a primero/ultimo (no todos los años) + cap duro
   const lcnInds = inds.filter(i => i.country_code === "LCN").slice(0, 12);
@@ -678,10 +692,14 @@ function dataDigest(fetchedData, suggestDecision = null) {
     const pts = i.series.map(s => `${s.year}=${s.value.toFixed(2)}`).join(", ");
     return `- ${i.indicator_label} [LCN] (${i.unit}): ${pts}`;
   }).join("\n");
-  // Series por pais: cap duro a 35 entradas
-  const countries = inds
-    .filter(i => i.country_code !== "LCN")
-    .slice(0, 35)
+  // Series por pais: acotado prioritariamente a la muestra de Top 5 países de SQLite
+  let countryInds = inds.filter(i => i.country_code !== "LCN");
+  if (topCcs.length) {
+    const matched = countryInds.filter(i => topCcs.includes(i.country_code));
+    if (matched.length) countryInds = matched;
+  }
+  const countries = countryInds
+    .slice(0, 25)
     .map(i => {
       const first = i.series[0]; const latest = i.series[i.series.length - 1];
       return `- ${i.indicator_label} [${i.country_code}] (${i.unit}): ${first.year}=${first.value.toFixed(2)} -> ${latest.year}=${latest.value.toFixed(2)}`;
@@ -759,6 +777,17 @@ function computeDigest(computeResults, suggestDecision = null) {
     // Solo paths, no captions — el LLM solo necesita referenciar, no leer el caption
     parts.push(`FIGURAS (referenciar con path exacto): ${computeResults.charts.map(c => `charts/${cdir}${c.file}`).join(", ")}`);
   }
+  if (computeResults.tables) {
+    if (computeResults.tables.descriptive) {
+      parts.push(`TABLA 1 PRE-COMPUTADA (Descriptiva / Series reales):\n${computeResults.tables.descriptive}`);
+    }
+    if (computeResults.tables.regression) {
+      parts.push(`TABLA 2 PRE-COMPUTADA (Modelos OLS y Panel):\n${computeResults.tables.regression}`);
+    }
+    if (computeResults.tables.correlations) {
+      parts.push(`TABLA 3 PRE-COMPUTADA (Correlaciones):\n${computeResults.tables.correlations}`);
+    }
+  }
   return parts.join("\n") || "Sin analisis estadistico.";
 }
 
@@ -797,7 +826,12 @@ ESTRUCTURA OBLIGATORIA:
 1. **Resumen** (100-150 palabras)
 2. **Introduccion** (300-400 palabras): plantea la pregunta de investigacion explicitamente
 3. **Metodologia** (150-250 palabras): datos del Banco Mundial 2015-2024, OLS, correlaciones Pearson/Spearman, Mann-Kendall. Menciona regresion de panel con efectos fijos por pais y/o intervalos bootstrap SOLO si aparecen en RESULTADOS. NO menciones metodos que no aparezcan en RESULTADOS (nada de Durbin-Watson, simulaciones ni proyecciones).
-4. **Analisis** (500-800 palabras): usa SOLO datos y resultados listados. Incluye tablas Markdown y referencia las figuras listadas.
+4. **Analisis** (500-800 palabras): usa SOLO datos y resultados listados.
+OBLIGATORIO PARA TABLAS Y FIGURAS:
+- Incluye las tablas pre-computadas provistas en RESULTADOS ESTADISTICOS tal cual están.
+- ESTÁ ESTRICTAMENTE PROHIBIDO usar puntos suspensivos ("…"), omitir celdas o dejar datos incompletos.
+- Referencia al menos 2-3 de las figuras reales provistas usando EXACTAMENTE la sintaxis: ![descripcion](charts/<path-exacto>).
+- PROHIBIDO inventar nombres de archivo de figuras (como charts/consumo_pib.png o cualquier nombre que no esté en la lista de FIGURAS).
 5. **Discusion** (200-350 palabras): interpreta; reconoce que n=10 observaciones por serie es muestra pequena y las correlaciones no implican causalidad.
 6. **Conclusiones** (150-250 palabras): DEBE dar un veredicto explicito sobre la hipotesis — "los datos apoyan / no apoyan / son insuficientes para evaluar" — basado SOLO en los resultados calculados.
 7. **Bibliografia**: formato APA. Solo puedes citar: Banco Mundial/World Development Indicators, la noticia que inspiro el tema, y literatura academica REAL y conocida (Autor 2015, Acemoglu & Restrepo, etc.) SIN atribuirles coeficientes ni cifras especificas.
@@ -823,7 +857,7 @@ Devuelve el paper completo en Markdown.`;
     console.log("  WRITE: bibliografía faltante — appendando fallback.");
     result = result.trimEnd() + "\n\n## Bibliografía\n\n- Banco Mundial. (2024). *World Development Indicators*. Washington, DC: World Bank. https://databank.worldbank.org/source/world-development-indicators\n";
   }
-  return result;
+  return repairTablesAndCharts(result, computeResults);
 }
 
 async function agentReview(fetchedData, computeResults, draft, suggestDecision = null) {
@@ -851,6 +885,8 @@ VERIFICACION OBLIGATORIA:
 2. Para cada uno, buscalo en DATOS/RESULTADOS de arriba. Si no aparece literalmente (o no se deriva directamente), marcalo como INVENTADO en "datos_inventados".
 3. Senales de alucinacion frecuentes — rechaza si el paper:
    - Menciona datos de paises NO listados arriba, o fuentes externas (CEPAL, OECD, IMF, ECLAC)
+   - Contiene tablas con elipses ("…") o celdas vacías sin datos
+   - Contiene enlaces a figuras inventadas que no estén en la lista de FIGURAS (ej: charts/consumo_pib.png)
    - Reporta tests no calculados (Durbin-Watson, White si dice "NO calculado"), simulaciones o proyecciones. Efectos fijos / regresion de panel solo son validos si "REGRESION PANEL" aparece en RESULTADOS; si no aparece, mencionarlos es inventado.
    - Cita literatura con coeficientes/cifras especificas no presentes en RESULTADOS
    - Afirma significancia estadistica cuando p>0.05
@@ -861,7 +897,7 @@ VERIFICACION OBLIGATORIA:
 Responde EXACTAMENTE como JSON (sin markdown):
 {"datos_correctos":true,"detalle_datos":"...","datos_inventados":["lista de cada valor fabricado"],"estructura_ok":true,"coherencia_ok":true,"correcciones":["..."],"datos_faltantes":null,"veredicto":"APROBADO","feedback":null}
 
-Veredicto: "APROBADO" solo si datos_correctos=true Y datos_inventados esta vacio. Si hay CUALQUIER dato inventado: "REESCRIBIR" con feedback detallado listando cada correccion.`;
+Veredicto: "APROBADO" solo si datos_correctos=true Y datos_inventados esta vacio Y estructura_ok=true. Si hay CUALQUIER dato inventado o incompleto: "REESCRIBIR" con feedback detallado listando cada correccion.`;
   const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2500, temperature: 0.2 });
   const raw = data.choices[0]?.message?.content || "";
   const decision = parseJSONResponse(raw);
@@ -870,7 +906,19 @@ Veredicto: "APROBADO" solo si datos_correctos=true Y datos_inventados esta vacio
     console.log("Review: respuesta no parseable (no se auto-aprueba):\n" + raw.slice(0, 500) + "\n");
     return { veredicto: undefined, datos_correctos: false, correcciones: [], feedback: "review response unparseable" };
   }
-  // Forzar consistencia: si reporta datos inventados, el veredicto no puede ser APROBADO
+  // Forzar consistencia: si reporta datos inventados o incompletos, el veredicto no puede ser APROBADO
+  const hasBrokenTables = /\|[^\n]*(?:…|\.{3})[^\n]*\|/.test(draft);
+  if (hasBrokenTables) {
+    decision.veredicto = "REESCRIBIR";
+    decision.datos_correctos = false;
+    decision.correcciones = decision.correcciones || [];
+    decision.correcciones.push("El paper contiene tablas con puntos suspensivos (…) o celdas incompletas.");
+    decision.feedback = (decision.feedback ? decision.feedback + "; " : "") + "Tablas incompletas con (…) detectadas.";
+  }
+  if (decision.estructura_ok === false && decision.veredicto === "APROBADO") {
+    decision.veredicto = "REESCRIBIR";
+    decision.feedback = (decision.feedback ? decision.feedback + "; " : "") + `Estructura incompleta: ${(decision.correcciones || []).join("; ")}`;
+  }
   if (decision.veredicto === "APROBADO" && (decision.datos_inventados?.length || decision.datos_correctos === false)) {
     decision.veredicto = "REESCRIBIR";
     decision.feedback = decision.feedback || `Datos inventados detectados: ${(decision.datos_inventados || []).join("; ")}`;
@@ -879,7 +927,7 @@ Veredicto: "APROBADO" solo si datos_correctos=true Y datos_inventados esta vacio
   return decision;
 }
 
-async function agentEdit(draft, review) {
+async function agentEdit(draft, review, computeResults = null) {
   console.log("[6/7] GPT-OSS 120B editando paper...\n");
   // Extract bibliography from original draft to re-append if EDIT truncates it
   const bibMatch = draft.match(/^## Bibliograf[\s\S]*$/m);
@@ -895,6 +943,7 @@ ${truncate(typeof review === "string" ? review : JSON.stringify(review), 1500)}
 Aplica correcciones, mejora flujo, verifica APA. Manten estructura y formato Markdown.
 IMPORTANTE: Preserva la seccion de Bibliografia, las tablas Markdown y todas las referencias a figuras ![..](charts/..) del paper original.
 NO agregues numeros, estadisticos ni tests que la REVISION no haya verificado.
+NO uses puntos suspensivos ("…") en las tablas ni inventes rutas de figuras.
 Devuelve SOLO el paper final en Markdown.`;
   const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4000, temperature: 0.5 });
   let result = data.choices[0]?.message?.content || "";
@@ -903,11 +952,85 @@ Devuelve SOLO el paper final en Markdown.`;
     console.log("  EDIT trunco bibliografia. Re-appendiendo del draft original.");
     result = result.trimEnd() + "\n\n" + originalBib;
   }
-  return result;
+  return repairTablesAndCharts(result, computeResults);
+}
+
+function repairTablesAndCharts(markdownText, computeResults) {
+  if (!markdownText || !computeResults) return markdownText;
+  let text = markdownText;
+  const cdir = computeResults.chartsDir ? `${computeResults.chartsDir}/` : "";
+  const validCharts = (computeResults.charts || []).map(c => c.file);
+
+  // 1. Normalizar y reparar rutas de figuras
+  if (validCharts.length > 0) {
+    text = text.replace(/!\[(.*?)\]\((charts\/[^\)]+)\)/g, (match, caption, p) => {
+      const filename = p.split("/").pop();
+      if (validCharts.includes(filename)) {
+        return `![${caption}](charts/${cdir}${filename})`;
+      }
+      return `![${caption || "Evolución de indicadores"}](charts/${cdir}${validCharts[0]})`;
+    });
+
+    if (!/!\[.*?\]\(charts\/.*?\)/.test(text)) {
+      const topCharts = computeResults.charts.slice(0, 3);
+      const chartSnippets = topCharts.map(c => `\n\n![${c.caption || c.file}](charts/${cdir}${c.file})\n`).join("");
+      if (/## Análisis/i.test(text)) {
+        text = text.replace(/## Análisis/i, `## Análisis${chartSnippets}`);
+      }
+    }
+  }
+
+  // 2. Corregir tablas incompletas o con puntos suspensivos (…)
+  if (computeResults.tables) {
+    const hasBrokenTables = /\|[^\n]*(?:…|\.{3})[^\n]*\|/.test(text);
+    if (hasBrokenTables) {
+      if (computeResults.tables.descriptive) {
+        text = text.replace(/\|[^\n]*(?:Serie|Indicador|País)[^\n]*\|[\s\S]*?(?=\n\s*\n|\n#|$)/i, (tbl) => {
+          if (tbl.includes("…") || tbl.includes("...")) return computeResults.tables.descriptive;
+          return tbl;
+        });
+      }
+      if (computeResults.tables.correlations) {
+        text = text.replace(/\|[^\n]*(?:Pearson|Spearman|Correlaci)[^\n]*\|[\s\S]*?(?=\n\s*\n|\n#|$)/i, (tbl) => {
+          if (tbl.includes("…") || tbl.includes("...")) return computeResults.tables.correlations;
+          return tbl;
+        });
+      }
+      if (computeResults.tables.regression) {
+        text = text.replace(/\|[^\n]*(?:Modelo|OLS|Panel|Coeficiente)[^\n]*\|[\s\S]*?(?=\n\s*\n|\n#|$)/i, (tbl) => {
+          if (tbl.includes("…") || tbl.includes("...")) return computeResults.tables.regression;
+          return tbl;
+        });
+      }
+      // Reemplazo de seguridad para cualquier tabla remanente con '…'
+      text = text.replace(/(\|(?:\s*[^|\n]+\s*\|){2,}\n\|(?:\s*[-:]+[-| :]*)\n(?:\|[^\n]+\|\n?)+)/g, (tbl) => {
+        if (tbl.includes("…") || tbl.includes("...")) {
+          if (/kWh|PIB|Manufactur|per cápita/i.test(tbl) && computeResults.tables.descriptive) {
+            return computeResults.tables.descriptive;
+          }
+          if (/Brasil|México|Colombia|Argentina|Chile|Guatemala/i.test(tbl) && computeResults.tables.correlations) {
+            return computeResults.tables.correlations;
+          }
+        }
+        return tbl;
+      });
+    }
+  }
+
+  return text;
 }
 
 async function agentApprove(finalText) {
   console.log("[7/7] GPT-OSS 20B QA final...\n");
+  const hasBrokenTables = /\|[^\n]*(?:…|\.{3})[^\n]*\|/.test(finalText);
+  if (hasBrokenTables) {
+    return {
+      veredicto: "RECHAZADO",
+      checklist: { estructura_ok: false, datos_verificados: false, resumen_ok: true, bibliografia_ok: true, citas_apa_ok: true, coherencia_ok: false, tono_academico: true, extension_ok: true },
+      palabras: finalText.split(/\s+/).length,
+      issues: ["El paper contiene tablas con celdas incompletas o elipses (…)"]
+    };
+  }
   const prompt = `Eres control de calidad de una revista de ciencias sociales. Verifica:
 
 ${truncate(finalText, 4000)}
@@ -1127,9 +1250,10 @@ class MoAGraph {
   async nodeCompute() { this.logNode("COMPUTE"); this.state.computeResults = await this.runWithGuardrails("COMPUTE", () => agentCompute(this.state.fetchedData, this.state.suggestDecision)); mkdirSync("output/raw", { recursive: true }); writeFileSync("output/raw/compute-results.json", JSON.stringify(this.state.computeResults, null, 2), "utf-8"); return resolveTransition("COMPUTE", this.state); }
   async nodeWrite() { this.logNode("WRITE"); this.state.currentDraft = await this.runWithGuardrails("WRITE", () => agentWrite(this.state.fetchedData, this.state.computeResults, this.state.writeFeedback, this.state.topic, this.state.angle, this.state.suggestDecision)); this.state.drafts.push(this.state.currentDraft); this.state.writeFeedback = null; await delay(20); return resolveTransition("WRITE", this.state); }
   async nodeReview() { this.logNode("REVIEW"); this.state.reviewDecision = await this.runWithGuardrails("REVIEW", () => agentReview(this.state.fetchedData, this.state.computeResults, this.state.currentDraft, this.state.suggestDecision)); await delay(20); return resolveTransition("REVIEW", this.state); }
-  async nodeEdit() { this.logNode("EDIT"); try { this.state.editedArticle = await this.runWithGuardrails("EDIT", () => agentEdit(this.state.currentDraft, this.state.editFeedback || "")); } catch (e) { console.log(`  EDIT fallo (${e.message}). Usando draft original.`); this.state.editedArticle = this.state.currentDraft; } await delay(20); return resolveTransition("EDIT", this.state); }
+  async nodeEdit() { this.logNode("EDIT"); try { this.state.editedArticle = await this.runWithGuardrails("EDIT", () => agentEdit(this.state.currentDraft, this.state.editFeedback || "", this.state.computeResults)); } catch (e) { console.log(`  EDIT fallo (${e.message}). Usando draft original.`); this.state.editedArticle = repairTablesAndCharts(this.state.currentDraft, this.state.computeResults); } await delay(20); return resolveTransition("EDIT", this.state); }
   async nodeApprove() {
     this.logNode("APPROVE"); await delay(40);
+    this.state.editedArticle = repairTablesAndCharts(this.state.editedArticle, this.state.computeResults);
     try { this.state.qaDecision = await this.runWithGuardrails("APPROVE", () => agentApprove(this.state.editedArticle)); }
     catch (e) { console.log(`  QA fallo (${e.message}). Auto-aprobando.`); this.state.qaDecision = { veredicto: "APROBADO", checklist: {}, palabras: 0, issues: ["QA no ejecutado"] }; }
     return resolveTransition("APPROVE", this.state);
@@ -1162,6 +1286,7 @@ class MoAGraph {
       this.state.editorial = await agentEditorial(this.state);
       if (this.state.editorial) console.log(`  Editorial "Datos al dia": ${this.state.editorial.split(/\s+/).length} palabras`);
     } catch (e) { console.log(`  Editorial skip: ${e.message}`); }
+    this.state.editedArticle = repairTablesAndCharts(this.state.editedArticle, this.state.computeResults);
     const finalPaper = this.state.editedArticle + "\n\n" + transparencyNote(this.state);
     writeFileSync(OUTPUT_FILE, finalPaper, "utf-8");
     const date = new Date().toISOString().slice(0, 10);

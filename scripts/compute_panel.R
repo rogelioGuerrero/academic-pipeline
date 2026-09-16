@@ -131,6 +131,34 @@ run_analysis <- function() {
   fit <- lm(as.formula(fmla_str), data = sub_df)
   s <- summary(fit)
   
+  # Cálculo de errores estándar robustos clusterizados por país (Cameron-Miller Sandwich Estimator)
+  X <- model.matrix(fit)
+  e <- residuals(fit)
+  n_obs <- nrow(X)
+  k_vars <- ncol(X)
+  G_clusters <- length(unique(sub_df$country))
+  
+  se_clustered <- NULL
+  if (G_clusters > 1 && n_obs > k_vars) {
+    tryCatch({
+      bread <- solve(crossprod(X))
+      meat <- matrix(0, nrow = k_vars, ncol = k_vars)
+      for (g in unique(sub_df$country)) {
+        idx_g <- which(sub_df$country == g)
+        X_g <- X[idx_g, , drop = FALSE]
+        e_g <- e[idx_g]
+        u_g <- crossprod(X_g, e_g)
+        meat <- meat + tcrossprod(u_g)
+      }
+      adj <- (G_clusters / (G_clusters - 1)) * ((n_obs - 1) / (n_obs - k_vars))
+      vcov_cluster <- adj * (bread %*% meat %*% bread)
+      se_clustered <- sqrt(diag(vcov_cluster))
+      names(se_clustered) <- colnames(X)
+    }, error = function(err) {
+      se_clustered <<- NULL
+    })
+  }
+
   # Extraer coeficientes solo de las variables de interés (no de los dummies)
   coefs <- list()
   for (ind in col_indeps) {
@@ -146,13 +174,25 @@ run_analysis <- function() {
     }
     
     if (!is.null(row_c)) {
+      beta_est <- as.numeric(row_c[1])
+      se_val <- as.numeric(row_c[2])
+      
+      # Si se calculó error estándar clusterizado para esta variable, usarlo
+      match_col <- which(names(se_clustered) == r_name | names(se_clustered) == ind)[1]
+      if (!is.na(match_col) && is.finite(se_clustered[match_col])) {
+        se_val <- as.numeric(se_clustered[match_col])
+      }
+      
+      t_val <- beta_est / se_val
+      p_val <- 2 * pt(abs(t_val), df = max(1, G_clusters - 1), lower.tail = FALSE)
+      
       coefs[[length(coefs) + 1]] <- list(
         name = ind,
-        estimate = as.numeric(row_c[1]),
-        std_error = as.numeric(row_c[2]),
-        t_stat = as.numeric(row_c[3]),
-        p_value = as.numeric(row_c[4]),
-        significant = (row_c[4] < 0.05)
+        estimate = beta_est,
+        std_error = se_val,
+        t_stat = t_val,
+        p_value = p_val,
+        significant = (p_val < 0.05)
       )
     }
   }

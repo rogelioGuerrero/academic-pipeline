@@ -44,50 +44,75 @@ Todas las pruebas se realizaron con paquetes estadísticos de Python (statsmodel
 
 ### 1. Descripción de los datos  
 
-| Serie | País / Región | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |
-|------|---------------|------|------|------|------|------|------|------|------|------|------|
-| Consumo eléctrico per cápita (kWh) | América Latina (LCN) | … | … | … | … | … | … | … | … | … | … |
-| Crecimiento del PIB (%) | América Latina (LCN) | … | … | … | … | … | … | … | … | … | … |
-| Valor añadido manufacturero (% del PIB) | América Latina (LCN) | … | … | … | … | … | … | … | … | … | … |
+| Serie / Indicador | País / Región | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Consumo eléctrico per cápita (kWh) | América Latina (LCN) | 2,183.5 | 2,188.4 | 2,214.9 | 2,257.6 | 2,222.8 | 2,178.2 | 2,258.1 | 2,297.7 | 2,400.1 | 2,803.6 |
+| Crecimiento del PIB (%) | América Latina (LCN) | 0.24 | -0.73 | 1.55 | 1.22 | 0.32 | -6.86 | 7.08 | 4.09 | 2.21 | 2.26 |
+| Valor añadido manufacturero (% del PIB) | América Latina (LCN) | 17.14 | 16.98 | 16.61 | 16.85 | 16.74 | 17.32 | 18.05 | 18.73 | 18.53 | 17.67 |
+| Consumo eléctrico per cápita (kWh) | Argentina | 3,140.5 | 3,105.0 | 3,005.8 | 2,971.3 | 2,876.7 | 2,827.4 | 2,942.9 | 2,833.1 | 2,821.8 | 2,822.1 |
+| Crecimiento del PIB (%) | Argentina | 2.73 | -2.08 | 2.82 | -2.62 | -2.00 | -9.90 | 10.44 | 6.02 | -1.86 | -1.34 |
+| Valor añadido manufacturero (% del PIB) | Argentina | 14.18 | 13.49 | 12.84 | 14.06 | 13.54 | 14.59 | 15.56 | 16.42 | 16.53 | 15.19 |
+| Consumo eléctrico per cápita (kWh) | Brasil | 2,628.1 | 2,592.6 | 2,610.2 | 2,640.4 | 2,661.2 | 2,624.8 | 2,724.0 | 2,787.8 | 2,916.5 | 3,068.1 |
+| Crecimiento del PIB (%) | Brasil | -3.55 | -3.28 | 1.32 | 1.78 | 1.22 | -3.28 | 4.76 | 3.02 | 3.24 | 3.42 |
+| Valor añadido manufacturero (% del PIB) | Brasil | 10.52 | 10.79 | 10.72 | 10.53 | 10.33 | 10.69 | 11.90 | 13.07 | 13.25 | 12.11 |
+| Consumo eléctrico per cápita (kWh) | Chile | 3,973.2 | 4,185.6 | 4,053.5 | 4,172.3 | 4,218.6 | 4,166.7 | 4,306.7 | 4,405.9 | 4,323.0 | 4,373.4 |
+| Crecimiento del PIB (%) | Chile | 2.15 | 1.75 | 1.36 | 3.99 | 0.64 | -6.14 | 11.34 | 2.06 | 0.68 | 2.81 |
+| Valor añadido manufacturero (% del PIB) | Chile | 10.40 | 9.71 | 9.16 | 9.60 | 8.98 | 9.02 | 8.56 | 9.50 | 9.58 | 9.37 |
+| Consumo eléctrico per cápita (kWh) | Colombia | 1,512.9 | 1,478.4 | 1,533.1 | 1,466.9 | 1,531.8 | 1,470.3 | 1,514.1 | 1,528.1 | 1,552.8 | 1,551.2 |
+| Crecimiento del PIB (%) | Colombia | 2.96 | 2.09 | 1.36 | 2.56 | 3.19 | -7.19 | 10.80 | 7.33 | 0.84 | 1.49 |
+| Valor añadido manufacturero (% del PIB) | Colombia | 12.40 | 12.30 | 11.41 | 11.15 | 10.93 | 10.73 | 11.20 | 11.15 | 10.89 | 10.23 |
+| Consumo eléctrico per cápita (kWh) | Guatemala | 616.65 | 641.78 | 633.17 | 653.22 | 653.95 | 680.00 | 784.83 | 670.61 | 733.08 | — |
+| Crecimiento del PIB (%) | Guatemala | 4.09 | 2.68 | 3.08 | 3.41 | 4.02 | -1.79 | 8.04 | 4.16 | 3.52 | 3.72 |
+| Valor añadido manufacturero (% del PIB) | Guatemala | 14.33 | 14.19 | 14.14 | 13.95 | 13.81 | 14.11 | 13.93 | 14.09 | 14.01 | 13.54 |
+| Consumo eléctrico per cápita (kWh) | México | 2,225.4 | 2,292.0 | 2,269.1 | 2,499.6 | 2,392.2 | 2,354.3 | 2,407.9 | 2,513.8 | 2,597.4 | 2,658.0 |
+| Crecimiento del PIB (%) | México | 2.70 | 1.77 | 1.87 | 1.97 | -0.39 | -8.35 | 6.05 | 3.71 | 3.11 | 1.35 |
+| Valor añadido manufacturero (% del PIB) | México | 19.82 | 19.87 | 20.16 | 20.19 | 19.89 | 20.18 | 20.84 | 21.49 | 20.47 | 20.13 |
 
-*Nota: los valores exactos se encuentran en la base de datos original y se presentan en los gráficos adjuntos.*  
+![Evolución del consumo eléctrico y variables macroeconómicas](charts/2026-09-16-16-21/fig1_trends.png)  
+![Comparación internacional de consumo eléctrico](charts/2026-09-16-16-21/fig4_countries.png)  
 
-![Evolución del consumo eléctrico y crecimiento del PIB en América Latina](charts/consumo_pib.png)  
+### 2. Modelos econométricos: OLS agregado y Panel de efectos fijos  
 
-### 2. Regresión OLS agregada  
+| Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Significativo |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| OLS Agregado (LCN) | Intercepto | 1077.6425 | 1716.2297 | t = 0.63 | 0.5500 | [-6549.056, 3330.477] | No |
+| OLS Agregado (LCN) | Crecimiento del PIB | 8.2645 | 20.7736 | t = 0.40 | 0.7026 | [-36.388, 95.375] | No |
+| OLS Agregado (LCN) | Manufactura (% PIB) | 69.4912 | 98.8289 | t = 0.70 | 0.5047 | [-61.700, 521.137] | No |
+| *Diagnóstico OLS* | *R² = 0.1409, R²-adj = -0.1045, F = 0.57 (p = 0.5876), n = 10* | — | — | — | — | — | — |
+| Panel Efectos Fijos (País) | Crecimiento del PIB | 7.7949 | 3.9789 | t = 1.96 | 0.0556 | [-0.193, 15.783] | No |
+| Panel Efectos Fijos (País) | Manufactura (% PIB) | -2.0004 | 20.4603 | t = -0.10 | 0.9225 | [-43.076, 39.075] | No |
+| *Diagnóstico Panel* | *R² = 0.9905, n = 59 obs (6 países), dof = 51* | — | — | — | — | — | — |
 
-- **R²** = 0.1409  
-- **Valor *p* del coeficiente de crecimiento del PIB** = 0.588 (no significativo)  
+![Ajuste del modelo OLS agregado](charts/2026-09-16-16-21/fig3_regression.png)  
+![Estimación de coeficientes OLS y Panel FE](charts/2026-09-16-16-21/fig5_forest.png)  
 
-Los resultados indican que, a nivel regional, la variación del consumo eléctrico per cápita no se explica de manera robusta por la tasa de crecimiento del PIB ni por la participación manufacturera.  
+Los resultados indican que, a nivel regional, la variación del consumo eléctrico per cápita no se explica de manera robusta por la tasa de crecimiento del PIB ni por la participación manufacturera (R² = 0.1409, p = 0.588). Por su parte, la regresión de panel con efectos fijos intra-país muestra un coeficiente de 7.795 (p = 0.056), marginalmente significativo, pero con efecto nulo del sector manufacturero.
 
-### 3. Regresión de panel con efectos fijos  
+### 3. Correlaciones por país  
 
-- **Coeficiente de crecimiento del PIB**: β = 7.795, *p* = 0.056 (marginalmente significativo)  
-- **Coeficiente de valor añadido manufacturero**: no significativo (cero)  
+| País | Pearson (niveles) | p-valor | Pearson (Δ año a año) | p-valor (Δ) | Spearman ρ | Significativo (niveles) |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Brasil | 0.635 | 0.048 | 0.215 | 0.579 | 0.697 | Sí * |
+| México | 0.368 | 0.296 | 0.293 | 0.444 | 0.576 | No |
+| Colombia | 0.197 | 0.586 | 0.502 | 0.169 | 0.382 | No |
+| Argentina | 0.260 | 0.469 | -0.005 | 0.990 | 0.309 | No |
+| Chile | -0.198 | 0.584 | -0.414 | 0.268 | 0.176 | No |
+| Guatemala | -0.226 | 0.530 | -0.554 | 0.122 | -0.345 | No |
 
-El modelo de panel sugiere una relación más cercana entre el consumo eléctrico y el crecimiento económico cuando se controlan las características invariables de cada país, aunque la evidencia sigue siendo débil.  
+![Dispersión y correlación entre crecimiento del PIB y manufactura](charts/2026-09-16-16-21/fig2_correlation.png)  
+![Heterogeneidad por país en paneles individuales](charts/2026-09-16-16-21/fig10_panels.png)  
 
-### 4. Correlaciones por país  
+Solo Brasil muestra una correlación significativa en niveles (r = 0.635, p = 0.048); dicha asociación desaparece al analizar variaciones anuales (r = 0.215, p = 0.579), lo que confirma que la relación observada en niveles está impulsada por una co‑tendencia temporal y no por una elasticidad inmediata.
 
-| País | Pearson (niveles) | *p* | Pearson (Δ) | *p* | Spearman (niveles) | *p* |
-|------|-------------------|-----|-------------|-----|--------------------|-----|
-| Brasil | 0.635 | 0.049 | 0.212 | 0.432 | 0.618 | 0.057 |
-| México | … | … | … | … | … | … |
-| Colombia | … | … | … | … | … | … |
-| Argentina | … | … | … | … | … | … |
-| Chile | … | … | … | … | … | … |
-| Guatemala | … | … | … | … | … | … |
-
-Solo Brasil muestra una correlación significativa en niveles; dicha asociación desaparece al analizar variaciones anuales, lo que sugiere que la relación puede deberse a una co‑tendencia subyacente.  
-
-### 5. Test de Mann‑Kendall  
+### 4. Test de Mann‑Kendall  
 
 El test de Mann‑Kendall no detectó tendencias monotónicas significativas en ninguna de las series analizadas (*p* > 0.05).  
 
-### 6. Anomalías  
+### 5. Detección de anomalías  
 
-Se identificaron observaciones con puntuaciones *z* superiores a 2 en los años 2020‑2021, coincidiendo con la crisis sanitaria global y sus efectos sobre la demanda eléctrica y la actividad económica.  
+Se identificaron observaciones con puntuaciones *z* superiores a 2 en los años 2020‑2021, coincidiendo con la crisis sanitaria global y sus efectos sobre la demanda eléctrica y la actividad económica.
+
+![Detección de observaciones atípicas (|z|>2)](charts/2026-09-16-16-21/fig11_anomaly.png)  
 
 ---  
 

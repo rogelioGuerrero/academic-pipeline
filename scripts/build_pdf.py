@@ -37,8 +37,12 @@ def clean_text_formatting(text: str) -> str:
     # (Restaurar si las URLs tenian caracteres escapados)
     text = re.sub(r'\[([^\]]+)\]\((https?://[^)]+)\)', r'#link("\2")[\1]', text)
     
-    # Negrita **texto** -> *texto*
-    text = re.sub(r'\*\*(.*?)\*\*', r'*\1*', text)
+    # Escapar asterisco suelto de significancia estadística (ej. "Sí *", "0.048 *", "p < 0.05 *")
+    text = re.sub(r'(?<=\w)\s+\*(?=[,\)\]\s]|$)', r' \\*', text)
+    # Convertir *cursiva* markdown a _cursiva_ Typst antes de negrita
+    text = re.sub(r'(?<!\*)\*([a-zA-Z0-9_\-\.\,]+?)\*(?!\*)', r'_\1_', text)
+    # Convertir **negrita** markdown a *negrita* Typst
+    text = re.sub(r'\*\*(.+?)\*\*', r'*\1*', text)
     
     # Normalizar tipografía especial (flechas, guiones no separables, espacios finos)
     text = text.replace("→", "->").replace("‑", "-").replace("–", "-").replace(" ", " ")
@@ -67,6 +71,8 @@ def parse_markdown_table(table_lines):
         cleaned_cells = []
         for cell in r:
             cell_clean = clean_text_formatting(cell)
+            if not cell_clean.startswith("#link"):
+                cell_clean = cell_clean.replace("[", r"\[").replace("]", r"\]")
             cleaned_cells.append(cell_clean)
         cleaned_rows.append(cleaned_cells)
 
