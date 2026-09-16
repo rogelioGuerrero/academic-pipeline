@@ -15,11 +15,31 @@
  *   Con argumento: usa el tema dado (modo v3)
  */
 
-import { writeFileSync, readFileSync, mkdirSync, readdirSync } from "fs";
+import { writeFileSync, readFileSync, mkdirSync, readdirSync, existsSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { execFileSync } from "child_process";
 import { fetchSources } from "./fetch-sources.mjs";
+
+const __rootdirname = dirname(fileURLToPath(import.meta.url));
+
+function getPythonPath() {
+  const isWindows = process.platform === "win32";
+  const venvPy = resolve(__rootdirname, "..", ".venv", "Scripts", "python.exe");
+  if (isWindows && existsSync(venvPy)) return venvPy;
+  return isWindows ? "python" : "python3";
+}
+
+function loadMemoryContext() {
+  try {
+    const py = getPythonPath();
+    const script = resolve(__rootdirname, "memory.py");
+    const out = execFileSync(py, [script, "context"], { encoding: "utf-8", timeout: 10000 });
+    return out.trim();
+  } catch {
+    return "";
+  }
+}
 
 function loadEnv() {
   try {
@@ -351,12 +371,12 @@ async function agentSuggest(fetchedData) {
     }));
   const newsText = topNews.map(n => `- [${n.score}] ${n.title} (${n.section})\n  ${n.summary}`).join("\n");
 
-  // Temas recientes para que el LLM evite repetir dominio de forma proactiva
-  // (el dedup post-hoc queda como red de seguridad, no como unico mecanismo)
+  // Memoria relacional SQLite previa (con fallback a JSON files)
+  const memoryContext = loadMemoryContext();
   const recentTopics = loadRecentTopics();
-  const recentText = recentTopics.length
+  const recentText = memoryContext || (recentTopics.length
     ? `TEMAS YA PUBLICADOS RECIENTEMENTE (evita repetir el mismo dominio/angulo):\n${recentTopics.map(t => `- ${t}`).join("\n")}\n`
-    : "";
+    : "");
 
   const prompt = `Eres un editor de una revista de ciencias sociales especializada en America Latina.
 
@@ -1001,6 +1021,14 @@ function rebuildKnowledge() {
     mkdirSync("docs", { recursive: true });
     writeFileSync("docs/knowledge.jsonl", records.map(r => JSON.stringify(r)).join("\n") + "\n", "utf-8");
     console.log(`  Knowledge base: ${records.length} registros en docs/knowledge.jsonl`);
+    try {
+      const py = getPythonPath();
+      const script = resolve(__rootdirname, "memory.py");
+      execFileSync(py, [script, "sync"], { stdio: "ignore", timeout: 15000 });
+      console.log("  Memoria persistente SQLite (docs/memory.db) sincronizada.");
+    } catch (e) {
+      console.log("  Aviso sync memory.db: " + e.message);
+    }
   } catch (e) {
     console.log(`  Knowledge base skip: ${e.message}`);
   }
