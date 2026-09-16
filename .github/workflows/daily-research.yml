@@ -91,6 +91,7 @@ jobs:
       - name: Notify new paper via Resend
         # Requiere secrets RESEND_API_KEY/RESEND_FROM/RESEND_TO y variable EMAIL_ON_PUBLISH=true
         if: ${{ vars.EMAIL_ON_PUBLISH == 'true' }}
+        continue-on-error: true
         run: python scripts/notify-email.py
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}

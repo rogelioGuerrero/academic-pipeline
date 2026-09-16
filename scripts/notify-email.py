@@ -58,8 +58,15 @@ def main():
             "Content-Type": "application/json",
         },
     )
-    status = urllib.request.urlopen(req).status
-    print(f"Correo enviado ({status}): {topic}")
+    try:
+        with urllib.request.urlopen(req) as response:
+            status = response.status
+            print(f"Correo enviado ({status}): {topic}")
+    except urllib.error.HTTPError as e:
+        err_body = e.read().decode("utf-8", errors="ignore")
+        print(f"Aviso: Resend devolvió HTTP {e.code}: {err_body}")
+    except Exception as e:
+        print(f"Aviso envío correo: {e}")
 
 
 if __name__ == "__main__":
