@@ -213,17 +213,29 @@ def convert_md_to_typst(md_content: str, meta: dict, paper_filename: str) -> str
         if img_match:
             caption = img_match.group(1)
             img_rel = img_match.group(2)
-            img_abs = os.path.normpath(os.path.join(PAPERS_DIR, img_rel))
-            if not os.path.exists(img_abs):
-                base_name = os.path.basename(img_rel)
-                img_alt = os.path.normpath(os.path.join(CHARTS_DIR, base_name))
-                if os.path.exists(img_alt):
-                    img_abs = img_alt
+            base_name = os.path.basename(img_rel)
             
-            # Con root=ROOT_DIR, una ruta con '/' inicial se resuelve desde la raiz del proyecto
-            img_rel_typst = "/" + os.path.relpath(img_abs, ROOT_DIR).replace("\\", "/")
+            # Buscar en distintas ubicaciones posibles
+            candidate_paths = [
+                os.path.normpath(os.path.join(PAPERS_DIR, img_rel)),
+                os.path.normpath(os.path.join(CHARTS_DIR, base_name)),
+            ]
             
-            fig_typ = f"""
+            charts_dir_stamp = meta.get("charts") or (meta.get("computeResults") or {}).get("chartsDir")
+            if charts_dir_stamp:
+                candidate_paths.append(os.path.normpath(os.path.join(CHARTS_DIR, charts_dir_stamp, base_name)))
+                # Fallback al primer gráfico de la corrida si el nombre fue inventado por el LLM
+                candidate_paths.append(os.path.normpath(os.path.join(CHARTS_DIR, charts_dir_stamp, "fig1_trends.png")))
+            
+            img_abs = None
+            for p in candidate_paths:
+                if os.path.exists(p):
+                    img_abs = p
+                    break
+            
+            if img_abs:
+                img_rel_typst = "/" + os.path.relpath(img_abs, ROOT_DIR).replace("\\", "/")
+                fig_typ = f"""
 #align(center)[
   #v(6pt)
   #block(
@@ -238,6 +250,22 @@ def convert_md_to_typst(md_content: str, meta: dict, paper_filename: str) -> str
     ]
   )
   #v(6pt)
+]
+"""
+            else:
+                fig_typ = f"""
+#align(center)[
+  #v(4pt)
+  #block(
+    stroke: 0.5pt + rgb("#cbd5e1"),
+    fill: rgb("#f8fafc"),
+    radius: 4pt,
+    inset: 8pt,
+    [
+      #text(size: 8pt, fill: rgb("#64748b"), style: "italic")[*Figura:* {clean_text_formatting(caption)} (Gráfico no disponible en repositorio)]
+    ]
+  )
+  #v(4pt)
 ]
 """
             typst_body.append(fig_typ)
