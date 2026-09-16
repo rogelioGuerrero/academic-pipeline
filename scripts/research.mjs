@@ -616,6 +616,21 @@ async function agentCompute(fetchedData, suggestDecision = null) {
       console.log(`    Tendencias: ${sig.length} significativas de ${results.trends.length}`);
     }
     if (results.charts?.length) console.log(`    Gráficas: ${results.charts.map(c => c.file).join(", ")}`);
+
+    // Complemento econometrico en R (Two-Way Fixed Effects Panel)
+    try {
+      const rScriptPath = resolve(__rootdirname, "compute_panel.R");
+      const rOutputPath = resolve(__rootdirname, "..", "output", "raw", "compute-r-results.json");
+      execFileSync("Rscript", [rScriptPath, inputPath, rOutputPath], { encoding: "utf-8", timeout: 30000 });
+      if (existsSync(rOutputPath)) {
+        const rData = JSON.parse(readFileSync(rOutputPath, "utf-8"));
+        results.r_econometrics = rData;
+        console.log(`    R Econometria (Two-Way FE): R²=${rData.r_squared?.toFixed(4)}, ${rData.coefficients?.length || 0} coeficientes`);
+      }
+    } catch {
+      // Rscript no disponible o sin jsonlite: continuar normalmente con Python
+    }
+
     return results;
   } catch (err) {
     console.error(`  Error Python: ${err.message}`);
@@ -699,6 +714,16 @@ function computeDigest(computeResults, suggestDecision = null) {
       parts.push(`  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}, IC95%=[${c.ci_95[0].toFixed(4)}, ${c.ci_95[1].toFixed(4)}]`);
     }
     parts.push(`  NOTA: el panel usa variacion INTRA-pais en el tiempo (controla caracteristicas fijas por pais). Si el OLS agregado y el panel discrepan, reportar ambos — la discrepancia es informacion (el agregado puede estar dominado por diferencias entre paises).`);
+  }
+  const rEcon = computeResults.r_econometrics;
+  if (rEcon && rEcon.coefficients?.length) {
+    parts.push(`REGRESION ROBUSTA DE PANEL EN R (Efectos Fijos Bidireccionales - Pais + Año):`);
+    parts.push(`  Especificación: ${rEcon.formula}`);
+    parts.push(`  R2=${rEcon.r_squared?.toFixed(4)}, R2_adj=${rEcon.adj_r_squared?.toFixed(4)}, F=${rEcon.f_statistic?.toFixed(2)} (p=${rEcon.f_p_value?.toFixed(4)}), n=${rEcon.n} (${rEcon.n_countries} países)`);
+    for (const c of rEcon.coefficients) {
+      parts.push(`  ${c.name}: estimate=${c.estimate?.toFixed(4)}, std_error=${c.std_error?.toFixed(4)}, t=${c.t_stat?.toFixed(2)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}`);
+    }
+    parts.push(`  NOTA METODOLOGICA (R): Controla simultaneamente por shocks globales de año (tendencias compartidas) y caracteristicas fijas de cada pais.`);
   }
   const corrs = (computeResults.correlations || []).filter(c => c.pearson_r !== undefined && relevant(c.x) && relevant(c.y));
   if (corrs.length) {
