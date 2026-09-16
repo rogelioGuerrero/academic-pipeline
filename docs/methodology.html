@@ -26,15 +26,15 @@
   <a class="back" href="index.html">← Volver a los papers</a>
   <h1>Metodología</h1>
 
-  <p>AcademicPipeline es un sistema <strong>multi-agente</strong> de investigación automatizada: agentes especializados con roles separados —uno propone el tema desde noticias trending, otro cruza indicadores socioeconómicos del Banco Mundial, Python ejecuta el análisis estadístico determinístico, un LLM redacta el paper en español, y dos agentes más lo verifican antes de publicar—. La separación de funciones es deliberada: quien redacta no es quien valida, y quien valida ve los datos completos, no solo el texto. Cada paper incluye una <strong>Nota de transparencia</strong> que declara qué se calculó y con qué datos; esta página explica el método una sola vez.</p>
+  <p>AcademicPipeline es un sistema <strong>multi-agente</strong> de investigación automatizada: agentes especializados con roles separados —uno propone el tema desde noticias trending, otro cruza indicadores socioeconómicos del Banco Mundial, Python y R ejecutan el análisis estadístico determinístico, un LLM redacta el paper en español, y dos agentes más lo verifican antes de publicar—. La separación de funciones es deliberada: quien redacta no es quien valida, y quien valida ve los datos completos, no solo el texto. Cada paper incluye una <strong>Nota de transparencia</strong> que declara qué se calculó y con qué datos; esta página explica el método una sola vez.</p>
 
   <h2>El pipeline</h2>
   <p><code>FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE</code></p>
   <table>
     <tr><th>Nodo</th><th>Qué hace</th><th>Tipo</th></tr>
-    <tr><td>FETCH</td><td>Descarga series 2015-2024 de la API pública del Banco Mundial: ~25 indicadores × 7 regiones (agregado LCN + BRA, MEX, COL, ARG, CHL, GTM)</td><td>Determinístico</td></tr>
+    <tr><td>FETCH</td><td>Descarga series 2015-2024 de la API pública del Banco Mundial (~25 indicadores × 13 países/regiones de América Latina) y las persiste en SQLite; una consulta SQL selecciona los 5 países con cobertura completa para los indicadores del tema — la muestra no está hardcodeada</td><td>Determinístico</td></tr>
     <tr><td>SUGGEST</td><td>Cruza noticias trending (score LLM ≥70, del pipeline job-hunter) con el catálogo de indicadores. Solo propone líneas editoriales que los datos pueden respaldar, y formula una <em>pregunta verificable</em> e <em>hipótesis falsable</em></td><td>LLM</td></tr>
-    <tr><td>COMPUTE</td><td>Estadística real con scipy/numpy: descriptivas, correlaciones, regresión OLS, tendencias, anomalías. También genera las figuras (matplotlib)</td><td>Determinístico</td></tr>
+    <tr><td>COMPUTE</td><td>Estadística real con Python (scipy/numpy): descriptivas, correlaciones, OLS, tendencias, anomalías; R calcula el panel econométrico (efectos fijos país+año, errores clusterizados) cuando está disponible. Genera también las tablas y las figuras (matplotlib)</td><td>Determinístico</td></tr>
     <tr><td>WRITE</td><td>Redacta el paper. Solo puede citar números que aparecen literalmente en los datos y resultados provistos</td><td>LLM</td></tr>
     <tr><td>REVIEW</td><td>Compara el paper contra los datos completos: detecta cifras inventadas, tests no calculados, fuentes externas, afirmaciones de significancia falsas</td><td>LLM</td></tr>
     <tr><td>EDIT</td><td>Pule estilo y formato APA, preservando números, tablas y figuras verificadas</td><td>LLM</td></tr>
@@ -46,15 +46,31 @@
   <p>Las series tienen <strong>n≤10 observaciones anuales</strong> — muestras pequeñas donde los métodos paramétricos son frágiles. Por eso se combinan:</p>
   <table>
     <tr><th>Método</th><th>Para qué</th><th>Por qué es apropiado aquí</th></tr>
-    <tr><td>Correlación de <strong>Pearson</strong></td><td>Mide asociación lineal entre dos series</td><td>Es el estándar; con IC95% por transformación de Fisher se reporta la incertidumbre</td></tr>
+    <tr><td>Correlación de <strong>Pearson</strong></td><td>Resume en un número (r, de −1 a +1) qué tanto dos series se mueven juntas en línea recta: +1 = suben juntas, −1 = una sube cuando la otra baja, 0 = sin relación</td><td>Es la medida de referencia; con n=10 un r suelto no dice qué tan confiable es, así que se reporta con su intervalo de confianza al 95% (transformación de Fisher). Si el IC95% incluye 0, la correlación no es concluyente</td></tr>
     <tr><td>Correlación de <strong>Spearman</strong></td><td>Mide asociación monotónica por rangos</td><td>Robusta a outliers y relaciones no lineales — el shock de 2020 (COVID) es exactamente el caso que Pearson exagera</td></tr>
     <tr><td>Correlación en <strong>primeras diferencias</strong></td><td>Correlaciona los cambios año a año (Δ), no los niveles</td><td>Distingue co-movimiento real de co-tendencia espuria: dos series que ambas suben siempre correlacionan en niveles; si la relación desaparece en diferencias, era tendencia común, no asociación</td></tr>
     <tr><td><strong>Regresión OLS</strong></td><td>Cuantifica la asociación de varias variables sobre una dependiente</td><td>Se reporta con errores estándar robustos (HC3), VIF para multicolinealidad y test de White para heterocedasticidad — los diagnósticos correctos para muestras pequeñas</td></tr>
     <tr><td><strong>IC95% bootstrap</strong></td><td>Remuestrea las observaciones con reemplazo (2000 réplicas) y reconstruye el intervalo de confianza desde la distribución empírica del coeficiente</td><td>Con n=10 el p-value paramétrico asume normalidad — supuesto inverificable. El bootstrap no asume nada; si el IC95% incluye 0, el coeficiente es frágil y el paper debe decirlo</td></tr>
-    <tr><td><strong>Panel con efectos fijos por país</strong></td><td>OLS sobre todas las observaciones país×año (~6 países × 10 años = 60 obs) con una dummy por país</td><td>Responde "dentro de cada país, cuando X subió, ¿se movió Y?" — controla las características estructurales fijas de cada país que el agregado regional esconde, y multiplica el n efectivo</td></tr>
+    <tr><td><strong>Panel con efectos fijos por país</strong></td><td>OLS sobre todas las observaciones país×año de la muestra seleccionada (en el último paper: 5 países × 10 años = 50 obs) con una dummy por país</td><td>Responde "dentro de cada país, cuando X subió, ¿se movió Y?" — controla las características estructurales fijas de cada país que el agregado regional esconde, y multiplica el n efectivo</td></tr>
     <tr><td><strong>Mann-Kendall</strong></td><td>Detecta tendencia monotónica en el tiempo</td><td>No paramétrico: no asume normalidad ni linealidad, ideal para n=10 anual</td></tr>
     <tr><td>Anomalías <strong>z-score / IQR</strong></td><td>Detecta observaciones atípicas por serie</td><td>Dos criterios independientes; el desfase 2020 aparece sistemáticamente</td></tr>
     <tr><td><strong>Compatibilidad de unidades</strong></td><td>Solo correlaciona pares semánticamente comparables</td><td>Guardia explícita: impide correlaciones sin sentido (ej. población absoluta vs tasa %)</td></tr>
+  </table>
+  <p><em>Glosario rápido: <strong>p-valor</strong> = probabilidad de observar un resultado así por puro azar si no existiera relación (p&lt;0.05 se considera "significativo"); <strong>IC95%</strong> = intervalo de confianza al 95%, el rango donde probablemente cae el valor verdadero; <strong>β</strong> = coeficiente: cuánto cambia la variable dependiente por cada unidad que sube la independiente; <strong>Δ</strong> = cambio año a año.</em></p>
+
+  <h2>Cómo leer los resultados: ejemplos con datos reales</h2>
+  <p>Con los números del último paper publicado (<a href="index.html#2026-09-16_financiamiento-del-sector-el-ctrico-medi.md">Financiamiento del sector eléctrico y crecimiento del PIB en América Latina</a>):</p>
+  <table>
+    <tr><th>Método</th><th>Resultado real</th><th>Cómo se lee</th></tr>
+    <tr><td>Selección de muestra (SQLite)</td><td>ARG, BRA, CHL, COL, MEX</td><td>La consulta SQL eligió los 5 países con datos completos para los 3 indicadores del tema. Guatemala quedó fuera porque le falta el dato 2024 de consumo eléctrico — la muestra la decide la cobertura, no una lista fija</td></tr>
+    <tr><td>Pearson (niveles)</td><td>Brasil: r = 0.635, p = 0.048</td><td>PIB y manufactura se mueven juntos de forma significativa en niveles — la única correlación significativa de los 5 países</td></tr>
+    <tr><td>Pearson en diferencias (Δ)</td><td>Brasil: r = 0.215, p = 0.579</td><td>La misma pareja, correlacionando solo los cambios año a año: la asociación desaparece → el r=0.635 era co-tendencia (ambas series subían por su cuenta), no relación real</td></tr>
+    <tr><td>Spearman</td><td>Brasil: ρ = 0.697</td><td>Compara rankings en vez de valores, así que el desplome de 2020 pesa menos; confirma el orden de la asociación en niveles</td></tr>
+    <tr><td>OLS agregado</td><td>R² = 0.141, p(F) = 0.588</td><td>El modelo regional no explica el consumo eléctrico: ~86% de la variación queda fuera del modelo y el conjunto no es significativo</td></tr>
+    <tr><td>Bootstrap IC95%</td><td>β manufactura (OLS): [−61.7, 521.1]</td><td>Intervalo enorme que incluye 0 → el coeficiente es frágil y el paper está obligado a decirlo</td></tr>
+    <tr><td>Panel efectos fijos</td><td>β PIB = 7.79, p = 0.056, IC95% [−0.19, 15.78]</td><td>Dentro de cada país, +1% de crecimiento del PIB se asocia a ~+7.8 kWh per cápita, pero el intervalo roza el 0 → evidencia marginal, no concluyente</td></tr>
+    <tr><td>Mann-Kendall</td><td>0 tendencias significativas en las series del estudio</td><td>Las series analizadas fluctúan sin dirección monotónica clara (en el catálogo completo, 70 de 154 series sí tienen tendencia)</td></tr>
+    <tr><td>Anomalías z-score</td><td>LCN: PIB 2020 = −6.86% marcado atípico</td><td>El shock de COVID aparece sistemáticamente en 2020-2021 — 90 observaciones atípicas en todo el catálogo</td></tr>
   </table>
 
   <h2>Qué puede y qué no puede afirmar un paper</h2>
