@@ -1,0 +1,79 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Financiamiento del sector eléctrico mediante bonos soberanos y su impacto en el consumo de energía y el crecimiento del PIB en América Latina",
+      "noticia_inspiradora": "FG raises N728.9bn in second bond issuance for power sector debt (Última Hora)",
+      "indicadores_respaldan": [
+        "Electric power consumption (kWh per capita)",
+        "GDP growth (annual %)",
+        "Manufacturing, value added (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Consumo eléctrico per cápita vs crecimiento del PIB",
+        "Consumo eléctrico per cápita vs valor añadido manufacturero"
+      ],
+      "justificacion": "La emisión de bonos para el sector eléctrico indica mayor financiamiento de infraestructura energética. Con los indicadores de consumo eléctrico per cápita y crecimiento del PIB podemos evaluar si los países que invierten más en energía presentan mejores resultados macroeconómicos."
+    },
+    {
+      "titulo": "Estabilidad política y flujos de inversión extranjera directa: evidencia comparada entre Tailandia y América Latina",
+      "noticia_inspiradora": "Thai official points to surging investment as stability returns (Economía)",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI neto vs crecimiento del PIB",
+        "FDI neto vs participación del comercio en el PIB"
+      ],
+      "justificacion": "El caso tailandés muestra cómo la estabilidad política impulsa la inversión extranjera. Usando los datos de FDI y crecimiento económico de América Latina podemos probar si la misma relación se mantiene en la región."
+    },
+    {
+      "titulo": "Incertidumbre de seguridad y flujos de inversión extranjera en América Latina: lecciones del conflicto en Arabia Saudí",
+      "noticia_inspiradora": "Saudi Arabia faces tough choices as Houthis gain in Yemen (Internacional)",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Percepción de inseguridad (proxied por años de conflicto) vs FDI neto",
+        "Inseguridad vs crecimiento del PIB"
+      ],
+      "justificacion": "Los conflictos en la región del Golfo reducen la confianza de los inversores. Analizando periodos de mayor tensión regional y sus efectos en FDI y crecimiento en América Latina podemos inferir la sensibilidad de la región a la inseguridad externa."
+    },
+    {
+      "titulo": "Inflación y remesas personales: cómo la presión de precios afecta los ingresos externos en América Latina",
+      "noticia_inspiradora": "Why the era of cheap government debt is over (Internacional)",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Personal remittances received (current US$)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflación vs volumen de remesas recibidas",
+        "Remesas vs PIB per cápita"
+      ],
+      "justificacion": "El aumento de la inflación puede erosionar el poder adquisitivo de las remesas. Con los indicadores de inflación, flujos de remesas y PIB per cápita podemos cuantificar esa relación en los países latinoamericanos."
+    },
+    {
+      "titulo": "Violencia de género y patrones de migración urbana en América Latina",
+      "noticia_inspiradora": "South Africa probes deaths of 7 women near Johannesburg (Internacional)",
+      "indicadores_respaldan": [
+        "Net migration (total people)",
+        "Urban population (% of total)",
+        "Poverty headcount at national poverty line (% of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Incidentes de violencia de género (proxied por años) vs migración neta",
+        "Violencia de género vs crecimiento de la población urbana",
+        "Violencia de género vs tasa de pobreza"
+      ],
+      "justificacion": "La violencia contra las mujeres puede impulsar la migración interna hacia áreas urbanas en busca de mayor seguridad y oportunidades. Los datos de migración neta, urbanización y pobreza permiten explorar esa dinámica en América Latina."
+    }
+  ],
+  "topic": "Financiamiento del sector eléctrico mediante bonos soberanos y su impacto en el consumo de energía y el crecimiento del PIB en América Latina",
+  "angle": "Analizar la relación entre el nivel de consumo eléctrico per cápita y la tasa de crecimiento del PIB en los países latinoamericanos, tomando como referencia los recientes programas de financiamiento del sector eléctrico mediante emisión de bonos soberanos.",
+  "pregunta": "¿Existe una correlación positiva entre el consumo eléctrico per cápita y la tasa de crecimiento anual del PIB en los países de América Latina?",
+  "hipotesis": "Los países latinoamericanos con mayor consumo eléctrico per cápita presentan tasas de crecimiento del PIB más altas que aquellos con menor consumo eléctrico."
+}
