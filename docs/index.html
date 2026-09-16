@@ -71,6 +71,8 @@
     #viewer.open { display: block; }
     #viewer .back { display: inline-block; margin-bottom: 16px; color: #1a56db; cursor: pointer; font-size: 0.9em; font-family: Verdana, sans-serif; }
     #viewer .back:hover { text-decoration: underline; }
+    #viewer .pdf-btn { float: right; display: inline-flex; align-items: center; gap: 6px; background: #14213d; color: #fff; text-decoration: none; font-family: Verdana, sans-serif; font-size: 0.82em; font-weight: 600; padding: 6px 14px; border-radius: 6px; transition: background 0.15s; margin-bottom: 16px; }
+    #viewer .pdf-btn:hover { background: #1f3157; color: #fff; }
     #viewer .news-link { display: inline-block; margin: 0 0 18px 14px; font-size: 0.82em; font-family: Verdana, sans-serif; }
     #viewer .news-link a { color: #1a56db; text-decoration: none; }
     #viewer .verdict-line { font-family: Verdana, sans-serif; font-size: 0.78em; color: #666; margin-bottom: 18px; padding: 8px 12px; background: #f5f4f1; border-radius: 6px; border-left: 3px solid #14213d; }
@@ -133,7 +135,12 @@
     <div id="hero"></div>
     <div class="cards" id="list"></div>
     <button class="more-btn" id="moreBtn" style="display:none" onclick="showMore()">Ver más</button>
-    <div id="viewer"><span class="back" onclick="closePaper()">← Volver a la lista</span><span class="news-link" id="newslink"></span><div id="content"></div></div>
+    <div id="viewer">
+      <span class="back" onclick="closePaper()">← Volver a la lista</span>
+      <a id="pdfdownload" class="pdf-btn" href="#" target="_blank" download>📄 Descargar PDF</a>
+      <span class="news-link" id="newslink"></span>
+      <div id="content"></div>
+    </div>
   </main>
 
   <footer>
@@ -273,6 +280,13 @@
         const vline = verdicts.length ? `<div class="verdict-line">${verdicts.join(' · ')} — ver Nota de transparencia al final del artículo</div>` : '';
         const ed = p.editorial ? `<div class="editorial-lead"><span class="ed-tag">DATOS AL DÍA — COLUMNA EDITORIAL</span><p>${esc(p.editorial)}</p></div>` : '';
         newslink.innerHTML = p.news_url ? `Noticia origen: <a href="${esc(p.news_url)}" target="_blank" rel="noopener">${esc(p.news_url)}</a>` : '';
+        const pdfBtn = document.getElementById('pdfdownload');
+        if (pdfBtn) {
+          const pdfUrl = `papers/${p.file.replace(/\.md$/, '.pdf')}`;
+          pdfBtn.href = pdfUrl;
+          pdfBtn.setAttribute('download', p.file.replace(/\.md$/, '.pdf'));
+          pdfBtn.title = `Descargar versión formal de "${p.topic}" en PDF`;
+        }
         content.innerHTML = banner + vline + ed + renderMd(md);
         enhanceFigures(p);
         list.style.display = 'none';

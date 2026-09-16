@@ -31,7 +31,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install Python dependencies
-        run: pip install numpy scipy matplotlib
+        run: pip install numpy scipy matplotlib typst
 
       - name: Install Node dependencies
         run: npm ci || npm install
@@ -70,6 +70,9 @@ jobs:
           cp -r output/charts/. docs/charts/ 2>/dev/null || true
           # Generate index.json listing all papers
           python scripts/generate-index.py
+
+      - name: Build PDF papers with Typst
+        run: python scripts/build_pdf.py
 
       - name: Commit artifacts
         run: |
