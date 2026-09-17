@@ -91,32 +91,105 @@ const NO_CACHE = process.argv.includes("--no-cache");
 const CACHE_PATH = "output/raw/fetched-data.json";
 const CACHE_MAX_AGE_HOURS = 8760; // 1 año: los datos del World Bank se actualizan anualmente
 
-// Estimacion de tokens: Groq tokeniza ~4 chars/token para espanol, pero
-// con razonamiento interno el consumo real puede ser mayor. Usamos 3.5 como
-// estimacion conservadora. Si el prompt excede el umbral, se trunca.
-const TOKEN_BUDGET = 7000; // margen seguro bajo 8000 TPM del free tier
-function estimateTokens(text) { return Math.ceil(text.length / 3.5); }
+// ── Presupuesto de tokens por peticion ──
+// Groq cuenta prompt + max_tokens contra el TPM del tier, no solo el prompt.
+// gpt-oss-120b y gpt-oss-20b tienen 8000 TPM en el plan gratuito, asi que el
+// limite real de una peticion es: prompt + respuesta <= TPM.
+// Un tope fijo de prompt no sirve: no puede saber cuanto se reserva para la
+// respuesta (con 7000 de prompt + 4500 de max_tokens se pedia 11500). En su
+// lugar se reparte el TPM: la respuesta pide lo que necesita y, si el prompt
+// es grande, se le da el resto. Solo se recorta el prompt si ya no cabe una
+// respuesta minima util, porque recortar el prompt pierde datos del estudio.
+const TPM_LIMIT = Number(process.env.GROQ_TPM_LIMIT || 8000);
+const COMPLETION_FLOOR = 1500; // bajo esto el paper sale cortado
+const TPM_MARGIN = 250;        // holgura: la estimacion de tokens no es exacta
+// chars/token medido contra la API, no supuesto: con 3.5 el plan se quedaba
+// corto un 26% (una peticion estimada en 4875 tokens resulto ser 6135) y el
+// 413 llegaba igual. 2.7 es conservador para espanol con razonamiento interno.
+// Se recalibra sola cuando la API reporta los tokens reales de una peticion.
+let CHARS_PER_TOKEN = 2.7;
+
+function estimateTokens(text) { return Math.ceil(text.length / CHARS_PER_TOKEN); }
+
+// Aprende el ratio real a partir de lo que la API reporta en un 413.
+function calibrateTokenRatio(promptChars, requestedTotal, maxTokens) {
+  const realPrompt = requestedTotal - maxTokens;
+  if (promptChars <= 0 || realPrompt <= 0) return;
+  const measured = promptChars / realPrompt;
+  if (measured > 1 && measured < 6 && measured < CHARS_PER_TOKEN) {
+    const before = CHARS_PER_TOKEN;
+    CHARS_PER_TOKEN = Math.max(1.5, measured * 0.98); // 2% de holgura
+    console.log(`  Calibrando estimador: ${before.toFixed(2)} -> ${CHARS_PER_TOKEN.toFixed(2)} chars/token (medido ${measured.toFixed(2)}).`);
+  }
+}
+
+// Recorta por caracteres garantizando el presupuesto, y ajusta los cortes al
+// limite de linea mas cercano cuando existe: una fila cortada a la mitad puede
+// partir un numero. Si la linea es gigante (sin saltos cerca), se corta por
+// caracter: llenar el presupuesto importa mas que la estetica del corte.
+function fitPrompt(text, budgetTokens) {
+  const before = estimateTokens(text);
+  if (before <= budgetTokens) return { text, before, after: before, cutChars: 0 };
+  const maxChars = Math.floor(budgetTokens * CHARS_PER_TOKEN);
+  // 60% cabeza (instrucciones + datos) + 35% cola (formato de salida) = 95%
+  // del presupuesto: siempre queda por debajo del limite.
+  let headEnd = Math.floor(maxChars * 0.6);
+  let tailStart = Math.max(headEnd, text.length - Math.floor(maxChars * 0.35));
+  const snapBack = Math.max(Math.floor(headEnd * 0.15), 1);
+  const newlineBefore = text.lastIndexOf("\n", headEnd);
+  if (newlineBefore > headEnd - snapBack) headEnd = newlineBefore;
+  const snapFwd = Math.max(Math.floor((text.length - tailStart) * 0.15), 1);
+  const newlineAfter = text.indexOf("\n", tailStart);
+  if (newlineAfter !== -1 && newlineAfter < tailStart + snapFwd) tailStart = newlineAfter + 1;
+  const head = text.slice(0, headEnd);
+  const tail = text.slice(Math.max(tailStart, headEnd));
+  const fitted = `${head}\n[...contenido recortado por limite de tokens...]\n${tail}`;
+  return { text: fitted, before, after: estimateTokens(fitted), cutChars: text.length - fitted.length };
+}
+
+// Reparte el TPM entre prompt y respuesta. Devuelve el prompt (recortado solo
+// si hace falta), el max_tokens efectivo y si hubo que ajustar algo.
+// `completionFloor` es lo MINIMO util para esta llamada: no es lo mismo un
+// JSON de veredicto (1.500) que un paper completo (~2.900). Un paper cortado
+// a la mitad no sirve de nada: REVIEW lo rebota y el bucle de reescritura
+// agranda el prompt. Mejor recortar el prompt un 15% con aviso.
+function planRequest(promptText, desiredMaxTokens, completionFloor = COMPLETION_FLOOR) {
+  const promptTokens = estimateTokens(promptText);
+  const desired = desiredMaxTokens || completionFloor;
+  const room = TPM_LIMIT - promptTokens - TPM_MARGIN;
+  if (room >= desired) {
+    return { prompt: promptText, maxTokens: desired, promptTokens, clamped: false };
+  }
+  if (room >= completionFloor) {
+    // Cabe una respuesta util: se conserva el prompt entero y se recorta solo
+    // la reserva de respuesta. No se pierde ningun dato del estudio.
+    return { prompt: promptText, maxTokens: room, promptTokens, clamped: true };
+  }
+  const fitted = fitPrompt(promptText, TPM_LIMIT - desired - TPM_MARGIN);
+  return { prompt: fitted.text, maxTokens: desired, promptTokens, clamped: true, fit: fitted };
+}
 
 // Registro de truncamientos para transparencia: si el safety net se activa,
 // el paper sale pero la metadata lo dice — asi sabemos si hay que ajustar.
 const truncationLog = [];
 
 async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
-  let safePrompt = prompt;
-  const tok = estimateTokens(prompt);
-  if (tok > TOKEN_BUDGET) {
-    // Truncar preservando el inicio (instrucciones + datos) y el final (formato JSON)
-    const overflow = (tok - TOKEN_BUDGET) * 3.5;
-    const cutStart = Math.floor(safePrompt.length * 0.6);
-    const cutEnd = Math.floor(safePrompt.length - overflow - (safePrompt.length - cutStart) * 0.3);
-    const cutChars = cutEnd - cutStart;
-    safePrompt = safePrompt.slice(0, cutStart) + "\n[...contenido recortado por limite de tokens...]\n" + safePrompt.slice(cutEnd);
-    const after = estimateTokens(safePrompt);
-    console.log(`  ⚠ Prompt ${tok} tokens > ${TOKEN_BUDGET}. Recortado a ~${after} tokens (${cutChars} chars cortados).`);
-    truncationLog.push({ model, before: tok, after, cutChars });
+  // `completion_floor` es una instruccion para el presupuesto, no un parametro
+  // de la API: se saca del body antes de enviarlo.
+  const { completion_floor, ...apiOpts } = opts;
+  const plan = planRequest(prompt, apiOpts.max_tokens, completion_floor);
+  let safePrompt = plan.prompt;
+  const body = { model, messages: [{ role: "user", content: safePrompt }], ...apiOpts, max_tokens: plan.maxTokens };
+  if (plan.fit && plan.fit.cutChars > 0) {
+    console.log(`  ⚠ Prompt ${plan.fit.before} tokens: recortado a ~${plan.fit.after} (${plan.fit.cutChars} chars) para caber en ${TPM_LIMIT} TPM con max_tokens=${plan.maxTokens}.`);
+    truncationLog.push({ model, before: plan.fit.before, after: plan.fit.after, cutChars: plan.fit.cutChars });
+  } else if (plan.clamped) {
+    console.log(`  max_tokens ajustado a ${plan.maxTokens} (prompt ~${plan.promptTokens} tokens) para no pasar de ${TPM_LIMIT} TPM.`);
   }
-  const body = { model, messages: [{ role: "user", content: safePrompt }], ...opts };
-  for (let attempt = 1; attempt <= 4; attempt++) {
+  // El presupuesto de 413 es propio: los 429 consumian los intentos y un 413
+  // en el ultimo era fatal, aunque recortar el prompt si hace progreso.
+  let shrinkAttempts = 0;
+  for (let attempt = 1; attempt <= 6; attempt++) {
     const res = await fetch(apiUrl, {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
@@ -124,7 +197,14 @@ async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
     });
     if (res.ok) {
       const json = await res.json();
-      const content = json.choices[0]?.message?.content || "";
+      const choice = json.choices?.[0];
+      const content = choice?.message?.content || "";
+      // Salida cortada por el techo de respuesta: queda registrado para que el
+      // paper salga con la advertencia en vez de pasar por completo.
+      if (choice?.finish_reason === "length") {
+        console.log(`  ⚠ Respuesta cortada por max_tokens=${body.max_tokens} en ${model}.`);
+        truncationLog.push({ model, outputTruncated: true, maxTokens: body.max_tokens });
+      }
       if (!content.trim() && attempt < 4) {
         console.log(`  Respuesta vacia de ${model}. Reintentando... (${attempt}/4)`);
         await new Promise((r) => setTimeout(r, 5000 * attempt));
@@ -140,14 +220,26 @@ async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
       await new Promise((r) => setTimeout(r, waitSec * 1000));
       continue;
     }
-    if (res.status === 413 && attempt < 4) {
-      console.log(`  Prompt demasiado largo (413). Recortando y reintentando... (${attempt}/4)`);
-      const overflow = estimateTokens(safePrompt) - 5000;
-      if (overflow > 0) {
-        const cutStart = Math.floor(safePrompt.length * 0.5);
-        safePrompt = safePrompt.slice(0, cutStart) + "\n[...contenido recortado por limite 413...]\n" + safePrompt.slice(safePrompt.length - 500);
-        body.messages = [{ role: "user", content: safePrompt }];
-      }
+    if (res.status === 413 && shrinkAttempts < 3) {
+      // La API reporta los numeros reales (Limit / Requested): usarlos en vez
+      // de estimar, y calibrar el estimador con ellos. Antes se comparaba
+      // contra un 5000 fijo y, si el prompt estaba por debajo, no recortaba
+      // nada: reintentaba la MISMA peticion hasta agotar los intentos.
+      shrinkAttempts++;
+      const errText = await res.text();
+      const limit = Number(errText.match(/Limit\s+(\d+)/i)?.[1]) || TPM_LIMIT;
+      const requested = Number(errText.match(/Requested\s+(\d+)/i)?.[1]) || 0;
+      const desired = body.max_tokens || COMPLETION_FLOOR;
+      calibrateTokenRatio(safePrompt.length, requested, desired);
+      const fitted = fitPrompt(safePrompt, Math.max(400, limit - desired - TPM_MARGIN));
+      let newMax = Math.max(500, Math.min(desired, limit - fitted.after - TPM_MARGIN));
+      // Si el prompt ya cabia, la reserva de respuesta es la que no cabe:
+      // bajarla a la mitad garantiza que cada reintento avance.
+      if (fitted.cutChars === 0) newMax = Math.max(400, Math.floor(newMax / 2));
+      console.log(`  Prompt demasiado largo (413): la API reporta ${requested} tokens con limite ${limit}. Prompt ~${fitted.after}, max_tokens ${newMax}. (recorte ${shrinkAttempts}/3)`);
+      safePrompt = fitted.text;
+      body.messages = [{ role: "user", content: safePrompt }];
+      body.max_tokens = newMax;
       await new Promise((r) => setTimeout(r, 3000));
       continue;
     }
@@ -443,7 +535,7 @@ Responde EXACTAMENTE como JSON (sin markdown):
   "hipotesis": "afirmacion concreta que los datos pueden apoyar o refutar"
 }`;
 
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4000, temperature: 0.7 });
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2000, temperature: 0.7 });
   const raw = data.choices[0]?.message?.content || "";
   const decision = parseJSONResponse(raw);
 
@@ -713,7 +805,7 @@ function sampleCountriesFor(suggestDecision) {
   return _sampleCache;
 }
 
-function dataDigest(fetchedData, suggestDecision = null) {
+function dataDigest(fetchedData, suggestDecision = null, compact = false) {
   let inds = fetchedData.indicators;
   const used = chosenIndicators(suggestDecision);
   let topCcs = [];
@@ -721,6 +813,19 @@ function dataDigest(fetchedData, suggestDecision = null) {
     const filtered = inds.filter(i => matchesIndicator(i.indicator_label, used));
     if (filtered.length) inds = filtered; // si nada coincide, mostrar todo (fallback seguro)
     topCcs = sampleCountriesFor(suggestDecision);
+  }
+  if (compact) {
+    // Con TABLA 1 en el prompt, las series crudas son duplicacion pura: la
+    // tabla trae esas mismas series con todos los años (~1400 tokens de
+    // diferencia). Aqui basta el inventario: WRITE sabe que existe y REVIEW
+    // puede detectar paises o indicadores inventados contra esta lista.
+    const coverages = [...new Set(inds.map(i => i.country_code))].sort().join(", ");
+    const indList = [...new Map(inds.map(i => [i.indicator_label, i.unit || "?"]))]
+      .map(([label, unit]) => `- ${label} (${unit})`).join("\n");
+    return {
+      lcn: "(las series regionales están en TABLA 1, año por año)",
+      countries: `Coberturas con datos: ${coverages}.\nIndicadores del estudio:\n${indList}\n(los valores año por año de cada serie están en TABLA 1)`,
+    };
   }
   // Series LCN: comprimir a primero/ultimo (no todos los años) + cap duro
   const lcnInds = inds.filter(i => i.country_code === "LCN").slice(0, 12);
@@ -752,10 +857,17 @@ function computeDigest(computeResults, suggestDecision = null) {
     const r = computeResults.regression;
     parts.push(`REGRESION OLS: ${r.dependent} ~ ${r.independent.join(" + ")}`);
     parts.push(`  n=${r.n}, R2=${r.r_squared?.toFixed(4)}, R2_adj=${r.adj_r_squared?.toFixed(4)}, F=${r.f_statistic?.toFixed(2)} (p=${r.f_p_value?.toFixed(4)})`);
-    for (const c of r.coefficients || []) {
-      let line = `  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}${c.robust_p !== undefined ? `, robust_p=${c.robust_p?.toFixed(4)}${c.robust_significant ? " *" : ""}` : ""}`;
-      if (c.boot_ci_95) line += ` | IC95% bootstrap=[${c.boot_ci_95[0].toFixed(4)}, ${c.boot_ci_95[1].toFixed(4)}]${c.boot_includes_zero ? " (incluye 0 -> fragil)" : " (no incluye 0)"}`;
-      parts.push(line);
+    // Con TABLA 2 en el prompt, repetir coeficiente por coeficiente es
+    // duplicacion: la tabla ya trae beta, error estandar, estadistico, p,
+    // IC95% y veredicto de evidencia.
+    if (computeResults.tables?.regression) {
+      parts.push(`  Los coeficientes estan en la TABLA 2 (con IC95% y veredicto de evidencia por parametro).`);
+    } else {
+      for (const c of r.coefficients || []) {
+        let line = `  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}${c.robust_p !== undefined ? `, robust_p=${c.robust_p?.toFixed(4)}${c.robust_significant ? " *" : ""}` : ""}`;
+        if (c.boot_ci_95) line += ` | IC95% bootstrap=[${c.boot_ci_95[0].toFixed(4)}, ${c.boot_ci_95[1].toFixed(4)}]${c.boot_includes_zero ? " (incluye 0 -> fragil)" : " (no incluye 0)"}`;
+        parts.push(line);
+      }
     }
     if (r.white_test) parts.push(`  White test: p=${r.white_test.p_value?.toFixed(4)} (${r.white_test.heteroscedastic ? "heterocedastico" : "homocedastico"})`);
     else parts.push(`  White test: NO calculado`);
@@ -767,15 +879,23 @@ function computeDigest(computeResults, suggestDecision = null) {
     parts.push(`REGRESION PANEL EN R (Efectos Fijos Bidireccionales - Pais + Año):`);
     parts.push(`  Especificación: ${rEcon.formula}`);
     parts.push(`  R2=${rEcon.r_squared?.toFixed(4)}, R2_adj=${rEcon.adj_r_squared?.toFixed(4)}, F=${rEcon.f_statistic?.toFixed(2)} (p=${rEcon.f_p_value?.toFixed(4)}), n=${rEcon.n} (${rEcon.n_countries} países)`);
-    for (const c of rEcon.coefficients) {
-      parts.push(`  ${c.name}: estimate=${c.estimate?.toFixed(4)}, std_error=${c.std_error?.toFixed(4)}, t=${c.t_stat?.toFixed(2)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}`);
+    if (computeResults.tables?.regression) {
+      parts.push(`  Los coeficientes estan en la TABLA 2.`);
+    } else {
+      for (const c of rEcon.coefficients) {
+        parts.push(`  ${c.name}: estimate=${c.estimate?.toFixed(4)}, std_error=${c.std_error?.toFixed(4)}, t=${c.t_stat?.toFixed(2)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}`);
+      }
     }
     parts.push(`  NOTA METODOLOGICA (R): Controla simultaneamente por shocks globales de año (tendencias compartidas) y caracteristicas fijas de cada pais.`);
   } else if (panel && panel.coefficients?.length) {
     parts.push(`REGRESION PANEL (efectos fijos por pais): ${panel.dependent} ~ ${panel.independent.join(" + ")}`);
     parts.push(`  n=${panel.n} obs (${panel.n_countries} paises x anos), R2=${panel.r_squared?.toFixed(4)}, dof=${panel.dof}`);
-    for (const c of panel.coefficients) {
-      parts.push(`  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}, IC95%=[${c.ci_95[0].toFixed(4)}, ${c.ci_95[1].toFixed(4)}]`);
+    if (computeResults.tables?.regression) {
+      parts.push(`  Los coeficientes estan en la TABLA 2.`);
+    } else {
+      for (const c of panel.coefficients) {
+        parts.push(`  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}, IC95%=[${c.ci_95[0].toFixed(4)}, ${c.ci_95[1].toFixed(4)}]`);
+      }
     }
     parts.push(`  NOTA: el panel usa variacion INTRA-pais en el tiempo (controla caracteristicas fijas por pais). Si el OLS agregado y el panel discrepan, reportar ambos — la discrepancia es informacion (el agregado puede estar dominado por diferencias entre paises).`);
   }
@@ -784,13 +904,20 @@ function computeDigest(computeResults, suggestDecision = null) {
     // Top correlaciones: significativas primero, luego por |r| — evita inflar
     // el digest con 100+ pares irrelevantes que rompen el limite TPM de Groq.
     const top = [...corrs].sort((a, b) => (b.significant - a.significant) || (Math.abs(b.pearson_r) - Math.abs(a.pearson_r))).slice(0, 20);
-    parts.push(`CORRELACIONES (${corrs.length} calculadas, top ${top.length} mostradas):`);
-    for (const c of top) {
-      let line = `  ${c.x} <-> ${c.y}: pearson_r=${c.pearson_r.toFixed(4)}, p=${c.pearson_p.toFixed(4)}, spearman=${c.spearman_rho.toFixed(4)}, n=${c.n}, significativa=${c.significant}`;
-      if (c.diff_pearson_r !== undefined) {
-        line += ` | en diferencias (Δ año a año): r=${c.diff_pearson_r.toFixed(4)}, p=${c.diff_pearson_p.toFixed(4)}, n=${c.diff_n}`;
+    if (computeResults.tables?.correlations) {
+      // La TABLA 3 trae exactamente estos pares, con sus valores, el Δ año a
+      // año y un veredicto de evidencia: repetirlos aqui costaba ~1000 tokens
+      // de prompt (12% del TPM) sin anadir un solo dato.
+      parts.push(`CORRELACIONES: ${corrs.length} pares calculados. Los ${top.length} mas relevantes (significativas primero) estan en la TABLA 3, con el contraste Δ año a año y el veredicto de evidencia de cada uno.`);
+    } else {
+      parts.push(`CORRELACIONES (${corrs.length} calculadas, top ${top.length} mostradas):`);
+      for (const c of top) {
+        let line = `  ${c.x} <-> ${c.y}: pearson_r=${c.pearson_r.toFixed(4)}, p=${c.pearson_p.toFixed(4)}, spearman=${c.spearman_rho.toFixed(4)}, n=${c.n}, significativa=${c.significant}`;
+        if (c.diff_pearson_r !== undefined) {
+          line += ` | en diferencias (Δ año a año): r=${c.diff_pearson_r.toFixed(4)}, p=${c.diff_pearson_p.toFixed(4)}, n=${c.diff_n}`;
+        }
+        parts.push(line);
       }
-      parts.push(line);
     }
     parts.push(`  NOTA: correlaciones en niveles entre series con tendencia pueden ser espurias (co-tendencia). Las correlaciones "en diferencias" (cambios año a año) son el test mas honesto: si la relacion en niveles desaparece en diferencias, era co-tendencia, no asociacion real.`);
   }
@@ -853,7 +980,7 @@ function formatAPA(work) {
     apa: `${apa_authors} (${work.publication_year}). ${work.title}. ${journal ? `*${journal}*. ` : ""}${doi ? `https://doi.org/${doi}` : ""}`.trim(),
     doi, title: work.title, year: work.publication_year,
     citations: work.cited_by_count,
-    abstract: reconstructAbstract(work.abstract_inverted_index).slice(0, 600),
+    abstract: reconstructAbstract(work.abstract_inverted_index).slice(0, 300),
   };
 }
 
@@ -887,7 +1014,7 @@ async function agentWrite(fetchedData, computeResults, feedback = null, topic = 
   const questionSection = suggestDecision?.pregunta
     ? `PREGUNTA DE INVESTIGACION:\n${suggestDecision.pregunta}\n\nHIPOTESIS A VERIFICAR:\n${suggestDecision.hipotesis || "(derivar de la pregunta)"}\n`
     : "";
-  const { lcn, countries } = dataDigest(fetchedData, suggestDecision);
+  const { lcn, countries } = dataDigest(fetchedData, suggestDecision, !!computeResults?.tables?.descriptive);
   const digest = computeDigest(computeResults, suggestDecision);
   const prompt = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
 
@@ -942,7 +1069,12 @@ REGLAS CRITICAS (incumplir = rechazo):
 - Total: 1200-1800 palabras. La Bibliografia es OBLIGATORIA y va AL FINAL — si te quedas sin espacio, acorta el Analisis, nunca omitas la Bibliografia.
 
 Devuelve el paper completo en Markdown.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4500, temperature: 0.6 });
+  // Reserva dimensionada al producto: el paper mide 1200-1800 palabras
+  // (~2900 tokens con tablas). Reservar 4500 regalaba 1300 tokens de prompt
+  // que Groq cuenta igual, usados o no. El suelo marca el minimo util: un
+  // paper cortado antes de tiempo lo rebota REVIEW y el bucle agranda el
+  // prompt — con 2900 garantizados se prefiere recortar el prompt.
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3200, completion_floor: 2900, temperature: 0.6 });
   let result = data.choices[0]?.message?.content || "";
   // Fallback: si el modelo no generó bibliografía (común en modelos Flash),
   // appendear una mínima basada en las fuentes usadas
@@ -955,7 +1087,7 @@ Devuelve el paper completo en Markdown.`;
 
 async function agentReview(fetchedData, computeResults, draft, suggestDecision = null) {
   console.log("[5/7] GPT-OSS 120B revisando rigor academico...\n");
-  const { lcn, countries } = dataDigest(fetchedData, suggestDecision);
+  const { lcn, countries } = dataDigest(fetchedData, suggestDecision, !!computeResults?.tables?.descriptive);
   const digest = computeDigest(computeResults, suggestDecision);
   const prompt = `Eres un revisor academico riguroso y desconfiado. Tu trabajo es detectar DATOS INVENTADOS comparando el paper contra los datos reales.
 
@@ -971,7 +1103,7 @@ RESULTADOS ESTADISTICOS REALES (Python):
 ${digest}
 
 PAPER A REVISAR:
-${truncate(draft, 5000)}
+${truncate(draft, 4000)}
 
 VERIFICACION OBLIGATORIA:
 1. Extrae TODOS los numeros/estadisticas que el paper afirma (porcentajes, coeficientes, r, p, R2, betas, medias).
@@ -990,8 +1122,10 @@ VERIFICACION OBLIGATORIA:
 Responde EXACTAMENTE como JSON (sin markdown):
 {"datos_correctos":true,"detalle_datos":"...","datos_inventados":["lista de cada valor fabricado"],"estructura_ok":true,"coherencia_ok":true,"correcciones":["..."],"datos_faltantes":null,"veredicto":"APROBADO","feedback":null}
 
-Veredicto: "APROBADO" solo si datos_correctos=true Y datos_inventados esta vacio Y estructura_ok=true. Si hay CUALQUIER dato inventado o incompleto: "REESCRIBIR" con feedback detallado listando cada correccion.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2500, temperature: 0.2 });
+Veredicto: "APROBADO" solo si datos_correctos=true Y datos_inventados esta vacio Y estructura_ok=true. Si hay CUALQUIER dato inventado o incompleto: "REESCRIBIR" con feedback detallado listando cada correccion.
+
+SE CONCISO: el JSON completo debe caber en ~800 tokens. detalle_datos en 2 frases, maximo 5 correcciones de una frase cada una, feedback en 2 frases. Si el JSON se corta a la mitad no se puede parsear y el paper se descarta sin revision: es peor quedarse corto que ser breve.`;
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2200, temperature: 0.2 });
   const raw = data.choices[0]?.message?.content || "";
   const decision = parseJSONResponse(raw);
   if (!decision) {
@@ -1038,7 +1172,7 @@ IMPORTANTE: Preserva la seccion de Bibliografia, las tablas Markdown y todas las
 NO agregues numeros, estadisticos ni tests que la REVISION no haya verificado.
 NO uses puntos suspensivos ("…") en las tablas ni inventes rutas de figuras.
 Devuelve SOLO el paper final en Markdown.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 4000, temperature: 0.5 });
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3200, temperature: 0.5 });
   let result = data.choices[0]?.message?.content || "";
   // If EDIT truncated the bibliography, re-append from original
   if (originalBib && !/## Bibliograf/i.test(result)) {

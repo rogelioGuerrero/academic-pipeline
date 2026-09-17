@@ -390,16 +390,22 @@ def get_top_countries_for_indicators(indicators: List[str], limit: int = 5) -> L
     cur = conn.cursor()
     
     placeholders = ", ".join(["?"] * len(indicators))
+    # LOWER() en ambos lados: los llamadores pasan las etiquetas en minusculas
+    # (chosenIndicators en research.mjs) y la comparacion de SQLite es sensible
+    # a mayusculas por defecto, asi que IN nunca casaba y esto devolvia siempre
+    # una lista vacia: la "muestra de 5 paises por cobertura" que documenta la
+    # metodologia no se estaba calculando.
     sql = f"""
     SELECT country_code, count(DISTINCT indicator_code) as n_indicators, count(*) as n_observations
     FROM indicator_series
     WHERE country_code != 'LCN'
-      AND (indicator_code IN ({placeholders}) OR indicator_label IN ({placeholders}))
+      AND (LOWER(indicator_code) IN ({placeholders}) OR LOWER(indicator_label) IN ({placeholders}))
     GROUP BY country_code
     ORDER BY n_indicators DESC, n_observations DESC
     LIMIT ?;
     """
-    params = indicators + indicators + [limit]
+    lowered = [str(i).lower() for i in indicators]
+    params = lowered + lowered + [limit]
     rows = cur.execute(sql, params).fetchall()
     conn.close()
     return [r["country_code"] for r in rows]

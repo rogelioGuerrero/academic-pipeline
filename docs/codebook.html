@@ -315,7 +315,7 @@ function renderMatrix() {
     ? 'Alcance: todo el catálogo.'
     : paper.sample_countries?.length
       ? `Alcance: el paper del ${esc(paper.date)}. Las columnas son su <strong>muestra real</strong> (${paper.sample_countries.map(esc).join(', ')}), tal como la eligió la consulta SQL por cobertura completa.`
-      : `<strong>Atención:</strong> este paper es anterior a que se persistiera la muestra, así que las columnas son todas las coberturas del catálogo, no la muestra que usó. Los papers nuevos sí la registran.`;
+      : `<strong>Atención:</strong> este paper no tiene muestra de países registrada (o es anterior a que se empezara a guardar), así que las columnas son todas las coberturas del catálogo, no necesariamente la muestra del análisis.`;
 
   box.innerHTML =
     `<table class="matrix"><thead><tr><th>${byIndicator ? 'Indicador' : 'Categoría'}</th>${head}</tr></thead><tbody>${body}</tbody></table>

@@ -63,6 +63,17 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
 
+      # Verde tiene que significar paper: hoy un run puede terminar en verde
+      # sin producir nada (p.ej. cuota agotada a mitad) y el checkmark miente.
+      - name: Verify a paper was produced
+        run: |
+          today=$(date -u +%Y-%m-%d)
+          if ! ls output/papers/${today}_*.md >/dev/null 2>&1; then
+            echo "::error::El run termino sin generar ningun paper con fecha ${today}. Verde sin producto es peor que rojo: revisa los logs del paso anterior."
+            exit 1
+          fi
+          echo "Paper del dia: $(ls output/papers/${today}_*.md)"
+
       - name: Copy papers to docs/ for GitHub Pages
         run: |
           mkdir -p docs/papers docs/charts

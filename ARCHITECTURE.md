@@ -74,7 +74,7 @@ El sistema separa cálculo de redacción:
 | EDITORIAL | ~1K |
 | **Total por run** | **~28K** |
 
-Safety net: si el prompt pasa de 7000 tokens, se trunca preservando instrucciones + formato. Se registra en metadata.
+Presupuesto de tokens: Groq cuenta **prompt + respuesta** contra el TPM del tier (8.000 en el gratuito), no solo el prompt. Cada llamada reparte el presupuesto: la respuesta reserva lo que el producto necesita (WRITE ~3.200, con suelo de 2.900 — un paper cortado a mitad lo rebota REVIEW), y el prompt recibe el resto; solo si no cabe una respuesta mínima útil se recorta el prompt por líneas completas preservando instrucciones y formato, y queda registrado en metadata. El digest no duplica datos: las series viven en las tablas pre-computadas y los bloques narrativos remiten a ellas. El estimador de tokens (chars/token) se auto-calibra con los números reales que la API reporta en un 413. Tests: `node scripts/test-token-budget.mjs`.
 
 ## Replicabilidad del concepto
 
