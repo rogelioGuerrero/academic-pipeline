@@ -927,67 +927,95 @@ def make_charts(data, results, outdir):
                 panel_entries.append({"name": c["name"].split(" [")[0], "beta": float(c["beta"]), "lo": float(ci[0]), "hi": float(ci[1]), "p": float(c.get("p_value", 1.0))})
 
     if ols_entries or panel_entries:
+        # Etiquetas en español para lectura directa
+        ES_NAMES = {
+            "GDP growth (annual %)": "Crecimiento del PIB",
+            "Manufacturing, value added (% of GDP)": "Manufactura (% del PIB)",
+            "Electric power consumption (kWh per capita)": "Consumo eléctrico per cápita",
+            "intercept": "Constante",
+        }
+        def _es_name(en):
+            return ES_NAMES.get(en, _short_label(en, 34))
+
+        def _verdict(e):
+            inc_zero = e["lo"] <= 0 <= e["hi"]
+            if not inc_zero and e["p"] < 0.05:
+                return "Concluyente", GREEN
+            if e["p"] < 0.10:
+                return "Marginal", "#d97706"
+            return "No concluyente", RED
+
+        def _draw_evidence(ax, entries, title):
+            """Tarjeta de evidencia: nombre ES, beta+IC en ventana legible,
+            columna de veredicto al margen derecho."""
+            span = max(30.0, max(abs(e["beta"]) for e in entries) * 1.7)
+            ax.set_xlim(-span, span)
+            ax.set_ylim(-0.8, len(entries) - 0.2)
+            ax.axvline(0, color=NAVY, lw=1.2, ls="--", alpha=0.75)
+            ax.axvspan(-span, span, color="none")
+            for i, e in enumerate(entries):
+                verdict, color = _verdict(e)
+                lo_c, hi_c = max(e["lo"], -span * 0.995), min(e["hi"], span * 0.995)
+                # barra del IC95% (recortada a la ventana; flechas si se sale)
+                ax.plot([lo_c, hi_c], [i, i], color=color, lw=5, alpha=0.35,
+                        solid_capstyle="round", zorder=2)
+                if e["lo"] < -span:
+                    ax.plot([-span], [i], marker="<", color=color, ms=6, zorder=3)
+                if e["hi"] > span:
+                    ax.plot([span], [i], marker=">", color=color, ms=6, zorder=3)
+                ax.plot([e["beta"]], [i], marker="o", ms=9, color=color,
+                        mec="white", mew=1.4, zorder=4)
+                # columna derecha: numeros + veredicto
+                p_str = f"p={e['p']:.3f}" if e["p"] >= 0.001 else "p<0.001"
+                ax.annotate(
+                    f"β = {e['beta']:+.1f}   {p_str}\nIC95% [{e['lo']:.1f}, {e['hi']:.1f}]\n{verdict}",
+                    xy=(1.05, i), xycoords=("axes fraction", "data"),
+                    fontsize=7.2, va="center", ha="left", color="#1f2937", linespacing=1.45,
+                    bbox=dict(boxstyle="round,pad=0.4", facecolor="#f8fafc",
+                              edgecolor=color, lw=1.5))
+            ax.set_yticks(range(len(entries)))
+            ax.set_yticklabels([_es_name(e["name"]) for e in entries], fontsize=9, fontweight="bold")
+            ax.set_title(title, loc="left", fontsize=9.5, fontweight="bold", color=NAVY, pad=8)
+            ax.grid(axis="x", alpha=0.3, ls=":")
+            ax.tick_params(axis="x", labelsize=8)
+            _despine(ax)
+            ax.spines["left"].set_visible(False)
+
         n_plots = (1 if panel_entries else 0) + (1 if ols_entries else 0)
-        fig, axes = plt.subplots(n_plots, 1, figsize=(7.2, 2.4 * n_plots), sharex=False)
+        n_rows = max(len(panel_entries), len(ols_entries))
+        fig, axes = plt.subplots(n_plots, 1,
+                                 figsize=(9.2, (0.95 * n_rows + 0.9) * n_plots + 0.6),
+                                 sharex=False)
         if n_plots == 1:
             axes = [axes]
+        fig.subplots_adjust(left=0.20, right=0.60, hspace=0.85, top=0.92)
 
         ax_idx = 0
         all_forest_entries = []
         if panel_entries:
-            ax = axes[ax_idx]
-            ys = np.arange(len(panel_entries))
-            labels = [_short_label(e["name"], 32) for e in panel_entries]
-            ax.axvline(0, color=NAVY, lw=1.2, ls="--", alpha=0.7)
-            for i, e in enumerate(panel_entries):
-                includes_zero = (e["lo"] <= 0 <= e["hi"])
-                color = GREEN if not includes_zero else "#d97706"
-                ax.errorbar([e["beta"]], [i], xerr=[[e["beta"] - e["lo"]], [e["hi"] - e["beta"]]], fmt="s",
-                            color=color, ecolor=color, elinewidth=2.5, capsize=6, capthick=2, ms=7, zorder=3)
-                p_str = f"p={e['p']:.3f}" if e['p'] >= 0.001 else "p<0.001"
-                status = "Robusto" if not includes_zero else "Incluye 0 (Frágil)"
-                badge = f"β={e['beta']:+.2f} ({p_str}) | IC95% [{e['lo']:.1f}, {e['hi']:.1f}] — {status}"
-                ax.annotate(badge, (e["beta"], i), textcoords="offset points", xytext=(0, 10),
-                            ha="center", fontsize=7.8, fontweight="bold", color="#1f2937",
-                            bbox=dict(boxstyle="round,pad=0.2", facecolor="#f8fafc", edgecolor="#cbd5e1", alpha=0.9))
+            _draw_evidence(axes[ax_idx], panel_entries,
+                           "Panel de efectos fijos — cada país contra sí mismo")
+            for e in panel_entries:
                 all_forest_entries.append({"label": f"Panel FE · {e['name']}", "beta": e["beta"], "lo": e["lo"], "hi": e["hi"], "model": "Panel"})
-            ax.set_yticks(ys)
-            ax.set_yticklabels(labels, fontsize=8.5, fontweight="bold")
-            ax.set_title("Panel Efectos Fijos por País (Variación Intra-País)", fontsize=9.5, fontweight="bold", color=NAVY, pad=14)
-            ax.grid(axis="x", alpha=0.25, ls=":")
-            _despine(ax)
             ax_idx += 1
-
         if ols_entries:
-            ax = axes[ax_idx]
-            ys = np.arange(len(ols_entries))
-            labels = [_short_label(e["name"], 32) for e in ols_entries]
-            ax.axvline(0, color=NAVY, lw=1.2, ls="--", alpha=0.7)
-            for i, e in enumerate(ols_entries):
-                includes_zero = (e["lo"] <= 0 <= e["hi"])
-                color = GREEN if not includes_zero else "#d97706"
-                ax.errorbar([e["beta"]], [i], xerr=[[e["beta"] - e["lo"]], [e["hi"] - e["beta"]]], fmt="o",
-                            color=color, ecolor=color, elinewidth=2.5, capsize=6, capthick=2, ms=7, zorder=3)
-                p_str = f"p={e['p']:.3f}" if e['p'] >= 0.001 else "p<0.001"
-                status = "Robusto" if not includes_zero else "Incluye 0 (Frágil)"
-                badge = f"β={e['beta']:+.2f} ({p_str}) | IC95% [{e['lo']:.1f}, {e['hi']:.1f}] — {status}"
-                ax.annotate(badge, (e["beta"], i), textcoords="offset points", xytext=(0, 10),
-                            ha="center", fontsize=7.8, fontweight="bold", color="#1f2937",
-                            bbox=dict(boxstyle="round,pad=0.2", facecolor="#f8fafc", edgecolor="#cbd5e1", alpha=0.9))
+            _draw_evidence(axes[ax_idx], ols_entries,
+                           "OLS regional — América Latina como una sola serie (bootstrap 2,000)")
+            axes[ax_idx].set_xlabel("Magnitud del efecto (β) con su intervalo de confianza al 95%",
+                                    fontsize=8, color="#475569")
+            for e in ols_entries:
                 all_forest_entries.append({"label": f"OLS · {e['name']}", "beta": e["beta"], "lo": e["lo"], "hi": e["hi"], "model": "OLS"})
-            ax.set_yticks(ys)
-            ax.set_yticklabels(labels, fontsize=8.5, fontweight="bold")
-            ax.set_title("Regresión OLS Agregada Regional (Bootstrap)", fontsize=9.5, fontweight="bold", color=NAVY, pad=14)
-            ax.set_xlabel("Magnitud del coeficiente e Intervalo de Confianza (IC 95%)", fontsize=8.5, color="#475569")
-            ax.grid(axis="x", alpha=0.25, ls=":")
-            _despine(ax)
 
-        fig.tight_layout()
+        # Leyenda: qué significa que la barra cruce el cero
+        fig.text(0.02, 0.005,
+                 "La barra es el rango plausible del efecto (IC95%). Si cruza la línea punteada del cero, "
+                 "el dato no alcanza para afirmar que hay efecto.",
+                 fontsize=7.2, color="#475569", style="italic")
         _watermark(fig)
         fname = "fig5_forest.png"
         fig.savefig(os.path.join(outdir, fname), dpi=150)
         plt.close(fig)
-        charts.append({"file": fname, "caption": "Gráfico de coeficientes con intervalos de confianza al 95% (Panel FE y OLS agregado con escalas independientes y anotaciones de robustez)."})
+        charts.append({"file": fname, "caption": "Tarjetas de evidencia: efecto estimado (punto) y rango plausible IC95% (barra) para cada coeficiente del panel de efectos fijos y del OLS regional. Las flechas indican intervalos que exceden la ventana del gráfico."})
         chart_data["figures"][fname] = {"type": "forest", "entries": all_forest_entries}
 
     # ── Fig 6: heatmap pais x par de indicadores (heterogeneidad visible) ──
