@@ -1091,6 +1091,163 @@ Devuelve el paper completo en Markdown.`;
   return repairTablesAndCharts(result, computeResults);
 }
 
+// ── Verificación determinista de cifras ──
+// REVIEW/APPROVE solo leen los primeros ~4.000 chars del draft; un dato
+// inventado en el resto del texto era invisible para ambos controles.
+// Esto extrae TODA cifra con decimales o % del paper completo y la coteja
+// contra los valores computados, a precision de redondeo. Cero tokens,
+// 100% del texto, auditable. Lo mecanico al servidor, el juicio al LLM.
+function collectAllowedNumbers(computeResults, fetchedData) {
+  const vals = [];
+  const push = v => { if (typeof v === "number" && Number.isFinite(v)) vals.push(v); };
+  const pushList = l => { if (Array.isArray(l)) l.forEach(push); };
+
+  for (const ind of fetchedData?.indicators || []) {
+    const ys = (ind.series || []).map(s => s.value).filter(v => typeof v === "number");
+    ys.forEach(push);
+    // Derivaciones directas que el REVIEW ya permite: diferencias y % de
+    // cambio entre años de la misma serie ("subio X puntos", "crecio Y%").
+    for (let i = 0; i < ys.length; i++) for (let j = 0; j < ys.length; j++) {
+      if (i === j) continue;
+      push(ys[i] - ys[j]);
+      if (ys[j]) push((ys[i] - ys[j]) / Math.abs(ys[j]) * 100);
+    }
+  }
+  const cr = computeResults || {};
+  for (const st of Object.values(cr.descriptive || {})) {
+    push(st.n); push(st.mean); push(st.median); push(st.std); push(st.min); push(st.max);
+  }
+  for (const c of cr.correlations || []) {
+    push(c.pearson_r); push(c.pearson_p); push(c.spearman_rho); push(c.spearman_p); push(c.n);
+    pushList(c.pearson_ci_95);
+  }
+  const regFields = o => {
+    if (!o) return;
+    push(o.n); push(o.n_countries); push(o.r_squared); push(o.adj_r_squared);
+    push(o.f_statistic); push(o.f_p_value); pushList(o.vif);
+    if (o.white_test) { push(o.white_test.lm_stat); push(o.white_test.p_value); }
+    for (const c of o.coefficients || []) {
+      push(c.beta); push(c.se); push(c.t); push(c.p_value); push(c.boot_includes_zero);
+      pushList(c.ci_95); pushList(c.boot_ci_95);
+    }
+  };
+  regFields(cr.regression); regFields(cr.panel); regFields(cr.r_econometrics);
+  for (const t of cr.trends || []) {
+    push(t.n); push(t.slope); push(t.slope_p); push(t.r_squared);
+    push(t.mann_kendall_z); push(t.mann_kendall_p);
+  }
+  for (const a of cr.anomalies || []) { push(a.z_score); push(a.value); push(a.year); }
+  // Sin datos reales no hay nada contra que verificar: devolver vacio para
+  // que verifyNumbers se salte (solo con umbrales marcaria todo como inventado)
+  if (!vals.length) return [];
+  push((cr.correlations || []).length);
+  push((cr.charts || []).length);
+  const sum = fetchedData?.summary || {};
+  push(sum.total_indicators); push(sum.total_series); push(sum.total_countries);
+  // Umbrales y constantes de metodo: el paper los menciona sin ser datos
+  [0.05, 0.01, 0.001, 0.1, 1, 2, 5, 10, 95, 99, 2000].forEach(push);
+  return vals;
+}
+
+// "12,345" puede ser miles o decimal en texto ES: devuelve ambas lecturas.
+// Solo interpreta un separador como miles con 3 digitos y grupos claros.
+function parseNumberToken(tok) {
+  const hasPct = tok.endsWith("%");
+  let s = hasPct ? tok.slice(0, -1) : tok;
+  const neg = s.startsWith("-");
+  if (neg) s = s.slice(1);
+  const sign = neg ? -1 : 1;
+  const out = [];
+  const lastDot = s.lastIndexOf("."), lastComma = s.lastIndexOf(",");
+  if (lastDot >= 0 && lastComma >= 0) {
+    const decSep = lastDot > lastComma ? "." : ",";
+    const norm = s.split(decSep === "." ? "," : ".").join("").replace(decSep, ".");
+    const v = parseFloat(norm);
+    const dec = s.length - Math.max(lastDot, lastComma) - 1;
+    if (isFinite(v)) out.push({ value: sign * v, decimals: dec });
+  } else if (lastDot >= 0 || lastComma >= 0) {
+    const idx = Math.max(lastDot, lastComma);
+    const sep = s[idx];
+    const after = s.length - idx - 1;
+    const parts = s.split(sep);
+    if (parts.length > 2) {
+      // "1.234.567" -> miles
+      const v = parseFloat(parts.join(""));
+      if (isFinite(v)) out.push({ value: sign * v, decimals: 0 });
+    } else {
+      const asDec = parseFloat(s.replace(sep, "."));
+      if (isFinite(asDec)) out.push({ value: sign * asDec, decimals: after });
+      if (after === 3) {
+        const asInt = parseFloat(parts.join(""));
+        if (isFinite(asInt)) out.push({ value: sign * asInt, decimals: 0 });
+      }
+    }
+  } else {
+    const v = parseFloat(s);
+    if (isFinite(v)) out.push({ value: sign * v, decimals: 0 });
+  }
+  return out;
+}
+
+function matchesAllowedNumber(claim, allowed) {
+  for (const it of claim.interps) {
+    // Ventana: medio ULP del redondeo mostrado + 1% relativo
+    const w = 0.5 * Math.pow(10, -it.decimals) + Math.abs(it.value) * 0.01;
+    for (const r of allowed) {
+      if (Math.abs(it.value - r) <= w) return true;
+      // Una fraccion puede reportarse como porcentaje (r=0.87 -> "87%").
+      // La ventana va en puntos porcentuales absolutos: el 1% relativo de 66
+      // seria 0.67 pp, demasiado laxo (aceptaba "66.6%" contra 0.66 real).
+      if (claim.percent && Math.abs(it.value - r * 100) <= 0.5 * Math.pow(10, -it.decimals) + 0.05) return true;
+    }
+  }
+  return false;
+}
+
+function verifyNumbers(draft, computeResults, fetchedData) {
+  const allowed = collectAllowedNumbers(computeResults, fetchedData);
+  if (!allowed.length || !draft) return { checked: 0, invented: [] };
+
+  // Zonas con digitos no-verificables: codigo, URLs, DOIs, rutas de figuras,
+  // numeracion de encabezados (### 3.1)
+  const clean = draft
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/`[^`\n]*`/g, " ")
+    .replace(/https?:\/\/\S+/g, " ")
+    .replace(/\b10\.\d{4,}\/\S+/g, " ")
+    .replace(/[\w/.-]*charts?\/[\w/.-]+/g, " ")
+    .replace(/^(#{1,6})\s*[\d.]+\s+/gm, "$1 ");
+
+  const claims = [];
+  const re = /-?\d+(?:[.,]\d+)*%?/g;
+  let m;
+  while ((m = re.exec(clean)) !== null) {
+    let tok = m[0];
+    const isPct = tok.endsWith("%");
+    const before = clean.slice(Math.max(0, m.index - 10), m.index);
+    // "2015-2024": el "-" es guion de rango, no signo -> evaluar el extremo
+    if (tok.startsWith("-") && /\d$/.test(before)) tok = tok.slice(1);
+    const hasSep = /[.,]\d/.test(tok);
+    if (!hasSep && !isPct) continue;               // enteros: años, conteos, refs
+    const interps = parseNumberToken(tok);
+    if (!interps.length) continue;
+    if (interps.every(i => i.value >= 1900 && i.value <= 2100 && i.decimals === 0)) continue;
+    // Umbrales en desigualdad ("p < 0.05", "r > 0.9") no son afirmaciones
+    if (/[<>≤≥]\s*$/.test(before)) continue;
+    claims.push({ text: tok, interps, percent: isPct });
+  }
+
+  const invented = [];
+  const seen = new Set();
+  for (const c of claims) {
+    if (!matchesAllowedNumber(c, allowed) && !seen.has(c.text)) {
+      seen.add(c.text);
+      invented.push(c);
+    }
+  }
+  return { checked: claims.length, invented };
+}
+
 async function agentReview(fetchedData, computeResults, draft, suggestDecision = null) {
   console.log("[5/7] GPT-OSS 120B revisando rigor academico...\n");
   const { lcn, countries } = dataDigest(fetchedData, suggestDecision, !!computeResults?.tables?.descriptive);
@@ -1156,6 +1313,20 @@ SE CONCISO: el JSON completo debe caber en ~800 tokens. detalle_datos en 2 frase
     decision.veredicto = "REESCRIBIR";
     decision.feedback = decision.feedback || `Datos inventados detectados: ${(decision.datos_inventados || []).join("; ")}`;
   }
+  // Verificación determinista de cifras: cubre el 100% del draft (el revisor
+  // LLM solo ve los primeros 4.000 chars). Cualquier cifra sin respaldo en los
+  // resultados computados fuerza REESCRIBIR, diga lo que diga el veredicto.
+  const numCheck = verifyNumbers(draft, computeResults, fetchedData);
+  console.log(`Verificación de cifras: ${numCheck.checked} revisadas, ${numCheck.invented.length} sin respaldo en datos.`);
+  if (numCheck.invented.length) {
+    decision.veredicto = "REESCRIBIR";
+    decision.datos_correctos = false;
+    decision.datos_inventados = [...(decision.datos_inventados || []),
+      ...numCheck.invented.slice(0, 5).map(c => `${c.text} (no coincide con ningún valor computado)`)];
+    decision.feedback = (decision.feedback ? decision.feedback + "; " : "") +
+      `Verificación automática detectó ${numCheck.invented.length} cifra(s) sin respaldo: ${numCheck.invented.slice(0, 3).map(c => c.text).join(", ")}. Elimínalas o usa valores de las tablas.`;
+  }
+  decision.number_check = { checked: numCheck.checked, invented: numCheck.invented.length };
   console.log("Review:\n" + JSON.stringify(decision, null, 2).slice(0, 500) + "\n");
   return decision;
 }
@@ -1253,8 +1424,22 @@ function repairTablesAndCharts(markdownText, computeResults) {
   return text;
 }
 
-async function agentApprove(finalText) {
+async function agentApprove(finalText, computeResults = null, fetchedData = null) {
   console.log("[7/7] GPT-OSS 20B QA final...\n");
+  // Verificación determinista de cifras sobre el texto COMPLETO (el QA solo
+  // lee 4.000 chars). Una cifra sin respaldo computado es motivo de rechazo:
+  // mejor un run que falla ruidosamente que publicar un numero inventado.
+  const numCheck = verifyNumbers(finalText, computeResults, fetchedData);
+  if (numCheck.invented.length) {
+    console.log(`QA: ${numCheck.invented.length} cifra(s) sin respaldo detectadas por verificación automática.`);
+    return {
+      veredicto: "RECHAZADO",
+      checklist: { estructura_ok: true, datos_verificados: false, resumen_ok: true, bibliografia_ok: true, citas_apa_ok: true, coherencia_ok: false, tono_academico: true, extension_ok: true },
+      palabras: finalText.split(/\s+/).length,
+      issues: numCheck.invented.slice(0, 8).map(c => `Cifra sin respaldo en datos computados: ${c.text}`),
+      number_check: { checked: numCheck.checked, invented: numCheck.invented.length }
+    };
+  }
   const hasBrokenTables = /\|[^\n]*(?:…|\.{3})[^\n]*\|/.test(finalText);
   if (hasBrokenTables) {
     return {
@@ -1332,6 +1517,7 @@ function transparencyNote(state) {
     "",
     "**Proceso editorial.** Siete nodos automáticos: FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE.",
     state.reviewDecision ? `Revisión de rigor: veredicto ${state.reviewDecision.veredicto}${state.reviewDecision.datos_inventados?.length ? ` (detectó ${state.reviewDecision.datos_inventados.length} datos inventados, corregidos en reescritura)` : ""}.` : "",
+    state.reviewDecision?.number_check?.checked ? `Verificación automática de cifras: ${state.reviewDecision.number_check.checked} cifras del texto cotejadas contra los resultados computados${state.reviewDecision.number_check.invented ? `; ${state.reviewDecision.number_check.invented} sin respaldo detectada(s) y corregida(s) en reescritura` : ""}.` : "",
     state.qaDecision ? `Control de calidad final: veredicto ${state.qaDecision.veredicto}.` : "",
     `Iteraciones: ${it.rewrite} reescritura(s), ${it.edit} reedición(es).`,
     "",
@@ -1509,7 +1695,7 @@ class MoAGraph {
   async nodeApprove() {
     this.logNode("APPROVE"); await delay(40);
     this.state.editedArticle = repairTablesAndCharts(this.state.editedArticle, this.state.computeResults);
-    try { this.state.qaDecision = await this.runWithGuardrails("APPROVE", () => agentApprove(this.state.editedArticle)); }
+    try { this.state.qaDecision = await this.runWithGuardrails("APPROVE", () => agentApprove(this.state.editedArticle, this.state.computeResults, this.state.fetchedData)); }
     catch (e) { console.log(`  QA fallo (${e.message}). Auto-aprobando.`); this.state.qaDecision = { veredicto: "APROBADO", checklist: {}, palabras: 0, issues: ["QA no ejecutado"] }; }
     return resolveTransition("APPROVE", this.state);
   }
