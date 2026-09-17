@@ -20,6 +20,10 @@
     .note { background: #e8f0fe; border-left: 3px solid #1a73e8; padding: 12px 16px; margin: 16px 0; font-size: 0.92em; }
     .back { display: inline-block; margin-bottom: 16px; color: #1a73e8; text-decoration: none; font-size: 0.9em; }
     .back:hover { text-decoration: underline; }
+    details.simple { margin: 16px 0; border: 1px solid #e3e0da; border-radius: 8px; padding: 10px 16px; background: #fff; }
+    details.simple summary { cursor: pointer; font-weight: 600; color: #14213d; font-size: 0.95em; }
+    details.simple summary:hover { color: #1a73e8; }
+    details.simple table { font-size: 0.88em; margin: 12px 0 6px; }
   </style>
 </head>
 <body>
@@ -57,6 +61,21 @@
     <tr><td><strong>Compatibilidad de unidades</strong></td><td>Solo correlaciona pares semánticamente comparables</td><td>Guardia explícita: impide correlaciones sin sentido (ej. población absoluta vs tasa %)</td></tr>
   </table>
   <p><em>Glosario rápido: <strong>p-valor</strong> = probabilidad de observar un resultado así por puro azar si no existiera relación (p&lt;0.05 se considera "significativo"); <strong>IC95%</strong> = intervalo de confianza al 95%, el rango donde probablemente cae el valor verdadero; <strong>β</strong> = coeficiente: cuánto cambia la variable dependiente por cada unidad que sube la independiente; <strong>Δ</strong> = cambio año a año.</em></p>
+
+  <details class="simple">
+    <summary>En palabras simples: ¿qué pregunta responde cada método?</summary>
+    <table>
+      <tr><th>Método</th><th>En una frase</th></tr>
+      <tr><td>Pearson</td><td>¿Los dos indicadores se mueven juntos formando una línea recta?</td></tr>
+      <tr><td>Spearman</td><td>¿Se mueven juntos aunque no sea en línea recta? (le importa poco que 2020 haya sido un año loco)</td></tr>
+      <tr><td>Primeras diferencias (Δ)</td><td>Cuando uno <em>cambia</em>, ¿el otro cambia ese mismo año? — desenmascara "falsas amistades" entre dos series que simplemente crecen cada una por su lado</td></tr>
+      <tr><td>Regresión OLS</td><td>Pone un número a la relación: si X sube 1 unidad, ¿cuánto sube Y?</td></tr>
+      <tr><td>Bootstrap</td><td>¿Ese número es confiable o fue suerte? Repite el cálculo 2,000 veces barajando los datos</td></tr>
+      <tr><td>Panel de efectos fijos</td><td>Compara cada país contra <em>sí mismo</em> a través de los años, en vez de mezclar países distintos</td></tr>
+      <tr><td>Mann-Kendall</td><td>¿La serie va hacia algún lado o solo se mece? Compara cada año contra todos los demás y cuenta cuántas veces "subió" vs "bajó"</td></tr>
+      <tr><td>z-score / IQR</td><td>¿Qué año fue tan raro que se sale de lo normal? (la respuesta casi siempre es 2020)</td></tr>
+    </table>
+  </details>
 
   <h2>Cómo leer los resultados: ejemplos con datos reales</h2>
   <p>Con los números del último paper publicado (<a href="index.html#2026-09-16_financiamiento-del-sector-el-ctrico-medi.md">Financiamiento del sector eléctrico y crecimiento del PIB en América Latina</a>):</p>
