@@ -1,0 +1,980 @@
+{
+  "generated": "2026-09-17T14:58:10+00:00",
+  "window": {
+    "from": 2015,
+    "to": 2024
+  },
+  "totals": {
+    "indicators_with_data": 23,
+    "countries": 7,
+    "series": 158,
+    "observations": 1492,
+    "papers": 3
+  },
+  "countries": [
+    {
+      "code": "ARG",
+      "name": "Argentina"
+    },
+    {
+      "code": "BRA",
+      "name": "Brazil"
+    },
+    {
+      "code": "CHL",
+      "name": "Chile"
+    },
+    {
+      "code": "COL",
+      "name": "Colombia"
+    },
+    {
+      "code": "GTM",
+      "name": "Guatemala"
+    },
+    {
+      "code": "LCN",
+      "name": "Latin America & Caribbean (regional)"
+    },
+    {
+      "code": "MEX",
+      "name": "Mexico"
+    }
+  ],
+  "papers": [
+    {
+      "date": "2026-09-16",
+      "file": "2026-09-16_financiamiento-del-sector-el-ctrico-medi.md",
+      "topic": "Financiamiento del sector eléctrico mediante bonos soberanos y su impacto en el consumo de energía y el crecimiento del PIB en América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "MEX"
+      ],
+      "sample_indicators": [
+        "Electric power consumption (kWh per capita)",
+        "GDP growth (annual %)",
+        "Manufacturing, value added (% of GDP)"
+      ],
+      "indicators": [
+        "Electric power consumption (kWh per capita)",
+        "GDP growth (annual %)",
+        "Manufacturing, value added (% of GDP)"
+      ]
+    },
+    {
+      "date": "2026-09-13",
+      "file": "2026-09-13_regulaci-n-de-ia-y-digitalizaci-n--impac.md",
+      "topic": "Regulación de IA y digitalización: impacto en el empleo del sector servicios en América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "GTM"
+      ],
+      "sample_indicators": [
+        "Total unemployment (% of total labor force)",
+        "Vulnerable employment (% of total employment)",
+        "GDP growth (annual %)"
+      ],
+      "indicators": [
+        "GDP growth (annual %)",
+        "Total unemployment (% of total labor force)",
+        "Vulnerable employment (% of total employment)"
+      ]
+    },
+    {
+      "date": "2026-09-13",
+      "file": "2026-09-13_penetraci-n-digital-y-empleo-vulnerable-.md",
+      "topic": "Penetración digital y empleo vulnerable en América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "GTM"
+      ],
+      "sample_indicators": [
+        "Vulnerable employment (% of total employment)",
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)"
+      ],
+      "indicators": [
+        "Vulnerable employment (% of total employment)",
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "name": "employment",
+      "n_indicators": 4,
+      "n_observations": 280,
+      "indicators": [
+        {
+          "code": "SL.SRV.EMPL.ZS",
+          "label": "Employment in services (% of total employment)",
+          "category": "employment",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SL.SRV.EMPL.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": []
+        },
+        {
+          "code": "SL.UEM.TOTL.ZS",
+          "label": "Total unemployment (% of total labor force)",
+          "category": "employment",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": [
+            {
+              "date": "2026-09-13",
+              "file": "2026-09-13_regulaci-n-de-ia-y-digitalizaci-n--impac.md",
+              "topic": "Regulación de IA y digitalización: impacto en el empleo del sector servicios en América Latina"
+            }
+          ]
+        },
+        {
+          "code": "SL.EMP.VULN.ZS",
+          "label": "Vulnerable employment (% of total employment)",
+          "category": "employment",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SL.EMP.VULN.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": [
+            {
+              "date": "2026-09-13",
+              "file": "2026-09-13_regulaci-n-de-ia-y-digitalizaci-n--impac.md",
+              "topic": "Regulación de IA y digitalización: impacto en el empleo del sector servicios en América Latina"
+            },
+            {
+              "date": "2026-09-13",
+              "file": "2026-09-13_penetraci-n-digital-y-empleo-vulnerable-.md",
+              "topic": "Penetración digital y empleo vulnerable en América Latina"
+            }
+          ]
+        },
+        {
+          "code": "SL.UEM.1524.ZS",
+          "label": "Youth unemployment (% of labor force 15-24)",
+          "category": "employment",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SL.UEM.1524.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": []
+        }
+      ]
+    },
+    {
+      "name": "economy",
+      "n_indicators": 7,
+      "n_observations": 487,
+      "indicators": [
+        {
+          "code": "BX.KLT.DINV.WD.GD.ZS",
+          "label": "Foreign direct investment, net inflows (% of GDP)",
+          "category": "economy",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/BX.KLT.DINV.WD.GD.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": []
+        },
+        {
+          "code": "NY.GDP.MKTP.KD.ZG",
+          "label": "GDP growth (annual %)",
+          "category": "economy",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": [
+            {
+              "date": "2026-09-16",
+              "file": "2026-09-16_financiamiento-del-sector-el-ctrico-medi.md",
+              "topic": "Financiamiento del sector eléctrico mediante bonos soberanos y su impacto en el consumo de energía y el crecimiento del PIB en América Latina"
+            },
+            {
+              "date": "2026-09-13",
+              "file": "2026-09-13_regulaci-n-de-ia-y-digitalizaci-n--impac.md",
+              "topic": "Regulación de IA y digitalización: impacto en el empleo del sector servicios en América Latina"
+            }
+          ]
+        },
+        {
+          "code": "NY.GDP.PCAP.CD",
+          "label": "GDP per capita (current US$)",
+          "category": "economy",
+          "unit": "USD",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": []
+        },
+        {
+          "code": "FP.CPI.TOTL.ZG",
+          "label": "Inflation, consumer prices (annual %)",
+          "category": "economy",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 7,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 67,
+          "n_observations_expected": 70,
+          "papers": []
+        },
+        {
+          "code": "NV.IND.MANF.ZS",
+          "label": "Manufacturing, value added (% of GDP)",
+          "category": "economy",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/NV.IND.MANF.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": [
+            {
+              "date": "2026-09-16",
+              "file": "2026-09-16_financiamiento-del-sector-el-ctrico-medi.md",
+              "topic": "Financiamiento del sector eléctrico mediante bonos soberanos y su impacto en el consumo de energía y el crecimiento del PIB en América Latina"
+            }
+          ]
+        },
+        {
+          "code": "BX.TRF.PWKR.CD.DT",
+          "label": "Personal remittances received (current US$)",
+          "category": "economy",
+          "unit": "USD",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/BX.TRF.PWKR.CD.DT",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": []
+        },
+        {
+          "code": "NE.TRD.GNFS.ZS",
+          "label": "Trade (% of GDP)",
+          "category": "economy",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/NE.TRD.GNFS.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": []
+        }
+      ]
+    },
+    {
+      "name": "education",
+      "n_indicators": 3,
+      "n_observations": 172,
+      "indicators": [
+        {
+          "code": "SE.XPD.TOTL.GD.ZS",
+          "label": "Government expenditure on education (% of GDP)",
+          "category": "education",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 9,
+            "BRA": 8,
+            "CHL": 8,
+            "COL": 6,
+            "GTM": 10,
+            "LCN": 9,
+            "MEX": 7
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 57,
+          "n_observations_expected": 70,
+          "papers": []
+        },
+        {
+          "code": "SE.SEC.ENRR",
+          "label": "Secondary school enrollment (% gross)",
+          "category": "education",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SE.SEC.ENRR",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 9,
+            "BRA": 9,
+            "CHL": 10,
+            "COL": 8,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 66,
+          "n_observations_expected": 70,
+          "papers": []
+        },
+        {
+          "code": "SE.ADT.1524.LT.ZS",
+          "label": "Youth literacy rate (% of people 15-24)",
+          "category": "education",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SE.ADT.1524.LT.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 1,
+            "BRA": 10,
+            "CHL": 3,
+            "COL": 10,
+            "GTM": 5,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 49,
+          "n_observations_expected": 70,
+          "papers": []
+        }
+      ]
+    },
+    {
+      "name": "technology",
+      "n_indicators": 2,
+      "n_observations": 140,
+      "indicators": [
+        {
+          "code": "IT.NET.USER.ZS",
+          "label": "Internet users (% of population)",
+          "category": "technology",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/IT.NET.USER.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": [
+            {
+              "date": "2026-09-13",
+              "file": "2026-09-13_penetraci-n-digital-y-empleo-vulnerable-.md",
+              "topic": "Penetración digital y empleo vulnerable en América Latina"
+            }
+          ]
+        },
+        {
+          "code": "IT.CEL.SETS.P2",
+          "label": "Mobile cellular subscriptions (per 100 people)",
+          "category": "technology",
+          "unit": "per100",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": [
+            {
+              "date": "2026-09-13",
+              "file": "2026-09-13_penetraci-n-digital-y-empleo-vulnerable-.md",
+              "topic": "Penetración digital y empleo vulnerable en América Latina"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "demographics",
+      "n_indicators": 2,
+      "n_observations": 140,
+      "indicators": [
+        {
+          "code": "SM.POP.NETM",
+          "label": "Net migration (total people)",
+          "category": "demographics",
+          "unit": "count",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SM.POP.NETM",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": []
+        },
+        {
+          "code": "SP.URB.TOTL.IN.ZS",
+          "label": "Urban population (% of total)",
+          "category": "demographics",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": []
+        }
+      ]
+    },
+    {
+      "name": "inequality",
+      "n_indicators": 2,
+      "n_observations": 69,
+      "indicators": [
+        {
+          "code": "SI.POV.GINI",
+          "label": "Gini index",
+          "category": "inequality",
+          "unit": "index",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SI.POV.GINI",
+          "n_countries": 6,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "MEX"
+          ],
+          "missing_countries": [
+            "LCN"
+          ],
+          "by_country": {
+            "ARG": 9,
+            "BRA": 10,
+            "CHL": 5,
+            "COL": 10,
+            "GTM": 1,
+            "MEX": 5
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 40,
+          "n_observations_expected": 60,
+          "papers": []
+        },
+        {
+          "code": "SI.POV.NAHC",
+          "label": "Poverty headcount at national poverty line (% of population)",
+          "category": "inequality",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SI.POV.NAHC",
+          "n_countries": 5,
+          "countries": [
+            "ARG",
+            "CHL",
+            "COL",
+            "GTM",
+            "MEX"
+          ],
+          "missing_countries": [
+            "BRA",
+            "LCN"
+          ],
+          "by_country": {
+            "ARG": 9,
+            "CHL": 4,
+            "COL": 10,
+            "GTM": 1,
+            "MEX": 5
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 29,
+          "n_observations_expected": 50,
+          "papers": []
+        }
+      ]
+    },
+    {
+      "name": "health",
+      "n_indicators": 2,
+      "n_observations": 135,
+      "indicators": [
+        {
+          "code": "SH.XPD.CHEX.GD.ZS",
+          "label": "Current health expenditure (% of GDP)",
+          "category": "health",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 9,
+            "BRA": 9,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 9,
+            "LCN": 9,
+            "MEX": 9
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 65,
+          "n_observations_expected": 70,
+          "papers": []
+        },
+        {
+          "code": "SP.DYN.LE00.IN",
+          "label": "Life expectancy at birth (years)",
+          "category": "health",
+          "unit": "years",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SP.DYN.LE00.IN",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 70,
+          "n_observations_expected": 70,
+          "papers": []
+        }
+      ]
+    },
+    {
+      "name": "environment",
+      "n_indicators": 1,
+      "n_observations": 69,
+      "indicators": [
+        {
+          "code": "EG.USE.ELEC.KH.PC",
+          "label": "Electric power consumption (kWh per capita)",
+          "category": "environment",
+          "unit": "kWh",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/EG.USE.ELEC.KH.PC",
+          "n_countries": 7,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "GTM",
+            "LCN",
+            "MEX"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "GTM": 9,
+            "LCN": 10,
+            "MEX": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 69,
+          "n_observations_expected": 70,
+          "papers": [
+            {
+              "date": "2026-09-16",
+              "file": "2026-09-16_financiamiento-del-sector-el-ctrico-medi.md",
+              "topic": "Financiamiento del sector eléctrico mediante bonos soberanos y su impacto en el consumo de energía y el crecimiento del PIB en América Latina"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

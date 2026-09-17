@@ -314,6 +314,24 @@ function loadRecentTopics() {
   }
 }
 
+// Recalcula los contadores del summary a partir de los datos. Los campos son
+// funciones puras de `indicators`, asi que se pueden reconstruir sin refetch.
+function refreshSummary(data) {
+  const indicators = data?.indicators || [];
+  const prev = data?.summary || {};
+  return {
+    total_series: indicators.length,
+    total_indicators: new Set(indicators.map(i => i.indicator_code)).size,
+    total_countries: new Set(indicators.map(i => i.country_code)).size,
+    categories: [...new Set(indicators.map(i => i.category))],
+    units: [...new Set(indicators.map(i => i.unit))],
+    sources: [...new Set(indicators.map(i => i.source))],
+    year_range: prev.year_range || null,
+    latest_year_available: prev.latest_year_available
+      ?? Math.max(...indicators.flatMap(i => (i.series || []).map(s => s.year))),
+  };
+}
+
 async function agentFetch(topic) {
   // Caché: si existe y es reciente, usar sin refetch
   if (!NO_CACHE) {
@@ -322,7 +340,11 @@ async function agentFetch(topic) {
       const ageHours = (Date.now() - stat.mtimeMs) / 3600000;
       if (ageHours < CACHE_MAX_AGE_HOURS) {
         const cached = JSON.parse(readFileSync(CACHE_PATH, "utf-8"));
-        console.log(`[1/7] Caché válida (${ageHours.toFixed(1)}h). Datos: ${cached.summary?.total_indicators || "??"} indicadores, ${cached.summary?.total_countries || "??"} países.`);
+        // El summary se recalcula desde los datos en vez de confiar en el que
+        // quedo guardado: la cache dura un anio, asi que un contador mal
+        // calculado en una version anterior sobreviviria todo ese tiempo.
+        cached.summary = refreshSummary(cached);
+        console.log(`[1/7] Caché válida (${ageHours.toFixed(1)}h). Datos: ${cached.summary.total_series} series de ${cached.summary.total_indicators} indicadores, ${cached.summary.total_countries} países.`);
         return cached;
       }
       console.log(`[1/7] Caché expirada (${ageHours.toFixed(1)}h > ${CACHE_MAX_AGE_HOURS}h). Refetching...`);
@@ -486,7 +508,10 @@ async function agentCompute(fetchedData, suggestDecision = null) {
   // Helper: add correlation pair if both exist and not duplicate
   function addPair(xs, ys) {
     if (!xs || !ys) return;
-    const key = `${xs.name}|${ys.name}`;
+    // Clave canonica: Pearson es simetrico, asi que el orden de la pareja no
+    // importa. Sin ordenar, el mismo par entraba dos veces cuando dos
+    // sugerencias lo listaban al reves.
+    const key = [xs.name, ys.name].sort().join("|");
     if (!seenPairs.has(key)) {
       seenPairs.add(key);
       dataset.correlations.push([xs.name, ys.name]);
@@ -677,6 +702,17 @@ function getTopCountriesFromMemory(indicators, limit = 5) {
   }
 }
 
+// ── Muestra del estudio: los paises que la consulta SQL elige por cobertura
+// completa para los indicadores del tema (no una lista fija). Se memoiza
+// porque dataDigest y la metadata final deben reportar exactamente lo mismo.
+let _sampleCache = null;
+function sampleCountriesFor(suggestDecision) {
+  if (_sampleCache) return _sampleCache;
+  const used = chosenIndicators(suggestDecision);
+  _sampleCache = used ? getTopCountriesFromMemory(used, 5) : [];
+  return _sampleCache;
+}
+
 function dataDigest(fetchedData, suggestDecision = null) {
   let inds = fetchedData.indicators;
   const used = chosenIndicators(suggestDecision);
@@ -684,7 +720,7 @@ function dataDigest(fetchedData, suggestDecision = null) {
   if (used) {
     const filtered = inds.filter(i => matchesIndicator(i.indicator_label, used));
     if (filtered.length) inds = filtered; // si nada coincide, mostrar todo (fallback seguro)
-    topCcs = getTopCountriesFromMemory(used, 5);
+    topCcs = sampleCountriesFor(suggestDecision);
   }
   // Series LCN: comprimir a primero/ultimo (no todos los años) + cap duro
   const lcnInds = inds.filter(i => i.country_code === "LCN").slice(0, 12);
@@ -1118,9 +1154,13 @@ function transparencyNote(state) {
   const sigTrends = trends.filter(t => t.trend !== "no_trend");
   const ind = state.fetchedData?.indicators || [];
   const allCountries = [...new Set(ind.map(i => i.country_code))];
-  const sampleCountries = cr.panel?.countries?.length
-    ? cr.panel.countries
-    : [...new Set((cr.correlations || []).map(c => c.x.split(' [')[1]?.replace(']', '')).filter(c => c && c !== 'LCN'))];
+  // Muestra declarada por el sistema (SQLite) si está disponible; si no, se
+  // deriva del panel o de las correlaciones como antes.
+  const sampleCountries = state.sampleCountries?.length
+    ? state.sampleCountries
+    : cr.panel?.countries?.length
+      ? cr.panel.countries
+      : [...new Set((cr.correlations || []).map(c => c.x.split(' [')[1]?.replace(']', '')).filter(c => c && c !== 'LCN'))];
   const sampleStr = sampleCountries.length ? sampleCountries.join(", ") : allCountries.filter(c => c !== "LCN").join(", ");
   const latestYear = state.fetchedData?.summary?.latest_year_available || "";
   const inspiring = s.suggestions?.find(x => x.titulo === state.topic) || s.suggestions?.[0];
@@ -1223,6 +1263,10 @@ function rebuildKnowledge() {
           editorial: m.editorial || null,
           series: m.dataSources?.indicators ?? null,
           paises: m.dataSources?.countries ?? null,
+          // Muestra real del estudio (los paises que eligio la consulta SQL),
+          // distinta de `paises`, que es cuantas coberturas se descargaron.
+          muestra_paises: m.sample?.countries || [],
+          muestra_indicadores: m.sample?.indicators || [],
         });
       } catch {}
     }
@@ -1352,6 +1396,13 @@ class MoAGraph {
       return;
     }
     mkdirSync(OUTPUT_DIR, { recursive: true });
+    // Muestra del estudio: se fija antes de la nota de transparencia para que
+    // la nota, la metadata y el libro de codigos reporten lo mismo.
+    this.state.sampleCountries = sampleCountriesFor(this.state.suggestDecision);
+    this.state.sampleIndicators = chosenSuggestion(this.state.suggestDecision)?.indicadores_respaldan || [];
+    if (this.state.sampleCountries.length) {
+      console.log(`  Muestra (SQLite): ${this.state.sampleCountries.join(", ")}`);
+    }
     // Columna editorial "Datos al dia" — derivada del resultado final, tolerante a fallos
     try {
       this.state.editorial = await agentEditorial(this.state);
@@ -1372,12 +1423,13 @@ class MoAGraph {
       suggestions: this.state.suggestDecision?.suggestions || [],
       reviewDecision: this.state.reviewDecision, qaDecision: this.state.qaDecision,
       editorial: this.state.editorial || null,
+      sample: { countries: this.state.sampleCountries || [], indicators: this.state.sampleIndicators || [] },
       dataSources: { source: "World Bank API", url: "https://api.worldbank.org", indicators: this.state.fetchedData?.summary?.total_indicators || 0, countries: this.state.fetchedData?.summary?.total_countries || 0, latestYear: this.state.fetchedData?.summary?.latest_year_available || null },
       computeResults: this.state.computeResults ? {
         chartsDir: this.state.computeResults.chartsDir || null,
         regression: this.state.computeResults.regression ? { r_squared: this.state.computeResults.regression.r_squared, n: this.state.computeResults.regression.n } : null,
         correlations: this.state.computeResults.correlations?.length || 0,
-        significantCorrelations: (this.state.computeResults.correlations || []).filter(c => c.significant).slice(0, 8).map(c => ({ x: c.x, y: c.y, r: c.pearson_r, p: c.pearson_p, diff_r: c.diff_pearson_r, diff_p: c.diff_pearson_p })),
+        significantCorrelations: (this.state.computeResults.correlations || []).filter(c => c.significant).slice(0, 8).map(c => ({ x: c.x, y: c.y, r: c.pearson_r, p: c.pearson_p, diff_r: c.diff_pearson_r, diff_p: c.diff_pearson_p, country: c.country || null })),
       } : null,
       truncations: truncationLog.length ? truncationLog : null,
       elapsed: parseFloat(((Date.now() - this.t0) / 1000).toFixed(1)),

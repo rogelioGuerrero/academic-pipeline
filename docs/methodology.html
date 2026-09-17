@@ -36,7 +36,7 @@
   <p><code>FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE</code></p>
   <table>
     <tr><th>Nodo</th><th>Qué hace</th><th>Tipo</th></tr>
-    <tr><td>FETCH</td><td>Descarga series 2015-2024 de la API pública del Banco Mundial (~25 indicadores × 13 países/regiones de América Latina) y las persiste en SQLite; una consulta SQL selecciona los 5 países con cobertura completa para los indicadores del tema — la muestra no está hardcodeada</td><td>Determinístico</td></tr>
+    <tr><td>FETCH</td><td>Descarga series 2015-2024 de la API pública del Banco Mundial (23 indicadores × 7 países/regiones de América Latina = 158 series) y las persiste en SQLite; una consulta SQL selecciona los 5 países con cobertura completa para los indicadores del tema — la muestra no está hardcodeada</td><td>Determinístico</td></tr>
     <tr><td>SUGGEST</td><td>Cruza noticias trending (score LLM ≥70, del pipeline job-hunter) con el catálogo de indicadores. Solo propone líneas editoriales que los datos pueden respaldar, y formula una <em>pregunta verificable</em> e <em>hipótesis falsable</em></td><td>LLM</td></tr>
     <tr><td>COMPUTE</td><td>Estadística real con Python (scipy/numpy): descriptivas, correlaciones, OLS, tendencias, anomalías; R calcula el panel econométrico (efectos fijos país+año, errores clusterizados) cuando está disponible. Genera también las tablas y las figuras (matplotlib)</td><td>Determinístico</td></tr>
     <tr><td>WRITE</td><td>Redacta el paper. Solo puede citar números que aparecen literalmente en los datos y resultados provistos</td><td>LLM</td></tr>
@@ -116,7 +116,8 @@
     <li><code>output/briefs/YYYY-MM-DD_brief.json</code> — la decisión editorial: tema, ángulo, pregunta, hipótesis</li>
     <li><code>output/papers/*.json</code> — metadata del run: historial de nodos, veredictos de revisión y QA</li>
     <li><code>output/charts/</code> — las figuras, generadas con matplotlib sobre los datos (no ilustrativas)</li>
-    <li><code>docs/data/*.parquet</code> — el catálogo completo (series, papers, correlaciones) exportado desde SQLite, consultable directamente en el <a href="explorer.html">explorador de datos</a> sin servidor</li>
+    <li><code>docs/data/*.parquet</code> — el catálogo completo (series, papers, correlaciones) exportado desde SQLite, consultable directamente en el <a href="explorer.html">explorador de datos</a> sin servidor: constructor visual de consultas por estantes o SQL libre, y el SQL generado queda a la vista y editable</li>
+    <li><code>docs/codebook.html</code> — el <a href="codebook.html">libro de códigos</a>: qué mide cada indicador, con qué código del Banco Mundial, en qué países y años hay datos, y en qué papers se ha usado. Incluye los indicadores del catálogo que todavía no tienen datos, y una matriz de cobertura con alcance por catálogo o por paper (con la muestra real de cada estudio)</li>
   </ul>
 
   <div class="note">

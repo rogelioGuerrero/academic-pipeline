@@ -5,6 +5,7 @@ para que el pipeline (MoA Groq) mantenga contexto acumulativo a costo $0.
 """
 
 import os
+import re
 import sys
 import json
 import sqlite3
@@ -43,6 +44,8 @@ def init_db(db_path: str = DB_PATH) -> None:
         review_verdict TEXT,
         qa_verdict TEXT,
         editorial TEXT,
+        sample_countries TEXT, -- JSON array: muestra de paises del estudio
+        sample_indicators TEXT, -- JSON array: indicadores del estudio
         created_at TEXT DEFAULT CURRENT_TIMESTAMP
     );
     """)
@@ -81,9 +84,33 @@ def init_db(db_path: str = DB_PATH) -> None:
     cur.execute("CREATE INDEX IF NOT EXISTS idx_corr_vars ON correlations(var_x, var_y);")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_ind_series_query ON indicator_series(indicator_code, country_code);")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_ind_series_label ON indicator_series(indicator_label, country_code);")
+
+    _migrate(cur)
     
     conn.commit()
     conn.close()
+
+# Columnas agregadas despues de la version inicial de `papers`. CREATE TABLE IF
+# NOT EXISTS no las agrega a una base ya creada, asi que van por ALTER TABLE.
+MIGRATIONS = {
+    "papers": {
+        "sample_countries": "TEXT",   # JSON array: muestra de paises del estudio
+        "sample_indicators": "TEXT",  # JSON array: indicadores del estudio
+    },
+}
+
+
+def _migrate(cur: sqlite3.Cursor) -> None:
+    """Agrega columnas nuevas a bases ya existentes (idempotente)."""
+    for table, columns in MIGRATIONS.items():
+        existing = {row[1] for row in cur.execute(f"PRAGMA table_info({table})")}
+        if not existing:
+            continue
+        for name, decl in columns.items():
+            if name not in existing:
+                cur.execute(f"ALTER TABLE {table} ADD COLUMN {name} {decl}")
+                print(f"Migracion: {table}.{name} agregada")
+
 
 def record_paper(data: Dict[str, Any], db_path: str = DB_PATH) -> int:
     """Inserta o actualiza un paper y sus correlaciones en SQLite."""
@@ -110,20 +137,32 @@ def record_paper(data: Dict[str, Any], db_path: str = DB_PATH) -> int:
     stats = data.get("stats") or data.get("computeResults") or {}
     r_squared = (stats.get("regresion") or stats.get("regression") or {}).get("r_squared")
     corr_total = stats.get("correlaciones") if isinstance(stats.get("correlaciones"), int) else stats.get("correlations", 0)
-    sig_list = stats.get("top_significativas") or stats.get("significantCorrelations") or []
+    sig_list = normalize_correlations(
+        stats.get("top_significativas") or stats.get("significantCorrelations") or []
+    )
     corr_sig = len(sig_list) if isinstance(sig_list, list) else stats.get("significativas", 0)
     
     review_verdict = data.get("review") or (data.get("reviewDecision") or {}).get("veredicto")
     qa_verdict = data.get("qa") or (data.get("qaDecision") or {}).get("veredicto")
     editorial = data.get("editorial")
 
+    # Muestra del estudio. Viene como `sample` desde output/papers/*.json o como
+    # `muestra_paises`/`muestra_indicadores` desde knowledge.jsonl. Se guarda
+    # NULL si no viene, para no pisar un valor bueno en una sincronizacion
+    # posterior que no la traiga (ver COALESCE en el UPDATE).
+    sample = data.get("sample") or {}
+    sample_countries = sample.get("countries") or data.get("muestra_paises") or []
+    sample_indicators = sample.get("indicators") or data.get("muestra_indicadores") or []
+    sample_countries_json = json.dumps(sample_countries, ensure_ascii=False) if sample_countries else None
+    sample_indicators_json = json.dumps(sample_indicators, ensure_ascii=False) if sample_indicators else None
+
     cur.execute("""
     INSERT INTO papers (
         date, filename, topic, pregunta, hipotesis, indicadores,
         inspiring_news_title, inspiring_news_url, r_squared,
         correlations_total, correlations_sig, review_verdict,
-        qa_verdict, editorial
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        qa_verdict, editorial, sample_countries, sample_indicators
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(filename) DO UPDATE SET
         topic=excluded.topic,
         pregunta=excluded.pregunta,
@@ -136,12 +175,15 @@ def record_paper(data: Dict[str, Any], db_path: str = DB_PATH) -> int:
         correlations_sig=excluded.correlations_sig,
         review_verdict=excluded.review_verdict,
         qa_verdict=excluded.qa_verdict,
-        editorial=excluded.editorial
+        editorial=excluded.editorial,
+        sample_countries=COALESCE(excluded.sample_countries, papers.sample_countries),
+        sample_indicators=COALESCE(excluded.sample_indicators, papers.sample_indicators)
     ;
     """, (
         date, filename, topic, pregunta, hipotesis, indicadores_json,
         news_title, news_url, r_squared, corr_total, corr_sig,
-        review_verdict, qa_verdict, editorial
+        review_verdict, qa_verdict, editorial,
+        sample_countries_json, sample_indicators_json
     ))
     
     paper_id = cur.execute("SELECT id FROM papers WHERE filename = ?", (filename,)).fetchone()[0]
@@ -151,22 +193,60 @@ def record_paper(data: Dict[str, Any], db_path: str = DB_PATH) -> int:
     
     if isinstance(sig_list, list):
         for c in sig_list:
-            if isinstance(c, dict) and "x" in c and "y" in c:
-                cur.execute("""
-                INSERT INTO correlations (paper_id, var_x, var_y, r, p_value, country)
-                VALUES (?, ?, ?, ?, ?, ?)
-                """, (
-                    paper_id,
-                    c.get("x", ""),
-                    c.get("y", ""),
-                    float(c.get("r", 0.0)),
-                    float(c.get("p", 1.0)),
-                    c.get("country") or ""
-                ))
+            cur.execute("""
+            INSERT INTO correlations (paper_id, var_x, var_y, r, p_value, country)
+            VALUES (?, ?, ?, ?, ?, ?)
+            """, (
+                paper_id,
+                c.get("x", ""),
+                c.get("y", ""),
+                float(c.get("r", 0.0)),
+                float(c.get("p", 1.0)),
+                c.get("country") or ""
+            ))
                 
     conn.commit()
     conn.close()
     return paper_id
+
+_COUNTRY_SUFFIX_RE = re.compile(r"\s*\[([A-Za-z]{2,3})\]\s*$")
+
+
+def _split_country(name: str):
+    """Separa 'Etiqueta [CC]' en (etiqueta, CC).
+
+    El sufijo [CC] lo agrega research.mjs a cada serie para evitar colisiones
+    de nombre entre paises en el var_map de compute.py.
+    """
+    match = _COUNTRY_SUFFIX_RE.search(name or "")
+    if not match:
+        return (name or "").strip(), ""
+    return name[: match.start()].strip(), match.group(1)
+
+
+def normalize_correlations(entries: Any) -> List[Dict[str, Any]]:
+    """Normaliza la lista de correlaciones antes de persistirla.
+
+    - Colapsa pares simetricos: (A,B) y (B,A) son la misma correlacion (Pearson
+      es simetrico) pero entraban dos veces, porque cada sugerencia del LLM
+      puede listar el mismo par en orden distinto.
+    - Rellena `country` desde el sufijo [CC] cuando el registro no lo trae.
+    """
+    normalized: List[Dict[str, Any]] = []
+    seen = set()
+    for entry in entries or []:
+        if not isinstance(entry, dict) or "x" not in entry or "y" not in entry:
+            continue
+        x_name, y_name = entry["x"], entry["y"]
+        key = tuple(sorted((x_name, y_name)))
+        if key in seen:
+            continue
+        seen.add(key)
+        _, cc_x = _split_country(x_name)
+        _, cc_y = _split_country(y_name)
+        normalized.append({**entry, "country": entry.get("country") or cc_x or cc_y or ""})
+    return normalized
+
 
 def sync_all_from_files(db_path: str = DB_PATH) -> int:
     """Sincroniza toda la base de datos a partir de knowledge.jsonl y output/papers/*.json."""

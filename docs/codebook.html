@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Libro de códigos — Academic Pipeline</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; background: #faf9f7; color: #1a1a1a; max-width: 960px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 8px; margin-bottom: 16px; }
+    h2 { font-size: 1.15em; margin: 28px 0 10px; }
+    p, li { line-height: 1.7; margin-bottom: 12px; }
+    a { color: #1a73e8; }
+    .back { display: inline-block; margin-bottom: 16px; color: #1a73e8; text-decoration: none; font-size: 0.9em; }
+    .back:hover { text-decoration: underline; }
+    .note { background: #e8f0fe; border-left: 3px solid #1a73e8; padding: 12px 16px; margin: 16px 0; font-size: 0.92em; }
+    .note.warn { background: #fff4e5; border-left-color: #b8860b; }
+
+    .strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+    .stat { background: #fff; border: 1px solid #e3e0da; border-radius: 8px; padding: 10px 14px; min-width: 104px; font-family: Verdana, sans-serif; }
+    .stat b { display: block; font-size: 1.35em; color: #14213d; font-variant-numeric: tabular-nums; }
+    .stat span { font-size: 0.72em; color: #666; text-transform: uppercase; letter-spacing: 0.04em; }
+
+    .controls { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0; align-items: center; }
+    input[type=search], button { font-family: Verdana, sans-serif; font-size: 0.85em; padding: 8px 12px; border: 1px solid #d8d4cc; border-radius: 8px; background: #fff; }
+    input[type=search] { flex: 1; min-width: 240px; }
+    button { background: #14213d; color: #fff; border: none; cursor: pointer; }
+    button:hover { background: #1f3157; }
+    button.ghost { background: #fff; color: #14213d; border: 1px solid #d8d4cc; }
+    button.ghost:hover { background: #f0efec; }
+    .chk { font-family: Verdana, sans-serif; font-size: 0.82em; color: #444; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+
+    details.cat { background: #fff; border: 1px solid #e3e0da; border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+    details.cat > summary { cursor: pointer; padding: 12px 16px; font-family: Verdana, sans-serif; font-size: 0.9em; font-weight: 600; color: #14213d; background: #f5f4f1; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    details.cat > summary::-webkit-details-marker { display: none; }
+    details.cat > summary .count { font-weight: 400; color: #666; font-size: 0.85em; }
+
+    details.ind { border-top: 1px solid #eee; }
+    details.ind > summary { cursor: pointer; padding: 10px 16px 10px 30px; font-family: Verdana, sans-serif; font-size: 0.82em; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; position: relative; }
+    details.ind > summary::-webkit-details-marker { display: none; }
+    details.ind > summary::before { content: '▸'; position: absolute; left: 12px; color: #999; font-size: 0.9em; }
+    details.ind[open] > summary::before { content: '▾'; }
+    details.ind > summary:hover { background: #fafaf8; }
+    details.ind .name { flex: 1; }
+    details.ind.nodata .name { color: #999; }
+    details.ind .badges { white-space: nowrap; }
+    .badge { display: inline-block; font-size: 0.86em; padding: 2px 7px; border-radius: 10px; background: #eef2f9; color: #14213d; margin-left: 4px; font-variant-numeric: tabular-nums; }
+    .badge.warn { background: #fdecea; color: #b3261e; }
+    .badge.off { background: #f0f0f0; color: #888; }
+
+    .ficha { padding: 4px 16px 18px 30px; font-family: Verdana, sans-serif; font-size: 0.8em; color: #333; }
+    .ficha dl { display: grid; grid-template-columns: 132px 1fr; gap: 6px 12px; margin-bottom: 10px; }
+    .ficha dt { color: #777; }
+    .ficha dd { word-break: break-word; }
+    .ficha code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.95em; }
+    .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+    .chip { background: #e8f0fe; color: #14213d; border-radius: 4px; padding: 1px 6px; font-size: 0.95em; }
+    .chip.miss { background: #fdecea; color: #b3261e; }
+    .chip.regional { background: #eceff4; color: #4a5568; border: 1px dashed #b9c2cf; }
+    .used { list-style: none; }
+    .used li { margin-bottom: 5px; line-height: 1.5; }
+
+    table.matrix { width: 100%; border-collapse: collapse; font-family: Verdana, sans-serif; font-size: 0.75em; margin: 10px 0 6px; }
+    table.matrix th, table.matrix td { border: 1px solid #e3e0da; padding: 4px 6px; text-align: center; }
+    table.matrix th { background: #f5f4f1; font-weight: 600; }
+    table.matrix td:first-child, table.matrix th:first-child { text-align: left; }
+    table.matrix td.yes { background: #e8f5e9; color: #2e7d32; }
+    table.matrix td.no { background: #fdecea; color: #b3261e; }
+    table.matrix td.num { background: #eef2f9; color: #14213d; font-variant-numeric: tabular-nums; }
+    .caption { font-size: 0.8em; color: #777; font-family: Verdana, sans-serif; margin-top: 6px; }
+    .hidden { display: none; }
+    #status { font-family: Verdana, sans-serif; font-size: 0.85em; color: #666; }
+    #status.err { color: #b3261e; }
+    footer { margin-top: 32px; padding-top: 14px; border-top: 1px solid #e3e0da; font-size: 0.8em; color: #777; font-family: Verdana, sans-serif; }
+  </style>
+</head>
+<body>
+  <a class="back" href="index.html">← Volver a los papers</a>
+  <h1>Libro de códigos</h1>
+  <p>Qué mide cada indicador que usa el pipeline, con qué código lo pide a su fuente, en qué países y años hay datos, y en qué papers se ha utilizado. Es la respuesta a la pregunta <em>"¿de dónde salen estos números?"</em>, indicador por indicador.</p>
+
+  <div class="note warn" id="gapnote"></div>
+  <div id="summary" class="strip"></div>
+
+  <div class="controls">
+    <input type="search" id="q" placeholder="Buscar por indicador, código o categoría…">
+    <label class="chk"><input type="checkbox" id="onlyData" checked> Solo con datos</label>
+    <button class="ghost" id="expand">Expandir todo</button>
+    <button class="ghost" id="collapse">Contraer todo</button>
+    <button id="matrixBtn">Matriz de cobertura</button>
+  </div>
+
+  <div id="status">Cargando…</div>
+  <div id="matrix" class="hidden">
+    <h2>Matriz de cobertura</h2>
+    <div class="controls">
+      <select id="mScope" title="Alcance de la matriz"></select>
+      <select id="mRows" title="Qué va en las filas">
+        <option value="indicator">Filas: indicador</option>
+        <option value="category">Filas: categoría</option>
+      </select>
+      <select id="mCell" title="Qué muestra cada celda">
+        <option value="presence">Celda: presencia</option>
+        <option value="years">Celda: años cubiertos</option>
+      </select>
+    </div>
+    <div id="matrixTable"></div>
+  </div>
+  <div id="codebook"></div>
+
+  <div class="note">
+    <strong>Cómo leerlo:</strong> un indicador con <span class="badge">7/7</span> tiene datos en las 7 coberturas de la ventana;
+    uno con <span class="badge warn">5/7</span> tiene huecos, y la ficha dice exactamente cuáles.
+    El conteo de observaciones se compara contra el máximo posible (coberturas × años): la diferencia son celdas faltantes en la fuente original, no un error del pipeline.
+    Los indicadores en gris están declarados en el catálogo pero no han traído datos todavía.
+    <span class="chip regional">LCN</span> es el agregado regional del Banco Mundial, no un país: cuando aparece con borde punteado significa que la fuente no publica ese indicador para la región (típico en encuestas nacionales como Gini o pobreza), no que falte un dato de un país.
+  </div>
+
+  <footer>
+    Datos: <code>docs/data/codebook.json</code> y <code>docs/data/catalog.json</code>, regenerados en cada corrida desde <code>docs/memory.db</code>.
+    Consultas SQL libres en el <a href="explorer.html">explorador de datos</a> · método en la <a href="methodology.html">metodología</a>.
+  </footer>
+
+<script>
+const CATEGORY_ES = {
+  employment: 'Empleo', economy: 'Economía', education: 'Educación', technology: 'Tecnología',
+  demographics: 'Demografía', inequality: 'Desigualdad', health: 'Salud', environment: 'Medio ambiente',
+};
+const UNIT_ES = {
+  '%': '%', USD: 'USD', count: 'personas', per100: 'por 100 hab.', years: 'años',
+  kWh: 'kWh', index: 'índice', score: 'puntos', t: 'toneladas',
+};
+const catES = c => CATEGORY_ES[c] || c;
+const unitES = u => UNIT_ES[u] || u || '—';
+const esc = s => String(s ?? '').replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+const nf = n => Number(n).toLocaleString('es-ES');
+
+const status = (msg, isErr = false) => {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = isErr ? 'err' : '';
+};
+
+let state = { rows: [], countries: [], totals: {}, window: {}, onlyData: true, q: '', papers: [], m: { scope: 'all', rows: 'indicator', cell: 'presence' } };
+
+function buildRows(codebook, catalog) {
+  const byCode = new Map();
+  for (const cat of codebook.categories)
+    for (const ind of cat.indicators) byCode.set(ind.code, ind);
+
+  const allCodes = codebook.countries.map(c => c.code);
+  const rows = catalog.entries.map(e => {
+    const d = byCode.get(e.code);
+    if (d) { byCode.delete(e.code); return { ...d, hasData: true }; }
+    return {
+      ...e, hasData: false, n_countries: 0, countries: [], missing_countries: allCodes,
+      year_from: null, year_to: null, n_observations: 0, n_observations_expected: 0, papers: [],
+    };
+  });
+  // Defensivo: algún indicador con datos que no esté en el catálogo declarado
+  for (const d of byCode.values()) rows.push({ ...d, hasData: true });
+  return rows;
+}
+
+function groupByCategory(rows, order) {
+  const names = [...new Set(rows.map(r => r.category))];
+  const ordered = [...order.filter(c => names.includes(c)), ...names.filter(c => !order.includes(c)).sort()];
+  return ordered.map(name => ({
+    name,
+    indicators: rows.filter(r => r.category === name).sort((a, b) => a.label.localeCompare(b.label)),
+  })).filter(g => g.indicators.length);
+}
+
+function ficha(r) {
+  if (!r.hasData) {
+    return `<div class="ficha"><dl>
+      <dt>Código</dt><dd><code>${esc(r.code)}</code></dd>
+      <dt>Fuente</dt><dd>${esc(r.source)}${r.ref_area ? ` (${esc(r.ref_area)})` : ''}</dd>
+      <dt>Estado</dt><dd>Declarado en el catálogo, sin datos en la ventana ${state.window.from}–${state.window.to}.</dd>
+    </dl></div>`;
+  }
+  const total = state.countries.length;
+  const chips = r.countries.map(c => {
+    const name = state.countries.find(x => x.code === c);
+    return `<span class="chip" title="${esc(name ? name.name : c)}">${esc(c)}</span>`;
+  }).join('');
+  const miss = r.missing_countries.map(c => {
+    const name = state.countries.find(x => x.code === c);
+    const label = name ? name.name : c;
+    // LCN es el agregado regional, no un país: un dato ausente ahí no es un
+    // hueco de cobertura nacional, y se marca distinto.
+    return c === 'LCN'
+      ? `<span class="chip regional" title="Agregado regional sin dato para este indicador">${esc(c)}</span>`
+      : `<span class="chip miss" title="Sin datos: ${esc(label)}">${esc(c)}</span>`;
+  }).join('');
+  const gap = r.n_observations_expected - r.n_observations;
+  const used = r.papers.length
+    ? `<ul class="used">${r.papers.map(p =>
+        `<li>${esc(p.date)} — <a href="papers/${encodeURIComponent(p.file)}">${esc(p.topic)}</a></li>`).join('')}</ul>`
+    : '<span style="color:#888">Ningún paper lo ha usado todavía.</span>';
+
+  return `<div class="ficha"><dl>
+    <dt>Código de fuente</dt><dd><a href="${esc(r.source_url)}" target="_blank" rel="noopener"><code>${esc(r.code)}</code></a></dd>
+    <dt>Fuente</dt><dd>${esc(r.source)}</dd>
+    <dt>Unidad</dt><dd>${esc(unitES(r.unit))}</dd>
+    <dt>Ventana</dt><dd>${r.year_from}–${r.year_to}</dd>
+    <dt>Cobertura</dt><dd><div class="chips">${chips}${miss}</div></dd>
+    <dt>Observaciones</dt><dd>${nf(r.n_observations)} de ${nf(r.n_observations_expected)} posibles${gap ? ` — faltan ${nf(gap)} celdas en la fuente` : ''}</dd>
+    <dt>Usado en</dt><dd>${used}</dd>
+  </dl></div>`;
+}
+
+function render() {
+  const q = state.q.trim().toLowerCase();
+  let rows = state.rows;
+  if (state.onlyData) rows = rows.filter(r => r.hasData);
+  if (q) rows = rows.filter(r =>
+    r.label.toLowerCase().includes(q) || r.code.toLowerCase().includes(q) ||
+    r.category.toLowerCase().includes(q) || catES(r.category).toLowerCase().includes(q));
+
+  if (!rows.length) {
+    document.getElementById('codebook').innerHTML = '<p style="color:#777">Ningún indicador coincide con el filtro.</p>';
+    return;
+  }
+
+  const groups = groupByCategory(rows, state.categories);
+  document.getElementById('codebook').innerHTML = groups.map(g => {
+    const items = g.indicators.map(r => {
+      const cov = r.hasData
+        ? `<span class="badge${r.missing_countries.length ? ' warn' : ''}">${r.n_countries}/${state.countries.length}</span>`
+        : '<span class="badge off">sin datos</span>';
+      const papers = r.papers && r.papers.length ? `<span class="badge">${r.papers.length} paper${r.papers.length > 1 ? 's' : ''}</span>` : '';
+      return `<details class="ind${r.hasData ? '' : ' nodata'}" data-code="${esc(r.code)}">
+        <summary><span class="name">${esc(r.label)}</span><span class="badges">${papers}${cov}</span></summary>
+        ${ficha(r)}
+      </details>`;
+    }).join('');
+    const obs = g.indicators.reduce((s, r) => s + r.n_observations, 0);
+    return `<details class="cat" open>
+      <summary><span>${esc(catES(g.name))}</span><span class="count">${g.indicators.length} indicador${g.indicators.length > 1 ? 'es' : ''} · ${nf(obs)} observaciones</span></summary>
+      ${items}
+    </details>`;
+  }).join('');
+}
+
+function currentPaper() {
+  return state.m.scope === 'all' ? null : state.papers.find(p => p.file === state.m.scope) || null;
+}
+
+function matrixRows() {
+  const withData = state.rows.filter(r => r.hasData);
+  const paper = currentPaper();
+  if (!paper) return withData;
+  const labels = new Set(paper.indicators);
+  return withData.filter(r => labels.has(r.label));
+}
+
+// Columnas de la matriz: con un paper cuyo muestreo quedó persistido, se
+// muestran SOLO los países de su muestra. Sin muestra persistida se cae a
+// todas las coberturas, y la leyenda lo advierte.
+function matrixColumns(paper) {
+  if (!paper?.sample_countries?.length) return state.countries;
+  return state.countries.filter(c => paper.sample_countries.includes(c.code));
+}
+
+function renderMatrix() {
+  const rows = matrixRows().sort((a, b) => a.label.localeCompare(b.label));
+  const box = document.getElementById('matrixTable');
+  if (!rows.length) {
+    box.innerHTML = '<p style="color:#777">Sin indicadores para este alcance.</p>';
+    return;
+  }
+
+  const paper = currentPaper();
+  const countries = matrixColumns(paper);
+  const presence = state.m.cell === 'presence';
+  const byIndicator = state.m.rows === 'indicator';
+  const head = countries.map(c => `<th title="${esc(c.name)}">${esc(c.code)}</th>`).join('');
+
+  let body;
+  if (byIndicator) {
+    body = rows.map(r => {
+      const cells = countries.map(c => {
+        const n = (r.by_country || {})[c.code] || 0;
+        if (!n) return '<td class="no" title="sin datos en esta cobertura">—</td>';
+        return presence
+          ? '<td class="yes" title="con datos">✓</td>'
+          : `<td class="num" title="${n} años con dato">${n}</td>`;
+      }).join('');
+      return `<tr><td>${esc(r.label)}</td>${cells}</tr>`;
+    }).join('');
+  } else {
+    body = groupByCategory(rows, state.categories).map(g => {
+      const cells = countries.map(c => {
+        const hits = g.indicators.filter(i => ((i.by_country || {})[c.code] || 0) > 0);
+        if (!hits.length) return '<td class="no" title="ningún indicador con datos">—</td>';
+        const total = g.indicators.length;
+        const val = presence ? `${hits.length}/${total}` : hits.reduce((s, i) => s + i.by_country[c.code], 0);
+        const tip = presence
+          ? `${hits.length} de ${total} indicadores con datos`
+          : `${hits.length} de ${total} indicadores · suma de años-indicador`;
+        return `<td class="yes" title="${esc(tip)}">${val}</td>`;
+      }).join('');
+      return `<tr><td>${esc(catES(g.name))}</td>${cells}</tr>`;
+    }).join('');
+  }
+
+  const captions = {
+    'indicator|presence': '✓ = el indicador tiene datos en esa cobertura · — = no los tiene.',
+    'indicator|years': `Años con dato, de ${state.window.to - state.window.from + 1} posibles en la ventana ${state.window.from}–${state.window.to}.`,
+    'category|presence': 'Indicadores de la categoría con datos en esa cobertura, sobre el total de la categoría.',
+    'category|years': 'Suma de años-indicador cubiertos por la categoría en esa cobertura.',
+  };
+  const scopeNote = !paper
+    ? 'Alcance: todo el catálogo.'
+    : paper.sample_countries?.length
+      ? `Alcance: el paper del ${esc(paper.date)}. Las columnas son su <strong>muestra real</strong> (${paper.sample_countries.map(esc).join(', ')}), tal como la eligió la consulta SQL por cobertura completa.`
+      : `<strong>Atención:</strong> este paper es anterior a que se persistiera la muestra, así que las columnas son todas las coberturas del catálogo, no la muestra que usó. Los papers nuevos sí la registran.`;
+
+  box.innerHTML =
+    `<table class="matrix"><thead><tr><th>${byIndicator ? 'Indicador' : 'Categoría'}</th>${head}</tr></thead><tbody>${body}</tbody></table>
+     <p class="caption">${captions[`${byIndicator ? 'indicator' : 'category'}|${presence ? 'presence' : 'years'}`]} ${scopeNote}</p>`;
+}
+
+function renderSummary(t) {
+  const stats = [
+    [t.indicators_with_data, 'indicadores'],
+    [t.declared, 'declarados'],
+    [t.countries, 'coberturas'],
+    [t.series, 'series'],
+    [nf(t.observations), 'observaciones'],
+    [t.papers, 'papers'],
+  ];
+  document.getElementById('summary').innerHTML = stats.map(([v, l]) =>
+    `<div class="stat"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('');
+}
+
+async function init() {
+  const [codebook, catalog] = await Promise.all([
+    fetch('data/codebook.json').then(r => { if (!r.ok) throw new Error('codebook.json HTTP ' + r.status); return r.json(); }),
+    fetch('data/catalog.json').then(r => { if (!r.ok) throw new Error('catalog.json HTTP ' + r.status); return r.json(); }),
+  ]);
+
+  state.countries = codebook.countries;
+  state.window = codebook.window;
+  state.papers = codebook.papers || [];
+  state.categories = codebook.categories.map(c => c.name);
+  state.rows = buildRows(codebook, catalog);
+  state.totals = { ...codebook.totals, declared: catalog.total };
+
+  document.getElementById('mScope').innerHTML =
+    '<option value="all">Alcance: catálogo completo</option>' +
+    state.papers.map(p =>
+      `<option value="${esc(p.file)}">Alcance: ${esc(p.date)} — ${esc(p.topic.slice(0, 58))}${p.topic.length > 58 ? '…' : ''}</option>`
+    ).join('');
+
+  const missing = catalog.total - codebook.totals.indicators_with_data;
+  document.getElementById('gapnote').innerHTML =
+    `<strong>El catálogo declara ${catalog.total} indicadores; ${codebook.totals.indicators_with_data} tienen datos.</strong> ` +
+    `Los ${missing} restantes están definidos en <code>scripts/fetch-sources.mjs</code> pero no han traído series en la ventana ` +
+    `${codebook.window.from}–${codebook.window.to} — aparecen abajo marcados como <em>sin datos</em> para que el hueco sea visible.`;
+
+  renderSummary(state.totals);
+  render();
+  renderMatrix();
+  status(`${state.rows.length} indicadores · generado ${codebook.generated.slice(0, 10)}`);
+}
+
+document.getElementById('q').addEventListener('input', e => { state.q = e.target.value; render(); });
+document.getElementById('onlyData').addEventListener('change', e => { state.onlyData = e.target.checked; render(); });
+document.getElementById('expand').addEventListener('click', () =>
+  document.querySelectorAll('#codebook details').forEach(d => d.open = true));
+document.getElementById('collapse').addEventListener('click', () =>
+  document.querySelectorAll('#codebook details').forEach(d => d.open = false));
+document.getElementById('matrixBtn').addEventListener('click', e => {
+  const m = document.getElementById('matrix');
+  m.classList.toggle('hidden');
+  e.target.textContent = m.classList.contains('hidden') ? 'Matriz de cobertura' : 'Ocultar matriz';
+});
+document.getElementById('mScope').addEventListener('change', e => { state.m.scope = e.target.value; renderMatrix(); });
+document.getElementById('mRows').addEventListener('change', e => { state.m.rows = e.target.value; renderMatrix(); });
+document.getElementById('mCell').addEventListener('change', e => { state.m.cell = e.target.value; renderMatrix(); });
+
+init().catch(err => status('No se pudo cargar el libro de códigos: ' + err.message, true));
+</script>
+</body>
+</html>

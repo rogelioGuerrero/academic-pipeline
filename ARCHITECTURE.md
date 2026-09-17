@@ -9,7 +9,7 @@ AcademicPipeline es el **motor de investigación automatizada** del sistema. Tom
 ```
 news_found.json (de job-hunter/Netlify) ─┐
                                          ↓
-World Bank API (158 indicadores, 7 países) ─→ FETCH ─→ SUGGEST ─→ COMPUTE ─→ WRITE ─→ REVIEW ─→ EDIT ─→ APPROVE ─→ EDITORIAL
+World Bank API (23 indicadores × 7 países = 158 series) ─→ FETCH ─→ SUGGEST ─→ COMPUTE ─→ WRITE ─→ REVIEW ─→ EDIT ─→ APPROVE ─→ EDITORIAL
                                               │         │          │           │          │         │          │            │
                                               │         │          │           │          │         │          │            ↓
                                               │         │          │           │          │         │          │     Paper .md + .json
@@ -28,7 +28,7 @@ World Bank API (158 indicadores, 7 países) ─→ FETCH ─→ SUGGEST ─→ C
 
 | Paso | Implementación | Verificable |
 |---|---|---|
-| **Buscar** | World Bank API (158 indicadores, 6 países + LCN) | fetched-data.json con 158 indicadores |
+| **Buscar** | World Bank API (23 indicadores × 6 países + LCN = 158 series) | fetched-data.json con 158 series |
 | **Filtrar** | SUGGEST cruza noticias (score ≥70) con catálogo de indicadores | Tema + hipótesis + pregunta de investigación |
 | **Resumir** | WRITE redacta paper técnico, EDITORIAL redacta columna llana | Paper .md + columna "Datos al día" |
 | **Validar** | REVIEW verifica contra compute-results reales, QA structural, guardrails por nodo | Papers RECHAZADOS se marcan con warning |
@@ -50,6 +50,8 @@ El sistema separa cálculo de redacción:
 - `scripts/compute.py` — análisis estadístico determinístico + 11 figuras con triggers condicionales
 - `scripts/fetch-sources.mjs` — World Bank API con caché de 1 año
 - `docs/index.html` — visor web con ECharts interactivos + guías de lectura + fallback PNG
+- `docs/codebook.html` — libro de códigos: qué mide cada indicador, cobertura, unidades, papers que lo usan y matriz de cobertura (alcance catálogo o paper)
+- `docs/explorer.html` — constructor visual de consultas (estantes) sobre Parquet vía DuckDB-WASM + SQL libre
 - `docs/methodology.html` — documentación metodológica
 - `.github/workflows/daily-research.yml` — cron 8am + deploy GitHub Pages
 

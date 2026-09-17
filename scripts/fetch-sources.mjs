@@ -267,8 +267,11 @@ async function fetchSources(topic) {
   }
 
   // Build summary
+  // Ojo: results.indicators es una entrada por indicador×país, no un indicador.
+  // total_series cuenta esas entradas; total_indicators cuenta códigos distintos.
   results.summary = {
-    total_indicators: results.indicators.length,
+    total_series: results.indicators.length,
+    total_indicators: new Set(results.indicators.map(i => i.indicator_code)).size,
     total_countries: new Set(results.indicators.map(i => i.country_code)).size,
     categories: [...new Set(results.indicators.map(i => i.category))],
     units: [...new Set(results.indicators.map(i => i.unit))],
@@ -277,7 +280,7 @@ async function fetchSources(topic) {
     latest_year_available: Math.max(...results.indicators.flatMap(i => i.series.map(s => s.year))),
   };
 
-  console.log(`\n  Total: ${results.summary.total_indicators} series de datos reales`);
+  console.log(`\n  Total: ${results.summary.total_series} series de datos reales (${results.summary.total_indicators} indicadores distintos)`);
   console.log(`  Paises: ${results.summary.total_countries}`);
   console.log(`  Categorias: ${results.summary.categories.join(", ")}`);
   console.log(`  Año mas reciente: ${results.summary.latest_year_available}\n`);

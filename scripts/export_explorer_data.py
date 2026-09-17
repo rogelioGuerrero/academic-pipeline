@@ -17,7 +17,7 @@ OUT_DIR = os.path.join(ROOT, "docs", "data")
 # nombre archivo -> (tabla sqlite, query)
 TABLES = {
     "series": "SELECT country_code, country_name, indicator_code, indicator_label, category, unit, year, value FROM indicator_series ORDER BY country_code, indicator_code, year",
-    "papers": "SELECT date, filename, topic, pregunta, hipotesis, inspiring_news_title, inspiring_news_url, r_squared, correlations_total, correlations_sig, review_verdict, qa_verdict FROM papers ORDER BY date DESC",
+    "papers": "SELECT date, filename, topic, pregunta, hipotesis, inspiring_news_title, inspiring_news_url, r_squared, correlations_total, correlations_sig, review_verdict, qa_verdict, sample_countries FROM papers ORDER BY date DESC",
     "correlations": "SELECT var_x, var_y, r, p_value, country FROM correlations ORDER BY p_value",
 }
 

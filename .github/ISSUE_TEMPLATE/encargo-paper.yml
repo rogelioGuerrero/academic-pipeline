@@ -1,0 +1,90 @@
+name: Encargo de paper
+description: Pedir un paper sobre un tema concreto. Dispara el pipeline de investigación.
+title: "[Encargo] "
+labels: ["encargo:paper"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Este formulario dispara el pipeline de investigación con el tema que escribas.
+        El pipeline busca los datos reales en el Banco Mundial, calcula la estadística con Python
+        y redacta el paper — tú solo eliges el tema y el ángulo.
+
+        Antes de enviarlo, revisa el [libro de códigos](https://rogelioguerrero.github.io/academic-pipeline/codebook.html):
+        solo se puede investigar lo que los datos pueden respaldar.
+
+  - type: input
+    id: tema
+    attributes:
+      label: Tema de investigación
+      description: Qué quieres investigar, en una frase concreta y verificable.
+      placeholder: "Penetración digital y empleo vulnerable en América Latina"
+    validations:
+      required: true
+
+  - type: textarea
+    id: angulo
+    attributes:
+      label: Ángulo editorial
+      description: Opcional. El argumento central que quieres que busque el paper.
+      placeholder: "Enfocar en si la digitalización reduce el trabajo precario o solo lo desplaza de sector."
+    validations:
+      required: false
+
+  - type: textarea
+    id: pregunta
+    attributes:
+      label: Pregunta e hipótesis (opcional)
+      description: Si ya las tienes, el paper las usará tal cual. Si no, el pipeline las deriva.
+      placeholder: |
+        Pregunta: ¿Existe una correlación negativa entre usuarios de internet y empleo vulnerable?
+        Hipótesis: A mayor penetración digital, menor porcentaje de empleo vulnerable.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: cobertura
+    attributes:
+      label: Coberturas de interés (opcional)
+      description: Solo orientativo. La muestra final la decide la cobertura de datos, no este campo.
+      multiple: true
+      options:
+        - Argentina (ARG)
+        - Brasil (BRA)
+        - Chile (CHL)
+        - Colombia (COL)
+        - Guatemala (GTM)
+        - México (MEX)
+        - Agregado regional (LCN)
+    validations:
+      required: false
+
+  - type: textarea
+    id: indicadores
+    attributes:
+      label: Indicadores sugeridos (opcional)
+      description: Si quieres forzar indicadores concretos, usa las etiquetas del libro de códigos, separadas por comas.
+      placeholder: "Internet users (% of population), Vulnerable employment (% of total employment)"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: prioridad
+    attributes:
+      label: Prioridad
+      options:
+        - Normal
+        - Alta
+      default: 0
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmacion
+    attributes:
+      label: Confirmación
+      options:
+        - label: Verifiqué en el libro de códigos que existen datos para este tema.
+          required: true
+        - label: Entiendo que el paper se publica automáticamente en el sitio si pasa REVIEW y QA.
+          required: true

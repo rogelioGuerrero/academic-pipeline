@@ -173,6 +173,9 @@ def correlation_analysis(data):
             "n": int(len(x_arr)),
             "years": years,
             "units": f"{ua} vs {ub}",
+            # El pais va en el sufijo [CC] del nombre de la variable; se expone
+            # aparte para que la correlacion sea consumible sin parsear nombres.
+            "country": ca or cb,
         }
         # ── First-difference correlation: distinguishes real co-movement
         # from spurious co-trending. Two series that both trend upward always

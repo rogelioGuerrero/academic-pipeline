@@ -83,6 +83,11 @@ jobs:
       - name: Export data catalog for web explorer
         run: python scripts/export_explorer_data.py
 
+      - name: Export indicator catalog & codebook
+        run: |
+          node scripts/export-catalog.mjs
+          python scripts/export_codebook.py
+
       - name: Commit artifacts
         run: |
           git config user.name "github-actions[bot]"

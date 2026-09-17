@@ -1,0 +1,153 @@
+name: Paper Request
+
+# Un encargo llega como issue (formulario .github/ISSUE_TEMPLATE/encargo-paper.yml)
+# y este workflow corre el pipeline con ese tema.
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+# Mismo grupo que daily-research.yml a propósito: serializa los commits al
+# branch por defecto y evita que un encargo choque con la corrida diaria.
+concurrency:
+  group: daily-research
+  cancel-in-progress: false
+
+jobs:
+  research:
+    if: contains(github.event.issue.labels.*.name, 'encargo:paper')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      # 'opened' y 'labeled' pueden dispararse ambos si la etiqueta se agrega
+      # después de crear el issue: si ya se generó, no repetir.
+      - name: Check if already processed
+        id: guard
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh issue view ${{ github.event.issue.number }} --json labels \
+               -q '.labels[].name' | grep -qx 'paper:generado'; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "El encargo ya fue procesado; se omite."
+          fi
+
+      - name: Setup Node.js
+        if: steps.guard.outputs.skip != 'true'
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Setup Python
+        if: steps.guard.outputs.skip != 'true'
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      # El cuerpo del issue es texto de un tercero: va por variable de entorno,
+      # nunca interpolado en la línea de comandos.
+      - name: Parse issue form
+        id: form
+        if: steps.guard.outputs.skip != 'true'
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          printf '%s' "$ISSUE_BODY" > /tmp/issue_body.md
+          python scripts/parse-issue-form.py /tmp/issue_body.md --github-output
+
+      - name: Install Python dependencies
+        if: steps.guard.outputs.skip != 'true'
+        run: pip install numpy scipy matplotlib typst pandas pyarrow requests
+
+      - name: Setup R & packages
+        if: steps.guard.outputs.skip != 'true'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y r-base r-cran-jsonlite
+        continue-on-error: true
+
+      - name: Install Node dependencies
+        if: steps.guard.outputs.skip != 'true'
+        run: npm ci || npm install
+
+      - name: Run research pipeline on requested topic
+        id: research
+        if: steps.guard.outputs.skip != 'true'
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TEMA: ${{ steps.form.outputs.tema }}
+          ANGULO: ${{ steps.form.outputs.angulo }}
+        run: node scripts/research.mjs "$TEMA" "$ANGULO"
+
+      - name: Copy papers to docs/ for GitHub Pages
+        if: steps.research.outcome == 'success'
+        run: |
+          mkdir -p docs/papers docs/charts
+          rm -f docs/papers/*.md
+          for f in output/papers/*.md; do
+            [ -f "$f" ] && cp "$f" "docs/papers/$(basename $f)"
+          done
+          rm -rf docs/charts/*
+          cp -r output/charts/. docs/charts/ 2>/dev/null || true
+          python scripts/generate-index.py
+
+      - name: Build PDF papers with Typst
+        if: steps.research.outcome == 'success'
+        run: python scripts/build_pdf.py
+
+      - name: Export data catalog, indicator catalog & codebook
+        if: steps.research.outcome == 'success'
+        run: |
+          python scripts/export_explorer_data.py
+          node scripts/export-catalog.mjs
+          python scripts/export_codebook.py
+
+      - name: Commit artifacts
+        if: steps.research.outcome == 'success'
+        env:
+          TEMA: ${{ steps.form.outputs.tema }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/compute-r-results.json output/raw/fetched-data.json output/charts/ docs/papers/ docs/charts/ docs/data/ docs/index.json docs/knowledge.jsonl docs/memory.db 2>/dev/null || true
+          git commit -m "Paper request #${ISSUE} - ${TEMA}" || echo "No changes to commit"
+          git push
+
+      - name: Label and comment on the issue
+        if: always() && steps.guard.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.number }}
+          OUTCOME: ${{ steps.research.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh label create "paper:generado" --color 0e8a16 --description "Encargo ya procesado por el pipeline" --force >/dev/null 2>&1 || true
+          gh label create "paper:error"    --color b3261e --description "El pipeline falló en este encargo"     --force >/dev/null 2>&1 || true
+
+          if [ "$OUTCOME" != "success" ]; then
+            gh issue comment "$ISSUE" --body "El pipeline falló con este encargo. Revisa los logs del run: $RUN_URL"
+            gh issue edit "$ISSUE" --add-label "paper:error"
+            exit 0
+          fi
+
+          NEW=$(basename "$(ls -t docs/papers/*.md 2>/dev/null | head -1)")
+          VERDICT=$(python -c "import glob,json,os; f=sorted(glob.glob('output/papers/*.json'), key=os.path.getmtime, reverse=True); m=json.load(open(f[0],encoding='utf-8')) if f else {}; print(m.get('reviewDecision',{}).get('veredicto','?') + ' / ' + m.get('qaDecision',{}).get('veredicto','?'))")
+
+          {
+            echo "Encargo procesado."
+            echo
+            echo "- **Paper**: \`$NEW\`"
+            echo "- **Veredictos** (REVIEW / QA): \`$VERDICT\`"
+            echo "- **Sitio**: https://rogelioguerrero.github.io/academic-pipeline/"
+            echo
+            echo "Si REVIEW o QA lo rechazaron, el paper se publica igual pero con advertencia; conviene reformular el tema en un encargo nuevo."
+          } > /tmp/comment.md
+          gh issue comment "$ISSUE" --body-file /tmp/comment.md
+          gh issue edit "$ISSUE" --add-label "paper:generado"
+          gh issue close "$ISSUE"

@@ -1,0 +1,411 @@
+{
+  "generated": "2026-09-17T14:58:10.447Z",
+  "total": 50,
+  "entries": [
+    {
+      "code": "SL.UEM.1524.ZS",
+      "label": "Youth unemployment (% of labor force 15-24)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.UEM.1524.ZS"
+    },
+    {
+      "code": "SL.UEM.1524.MA.ZS",
+      "label": "Youth unemployment, male (% of male labor force 15-24)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS"
+    },
+    {
+      "code": "SL.UEM.1524.FE.ZS",
+      "label": "Youth unemployment, female (% of female labor force 15-24)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.UEM.1524.FE.ZS"
+    },
+    {
+      "code": "SL.UEM.TOTL.ZS",
+      "label": "Total unemployment (% of total labor force)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS"
+    },
+    {
+      "code": "SL.UEM.TOTL.MA.ZS",
+      "label": "Unemployment, male (% of male labor force)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.UEM.TOTL.MA.ZS"
+    },
+    {
+      "code": "SL.UEM.TOTL.FE.ZS",
+      "label": "Unemployment, female (% of female labor force)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.UEM.TOTL.FE.ZS"
+    },
+    {
+      "code": "SL.EMP.1524.ZS",
+      "label": "Youth employment (% of population 15-24)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.EMP.1524.ZS"
+    },
+    {
+      "code": "SL.TLF.TOTL.IN",
+      "label": "Total labor force (total)",
+      "category": "employment",
+      "unit": "count",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.TLF.TOTL.IN"
+    },
+    {
+      "code": "SL.TLF.1524.IN",
+      "label": "Labor force, youth total (ages 15-24)",
+      "category": "employment",
+      "unit": "count",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.TLF.1524.IN"
+    },
+    {
+      "code": "SL.EMP.VULN.ZS",
+      "label": "Vulnerable employment (% of total employment)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.EMP.VULN.ZS"
+    },
+    {
+      "code": "SL.AGR.EMPL.ZS",
+      "label": "Employment in agriculture (% of total employment)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.AGR.EMPL.ZS"
+    },
+    {
+      "code": "SL.IND.EMPL.ZS",
+      "label": "Employment in industry (% of total employment)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.IND.EMPL.ZS"
+    },
+    {
+      "code": "SL.SRV.EMPL.ZS",
+      "label": "Employment in services (% of total employment)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.SRV.EMPL.ZS"
+    },
+    {
+      "code": "NY.GDP.PCAP.CD",
+      "label": "GDP per capita (current US$)",
+      "category": "economy",
+      "unit": "USD",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD"
+    },
+    {
+      "code": "NY.GDP.MKTP.CD",
+      "label": "GDP (current US$)",
+      "category": "economy",
+      "unit": "USD",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/NY.GDP.MKTP.CD"
+    },
+    {
+      "code": "NY.GDP.PCAP.PP.CD",
+      "label": "GDP per capita, PPP (current US$)",
+      "category": "economy",
+      "unit": "USD",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.CD"
+    },
+    {
+      "code": "NY.GDP.MKTP.KD.ZG",
+      "label": "GDP growth (annual %)",
+      "category": "economy",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG"
+    },
+    {
+      "code": "NV.IND.MANF.ZS",
+      "label": "Manufacturing, value added (% of GDP)",
+      "category": "economy",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/NV.IND.MANF.ZS"
+    },
+    {
+      "code": "GC.TAX.TOTL.GD.ZS",
+      "label": "Tax revenue (% of GDP)",
+      "category": "economy",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS"
+    },
+    {
+      "code": "SE.ADT.1524.LT.ZS",
+      "label": "Youth literacy rate (% of people 15-24)",
+      "category": "education",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SE.ADT.1524.LT.ZS"
+    },
+    {
+      "code": "SE.ADT.1524.LT.MA.ZS",
+      "label": "Youth literacy rate, male",
+      "category": "education",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SE.ADT.1524.LT.MA.ZS"
+    },
+    {
+      "code": "SE.ADT.1524.LT.FE.ZS",
+      "label": "Youth literacy rate, female",
+      "category": "education",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SE.ADT.1524.LT.FE.ZS"
+    },
+    {
+      "code": "SE.XPD.TOTL.GD.ZS",
+      "label": "Government expenditure on education (% of GDP)",
+      "category": "education",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS"
+    },
+    {
+      "code": "SE.SEC.ENRR",
+      "label": "Secondary school enrollment (% gross)",
+      "category": "education",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SE.SEC.ENRR"
+    },
+    {
+      "code": "SE.TER.ENRR",
+      "label": "Tertiary school enrollment (% gross)",
+      "category": "education",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SE.TER.ENRR"
+    },
+    {
+      "code": "IT.NET.USER.ZS",
+      "label": "Internet users (% of population)",
+      "category": "technology",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/IT.NET.USER.ZS"
+    },
+    {
+      "code": "IT.CEL.SETS.P2",
+      "label": "Mobile cellular subscriptions (per 100 people)",
+      "category": "technology",
+      "unit": "per100",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2"
+    },
+    {
+      "code": "IT.NET.BNDW.PC",
+      "label": "Fixed broadband subscriptions (per 100 people)",
+      "category": "technology",
+      "unit": "per100",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/IT.NET.BNDW.PC"
+    },
+    {
+      "code": "SP.POP.TOTL",
+      "label": "Total population",
+      "category": "demographics",
+      "unit": "count",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SP.POP.TOTL"
+    },
+    {
+      "code": "SP.POP.1524.TO",
+      "label": "Youth population (ages 15-24)",
+      "category": "demographics",
+      "unit": "count",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SP.POP.1524.TO"
+    },
+    {
+      "code": "SP.URB.TOTL.IN.ZS",
+      "label": "Urban population (% of total)",
+      "category": "demographics",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS"
+    },
+    {
+      "code": "SI.POV.GINI",
+      "label": "Gini index",
+      "category": "inequality",
+      "unit": "index",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SI.POV.GINI"
+    },
+    {
+      "code": "SI.POV.NAHC",
+      "label": "Poverty headcount at national poverty line (% of population)",
+      "category": "inequality",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SI.POV.NAHC"
+    },
+    {
+      "code": "LO.PISA.MAT",
+      "label": "PISA Mathematics score",
+      "category": "education",
+      "unit": "score",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/LO.PISA.MAT"
+    },
+    {
+      "code": "LO.PISA.REA",
+      "label": "PISA Reading score",
+      "category": "education",
+      "unit": "score",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/LO.PISA.REA"
+    },
+    {
+      "code": "LO.PISA.SCI",
+      "label": "PISA Science score",
+      "category": "education",
+      "unit": "score",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/LO.PISA.SCI"
+    },
+    {
+      "code": "SM.POP.NETM",
+      "label": "Net migration (total people)",
+      "category": "demographics",
+      "unit": "count",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SM.POP.NETM"
+    },
+    {
+      "code": "BX.TRF.PWKR.CD.DT",
+      "label": "Personal remittances received (current US$)",
+      "category": "economy",
+      "unit": "USD",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/BX.TRF.PWKR.CD.DT"
+    },
+    {
+      "code": "FP.CPI.TOTL.ZG",
+      "label": "Inflation, consumer prices (annual %)",
+      "category": "economy",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG"
+    },
+    {
+      "code": "SP.DYN.LE00.IN",
+      "label": "Life expectancy at birth (years)",
+      "category": "health",
+      "unit": "years",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SP.DYN.LE00.IN"
+    },
+    {
+      "code": "SH.XPD.CHEX.GD.ZS",
+      "label": "Current health expenditure (% of GDP)",
+      "category": "health",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS"
+    },
+    {
+      "code": "EN.ATM.CO2E.PC",
+      "label": "CO2 emissions (metric tons per capita)",
+      "category": "environment",
+      "unit": "t",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/EN.ATM.CO2E.PC"
+    },
+    {
+      "code": "EG.USE.ELEC.KH.PC",
+      "label": "Electric power consumption (kWh per capita)",
+      "category": "environment",
+      "unit": "kWh",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/EG.USE.ELEC.KH.PC"
+    },
+    {
+      "code": "NE.TRD.GNFS.ZS",
+      "label": "Trade (% of GDP)",
+      "category": "economy",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/NE.TRD.GNFS.ZS"
+    },
+    {
+      "code": "BX.KLT.DINV.WD.GD.ZS",
+      "label": "Foreign direct investment, net inflows (% of GDP)",
+      "category": "economy",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/BX.KLT.DINV.WD.GD.ZS"
+    },
+    {
+      "code": "UNE_DEAP_SEX_AGE_RT",
+      "label": "Youth unemployment rate (ILO, 15-24)",
+      "category": "employment",
+      "unit": "%",
+      "source": "ILO",
+      "ref_area": "AMR",
+      "source_url": "https://ilostat.ilo.org/data/"
+    },
+    {
+      "code": "EMP_DWAP_SEX_AGE_RT",
+      "label": "Youth employment-to-population ratio (ILO, 15-24)",
+      "category": "employment",
+      "unit": "%",
+      "source": "ILO",
+      "ref_area": "AMR",
+      "source_url": "https://ilostat.ilo.org/data/"
+    },
+    {
+      "code": "UNE_DEAP_SEX_AGE_NB",
+      "label": "Youth unemployed, total (ILO, 15-24)",
+      "category": "employment",
+      "unit": "count",
+      "source": "ILO",
+      "ref_area": "AMR",
+      "source_url": "https://ilostat.ilo.org/data/"
+    },
+    {
+      "code": "EMP_NINS_SEX_AGE_RT",
+      "label": "Informal employment rate (ILO)",
+      "category": "employment",
+      "unit": "%",
+      "source": "ILO",
+      "ref_area": "AMR",
+      "source_url": "https://ilostat.ilo.org/data/"
+    },
+    {
+      "code": "EAR_GAP_SEX_AGE_RT",
+      "label": "Gender wage gap (ILO)",
+      "category": "employment",
+      "unit": "%",
+      "source": "ILO",
+      "ref_area": "AMR",
+      "source_url": "https://ilostat.ilo.org/data/"
+    }
+  ]
+}

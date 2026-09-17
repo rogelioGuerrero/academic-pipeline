@@ -28,16 +28,35 @@
     .result-wrap { max-height: 480px; overflow: auto; border: 1px solid #e3e0da; border-radius: 8px; }
     .schema { font-size: 0.78em; color: #666; font-family: Verdana, sans-serif; margin-top: 8px; }
     .schema code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; }
+
+    .builder { background: #fff; border: 1px solid #e3e0da; border-radius: 8px; padding: 12px 14px; margin: 14px 0; }
+    .builder h3 { font-size: 0.8em; font-family: Verdana, sans-serif; text-transform: uppercase; letter-spacing: 0.05em; color: #666; margin-bottom: 10px; }
+    .fields { display: flex; flex-wrap: wrap; gap: 5px; }
+    .field { font-family: Verdana, sans-serif; font-size: 0.74em; background: #eef2f9; border: 1px solid #cdd9ec; border-radius: 5px; padding: 3px 8px; cursor: grab; user-select: none; }
+    .field:active { cursor: grabbing; }
+    .field .ty { color: #8a97ab; margin-left: 5px; font-size: 0.88em; }
+    .shelves { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    @media (max-width: 640px) { .shelves { grid-template-columns: 1fr; } }
+    .shelf { border: 1px dashed #cdc9c0; border-radius: 8px; padding: 8px 10px; min-height: 58px; background: #fcfcfa; }
+    .shelf.active { border-color: #1a73e8; background: #f4f8ff; }
+    .shelf.over { border-color: #14213d; background: #eef2f9; }
+    .shelf h4 { font-family: Verdana, sans-serif; font-size: 0.7em; text-transform: uppercase; letter-spacing: 0.05em; color: #777; margin-bottom: 6px; }
+    .shelf .empty { font-family: Verdana, sans-serif; font-size: 0.72em; color: #aaa; }
+    .item { display: flex; align-items: center; gap: 6px; font-family: Verdana, sans-serif; font-size: 0.74em; background: #fff; border: 1px solid #ddd9d1; border-radius: 5px; padding: 3px 6px; margin-bottom: 4px; }
+    .item select, .item input { font-size: 0.95em; padding: 1px 4px; border: 1px solid #ddd9d1; border-radius: 3px; font-family: Verdana, sans-serif; }
+    .item input { width: 78px; }
+    .item .rm { margin-left: auto; cursor: pointer; color: #b3261e; border: none; background: none; font-size: 1.15em; line-height: 1; padding: 0 2px; }
+    .hint { font-family: Verdana, sans-serif; font-size: 0.72em; color: #888; margin-top: 10px; line-height: 1.5; }
   </style>
 </head>
 <body>
   <a class="back" href="index.html">← Volver a los papers</a>
   <h1>Explorador de datos</h1>
-  <p>El catálogo completo del pipeline —series del Banco Mundial, papers publicados y correlaciones— exportado a Parquet y consultable aquí mismo. <strong>Las queries corren en tu navegador</strong> (DuckDB-WASM): ningún dato sale de tu máquina ni depende de un servidor.</p>
+  <p>El catálogo completo del pipeline —series del Banco Mundial, papers publicados y correlaciones— exportado a Parquet y consultable aquí mismo. <strong>Las queries corren en tu navegador</strong> (DuckDB-WASM): ningún dato sale de tu máquina ni depende de un servidor. Si buscas qué significa cada indicador en vez de consultar sus valores, ve al <a href="codebook.html">libro de códigos</a>.</p>
 
   <div class="controls">
     <select id="presets">
-      <option value="">— Consultas de ejemplo —</option>
+      <option value="">— Consultas SQL de ejemplo —</option>
       <option value="SELECT country_name, country_code, COUNT(DISTINCT indicator_code) AS indicadores, COUNT(*) AS observaciones, MIN(year) AS desde, MAX(year) AS hasta FROM series GROUP BY ALL ORDER BY indicadores DESC, observaciones DESC">Cobertura de datos por país</option>
       <option value="SELECT indicator_label, category, unit, COUNT(DISTINCT country_code) AS paises, COUNT(*) AS observaciones FROM series GROUP BY ALL ORDER BY observaciones DESC">Cobertura por indicador</option>
       <option value="SELECT year, value FROM series WHERE country_code='LCN' AND indicator_code='EG.USE.ELEC.KH.PC' ORDER BY year">Serie: consumo eléctrico per cápita — América Latina</option>
@@ -50,12 +69,39 @@
     <button id="csv" disabled>Descargar CSV</button>
   </div>
 
+  <div class="builder">
+    <h3>Constructor visual</h3>
+    <div class="controls" style="margin:0 0 10px">
+      <select id="bTable"></select>
+      <select id="bPreset">
+        <option value="">— Ejemplos del constructor —</option>
+        <option value="coverage">Cobertura: indicador × cobertura</option>
+        <option value="years">Años cubiertos por indicador</option>
+        <option value="papers">Papers por veredicto de revisión</option>
+        <option value="corr">Correlaciones: r medio por variable</option>
+      </select>
+      <button class="ghost" id="bClear">Limpiar</button>
+    </div>
+    <div class="fields" id="bFields"></div>
+    <div class="shelves">
+      <div class="shelf active" data-shelf="rows"><h4>Filas</h4><div class="items"></div></div>
+      <div class="shelf" data-shelf="cols"><h4>Columnas</h4><div class="items"></div></div>
+      <div class="shelf" data-shelf="values"><h4>Valores</h4><div class="items"></div></div>
+      <div class="shelf" data-shelf="filters"><h4>Filtros</h4><div class="items"></div></div>
+    </div>
+    <p class="hint">
+      Arrastra un campo a un estante, o haz clic para agregarlo al estante activo (el resaltado).
+      El constructor escribe el SQL abajo y lo deja editable: no esconde la consulta.
+      Un estante a la vez: <strong>Filas</strong> y <strong>Columnas</strong> arman el cruce, <strong>Valores</strong> lo agrega, <strong>Filtros</strong> recorta.
+    </p>
+  </div>
+
   <textarea id="sql" spellcheck="false" placeholder="Escribe SQL libre aquí… Tablas disponibles: series, papers, correlations"></textarea>
   <div id="status">Cargando motor DuckDB y datos…</div>
   <div class="result-wrap"><table id="result"><thead></thead><tbody></tbody></table></div>
   <div class="schema">
     Esquema — <code>series</code>(country_code, country_name, indicator_code, indicator_label, category, unit, year, value) ·
-    <code>papers</code>(date, filename, topic, pregunta, hipotesis, inspiring_news_title, inspiring_news_url, r_squared, correlations_total, correlations_sig, review_verdict, qa_verdict) ·
+    <code>papers</code>(date, filename, topic, pregunta, hipotesis, inspiring_news_title, inspiring_news_url, r_squared, correlations_total, correlations_sig, review_verdict, qa_verdict, sample_countries) ·
     <code>correlations</code>(var_x, var_y, r, p_value, country)
   </div>
 
@@ -73,6 +119,7 @@ const status = (msg, isErr=false) => {
 };
 
 const FILES = ['series', 'papers', 'correlations'];
+const schema = {}; // tabla -> [{name, type}], llenado por introspeccion
 let db, conn, lastResult = null;
 
 async function init() {
@@ -91,9 +138,14 @@ async function init() {
     await db.registerFileBuffer(`${name}.parquet`, new Uint8Array(buf));
     await conn.query(`CREATE OR REPLACE VIEW ${name} AS SELECT * FROM '${name}.parquet'`);
   }
-  status('Listo. Elige una consulta de ejemplo o escribe SQL.');
+  // Introspeccion del esquema: el constructor visual no hardcodea los campos.
+  for (const name of FILES) {
+    const res = await conn.query(`DESCRIBE ${name}`);
+    schema[name] = res.toArray().map(r => ({ name: r.column_name, type: String(r.column_type) }));
+  }
+  initBuilder();
+  status('Listo. Arma la consulta arriba o escribe SQL directamente.');
 }
-
 function cellText(v) {
   if (v === null || v === undefined) return '';
   if (typeof v === 'bigint') return v.toString();
@@ -130,7 +182,223 @@ async function runQuery(sql) {
   }
 }
 
+// ── Constructor visual (modelo de estantes, sin dependencias) ──
+// El SQL generado se escribe en el textarea de abajo, que sigue siendo la
+// fuente de verdad: se puede editar y ejecutar tal cual.
+const AGG_LABELS = [
+  ['count', 'count(*)'],
+  ['count_distinct', 'n distintos'],
+  ['sum', 'suma'],
+  ['avg', 'promedio'],
+  ['min', 'mínimo'],
+  ['max', 'máximo'],
+];
+const OP_LABELS = [
+  ['=', '='], ['!=', '≠'], ['>', '>'], ['>=', '≥'], ['<', '<'], ['<=', '≤'], ['contains', 'contiene'],
+];
+const BUILDER_PRESETS = {
+  coverage: { table: 'series', rows: [{ field: 'indicator_label' }], cols: [{ field: 'country_code' }], values: [{ field: 'year', agg: 'count_distinct' }], filters: [] },
+  years: { table: 'series', rows: [{ field: 'indicator_label' }], cols: [{ field: 'year' }], values: [{ field: 'country_code', agg: 'count_distinct' }], filters: [] },
+  papers: { table: 'papers', rows: [{ field: 'date' }], cols: [{ field: 'review_verdict' }], values: [{ field: 'filename', agg: 'count' }], filters: [] },
+  corr: { table: 'correlations', rows: [{ field: 'var_x' }], cols: [{ field: 'country' }], values: [{ field: 'r', agg: 'avg' }], filters: [] },
+};
+
+const builder = { table: 'series', rows: [], cols: [], values: [], filters: [], active: 'rows' };
+
+// Escapado HTML para interpolar nombres de campo/valor en el DOM.
+const escHtml = s => String(s ?? '').replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+const qid = n => `"${String(n).replace(/"/g, '""')}"`;
+const shortType = t => String(t).toLowerCase().replace('varchar', 'texto').replace('double', 'num').replace('bigint', 'entero').replace('int64', 'entero');
+
+function aggExpr(item) {
+  if (item.agg === 'count') return 'count(*)';
+  if (item.agg === 'count_distinct') return `count(DISTINCT ${qid(item.field)})`;
+  return `${item.agg}(${qid(item.field)})`;
+}
+
+function builderSQL() {
+  const b = builder;
+  if (!b.table) return '';
+  const select = [
+    ...b.rows.map(i => qid(i.field)),
+    ...b.cols.map(i => qid(i.field)),
+  ];
+  for (const item of b.values) {
+    const label = item.agg === 'count' ? `n_${item.field}` : `${item.agg}_${item.field}`;
+    select.push(`${aggExpr(item)} AS ${qid(label)}`);
+  }
+  const groupBy = [...b.rows, ...b.cols].map(i => qid(i.field));
+  // Sin Valores pero con ejes: contar filas, para que el cruce no salga vacío.
+  if (!b.values.length && groupBy.length) select.push('count(*) AS "n"');
+  if (!select.length) return '';
+
+  const where = b.filters
+    .filter(f => f.value !== '' && f.value !== undefined)
+    .map(f => {
+      const col = qid(f.field);
+      if (f.op === 'contains') return `CAST(${col} AS VARCHAR) ILIKE '%${String(f.value).replace(/'/g, "''")}%'`;
+      const raw = String(f.value).trim();
+      const lit = /^-?\d+(\.\d+)?$/.test(raw) ? raw : `'${raw.replace(/'/g, "''")}'`;
+      return `${col} ${f.op} ${lit}`;
+    });
+
+  const parts = [`SELECT ${select.join(', ')}`, `FROM ${b.table}`];
+  if (where.length) parts.push(`WHERE ${where.join(' AND ')}`);
+  if (groupBy.length) parts.push(`GROUP BY ${groupBy.join(', ')}`);
+  if (groupBy.length) parts.push(`ORDER BY ${groupBy.join(', ')}`);
+  else if (b.values.length) parts.push('ORDER BY 1 DESC');
+  return parts.join('\n') + ';';
+}
+
+function syncSQL() {
+  const sql = builderSQL();
+  if (sql) document.getElementById('sql').value = sql;
+  return sql;
+}
+
+function addField(shelf, field) {
+  builder[shelf].push({ field, ...(shelf === 'values' ? { agg: 'count_distinct' } : {}), ...(shelf === 'filters' ? { op: '=', value: '' } : {}) });
+  renderShelves();
+  syncSQL();
+}
+
+function renderFields() {
+  const fields = schema[builder.table] || [];
+  document.getElementById('bFields').innerHTML = fields
+    .map(f => `<span class="field" draggable="true" data-field="${escHtml(f.name)}" title="${escHtml(f.type)}">${escHtml(f.name)}<span class="ty">${escHtml(shortType(f.type))}</span></span>`)
+    .join('');
+}
+
+function renderShelves() {
+  document.querySelectorAll('.shelf').forEach(shelfEl => {
+    const key = shelfEl.dataset.shelf;
+    const items = builder[key];
+    shelfEl.classList.toggle('active', builder.active === key);
+    const box = shelfEl.querySelector('.items');
+    if (!items.length) {
+      box.innerHTML = '<span class="empty">arrastra un campo aquí</span>';
+      return;
+    }
+    box.innerHTML = items.map((item, idx) => {
+      let extra = '';
+      if (key === 'values') {
+        extra = `<select data-agg="${idx}">${AGG_LABELS.map(([v, l]) =>
+          `<option value="${v}"${item.agg === v ? ' selected' : ''}>${escHtml(l)}</option>`).join('')}</select>`;
+      }
+      if (key === 'filters') {
+        extra = `<select data-op="${idx}">${OP_LABELS.map(([v, l]) =>
+          `<option value="${v}"${item.op === v ? ' selected' : ''}>${escHtml(l)}</option>`).join('')}</select>` +
+          `<input data-val="${idx}" value="${escHtml(item.value || '')}" placeholder="valor">`;
+      }
+      return `<div class="item"><span>${escHtml(item.field)}</span>${extra}<button class="rm" data-rm="${idx}" title="Quitar">×</button></div>`;
+    }).join('');
+  });
+}
+
+function clearBuilder() {
+  builder.rows = []; builder.cols = []; builder.values = []; builder.filters = [];
+  builder.active = 'rows';
+  renderShelves();
+}
+
+function initBuilder() {
+  const tableSel = document.getElementById('bTable');
+  tableSel.innerHTML = FILES.map(f => `<option value="${f}">Tabla: ${f}</option>`).join('');
+  tableSel.value = builder.table;
+  renderFields();
+  renderShelves();
+
+  // Campos: clic = agregar al estante activo; dragstart = arrastrar
+  const fieldsBox = document.getElementById('bFields');
+  fieldsBox.addEventListener('click', e => {
+    const el = e.target.closest('.field');
+    if (el) addField(builder.active, el.dataset.field);
+  });
+  fieldsBox.addEventListener('dragstart', e => {
+    const el = e.target.closest('.field');
+    if (!el) return;
+    e.dataTransfer.setData('text/plain', el.dataset.field);
+    e.dataTransfer.effectAllowed = 'copy';
+  });
+
+  // Estantes: soltar, resaltar y marcar como activo
+  document.querySelectorAll('.shelf').forEach(shelfEl => {
+    const key = shelfEl.dataset.shelf;
+    shelfEl.addEventListener('dragover', e => { e.preventDefault(); shelfEl.classList.add('over'); });
+    shelfEl.addEventListener('dragleave', () => shelfEl.classList.remove('over'));
+    shelfEl.addEventListener('drop', e => {
+      e.preventDefault();
+      shelfEl.classList.remove('over');
+      const field = e.dataTransfer.getData('text/plain');
+      if (field) { builder.active = key; addField(key, field); }
+    });
+    shelfEl.addEventListener('click', e => {
+      if (e.target.closest('.item')) return;
+      builder.active = key;
+      renderShelves();
+    });
+  });
+
+  // Controles dentro de los estantes
+  document.querySelectorAll('.shelf').forEach(shelfEl => {
+    const key = shelfEl.dataset.shelf;
+    const box = shelfEl.querySelector('.items');
+    box.addEventListener('change', e => {
+      const idx = Number(e.target.dataset.agg ?? e.target.dataset.op);
+      if (e.target.dataset.agg !== undefined) builder.values[idx].agg = e.target.value;
+      else if (e.target.dataset.op !== undefined) builder.filters[idx].op = e.target.value;
+      syncSQL();
+    });
+    box.addEventListener('input', e => {
+      if (e.target.dataset.val === undefined) return;
+      builder.filters[Number(e.target.dataset.val)].value = e.target.value;
+      syncSQL();
+    });
+    box.addEventListener('click', e => {
+      const rm = e.target.closest('.rm');
+      if (!rm) return;
+      builder[key].splice(Number(rm.dataset.rm), 1);
+      renderShelves();
+      syncSQL();
+    });
+  });
+
+  tableSel.addEventListener('change', e => {
+    builder.table = e.target.value;
+    // Los campos cambian con la tabla: los estantes se vacían para no dejar
+    // referencias a columnas que ya no existen.
+    builder.rows = []; builder.cols = []; builder.values = []; builder.filters = [];
+    renderFields();
+    renderShelves();
+    syncSQL();
+  });
+
+  document.getElementById('bClear').addEventListener('click', () => {
+    clearBuilder();
+    document.getElementById('sql').value = '';
+  });
+
+  document.getElementById('bPreset').addEventListener('change', e => {
+    const preset = BUILDER_PRESETS[e.target.value];
+    if (!preset) return;
+    const clone = JSON.parse(JSON.stringify(preset));
+    builder.table = clone.table;
+    builder.rows = clone.rows;
+    builder.cols = clone.cols;
+    builder.values = clone.values;
+    builder.filters = clone.filters;
+    builder.active = 'rows';
+    document.getElementById('bTable').value = builder.table;
+    renderFields();
+    renderShelves();
+    runQuery(syncSQL());
+  });
+}
+
 document.getElementById('presets').addEventListener('change', e => {
+  // Un preset SQL reemplaza el textarea: se limpia el constructor para que el
+  // estado de los estantes no quede contradiciendo la consulta visible.
+  clearBuilder();
   document.getElementById('sql').value = e.target.value;
   if (e.target.value) runQuery(e.target.value);
 });
