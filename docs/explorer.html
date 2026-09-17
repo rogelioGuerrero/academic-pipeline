@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explorador de datos — Academic Pipeline</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; background: #faf9f7; color: #1a1a1a; max-width: 960px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.8em; border-bottom: 3px solid #1a73e8; padding-bottom: 8px; margin-bottom: 16px; }
+    p, li { line-height: 1.7; margin-bottom: 12px; }
+    .back { display: inline-block; margin-bottom: 16px; color: #1a73e8; text-decoration: none; font-size: 0.9em; }
+    .back:hover { text-decoration: underline; }
+    .note { background: #e8f0fe; border-left: 3px solid #1a73e8; padding: 12px 16px; margin: 16px 0; font-size: 0.92em; }
+    .controls { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; align-items: center; }
+    select, button { font-family: Verdana, sans-serif; font-size: 0.85em; padding: 8px 12px; border: 1px solid #d8d4cc; border-radius: 8px; background: #fff; }
+    select { flex: 1; min-width: 280px; }
+    button { background: #14213d; color: #fff; border: none; cursor: pointer; }
+    button:hover { background: #1f3157; }
+    button:disabled { background: #999; cursor: default; }
+    #sql { width: 100%; font-family: 'Courier New', monospace; font-size: 0.85em; padding: 12px; border: 1px solid #d8d4cc; border-radius: 8px; min-height: 90px; resize: vertical; }
+    #status { font-size: 0.85em; color: #666; margin: 10px 0; font-family: Verdana, sans-serif; }
+    #status.err { color: #b3261e; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.82em; font-family: Verdana, sans-serif; }
+    th, td { border: 1px solid #ddd; padding: 6px 9px; text-align: left; }
+    th { background: #f5f5f5; position: sticky; top: 0; }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .result-wrap { max-height: 480px; overflow: auto; border: 1px solid #e3e0da; border-radius: 8px; }
+    .schema { font-size: 0.78em; color: #666; font-family: Verdana, sans-serif; margin-top: 8px; }
+    .schema code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <a class="back" href="index.html">← Volver a los papers</a>
+  <h1>Explorador de datos</h1>
+  <p>El catálogo completo del pipeline —series del Banco Mundial, papers publicados y correlaciones— exportado a Parquet y consultable aquí mismo. <strong>Las queries corren en tu navegador</strong> (DuckDB-WASM): ningún dato sale de tu máquina ni depende de un servidor.</p>
+
+  <div class="controls">
+    <select id="presets">
+      <option value="">— Consultas de ejemplo —</option>
+      <option value="SELECT country_name, country_code, COUNT(DISTINCT indicator_code) AS indicadores, COUNT(*) AS observaciones, MIN(year) AS desde, MAX(year) AS hasta FROM series GROUP BY ALL ORDER BY indicadores DESC, observaciones DESC">Cobertura de datos por país</option>
+      <option value="SELECT indicator_label, category, unit, COUNT(DISTINCT country_code) AS paises, COUNT(*) AS observaciones FROM series GROUP BY ALL ORDER BY observaciones DESC">Cobertura por indicador</option>
+      <option value="SELECT year, value FROM series WHERE country_code='LCN' AND indicator_code='EG.USE.ELEC.KH.PC' ORDER BY year">Serie: consumo eléctrico per cápita — América Latina</option>
+      <option value="SELECT year, value FROM series WHERE country_code='MEX' AND indicator_code='NY.GDP.MKTP.KD.ZG' ORDER BY year">Serie: crecimiento del PIB — México</option>
+      <option value="SELECT country_name, indicator_label, year, value FROM series WHERE year=2020 ORDER BY country_name, indicator_label LIMIT 100">El año del shock: datos de 2020</option>
+      <option value="SELECT date, topic, review_verdict, qa_verdict, filename FROM papers ORDER BY date DESC">Papers publicados y sus veredictos</option>
+      <option value="SELECT var_x, var_y, r, p_value, country FROM correlations WHERE p_value &lt; 0.05 ORDER BY ABS(r) DESC">Correlaciones significativas detectadas</option>
+    </select>
+    <button id="run">Ejecutar</button>
+    <button id="csv" disabled>Descargar CSV</button>
+  </div>
+
+  <textarea id="sql" spellcheck="false" placeholder="Escribe SQL libre aquí… Tablas disponibles: series, papers, correlations"></textarea>
+  <div id="status">Cargando motor DuckDB y datos…</div>
+  <div class="result-wrap"><table id="result"><thead></thead><tbody></tbody></table></div>
+  <div class="schema">
+    Esquema — <code>series</code>(country_code, country_name, indicator_code, indicator_label, category, unit, year, value) ·
+    <code>papers</code>(date, filename, topic, pregunta, hipotesis, inspiring_news_title, inspiring_news_url, r_squared, correlations_total, correlations_sig, review_verdict, qa_verdict) ·
+    <code>correlations</code>(var_x, var_y, r, p_value, country)
+  </div>
+
+  <div class="note">
+    <strong>Transparencia verificable:</strong> estos archivos (<code>data/*.parquet</code>) se regeneran en cada corrida del pipeline desde <code>docs/memory.db</code>. Lo que ves aquí es exactamente lo que el sistema usó para seleccionar países y calcular.
+  </div>
+
+<script type="module">
+import * as duckdb from 'https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm';
+
+const status = (msg, isErr=false) => {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = isErr ? 'err' : '';
+};
+
+const FILES = ['series', 'papers', 'correlations'];
+let db, conn, lastResult = null;
+
+async function init() {
+  const bundle = await duckdb.selectBundle(duckdb.getJsDelivrBundles());
+  const workerUrl = URL.createObjectURL(
+    new Blob([`importScripts("${bundle.mainWorker}");`], {type: 'text/javascript'})
+  );
+  db = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(duckdb.LogLevel.WARNING), new Worker(workerUrl));
+  await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+  conn = await db.connect();
+  for (const name of FILES) {
+    const buf = await fetch(`data/${name}.parquet`).then(r => {
+      if (!r.ok) throw new Error(`No se pudo cargar data/${name}.parquet (HTTP ${r.status})`);
+      return r.arrayBuffer();
+    });
+    await db.registerFileBuffer(`${name}.parquet`, new Uint8Array(buf));
+    await conn.query(`CREATE OR REPLACE VIEW ${name} AS SELECT * FROM '${name}.parquet'`);
+  }
+  status('Listo. Elige una consulta de ejemplo o escribe SQL.');
+}
+
+function cellText(v) {
+  if (v === null || v === undefined) return '';
+  if (typeof v === 'bigint') return v.toString();
+  if (v instanceof Date) return v.toISOString().slice(0, 10);
+  if (typeof v === 'number' && !Number.isInteger(v)) return Number(v.toFixed(6)).toString();
+  return String(v);
+}
+
+function render(result) {
+  const cols = result.schema.fields.map(f => f.name);
+  const rows = result.toArray().map(r => r.toArray());
+  const thead = document.querySelector('#result thead');
+  const tbody = document.querySelector('#result tbody');
+  thead.innerHTML = '<tr>' + cols.map(c => `<th>${c}</th>`).join('') + '</tr>';
+  tbody.innerHTML = rows.map(row =>
+    '<tr>' + row.map(v => {
+      const isNum = typeof v === 'number' || typeof v === 'bigint';
+      return `<td class="${isNum ? 'num' : ''}">${cellText(v)}</td>`;
+    }).join('') + '</tr>'
+  ).join('');
+  status(`${rows.length} filas · ${cols.length} columnas`);
+}
+
+async function runQuery(sql) {
+  if (!sql.trim()) return;
+  try {
+    status('Ejecutando…');
+    const res = await conn.query(sql);
+    lastResult = res;
+    render(res);
+    document.getElementById('csv').disabled = false;
+  } catch (e) {
+    status('Error: ' + e.message, true);
+  }
+}
+
+document.getElementById('presets').addEventListener('change', e => {
+  document.getElementById('sql').value = e.target.value;
+  if (e.target.value) runQuery(e.target.value);
+});
+document.getElementById('run').addEventListener('click', () => runQuery(document.getElementById('sql').value));
+document.getElementById('csv').addEventListener('click', () => {
+  if (!lastResult) return;
+  const cols = lastResult.schema.fields.map(f => f.name);
+  const rows = lastResult.toArray().map(r => r.toArray());
+  const esc = v => `"${cellText(v).replace(/"/g, '""')}"`;
+  const csv = [cols.map(esc).join(','), ...rows.map(r => r.map(esc).join(','))].join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv'}));
+  a.download = 'academic-pipeline-query.csv';
+  a.click();
+});
+
+init().catch(e => status('No se pudo iniciar el motor: ' + e.message, true));
+</script>
+</body>
+</html>

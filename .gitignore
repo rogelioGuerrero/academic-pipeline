@@ -10,6 +10,8 @@ test-digest.mjs
 # Harness de pruebas locales (ECharts preview)
 test-charts/
 test-in.json
+.playwright-mcp/
+output/link-report.json
 docs/test-echarts.html
 docs/test-frag.js
 docs/charts/test-echarts/

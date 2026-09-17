@@ -1,0 +1,32 @@
+name: Link Check
+
+on:
+  schedule:
+    # Domingos 13:00 UTC — revisa que fuentes y bibliografia no tengan link rot
+    - cron: '0 13 * * 0'
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Check paper links
+        run: python scripts/check_links.py
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: link-report-${{ github.run_id }}
+          path: output/link-report.json
+          retention-days: 30

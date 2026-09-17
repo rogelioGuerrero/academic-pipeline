@@ -31,7 +31,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install Python dependencies
-        run: pip install numpy scipy matplotlib typst
+        run: pip install numpy scipy matplotlib typst pandas pyarrow requests
 
       - name: Setup R & packages
         run: |
@@ -80,11 +80,14 @@ jobs:
       - name: Build PDF papers with Typst
         run: python scripts/build_pdf.py
 
+      - name: Export data catalog for web explorer
+        run: python scripts/export_explorer_data.py
+
       - name: Commit artifacts
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/compute-r-results.json output/raw/fetched-data.json output/charts/ docs/papers/ docs/charts/ docs/index.json docs/knowledge.jsonl docs/memory.db 2>/dev/null || true
+          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/compute-r-results.json output/raw/fetched-data.json output/charts/ docs/papers/ docs/charts/ docs/data/ docs/index.json docs/knowledge.jsonl docs/memory.db 2>/dev/null || true
           git commit -m "Daily research paper - $(date -u +%Y-%m-%d)" || echo "No changes to commit"
           git push
 

@@ -8,7 +8,7 @@ Este estudio explora la relación entre el consumo eléctrico per cápita y la t
 
 ## Introducción  
 
-En los últimos años, varios gobiernos latinoamericanos han recurrido a la emisión de bonos soberanos para financiar la expansión y modernización de sus sistemas eléctricos, con el objetivo de mejorar la cobertura, la fiabilidad y la sostenibilidad del suministro energético (Banco Mundial, 2024). Estas iniciativas se inscriben en un marco de políticas que asumen que el acceso ampliado a la electricidad estimula la productividad, la industrialización y, por ende, el crecimiento económico (Acemoglu & Restrepo, 2015).  
+En los últimos años, varios gobiernos latinoamericanos han recurrido a la emisión de bonos soberanos para financiar la expansión y modernización de sus sistemas eléctricos, con el objetivo de mejorar la cobertura, la fiabilidad y la sostenibilidad del suministro energético (Banco Mundial, 2024). Estas iniciativas se inscriben en un marco de políticas que asumen que el acceso ampliado a la electricidad estimula la productividad, la industrialización y, por ende, el crecimiento económico (Dinkelman, 2011).  
 
 A la luz de este discurso, la presente investigación plantea la siguiente **pregunta de investigación**:  
 
@@ -128,7 +128,7 @@ En síntesis, el estudio aporta una visión crítica sobre la suposición de que
 
 ## Bibliografía  
 
-Acemoglu, D., & Restrepo, P. (2015). *The race between education and technology*. Journal of Economic Growth, 20(1), 1‑30. https://doi.org/10.1007/s10887-014-9131-4  
+Dinkelman, T. (2011). *The effects of rural electrification on employment: New evidence from South Africa*. American Economic Review, 101(7), 3078–3108. https://doi.org/10.1257/aer.101.7.3078  
 
 Banco Mundial. (2024). *World Development Indicators*. Recuperado de https://databank.worldbank.org/source/world-development-indicators  
 
