@@ -791,7 +791,57 @@ function computeDigest(computeResults, suggestDecision = null) {
   return parts.join("\n") || "Sin analisis estadistico.";
 }
 
-async function agentWrite(fetchedData, computeResults, feedback = null, topic = null, angle = null, suggestDecision = null) {
+// ── Literatura real via OpenAlex ─────────────────────────────────────────────
+// Reconstruye el abstract desde el inverted index de OpenAlex
+function reconstructAbstract(inv) {
+  if (!inv) return "";
+  const words = [];
+  for (const [word, positions] of Object.entries(inv)) {
+    for (const p of positions) words[p] = word;
+  }
+  return words.filter(Boolean).join(" ");
+}
+
+function formatAPA(work) {
+  const authors = (work.authorships || [])
+    .map(a => a.author?.display_name || "")
+    .filter(Boolean);
+  const apa_authors = authors.slice(0, 3).map(name => {
+    const parts = name.trim().split(/\s+/);
+    const last = parts.pop();
+    return `${last}, ${parts.map(p => p[0]).join(". ")}.`;
+  }).join(", ") + (authors.length > 3 ? " et al." : "");
+  const journal = work.primary_location?.source?.display_name || "";
+  const doi = work.doi ? work.doi.replace("https://doi.org/", "") : "";
+  return {
+    apa: `${apa_authors} (${work.publication_year}). ${work.title}. ${journal ? `*${journal}*. ` : ""}${doi ? `https://doi.org/${doi}` : ""}`.trim(),
+    doi, title: work.title, year: work.publication_year,
+    citations: work.cited_by_count,
+    abstract: reconstructAbstract(work.abstract_inverted_index).slice(0, 600),
+  };
+}
+
+async function fetchLiterature(topic, pregunta) {
+  const query = (pregunta || topic || "").trim();
+  if (!query) return [];
+  const url = `https://api.openalex.org/works?search=${encodeURIComponent(query)}` +
+    `&filter=has_doi:true,type:article,cited_by_count:>30&per-page=10` +
+    `&select=doi,title,publication_year,authorships,primary_location,cited_by_count,abstract_inverted_index`;
+  try {
+    const res = await fetch(url, { headers: { "User-Agent": "AcademicPipeline/1.0 (mailto:pipeline@localhost)" } });
+    if (!res.ok) { console.log(`  OpenAlex respondio ${res.status} — sin literatura verificada.`); return []; }
+    const json = await res.json();
+    const works = (json.results || []).filter(w => w.doi && w.title).slice(0, 6).map(formatAPA);
+    console.log(`  Literatura OpenAlex: ${works.length} papers reales recuperados`);
+    works.forEach((w, i) => console.log(`    ${i + 1}. ${w.apa.slice(0, 90)}`));
+    return works;
+  } catch (e) {
+    console.log(`  OpenAlex fallo (${e.message}) — continuando sin literatura verificada.`);
+    return [];
+  }
+}
+
+async function agentWrite(fetchedData, computeResults, feedback = null, topic = null, angle = null, suggestDecision = null, literature = []) {
   console.log("[4/7] GPT-OSS 120B redactando paper con datos reales...\n");
   if (feedback) console.log(`Aplicando feedback: ${feedback.slice(0, 100)}\n`);
   const effectiveTopic = topic || TOPIC;
@@ -816,6 +866,9 @@ ${countries || "Sin datos por pais."}
 RESULTADOS ESTADISTICOS REALES (Python/statsmodels/scipy):
 ${digest}
 
+LITERATURA REAL VERIFICADA (recuperada de OpenAlex — obras que EXISTEN y puedes citar; usa sus hallazgos para contextualizar el analisis):
+${literature.length ? literature.map((w, i) => `${i + 1}. ${w.apa}\n   Resumen: ${w.abstract || "(sin resumen)"}`).join("\n") : "(sin literatura verificada — no cites literatura academica, solo Banco Mundial y la noticia)"}
+
 Escribe un paper academico sobre: ${effectiveTopic}
 
 ${angleSection}
@@ -834,7 +887,7 @@ OBLIGATORIO PARA TABLAS Y FIGURAS:
 - PROHIBIDO inventar nombres de archivo de figuras (como charts/consumo_pib.png o cualquier nombre que no esté en la lista de FIGURAS).
 5. **Discusion** (200-350 palabras): interpreta; reconoce que n=10 observaciones por serie es muestra pequena y las correlaciones no implican causalidad.
 6. **Conclusiones** (150-250 palabras): DEBE dar un veredicto explicito sobre la hipotesis — "los datos apoyan / no apoyan / son insuficientes para evaluar" — basado SOLO en los resultados calculados.
-7. **Bibliografia**: formato APA. Solo puedes citar: Banco Mundial/World Development Indicators, la noticia que inspiro el tema, y literatura academica REAL y conocida (Autor 2015, Acemoglu & Restrepo, etc.) SIN atribuirles coeficientes ni cifras especificas.
+7. **Bibliografia**: formato APA. Solo puedes citar: Banco Mundial/World Development Indicators, la noticia que inspiro el tema, y las obras listadas en LITERATURA REAL VERIFICADA (usa exactamente la cita APA provista, incluyendo el DOI). PROHIBIDO citar cualquier obra que no este en esa lista — no cites de memoria.
 
 REGLAS CRITICAS (incumplir = rechazo):
 - Todo numero citado debe aparecer LITERALMENTE en DATOS o RESULTADOS de arriba. Prohibido redondear a valores diferentes, inventar valores por pais no listados, o reportar estadisticos no calculados.
@@ -846,6 +899,7 @@ REGLAS CRITICAS (incumplir = rechazo):
 - Cuando una correlacion en niveles es significativa pero su correlacion "en diferencias" no lo es (o viceversa), dilo explicitamente: la primera puede ser co-tendencia espuria, la segunda es evidencia mas honesta de co-movimiento.
 - Referencia las figuras reales listadas con el path EXACTO de la lista: ![descripcion](charts/<path-completo>). NO inventes figuras ni cambies los paths.
 - Cita cada dato como (Banco Mundial, 2024).
+- En Introduccion o Discusion, contrasta los hallazgos con la literatura listada (ej: "consistente con Autor (año)" o "nuestros datos no replican el efecto reportado por Autor (año)") — solo si es pertinente y sin inventarles cifras.
 - Justo despues del Resumen, agrega un blockquote: "> **En breve:** <la respuesta en una frase a la pregunta de investigacion, con el veredicto honesto segun los resultados>".
 - Bajo cada sub-encabezado ### del Analisis, agrega UNA linea en cursiva que explique con lenguaje sencillo que muestra esa seccion (para lectores no tecnicos). NO uses la frase "En palabras simples" — empieza directo con la explicacion.
 - Bajo cada figura referenciada, agrega una linea en cursiva "*Como leerla: <guia>*" usando la guia de lectura provista en la lista FIGURAS.
@@ -1101,7 +1155,7 @@ function transparencyNote(state) {
     state.qaDecision ? `Control de calidad final: veredicto ${state.qaDecision.veredicto}.` : "",
     `Iteraciones: ${it.rewrite} reescritura(s), ${it.edit} reedición(es).`,
     "",
-    "**Limitaciones.** Las series tienen n≤10 observaciones anuales; las correlaciones no implican causalidad y las muestras pequeñas reducen la potencia estadística. El texto fue redactado por un modelo de lenguaje y verificado automáticamente contra los datos; no sustituye revisión humana. Artefactos verificables en el repositorio: `output/raw/fetched-data.json` (datos crudos), `output/raw/compute-results.json` (resultados completos), `output/briefs/` (decisión editorial).",
+    "**Limitaciones.** Las series tienen n≤10 observaciones anuales; las correlaciones no implican causalidad y las muestras pequeñas reducen la potencia estadística. El texto fue redactado por un modelo de lenguaje y verificado automáticamente contra los datos; no sustituye revisión humana. Artefactos verificables en el repositorio: `output/raw/fetched-data.json` (datos crudos), `output/raw/compute-results.json` (resultados completos), `output/raw/literature.json` (referencias verificadas en OpenAlex), `output/briefs/` (decisión editorial).",
     "",
     "*Explicación completa de los métodos (por qué Pearson, Spearman, OLS, Mann-Kendall): [metodología](https://rogelioguerrero.github.io/academic-pipeline/methodology.html)*",
   ];
@@ -1194,6 +1248,7 @@ class MoAGraph {
     this.state = {
       topic: TOPIC, angle: ANGLE, fetchedData: null, suggestDecision: null,
       computeResults: null, currentDraft: "", drafts: [], reviewDecision: null,
+      literature: null,
       editedArticle: "", qaDecision: null, writeFeedback: null, editFeedback: null,
       iterations: { rewrite: 0, edit: 0 }, nodeHistory: [],
     };
@@ -1255,7 +1310,16 @@ class MoAGraph {
     await delay(20); return resolveTransition("SUGGEST", this.state);
   }
   async nodeCompute() { this.logNode("COMPUTE"); this.state.computeResults = await this.runWithGuardrails("COMPUTE", () => agentCompute(this.state.fetchedData, this.state.suggestDecision)); mkdirSync("output/raw", { recursive: true }); writeFileSync("output/raw/compute-results.json", JSON.stringify(this.state.computeResults, null, 2), "utf-8"); return resolveTransition("COMPUTE", this.state); }
-  async nodeWrite() { this.logNode("WRITE"); this.state.currentDraft = await this.runWithGuardrails("WRITE", () => agentWrite(this.state.fetchedData, this.state.computeResults, this.state.writeFeedback, this.state.topic, this.state.angle, this.state.suggestDecision)); this.state.drafts.push(this.state.currentDraft); this.state.writeFeedback = null; await delay(20); return resolveTransition("WRITE", this.state); }
+  async nodeWrite() {
+    this.logNode("WRITE");
+    if (this.state.literature === null) {
+      this.state.literature = await fetchLiterature(this.state.topic, this.state.suggestDecision?.pregunta);
+      mkdirSync("output/raw", { recursive: true });
+      writeFileSync("output/raw/literature.json", JSON.stringify(this.state.literature, null, 2), "utf-8");
+    }
+    this.state.currentDraft = await this.runWithGuardrails("WRITE", () => agentWrite(this.state.fetchedData, this.state.computeResults, this.state.writeFeedback, this.state.topic, this.state.angle, this.state.suggestDecision, this.state.literature));
+    this.state.drafts.push(this.state.currentDraft); this.state.writeFeedback = null; await delay(20); return resolveTransition("WRITE", this.state);
+  }
   async nodeReview() { this.logNode("REVIEW"); this.state.reviewDecision = await this.runWithGuardrails("REVIEW", () => agentReview(this.state.fetchedData, this.state.computeResults, this.state.currentDraft, this.state.suggestDecision)); await delay(20); return resolveTransition("REVIEW", this.state); }
   async nodeEdit() { this.logNode("EDIT"); try { this.state.editedArticle = await this.runWithGuardrails("EDIT", () => agentEdit(this.state.currentDraft, this.state.editFeedback || "", this.state.computeResults)); } catch (e) { console.log(`  EDIT fallo (${e.message}). Usando draft original.`); this.state.editedArticle = repairTablesAndCharts(this.state.currentDraft, this.state.computeResults); } await delay(20); return resolveTransition("EDIT", this.state); }
   async nodeApprove() {
