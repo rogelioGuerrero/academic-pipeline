@@ -40,13 +40,21 @@ def clean_text_formatting(text: str) -> str:
     # Escapar asterisco suelto de significancia estadística (ej. "Sí *", "0.048 *", "p < 0.05 *")
     text = re.sub(r'(?<=\w)\s+\*(?=[,\)\]\s]|$)', r' \\*', text)
     # Convertir *cursiva* markdown a _cursiva_ Typst antes de negrita
-    text = re.sub(r'(?<!\*)\*([a-zA-Z0-9_\-\.\,]+?)\*(?!\*)', r'_\1_', text)
+    text = re.sub(r'(?<!\*)\*([^*\n]+?)\*(?!\*)', r'_\1_', text)
     # Convertir **negrita** markdown a *negrita* Typst
     text = re.sub(r'\*\*(.+?)\*\*', r'*\1*', text)
     
     # Normalizar tipografía especial (flechas, guiones no separables, espacios finos)
     text = text.replace("→", "->").replace("‑", "-").replace("–", "-").replace(" ", " ")
     return text
+
+# Semaforo de evidencia: emojis a circulos de color Typst (las fuentes del
+# PDF no traen glifos emoji; un circulo coloreado comunica igual).
+BADGE_TYPST = {
+    "🟢": '#text(fill: rgb("2e7d32"))[●]',
+    "🟡": '#text(fill: rgb("b8860b"))[●]',
+    "🔴": '#text(fill: rgb("c62828"))[●]',
+}
 
 def parse_markdown_table(table_lines):
     """Convierte una tabla markdown a una tabla Typst profesional."""
@@ -73,6 +81,8 @@ def parse_markdown_table(table_lines):
             cell_clean = clean_text_formatting(cell)
             if not cell_clean.startswith("#link"):
                 cell_clean = cell_clean.replace("[", r"\[").replace("]", r"\]")
+            for badge, typ in BADGE_TYPST.items():
+                cell_clean = cell_clean.replace(badge, typ)
             cleaned_cells.append(cell_clean)
         cleaned_rows.append(cleaned_cells)
 
@@ -128,7 +138,7 @@ def convert_md_to_typst(md_content: str, meta: dict, paper_filename: str) -> str
         if line_s.startswith("## Resumen"):
             i += 1
             res_parts = []
-            while i < len(lines) and not lines[i].strip().startswith("## ") and not lines[i].strip().startswith("---"):
+            while i < len(lines) and not lines[i].strip().startswith("## ") and not lines[i].strip().startswith("---") and not lines[i].strip().startswith(">"):
                 if lines[i].strip():
                     res_parts.append(lines[i].strip())
                 i += 1
@@ -293,6 +303,31 @@ def convert_md_to_typst(md_content: str, meta: dict, paper_filename: str) -> str
             h_text = clean_text_formatting(line_s[2:].strip().replace("**", ""))
             typst_body.append(f"\n= {h_text}\n")
             j += 1
+            continue
+
+        # Blockquotes / callouts (ej. "> **En corto:** ...")
+        if line_s.startswith(">"):
+            quote_lines = []
+            while j < len(body_lines) and body_lines[j].strip().startswith(">"):
+                quote_lines.append(body_lines[j].strip().lstrip(">").strip())
+                j += 1
+            q_joined = " ".join(quote_lines)
+            q_text = clean_text_formatting(q_joined)
+            is_tldr = "En corto:" in q_joined
+            q_fill, q_stroke = ("#eef3fc", "#14213d") if is_tldr else ("#f8fafc", "#1a56db")
+            typst_body.append(f"""
+#block(
+  fill: rgb("{q_fill}"),
+  stroke: (left: 4pt + rgb("{q_stroke}")),
+  radius: (right: 6pt),
+  inset: (x: 12pt, y: 10pt),
+  width: 100%,
+  [
+    #set text(size: 9pt)
+    {q_text}
+  ]
+)
+""")
             continue
 
         # Formato de texto normal

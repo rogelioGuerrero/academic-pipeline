@@ -107,6 +107,10 @@
 
     .echart { width: 100%; height: 380px; margin: 0.4em 0 0.2em; }
     .fig-hint { font-size: .8rem; color: #8a7a4a; font-style: italic; margin: 1.2em 0 0.2em; font-family: 'Inter', sans-serif; }
+    /* Glosario: terminos tecnicos con definicion al hover */
+    .gloss { border-bottom: 1px dotted #1a56db; cursor: help; }
+    /* Callout "En corto": respuesta en una frase tras el resumen */
+    #viewer blockquote.tldr { background: #eef3fc; border-left: 4px solid #14213d; padding: 12px 16px; border-radius: 0 8px 8px 0; color: #1a1a1a; font-style: normal; }
     figure.echart-fig { margin: 1.6em 0; }
     figure.echart-fig figcaption { font-size: .78rem; color: #666; margin-top: 6px; font-family: 'Inter', sans-serif; }
 
@@ -288,6 +292,8 @@
           pdfBtn.title = `Descargar versión formal de "${p.topic}" en PDF`;
         }
         content.innerHTML = banner + vline + ed + renderMd(md);
+        content.querySelectorAll('blockquote').forEach(b => { if (/^\s*En corto/.test(b.textContent)) b.classList.add('tldr'); });
+        applyGlossary(content);
         enhanceFigures(p);
         list.style.display = 'none';
         hero.style.display = 'none';
@@ -340,6 +346,51 @@
       anomaly: 'El pin rojo marca un año estadísticamente atípico — un choque externo (como 2020) que debe leerse como contexto, no como tendencia.',
       trends: 'Cada mini-gráfico es un indicador regional a lo largo del tiempo.'
     };
+    // ── Glosario interactivo: la primera aparicion de cada termino tecnico ──
+    // queda subrayada punteado y muestra su definicion al pasar el cursor.
+    // Retroactivo: funciona sobre cualquier paper sin tocar el .md.
+    const GLOSSARY = [
+      ['intervalo de confianza', 'El rango donde probablemente cae el valor verdadero. Si incluye 0, el resultado no es concluyente.'],
+      ['IC95%', 'Intervalo de confianza al 95%: el rango donde probablemente cae el valor verdadero. Si incluye 0, no es concluyente.'],
+      ['p-valor', 'Probabilidad de observar un resultado así por puro azar si no existiera relación. Menor a 0.05 = significativo.'],
+      ['efectos fijos', 'Modelo que compara cada país contra sí mismo año a año, controlando sus características permanentes.'],
+      ['bootstrap', 'Repetir el cálculo miles de veces barajando los datos, para medir qué tan estable es el resultado.'],
+      ['co-tendencia', 'Dos series que suben por su cuenta parecen relacionadas aunque no se influyan; por eso también se prueba con los cambios año a año.'],
+      ['co‑tendencia', 'Dos series que suben por su cuenta parecen relacionadas aunque no se influyan; por eso también se prueba con los cambios año a año.'],
+      ['Pearson', 'Correlación clásica: mide qué tan bien dos series se mueven juntas en línea recta (r de −1 a +1).'],
+      ['Spearman', 'Correlación por rangos: robusta a años extremos como el shock de 2020.'],
+      ['Mann-Kendall', 'Prueba de tendencia: detecta si una serie sube o baja de forma consistente, o solo fluctúa.'],
+      ['Mann‑Kendall', 'Prueba de tendencia: detecta si una serie sube o baja de forma consistente, o solo fluctúa.'],
+      ['z-score', 'Qué tan raro es un dato frente al resto de su serie. |z| mayor a 2 = año atípico.'],
+      ['OLS', 'Regresión lineal estándar: estima cuánto cambia la variable dependiente por cada unidad que sube otra.'],
+      ['R²', 'Porcentaje de la variación que el modelo logra explicar. Un R² de 0.14 significa que el 86% queda fuera del modelo.'],
+      ['β', 'Coeficiente: cuánto cambia la variable dependiente por cada unidad que sube la independiente.'],
+    ];
+    function applyGlossary(root) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: n => n.parentElement && n.parentElement.closest('code,pre,a,abbr,script,style,figcaption')
+          ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+      });
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      for (const [term, def] of GLOSSARY) {
+        const needle = term.toLowerCase();
+        for (const node of nodes) {
+          if (!node.parentNode) continue;
+          const idx = node.data.toLowerCase().indexOf(needle);
+          if (idx === -1) continue;
+          const mid = node.splitText(idx);
+          mid.splitText(term.length);
+          const ab = document.createElement('abbr');
+          ab.className = 'gloss';
+          ab.title = def;
+          ab.textContent = mid.data;
+          mid.replaceWith(ab);
+          break; // solo la primera aparicion de cada termino
+        }
+      }
+    }
+
     let liveCharts = [];
     const EC = { navy: '#14213d', blue: '#1a56db', gold: '#b8860b', red: '#d93025', green: '#2e7d32', grid: '#e5e2db', txt: '#555' };
     const AX = () => ({ axisLine: { lineStyle: { color: '#bbb' } }, axisLabel: { color: EC.txt, fontSize: 11 }, splitLine: { lineStyle: { color: EC.grid } }, nameTextStyle: { color: EC.txt } });
@@ -602,8 +653,9 @@
         if (/^\s*-{3,}\s*$/.test(line)) { html += '<hr>'; i++; continue; }
         // Blockquote
         if (/^\s*>\s?/.test(line)) {
-          const quote = [];
-          while (i + 1 < lines.length && /^\s*>\s?/.test(lines[i])) { i++; quote.push(lines[i].replace(/^\s*>\s?/, '')); }
+          const quote = [line.replace(/^\s*>\s?/, '')];
+          while (i + 1 < lines.length && /^\s*>\s?/.test(lines[i + 1])) { i++; quote.push(lines[i].replace(/^\s*>\s?/, '')); }
+          i++;
           html += `<blockquote>${quote.map(inline).join('<br>')}</blockquote>`;
           continue;
         }

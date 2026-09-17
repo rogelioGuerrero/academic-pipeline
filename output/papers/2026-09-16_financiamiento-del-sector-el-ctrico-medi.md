@@ -4,6 +4,8 @@
 
 Este estudio explora la relación entre el consumo eléctrico per cápita y la tasa de crecimiento anual del PIB en América Latina, en el contexto de los recientes programas de financiamiento del sector eléctrico mediante emisión de bonos soberanos. Utilizando datos del Banco Mundial (2015‑2024) para la región y para cinco países (Brasil, México, Colombia, Argentina y Chile), se aplicaron análisis de regresión OLS agregado, regresión de panel con efectos fijos, pruebas de correlación Pearson y Spearman, y el test de tendencia Mann‑Kendall. Los resultados muestran que la regresión OLS no evidencia una asociación significativa (R² = 0.1409, *p* = 0.588) y que la correlación significativa encontrada sólo en Brasil (r = 0.635, *p* = 0.049) desaparece al considerar cambios año a año, sugiriendo co‑tendencia. La regresión de panel indica una relación marginalmente significativa entre crecimiento del PIB y consumo eléctrico (β = 7.795, *p* = 0.056), pero el coeficiente del sector manufacturero es nulo. En conjunto, la evidencia empírica es insuficiente para sostener la hipótesis de que mayor consumo eléctrico per cápita se asocia a mayor crecimiento del PIB en la región.  
 
+> **En corto:** ¿Más consumo eléctrico implica más crecimiento del PIB? La evidencia no alcanza para afirmarlo — la única correlación significativa (Brasil) resultó ser co-tendencia, y el efecto del panel es marginal.
+
 ---  
 
 ## Introducción  
@@ -44,6 +46,8 @@ Todas las pruebas se realizaron con paquetes estadísticos de Python (statsmodel
 
 ### 1. Descripción de los datos  
 
+*En palabras simples: la tabla muestra, año por año, los tres indicadores para la región y los cinco países del estudio.*
+
 | Serie / Indicador | País / Región | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Consumo eléctrico per cápita (kWh) | América Latina (LCN) | 2,183.5 | 2,188.4 | 2,214.9 | 2,257.6 | 2,222.8 | 2,178.2 | 2,258.1 | 2,297.7 | 2,400.1 | 2,803.6 |
@@ -66,49 +70,64 @@ Todas las pruebas se realizaron con paquetes estadísticos de Python (statsmodel
 | Valor añadido manufacturero (% del PIB) | México | 19.82 | 19.87 | 20.16 | 20.19 | 19.89 | 20.18 | 20.84 | 21.49 | 20.47 | 20.13 |
 
 ![Evolución del consumo eléctrico y variables macroeconómicas](charts/2026-09-16-16-21/fig1_trends.png)  
+*Cómo leerla: cada mini-panel muestra un indicador regional a lo largo del tiempo; busca si sube, baja o fluctúa.*
 ![Comparación internacional de consumo eléctrico](charts/2026-09-16-16-21/fig4_countries.png)  
+*Cómo leerla: barra más larga = mayor consumo eléctrico per cápita en ese país.*
 
 ### 2. Modelos econométricos: OLS agregado y Panel de efectos fijos  
 
-| Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Significativo |
+*En palabras simples: se probaron dos modelos — uno que mira a la región como una sola serie (OLS) y otro que compara cada país contra sí mismo año a año (panel de efectos fijos).*
+
+| Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Evidencia |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| OLS Agregado (LCN) | Intercepto | 1077.6425 | 1716.2297 | t = 0.63 | 0.5500 | [-6549.056, 3330.477] | No |
-| OLS Agregado (LCN) | Crecimiento del PIB | 8.2645 | 20.7736 | t = 0.40 | 0.7026 | [-36.388, 95.375] | No |
-| OLS Agregado (LCN) | Manufactura (% PIB) | 69.4912 | 98.8289 | t = 0.70 | 0.5047 | [-61.700, 521.137] | No |
+| OLS Agregado (LCN) | Intercepto | 1077.6425 | 1716.2297 | t = 0.63 | 0.5500 | [-6549.056, 3330.477] | 🔴 Sin evidencia |
+| OLS Agregado (LCN) | Crecimiento del PIB | 8.2645 | 20.7736 | t = 0.40 | 0.7026 | [-36.388, 95.375] | 🔴 Sin evidencia |
+| OLS Agregado (LCN) | Manufactura (% PIB) | 69.4912 | 98.8289 | t = 0.70 | 0.5047 | [-61.700, 521.137] | 🔴 Sin evidencia |
 | *Diagnóstico OLS* | *R² = 0.1409, R²-adj = -0.1045, F = 0.57 (p = 0.5876), n = 10* | — | — | — | — | — | — |
-| Panel Efectos Fijos (País) | Crecimiento del PIB | 7.7949 | 3.9789 | t = 1.96 | 0.0556 | [-0.193, 15.783] | No |
-| Panel Efectos Fijos (País) | Manufactura (% PIB) | -2.0004 | 20.4603 | t = -0.10 | 0.9225 | [-43.076, 39.075] | No |
+| Panel Efectos Fijos (País) | Crecimiento del PIB | 7.7949 | 3.9789 | t = 1.96 | 0.0556 | [-0.193, 15.783] | 🟡 Marginal |
+| Panel Efectos Fijos (País) | Manufactura (% PIB) | -2.0004 | 20.4603 | t = -0.10 | 0.9225 | [-43.076, 39.075] | 🔴 Sin evidencia |
 | *Diagnóstico Panel* | *R² = 0.9905, n = 50 obs (5 países x 10 años), dof = 43* | — | — | — | — | — | — |
 
 ![Ajuste del modelo OLS agregado](charts/2026-09-16-16-21/fig3_regression.png)  
+*Cómo leerla: lo observado frente a lo que el modelo predijo; donde se separan, el modelo no captura la realidad.*
 ![Estimación de coeficientes OLS y Panel FE](charts/2026-09-16-16-21/fig5_forest.png)  
+*Cómo leerla: la bolita es la estimación y la barra el rango plausible; si cruza la línea del cero, no es concluyente.*
 
 Los resultados indican que, a nivel regional, la variación del consumo eléctrico per cápita no se explica de manera robusta por la tasa de crecimiento del PIB ni por la participación manufacturera (R² = 0.1409, p = 0.588). Por su parte, la regresión de panel con efectos fijos intra-país muestra un coeficiente de 7.795 (p = 0.056), marginalmente significativo, pero con efecto nulo del sector manufacturero.
 
 ### 3. Correlaciones por país  
 
-| País | Pearson (niveles) | p-valor | Pearson (Δ año a año) | p-valor (Δ) | Spearman ρ | Significativo (niveles) |
+*En palabras simples: se mide si dos indicadores se mueven juntos en cada país — en sus niveles y en sus cambios año a año.*
+
+| País | Pearson (niveles) | p-valor | Pearson (Δ año a año) | p-valor (Δ) | Spearman ρ | Evidencia |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| Brasil | 0.635 | 0.048 | 0.215 | 0.579 | 0.697 | Sí * |
-| México | 0.368 | 0.296 | 0.293 | 0.444 | 0.576 | No |
-| Colombia | 0.197 | 0.586 | 0.502 | 0.169 | 0.382 | No |
-| Argentina | 0.260 | 0.469 | -0.005 | 0.990 | 0.309 | No |
-| Chile | -0.198 | 0.584 | -0.414 | 0.268 | 0.176 | No |
+| Brasil | 0.635 | 0.048 | 0.215 | 0.579 | 0.697 | 🟡 Co-tendencia probable |
+| México | 0.368 | 0.296 | 0.293 | 0.444 | 0.576 | 🔴 Sin evidencia |
+| Colombia | 0.197 | 0.586 | 0.502 | 0.169 | 0.382 | 🔴 Sin evidencia |
+| Argentina | 0.260 | 0.469 | -0.005 | 0.990 | 0.309 | 🔴 Sin evidencia |
+| Chile | -0.198 | 0.584 | -0.414 | 0.268 | 0.176 | 🔴 Sin evidencia |
 
 ![Dispersión y correlación entre crecimiento del PIB y manufactura](charts/2026-09-16-16-21/fig2_correlation.png)  
+*Cómo leerla: cada punto es un año; si se alinean cerca de la línea punteada, las variables se mueven juntas.*
 ![Heterogeneidad por país en paneles individuales](charts/2026-09-16-16-21/fig10_panels.png)  
+*Cómo leerla: la misma relación dentro de cada país; pendientes distintas = la respuesta depende del país.*
 
 Solo Brasil muestra una correlación significativa en niveles (r = 0.635, p = 0.048); dicha asociación desaparece al analizar variaciones anuales (r = 0.215, p = 0.579), lo que confirma que la relación observada en niveles está impulsada por una co‑tendencia temporal y no por una elasticidad inmediata.
 
 ### 4. Test de Mann‑Kendall  
 
+*En palabras simples: una prueba que detecta si cada serie sube o baja de forma consistente, o solo fluctúa.*
+
 El test de Mann‑Kendall no detectó tendencias monotónicas significativas en ninguna de las series analizadas (*p* > 0.05).  
 
 ### 5. Detección de anomalías  
 
+*En palabras simples: identifica qué años fueron tan raros que se salen de lo normal (como el choque de 2020).*
+
 Se identificaron observaciones con puntuaciones *z* superiores a 2 en los años 2020‑2021, coincidiendo con la crisis sanitaria global y sus efectos sobre la demanda eléctrica y la actividad económica.
 
 ![Detección de observaciones atípicas (|z|>2)](charts/2026-09-16-16-21/fig11_anomaly.png)  
+*Cómo leerla: los pines marcan años atípicos — choques como 2020 que se leen como contexto, no como tendencia.*
 
 ---  
 

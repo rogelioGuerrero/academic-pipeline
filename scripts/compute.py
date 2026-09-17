@@ -1213,7 +1213,45 @@ def make_charts(data, results, outdir):
                 json.dump(chart_data, fh, ensure_ascii=False)
         except Exception:
             pass
+    for c in charts:
+        c["howto"] = FIG_GUIDE.get(c["file"], "")
     return charts
+
+# Guia de lectura en lenguaje llano por figura — llega al prompt de WRITE y,
+# cuando el orquestador inyecta figuras, se inserta como linea en cursiva.
+FIG_GUIDE = {
+    "fig1_trends.png": "cada mini-panel muestra un indicador regional a lo largo del tiempo; busca si sube, baja o fluctúa",
+    "fig2_correlation.png": "cada punto es un año; si se alinean cerca de la línea punteada, las variables se mueven juntas",
+    "fig3_regression.png": "los datos observados frente a lo que el modelo predijo; donde se separan, el modelo no captura la realidad",
+    "fig4_countries.png": "barra más larga o país más oscuro = valor más alto del indicador",
+    "fig5_forest.png": "la bolita es la estimación y la barra el rango plausible; si la barra cruza la línea del cero, el resultado no es concluyente",
+    "fig6_heatmap.png": "azul = se mueven juntas; rojo = se mueven al revés; casi blanco = sin relación clara; * = significativo",
+    "fig7_boxplot.png": "cada caja resume un país: la línea central es el valor típico; una caja alta significa mucha variación año a año",
+    "fig8_bootdist.png": "repetimos el cálculo 2000 veces barajando los datos; si las barras no tocan la línea roja del cero, el coeficiente es estable",
+    "fig9_residuals.png": "puntos regados sin patrón cerca del cero = modelo sano; si dibujan una forma, el modelo se perdió algo",
+    "fig10_panels.png": "la misma relación dentro de cada país; si las pendientes apuntan en direcciones distintas, la respuesta depende del país",
+    "fig11_anomaly.png": "los pines marcan años estadísticamente atípicos — choques como 2020 que se leen como contexto, no como tendencia",
+}
+
+def _evidence_badge(p, ci=None):
+    """Semaforo de evidencia para coeficientes: robusta / marginal / sin evidencia."""
+    if p is None:
+        return "—"
+    ci_has_zero = ci is not None and len(ci) == 2 and ci[0] <= 0 <= ci[1]
+    if p < 0.05 and not ci_has_zero:
+        return "🟢 Robusta"
+    if p < 0.10:
+        return "🟡 Marginal"
+    return "🔴 Sin evidencia"
+
+def _corr_badge(c):
+    """Semaforo para correlaciones: una r significativa que no sobrevive en
+    primeras diferencias es probable co-tendencia, no evidencia robusta."""
+    if c.get("significant"):
+        return "🟢 Robusta" if c.get("diff_significant") else "🟡 Co-tendencia probable"
+    if (c.get("pearson_p") or 1) < 0.10:
+        return "🟡 Marginal"
+    return "🔴 Sin evidencia"
 
 def generate_markdown_tables(data, results):
     """
@@ -1285,14 +1323,14 @@ def generate_markdown_tables(data, results):
         tables["descriptive"] = "\n".join(rows)
 
     model_rows = [
-        "| Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Significativo |",
+        "| Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Evidencia |",
         "|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|"
     ]
     has_model = False
     if reg and isinstance(reg, dict) and "coefficients" in reg:
         has_model = True
         for c in reg["coefficients"]:
-            sig_mark = "Sí *" if c.get("significant") else "No"
+            sig_mark = _evidence_badge(c.get("p_value"), c.get("boot_ci_95"))
             boot_ci = c.get("boot_ci_95")
             ci_str = f"[{boot_ci[0]:.3f}, {boot_ci[1]:.3f}]" if boot_ci else "—"
             stat_str = f"t = {c.get('t_stat', 0):.2f}"
@@ -1303,8 +1341,8 @@ def generate_markdown_tables(data, results):
     if panel and isinstance(panel, dict) and "coefficients" in panel:
         has_model = True
         for c in panel["coefficients"]:
-            sig_mark = "Sí *" if c.get("significant") else "No"
             ci = c.get("ci_95")
+            sig_mark = _evidence_badge(c.get("p_value"), ci)
             ci_str = f"[{ci[0]:.3f}, {ci[1]:.3f}]" if ci else "—"
             stat_str = f"t = {c.get('t', 0):.2f}"
             var_name = c['name'].split(" [")[0]
@@ -1318,7 +1356,7 @@ def generate_markdown_tables(data, results):
     if corrs:
         top_corrs = sorted(corrs, key=lambda c: (1 if c.get("significant") else 0, abs(c.get("pearson_r") or 0)), reverse=True)[:15]
         corr_rows = [
-            "| Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Significativo |",
+            "| Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Evidencia |",
             "|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|"
         ]
         for c in top_corrs:
@@ -1330,8 +1368,7 @@ def generate_markdown_tables(data, results):
             sp_val = f"{c['spearman_rho']:.3f}" if c.get("spearman_rho") is not None else "—"
             diff_r = f"{c['diff_pearson_r']:.3f}" if c.get("diff_pearson_r") is not None else "—"
             diff_p = f"{c['diff_pearson_p']:.3f}" if c.get("diff_pearson_p") is not None else "—"
-            sig = "Sí *" if c.get("significant") else "No"
-            corr_rows.append(f"| {vx} | {vy} | {cc} | {r_val} | {p_val} | {sp_val} | {diff_r} | {diff_p} | {sig} |")
+            corr_rows.append(f"| {vx} | {vy} | {cc} | {r_val} | {p_val} | {sp_val} | {diff_r} | {diff_p} | {_corr_badge(c)} |")
         tables["correlations"] = "\n".join(corr_rows)
 
     return tables
