@@ -611,27 +611,33 @@ async function agentCompute(fetchedData, suggestDecision = null) {
   }
 
   if (suggestDecision?.suggestions?.length) {
-    // ── Modo SUGGEST: correlaciones basadas en las sugerencias del LLM ──
-    console.log("  Construyendo correlaciones desde sugerencias del SUGGEST...");
-    for (const sug of suggestDecision.suggestions) {
-      const indicators = sug.indicadores_respaldan || [];
-      // Correlacionar todos los pares de indicadores sugeridos, mismo país
-      for (let i = 0; i < indicators.length; i++) {
-        for (let j = i + 1; j < indicators.length; j++) {
-          // Buscar en todos los países
-          const countries = [...new Set(dataset.series.map(s => s.country_code))];
-          for (const cc of countries) {
-            const xs = findSeries(indicators[i], cc);
-            const ys = findSeries(indicators[j], cc);
-            addPair(xs, ys);
-          }
+    // ── Modo SUGGEST: pares SOLO de la línea elegida ──
+    // Antes se correlacionaban los indicadores de TODAS las líneas propuestas
+    // (los 4 menús del LLM): la elegida necesita ~3 pares × 7 coberturas, pero
+    // se calculaban 42-56. TABLA 3 tiene tope de 15 filas, asi que esto no
+    // ahorra tokens: lo que arregla es que las filas de evidencia del paper
+    // sean de SU linea y no de otras tres que nadie escribe. Tambien es lo
+    // que promete la metodologia: pares elegidos por teoria, no por barrido.
+    const chosen = chosenSuggestion(suggestDecision);
+    const indicators = chosen?.indicadores_respaldan || [];
+    console.log(`  Construyendo correlaciones desde la línea elegida (${indicators.length} indicadores)...`);
+    for (let i = 0; i < indicators.length; i++) {
+      for (let j = i + 1; j < indicators.length; j++) {
+        // Buscar en todos los países
+        const countries = [...new Set(dataset.series.map(s => s.country_code))];
+        for (const cc of countries) {
+          const xs = findSeries(indicators[i], cc);
+          const ys = findSeries(indicators[j], cc);
+          addPair(xs, ys);
         }
       }
     }
 
-    // ── Regresión: usar el primer indicador como dependiente, resto como independientes ──
-    const topSuggestion = suggestDecision.suggestions[0];
-    const topIndicators = topSuggestion?.indicadores_respaldan || [];
+    // ── Regresión: primer indicador como dependiente, resto como independientes ──
+    // Sobre la MISMA línea elegida. Antes usaba suggestions[0], que puede no ser
+    // la línea que el paper va a escribir: la regresión salía de otros
+    // indicadores que la pregunta de investigación.
+    const topIndicators = indicators;
     if (topIndicators.length >= 3) {
       // Buscar series regionales (LCN) para la regresión
       const depSeries = findSeries(topIndicators[0], "LCN");
