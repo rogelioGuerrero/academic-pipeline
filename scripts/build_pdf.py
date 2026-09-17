@@ -313,7 +313,7 @@ def convert_md_to_typst(md_content: str, meta: dict, paper_filename: str) -> str
                 j += 1
             q_joined = " ".join(quote_lines)
             q_text = clean_text_formatting(q_joined)
-            is_tldr = "En corto:" in q_joined
+            is_tldr = "En corto:" in q_joined or "En breve:" in q_joined
             q_fill, q_stroke = ("#eef3fc", "#14213d") if is_tldr else ("#f8fafc", "#1a56db")
             typst_body.append(f"""
 #block(

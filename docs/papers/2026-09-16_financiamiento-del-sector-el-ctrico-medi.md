@@ -4,7 +4,7 @@
 
 Este estudio explora la relación entre el consumo eléctrico per cápita y la tasa de crecimiento anual del PIB en América Latina, en el contexto de los recientes programas de financiamiento del sector eléctrico mediante emisión de bonos soberanos. Utilizando datos del Banco Mundial (2015‑2024) para la región y para cinco países (Brasil, México, Colombia, Argentina y Chile), se aplicaron análisis de regresión OLS agregado, regresión de panel con efectos fijos, pruebas de correlación Pearson y Spearman, y el test de tendencia Mann‑Kendall. Los resultados muestran que la regresión OLS no evidencia una asociación significativa (R² = 0.1409, *p* = 0.588) y que la correlación significativa encontrada sólo en Brasil (r = 0.635, *p* = 0.049) desaparece al considerar cambios año a año, sugiriendo co‑tendencia. La regresión de panel indica una relación marginalmente significativa entre crecimiento del PIB y consumo eléctrico (β = 7.795, *p* = 0.056), pero el coeficiente del sector manufacturero es nulo. En conjunto, la evidencia empírica es insuficiente para sostener la hipótesis de que mayor consumo eléctrico per cápita se asocia a mayor crecimiento del PIB en la región.  
 
-> **En corto:** ¿Más consumo eléctrico implica más crecimiento del PIB? La evidencia no alcanza para afirmarlo — la única correlación significativa (Brasil) resultó ser co-tendencia, y el efecto del panel es marginal.
+> **En breve:** ¿Más consumo eléctrico implica más crecimiento del PIB? La evidencia no alcanza para afirmarlo — la única correlación significativa (Brasil) resultó ser co-tendencia, y el efecto del panel es marginal.
 
 ---  
 
@@ -46,7 +46,7 @@ Todas las pruebas se realizaron con paquetes estadísticos de Python (statsmodel
 
 ### 1. Descripción de los datos  
 
-*En palabras simples: la tabla muestra, año por año, los tres indicadores para la región y los cinco países del estudio.*
+*La tabla muestra, año por año, los tres indicadores para la región y los cinco países del estudio.*
 
 | Serie / Indicador | País / Región | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -76,7 +76,7 @@ Todas las pruebas se realizaron con paquetes estadísticos de Python (statsmodel
 
 ### 2. Modelos econométricos: OLS agregado y Panel de efectos fijos  
 
-*En palabras simples: se probaron dos modelos — uno que mira a la región como una sola serie (OLS) y otro que compara cada país contra sí mismo año a año (panel de efectos fijos).*
+*Se probaron dos modelos — uno que mira a la región como una sola serie (OLS) y otro que compara cada país contra sí mismo año a año (panel de efectos fijos).*
 
 | Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Evidencia |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -97,7 +97,7 @@ Los resultados indican que, a nivel regional, la variación del consumo eléctri
 
 ### 3. Correlaciones por país  
 
-*En palabras simples: se mide si dos indicadores se mueven juntos en cada país — en sus niveles y en sus cambios año a año.*
+*Se mide si dos indicadores se mueven juntos en cada país — en sus niveles y en sus cambios año a año.*
 
 | País | Pearson (niveles) | p-valor | Pearson (Δ año a año) | p-valor (Δ) | Spearman ρ | Evidencia |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -116,13 +116,13 @@ Solo Brasil muestra una correlación significativa en niveles (r = 0.635, p = 0.
 
 ### 4. Test de Mann‑Kendall  
 
-*En palabras simples: una prueba que detecta si cada serie sube o baja de forma consistente, o solo fluctúa.*
+*Una prueba que detecta si cada serie sube o baja de forma consistente, o solo fluctúa.*
 
 El test de Mann‑Kendall no detectó tendencias monotónicas significativas en ninguna de las series analizadas (*p* > 0.05).  
 
 ### 5. Detección de anomalías  
 
-*En palabras simples: identifica qué años fueron tan raros que se salen de lo normal (como el choque de 2020).*
+*Identifica qué años fueron tan raros que se salen de lo normal (como el choque de 2020).*
 
 Se identificaron observaciones con puntuaciones *z* superiores a 2 en los años 2020‑2021, coincidiendo con la crisis sanitaria global y sus efectos sobre la demanda eléctrica y la actividad económica.
 

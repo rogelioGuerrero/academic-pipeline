@@ -846,8 +846,8 @@ REGLAS CRITICAS (incumplir = rechazo):
 - Cuando una correlacion en niveles es significativa pero su correlacion "en diferencias" no lo es (o viceversa), dilo explicitamente: la primera puede ser co-tendencia espuria, la segunda es evidencia mas honesta de co-movimiento.
 - Referencia las figuras reales listadas con el path EXACTO de la lista: ![descripcion](charts/<path-completo>). NO inventes figuras ni cambies los paths.
 - Cita cada dato como (Banco Mundial, 2024).
-- Justo despues del Resumen, agrega un blockquote: "> **En corto:** <la respuesta en una frase a la pregunta de investigacion, con el veredicto honesto segun los resultados>".
-- Bajo cada sub-encabezado ### del Analisis, agrega UNA linea en cursiva que explique en palabras simples que muestra esa seccion (para lectores no tecnicos).
+- Justo despues del Resumen, agrega un blockquote: "> **En breve:** <la respuesta en una frase a la pregunta de investigacion, con el veredicto honesto segun los resultados>".
+- Bajo cada sub-encabezado ### del Analisis, agrega UNA linea en cursiva que explique con lenguaje sencillo que muestra esa seccion (para lectores no tecnicos). NO uses la frase "En palabras simples" — empieza directo con la explicacion.
 - Bajo cada figura referenciada, agrega una linea en cursiva "*Como leerla: <guia>*" usando la guia de lectura provista en la lista FIGURAS.
 - Total: 1200-1800 palabras. La Bibliografia es OBLIGATORIA y va AL FINAL — si te quedas sin espacio, acorta el Analisis, nunca omitas la Bibliografia.
 

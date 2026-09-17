@@ -292,7 +292,7 @@
           pdfBtn.title = `Descargar versión formal de "${p.topic}" en PDF`;
         }
         content.innerHTML = banner + vline + ed + renderMd(md);
-        content.querySelectorAll('blockquote').forEach(b => { if (/^\s*En corto/.test(b.textContent)) b.classList.add('tldr'); });
+        content.querySelectorAll('blockquote').forEach(b => { if (/^\s*En (corto|breve)/.test(b.textContent)) b.classList.add('tldr'); });
         applyGlossary(content);
         enhanceFigures(p);
         list.style.display = 'none';
