@@ -1,0 +1,59 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Inversión en vehículos eléctricos y su efecto en la manufactura y el comercio exterior de Brasil",
+      "noticia_inspiradora": "Renault et Geely accélèrent sur les véhicules électriques au Brésil en renforçant leur alliance",
+      "indicadores_respaldan": [
+        "Manufacturing, value added (% of GDP)",
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Manufacturing value added ↔ GDP growth (a estimar)",
+        "Trade (% of GDP) ↔ GDP growth (r=0.64, Brasil)"
+      ],
+      "justificacion": "La noticia anuncia una inversión multimillonaria en la producción de EV, lo que afecta directamente al sector manufacturero. Los indicadores de valor agregado manufacturero, comercio exterior y crecimiento del PIB permiten medir si esa expansión se traduce en mayor participación de la manufactura en la economía y en mayores volúmenes de exportación, aprovechando la correlación ya confirmada entre comercio y crecimiento en Brasil."
+    },
+    {
+      "titulo": "Inflación en América Latina y su relación con la atracción de inversión extranjera directa",
+      "noticia_inspiradora": "Markets on edge as US Fed meets to tackle high inflation",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Foreign direct investment, net inflows (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflación ↔ Inversión extranjera directa (a estimar)"
+      ],
+      "justificacion": "El endurecimiento de la política monetaria en EE.UU. suele repercutir en la inflación de los países latinoamericanos y en los flujos de capital. Los indicadores de inflación y de entradas netas de IED permiten explorar si mayores tasas inflacionarias reducen la capacidad del país para atraer inversión extranjera."
+    },
+    {
+      "titulo": "Penetración de la telefonía móvil y desempleo juvenil en la región",
+      "noticia_inspiradora": "Markets on edge as US Fed meets to tackle high inflation",
+      "indicadores_respaldan": [
+        "Mobile cellular subscriptions (per 100 people)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Suscripciones móviles ↔ Desempleo juvenil (a estimar)"
+      ],
+      "justificacion": "Aunque la noticia se centra en la inflación, el contexto macroeconómico afecta al mercado laboral juvenil. La disponibilidad de dispositivos móviles es un proxy de inclusión digital que puede facilitar la búsqueda de empleo; los datos permiten probar si mayor cobertura móvil se asocia a menores tasas de desempleo juvenil."
+    },
+    {
+      "titulo": "Impacto de la resolución del conflicto Irán‑EE.UU. en los países exportadores de petróleo latinoamericanos",
+      "noticia_inspiradora": "US House votes to end Iran war, 7 Republicans join in favour",
+      "indicadores_respaldan": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)",
+        "Poverty headcount at national poverty line (% of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Trade (% of GDP) ↔ GDP growth (r=0.66, Guatemala) y (r=0.64, Brasil)"
+      ],
+      "justificacion": "El fin de un conflicto que involucra a un importante productor de petróleo puede modificar los precios internacionales del crudo, afectando a los exportadores latinoamericanos. Los indicadores de comercio y crecimiento del PIB permiten evaluar si variaciones en la participación del comercio (principalmente de energía) se traducen en cambios en el crecimiento económico y en la pobreza."
+    }
+  ],
+  "topic": "Efectos de la inversión en vehículos eléctricos sobre la manufactura y el comercio exterior de Brasil",
+  "angle": "Analizar si la nueva inversión de Renault y Geely en la producción de vehículos eléctricos impulsa el valor agregado manufacturero y eleva la proporción del comercio exterior en la economía brasileña, y cómo estos cambios se relacionan con el crecimiento del PIB.",
+  "pregunta": "¿La inversión en la producción de vehículos eléctricos en Brasil está asociada a un aumento del valor agregado del sector manufacturero y a una mayor participación del comercio exterior en el PIB, contribuyendo a un mayor crecimiento económico?",
+  "hipotesis": "Los países latinoamericanos que incrementan la inversión en la producción de vehículos eléctricos experimentan un aumento significativo del valor agregado manufacturero y una mayor proporción del comercio exterior en el PIB, lo que se traduce en un mayor crecimiento anual del PIB."
+}

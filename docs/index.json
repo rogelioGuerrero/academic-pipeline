@@ -97,6 +97,22 @@
     "ts": "2026-09-18T16:11:41.107Z"
   },
   {
+    "file": "2026-09-17_efectos-de-la-inversi-n-en-veh-culos-el-.md",
+    "date": "2026-09-17",
+    "topic": "**Manufactura, Comercio y Crecimiento Económico en América Latina y el Caribe (2015‑2024)**",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://img.numerama.com/www.numerama.com/wp-content/uploads/2026/09/rgdb-event.jpg?resize=1600,900&key=d406f61f",
+    "section": "Amérique Latine",
+    "news_url": "https://www.numerama.com/vroom/2333649-renault-et-geely-accelerent-sur-les-vehicules-electriques-au-bresil-en-renforcant-leur-alliance.html",
+    "pregunta": "¿La inversión en la producción de vehículos eléctricos en Brasil está asociada a un aumento del valor agregado del sector manufacturero y a una mayor participación del comercio exterior en el PIB, contribuyendo a un mayor crecimiento económico?",
+    "editorial": "¿Invertir en la fabricación de autos eléctricos hará que Brasil y sus vecinos tengan una industria más fuerte y que el comercio pese más en el PIB? Esa fue la duda que surgió al leer sobre los nuevos planes de inversión.\n\nAl revisar los números del Banco Mundial, la historia que cuenta el conjunto de datos es la siguiente: en los seis países latinoamericanos observados durante una década, cuando la participación del comercio exterior en el PIB sube un punto porcentual, la parte que corresponde a la manufactura tiende a crecer medio punto porcentual. En México, por ejemplo, la relación entre ambos indicadores es muy estrecha; cuando el comercio aumenta, la manufactura también lo hace, y la conexión es casi idéntica en la región en general. Por el contrario, el ritmo de crecimiento del PIB no muestra una relación clara con la fuerza manufacturera; los cambios en el crecimiento anual no se traducen en variaciones perceptibles en el valor agregado de la industria.\n\nEn resumen, los datos confirman que una mayor apertura comercial está acompañada de una manufactura más robusta, pero no avalan la idea de que el crecimiento del PIB sea el motor de ese aumento. Así, la hipótesis de que la inversión en vehículos eléctricos impulse simultáneamente la manufactura y el comercio tiene apoyo parcial: el vínculo con el comercio es evidente, mientras que el vínculo con el crecimiento económico sigue sin confirmarse.",
+    "charts": "2026-09-17-16-31",
+    "ts": "2026-09-17T16:34:39.270Z"
+  },
+  {
     "file": "2026-09-16_financiamiento-del-sector-el-ctrico-medi.md",
     "date": "2026-09-16",
     "topic": "Financiamiento del sector eléctrico mediante bonos soberanos y su impacto en el consumo de energía y el crecimiento del PIB en América Latina",
