@@ -797,10 +797,36 @@ def make_charts(data, results, outdir):
     charts = []
     chart_data = {"figures": {}}
 
-    # ── Fig 1: trends grid for LCN series ──
-    lcn_vars = [v for v in variables if v.get("country_code") == "LCN" and len(v.get("values", [])) >= 3]
+    # ── Fig 1: trends grid — solo las variables que el análisis usa ──
+    # Antes graficaba todo el catálogo LCN: la imagen salía idéntica en cada
+    # paper. Ahora se limita a las variables de la regresión y de las
+    # correlaciones significativas, ordenadas por relevancia del tema.
+    def _base_name(n):
+        return (n or "").split(" [")[0].strip()
+
+    relevant, seen = [], set()
+    def _add(n):
+        b = _base_name(n)
+        if b and b not in seen:
+            seen.add(b)
+            relevant.append(b)
+
+    reg_spec = data.get("regression") or {}
+    _add(reg_spec.get("dependent"))
+    for _n in reg_spec.get("independent") or []:
+        _add(_n)
+    for c in sorted((c for c in results.get("correlations", []) if c.get("significant")),
+                    key=lambda c: -abs(c.get("pearson_r") or 0)):
+        _add(c.get("x")); _add(c.get("y"))
+
+    lcn_vars = sorted(
+        (v for v in variables
+         if v.get("country_code") == "LCN" and len(v.get("values", [])) >= 3
+         and _base_name(v.get("name")) in seen),
+        key=lambda v: relevant.index(_base_name(v.get("name")))
+    )[:12]
     if lcn_vars:
-        ncols = 3
+        ncols = min(3, len(lcn_vars))
         nrows = int(np.ceil(len(lcn_vars) / ncols))
         fig, axes = plt.subplots(nrows, ncols, figsize=(11, 2.6 * nrows))
         axes = np.array(axes).reshape(-1)
@@ -812,14 +838,14 @@ def make_charts(data, results, outdir):
             _despine(ax)
         for ax in axes[len(lcn_vars):]:
             ax.axis("off")
-        fig.suptitle("Indicadores World Bank — América Latina y Caribe (agregado)", fontsize=11, fontweight="bold")
+        fig.suptitle("Indicadores del análisis — América Latina y Caribe (agregado)", fontsize=11, fontweight="bold")
         fig.tight_layout(rect=[0, 0, 1, 0.96])
         _watermark(fig)
         fname = "fig1_trends.png"
         fig.savefig(os.path.join(outdir, fname), dpi=150)
         plt.close(fig)
-        charts.append({"file": fname, "caption": "Evolución temporal 2015-2024 de los indicadores regionales (América Latina y Caribe). Fuente: World Bank API."})
-        chart_data["figures"][fname] = {"type": "trends", "title": "Indicadores World Bank — América Latina y Caribe", "series": [{"name": v["name"], "years": v.get("years", []), "values": v["values"]} for v in lcn_vars]}
+        charts.append({"file": fname, "caption": "Evolución temporal 2015-2024 de los indicadores usados en el análisis (agregado regional). Fuente: World Bank API."})
+        chart_data["figures"][fname] = {"type": "trends", "title": "Indicadores del análisis — América Latina y Caribe", "series": [{"name": v["name"], "years": v.get("years", []), "values": v["values"]} for v in lcn_vars]}
 
     # ── Fig 2: scatter of top significant correlation ──
     corr_results = [c for c in results.get("correlations", []) if c.get("significant")]
