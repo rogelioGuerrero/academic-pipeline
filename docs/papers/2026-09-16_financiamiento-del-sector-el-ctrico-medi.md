@@ -147,7 +147,7 @@ En síntesis, el estudio aporta una visión crítica sobre la suposición de que
 
 ## Bibliografía  
 
-Dinkelman, T. (2011). *The effects of rural electrification on employment: New evidence from South Africa*. American Economic Review, 101(7), 3078‑3108. https://doi.org/10.1257/aer.101.7.3078  
+Dinkelman, T. (2011). *The effects of rural electrification on employment: New evidence from South Africa*. American Economic Review, 101(7), 3078–3108. https://doi.org/10.1257/aer.101.7.3078  
 
 Banco Mundial. (2024). *World Development Indicators*. Recuperado de https://databank.worldbank.org/source/world-development-indicators  
 

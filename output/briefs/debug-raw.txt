@@ -1,0 +1,35 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Repatriación del manuscrito azteca y su posible impulso a la inversión en educación en México",
+      "noticia_inspiradora": "Aztec manuscript returns to Mexico after two centuries, on loan",
+      "indicadores_respaldan": [
+        "Government expenditure on education (% of GDP)",
+        "Youth literacy rate (% of people 15-24)",
+        "Secondary school enrollment (% gross)"
+      ],
+      "correlaciones_relevantes": [
+        "Gasto educativo ↔ Tasa de alfabetización juvenil",
+        "Gasto educativo ↔ Matrícula secundaria"
+      ],
+      "justificacion": "Los eventos de restitución cultural suelen generar mayor orgullo nacional y pueden traducirse en políticas de fortalecimiento educativo; los indicadores de gasto educativo, alfabetización juvenil y matrícula secundaria permiten medir si existe una asociación temporal entre la repatriación y la inversión en educación."
+    },
+    {
+      "titulo": "Efectos de la caída de los precios del crudo en el crecimiento económico y el comercio de los exportadores latinoamericanos",
+      "noticia_inspiradora": "Oil Prices Slide as Saudi Arabia Reroutes Crude via Oman",
+      "indicadores_respaldan": [
+        "GDP growth (annual %)",
+        "Trade (% of GDP)",
+        "Inflation, consumer prices (annual %)",
+        "Foreign direct investment, net inflows (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "GDP growth ↔ Trade (% of GDP) (r=0.66, p=0.0386 en LATAM)",
+        "FDI ↔ GDP growth (r=0.74, p=0.0140 en LATAM)",
+        "Inflación ↔ Precio del crudo (proxy mediante variación del Trade % del PIB)"
+      ],
+      "justificacion": "Una caída del precio del petróleo afecta directamente a los países exportadores de crudo de América Latina, modificando sus ingresos por exportaciones, su crecimiento del PIB y la atracción de inversión extranjera; los indicadores disponibles capturan esas dimensiones y existen correlaciones previamente verificadas que facilitan el análisis."
+    },
+    {
+      "titulo": "Cómo la política monetaria del Reino Unido influye en la entrada de inversión extranjera directa en América Latina",
+      "noticia_inspiradora": "Bank of England set to defy Fed’s rate-hike lead, despite rising

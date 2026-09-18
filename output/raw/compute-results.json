@@ -1553,117 +1553,16 @@
   },
   "correlations": [
     {
-      "x": "Electric power consumption (kWh per capita) [LCN]",
-      "y": "GDP growth (annual %) [LCN]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [BRA]",
-      "y": "GDP growth (annual %) [BRA]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [MEX]",
-      "y": "GDP growth (annual %) [MEX]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [COL]",
-      "y": "GDP growth (annual %) [COL]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [ARG]",
-      "y": "GDP growth (annual %) [ARG]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [CHL]",
-      "y": "GDP growth (annual %) [CHL]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [GTM]",
-      "y": "GDP growth (annual %) [GTM]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [LCN]",
-      "y": "Manufacturing, value added (% of GDP) [LCN]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [BRA]",
-      "y": "Manufacturing, value added (% of GDP) [BRA]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [MEX]",
-      "y": "Manufacturing, value added (% of GDP) [MEX]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [COL]",
-      "y": "Manufacturing, value added (% of GDP) [COL]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [ARG]",
-      "y": "Manufacturing, value added (% of GDP) [ARG]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [CHL]",
-      "y": "Manufacturing, value added (% of GDP) [CHL]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "Electric power consumption (kWh per capita) [GTM]",
-      "y": "Manufacturing, value added (% of GDP) [GTM]",
-      "error": "incompatible units: kWh vs %"
-    },
-    {
-      "x": "GDP growth (annual %) [LCN]",
-      "y": "Manufacturing, value added (% of GDP) [LCN]",
-      "pearson_r": 0.45714630768393705,
-      "pearson_p": 0.1840761818948726,
+      "x": "Youth unemployment (% of labor force 15-24) [LCN]",
+      "y": "GDP per capita (current US$) [LCN]",
+      "pearson_r": -0.8957664312552491,
+      "pearson_p": 0.0004545953126597207,
       "pearson_ci_95": [
-        -0.24220262388790384,
-        0.8438819759455499
+        -0.9753168917997646,
+        -0.6104019493365093
       ],
-      "spearman_rho": 0.5393939393939393,
-      "spearman_p": 0.10759318778241479,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.1394171271567267,
-      "diff_pearson_p": 0.720542033013316,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "GDP growth (annual %) [BRA]",
-      "y": "Manufacturing, value added (% of GDP) [BRA]",
-      "pearson_r": 0.6351066373862745,
-      "pearson_p": 0.0484933929240062,
-      "pearson_ci_95": [
-        0.009118454754588407,
-        0.9034607122442455
-      ],
-      "spearman_rho": 0.6969696969696969,
-      "spearman_p": 0.02509667588225185,
+      "spearman_rho": -0.7696969696969697,
+      "spearman_p": 0.009221952722215994,
       "significant": true,
       "n": 10,
       "years": [
@@ -1678,24 +1577,25 @@
         2023,
         2024
       ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.2145712822617827,
-      "diff_pearson_p": 0.5793045956719309,
+      "units": "% vs USD",
+      "country": "LCN",
+      "diff_pearson_r": -0.8481381534448312,
+      "diff_pearson_p": 0.003860843932584686,
       "diff_n": 9,
-      "diff_significant": false
+      "diff_significant": true
     },
     {
-      "x": "GDP growth (annual %) [MEX]",
-      "y": "Manufacturing, value added (% of GDP) [MEX]",
-      "pearson_r": 0.3676924685840945,
-      "pearson_p": 0.2958788099910603,
+      "x": "Youth unemployment (% of labor force 15-24) [BRA]",
+      "y": "GDP per capita (current US$) [BRA]",
+      "pearson_r": -0.6338388447441,
+      "pearson_p": 0.049084803571338056,
       "pearson_ci_95": [
-        -0.3408537328541547,
-        0.8098395229591334
+        -0.9030700225956404,
+        -0.006996565198663971
       ],
-      "spearman_rho": 0.5757575757575757,
-      "spearman_p": 0.08155281477260244,
-      "significant": false,
+      "spearman_rho": -0.5515151515151515,
+      "spearman_p": 0.09840117666963498,
+      "significant": true,
       "n": 10,
       "years": [
         2015,
@@ -1709,24 +1609,25 @@
         2023,
         2024
       ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.29319572218295253,
-      "diff_pearson_p": 0.4438564427219463,
+      "units": "% vs USD",
+      "country": "BRA",
+      "diff_pearson_r": -0.4863934392901735,
+      "diff_pearson_p": 0.18427986924876175,
       "diff_n": 9,
       "diff_significant": false
     },
     {
-      "x": "GDP growth (annual %) [COL]",
-      "y": "Manufacturing, value added (% of GDP) [COL]",
-      "pearson_r": 0.19665588481641938,
-      "pearson_p": 0.5860695308664268,
+      "x": "Youth unemployment (% of labor force 15-24) [MEX]",
+      "y": "GDP per capita (current US$) [MEX]",
+      "pearson_r": -0.8243972470417161,
+      "pearson_p": 0.0033459987049925116,
       "pearson_ci_95": [
-        -0.49416705510829784,
-        0.7352506818085975
+        -0.95718614484524,
+        -0.40497018323960726
       ],
-      "spearman_rho": 0.38181818181818183,
-      "spearman_p": 0.2762553333854362,
-      "significant": false,
+      "spearman_rho": -0.7575757575757575,
+      "spearman_p": 0.011143446799694208,
+      "significant": true,
       "n": 10,
       "years": [
         2015,
@@ -1740,53 +1641,23 @@
         2023,
         2024
       ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.5015062627860857,
-      "diff_pearson_p": 0.16897961023357455,
+      "units": "% vs USD",
+      "country": "MEX",
+      "diff_pearson_r": -0.49801690411205457,
+      "diff_pearson_p": 0.17244517386473635,
       "diff_n": 9,
       "diff_significant": false
     },
     {
-      "x": "GDP growth (annual %) [ARG]",
-      "y": "Manufacturing, value added (% of GDP) [ARG]",
-      "pearson_r": 0.2595628908181126,
-      "pearson_p": 0.4689385289974534,
+      "x": "Youth unemployment (% of labor force 15-24) [COL]",
+      "y": "GDP per capita (current US$) [COL]",
+      "pearson_r": -0.4881612374111015,
+      "pearson_p": 0.15229803161360939,
       "pearson_ci_95": [
-        -0.4423676648415595,
-        0.7642897246414907
+        -0.85500018975487,
+        0.20425318411687815
       ],
-      "spearman_rho": 0.309090909090909,
-      "spearman_p": 0.38484123026128353,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": -0.004887717822078027,
-      "diff_pearson_p": 0.990043021243565,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "GDP growth (annual %) [CHL]",
-      "y": "Manufacturing, value added (% of GDP) [CHL]",
-      "pearson_r": -0.19790117402171914,
-      "pearson_p": 0.5836512966624586,
-      "pearson_ci_95": [
-        -0.7358453757354726,
-        0.49318712655937363
-      ],
-      "spearman_rho": 0.17575757575757575,
+      "spearman_rho": -0.17575757575757575,
       "spearman_p": 0.6271883447764846,
       "significant": false,
       "n": 10,
@@ -1802,1263 +1673,30 @@
         2023,
         2024
       ],
-      "units": "% vs %",
-      "diff_pearson_r": -0.4139395211717513,
-      "diff_pearson_p": 0.2680469442271584,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "GDP growth (annual %) [GTM]",
-      "y": "Manufacturing, value added (% of GDP) [GTM]",
-      "pearson_r": -0.22587126846575378,
-      "pearson_p": 0.5303519248243237,
-      "pearson_ci_95": [
-        -0.7489875164615623,
-        0.47070522565898487
-      ],
-      "spearman_rho": -0.34545454545454546,
-      "spearman_p": 0.3282265114713672,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": -0.5541049430743471,
-      "diff_pearson_p": 0.12160645910780402,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [LCN]",
-      "y": "GDP growth (annual %) [LCN]",
-      "pearson_r": 0.03193844819818954,
-      "pearson_p": 0.9302058681257839,
-      "pearson_ci_95": [
-        -0.609962131880781,
-        0.6485312926032124
-      ],
-      "spearman_rho": -0.19999999999999998,
-      "spearman_p": 0.5795840000000002,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.26026886830054363,
-      "diff_pearson_p": 0.4988102562824311,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [BRA]",
-      "y": "GDP growth (annual %) [BRA]",
-      "pearson_r": -0.16889263096820298,
-      "pearson_p": 0.6409067626213847,
-      "pearson_ci_95": [
-        -0.7217733180484905,
-        0.515567677103245
-      ],
-      "spearman_rho": -0.2121212121212121,
-      "spearman_p": 0.5563057751029299,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.06805377801935834,
-      "diff_pearson_p": 0.8618959311515869,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [MEX]",
-      "y": "GDP growth (annual %) [MEX]",
-      "pearson_r": -0.07473445179431358,
-      "pearson_p": 0.8374284146602706,
-      "pearson_ci_95": [
-        -0.6727141416805784,
-        0.5823004391752252
-      ],
-      "spearman_rho": -0.10303030303030303,
-      "spearman_p": 0.7769984634438898,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": -0.17710929143456067,
-      "diff_pearson_p": 0.6484946142452044,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [COL]",
-      "y": "GDP growth (annual %) [COL]",
-      "pearson_r": 0.22719458891341904,
-      "pearson_p": 0.5278803369708537,
-      "pearson_ci_95": [
-        -0.4696186692714716,
-        0.7495992641163322
-      ],
-      "spearman_rho": 0.11515151515151514,
-      "spearman_p": 0.7514196523258485,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.19264514483470066,
-      "diff_pearson_p": 0.6194820605449123,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [ARG]",
-      "y": "GDP growth (annual %) [ARG]",
-      "pearson_r": 0.0682806929880492,
-      "pearson_p": 0.8513304110877089,
-      "pearson_ci_95": [
-        -0.5865716417622213,
-        0.6691473079409598
-      ],
-      "spearman_rho": 0.24848484848484845,
-      "spearman_p": 0.4887763045192432,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": -0.03841801435661587,
-      "diff_pearson_p": 0.9218316616180356,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [CHL]",
-      "y": "GDP growth (annual %) [CHL]",
-      "pearson_r": -0.019904395970213328,
-      "pearson_p": 0.9564763799521264,
-      "pearson_ci_95": [
-        -0.6414993255156747,
-        0.6174685417396306
-      ],
-      "spearman_rho": -0.06666666666666665,
-      "spearman_p": 0.8548130882487427,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": -0.10523743888644518,
-      "diff_pearson_p": 0.7875808097285171,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [GTM]",
-      "y": "GDP growth (annual %) [GTM]",
-      "pearson_r": 0.7419023352255061,
-      "pearson_p": 0.014023912988062348,
-      "pearson_ci_95": [
-        0.21068413258222393,
-        0.934845145861268
-      ],
-      "spearman_rho": 0.7575757575757575,
-      "spearman_p": 0.011143446799694208,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.8425690813222124,
-      "diff_pearson_p": 0.004354501036023577,
+      "units": "% vs USD",
+      "country": "COL",
+      "diff_pearson_r": -0.8015719050147702,
+      "diff_pearson_p": 0.009381085455594447,
       "diff_n": 9,
       "diff_significant": true
     },
     {
-      "x": "Foreign direct investment, net inflows (% of GDP) [LCN]",
-      "y": "Trade (% of GDP) [LCN]",
-      "pearson_r": -0.2075768576589258,
-      "pearson_p": 0.5649902211115584,
-      "pearson_ci_95": [
-        -0.740437945464225,
-        0.48551302362143894
-      ],
-      "spearman_rho": -0.29696969696969694,
-      "spearman_p": 0.40470167127015705,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.6414302477184022,
-      "diff_pearson_p": 0.06260495058807673,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [BRA]",
-      "y": "Trade (% of GDP) [BRA]",
-      "pearson_r": -0.3996504455757978,
-      "pearson_p": 0.25252543759459073,
-      "pearson_ci_95": [
-        -0.8223531770189186,
-        0.3073148477073899
-      ],
-      "spearman_rho": -0.29696969696969694,
-      "spearman_p": 0.40470167127015705,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.3235714287830169,
-      "diff_pearson_p": 0.3956622977003247,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [MEX]",
-      "y": "Trade (% of GDP) [MEX]",
-      "pearson_r": 0.05329495352056924,
-      "pearson_p": 0.8837478611739048,
-      "pearson_ci_95": [
-        -0.5963509184882859,
-        0.6607568857549926
-      ],
-      "spearman_rho": -0.01818181818181818,
-      "spearman_p": 0.9602404181286242,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.5911410100762616,
-      "diff_pearson_p": 0.09365979187959728,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [COL]",
-      "y": "Trade (% of GDP) [COL]",
-      "pearson_r": 0.46485837038563094,
-      "pearson_p": 0.17583797602032544,
-      "pearson_ci_95": [
-        -0.23296199683343888,
-        0.8466779705761542
-      ],
-      "spearman_rho": 0.3696969696969697,
-      "spearman_p": 0.29305007529282234,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.6106000682776361,
-      "diff_pearson_p": 0.08072188013018962,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [ARG]",
-      "y": "Trade (% of GDP) [ARG]",
-      "pearson_r": -0.12098616043634884,
-      "pearson_p": 0.739182829329303,
-      "pearson_ci_95": [
-        -0.697488083483755,
-        0.5505907414165208
-      ],
-      "spearman_rho": -0.07878787878787878,
-      "spearman_p": 0.8287173946974606,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": -0.48389535966396385,
-      "diff_pearson_p": 0.1868816555932521,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [CHL]",
-      "y": "Trade (% of GDP) [CHL]",
-      "pearson_r": 0.42802431549624026,
-      "pearson_p": 0.21719889892079577,
-      "pearson_ci_95": [
-        -0.27598890166435924,
-        0.8331309670198805
-      ],
-      "spearman_rho": 0.4787878787878787,
-      "spearman_p": 0.16152292801745594,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.30428824126220416,
-      "diff_pearson_p": 0.42596878591385656,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Foreign direct investment, net inflows (% of GDP) [GTM]",
-      "y": "Trade (% of GDP) [GTM]",
-      "pearson_r": 0.28232689562635693,
-      "pearson_p": 0.42932746713575004,
-      "pearson_ci_95": [
-        -0.4223934447023891,
-        0.774316733634003
-      ],
-      "spearman_rho": 0.5515151515151515,
-      "spearman_p": 0.09840117666963498,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.22963481374232292,
-      "diff_pearson_p": 0.552264177123751,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "GDP growth (annual %) [LCN]",
-      "y": "Trade (% of GDP) [LCN]",
-      "pearson_r": 0.640884158476858,
-      "pearson_p": 0.045858393176774134,
-      "pearson_ci_95": [
-        0.018860137106410314,
-        0.9052355163012346
-      ],
-      "spearman_rho": 0.8181818181818182,
-      "spearman_p": 0.003814920082550713,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.592339278824387,
-      "diff_pearson_p": 0.09282878125759912,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "GDP growth (annual %) [BRA]",
-      "y": "Trade (% of GDP) [BRA]",
-      "pearson_r": 0.6437225841481393,
-      "pearson_p": 0.04459966203932047,
-      "pearson_ci_95": [
-        0.023689765575560007,
-        0.906104089960058
-      ],
-      "spearman_rho": 0.6727272727272726,
-      "spearman_p": 0.03304122254543772,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.19201326280867287,
-      "diff_pearson_p": 0.620653561030897,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "GDP growth (annual %) [MEX]",
-      "y": "Trade (% of GDP) [MEX]",
-      "pearson_r": 0.24705378618793863,
-      "pearson_p": 0.4913648897234434,
-      "pearson_ci_95": [
-        -0.4530550740597296,
-        0.7586738592846499
-      ],
-      "spearman_rho": 0.2727272727272727,
-      "spearman_p": 0.4458383415427516,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.28555048491972357,
-      "diff_pearson_p": 0.45637249875771535,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "GDP growth (annual %) [COL]",
-      "y": "Trade (% of GDP) [COL]",
-      "pearson_r": 0.6384408897172313,
-      "pearson_p": 0.04696072654392137,
-      "pearson_ci_95": [
-        0.014725993037012823,
-        0.904486089351655
-      ],
-      "spearman_rho": 0.6121212121212121,
-      "spearman_p": 0.05997214247725527,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.5393024414484707,
-      "diff_pearson_p": 0.13401859051013038,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "GDP growth (annual %) [ARG]",
-      "y": "Trade (% of GDP) [ARG]",
-      "pearson_r": 0.10568321926722049,
-      "pearson_p": 0.7713827595586332,
-      "pearson_ci_95": [
-        -0.5613012973584978,
-        0.6894410832237475
-      ],
-      "spearman_rho": 0.09090909090909088,
-      "spearman_p": 0.8027717312071619,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.32646584892981495,
-      "diff_pearson_p": 0.3912018798380356,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "GDP growth (annual %) [CHL]",
-      "y": "Trade (% of GDP) [CHL]",
-      "pearson_r": 0.2954736541116759,
-      "pearson_p": 0.40718616229564636,
-      "pearson_ci_95": [
-        -0.4105374111990807,
-        0.7799971752515448
-      ],
-      "spearman_rho": 0.5272727272727272,
-      "spearman_p": 0.11730806555020232,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.1229377083349758,
-      "diff_pearson_p": 0.7526862515527665,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "GDP growth (annual %) [GTM]",
-      "y": "Trade (% of GDP) [GTM]",
-      "pearson_r": 0.6581168675861045,
-      "pearson_p": 0.038571739613342766,
-      "pearson_ci_95": [
-        0.04863566020229033,
-        0.9104750280992968
-      ],
-      "spearman_rho": 0.7575757575757575,
-      "spearman_p": 0.011143446799694208,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.5925964280885614,
-      "diff_pearson_p": 0.09265103651724191,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Trade (% of GDP) [LCN]",
-      "y": "GDP growth (annual %) [LCN]",
-      "pearson_r": 0.640884158476858,
-      "pearson_p": 0.045858393176774134,
-      "pearson_ci_95": [
-        0.018860137106410314,
-        0.9052355163012346
-      ],
-      "spearman_rho": 0.8181818181818182,
-      "spearman_p": 0.003814920082550713,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.592339278824387,
-      "diff_pearson_p": 0.09282878125759912,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Trade (% of GDP) [BRA]",
-      "y": "GDP growth (annual %) [BRA]",
-      "pearson_r": 0.6437225841481393,
-      "pearson_p": 0.04459966203932047,
-      "pearson_ci_95": [
-        0.023689765575560007,
-        0.906104089960058
-      ],
-      "spearman_rho": 0.6727272727272726,
-      "spearman_p": 0.03304122254543772,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.19201326280867287,
-      "diff_pearson_p": 0.620653561030897,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Trade (% of GDP) [MEX]",
-      "y": "GDP growth (annual %) [MEX]",
-      "pearson_r": 0.24705378618793863,
-      "pearson_p": 0.4913648897234434,
-      "pearson_ci_95": [
-        -0.4530550740597296,
-        0.7586738592846499
-      ],
-      "spearman_rho": 0.2727272727272727,
-      "spearman_p": 0.4458383415427516,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.28555048491972357,
-      "diff_pearson_p": 0.45637249875771535,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Trade (% of GDP) [COL]",
-      "y": "GDP growth (annual %) [COL]",
-      "pearson_r": 0.6384408897172313,
-      "pearson_p": 0.04696072654392137,
-      "pearson_ci_95": [
-        0.014725993037012823,
-        0.904486089351655
-      ],
-      "spearman_rho": 0.6121212121212121,
-      "spearman_p": 0.05997214247725527,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.5393024414484707,
-      "diff_pearson_p": 0.13401859051013038,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Trade (% of GDP) [ARG]",
-      "y": "GDP growth (annual %) [ARG]",
-      "pearson_r": 0.10568321926722049,
-      "pearson_p": 0.7713827595586332,
-      "pearson_ci_95": [
-        -0.5613012973584978,
-        0.6894410832237475
-      ],
-      "spearman_rho": 0.09090909090909088,
-      "spearman_p": 0.8027717312071619,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.32646584892981495,
-      "diff_pearson_p": 0.3912018798380356,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Trade (% of GDP) [CHL]",
-      "y": "GDP growth (annual %) [CHL]",
-      "pearson_r": 0.2954736541116759,
-      "pearson_p": 0.40718616229564636,
-      "pearson_ci_95": [
-        -0.4105374111990807,
-        0.7799971752515448
-      ],
-      "spearman_rho": 0.5272727272727272,
-      "spearman_p": 0.11730806555020232,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.1229377083349758,
-      "diff_pearson_p": 0.7526862515527665,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Trade (% of GDP) [GTM]",
-      "y": "GDP growth (annual %) [GTM]",
-      "pearson_r": 0.6581168675861045,
-      "pearson_p": 0.038571739613342766,
-      "pearson_ci_95": [
-        0.04863566020229033,
-        0.9104750280992968
-      ],
-      "spearman_rho": 0.7575757575757575,
-      "spearman_p": 0.011143446799694208,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.5925964280885614,
-      "diff_pearson_p": 0.09265103651724191,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [LCN]",
-      "y": "Personal remittances received (current US$) [LCN]",
-      "pearson_r": 0.7010191589179763,
-      "pearson_p": 0.023911849609528052,
-      "pearson_ci_95": [
-        0.12778882100446734,
-        0.9231765851786797
-      ],
-      "spearman_rho": 0.6848484848484848,
-      "spearman_p": 0.028882797506732765,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "diff_pearson_r": 0.484557783659196,
-      "diff_pearson_p": 0.18618972255201371,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [BRA]",
-      "y": "Personal remittances received (current US$) [BRA]",
-      "pearson_r": 0.1319973617688462,
-      "pearson_p": 0.716234274931909,
-      "pearson_ci_95": [
-        -0.542744719958971,
-        0.7031897142419805
-      ],
-      "spearman_rho": 0.2727272727272727,
-      "spearman_p": 0.4458383415427516,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "diff_pearson_r": 0.7036176619558494,
-      "diff_pearson_p": 0.03441757581161465,
-      "diff_n": 9,
-      "diff_significant": true
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [MEX]",
-      "y": "Personal remittances received (current US$) [MEX]",
-      "pearson_r": 0.5933387814204679,
-      "pearson_p": 0.07057969999877708,
-      "pearson_ci_95": [
-        -0.05794214123597566,
-        0.8903503562094403
-      ],
-      "spearman_rho": 0.49090909090909085,
-      "spearman_p": 0.1496556734208368,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "diff_pearson_r": 0.47517298615846487,
-      "diff_pearson_p": 0.1961277197171674,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [COL]",
-      "y": "Personal remittances received (current US$) [COL]",
-      "pearson_r": 0.47581619757277077,
-      "pearson_p": 0.16451595626233112,
-      "pearson_ci_95": [
-        -0.2196119203037123,
-        0.8506147766519793
-      ],
-      "spearman_rho": 0.29696969696969694,
-      "spearman_p": 0.40470167127015705,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "diff_pearson_r": -0.2358904521029869,
-      "diff_pearson_p": 0.5411769829045864,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [ARG]",
-      "y": "Personal remittances received (current US$) [ARG]",
-      "pearson_r": 0.6691081952596102,
-      "pearson_p": 0.10023068908812885,
-      "pearson_ci_95": [
-        -0.16922950955236746,
-        0.9456683187237654
-      ],
-      "spearman_rho": 0.7857142857142859,
-      "spearman_p": 0.03623846267982715,
-      "significant": false,
-      "n": 7,
-      "years": [
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "diff_pearson_r": -0.5709253444099693,
-      "diff_pearson_p": 0.2366601824836602,
-      "diff_n": 6,
-      "diff_significant": false
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [CHL]",
-      "y": "Personal remittances received (current US$) [CHL]",
-      "pearson_r": 0.5282225979342886,
-      "pearson_p": 0.11652771481893011,
-      "pearson_ci_95": [
-        -0.15194781325037768,
-        0.8688790735378543
-      ],
-      "spearman_rho": 0.19999999999999998,
-      "spearman_p": 0.5795840000000002,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "diff_pearson_r": 0.38586137089335903,
-      "diff_pearson_p": 0.30504367253044934,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [GTM]",
-      "y": "Personal remittances received (current US$) [GTM]",
-      "pearson_r": 0.4356768468643129,
-      "pearson_p": 0.20818664681431165,
-      "pearson_ci_95": [
-        -0.2672760942794181,
-        0.8359860318689855
-      ],
-      "spearman_rho": 0.19999999999999998,
-      "spearman_p": 0.5795840000000002,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "diff_pearson_r": 0.3080574217091548,
-      "diff_pearson_p": 0.419965266460413,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [LCN]",
-      "y": "GDP per capita (current US$) [LCN]",
-      "pearson_r": 0.5002488443034022,
-      "pearson_p": 0.14088374918183247,
-      "pearson_ci_95": [
-        -0.18887700711357422,
-        0.8592439189014934
-      ],
-      "spearman_rho": 0.7212121212121211,
-      "spearman_p": 0.01857315508946023,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "diff_pearson_r": 0.29607907951485274,
-      "diff_pearson_p": 0.43917554207514475,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [BRA]",
-      "y": "GDP per capita (current US$) [BRA]",
-      "pearson_r": -0.16900775976773952,
-      "pearson_p": 0.6406758746991819,
-      "pearson_ci_95": [
-        -0.7218300853849796,
-        0.5154806617477026
-      ],
-      "spearman_rho": -0.06666666666666665,
-      "spearman_p": 0.8548130882487427,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "diff_pearson_r": -0.159914514546773,
-      "diff_pearson_p": 0.6810876243217104,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [MEX]",
-      "y": "GDP per capita (current US$) [MEX]",
-      "pearson_r": 0.3814941332650883,
-      "pearson_p": 0.27669735977269827,
-      "pearson_ci_95": [
-        -0.3265872535742293,
-        0.8152935992263611
-      ],
-      "spearman_rho": 0.41818181818181815,
-      "spearman_p": 0.22911284098281892,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "diff_pearson_r": 0.012312129424672105,
-      "diff_pearson_p": 0.9749211041434862,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [COL]",
-      "y": "GDP per capita (current US$) [COL]",
-      "pearson_r": 0.41097307160231844,
-      "pearson_p": 0.23806845160849974,
-      "pearson_ci_95": [
-        -0.29499525127712856,
-        0.8266907492484787
-      ],
-      "spearman_rho": 0.4424242424242424,
-      "spearman_p": 0.20042268671194213,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "diff_pearson_r": -0.13308116105085982,
-      "diff_pearson_p": 0.7328587398743115,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Inflation, consumer prices (annual %) [ARG]",
+      "x": "Youth unemployment (% of labor force 15-24) [ARG]",
       "y": "GDP per capita (current US$) [ARG]",
-      "pearson_r": 0.6808290553737977,
-      "pearson_p": 0.09223779524748518,
+      "pearson_r": -0.8957322150016291,
+      "pearson_p": 0.00045517308920382154,
       "pearson_ci_95": [
-        -0.1482417519128806,
-        0.9478986502635235
+        -0.9753084490750843,
+        -0.6102933143727651
       ],
-      "spearman_rho": 0.7142857142857144,
-      "spearman_p": 0.07134356146753766,
-      "significant": false,
-      "n": 7,
+      "spearman_rho": -0.7939393939393938,
+      "spearman_p": 0.006099923313696911,
+      "significant": true,
+      "n": 10,
       "years": [
+        2015,
+        2016,
+        2017,
         2018,
         2019,
         2020,
@@ -3068,19 +1706,20 @@
         2024
       ],
       "units": "% vs USD",
-      "diff_pearson_r": -0.006176181101735595,
-      "diff_pearson_p": 0.9907358461432685,
-      "diff_n": 6,
-      "diff_significant": false
+      "country": "ARG",
+      "diff_pearson_r": -0.7440885258944439,
+      "diff_pearson_p": 0.02150569475963446,
+      "diff_n": 9,
+      "diff_significant": true
     },
     {
-      "x": "Inflation, consumer prices (annual %) [CHL]",
+      "x": "Youth unemployment (% of labor force 15-24) [CHL]",
       "y": "GDP per capita (current US$) [CHL]",
-      "pearson_r": 0.35041273480794877,
-      "pearson_p": 0.3208618849234478,
+      "pearson_r": 0.28520456515747483,
+      "pearson_p": 0.424434064293016,
       "pearson_ci_95": [
-        -0.35826690954796453,
-        0.8029015207968418
+        -0.41981875190440887,
+        0.7755669304679321
       ],
       "spearman_rho": 0.35757575757575755,
       "spearman_p": 0.31037609170568026,
@@ -3099,22 +1738,23 @@
         2024
       ],
       "units": "% vs USD",
-      "diff_pearson_r": -0.24518482802419084,
-      "diff_pearson_p": 0.5248639741575255,
+      "country": "CHL",
+      "diff_pearson_r": -0.33219363024260473,
+      "diff_pearson_p": 0.3824446078336198,
       "diff_n": 9,
       "diff_significant": false
     },
     {
-      "x": "Inflation, consumer prices (annual %) [GTM]",
+      "x": "Youth unemployment (% of labor force 15-24) [GTM]",
       "y": "GDP per capita (current US$) [GTM]",
-      "pearson_r": 0.38392818651141025,
-      "pearson_p": 0.2733865244465088,
+      "pearson_r": -0.25974627012706364,
+      "pearson_p": 0.4686131751231092,
       "pearson_ci_95": [
-        -0.3240373060417252,
-        0.8162475581730574
+        -0.7643714859098019,
+        0.4422094940930866
       ],
-      "spearman_rho": 0.2121212121212121,
-      "spearman_p": 0.5563057751029299,
+      "spearman_rho": -0.49090909090909085,
+      "spearman_p": 0.1496556734208368,
       "significant": false,
       "n": 10,
       "years": [
@@ -3130,316 +1770,23 @@
         2024
       ],
       "units": "% vs USD",
-      "diff_pearson_r": 0.09276003277060538,
-      "diff_pearson_p": 0.8123805476835699,
+      "country": "GTM",
+      "diff_pearson_r": -0.07822606351330426,
+      "diff_pearson_p": 0.841449585375171,
       "diff_n": 9,
       "diff_significant": false
     },
     {
-      "x": "Personal remittances received (current US$) [LCN]",
-      "y": "GDP per capita (current US$) [LCN]",
-      "pearson_r": 0.6746433260097768,
-      "pearson_p": 0.03235843017012395,
+      "x": "Youth unemployment (% of labor force 15-24) [LCN]",
+      "y": "Internet users (% of population) [LCN]",
+      "pearson_r": -0.2493930753628413,
+      "pearson_p": 0.487136501493516,
       "pearson_ci_95": [
-        0.07824607929581964,
-        0.9154248446974296
+        -0.7597298770834024,
+        0.451071636148523
       ],
-      "spearman_rho": 0.5272727272727272,
-      "spearman_p": 0.11730806555020232,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "diff_pearson_r": 0.589512258400904,
-      "diff_pearson_p": 0.09479662143362583,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Personal remittances received (current US$) [BRA]",
-      "y": "GDP per capita (current US$) [BRA]",
-      "pearson_r": 0.20945616634981123,
-      "pearson_p": 0.5613924858846441,
-      "pearson_ci_95": [
-        -0.48400999034618036,
-        0.7413242269644292
-      ],
-      "spearman_rho": 0.2121212121212121,
-      "spearman_p": 0.5563057751029299,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "diff_pearson_r": -0.07964819456176771,
-      "diff_pearson_p": 0.8385973650218955,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Personal remittances received (current US$) [MEX]",
-      "y": "GDP per capita (current US$) [MEX]",
-      "pearson_r": 0.8253398251802373,
-      "pearson_p": 0.003278692519751098,
-      "pearson_ci_95": [
-        0.4074328674777897,
-        0.9574325861291559
-      ],
-      "spearman_rho": 0.7575757575757575,
-      "spearman_p": 0.011143446799694208,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "diff_pearson_r": 0.48371766849181647,
-      "diff_pearson_p": 0.187067508961284,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Personal remittances received (current US$) [COL]",
-      "y": "GDP per capita (current US$) [COL]",
-      "pearson_r": 0.7127556646890966,
-      "pearson_p": 0.02069600961405734,
-      "pearson_ci_95": [
-        0.15079365761870436,
-        0.9265687595312062
-      ],
-      "spearman_rho": 0.5878787878787878,
-      "spearman_p": 0.07387770688865808,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "diff_pearson_r": 0.9092387349591043,
-      "diff_pearson_p": 0.0006780016969341821,
-      "diff_n": 9,
-      "diff_significant": true
-    },
-    {
-      "x": "Personal remittances received (current US$) [ARG]",
-      "y": "GDP per capita (current US$) [ARG]",
-      "pearson_r": 0.23750357296323432,
-      "pearson_p": 0.508788528198853,
-      "pearson_ci_95": [
-        -0.4610812380961771,
-        0.7543345616479185
-      ],
-      "spearman_rho": 0.09090909090909088,
-      "spearman_p": 0.8027717312071619,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "diff_pearson_r": 0.5704082340303094,
-      "diff_pearson_p": 0.10876102041661752,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Personal remittances received (current US$) [CHL]",
-      "y": "GDP per capita (current US$) [CHL]",
-      "pearson_r": 0.769434884386434,
-      "pearson_p": 0.00926082420972536,
-      "pearson_ci_95": [
-        0.27117414116895483,
-        0.9424752423890236
-      ],
-      "spearman_rho": 0.8060606060606059,
-      "spearman_p": 0.004862061101964607,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "diff_pearson_r": 0.007641852634665325,
-      "diff_pearson_p": 0.9844329032373861,
-      "diff_n": 9,
-      "diff_significant": false
-    },
-    {
-      "x": "Personal remittances received (current US$) [GTM]",
-      "y": "GDP per capita (current US$) [GTM]",
-      "pearson_r": 0.9864255231184988,
-      "pearson_p": 1.4614313666993096e-7,
-      "pearson_ci_95": [
-        0.9416186074282076,
-        0.996898676033005
-      ],
-      "spearman_rho": 0.9878787878787878,
-      "spearman_p": 9.307459988955516e-8,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "diff_pearson_r": 0.7512538672655328,
-      "diff_pearson_p": 0.01962047100361995,
-      "diff_n": 9,
-      "diff_significant": true
-    },
-    {
-      "x": "Net migration (total people) [LCN]",
-      "y": "Urban population (% of total) [LCN]",
-      "error": "incompatible units: count vs %"
-    },
-    {
-      "x": "Net migration (total people) [BRA]",
-      "y": "Urban population (% of total) [BRA]",
-      "error": "incompatible units: count vs %"
-    },
-    {
-      "x": "Net migration (total people) [MEX]",
-      "y": "Urban population (% of total) [MEX]",
-      "error": "incompatible units: count vs %"
-    },
-    {
-      "x": "Net migration (total people) [COL]",
-      "y": "Urban population (% of total) [COL]",
-      "error": "incompatible units: count vs %"
-    },
-    {
-      "x": "Net migration (total people) [ARG]",
-      "y": "Urban population (% of total) [ARG]",
-      "error": "incompatible units: count vs %"
-    },
-    {
-      "x": "Net migration (total people) [CHL]",
-      "y": "Urban population (% of total) [CHL]",
-      "error": "incompatible units: count vs %"
-    },
-    {
-      "x": "Net migration (total people) [GTM]",
-      "y": "Urban population (% of total) [GTM]",
-      "error": "incompatible units: count vs %"
-    },
-    {
-      "x": "Net migration (total people) [MEX]",
-      "y": "Poverty headcount at national poverty line (% of population) [MEX]",
-      "error": "incompatible units: count vs %"
-    },
-    {
-      "x": "Net migration (total people) [COL]",
-      "y": "Poverty headcount at national poverty line (% of population) [COL]",
-      "error": "incompatible units: count vs %"
-    },
-    {
-      "x": "Net migration (total people) [ARG]",
-      "y": "Poverty headcount at national poverty line (% of population) [ARG]",
-      "error": "incompatible units: count vs %"
-    },
-    {
-      "x": "Net migration (total people) [CHL]",
-      "y": "Poverty headcount at national poverty line (% of population) [CHL]",
-      "error": "incompatible units: count vs %"
-    },
-    {
-      "x": "Urban population (% of total) [MEX]",
-      "y": "Poverty headcount at national poverty line (% of population) [MEX]",
-      "pearson_r": -0.8402316998452375,
-      "pearson_p": 0.07479593396123493,
-      "pearson_ci_95": [
-        -0.9891982706063851,
-        0.1625144011893082
-      ],
-      "spearman_rho": -0.7,
-      "spearman_p": 0.1881204043741873,
-      "significant": false,
-      "n": 5,
-      "years": [
-        2016,
-        2018,
-        2020,
-        2022,
-        2024
-      ],
-      "units": "% vs %"
-    },
-    {
-      "x": "Urban population (% of total) [COL]",
-      "y": "Poverty headcount at national poverty line (% of population) [COL]",
-      "pearson_r": -0.33765727014518176,
-      "pearson_p": 0.3399828057810179,
-      "pearson_ci_95": [
-        -0.7977001901198872,
-        0.3708121609226732
-      ],
-      "spearman_rho": -0.38905954795524134,
-      "spearman_p": 0.266477921200522,
+      "spearman_rho": -0.2606060606060606,
+      "spearman_p": 0.46708905438634024,
       "significant": false,
       "n": 10,
       "years": [
@@ -3455,23 +1802,962 @@
         2024
       ],
       "units": "% vs %",
-      "diff_pearson_r": -0.18583578908967416,
-      "diff_pearson_p": 0.6321450607979995,
+      "country": "LCN",
+      "diff_pearson_r": 0.7925861253604499,
+      "diff_pearson_p": 0.01085138515536232,
+      "diff_n": 9,
+      "diff_significant": true
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [BRA]",
+      "y": "Internet users (% of population) [BRA]",
+      "pearson_r": -0.22896997198910035,
+      "pearson_p": 0.5245718054087835,
+      "pearson_ci_95": [
+        -0.7504185928167846,
+        0.468157608566857
+      ],
+      "spearman_rho": -0.19999999999999998,
+      "spearman_p": 0.5795840000000002,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "BRA",
+      "diff_pearson_r": 0.5607659429609881,
+      "diff_pearson_p": 0.11625418569466432,
       "diff_n": 9,
       "diff_significant": false
     },
     {
-      "x": "Urban population (% of total) [ARG]",
-      "y": "Poverty headcount at national poverty line (% of population) [ARG]",
-      "pearson_r": 0.80373046338108,
-      "pearson_p": 0.009049141543624949,
+      "x": "Youth unemployment (% of labor force 15-24) [MEX]",
+      "y": "Internet users (% of population) [MEX]",
+      "pearson_r": -0.531675957136089,
+      "pearson_p": 0.1137180397371621,
       "pearson_ci_95": [
-        0.29943153965487684,
-        0.9570205627240973
+        -0.8700508996216173,
+        0.14725329992352923
       ],
-      "spearman_rho": 0.7666666666666667,
-      "spearman_p": 0.01594401657897403,
+      "spearman_rho": -0.4787878787878787,
+      "spearman_p": 0.16152292801745594,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "MEX",
+      "diff_pearson_r": 0.38943517867475314,
+      "diff_pearson_p": 0.3001979168059712,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [COL]",
+      "y": "Internet users (% of population) [COL]",
+      "pearson_r": 0.4004155068495492,
+      "pearson_p": 0.25153359855040475,
+      "pearson_ci_95": [
+        -0.30648982073107567,
+        0.82264781947146
+      ],
+      "spearman_rho": 0.5393939393939393,
+      "spearman_p": 0.10759318778241479,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "COL",
+      "diff_pearson_r": 0.4365862899914445,
+      "diff_pearson_p": 0.24002954963962217,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [ARG]",
+      "y": "Internet users (% of population) [ARG]",
+      "pearson_r": -0.09139061472690355,
+      "pearson_p": 0.8017444346048085,
+      "pearson_ci_95": [
+        -0.6817929347603042,
+        0.5711069280938014
+      ],
+      "spearman_rho": -0.35757575757575755,
+      "spearman_p": 0.31037609170568026,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "ARG",
+      "diff_pearson_r": 0.5870849940282302,
+      "diff_pearson_p": 0.0965063763174478,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [CHL]",
+      "y": "Internet users (% of population) [CHL]",
+      "pearson_r": 0.6468458286371521,
+      "pearson_p": 0.04324159323931302,
+      "pearson_ci_95": [
+        0.02903767275658278,
+        0.9070572704743214
+      ],
+      "spearman_rho": 0.7818181818181817,
+      "spearman_p": 0.0075470077810678785,
       "significant": true,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "CHL",
+      "diff_pearson_r": -0.14843866514689202,
+      "diff_pearson_p": 0.7031008422695352,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [GTM]",
+      "y": "Internet users (% of population) [GTM]",
+      "pearson_r": -0.3246334883582053,
+      "pearson_p": 0.3600897623912577,
+      "pearson_ci_95": [
+        -0.7923178750399725,
+        0.3833599804095879
+      ],
+      "spearman_rho": -0.4424242424242424,
+      "spearman_p": 0.20042268671194213,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "GTM",
+      "diff_pearson_r": 0.2758729845124459,
+      "diff_pearson_p": 0.472429793216022,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [LCN]",
+      "y": "Government expenditure on education (% of GDP) [LCN]",
+      "pearson_r": 0.6143984751663101,
+      "pearson_p": 0.07833372031913617,
+      "pearson_ci_95": [
+        -0.08401156450318818,
+        0.9080196765976235
+      ],
+      "spearman_rho": 0.5666666666666667,
+      "spearman_p": 0.1116329876114912,
+      "significant": false,
+      "n": 9,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "units": "% vs %",
+      "country": "LCN",
+      "diff_pearson_r": 0.6399213599036389,
+      "diff_pearson_p": 0.08746608739096585,
+      "diff_n": 8,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [BRA]",
+      "y": "Government expenditure on education (% of GDP) [BRA]",
+      "pearson_r": -0.06037763685226602,
+      "pearson_p": 0.8870667602611649,
+      "pearson_ci_95": [
+        -0.7338361643534066,
+        0.672934738119366
+      ],
+      "spearman_rho": -0.09523809523809526,
+      "spearman_p": 0.8225054302036114,
+      "significant": false,
+      "n": 8,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "units": "% vs %",
+      "country": "BRA",
+      "diff_pearson_r": -0.02359700473187265,
+      "diff_pearson_p": 0.9599516325959219,
+      "diff_n": 7,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [MEX]",
+      "y": "Government expenditure on education (% of GDP) [MEX]",
+      "pearson_r": 0.8243881406818823,
+      "pearson_p": 0.022527248938396707,
+      "pearson_ci_95": [
+        0.18809529165773284,
+        0.9732452752302075
+      ],
+      "spearman_rho": 0.8214285714285715,
+      "spearman_p": 0.0234488083456915,
+      "significant": true,
+      "n": 7,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2020,
+        2021,
+        2022
+      ],
+      "units": "% vs %",
+      "country": "MEX",
+      "diff_pearson_r": -0.1818723872411759,
+      "diff_pearson_p": 0.7697159073375227,
+      "diff_n": 5,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [COL]",
+      "y": "Government expenditure on education (% of GDP) [COL]",
+      "pearson_r": 0.9506412168980322,
+      "pearson_p": 0.003594308062216106,
+      "pearson_ci_95": [
+        0.6086614415509819,
+        0.994749815810452
+      ],
+      "spearman_rho": 0.5428571428571429,
+      "spearman_p": 0.26570262390670546,
+      "significant": true,
+      "n": 6,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "units": "% vs %",
+      "country": "COL",
+      "diff_pearson_r": 0.9658165683484496,
+      "diff_pearson_p": 0.007547756634125547,
+      "diff_n": 5,
+      "diff_significant": true
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [ARG]",
+      "y": "Government expenditure on education (% of GDP) [ARG]",
+      "pearson_r": -0.05389682933688514,
+      "pearson_p": 0.8904677234860315,
+      "pearson_ci_95": [
+        -0.6932135257856955,
+        0.632886967623395
+      ],
+      "spearman_rho": -0.26666666666666666,
+      "spearman_p": 0.48792227483870076,
+      "significant": false,
+      "n": 9,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "units": "% vs %",
+      "country": "ARG",
+      "diff_pearson_r": 0.436796112913798,
+      "diff_pearson_p": 0.2792157075294571,
+      "diff_n": 8,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [CHL]",
+      "y": "Government expenditure on education (% of GDP) [CHL]",
+      "pearson_r": 0.3876392921973372,
+      "pearson_p": 0.34270448320407404,
+      "pearson_ci_95": [
+        -0.43619316858316404,
+        0.8579585937050007
+      ],
+      "spearman_rho": 0.4761904761904762,
+      "spearman_p": 0.23293553465009798,
+      "significant": false,
+      "n": 8,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "units": "% vs %",
+      "country": "CHL",
+      "diff_pearson_r": 0.4995456765287074,
+      "diff_pearson_p": 0.25367118596892424,
+      "diff_n": 7,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [GTM]",
+      "y": "Government expenditure on education (% of GDP) [GTM]",
+      "pearson_r": 0.0009034646637900347,
+      "pearson_p": 0.998023672661134,
+      "pearson_ci_95": [
+        -0.6290889106220388,
+        0.6301795019187247
+      ],
+      "spearman_rho": -0.06666666666666665,
+      "spearman_p": 0.8548130882487427,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "GTM",
+      "diff_pearson_r": 0.613224324333575,
+      "diff_pearson_p": 0.07906719432402383,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [LCN]",
+      "y": "Vulnerable employment (% of total employment) [LCN]",
+      "pearson_r": 0.6358733967136487,
+      "pearson_p": 0.04813802413192552,
+      "pearson_ci_95": [
+        0.01040451238744916,
+        0.903696784680022
+      ],
+      "spearman_rho": 0.7818181818181817,
+      "spearman_p": 0.0075470077810678785,
+      "significant": true,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "LCN",
+      "diff_pearson_r": 0.6503036049596509,
+      "diff_pearson_p": 0.05791643779794406,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [BRA]",
+      "y": "Vulnerable employment (% of total employment) [BRA]",
+      "pearson_r": 0.5208772233198701,
+      "pearson_p": 0.12264707394878417,
+      "pearson_ci_95": [
+        -0.1618321259162471,
+        0.8663738106777115
+      ],
+      "spearman_rho": 0.6,
+      "spearman_p": 0.06668799999999998,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "BRA",
+      "diff_pearson_r": 0.5709466852835144,
+      "diff_pearson_p": 0.10835142671920496,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [MEX]",
+      "y": "Vulnerable employment (% of total employment) [MEX]",
+      "pearson_r": 0.06200606903806989,
+      "pearson_p": 0.8648820176815695,
+      "pearson_ci_95": [
+        -0.5906896576246641,
+        0.6656527299055218
+      ],
+      "spearman_rho": 0.18787878787878787,
+      "spearman_p": 0.6032176100292089,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "MEX",
+      "diff_pearson_r": 0.32068107660288797,
+      "diff_pearson_p": 0.4001397882051414,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [COL]",
+      "y": "Vulnerable employment (% of total employment) [COL]",
+      "pearson_r": 0.4317952954597402,
+      "pearson_p": 0.21273042984298768,
+      "pearson_ci_95": [
+        -0.2717098546565155,
+        0.8345405764555751
+      ],
+      "spearman_rho": 0.5515151515151515,
+      "spearman_p": 0.09840117666963498,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "COL",
+      "diff_pearson_r": 0.54355818137928,
+      "diff_pearson_p": 0.13037668355435453,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [ARG]",
+      "y": "Vulnerable employment (% of total employment) [ARG]",
+      "pearson_r": 0.398662989820507,
+      "pearson_p": 0.2538087972793509,
+      "pearson_ci_95": [
+        -0.30837813171041817,
+        0.8219725499731356
+      ],
+      "spearman_rho": 0.29696969696969694,
+      "spearman_p": 0.40470167127015705,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "ARG",
+      "diff_pearson_r": 0.6843618841039878,
+      "diff_pearson_p": 0.04200900642783965,
+      "diff_n": 9,
+      "diff_significant": true
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [CHL]",
+      "y": "Vulnerable employment (% of total employment) [CHL]",
+      "pearson_r": 0.7583658982016102,
+      "pearson_p": 0.01101031209088163,
+      "pearson_ci_95": [
+        0.24637271249734932,
+        0.939429215558186
+      ],
+      "spearman_rho": 0.7333333333333332,
+      "spearman_p": 0.015800596250571577,
+      "significant": true,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "CHL",
+      "diff_pearson_r": 0.5473070076188504,
+      "diff_pearson_p": 0.12721770410844419,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [GTM]",
+      "y": "Vulnerable employment (% of total employment) [GTM]",
+      "pearson_r": -0.1563175598299179,
+      "pearson_p": 0.6662890291896322,
+      "pearson_ci_95": [
+        -0.7155277388790082,
+        0.524987794179732
+      ],
+      "spearman_rho": 0.06666666666666665,
+      "spearman_p": 0.8548130882487427,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "GTM",
+      "diff_pearson_r": -0.15765678009071582,
+      "diff_pearson_p": 0.6854025863593751,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [LCN]",
+      "y": "Manufacturing, value added (% of GDP) [LCN]",
+      "pearson_r": -0.44238921286880284,
+      "pearson_p": 0.2004625523280983,
+      "pearson_ci_95": [
+        -0.8384726167923273,
+        0.2595379046424002
+      ],
+      "spearman_rho": -0.35757575757575755,
+      "spearman_p": 0.31037609170568026,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "LCN",
+      "diff_pearson_r": -0.2097757132097628,
+      "diff_pearson_p": 0.5880113603473116,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [BRA]",
+      "y": "Manufacturing, value added (% of GDP) [BRA]",
+      "pearson_r": -0.6203691680587264,
+      "pearson_p": 0.055666927110533726,
+      "pearson_ci_95": [
+        -0.8988914381948869,
+        0.015204196282574857
+      ],
+      "spearman_rho": -0.41818181818181815,
+      "spearman_p": 0.22911284098281892,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "BRA",
+      "diff_pearson_r": -0.22007458846571093,
+      "diff_pearson_p": 0.5693706367267575,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [MEX]",
+      "y": "Manufacturing, value added (% of GDP) [MEX]",
+      "pearson_r": -0.33882045272410216,
+      "pearson_p": 0.3382155453146149,
+      "pearson_ci_95": [
+        -0.7981773575324347,
+        0.369678762338274
+      ],
+      "spearman_rho": -0.38181818181818183,
+      "spearman_p": 0.2762553333854362,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "MEX",
+      "diff_pearson_r": -0.13873574411935333,
+      "diff_pearson_p": 0.7218639830325578,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [COL]",
+      "y": "Manufacturing, value added (% of GDP) [COL]",
+      "pearson_r": -0.456063115540981,
+      "pearson_p": 0.1852511506233438,
+      "pearson_ci_95": [
+        -0.8434875769814194,
+        0.24349042671715493
+      ],
+      "spearman_rho": -0.5636363636363636,
+      "spearman_p": 0.0897240283170912,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "COL",
+      "diff_pearson_r": -0.24412848511299987,
+      "diff_pearson_p": 0.5267082244781551,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [ARG]",
+      "y": "Manufacturing, value added (% of GDP) [ARG]",
+      "pearson_r": -0.4593322965147077,
+      "pearson_p": 0.18171839295235218,
+      "pearson_ci_95": [
+        -0.8446766412334796,
+        0.23959618420966944
+      ],
+      "spearman_rho": -0.5151515151515151,
+      "spearman_p": 0.1275528697032343,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "ARG",
+      "diff_pearson_r": -0.33626237170585976,
+      "diff_pearson_p": 0.3762803884446582,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [CHL]",
+      "y": "Manufacturing, value added (% of GDP) [CHL]",
+      "pearson_r": -0.55965935091427,
+      "pearson_p": 0.09251481015241518,
+      "pearson_ci_95": [
+        -0.8794075071034994,
+        0.1080498700304684
+      ],
+      "spearman_rho": -0.5757575757575757,
+      "spearman_p": 0.08155281477260244,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "CHL",
+      "diff_pearson_r": -0.02673622946744077,
+      "diff_pearson_p": 0.94556583526441,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [GTM]",
+      "y": "Manufacturing, value added (% of GDP) [GTM]",
+      "pearson_r": 0.5529598694523279,
+      "pearson_p": 0.09734009449000203,
+      "pearson_ci_95": [
+        -0.11762849042800332,
+        0.8771897160986175
+      ],
+      "spearman_rho": 0.709090909090909,
+      "spearman_p": 0.02166592336753244,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "GTM",
+      "diff_pearson_r": 0.39974805740687464,
+      "diff_pearson_p": 0.2864371187690064,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [BRA]",
+      "y": "Gini index [BRA]",
+      "pearson_r": 0.30401097255250364,
+      "pearson_p": 0.3931059336142452,
+      "pearson_ci_95": [
+        -0.40270827032774387,
+        0.7836437016207655
+      ],
+      "spearman_rho": 0.26747843921922837,
+      "spearman_p": 0.45498600795402727,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs index",
+      "country": "BRA",
+      "diff_pearson_r": -0.022591734629074198,
+      "diff_pearson_p": 0.95399606645374,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [MEX]",
+      "y": "Gini index [MEX]",
+      "pearson_r": 0.6645392837457641,
+      "pearson_p": 0.2211235314759468,
+      "pearson_ci_95": [
+        -0.5263116435884538,
+        0.9751037097430341
+      ],
+      "spearman_rho": 0.7,
+      "spearman_p": 0.1881204043741873,
+      "significant": false,
+      "n": 5,
+      "years": [
+        2016,
+        2018,
+        2020,
+        2022,
+        2024
+      ],
+      "units": "% vs index",
+      "country": "MEX"
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [COL]",
+      "y": "Gini index [COL]",
+      "pearson_r": 0.6144535898989956,
+      "pearson_p": 0.05873320758558723,
+      "pearson_ci_95": [
+        -0.024760170934203456,
+        0.8970401475345641
+      ],
+      "spearman_rho": 0.5957474328064633,
+      "spearman_p": 0.06915584415208557,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs index",
+      "country": "COL",
+      "diff_pearson_r": 0.6557442762260945,
+      "diff_pearson_p": 0.05515500189047635,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [ARG]",
+      "y": "Gini index [ARG]",
+      "pearson_r": 0.4443275807903053,
+      "pearson_p": 0.2308319160616145,
+      "pearson_ci_95": [
+        -0.31181673268758464,
+        0.85589143819301
+      ],
+      "spearman_rho": 0.4746444525345673,
+      "spearman_p": 0.19669605234939094,
+      "significant": false,
       "n": 9,
       "years": [
         2016,
@@ -3484,319 +2770,572 @@
         2023,
         2024
       ],
-      "units": "% vs %",
-      "diff_pearson_r": 0.19348785663090762,
-      "diff_pearson_p": 0.6461632130561212,
+      "units": "% vs index",
+      "country": "ARG",
+      "diff_pearson_r": 0.24612821447543898,
+      "diff_pearson_p": 0.5568086613803696,
       "diff_n": 8,
       "diff_significant": false
     },
     {
-      "x": "Urban population (% of total) [CHL]",
-      "y": "Poverty headcount at national poverty line (% of population) [CHL]",
-      "pearson_r": -0.6571904669010397,
-      "pearson_p": 0.34280953309896045,
+      "x": "Youth unemployment (% of labor force 15-24) [CHL]",
+      "y": "Gini index [CHL]",
+      "pearson_r": 0.32704542963764105,
+      "pearson_p": 0.5911397842465006,
       "pearson_ci_95": [
-        -0.9918248216624524,
-        0.8249595542924609
+        -0.780407919157901,
+        0.938515403708944
       ],
-      "spearman_rho": -0.7999999999999999,
-      "spearman_p": 0.2000000000000001,
+      "spearman_rho": 0.051298917604257706,
+      "spearman_p": 0.934712848108234,
       "significant": false,
-      "n": 4,
+      "n": 5,
       "years": [
         2015,
         2017,
         2020,
-        2022
+        2022,
+        2024
       ],
-      "units": "% vs %"
+      "units": "% vs index",
+      "country": "CHL"
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [LCN]",
+      "y": "GDP growth (annual %) [LCN]",
+      "pearson_r": -0.42584424231668344,
+      "pearson_p": 0.21980651873213805,
+      "pearson_ci_95": [
+        -0.8323136378811423,
+        0.27845003264544904
+      ],
+      "spearman_rho": -0.2606060606060606,
+      "spearman_p": 0.46708905438634024,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "LCN",
+      "diff_pearson_r": -0.4085998681655304,
+      "diff_pearson_p": 0.2748916998548742,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [BRA]",
+      "y": "GDP growth (annual %) [BRA]",
+      "pearson_r": -0.24480300309073805,
+      "pearson_p": 0.49544806746827147,
+      "pearson_ci_95": [
+        -0.7576552511794306,
+        0.4549569489571042
+      ],
+      "spearman_rho": -0.24848484848484845,
+      "spearman_p": 0.4887763045192432,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "BRA",
+      "diff_pearson_r": -0.029383801853468852,
+      "diff_pearson_p": 0.9401828634725315,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [MEX]",
+      "y": "GDP growth (annual %) [MEX]",
+      "pearson_r": -0.2819612658841023,
+      "pearson_p": 0.4299510754836606,
+      "pearson_ci_95": [
+        -0.7741576111683456,
+        0.42271976671534783
+      ],
+      "spearman_rho": -0.10303030303030303,
+      "spearman_p": 0.7769984634438898,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "MEX",
+      "diff_pearson_r": -0.3370215473707779,
+      "diff_pearson_p": 0.3751354554711751,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [COL]",
+      "y": "GDP growth (annual %) [COL]",
+      "pearson_r": -0.17820200702184308,
+      "pearson_p": 0.6223280364141481,
+      "pearson_ci_95": [
+        -0.7263396629163977,
+        0.5084856891374665
+      ],
+      "spearman_rho": 0.18787878787878787,
+      "spearman_p": 0.6032176100292089,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "COL",
+      "diff_pearson_r": -0.4791806833040507,
+      "diff_pearson_p": 0.19184821947488906,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [ARG]",
+      "y": "GDP growth (annual %) [ARG]",
+      "pearson_r": -0.48794762129665964,
+      "pearson_p": 0.1525046218986283,
+      "pearson_ci_95": [
+        -0.8549247488437964,
+        0.20452187890193071
+      ],
+      "spearman_rho": -0.4666666666666666,
+      "spearman_p": 0.17393859716506654,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "ARG",
+      "diff_pearson_r": -0.6263784487279468,
+      "diff_pearson_p": 0.07109101456150753,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [CHL]",
+      "y": "GDP growth (annual %) [CHL]",
+      "pearson_r": -0.31828777258927926,
+      "pearson_p": 0.3700969925627883,
+      "pearson_ci_95": [
+        -0.7896687488700812,
+        0.3893805380625482
+      ],
+      "spearman_rho": -0.2727272727272727,
+      "spearman_p": 0.4458383415427516,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "CHL",
+      "diff_pearson_r": -0.5436048928992983,
+      "diff_pearson_p": 0.13033703877095937,
+      "diff_n": 9,
+      "diff_significant": false
+    },
+    {
+      "x": "Youth unemployment (% of labor force 15-24) [GTM]",
+      "y": "GDP growth (annual %) [GTM]",
+      "pearson_r": -0.3844879218294141,
+      "pearson_p": 0.2726282317225749,
+      "pearson_ci_95": [
+        -0.8164665978222385,
+        0.3234494612616091
+      ],
+      "spearman_rho": -0.24848484848484845,
+      "spearman_p": 0.4887763045192432,
+      "significant": false,
+      "n": 10,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "units": "% vs %",
+      "country": "GTM",
+      "diff_pearson_r": -0.6041217506518706,
+      "diff_pearson_p": 0.08489791595255253,
+      "diff_n": 9,
+      "diff_significant": false
     }
   ],
   "regression": {
-    "dependent": "Electric power consumption (kWh per capita) [LCN]",
+    "dependent": "Youth unemployment (% of labor force 15-24) [LCN]",
     "independent": [
-      "GDP growth (annual %) [LCN]",
-      "Manufacturing, value added (% of GDP) [LCN]"
+      "GDP per capita (current US$) [LCN]",
+      "Internet users (% of population) [LCN]",
+      "Government expenditure on education (% of GDP) [LCN]"
     ],
-    "n": 10,
-    "r_squared": 0.1409417030808603,
-    "adj_r_squared": -0.10450352461032253,
-    "f_statistic": 0.574228736922895,
-    "f_p_value": 0.5875965380076034,
+    "n": 9,
+    "r_squared": 0.8484697307511435,
+    "adj_r_squared": 0.7575515692018296,
+    "f_statistic": 9.332235895365471,
+    "f_p_value": 0.017192275102521304,
     "vif": {
-      "GDP growth (annual %) [LCN]": 1.264194928414608,
-      "Manufacturing, value added (% of GDP) [LCN]": 1.264194928414611
+      "GDP per capita (current US$) [LCN]": 2.721696927757101,
+      "Internet users (% of population) [LCN]": 2.541184353464576,
+      "Government expenditure on education (% of GDP) [LCN]": 4.97259907399161
     },
-    "white_test": {
-      "lm_stat": 5.105355890411955,
-      "p_value": 0.4031583018913558,
-      "heteroscedastic": false
-    },
+    "white_test": null,
     "robust_se": true,
     "bootstrap": true,
     "coefficients": [
       {
         "name": "intercept",
-        "beta": 1077.6424710560664,
-        "se": 1716.229681253065,
-        "t": 0.6279127338418077,
-        "p_value": 0.5499889069919102,
+        "beta": 2.2683149685979855,
+        "se": 21.368009057127743,
+        "t": 0.10615471766852991,
+        "p_value": 0.9195870682056757,
         "ci_95": [
-          -2980.595854538285,
-          5135.880796650417
+          -52.659900977366846,
+          57.196530914562814
         ],
-        "robust_se": 352.7028431078408,
-        "robust_t": 3.055383567539237,
-        "robust_p": 0.01844287792030852,
+        "robust_se": 8.22405592450511,
+        "robust_t": 0.2758146332442995,
+        "robust_p": 0.7937267062753355,
         "robust_ci_95": [
-          243.63277463754116,
-          1911.6521674745916
+          -18.872293806192072,
+          23.40892374338804
         ],
         "boot_ci_95": [
-          -6549.055646552413,
-          3330.476952961355
+          -85.37296227298027,
+          121.58018976823766
         ],
         "boot_includes_zero": true,
         "boot_hist": {
           "counts": [
-            3,
             12,
-            27,
-            10,
-            13,
-            9,
-            7,
-            23,
-            35,
-            59,
-            156,
-            499,
-            751,
-            291,
-            49,
-            15,
-            9,
             4,
-            6,
-            2
-          ],
-          "edges": [
-            -8882.617212642584,
-            -8064.591352796182,
-            -7246.5654929497805,
-            -6428.539633103378,
-            -5610.5137732569765,
-            -4792.487913410574,
-            -3974.4620535641716,
-            -3156.43619371777,
-            -2338.4103338713676,
-            -1520.3844740249651,
-            -702.3586141785636,
-            115.66724566783887,
-            933.6931055142413,
-            1751.7189653606438,
-            2569.7448252070444,
-            3387.770685053447,
-            4205.796544899849,
-            5023.822404746252,
-            5841.848264592654,
-            6659.874124439055,
-            7477.899984285456
-          ]
-        }
-      },
-      {
-        "name": "GDP growth (annual %) [LCN]",
-        "beta": 8.264483307880298,
-        "se": 20.773612383404217,
-        "t": 0.3978356366407747,
-        "p_value": 0.7026048815448607,
-        "significant": false,
-        "ci_95": [
-          -40.85730432710549,
-          57.38627094286608
-        ],
-        "robust_se": 5.2236766248837405,
-        "robust_t": 1.5821200088288838,
-        "robust_p": 0.15763676476596755,
-        "robust_significant": false,
-        "robust_ci_95": [
-          -4.087549121798137,
-          20.616515737558732
-        ],
-        "boot_ci_95": [
-          -36.388494529153256,
-          95.37532413772378
-        ],
-        "boot_includes_zero": true,
-        "boot_hist": {
-          "counts": [
-            7,
-            6,
-            11,
-            20,
-            104,
-            395,
-            1045,
-            209,
-            98,
-            22,
-            18,
-            17,
-            9,
-            5,
-            7,
             3,
-            0,
-            1,
-            1,
-            2
+            7,
+            24,
+            21,
+            48,
+            141,
+            229,
+            403,
+            581,
+            289,
+            61,
+            36,
+            21,
+            29,
+            6,
+            16,
+            19,
+            22
           ],
           "edges": [
-            -104.60253732610843,
-            -86.77201447387284,
-            -68.94149162163727,
-            -51.11096876940169,
-            -33.280445917166105,
-            -15.449923064930516,
-            2.3805997873050586,
-            20.211122639540633,
-            38.04164549177622,
-            55.87216834401181,
-            73.7026911962474,
-            91.53321404848296,
-            109.36373690071855,
-            127.19425975295414,
-            145.0247826051897,
-            162.85530545742532,
-            180.68582830966088,
-            198.51635116189644,
-            216.34687401413206,
-            234.17739686636762,
-            252.00791971860323
+            -151.0401024382202,
+            -135.9047341375664,
+            -120.76936583691263,
+            -105.63399753625883,
+            -90.49862923560505,
+            -75.36326093495126,
+            -60.22789263429746,
+            -45.09252433364368,
+            -29.957156032989886,
+            -14.821787732336105,
+            0.31358056831768977,
+            15.448948868971485,
+            30.58431716962528,
+            45.719685470279074,
+            60.85505377093284,
+            75.99042207158664,
+            91.12579037224043,
+            106.2611586728942,
+            121.39652697354799,
+            136.5318952742018,
+            151.66726357485558
           ]
         }
       },
       {
-        "name": "Manufacturing, value added (% of GDP) [LCN]",
-        "beta": 69.49121025258711,
-        "se": 98.82890158353678,
-        "t": 0.7031466417123791,
-        "p_value": 0.504671339068721,
+        "name": "GDP per capita (current US$) [LCN]",
+        "beta": -0.0014639920732568532,
+        "se": 0.0006917384349476729,
+        "t": -2.1163954455813894,
+        "p_value": 0.08790624073554443,
         "significant": false,
         "ci_95": [
-          -164.20200719012044,
-          303.18442769529463
+          -0.0032421623291448336,
+          0.00031417818263112726
         ],
-        "robust_se": 21.322908698308648,
-        "robust_t": 3.2589930030558736,
-        "robust_p": 0.013883686444493337,
+        "robust_se": 0.00028158418195677856,
+        "robust_t": -5.199127532957682,
+        "robust_p": 0.0034695611666311077,
         "robust_significant": true,
         "robust_ci_95": [
-          19.070543230067756,
-          119.91187727510646
+          -0.0021878272565974593,
+          -0.0007401568899162473
         ],
         "boot_ci_95": [
-          -61.69972214990383,
-          521.1365624767336
+          -0.0035673558020360837,
+          0.0009934517307414136
         ],
         "boot_includes_zero": true,
         "boot_hist": {
           "counts": [
             4,
-            6,
-            3,
-            12,
-            20,
-            74,
-            409,
-            787,
-            356,
-            124,
-            50,
+            8,
+            17,
+            25,
             37,
+            226,
+            611,
+            524,
+            260,
+            130,
+            81,
+            19,
+            3,
+            3,
+            8,
+            2,
+            0,
+            11,
+            2,
+            1
+          ],
+          "edges": [
+            -0.005557887617239882,
+            -0.00497860933662783,
+            -0.004399331056015778,
+            -0.0038200527754037256,
+            -0.003240774494791674,
+            -0.002661496214179622,
+            -0.00208221793356757,
+            -0.0015029396529555178,
+            -0.0009236613723434661,
+            -0.0003443830917314143,
+            0.00023489518888063741,
+            0.00081417346949269,
+            0.0013934517501047418,
+            0.0019727300307167935,
+            0.002552008311328846,
+            0.003131286591940898,
+            0.0037105648725529496,
+            0.004289843153165001,
+            0.004869121433777053,
+            0.005448399714389105,
+            0.0060276779950011565
+          ]
+        }
+      },
+      {
+        "name": "Internet users (% of population) [LCN]",
+        "beta": 0.1287453481018157,
+        "se": 0.06540340346324358,
+        "t": 1.9684808631430015,
+        "p_value": 0.10613004541362048,
+        "significant": false,
+        "ci_95": [
+          -0.03937945282959149,
+          0.2968701490332229
+        ],
+        "robust_se": 0.026855111991634692,
+        "robust_t": 4.794072284707641,
+        "robust_p": 0.0049092472938110365,
+        "robust_significant": true,
+        "robust_ci_95": [
+          0.05971208502214059,
+          0.19777861118149082
+        ],
+        "boot_ci_95": [
+          -0.14384095979083802,
+          0.38023894810664494
+        ],
+        "boot_includes_zero": true,
+        "boot_hist": {
+          "counts": [
+            4,
+            28,
+            16,
+            25,
+            54,
+            52,
+            57,
+            175,
+            323,
+            474,
+            395,
+            143,
+            51,
+            69,
+            61,
             18,
-            7,
-            9,
-            12,
             10,
-            26,
-            12,
+            11,
+            2,
             4
           ],
           "edges": [
-            -285.22861925759105,
-            -238.2530943762876,
-            -191.27756949498414,
-            -144.30204461368066,
-            -97.32651973237722,
-            -50.35099485107378,
-            -3.375469969770279,
-            43.600054911533164,
-            90.5755797928366,
-            137.55110467414005,
-            184.5266295554435,
-            231.502154436747,
-            278.4776793180505,
-            325.4532041993539,
-            372.4287290806574,
-            419.40425396196076,
-            466.37977884326426,
-            513.3553037245678,
-            560.3308286058711,
-            607.3063534871746,
-            654.281878368478
+            -0.255894511458493,
+            -0.2145990946989888,
+            -0.17330367793948462,
+            -0.13200826117998044,
+            -0.09071284442047622,
+            -0.04941742766097201,
+            -0.00812201090146783,
+            0.03317340585803635,
+            0.07446882261754056,
+            0.11576423937704478,
+            0.157059656136549,
+            0.19835507289605314,
+            0.23965048965555735,
+            0.2809459064150615,
+            0.3222413231745657,
+            0.36353673993406993,
+            0.40483215669357414,
+            0.44612757345307835,
+            0.48742299021258256,
+            0.5287184069720867,
+            0.5700138237315909
+          ]
+        }
+      },
+      {
+        "name": "Government expenditure on education (% of GDP) [LCN]",
+        "beta": 4.339076237362854,
+        "se": 3.024912529377787,
+        "t": 1.4344468460565323,
+        "p_value": 0.21090728914141232,
+        "significant": false,
+        "ci_95": [
+          -3.436708965044385,
+          12.114861439770094
+        ],
+        "robust_se": 1.1513708507633043,
+        "robust_t": 3.7686174133088852,
+        "robust_p": 0.013041436649064098,
+        "robust_significant": true,
+        "robust_ci_95": [
+          1.3793832423095744,
+          7.298769232416134
+        ],
+        "boot_ci_95": [
+          -16.930611579322495,
+          15.825817721515651
+        ],
+        "boot_includes_zero": true,
+        "boot_hist": {
+          "counts": [
+            15,
+            17,
+            5,
+            2,
+            0,
+            8,
+            0,
+            12,
+            22,
+            80,
+            268,
+            796,
+            457,
+            177,
+            63,
+            20,
+            13,
+            4,
+            10,
+            3
+          ],
+          "edges": [
+            -32.69529705366713,
+            -29.5476989061173,
+            -26.40010075856747,
+            -23.25250261101764,
+            -20.104904463467808,
+            -16.957306315917975,
+            -13.809708168368147,
+            -10.662110020818314,
+            -7.514511873268482,
+            -4.36691372571865,
+            -1.2193155781688176,
+            1.928282569381011,
+            5.07588071693084,
+            8.223478864480676,
+            11.371077012030504,
+            14.51867515958034,
+            17.66627330713017,
+            20.813871454679997,
+            23.961469602229833,
+            27.109067749779662,
+            30.2566658973295
           ]
         }
       }
     ]
   },
   "panel": {
-    "type": "fixed_effects_country",
-    "dependent": "Electric power consumption (kWh per capita)",
-    "independent": [
-      "GDP growth (annual %)",
-      "Manufacturing, value added (% of GDP)"
-    ],
-    "n": 59,
-    "n_countries": 6,
-    "countries": [
-      "ARG",
-      "BRA",
-      "CHL",
-      "COL",
-      "GTM",
-      "MEX"
-    ],
-    "r_squared": 0.9905464674658547,
-    "dof": 51,
-    "coefficients": [
-      {
-        "name": "GDP growth (annual %)",
-        "beta": 7.794918048333539,
-        "se": 3.978865103957698,
-        "t": 1.9590807541024926,
-        "p_value": 0.05558121994238063,
-        "significant": false,
-        "ci_95": [
-          -0.19298695864796667,
-          15.782823055315045
-        ]
-      },
-      {
-        "name": "Manufacturing, value added (% of GDP)",
-        "beta": -2.00043139418748,
-        "se": 20.46025701669862,
-        "t": -0.09777156721710922,
-        "p_value": 0.9224969333516504,
-        "significant": false,
-        "ci_95": [
-          -43.07611131740233,
-          39.07524852902737
-        ]
-      }
-    ],
-    "note": "OLS con dummies de pais (efectos fijos). Controla caracteristicas fijas por pais; los coeficientes reflejan variacion intra-pais en el tiempo."
+    "error": "insufficient panel data (0 obs, 0 countries)"
   },
   "clustering": {
     "best_k": 2,
@@ -6638,48 +6177,64 @@
   "charts": [
     {
       "file": "fig1_trends.png",
-      "caption": "Evolución temporal 2015-2024 de los indicadores regionales (América Latina y Caribe). Fuente: World Bank API."
+      "caption": "Evolución temporal 2015-2024 de los indicadores regionales (América Latina y Caribe). Fuente: World Bank API.",
+      "howto": "cada mini-panel muestra un indicador regional a lo largo del tiempo; busca si sube, baja o fluctúa"
     },
     {
       "file": "fig2_correlation.png",
-      "caption": "Correlación de Pearson entre Personal remittances received (current US$) y GDP per capita (current US$) (n=10)."
+      "caption": "Correlación de Pearson entre Youth unemployment (% of labor force 15-24) y Government expenditure on education (% of GDP) (n=6).",
+      "howto": "cada punto es un año; si se alinean cerca de la línea punteada, las variables se mueven juntas"
     },
     {
       "file": "fig3_regression.png",
-      "caption": "Ajuste del modelo de regresión OLS sobre Electric power consumption (kWh per capita) (n=10, R²=0.141)."
+      "caption": "Ajuste del modelo de regresión OLS sobre Youth unemployment (% of labor force 15-24) (n=9, R²=0.848).",
+      "howto": "los datos observados frente a lo que el modelo predijo; donde se separan, el modelo no captura la realidad"
     },
     {
       "file": "fig4_countries.png",
-      "caption": "Comparación internacional de Youth unemployment (% of labor force 15-24) (último año disponible). Fuente: World Bank API."
+      "caption": "Comparación internacional de Youth unemployment (% of labor force 15-24) (último año disponible). Fuente: World Bank API.",
+      "howto": "barra más larga o país más oscuro = valor más alto del indicador"
     },
     {
       "file": "fig5_forest.png",
-      "caption": "Forest plot: coeficientes OLS y de panel (efectos fijos por país) con intervalos de confianza 95%. Las barras que cruzan la línea del cero indican resultados frágiles (el intervalo incluye efecto nulo)."
+      "caption": "Tarjetas de evidencia: efecto estimado (punto) y rango plausible IC95% (barra) para cada coeficiente del panel de efectos fijos y del OLS regional. Las flechas indican intervalos que exceden la ventana del gráfico.",
+      "howto": "la bolita es la estimación y la barra el rango plausible; si la barra cruza la línea del cero, el resultado no es concluyente"
     },
     {
       "file": "fig6_heatmap.png",
-      "caption": "Mapa de calor de correlaciones Pearson por país: la heterogeneidad entre países se aprecia en las diferencias de signo e intensidad. * marca significancia (p<0.05)."
+      "caption": "Mapa de calor de correlaciones Pearson por país: la heterogeneidad entre países se aprecia en las diferencias de signo e intensidad. * marca significancia (p<0.05).",
+      "howto": "azul = se mueven juntas; rojo = se mueven al revés; casi blanco = sin relación clara; * = significativo"
     },
     {
       "file": "fig7_boxplot.png",
-      "caption": "Distribución de Youth unemployment (% of labor force 15-24) por país (2015-2024): caja = rango intercuartílico, línea = mediana. La dispersión revela heterogeneidad que el promedio esconde."
+      "caption": "Distribución de Youth unemployment (% of labor force 15-24) por país (2015-2024): caja = rango intercuartílico, línea = mediana. La dispersión revela heterogeneidad que el promedio esconde.",
+      "howto": "cada caja resume un país: la línea central es el valor típico; una caja alta significa mucha variación año a año"
     },
     {
       "file": "fig8_bootdist.png",
-      "caption": "Estabilidad del coeficiente de GDP growth (annual %) tras 2000 remuestreos (rango recortado al 99% central): las barras muestran dónde cayó la estimación en cada réplica; si toca la línea roja (cero = sin efecto), el resultado es frágil."
+      "caption": "Estabilidad del coeficiente de GDP per capita (current US$) tras 2000 remuestreos (rango recortado al 99% central): las barras muestran dónde cayó la estimación en cada réplica; si toca la línea roja (cero = sin efecto), el resultado es frágil.",
+      "howto": "repetimos el cálculo 2000 veces barajando los datos; si las barras no tocan la línea roja del cero, el coeficiente es estable"
     },
     {
       "file": "fig9_residuals.png",
-      "caption": "Diagnóstico de residuos del modelo OLS: puntos dispersos alrededor del cero indican ajuste razonable; patrones sistemáticos revelan limitaciones del modelo."
+      "caption": "Diagnóstico de residuos del modelo OLS: puntos dispersos alrededor del cero indican ajuste razonable; patrones sistemáticos revelan limitaciones del modelo.",
+      "howto": "puntos regados sin patrón cerca del cero = modelo sano; si dibujan una forma, el modelo se perdió algo"
     },
     {
       "file": "fig10_panels.png",
-      "caption": "Relación Electric power consumption (kWh per capita) vs GDP growth (annual %) dentro de cada país: las pendientes de signo distinto evidencian heterogeneidad que el agregado regional oculta."
+      "caption": "Relación Youth unemployment (% of labor force 15-24) vs GDP per capita (current US$) dentro de cada país: las pendientes de signo distinto evidencian heterogeneidad que el agregado regional oculta.",
+      "howto": "la misma relación dentro de cada país; si las pendientes apuntan en direcciones distintas, la respuesta depende del país"
     },
     {
       "file": "fig11_anomaly.png",
-      "caption": "Años estadísticamente atípicos en Foreign direct investment, net inflows (% of GDP) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia."
+      "caption": "Años estadísticamente atípicos en Foreign direct investment, net inflows (% of GDP) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia.",
+      "howto": "los pines marcan años estadísticamente atípicos — choques como 2020 que se leen como contexto, no como tendencia"
     }
   ],
-  "chartsDir": "2026-09-16-16-21"
+  "tables": {
+    "descriptive": "| Serie / Indicador | País / Región | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |\n| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n| GDP per capita (current US$) [LCN] (USD) | Latin America & Caribbean (regional) | 8,546.9 | 8,241.5 | 9,065.8 | 8,778.6 | 8,540.0 | 7,169.4 | 8,292.2 | 9,412.1 | 10,507.6 | 10,705.1 |\n| Government expenditure on education (% of GDP) [LCN] (%) | Latin America & Caribbean (regional) | 4.447 | 4.414 | 4.408 | 4.461 | 4.511 | 4.535 | 4.087 | 3.861 | 3.820 | — |\n| Internet users (% of population) [LCN] (%) | Latin America & Caribbean (regional) | 54.40 | 57.50 | 60.20 | 63.50 | 67.80 | 73.80 | 75.80 | 77.10 | 80.00 | 81.70 |\n| Youth unemployment (% of labor force 15-24) [LCN] (%) | Latin America & Caribbean (regional) | 14.72 | 16.96 | 17.39 | 17.35 | 17.44 | 20.65 | 18.52 | 14.77 | 13.42 | 12.85 |\n| GDP per capita (current US$) [ARG] (USD) | Argentina | 13,679.6 | 12,700.0 | 14,532.5 | 11,752.8 | 9,956.0 | 8,535.6 | 10,738.0 | 13,962.2 | 14,261.8 | 13,969.8 |\n| Government expenditure on education (% of GDP) [ARG] (%) | Argentina | 5.776 | 5.545 | 5.454 | 4.878 | 4.772 | 5.277 | 4.654 | 4.793 | 5.003 | — |\n| Internet users (% of population) [ARG] (%) | Argentina | 68.04 | 70.97 | 74.29 | 77.70 | 79.95 | 85.51 | 87.15 | 88.38 | 89.23 | 89.67 |\n| Youth unemployment (% of labor force 15-24) [ARG] (%) | Argentina | 20.27 | 21.80 | 22.84 | 23.84 | 25.84 | 30.43 | 23.37 | 19.00 | 17.95 | 19.23 |\n| GDP per capita (current US$) [BRA] (USD) | Brazil | 8,936.2 | 8,836.3 | 10,080.5 | 9,300.7 | 9,029.8 | 7,074.2 | 7,972.5 | 9,281.3 | 10,377.6 | 10,310.5 |\n| Government expenditure on education (% of GDP) [BRA] (%) | Brazil | 6.241 | 6.314 | 6.320 | 6.089 | 5.963 | 5.771 | 5.497 | 5.619 | — | — |\n| Internet users (% of population) [BRA] (%) | Brazil | 58.33 | 60.87 | 67.47 | 70.43 | 73.91 | 81.34 | 80.69 | 80.53 | 84.15 | 84.46 |\n| Youth unemployment (% of labor force 15-24) [BRA] (%) | Brazil | 19.49 | 26.60 | 28.59 | 27.96 | 27.10 | 30.27 | 28.31 | 20.73 | 17.94 | 15.67 |\n| GDP per capita (current US$) [CHL] (USD) | Chile | 13,433.9 | 13,649.9 | 14,879.9 | 15,659.5 | 14,496.9 | 13,118.0 | 16,216.2 | 15,399.1 | 17,081.5 | 16,659.0 |\n| Government expenditure on education (% of GDP) [CHL] (%) | Chile | 4.904 | 5.366 | 5.433 | 5.473 | 5.626 | 5.630 | 5.002 | 4.912 | — | — |\n| Internet users (% of population) [CHL] (%) | Chile | 76.63 | 83.56 | 82.33 | 84.90 | 85.02 | 87.46 | 90.23 | 92.32 | 94.46 | 95.59 |\n| Youth unemployment (% of labor force 15-24) [CHL] (%) | Chile | 15.81 | 15.80 | 17.73 | 18.14 | 18.95 | 24.38 | 20.48 | 18.29 | 21.97 | 20.99 |\n| GDP per capita (current US$) [COL] (USD) | Colombia | 6,248.5 | 5,959.8 | 6,479.5 | 6,817.0 | 6,472.5 | 5,339.7 | 6,222.6 | 6,680.4 | 7,012.5 | 7,951.1 |\n| Government expenditure on education (% of GDP) [COL] (%) | Colombia | 4.470 | 4.477 | 4.536 | 4.449 | 4.511 | 5.262 | — | — | — | — |\n| Internet users (% of population) [COL] (%) | Colombia | 55.90 | 58.14 | 62.26 | 64.13 | 65.01 | 69.80 | 73.03 | 72.80 | 77.34 | 79.35 |\n| Youth unemployment (% of labor force 15-24) [COL] (%) | Colombia | 17.32 | 18.27 | 18.47 | 19.45 | 20.66 | 27.25 | 24.76 | 20.97 | 19.36 | 19.41 |\n| GDP per capita (current US$) [GTM] (USD) | Guatemala | 3,893.5 | 4,060.1 | 4,325.0 | 4,352.9 | 4,512.0 | 4,477.6 | 4,912.6 | 5,356.9 | 5,754.4 | 6,150.9 |\n| Government expenditure on education (% of GDP) [GTM] (%) | Guatemala | 3.030 | 2.945 | 2.950 | 3.132 | 3.193 | 3.295 | 3.092 | 3.208 | 3.109 | 3.076 |\n| Internet users (% of population) [GTM] (%) | Guatemala | 28.81 | 34.51 | 37.90 | 41.50 | 44.40 | 47.51 | 50.84 | 54.40 | 56.73 | 60.22 |\n| Youth unemployment (% of labor force 15-24) [GTM] (%) | Guatemala | 5.581 | 5.582 | 4.939 | 4.679 | 4.461 | 5.157 | 3.789 | 6.274 | 4.326 | 4.624 |\n| GDP per capita (current US$) [MEX] (USD) | Mexico | 10,021.2 | 9,097.9 | 9,649.3 | 10,084.8 | 10,369.6 | 8,841.3 | 10,314.1 | 11,405.8 | 13,830.8 | 13,988.0 |\n| Government expenditure on education (% of GDP) [MEX] (%) | Mexico | 5.051 | 4.758 | 4.398 | 4.139 | — | 4.500 | 4.238 | 4.060 | — | — |\n| Internet users (% of population) [MEX] (%) | Mexico | 57.43 | 59.54 | 53.03 | 56.66 | 69.63 | 71.49 | 75.63 | 78.63 | 81.18 | 83.12 |\n| Youth unemployment (% of labor force 15-24) [MEX] (%) | Mexico | 8.516 | 7.621 | 6.849 | 6.815 | 7.160 | 8.053 | 7.626 | 6.465 | 5.844 | 5.760 |",
+    "regression": "| Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Evidencia |\n|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|\n| OLS Agregado (LCN) | intercept | 2.2683 | 21.3680 | t = 0.00 | 0.9196 | [-85.373, 121.580] | 🔴 Sin evidencia |\n| OLS Agregado (LCN) | GDP per capita (current US$) | -0.0015 | 0.0007 | t = 0.00 | 0.0879 | [-0.004, 0.001] | 🟡 Marginal |\n| OLS Agregado (LCN) | Internet users (% of population) | 0.1287 | 0.0654 | t = 0.00 | 0.1061 | [-0.144, 0.380] | 🔴 Sin evidencia |\n| OLS Agregado (LCN) | Government expenditure on education (% of GDP) | 4.3391 | 3.0249 | t = 0.00 | 0.2109 | [-16.931, 15.826] | 🔴 Sin evidencia |\n| *Diagnóstico OLS* | *R² = 0.8485, R²-adj = 0.7576, F = 9.33 (p = 0.0172), n = 9* | — | — | — | — | — | — |",
+    "correlations": "| Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Evidencia |\n|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|\n| Youth unemployment (% of labor force 15-24) | Government expenditure on education (% of GDP) | COL | 0.951 | 0.004 | 0.543 | 0.966 | 0.008 | 🟢 Robusta |\n| Youth unemployment (% of labor force 15-24) | GDP per capita (current US$) | LCN | -0.896 | 0.000 | -0.770 | -0.848 | 0.004 | 🟢 Robusta |\n| Youth unemployment (% of labor force 15-24) | GDP per capita (current US$) | ARG | -0.896 | 0.000 | -0.794 | -0.744 | 0.022 | 🟢 Robusta |\n| Youth unemployment (% of labor force 15-24) | GDP per capita (current US$) | MEX | -0.824 | 0.003 | -0.758 | -0.498 | 0.172 | 🟡 Co-tendencia probable |\n| Youth unemployment (% of labor force 15-24) | Government expenditure on education (% of GDP) | MEX | 0.824 | 0.023 | 0.821 | -0.182 | 0.770 | 🟡 Co-tendencia probable |\n| Youth unemployment (% of labor force 15-24) | Vulnerable employment (% of total employment) | CHL | 0.758 | 0.011 | 0.733 | 0.547 | 0.127 | 🟡 Co-tendencia probable |\n| Youth unemployment (% of labor force 15-24) | Internet users (% of population) | CHL | 0.647 | 0.043 | 0.782 | -0.148 | 0.703 | 🟡 Co-tendencia probable |\n| Youth unemployment (% of labor force 15-24) | Vulnerable employment (% of total employment) | LCN | 0.636 | 0.048 | 0.782 | 0.650 | 0.058 | 🟡 Co-tendencia probable |\n| Youth unemployment (% of labor force 15-24) | GDP per capita (current US$) | BRA | -0.634 | 0.049 | -0.552 | -0.486 | 0.184 | 🟡 Co-tendencia probable |\n| Youth unemployment (% of labor force 15-24) | Gini index | MEX | 0.665 | 0.221 | 0.700 | — | — | 🔴 Sin evidencia |\n| Youth unemployment (% of labor force 15-24) | Manufacturing, value added (% of GDP) | BRA | -0.620 | 0.056 | -0.418 | -0.220 | 0.569 | 🟡 Marginal |\n| Youth unemployment (% of labor force 15-24) | Gini index | COL | 0.614 | 0.059 | 0.596 | 0.656 | 0.055 | 🟡 Marginal |\n| Youth unemployment (% of labor force 15-24) | Government expenditure on education (% of GDP) | LCN | 0.614 | 0.078 | 0.567 | 0.640 | 0.087 | 🟡 Marginal |\n| Youth unemployment (% of labor force 15-24) | Manufacturing, value added (% of GDP) | CHL | -0.560 | 0.093 | -0.576 | -0.027 | 0.946 | 🟡 Marginal |\n| Youth unemployment (% of labor force 15-24) | Manufacturing, value added (% of GDP) | GTM | 0.553 | 0.097 | 0.709 | 0.400 | 0.286 | 🟡 Marginal |"
+  },
+  "chartsDir": "2026-09-18-16-02"
 }
