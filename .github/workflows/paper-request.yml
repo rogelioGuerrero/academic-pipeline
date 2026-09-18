@@ -115,8 +115,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/compute-r-results.json output/raw/fetched-data.json output/charts/ docs/papers/ docs/charts/ docs/data/ docs/index.json docs/knowledge.jsonl docs/memory.db 2>/dev/null || true
-          git commit -m "Paper request #${ISSUE} - ${TEMA}" || echo "No changes to commit"
+          git add output/briefs/ output/papers/ output/raw/compute-results.json output/raw/fetched-data.json output/charts/ docs/papers/ docs/charts/ docs/data/ docs/index.json docs/knowledge.jsonl docs/memory.db
+          # compute-r-results.json solo existe cuando R corre el panel (opcional).
+          # Exigirlo en el git add abortaba todo el staging y el commit quedaba vacio.
+          [ -f output/raw/compute-r-results.json ] && git add output/raw/compute-r-results.json || true
+          git commit -m "Paper request #${ISSUE} - ${TEMA}" || echo "::warning::No changes to commit (revisar git add)"
           git push
 
       - name: Label and comment on the issue
