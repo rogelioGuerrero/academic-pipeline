@@ -25,7 +25,9 @@
   },
   "pregunta": null,
   "hipotesis": null,
-  "inspiringNews": null,
+  "inspiringNews": {
+    "image": "img/2026-09-18_desempleo-juvenil.jpg"
+  },
   "suggestMode": "fallback",
   "suggestions": [],
   "reviewDecision": {
