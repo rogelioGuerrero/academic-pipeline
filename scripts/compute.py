@@ -909,15 +909,23 @@ def make_charts(data, results, outdir):
                 chart_data["figures"][fname] = {"type": "fit", "dep": _short_label(reg["dependent"], 60), "r2": reg["r_squared"], "years": [int(y) for y in common], "observed": [float(v) for v in y_arr], "fitted": [float(v) for v in y_pred]}
 
     # ── Fig 4: country comparison bar chart (latest value of key indicator) ──
-    # Pick the indicator with most country coverage (excluding LCN)
+    # El indicador del analisis (dependiente de la regresion) manda; si no
+    # tiene >=3 paises con datos, cae al de mayor cobertura como antes.
     by_ind = {}
     for v in variables:
         cc = v.get("country_code", "")
         if cc and cc != "LCN" and v.get("values"):
             base = v["name"].split(" [")[0]
             by_ind.setdefault(base, []).append(v)
-    if by_ind:
-        base_name, vs = max(by_ind.items(), key=lambda kv: len(kv[1]))
+    key_ind = relevant[0] if relevant else None
+    if key_ind and len(by_ind.get(key_ind, [])) >= 3:
+        ind_pick = (key_ind, by_ind[key_ind])
+    elif by_ind:
+        ind_pick = max(by_ind.items(), key=lambda kv: len(kv[1]))
+    else:
+        ind_pick = None
+    if ind_pick:
+        base_name, vs = ind_pick
         if len(vs) >= 3:
             labels = [v.get("country_code") for v in vs]
             vals = [v["values"][-1] for v in vs]
@@ -1106,10 +1114,10 @@ def make_charts(data, results, outdir):
             chart_data["figures"][fname] = {"type": "heatmap", "pairs": top_pairs, "countries": ccs, "cells": cells}
 
     # ── Fig 7: boxplot por pais — la dispersion entre paises visible ──
-    # Trigger: el indicador con mas cobertura (mismo de fig4) tiene >=3 paises
+    # Trigger: el indicador elegido en fig4 (el del analisis) tiene >=3 paises
     # con >=4 observaciones.
-    if by_ind:
-        base_name2, vs2 = max(by_ind.items(), key=lambda kv: len(kv[1]))
+    if ind_pick:
+        base_name2, vs2 = ind_pick
         box_vs = [v for v in vs2 if len(v.get("values", [])) >= 4]
         if len(box_vs) >= 3:
             fig, ax = plt.subplots(figsize=(6.5, 3.8))
