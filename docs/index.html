@@ -276,7 +276,15 @@
         const res = await fetch(`papers/${p.file}`);
         if (!res.ok) throw new Error('not found');
         const md = await res.text();
-        const truncWarn = p.truncations?.length ? `<div class="warn-banner">⚠ Este paper tuvo ${p.truncations.length} recorte(s) de contenido por límites de tokens del modelo (${p.truncations.map(t => t.model.split('/').pop() + ': ' + t.cutChars + ' chars').join(', ')}). El análisis puede tener menos contexto del ideal.</div>` : '';
+        const truncWarn = p.truncations?.length ? (() => {
+          const promptCuts = p.truncations.filter(t => t.cutChars > 0);
+          const outCuts = p.truncations.filter(t => t.outputTruncated);
+          const chars = promptCuts.reduce((s, t) => s + t.cutChars, 0);
+          const parts = [];
+          if (promptCuts.length) parts.push(`${promptCuts.length} recorte(s) de contexto (~${chars.toLocaleString('es')} caracteres)`);
+          if (outCuts.length) parts.push(`${outCuts.length} respuesta(s) cortada(s) al tope de tokens`);
+          return `<div class="warn-banner">⚠ Este paper tuvo ${p.truncations.length} ajuste(s) por límites de tokens del modelo (${parts.join(' + ')}). El análisis puede tener menos contexto del ideal.</div>`;
+        })() : '';
         const banner = (p.warning ? `<div class="warn-banner">${esc(p.warning)}</div>` : '') + truncWarn;
         const verdicts = [];
         if (p.review) verdicts.push(`Revisión de rigor: <span class="${p.review === 'APROBADO' ? 'v-ok' : 'v-warn'}">${esc(p.review)}</span>`);
