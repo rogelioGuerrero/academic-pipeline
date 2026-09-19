@@ -88,8 +88,8 @@ jobs:
         if: steps.research.outcome == 'success'
         run: |
           mkdir -p docs/papers docs/charts
-          rm -f docs/papers/*.md
-          for f in output/papers/*.md; do
+          rm -f docs/papers/*.md docs/papers/*.json
+          for f in output/papers/*.md output/papers/*.json; do
             [ -f "$f" ] && cp "$f" "docs/papers/$(basename $f)"
           done
           rm -rf docs/charts/*

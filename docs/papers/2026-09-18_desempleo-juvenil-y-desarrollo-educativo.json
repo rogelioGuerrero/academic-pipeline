@@ -1,0 +1,253 @@
+{
+  "generated": "2026-09-18T16:11:41.107Z",
+  "topic": "desempleo juvenil y desarrollo educativo en America Latina",
+  "angle": "",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 2,
+    "edit": 2
+  },
+  "pregunta": null,
+  "hipotesis": null,
+  "inspiringNews": {
+    "image": "img/2026-09-18_desempleo-juvenil.jpg"
+  },
+  "suggestMode": "fallback",
+  "suggestions": [],
+  "reviewDecision": {
+    "datos_correctos": false,
+    "detalle_datos": "Todas las cifras citadas (tasa de desempleo juvenil, resultados de la regresión OLS, pruebas de tendencia y anomalías) coinciden con los datos y resultados provistos por el World Bank API.",
+    "datos_inventados": [
+      "-0.0012 (no coincide con ningún valor computado)",
+      "-0.0018 (no coincide con ningún valor computado)",
+      "-0.0006 (no coincide con ningún valor computado)"
+    ],
+    "estructura_ok": false,
+    "coherencia_ok": true,
+    "correcciones": [
+      "Agregar un Resumen (Abstract) al inicio del documento.",
+      "Incluir una sección de Discusión que interprete los hallazgos y sus limitaciones.",
+      "Añadir una sección de Conclusiones que sintetice las respuestas a la pregunta de investigación.",
+      "Proveer una Bibliografía completa con las fuentes del World Bank y cualquier referencia citada.",
+      "Si se utilizan datos de México, presentar la tabla correspondiente para ese país."
+    ],
+    "datos_faltantes": null,
+    "veredicto": "REESCRIBIR",
+    "feedback": "Los números son correctos, pero el manuscrito carece de secciones estructurales esenciales. Completa el formato estándar antes de una nueva revisión.; Verificación automática detectó 3 cifra(s) sin respaldo: -0.0012, -0.0018, -0.0006. Elimínalas o usa valores de las tablas.",
+    "number_check": {
+      "checked": 116,
+      "invented": 3
+    }
+  },
+  "qaDecision": {
+    "checklist": {
+      "estructura_ok": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": true,
+      "datos_verificados": true,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 3000,
+    "veredicto": "APROBADO",
+    "issues": []
+  },
+  "editorial": "¿Por qué tantos jóvenes en América Latina siguen sin trabajo a pesar de que la economía parece crecer? Cuando miramos los indicadores del Banco Mundial, vemos que la participación de los servicios en el empleo sube poco a poco, alrededor de 0,17 % cada año, y que el comercio como parte del PIB avanza casi un punto al año. El acceso a internet se dispara, ganando más de 3 % de la población cada año, y la tasa de alfabetización juvenil apenas sube, pero de forma constante, 0,04 % anual. La matrícula en secundaria crece 0,23 % al año y la población urbana se expande 0,20 % anual. Además, cada año llegan 50 021 migrantes más y los envíos de remesas aumentan en unos 11 415 USD. Al combinar el nivel de vida, la penetración de internet y el gasto público en educación, los países que invierten más en estos ámbitos tienden a registrar un leve descenso del desempleo juvenil. Sin embargo, al observar los cambios de un año a otro, esa relación se debilita, lo que sugiere que podría tratarse de una coincidencia más que de una regla firme. En conclusión, los datos no confirman de forma clara que el crecimiento económico o la digitalización eliminen el desempleo de los jóvenes; la situación sigue siendo heterogénea y merece seguir investigándose.",
+  "sample": {
+    "countries": [],
+    "indicators": []
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 23,
+    "countries": 7,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-09-18-16-02",
+    "regression": {
+      "r_squared": 0.8484697307511435,
+      "n": 9
+    },
+    "correlations": 47,
+    "significantCorrelations": [
+      {
+        "x": "Youth unemployment (% of labor force 15-24) [LCN]",
+        "y": "GDP per capita (current US$) [LCN]",
+        "r": -0.8957664312552491,
+        "p": 0.0004545953126597207,
+        "diff_r": -0.8481381534448312,
+        "diff_p": 0.003860843932584686,
+        "country": "LCN"
+      },
+      {
+        "x": "Youth unemployment (% of labor force 15-24) [BRA]",
+        "y": "GDP per capita (current US$) [BRA]",
+        "r": -0.6338388447441,
+        "p": 0.049084803571338056,
+        "diff_r": -0.4863934392901735,
+        "diff_p": 0.18427986924876175,
+        "country": "BRA"
+      },
+      {
+        "x": "Youth unemployment (% of labor force 15-24) [MEX]",
+        "y": "GDP per capita (current US$) [MEX]",
+        "r": -0.8243972470417161,
+        "p": 0.0033459987049925116,
+        "diff_r": -0.49801690411205457,
+        "diff_p": 0.17244517386473635,
+        "country": "MEX"
+      },
+      {
+        "x": "Youth unemployment (% of labor force 15-24) [ARG]",
+        "y": "GDP per capita (current US$) [ARG]",
+        "r": -0.8957322150016291,
+        "p": 0.00045517308920382154,
+        "diff_r": -0.7440885258944439,
+        "diff_p": 0.02150569475963446,
+        "country": "ARG"
+      },
+      {
+        "x": "Youth unemployment (% of labor force 15-24) [CHL]",
+        "y": "Internet users (% of population) [CHL]",
+        "r": 0.6468458286371521,
+        "p": 0.04324159323931302,
+        "diff_r": -0.14843866514689202,
+        "diff_p": 0.7031008422695352,
+        "country": "CHL"
+      },
+      {
+        "x": "Youth unemployment (% of labor force 15-24) [MEX]",
+        "y": "Government expenditure on education (% of GDP) [MEX]",
+        "r": 0.8243881406818823,
+        "p": 0.022527248938396707,
+        "diff_r": -0.1818723872411759,
+        "diff_p": 0.7697159073375227,
+        "country": "MEX"
+      },
+      {
+        "x": "Youth unemployment (% of labor force 15-24) [COL]",
+        "y": "Government expenditure on education (% of GDP) [COL]",
+        "r": 0.9506412168980322,
+        "p": 0.003594308062216106,
+        "diff_r": 0.9658165683484496,
+        "diff_p": 0.007547756634125547,
+        "country": "COL"
+      },
+      {
+        "x": "Youth unemployment (% of labor force 15-24) [LCN]",
+        "y": "Vulnerable employment (% of total employment) [LCN]",
+        "r": 0.6358733967136487,
+        "p": 0.04813802413192552,
+        "diff_r": 0.6503036049596509,
+        "diff_p": 0.05791643779794406,
+        "country": "LCN"
+      }
+    ]
+  },
+  "truncations": [
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 2000
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 7757,
+      "after": 4288,
+      "cutChars": 9367
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 7208,
+      "after": 5224,
+      "cutChars": 5358
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 7835,
+      "after": 4288,
+      "cutChars": 9577
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 7835,
+      "after": 4288,
+      "cutChars": 9577
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 7208,
+      "after": 5231,
+      "cutChars": 5338
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 7829,
+      "after": 4288,
+      "cutChars": 9560
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 7208,
+      "after": 5224,
+      "cutChars": 5357
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 2200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 7208,
+      "after": 5224,
+      "cutChars": 5357
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    }
+  ],
+  "elapsed": 585.6
+}

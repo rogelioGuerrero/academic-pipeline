@@ -18,8 +18,10 @@
     th { background: #f5f5f5; }
     code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
     .note { background: #e8f0fe; border-left: 3px solid #1a73e8; padding: 12px 16px; margin: 16px 0; font-size: 0.92em; }
-    .back { display: inline-block; margin-bottom: 16px; color: #1a73e8; text-decoration: none; font-size: 0.9em; }
-    .back:hover { text-decoration: underline; }
+    .nav { display: flex; gap: 18px; margin-bottom: 20px; font-size: 0.85em; border-bottom: 1px solid #e0dcd4; padding-bottom: 12px; flex-wrap: wrap; }
+    .nav a { color: #1a73e8; text-decoration: none; }
+    .nav a.active { font-weight: bold; color: #14213d; border-bottom: 2px solid #14213d; }
+    .nav a:hover { text-decoration: underline; }
     details.simple { margin: 16px 0; border: 1px solid #e3e0da; border-radius: 8px; padding: 10px 16px; background: #fff; }
     details.simple summary { cursor: pointer; font-weight: 600; color: #14213d; font-size: 0.95em; }
     details.simple summary:hover { color: #1a73e8; }
@@ -27,7 +29,12 @@
   </style>
 </head>
 <body>
-  <a class="back" href="index.html">← Volver a los papers</a>
+  <nav class="nav">
+    <a href="index.html">← Artículos</a>
+    <a href="methodology.html" class="active">Metodología</a>
+    <a href="codebook.html">Libro de códigos</a>
+    <a href="explorer.html">Explorar datos</a>
+  </nav>
   <h1>Metodología</h1>
 
   <p>AcademicPipeline es un sistema <strong>multi-agente</strong> de investigación automatizada: agentes especializados con roles separados —uno propone el tema desde noticias trending, otro cruza indicadores socioeconómicos del Banco Mundial, Python y R ejecutan el análisis estadístico determinístico, un LLM redacta el paper en español, y dos agentes más lo verifican antes de publicar—. La separación de funciones es deliberada: quien redacta no es quien valida, y quien valida ve los datos completos, no solo el texto. Cada paper incluye una <strong>Nota de transparencia</strong> que declara qué se calculó y con qué datos; esta página explica el método una sola vez.</p>

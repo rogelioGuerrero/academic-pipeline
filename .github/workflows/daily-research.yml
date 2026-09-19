@@ -78,8 +78,8 @@ jobs:
         run: |
           mkdir -p docs/papers docs/charts
           # Limpiar papers obsoletos antes de copiar (evita slugs viejos colgados)
-          rm -f docs/papers/*.md
-          for f in output/papers/*.md; do
+          rm -f docs/papers/*.md docs/papers/*.json
+          for f in output/papers/*.md output/papers/*.json; do
             [ -f "$f" ] && cp "$f" "docs/papers/$(basename $f)"
           done
           # Charts por run: output/charts/<stamp>/figN.png -> docs/charts/<stamp>/

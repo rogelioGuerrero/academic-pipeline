@@ -67,6 +67,9 @@ for f in sorted(glob.glob('docs/papers/*.md'), reverse=True):
         cdir = (meta.get('computeResults') or {}).get('chartsDir')
         if cdir:
             entry['charts'] = cdir
+            figs = sorted(os.path.basename(p) for p in glob.glob(f'docs/charts/{cdir}/fig*.png'))
+            if figs:
+                entry['figs'] = figs
         if meta.get('truncations'):
             entry['truncations'] = meta['truncations']
         entry['ts'] = meta.get('generated') or (date + 'T00:00:00Z')

@@ -10,6 +10,19 @@
     "image": "img/2026-09-18_desempleo-juvenil.jpg",
     "editorial": "¿Por qué tantos jóvenes en América Latina siguen sin trabajo a pesar de que la economía parece crecer? Cuando miramos los indicadores del Banco Mundial, vemos que la participación de los servicios en el empleo sube poco a poco, alrededor de 0,17 % cada año, y que el comercio como parte del PIB avanza casi un punto al año. El acceso a internet se dispara, ganando más de 3 % de la población cada año, y la tasa de alfabetización juvenil apenas sube, pero de forma constante, 0,04 % anual. La matrícula en secundaria crece 0,23 % al año y la población urbana se expande 0,20 % anual. Además, cada año llegan 50 021 migrantes más y los envíos de remesas aumentan en unos 11 415 USD. Al combinar el nivel de vida, la penetración de internet y el gasto público en educación, los países que invierten más en estos ámbitos tienden a registrar un leve descenso del desempleo juvenil. Sin embargo, al observar los cambios de un año a otro, esa relación se debilita, lo que sugiere que podría tratarse de una coincidencia más que de una regla firme. En conclusión, los datos no confirman de forma clara que el crecimiento económico o la digitalización eliminen el desempleo de los jóvenes; la situación sigue siendo heterogénea y merece seguir investigándose.",
     "charts": "2026-09-18-16-02",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
     "truncations": [
       {
         "model": "openai/gpt-oss-120b",
@@ -111,6 +124,19 @@
     "pregunta": "¿La inversión en la producción de vehículos eléctricos en Brasil está asociada a un aumento del valor agregado del sector manufacturero y a una mayor participación del comercio exterior en el PIB, contribuyendo a un mayor crecimiento económico?",
     "editorial": "¿Invertir en la fabricación de autos eléctricos hará que Brasil y sus vecinos tengan una industria más fuerte y que el comercio pese más en el PIB? Esa fue la duda que surgió al leer sobre los nuevos planes de inversión.\n\nAl revisar los números del Banco Mundial, la historia que cuenta el conjunto de datos es la siguiente: en los seis países latinoamericanos observados durante una década, cuando la participación del comercio exterior en el PIB sube un punto porcentual, la parte que corresponde a la manufactura tiende a crecer medio punto porcentual. En México, por ejemplo, la relación entre ambos indicadores es muy estrecha; cuando el comercio aumenta, la manufactura también lo hace, y la conexión es casi idéntica en la región en general. Por el contrario, el ritmo de crecimiento del PIB no muestra una relación clara con la fuerza manufacturera; los cambios en el crecimiento anual no se traducen en variaciones perceptibles en el valor agregado de la industria.\n\nEn resumen, los datos confirman que una mayor apertura comercial está acompañada de una manufactura más robusta, pero no avalan la idea de que el crecimiento del PIB sea el motor de ese aumento. Así, la hipótesis de que la inversión en vehículos eléctricos impulse simultáneamente la manufactura y el comercio tiene apoyo parcial: el vínculo con el comercio es evidente, mientras que el vínculo con el crecimiento económico sigue sin confirmarse.",
     "charts": "2026-09-17-16-31",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
     "ts": "2026-09-17T16:34:39.270Z"
   },
   {
@@ -127,6 +153,19 @@
     "pregunta": "¿Existe una correlación positiva entre el consumo eléctrico per cápita y la tasa de crecimiento anual del PIB en los países de América Latina?",
     "editorial": "La noticia de que la empresa FG recaudó 728.9 mil millones de pesos en una nueva emisión de bonos para el sector eléctrico despertó una pregunta sencilla: ¿los países latinoamericanos que usan más energía por habitante también crecen más rápido en su producto interno bruto?  \n\nAl revisar los datos de diez naciones, la historia que surgió fue más bien tenue. En promedio, los países que consumían más kilovatios‑hora por persona no mostraron un impulso claro en su ritmo de crecimiento económico; la relación entre ambos parecía casi nula. Cuando miramos la evolución interna de seis países a lo largo de varios años, la tendencia se volvió un poco más visible, pero aun así la conexión entre mayor consumo eléctrico y mayor crecimiento del PIB quedó en el límite, sin poder afirmarse con seguridad. En algunos casos, como en Brasil, el crecimiento del sector manufacturero sí acompañó a un mejor desempeño económico, pero esa señal no se repitió de forma consistente en los demás países.  \n\nEn conclusión, la idea de que más electricidad per cápita garantice un crecimiento más veloz no se confirmó con los datos disponibles. Los resultados son inconclusos y podrían deberse a casualidades más que a una regla general. Para quien sigue la marcha de la economía regional, el mensaje es claro: el consumo de energía por sí solo no explica por qué algunos países avanzan más rápido que otros.",
     "charts": "2026-09-16-16-21",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
     "ts": "2026-09-16T16:28:09.852Z"
   },
   {

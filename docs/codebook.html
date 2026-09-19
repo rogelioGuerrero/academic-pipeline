@@ -11,8 +11,10 @@
     h2 { font-size: 1.15em; margin: 28px 0 10px; }
     p, li { line-height: 1.7; margin-bottom: 12px; }
     a { color: #1a73e8; }
-    .back { display: inline-block; margin-bottom: 16px; color: #1a73e8; text-decoration: none; font-size: 0.9em; }
-    .back:hover { text-decoration: underline; }
+    .nav { display: flex; gap: 18px; margin-bottom: 20px; font-size: 0.85em; border-bottom: 1px solid #e0dcd4; padding-bottom: 12px; flex-wrap: wrap; }
+    .nav a { color: #1a73e8; text-decoration: none; }
+    .nav a.active { font-weight: bold; color: #14213d; border-bottom: 2px solid #14213d; }
+    .nav a:hover { text-decoration: underline; }
     .note { background: #e8f0fe; border-left: 3px solid #1a73e8; padding: 12px 16px; margin: 16px 0; font-size: 0.92em; }
     .note.warn { background: #fff4e5; border-left-color: #b8860b; }
 
@@ -75,7 +77,12 @@
   </style>
 </head>
 <body>
-  <a class="back" href="index.html">← Volver a los papers</a>
+  <nav class="nav">
+    <a href="index.html">← Artículos</a>
+    <a href="methodology.html">Metodología</a>
+    <a href="codebook.html" class="active">Libro de códigos</a>
+    <a href="explorer.html">Explorar datos</a>
+  </nav>
   <h1>Libro de códigos</h1>
   <p>Qué mide cada indicador que usa el pipeline, con qué código lo pide a su fuente, en qué países y años hay datos, y en qué papers se ha utilizado. Es la respuesta a la pregunta <em>"¿de dónde salen estos números?"</em>, indicador por indicador.</p>
 
