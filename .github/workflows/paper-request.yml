@@ -63,6 +63,11 @@ jobs:
         if: steps.guard.outputs.skip != 'true'
         run: pip install -r requirements.txt
 
+      # Mismo gate que el daily: compute.py incorrecto no debe producir papers.
+      - name: Test statistical code (compute.py)
+        if: steps.guard.outputs.skip != 'true'
+        run: python -m pytest scripts/test_compute.py -q
+
       - name: Setup R & packages
         if: steps.guard.outputs.skip != 'true'
         run: |

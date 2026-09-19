@@ -33,6 +33,13 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
+      # Gate de correccion estadistica: si compute.py produce numeros malos,
+      # el verificador del pipeline los validaria igual (solo compara texto
+      # contra resultados). Estos tests de respuesta conocida deben pasar
+      # antes de gastar un solo token de Groq.
+      - name: Test statistical code (compute.py)
+        run: python -m pytest scripts/test_compute.py -q
+
       - name: Setup R & packages
         run: |
           sudo apt-get update -qq
