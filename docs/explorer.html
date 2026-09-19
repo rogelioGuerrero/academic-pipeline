@@ -473,6 +473,28 @@ function resultToRows(res) {
   });
 }
 
+// Config inicial segun la forma de los datos: el viewer abre YA en modo
+// grafico (no en el datagrid por defecto) para que el valor sea evidente.
+// El usuario puede cambiarlo todo despues desde el panel de estantes.
+function defaultConfig(rows) {
+  const cols = rows.length ? Object.keys(rows[0]) : [];
+  const isNum = c => typeof rows[0][c] === 'number';
+  // Series temporales: eje x = año, una linea por indicador (LCN si existe)
+  if (cols.includes('year') && cols.includes('value')) {
+    const cfg = { plugin: 'Y Line', group_by: ['year'], columns: ['value'], settings: true };
+    if (cols.includes('indicator_label')) cfg.split_by = ['indicator_label'];
+    if (cols.includes('country_code') && rows.some(r => r.country_code === 'LCN')) {
+      cfg.filter = [['country_code', '==', 'LCN']];
+    }
+    return cfg;
+  }
+  // Generico: primera columna categorica x primera numerica -> barras
+  const num = cols.find(isNum);
+  const cat = cols.find(c => !isNum(c));
+  if (num && cat) return { plugin: 'Y Bar', group_by: [cat], columns: [num], settings: true };
+  return { settings: true };
+}
+
 async function openVisual(data) {
   const pv = document.getElementById('pv');
   try {
@@ -480,6 +502,7 @@ async function openVisual(data) {
     const worker = await perspectiveWorker();
     const table = await worker.table(data);
     await pv.load(table);
+    await pv.restore(defaultConfig(data));
     pv.style.display = 'block';
     pv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     status(`${data.length.toLocaleString('es')} filas en el explorador visual — arrastra campos para graficar.`);
