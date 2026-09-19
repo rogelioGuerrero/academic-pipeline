@@ -125,6 +125,8 @@
     /* Evidencia y anexos: expediente auditable al final del paper */
     #viewer .annex { margin-top: 36px; border-top: 2px solid #14213d; padding-top: 18px; }
     #viewer .annex-h { font-size: 1.05em; color: #14213d; margin-bottom: 12px; border: none; }
+    #viewer .annex-sub { font-family: Verdana, sans-serif; font-size: 0.8em; color: #555; margin: 18px 0 10px; border: none; }
+    #viewer .annex-sub .annex-note { font-weight: normal; color: #999; font-size: 0.9em; }
     #viewer .annex-links { list-style: none; margin: 0 0 18px; }
     #viewer .annex-links li { margin-bottom: 8px; font-family: Verdana, sans-serif; font-size: 0.82em; }
     #viewer .annex-links a { color: #1a56db; text-decoration: none; }
@@ -332,7 +334,7 @@
           <div><b>Nodos ejecutados</b>${p.nodes || '—'}</div>
           <div><b>Figuras</b>${(p.figs || []).length || '—'}</div>
         </div></div>`;
-        content.innerHTML = banner + vline + ficha + ed + renderMd(md) + renderAnnex(p);
+        content.innerHTML = banner + vline + ficha + ed + renderMd(md) + renderAnnex(p, md);
         content.querySelectorAll('blockquote').forEach(b => { if (/^\s*En (corto|breve)/.test(b.textContent)) b.classList.add('tldr'); });
         applyGlossary(content);
         enhanceFigures(p);
@@ -371,12 +373,44 @@
     // ── Evidencia y anexos: el expediente auditable del paper ──
     // PDF + metadata JSON (decisiones de agentes, iteraciones, truncamientos)
     // + galería de figuras del run + accesos al libro de códigos y explorador.
-    function renderAnnex(p) {
+    // Las figuras se separan en dos grupos honestos: las que el texto cita
+    // (con su caption real) y el material suplementario que Python generó
+    // pero el paper no usa (etiquetado por tipo, no por "Fig. N").
+    const FIG_TYPE_LABELS = {
+      trends: 'Tendencias de los indicadores del análisis',
+      correlation: 'Correlación destacada (dispersión)',
+      regression: 'Observado vs. ajustado del modelo',
+      countries: 'Comparación por país',
+      forest: 'Coeficientes e intervalos de confianza',
+      heatmap: 'Mapa de correlaciones país × par',
+      boxplot: 'Dispersión por país (boxplot)',
+      bootdist: 'Distribución bootstrap del coeficiente',
+      residuals: 'Residuos del modelo',
+      panels: 'Relación dentro de cada país',
+      anomaly: 'Años estadísticamente atípicos',
+    };
+    function figLabel(f) {
+      const m = f.match(/^fig\d+_(\w+)\.png$/);
+      return (m && FIG_TYPE_LABELS[m[1]]) || f.replace(/^fig\d+_/, '').replace(/_/g, ' ').replace(/\.png$/, '');
+    }
+    function renderAnnex(p, md) {
       const stem = p.file.replace(/\.md$/, '');
-      const figs = (p.figs || []).map(f => {
-        const label = f.replace(/^fig(\d+)_/, 'Fig. $1 — ').replace(/_/g, ' ').replace(/\.png$/, '');
-        return `<a class="annex-fig" href="charts/${p.charts}/${f}" target="_blank" rel="noopener"><img src="charts/${p.charts}/${f}" loading="lazy" alt="${esc(label)}"><span>${esc(label)}</span></a>`;
-      }).join('');
+      // Figuras citadas en el texto, en orden de cita, con su caption real
+      const cited = [];
+      if (md && p.charts) {
+        for (const m of md.matchAll(/!\[(.*?)\]\((charts\/[^)]*?)\)/g)) {
+          const base = m[2].split('/').pop();
+          if ((p.figs || []).includes(base)) cited.push({ file: base, caption: m[1] });
+        }
+      }
+      const citedFiles = new Set(cited.map(c => c.file));
+      const extra = (p.figs || []).filter(f => !citedFiles.has(f));
+      const figCard = (f, label) =>
+        `<a class="annex-fig" href="charts/${p.charts}/${f}" target="_blank" rel="noopener"><img src="charts/${p.charts}/${f}" loading="lazy" alt="${esc(label)}"><span>${esc(label)}</span></a>`;
+      const citedHtml = cited.length
+        ? `<h3 class="annex-sub">Figuras del artículo</h3><div class="annex-figs">${cited.map(c => figCard(c.file, c.caption)).join('')}</div>` : '';
+      const extraHtml = extra.length
+        ? `<h3 class="annex-sub">Material suplementario del análisis <span class="annex-note">(generado por Python; el texto no lo discute)</span></h3><div class="annex-figs">${extra.map(f => figCard(f, figLabel(f))).join('')}</div>` : '';
       return `<div class="annex">
         <h2 class="annex-h">Evidencia y anexos</h2>
         <ul class="annex-links">
@@ -386,7 +420,7 @@
           <li><a href="explorer.html" target="_blank" rel="noopener">🔍 Explorar los datos crudos (SQL en tu navegador, sin servidor)</a></li>
           <li><a href="https://github.com/rogelioGuerrero/academic-pipeline/blob/main/output/raw/fetched-data.json" target="_blank" rel="noopener">📦 Datos crudos del fetch (fetched-data.json en el repositorio)</a></li>
         </ul>
-        ${figs ? `<div class="annex-figs">${figs}</div>` : ''}
+        ${citedHtml}${extraHtml}
       </div>`;
     }
 
