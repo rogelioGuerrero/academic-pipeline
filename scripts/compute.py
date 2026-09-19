@@ -1471,14 +1471,26 @@ def generate_markdown_tables(data, results):
 
     # Tabla de derivados: cifras que el LLM tiende a calcular a mano
     # (cambio anual, % de cambio, CAGR). Pre-computadas = citables con respaldo.
+    # Se limita a las variables del analisis (max 8 filas, LCN primero) y a las
+    # columnas que el LLM suele inventar: cada token de tabla compite con el
+    # presupuesto del prompt de WRITE (8000 TPM - max_tokens - margen).
     derived = results.get("derived") or {}
-    deriv_vars = selected_vars if selected_vars else variables
+    dep_name = ""
+    if reg and isinstance(reg, dict) and "dependent" in reg:
+        dep_name = reg["dependent"].split(" [")[0].lower()
+    elif panel and isinstance(panel, dict) and "dependent" in panel:
+        dep_name = panel["dependent"].split(" [")[0].lower()
+    def _deriv_rank(v):
+        is_lcn = 0 if v.get("country_code") == "LCN" else 1
+        is_dep = 0 if v["name"].split(" [")[0].lower() == dep_name else 1
+        return (is_dep, is_lcn, v.get("country_code", ""), v["name"])
+    deriv_vars = sorted(selected_vars, key=_deriv_rank)
     deriv_rows = [
-        "| Serie | Ámbito | Periodo | Valor inicial | Valor final | Cambio total | Cambio anual prom. | % cambio | CAGR | Mín (año) | Máx (año) |",
-        "|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|"
+        "| Serie | Ámbito | Inicial (año) | Final (año) | Cambio anual prom. | % cambio total | CAGR |",
+        "|:---|:---:|:---:|:---:|:---:|:---:|:---:|"
     ]
     n_deriv = 0
-    for v in deriv_vars[:15]:
+    for v in deriv_vars[:8]:
         d = derived.get(v["name"])
         if not d:
             continue
@@ -1488,9 +1500,8 @@ def generate_markdown_tables(data, results):
         pct = f"{d['pct_change_total']:.2f}%" if "pct_change_total" in d else "—"
         cagr = f"{d['cagr']:.2f}%" if "cagr" in d else "—"
         deriv_rows.append(
-            f"| {label} | {cc} | {d['first_year']}–{d['last_year']} | {d['first_value']:.2f} | {d['last_value']:.2f} "
-            f"| {d['delta_total']:.3f} | {d['avg_annual_change']:.4f} | {pct} | {cagr} "
-            f"| {d['min_value']:.2f} ({d['min_year']}) | {d['max_value']:.2f} ({d['max_year']}) |"
+            f"| {label} | {cc} | {d['first_value']:.2f} ({d['first_year']}) | {d['last_value']:.2f} ({d['last_year']}) "
+            f"| {d['avg_annual_change']:.4f} | {pct} | {cagr} |"
         )
     if n_deriv:
         tables["derived"] = "\n".join(deriv_rows)
