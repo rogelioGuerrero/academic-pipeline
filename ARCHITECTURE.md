@@ -9,7 +9,7 @@ AcademicPipeline es el **motor de investigación automatizada** del sistema. Tom
 ```
 news_found.json (de job-hunter/Netlify) ─┐
                                          ↓
-World Bank API (23 indicadores × 7 países = 158 series) ─→ FETCH ─→ SUGGEST ─→ COMPUTE ─→ WRITE ─→ REVIEW ─→ EDIT ─→ APPROVE ─→ EDITORIAL
+World Bank API (30 indicadores × 13 entidades = ~387 series) ─→ FETCH ─→ SUGGEST ─→ COMPUTE ─→ WRITE ─→ REVIEW ─→ EDIT ─→ APPROVE ─→ EDITORIAL
                                               │         │          │           │          │         │          │            │
                                               │         │          │           │          │         │          │            ↓
                                               │         │          │           │          │         │          │     Paper .md + .json
@@ -28,7 +28,7 @@ World Bank API (23 indicadores × 7 países = 158 series) ─→ FETCH ─→ SU
 
 | Paso | Implementación | Verificable |
 |---|---|---|
-| **Buscar** | World Bank API (23 indicadores × 6 países + LCN = 158 series) | fetched-data.json con 158 series |
+| **Buscar** | World Bank API (30 indicadores × 12 países + LCN = ~387 series) | fetched-data.json con ~387 series |
 | **Filtrar** | SUGGEST cruza noticias (score ≥70) con catálogo de indicadores | Tema + hipótesis + pregunta de investigación |
 | **Resumir** | WRITE redacta paper técnico, EDITORIAL redacta columna llana | Paper .md + columna "Datos al día" |
 | **Validar** | REVIEW verifica contra compute-results reales, QA structural, guardrails por nodo | Papers RECHAZADOS se marcan con warning |
@@ -38,7 +38,7 @@ World Bank API (23 indicadores × 7 países = 158 series) ─→ FETCH ─→ SU
 
 El sistema separa cálculo de redacción:
 
-1. **Python calcula** (determinístico, seed=42): descriptivas, Pearson/Spearman, OLS con VIF/White/robust SE, panel FE, bootstrap (2000 réplicas), Mann-Kendall, anomalías, clustering
+1. **Python calcula** (determinístico, seed=42): descriptivas, Pearson/Spearman, OLS con VIF/White/robust SE, panel FE, bootstrap (2000 réplicas), Mann-Kendall, anomalías, clustering, derivados por serie (delta, cambio anual, % cambio, CAGR, extremos)
 2. **LLM solo redacta** sobre resultados reales — no calcula nada
 3. **REVIEW verifica** que cada número del paper esté en compute-results
 4. **Guardrails** por nodo: FETCH (¿hay indicadores?), COMPUTE (¿hay regresión o correlaciones?), WRITE (¿tiene Resumen y Bibliografía?), REVIEW (¿veredicto válido?)
@@ -48,7 +48,7 @@ El sistema separa cálculo de redacción:
 
 - `scripts/research.mjs` — orquestador (8 nodos: SUGGEST→FETCH→COMPUTE→WRITE→REVIEW→EDIT→APPROVE→EDITORIAL)
 - `scripts/compute.py` — análisis estadístico determinístico + 11 figuras con triggers condicionales
-- `scripts/fetch-sources.mjs` — World Bank API con caché de 1 año
+- `scripts/fetch-sources.mjs` — World Bank API con caché incremental por serie (`fetched_at`, TTL 180d; `fetched-data.json` viaja en git así el cron hereda la caché y no re-descarga el histórico cada día; pares sin datos en el BM se recuerdan en `no_data`)
 - `docs/index.html` — visor web con ECharts interactivos + guías de lectura + fallback PNG
 - `docs/codebook.html` — libro de códigos: qué mide cada indicador, cobertura, unidades, papers que lo usan y matriz de cobertura (alcance catálogo o paper)
 - `docs/explorer.html` — constructor visual de consultas (estantes) sobre Parquet vía DuckDB-WASM + SQL libre

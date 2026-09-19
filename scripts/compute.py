@@ -758,6 +758,39 @@ def trend_analysis(data):
         })
     return results
 
+def derived_stats(data):
+    """Estadisticas derivadas por serie: deltas, cambio anual promedio,
+    % de cambio, CAGR y extremos. El LLM suele calcular estas cifras a mano
+    y el verificador las marca como inventadas; pre-computarlas las vuelve
+    citables con respaldo en compute-results."""
+    import numpy as np
+    out = {}
+    for v in _get_variables(data):
+        pts = [(y, x) for y, x in zip(v.get("years", []), v.get("values", [])) if x is not None]
+        if len(pts) < 2:
+            continue
+        pts.sort()
+        (y0, v0), (y1, v1) = pts[0], pts[-1]
+        span = max(1, y1 - y0)
+        arr = np.array([x for _, x in pts], dtype=float)
+        i_min, i_max = int(arr.argmin()), int(arr.argmax())
+        d = {
+            "first_year": y0, "first_value": float(v0),
+            "last_year": y1, "last_value": float(v1),
+            "delta_total": float(v1 - v0),
+            "avg_annual_change": float((v1 - v0) / span),
+            "min_year": pts[i_min][0], "min_value": float(arr[i_min]),
+            "max_year": pts[i_max][0], "max_value": float(arr[i_max]),
+            "mean": float(arr.mean()), "sd": float(arr.std()),
+        }
+        if v0:
+            d["pct_change_total"] = float((v1 - v0) / abs(v0) * 100)
+        if v0 > 0 and v1 > 0:
+            d["cagr"] = float(((v1 / v0) ** (1.0 / span) - 1) * 100)
+        out[v["name"]] = d
+    return out
+
+
 def _short_label(name, maxlen=42):
     """Shorten an indicator name for chart labels."""
     name = name.split(" [")[0]  # drop [CC] suffix for display
@@ -1436,6 +1469,32 @@ def generate_markdown_tables(data, results):
             corr_rows.append(f"| {vx} | {vy} | {cc} | {r_val} | {p_val} | {sp_val} | {diff_r} | {diff_p} | {_corr_badge(c)} |")
         tables["correlations"] = "\n".join(corr_rows)
 
+    # Tabla de derivados: cifras que el LLM tiende a calcular a mano
+    # (cambio anual, % de cambio, CAGR). Pre-computadas = citables con respaldo.
+    derived = results.get("derived") or {}
+    deriv_vars = selected_vars if selected_vars else variables
+    deriv_rows = [
+        "| Serie | Ámbito | Periodo | Valor inicial | Valor final | Cambio total | Cambio anual prom. | % cambio | CAGR | Mín (año) | Máx (año) |",
+        "|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|"
+    ]
+    n_deriv = 0
+    for v in deriv_vars[:15]:
+        d = derived.get(v["name"])
+        if not d:
+            continue
+        n_deriv += 1
+        label = v.get("label", v["name"].split(" [")[0])
+        cc = v.get("country", "") or v.get("country_code", "")
+        pct = f"{d['pct_change_total']:.2f}%" if "pct_change_total" in d else "—"
+        cagr = f"{d['cagr']:.2f}%" if "cagr" in d else "—"
+        deriv_rows.append(
+            f"| {label} | {cc} | {d['first_year']}–{d['last_year']} | {d['first_value']:.2f} | {d['last_value']:.2f} "
+            f"| {d['delta_total']:.3f} | {d['avg_annual_change']:.4f} | {pct} | {cagr} "
+            f"| {d['min_value']:.2f} ({d['min_year']}) | {d['max_value']:.2f} ({d['max_year']}) |"
+        )
+    if n_deriv:
+        tables["derived"] = "\n".join(deriv_rows)
+
     return tables
 
 def main():
@@ -1451,6 +1510,7 @@ def main():
         "clustering": cluster_analysis(data),
         "anomalies": anomaly_detection(data),
         "trends": trend_analysis(data),
+        "derived": derived_stats(data),
     }
     charts_dir = sys.argv[2] if len(sys.argv) > 2 else None
     output["charts"] = make_charts(data, output, charts_dir) if charts_dir else []

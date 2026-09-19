@@ -16,7 +16,7 @@
  *   node scripts/fetch-sources.mjs "youth unemployment AI automation"
  */
 
-import { writeFileSync, mkdirSync } from "fs";
+import { writeFileSync, mkdirSync, readFileSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -32,9 +32,11 @@ const WB_INDICATORS = [
   { code: "SL.UEM.TOTL.ZS", label: "Total unemployment (% of total labor force)", category: "employment", unit: "%" },
   { code: "SL.UEM.TOTL.MA.ZS", label: "Unemployment, male (% of male labor force)", category: "employment", unit: "%" },
   { code: "SL.UEM.TOTL.FE.ZS", label: "Unemployment, female (% of female labor force)", category: "employment", unit: "%" },
-  { code: "SL.EMP.1524.ZS", label: "Youth employment (% of population 15-24)", category: "employment", unit: "%" },
+  { code: "SL.EMP.TOTL.SP.ZS", label: "Employment to population ratio, 15+, total (%)", category: "employment", unit: "%" },
   { code: "SL.TLF.TOTL.IN", label: "Total labor force (total)", category: "employment", unit: "count" },
   { code: "SL.TLF.1524.IN", label: "Labor force, youth total (ages 15-24)", category: "employment", unit: "count" },
+  { code: "SL.UEM.NEET.ZS", label: "Share of youth not in education, employment or training (NEET, % of youth population)", category: "employment", unit: "%" },
+  { code: "SL.TLF.CACT.ZS", label: "Labor force participation rate (% of population ages 15+)", category: "employment", unit: "%" },
   { code: "SL.EMP.VULN.ZS", label: "Vulnerable employment (% of total employment)", category: "employment", unit: "%" },
   { code: "SL.AGR.EMPL.ZS", label: "Employment in agriculture (% of total employment)", category: "employment", unit: "%" },
   { code: "SL.IND.EMPL.ZS", label: "Employment in industry (% of total employment)", category: "employment", unit: "%" },
@@ -64,6 +66,7 @@ const WB_INDICATORS = [
   // Inequality
   { code: "SI.POV.GINI", label: "Gini index", category: "inequality", unit: "index" },
   { code: "SI.POV.NAHC", label: "Poverty headcount at national poverty line (% of population)", category: "inequality", unit: "%" },
+  { code: "SI.POV.DDAY", label: "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)", category: "inequality", unit: "%" },
   // PISA scores (via World Bank EdStats, sourced from OECD PISA)
   { code: "LO.PISA.MAT", label: "PISA Mathematics score", category: "education", unit: "score" },
   { code: "LO.PISA.REA", label: "PISA Reading score", category: "education", unit: "score" },
@@ -77,7 +80,7 @@ const WB_INDICATORS = [
   { code: "SP.DYN.LE00.IN", label: "Life expectancy at birth (years)", category: "health", unit: "years" },
   { code: "SH.XPD.CHEX.GD.ZS", label: "Current health expenditure (% of GDP)", category: "health", unit: "%" },
   // Environment & energy
-  { code: "EN.ATM.CO2E.PC", label: "CO2 emissions (metric tons per capita)", category: "environment", unit: "t" },
+  { code: "EG.FEC.RNEW.ZS", label: "Renewable energy consumption (% of total final energy)", category: "environment", unit: "%" },
   { code: "EG.USE.ELEC.KH.PC", label: "Electric power consumption (kWh per capita)", category: "environment", unit: "kWh" },
   // Trade & investment
   { code: "NE.TRD.GNFS.ZS", label: "Trade (% of GDP)", category: "economy", unit: "%" },
@@ -178,33 +181,20 @@ async function fetchILOIndicator(indicator, refArea) {
   }
 }
 
-async function fetchSources(topic) {
-  console.log("[FETCH] Obteniendo datos reales de APIs públicas...\n");
-  console.log(`  Tema: ${topic}`);
-  console.log(`  Fuente: World Bank API (LCN + 6 paises)`);
-  console.log(`  Indicadores: 25 (modo PoC ampliado)`);
-  console.log("  Rango: " + YEAR_RANGE + "\n");
-
-  const results = {
-    topic,
-    fetchDate: new Date().toISOString(),
-    sources: ["World Bank API"],
-    indicators: [],
-    summary: {},
-  };
-
-  // PoC: 25 indicadores x 7 regiones = ~175 series.
-  // Cubre: empleo, economia, educacion, tecnologia, demografia, desigualdad,
-  // migracion/remesas, inflacion, salud, ambiente/energia, comercio/inversion.
-  // El prompt de WRITE solo inyecta los indicadores del tema elegido (filtro topico),
-  // asi el costo de tokens no crece con el catalogo.
-  const KEY_INDICATORS = [
+// Cubre: empleo, economia, educacion, tecnologia, demografia, desigualdad,
+// migracion/remesas, inflacion, salud, ambiente/energia, comercio/inversion.
+// El prompt de WRITE solo inyecta los indicadores del tema elegido (filtro topico),
+// asi el costo de tokens no crece con el catalogo.
+const KEY_INDICATORS = [
     // Empleo y estructura laboral
     "SL.UEM.1524.ZS",
     "SL.UEM.TOTL.ZS",
-    "SL.EMP.1524.ZS",
+    "SL.EMP.TOTL.SP.ZS",
     "SL.SRV.EMPL.ZS",
     "SL.EMP.VULN.ZS",
+    "SL.UEM.NEET.ZS",
+    "SL.TLF.CACT.ZS",
+    "SL.AGR.EMPL.ZS",
     "NV.IND.MANF.ZS",
     // Economia
     "NY.GDP.PCAP.CD",
@@ -219,33 +209,98 @@ async function fetchSources(topic) {
     "SE.ADT.1524.LT.ZS",
     "SE.XPD.TOTL.GD.ZS",
     "SE.SEC.ENRR",
+    "SE.TER.ENRR",
     // Demografia y migracion
     "SP.URB.TOTL.IN.ZS",
     "SM.POP.NETM",
     // Desigualdad
     "SI.POV.GINI",
     "SI.POV.NAHC",
+    "SI.POV.DDAY",
     // Remesas
     "BX.TRF.PWKR.CD.DT",
     // Salud
     "SP.DYN.LE00.IN",
     "SH.XPD.CHEX.GD.ZS",
     // Ambiente y energia
-    "EN.ATM.CO2E.PC",
+    "EG.FEC.RNEW.ZS",
     "EG.USE.ELEC.KH.PC",
-  ];
+];
 
-  // Países representativos de América Latina y Caribe (Sudamérica, Centroamérica y Caribe)
-  const FETCH_COUNTRIES = [
-    { code: "LCN", name: "Latin America & Caribbean (regional)" },
-    ...LAC_COUNTRIES.filter(c => ["BRA", "MEX", "COL", "ARG", "CHL", "PER", "ECU", "URY", "CRI", "GTM", "DOM", "PAN"].includes(c.code))
-  ];
+// Países representativos de América Latina y Caribe (Sudamérica, Centroamérica y Caribe)
+const FETCH_COUNTRIES = [
+  { code: "LCN", name: "Latin America & Caribbean (regional)" },
+  ...LAC_COUNTRIES.filter(c => ["BRA", "MEX", "COL", "ARG", "CHL", "PER", "ECU", "URY", "CRI", "GTM", "DOM", "PAN"].includes(c.code))
+];
 
+// Firma del catálogo esperado: pares indicador|país que fetched-data.json debe
+// contener. research.mjs la usa para decidir si la caché está incompleta y hay
+// que hacer un fetch incremental (solo de los pares faltantes/vencidos).
+const SERIES_STALE_DAYS = 180;
+const CATALOG_KEYS = new Set();
+for (const c of FETCH_COUNTRIES) for (const i of KEY_INDICATORS) CATALOG_KEYS.add(`${i}|${c.code}`);
+
+async function fetchSources(topic) {
+  console.log("[FETCH] Obteniendo datos reales de APIs públicas...\n");
+  console.log(`  Tema: ${topic}`);
+  console.log(`  Fuente: World Bank API (LCN + ${FETCH_COUNTRIES.length - 1} paises)`);
+  console.log(`  Indicadores: ${KEY_INDICATORS.length} (modo PoC ampliado)`);
+  console.log("  Rango: " + YEAR_RANGE + "\n");
+
+  const results = {
+    topic,
+    fetchDate: new Date().toISOString(),
+    sources: ["World Bank API"],
+    indicators: [],
+    summary: {},
+  };
+
+  // Caché incremental por serie: fetched-data.json es el store persistente
+  // (viaja en git, así el cron hereda la caché). Solo se re-descargan los
+  // pares indicador×país que falten o lleven >180 días sin refresco; el resto
+  // se reutiliza. --no-cache ignora todo y baja el catálogo completo.
+  const STALE_DAYS = SERIES_STALE_DAYS;
+  const RAW_PATH = resolve(__dirname, "..", "output", "raw", "fetched-data.json");
+  const NO_CACHE = process.argv.includes("--no-cache");
+  const cacheMap = new Map();   // series frescas: se reusan sin llamar a la API
+  const prevMap = new Map();    // todas las series previas: fallback si el refetch falla
+  if (!NO_CACHE) {
+    try {
+      const prev = JSON.parse(readFileSync(RAW_PATH, "utf-8"));
+      const baseTs = Date.parse(prev.fetchDate || 0) || 0;
+      for (const e of prev.indicators || []) {
+        prevMap.set(`${e.indicator_code}|${e.country_code}`, e);
+        const ts = Date.parse(e.fetched_at || "") || baseTs;
+        if (Date.now() - ts < STALE_DAYS * 86400000) {
+          cacheMap.set(`${e.indicator_code}|${e.country_code}`, e);
+        }
+      }
+      // Pares conocidos como "sin datos" en el BM (p.ej. GINI no tiene agregado
+      // LCN): se guardan con timestamp para no reintentarlos en cada corrida.
+      for (const e of prev.no_data || []) {
+        const ts = Date.parse(e.fetched_at || "") || baseTs;
+        if (e.key && Date.now() - ts < STALE_DAYS * 86400000) {
+          cacheMap.set(e.key, null);
+        }
+      }
+    } catch {}
+  }
+
+  let nCached = 0, nFetched = 0;
+  const noData = [];
   for (const country of FETCH_COUNTRIES) {
     console.log(`  [${country.code} — ${country.name}]`);
     for (const indCode of KEY_INDICATORS) {
       const ind = WB_INDICATORS.find(i => i.code === indCode);
       if (!ind) continue;
+      const key = `${ind.code}|${country.code}`;
+      if (cacheMap.has(key)) {
+        const hit = cacheMap.get(key);
+        if (hit) results.indicators.push(hit);
+        else noData.push({ key, fetched_at: new Date().toISOString() });
+        nCached++;
+        continue;
+      }
       const data = await fetchWBIndicator(ind.code, country.code);
       if (data && data.length > 0) {
         results.indicators.push({
@@ -258,13 +313,28 @@ async function fetchSources(topic) {
           series: data,
           source: "World Bank API",
           source_url: `https://data.worldbank.org/indicator/${ind.code}`,
+          fetched_at: new Date().toISOString(),
         });
+        nFetched++;
         const latest = data[data.length - 1];
         console.log(`    ${ind.code}: ${ind.label} => ${latest.year}: ${latest.value.toFixed(2)}`);
+      } else {
+        // Refetch vacío o falló: conservar la versión previa (vencida) si existe —
+        // mejor un dato viejo auditado que perder la serie por un fallo transitorio.
+        const stale = prevMap.get(`${ind.code}|${country.code}`);
+        if (stale) {
+          results.indicators.push(stale);
+          nCached++;
+          console.log(`    ${ind.code}: refetch sin datos, se conserva caché vencida (${stale.series?.length || 0} puntos)`);
+        } else {
+          noData.push({ key, fetched_at: new Date().toISOString() });
+        }
       }
       await new Promise(r => setTimeout(r, 100)); // rate limit
     }
   }
+  results.no_data = noData;
+  console.log(`  Caché incremental: ${nCached} series reutilizadas, ${nFetched} descargadas de la API, ${noData.length} sin datos en el BM.`);
 
   // Build summary
   // Ojo: results.indicators es una entrada por indicador×país, no un indicador.
@@ -305,4 +375,4 @@ if (process.argv[1] && process.argv[1].endsWith("fetch-sources.mjs")) {
   });
 }
 
-export { fetchSources, WB_INDICATORS, LAC_COUNTRIES, ILO_INDICATORS, ILO_COUNTRIES };
+export { fetchSources, WB_INDICATORS, LAC_COUNTRIES, ILO_INDICATORS, ILO_COUNTRIES, CATALOG_KEYS, SERIES_STALE_DAYS };

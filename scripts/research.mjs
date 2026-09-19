@@ -19,7 +19,7 @@ import { writeFileSync, readFileSync, mkdirSync, readdirSync, existsSync } from 
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { execFileSync } from "child_process";
-import { fetchSources } from "./fetch-sources.mjs";
+import { fetchSources, CATALOG_KEYS, SERIES_STALE_DAYS } from "./fetch-sources.mjs";
 
 const __rootdirname = dirname(fileURLToPath(import.meta.url));
 
@@ -432,12 +432,26 @@ async function agentFetch(topic) {
       const ageHours = (Date.now() - stat.mtimeMs) / 3600000;
       if (ageHours < CACHE_MAX_AGE_HOURS) {
         const cached = JSON.parse(readFileSync(CACHE_PATH, "utf-8"));
-        // El summary se recalcula desde los datos en vez de confiar en el que
-        // quedo guardado: la cache dura un anio, asi que un contador mal
-        // calculado en una version anterior sobreviviria todo ese tiempo.
-        cached.summary = refreshSummary(cached);
-        console.log(`[1/7] Caché válida (${ageHours.toFixed(1)}h). Datos: ${cached.summary.total_series} series de ${cached.summary.total_indicators} indicadores, ${cached.summary.total_countries} países.`);
-        return cached;
+        // Cobertura del catálogo: si faltan pares indicador|país (p.ej. se
+        // agregaron indicadores al catalogo) o hay series vencidas (>180d),
+        // delegar al fetch incremental — solo baja lo que falta, reusa el resto.
+        const have = new Set((cached.indicators || []).map(e => `${e.indicator_code}|${e.country_code}`));
+        for (const e of cached.no_data || []) if (e.key) have.add(e.key);
+        const missing = [...CATALOG_KEYS].filter(k => !have.has(k));
+        const stale = (cached.indicators || []).filter(e =>
+          CATALOG_KEYS.has(`${e.indicator_code}|${e.country_code}`) &&
+          Date.now() - (Date.parse(e.fetched_at || cached.fetchDate || 0) || 0) >= SERIES_STALE_DAYS * 86400000
+        ).length;
+        if (missing.length === 0 && stale === 0) {
+          // El summary se recalcula desde los datos en vez de confiar en el que
+          // quedo guardado: la cache dura un anio, asi que un contador mal
+          // calculado en una version anterior sobreviviria todo ese tiempo.
+          cached.summary = refreshSummary(cached);
+          console.log(`[1/7] Caché válida (${ageHours.toFixed(1)}h). Datos: ${cached.summary.total_series} series de ${cached.summary.total_indicators} indicadores, ${cached.summary.total_countries} países.`);
+          return cached;
+        }
+        console.log(`[1/7] Caché incompleta: ${missing.length} series faltantes, ${stale} vencidas. Fetch incremental...`);
+        return await fetchSources(topic);
       }
       console.log(`[1/7] Caché expirada (${ageHours.toFixed(1)}h > ${CACHE_MAX_AGE_HOURS}h). Refetching...`);
     } catch {
@@ -956,6 +970,9 @@ function computeDigest(computeResults, suggestDecision = null) {
     if (computeResults.tables.correlations) {
       parts.push(`TABLA 3 PRE-COMPUTADA (Correlaciones):\n${computeResults.tables.correlations}`);
     }
+    if (computeResults.tables.derived) {
+      parts.push(`TABLA 4 PRE-COMPUTADA (Derivados: cambio anual, % cambio, CAGR — cifras citables, no recalcular):\n${computeResults.tables.derived}`);
+    }
   }
   return parts.join("\n") || "Sin analisis estadistico.";
 }
@@ -1137,6 +1154,14 @@ function collectAllowedNumbers(computeResults, fetchedData) {
     push(t.mann_kendall_z); push(t.mann_kendall_p);
   }
   for (const a of cr.anomalies || []) { push(a.z_score); push(a.value); push(a.year); }
+  // Derivados pre-computados por compute.py (deltas, cambio anual, % cambio, CAGR,
+  // extremos): cifras citables por el LLM sin recalcularlas a mano.
+  for (const d of Object.values(cr.derived || {})) {
+    push(d.first_value); push(d.last_value); push(d.delta_total);
+    push(d.avg_annual_change); push(d.pct_change_total); push(d.cagr);
+    push(d.min_value); push(d.max_value); push(d.mean); push(d.sd);
+    push(d.first_year); push(d.last_year); push(d.min_year); push(d.max_year);
+  }
   // Sin datos reales no hay nada contra que verificar: devolver vacio para
   // que verifyNumbers se salte (solo con umbrales marcaria todo como inventado)
   if (!vals.length) return [];
@@ -1604,6 +1629,7 @@ function rebuildKnowledge() {
       const py = getPythonPath();
       const script = resolve(__rootdirname, "memory.py");
       execFileSync(py, [script, "sync"], { stdio: "ignore", timeout: 15000 });
+      execFileSync(py, [script, "sync-indicators"], { stdio: "ignore", timeout: 15000 });
       console.log("  Memoria persistente SQLite (docs/memory.db) sincronizada.");
     } catch (e) {
       console.log("  Aviso sync memory.db: " + e.message);
