@@ -518,7 +518,7 @@ ${recentText}
 TAREA:
 1. Cruza las noticias con los indicadores disponibles.
 2. Propone 3-5 lineas editoriales que PUEDEN respaldarse con datos reales.
-3. Para cada linea: indica que noticia la inspira, que indicadores la respaldan, y que correlaciones serian relevantes.
+3. Para cada linea: indica que noticia la inspira, QUE AFIRMA o sugiere esa noticia (afirmacion_noticia), QUE PARTE de esa afirmacion pueden verificar o refutar los indicadores disponibles y que parte NO (verificable_con_datos), que indicadores la respaldan, y que correlaciones serian relevantes.
 4. Descarta noticias que no tengan respaldo de datos (ej: politica interna, conflictos belicos sin datos economicos).
 5. Elige la MEJOR linea como tema principal.
 
@@ -538,6 +538,8 @@ Responde EXACTAMENTE como JSON (sin markdown):
     {
       "titulo": "titulo de la linea editorial",
       "noticia_inspiradora": "titulo de la noticia",
+      "afirmacion_noticia": "que dice o sugiere la noticia (la afirmacion a contrastar)",
+      "verificable_con_datos": "que parte puede confirmarse/refutarse con los indicadores disponibles y que parte queda fuera de alcance",
       "indicadores_respaldan": ["indicador 1", "indicador 2"],
       "correlaciones_relevantes": ["corr 1", "corr 2"],
       "justificacion": "por que esta linea tiene respaldo de datos"
@@ -960,6 +962,17 @@ function computeDigest(computeResults, suggestDecision = null) {
       }
     }
     parts.push(`  NOTA: la significancia de correlaciones se evalua por q-value (Benjamini-Hochberg FDR), no por p crudo — con ${corrs.length} tests, p<0.05 produce falsos positivos por azar. Solo citar como "significativa" lo que tenga q<0.05. Correlaciones en niveles entre series con tendencia pueden ser espurias (co-tendencia): el test honesto es "en diferencias" (cambios año a año); si la relacion en niveles desaparece en diferencias, era co-tendencia, no asociacion real.`);
+    // Pares fragiles: significativos en niveles pero no en diferencias.
+    // Lista determinista — ni WRITE ni REVIEW tienen que deducirla.
+    const fragiles = corrs.filter(c => fdr(c)
+      && c.diff_pearson_r !== undefined
+      && !(c.diff_significant_fdr ?? c.diff_significant));
+    if (fragiles.length) {
+      parts.push(`  ALERTA CO-TENDENCIA (${fragiles.length} pares significativos en niveles pero NO en diferencias — reportar como descriptivos/probablemente espurios, nunca como asociacion robusta):`);
+      for (const c of fragiles.slice(0, 10)) {
+        parts.push(`    ${c.x} <-> ${c.y}: r_nivel=${c.pearson_r.toFixed(3)} (q=${(c.pearson_q ?? c.pearson_p).toFixed(3)}) vs r_dif=${c.diff_pearson_r.toFixed(3)} (${c.diff_pearson_q !== undefined ? `q=${c.diff_pearson_q.toFixed(3)}` : `p=${c.diff_pearson_p.toFixed(3)}`})`);
+      }
+    }
   }
   const sigTrends = (computeResults.trends || []).filter(t => t.trend !== "no_trend" && relevant(t.indicator));
   if (sigTrends.length) {
@@ -1057,6 +1070,10 @@ async function agentWrite(fetchedData, computeResults, feedback = null, topic = 
   const questionSection = suggestDecision?.pregunta
     ? `PREGUNTA DE INVESTIGACION:\n${suggestDecision.pregunta}\n\nHIPOTESIS A VERIFICAR:\n${suggestDecision.hipotesis || "(derivar de la pregunta)"}\n`
     : "";
+  const chosenSug = chosenSuggestion(suggestDecision);
+  const claimSection = chosenSug?.afirmacion_noticia
+    ? `LO QUE LA NOTICIA AFIRMA O SUGIERE (contexto editorial, no evidencia):\n${chosenSug.afirmacion_noticia}\n\nALCANCE VERIFICABLE CON LOS DATOS:\n${chosenSug.verificable_con_datos || "(delimitar en el paper que parte queda fuera de alcance)"}\n`
+    : "";
   const { lcn, countries } = dataDigest(fetchedData, suggestDecision, !!computeResults?.tables?.descriptive);
   const digest = computeDigest(computeResults, suggestDecision);
   const prompt = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
@@ -1079,6 +1096,7 @@ Escribe un paper academico sobre: ${effectiveTopic}
 
 ${angleSection}
 ${questionSection}
+${claimSection}
 ${feedbackSection}
 
 ESTRUCTURA OBLIGATORIA:
@@ -1100,6 +1118,8 @@ REGLAS CRITICAS (incumplir = rechazo):
 - NO existe informacion de paises fuera de la lista. NO uses fuentes que no sean World Bank (nada de CEPAL, OECD, IMF, ECLAC).
 - NO inventes tests diagnosticos (White, Durbin-Watson), simulaciones, escenarios futuros ni proyecciones: solo reporta lo que Python calculo.
 - Si un resultado no es significativo (p>0.05), dilo explicitamente; no lo presentes como evidencia solida. Si el IC95% bootstrap "incluye 0 -> fragil", reporta esa fragilidad.
+- En la Introduccion distingue explicitamente que afirma la noticia de que pueden verificar los datos; en Discusion o Conclusiones declara que parte de la afirmacion quedo fuera del alcance de los indicadores (si aplica).
+- Regla de estacionariedad: cuando una correlacion en niveles es significativa pero la correlacion en diferencias (Δ año a año) no lo es, la relacion debe reportarse como co-tendencia o descriptiva, NUNCA como evidencia de asociacion robusta. Lidera la interpretacion con el resultado en diferencias (diff_r) y usa el de niveles solo como contexto. Los pares en "ALERTA CO-TENDENCIA" de RESULTADOS deben tratarse asi.
 - Si aparece "REGRESION PANEL EN R" en RESULTADOS, menciónala explícitamente en Metodología y Análisis como estimación econométrica de efectos fijos bidireccionales (país + año) ejecutada en R 4.x, contrastándola con las correlaciones y OLS de Python. Si solo aparece Python, reporta solo Python.
 - Si aparece "REGRESION PANEL" en RESULTADOS, reportala: explica que usa variacion intra-pais (n paises x anos) y contrasta su veredicto con el OLS agregado. Si discrepan, dilo.
 - Cuando una correlacion en niveles es significativa pero su correlacion "en diferencias" no lo es (o viceversa), dilo explicitamente: la primera puede ser co-tendencia espuria, la segunda es evidencia mas honesta de co-movimiento.
@@ -1350,6 +1370,7 @@ VERIFICACION OBLIGATORIA:
    - Reporta tests no calculados (Durbin-Watson, White si dice "NO calculado"), simulaciones o proyecciones. Efectos fijos / regresion de panel solo son validos si "REGRESION PANEL" aparece en RESULTADOS; si no aparece, mencionarlos es inventado.
    - Cita literatura con coeficientes/cifras especificas no presentes en RESULTADOS
    - Afirma significancia estadistica cuando el q-value FDR>0.05 (la significancia de correlaciones se evalua por q de Benjamini-Hochberg, no por p crudo)
+   - Apoya una conclusion en una correlacion en niveles significativa cuyo contraste en diferencias NO lo es (estos pares aparecen listados en ALERTA CO-TENDENCIA): eso es co-tendencia — el paper debe liderar con el resultado en diferencias y reportar el nivel como descriptivo/probablemente espurio, nunca como evidencia de asociacion robusta
    - Presenta correlaciones como causalidad sin matizar
 4. CONSISTENCIA INTERNA: verifica que la prosa no contradiga las tablas ni los datos — ej. si dice "cinco paises" pero la tabla lista seis, si enumera paises distintos a los que aparecen en tablas, o si describe una tendencia opuesta a la que muestran las cifras citadas. Estas contradicciones cuentan como datos_inventados.
 5. Verifica estructura (Resumen, Metodologia, Analisis, Discusion, Conclusiones, Bibliografia) y coherencia.
@@ -1603,6 +1624,8 @@ function transparencyNote(state) {
     "**Contexto.** Este artículo fue generado automáticamente por AcademicPipeline, un pipeline multi-agente de investigación asistida por IA: agentes especializados proponen, calculan, redactan y se verifican mutuamente antes de publicar.",
     state.topic ? `Tema seleccionado: *${state.topic}*.` : "",
     inspiring?.noticia_inspiradora ? `Noticia que inspiró la línea editorial: *"${inspiring.noticia_inspiradora}"*${s.inspiringNews?.url ? ` ([${s.inspiringNews.source || "fuente"}](${s.inspiringNews.url}))` : ""}.` : "",
+    inspiring?.afirmacion_noticia ? `Lo que la noticia afirmaba o sugería: ${inspiring.afirmacion_noticia}` : "",
+    inspiring?.verificable_con_datos ? `Alcance verificable con los datos: ${inspiring.verificable_con_datos}` : "",
     inspiring?.justificacion ? `Justificación del sistema: ${inspiring.justificacion}` : "",
     s.pregunta ? `**Pregunta de investigación:** ${s.pregunta}` : "",
     s.hipotesis ? `**Hipótesis planteada:** ${s.hipotesis}` : "",
