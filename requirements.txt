@@ -1,0 +1,10 @@
+# Dependencias Python del pipeline — versiones fijadas para reproducibilidad.
+# Mismas cifras de entrada -> mismos resultados; una actualizacion de libreria
+# no puede cambiar silenciosamente los numeros publicados.
+numpy==2.4.6
+scipy==1.17.1
+matplotlib==3.11.2
+pandas==3.0.5
+pyarrow==22.0.0
+typst==0.15.0
+requests==2.32.5

@@ -891,7 +891,10 @@ function computeDigest(computeResults, suggestDecision = null) {
   if (computeResults.regression && !computeResults.error && computeResults.regression.dependent) {
     const r = computeResults.regression;
     parts.push(`REGRESION OLS: ${r.dependent} ~ ${r.independent.join(" + ")}`);
-    parts.push(`  n=${r.n}, R2=${r.r_squared?.toFixed(4)}, R2_adj=${r.adj_r_squared?.toFixed(4)}, F=${r.f_statistic?.toFixed(2)} (p=${r.f_p_value?.toFixed(4)})`);
+    parts.push(`  n=${r.n}, dof=${r.dof ?? r.n - r.independent.length - 1}, R2=${r.r_squared?.toFixed(4)}, R2_adj=${r.adj_r_squared?.toFixed(4)}, F=${r.f_statistic?.toFixed(2)} (p=${r.f_p_value?.toFixed(4)})`);
+    if (r.dropped_regressors?.length) {
+      parts.push(`  NOTA: ${r.dropped_regressors.length} regresor(es) excluidos por n insuficiente (regla ~4 obs/parametro): ${r.dropped_regressors.join(", ")}. NO citarlos como parte del modelo estimado.`);
+    }
     // Con TABLA 2 en el prompt, repetir coeficiente por coeficiente es
     // duplicacion: la tabla ya trae beta, error estandar, estadistico, p,
     // IC95% y veredicto de evidencia.
@@ -938,23 +941,25 @@ function computeDigest(computeResults, suggestDecision = null) {
   if (corrs.length) {
     // Top correlaciones: significativas primero, luego por |r| — evita inflar
     // el digest con 100+ pares irrelevantes que rompen el limite TPM de Groq.
-    const top = [...corrs].sort((a, b) => (b.significant - a.significant) || (Math.abs(b.pearson_r) - Math.abs(a.pearson_r))).slice(0, 20);
+    const fdr = c => c.significant_fdr ?? c.significant;
+    const top = [...corrs].sort((a, b) => (fdr(b) - fdr(a)) || (Math.abs(b.pearson_r) - Math.abs(a.pearson_r))).slice(0, 20);
+    const nSigFdr = corrs.filter(c => c.significant_fdr).length;
     if (computeResults.tables?.correlations) {
       // La TABLA 3 trae exactamente estos pares, con sus valores, el Δ año a
       // año y un veredicto de evidencia: repetirlos aqui costaba ~1000 tokens
       // de prompt (12% del TPM) sin anadir un solo dato.
-      parts.push(`CORRELACIONES: ${corrs.length} pares calculados. Los ${top.length} mas relevantes (significativas primero) estan en la TABLA 3, con el contraste Δ año a año y el veredicto de evidencia de cada uno.`);
+      parts.push(`CORRELACIONES: ${corrs.length} pares calculados (${nSigFdr} significativas tras FDR). Los ${top.length} mas relevantes estan en la TABLA 3, con q-value (FDR), el contraste Δ año a año y el veredicto de evidencia de cada uno.`);
     } else {
-      parts.push(`CORRELACIONES (${corrs.length} calculadas, top ${top.length} mostradas):`);
+      parts.push(`CORRELACIONES (${corrs.length} calculadas, ${nSigFdr} sig. FDR, top ${top.length} mostradas):`);
       for (const c of top) {
-        let line = `  ${c.x} <-> ${c.y}: pearson_r=${c.pearson_r.toFixed(4)}, p=${c.pearson_p.toFixed(4)}, spearman=${c.spearman_rho.toFixed(4)}, n=${c.n}, significativa=${c.significant}`;
+        let line = `  ${c.x} <-> ${c.y}: pearson_r=${c.pearson_r.toFixed(4)}, p=${c.pearson_p.toFixed(4)}${c.pearson_q !== undefined ? `, q_fdr=${c.pearson_q.toFixed(4)}` : ""}, spearman=${c.spearman_rho.toFixed(4)}, n=${c.n}, significativa_fdr=${fdr(c)}`;
         if (c.diff_pearson_r !== undefined) {
-          line += ` | en diferencias (Δ año a año): r=${c.diff_pearson_r.toFixed(4)}, p=${c.diff_pearson_p.toFixed(4)}, n=${c.diff_n}`;
+          line += ` | en diferencias (Δ año a año): r=${c.diff_pearson_r.toFixed(4)}, p=${c.diff_pearson_p.toFixed(4)}${c.diff_pearson_q !== undefined ? `, q=${c.diff_pearson_q.toFixed(4)}` : ""}, n=${c.diff_n}`;
         }
         parts.push(line);
       }
     }
-    parts.push(`  NOTA: correlaciones en niveles entre series con tendencia pueden ser espurias (co-tendencia). Las correlaciones "en diferencias" (cambios año a año) son el test mas honesto: si la relacion en niveles desaparece en diferencias, era co-tendencia, no asociacion real.`);
+    parts.push(`  NOTA: la significancia de correlaciones se evalua por q-value (Benjamini-Hochberg FDR), no por p crudo — con ${corrs.length} tests, p<0.05 produce falsos positivos por azar. Solo citar como "significativa" lo que tenga q<0.05. Correlaciones en niveles entre series con tendencia pueden ser espurias (co-tendencia): el test honesto es "en diferencias" (cambios año a año); si la relacion en niveles desaparece en diferencias, era co-tendencia, no asociacion real.`);
   }
   const sigTrends = (computeResults.trends || []).filter(t => t.trend !== "no_trend" && relevant(t.indicator));
   if (sigTrends.length) {
@@ -1150,12 +1155,13 @@ function collectAllowedNumbers(computeResults, fetchedData) {
     push(st.n); push(st.mean); push(st.median); push(st.std); push(st.min); push(st.max);
   }
   for (const c of cr.correlations || []) {
-    push(c.pearson_r); push(c.pearson_p); push(c.spearman_rho); push(c.spearman_p); push(c.n);
+    push(c.pearson_r); push(c.pearson_p); push(c.pearson_q); push(c.spearman_rho); push(c.spearman_p); push(c.spearman_q); push(c.n);
+    push(c.diff_pearson_r); push(c.diff_pearson_p); push(c.diff_pearson_q); push(c.diff_n);
     pushList(c.pearson_ci_95);
   }
   const regFields = o => {
     if (!o) return;
-    push(o.n); push(o.n_countries); push(o.r_squared); push(o.adj_r_squared);
+    push(o.n); push(o.n_countries); push(o.dof); push(o.r_squared); push(o.adj_r_squared);
     push(o.f_statistic); push(o.f_p_value); pushList(o.vif);
     if (o.white_test) { push(o.white_test.lm_stat); push(o.white_test.p_value); }
     for (const c of o.coefficients || []) {
@@ -1288,6 +1294,32 @@ function verifyNumbers(draft, computeResults, fetchedData) {
   return { checked: claims.length, invented };
 }
 
+// ── Linter determinista de lenguaje causal ──────────────────────────────────
+// La metodologia prohibe afirmar causalidad: el diseno es correlacional (OLS
+// agregado / panel FE no identifican efectos). El revisor LLM solo lee ~4.000
+// chars del draft; este chequeo cubre el texto completo en dos niveles:
+//   hard = verbos de atribucion causal directa -> fuerza REESCRIBIR/RECHAZADO
+//   soft = construcciones de atribucion laxa -> advertencia en correcciones
+// Una frase con matiz explicito (negacion, "correlacion", "se asocia",
+// "sugiere", "hipotesis") no se marca: el matiz ya esta hecho.
+const CAUSAL_HARD = /\b(?:caus\w*|provoc\w*|determin(?:a|an|ó|aron|ar|ará|arán|ado|ada|ados|adas)\b|impact(?:a|an|ó|aron|ar|ará|arán)\b|efectos?\s+(?:de|del|sobre)\b|impactos?\s+(?:de|del|sobre)\b)/iu;
+const CAUSAL_SOFT = /\b(?:debido\s+a|a\s+causa\s+de|gracias\s+a|consecuencia\s+de|a\s+ra[ií]z\s+de|en\s+funci[oó]n\s+de)\b/iu;
+const CAUSAL_HEDGE = /\b(?:no\b|sin\s|tampoco|correlaci|asociaci|asociad|relaci|sugier|podr[ií]a|posible|potencial|aparente|probable|matiz|limitaci|hip[oó]tesis|implica|permite|establece|sustenta|parece|indica|evidencia)/iu;
+
+function causalClaimCheck(draft) {
+  if (!draft) return { hard: [], soft: [] };
+  const sentences = draft.split(/(?<=[.!?])\s+|\n+/)
+    .map(s => s.trim())
+    .filter(s => s.length > 15 && !s.startsWith("#") && !s.startsWith("|") && !s.startsWith("!") && !s.startsWith("-"));
+  const hard = [], soft = [];
+  for (const s of sentences) {
+    if (CAUSAL_HEDGE.test(s)) continue;
+    if (CAUSAL_HARD.test(s)) hard.push(s.slice(0, 140));
+    else if (CAUSAL_SOFT.test(s)) soft.push(s.slice(0, 140));
+  }
+  return { hard: hard.slice(0, 10), soft: soft.slice(0, 10) };
+}
+
 async function agentReview(fetchedData, computeResults, draft, suggestDecision = null) {
   console.log("[5/7] GPT-OSS 120B revisando rigor academico...\n");
   const { lcn, countries } = dataDigest(fetchedData, suggestDecision, !!computeResults?.tables?.descriptive);
@@ -1317,7 +1349,7 @@ VERIFICACION OBLIGATORIA:
    - Contiene enlaces a figuras inventadas que no estén en la lista de FIGURAS (ej: charts/consumo_pib.png)
    - Reporta tests no calculados (Durbin-Watson, White si dice "NO calculado"), simulaciones o proyecciones. Efectos fijos / regresion de panel solo son validos si "REGRESION PANEL" aparece en RESULTADOS; si no aparece, mencionarlos es inventado.
    - Cita literatura con coeficientes/cifras especificas no presentes en RESULTADOS
-   - Afirma significancia estadistica cuando p>0.05
+   - Afirma significancia estadistica cuando el q-value FDR>0.05 (la significancia de correlaciones se evalua por q de Benjamini-Hochberg, no por p crudo)
    - Presenta correlaciones como causalidad sin matizar
 4. CONSISTENCIA INTERNA: verifica que la prosa no contradiga las tablas ni los datos — ej. si dice "cinco paises" pero la tabla lista seis, si enumera paises distintos a los que aparecen en tablas, o si describe una tendencia opuesta a la que muestran las cifras citadas. Estas contradicciones cuentan como datos_inventados.
 5. Verifica estructura (Resumen, Metodologia, Analisis, Discusion, Conclusiones, Bibliografia) y coherencia.
@@ -1366,6 +1398,23 @@ SE CONCISO: el JSON completo debe caber en ~800 tokens. detalle_datos en 2 frase
     decision.feedback = (decision.feedback ? decision.feedback + "; " : "") +
       `Verificación automática detectó ${numCheck.invented.length} cifra(s) sin respaldo: ${numCheck.invented.slice(0, 3).map(c => c.text).join(", ")}. Elimínalas o usa valores de las tablas.`;
   }
+  // Linter determinista de lenguaje causal: cubre el 100% del draft (el
+  // revisor LLM solo lee ~4.000 chars). Afirmaciones causales sin matiz
+  // fuerzan REESCRIBIR — el diseño es correlacional y no las respalda.
+  const causalCheck = causalClaimCheck(draft);
+  if (causalCheck.hard.length) {
+    decision.veredicto = "REESCRIBIR";
+    decision.datos_correctos = false;
+    decision.correcciones = [...(decision.correcciones || []),
+      ...causalCheck.hard.slice(0, 3).map(s => `Afirmación causal sin matiz: "${s}" — reformular como asociación, no efecto`)];
+    decision.feedback = (decision.feedback ? decision.feedback + "; " : "") +
+      `Linter detectó ${causalCheck.hard.length} afirmación(es) causal(es) sin matiz (ej: "${causalCheck.hard[0].slice(0, 80)}…"). Reformular como asociación/correlación.`;
+  }
+  if (causalCheck.soft.length) {
+    decision.correcciones = [...(decision.correcciones || []),
+      `Atribución laxa detectada, revisar matiz: "${causalCheck.soft[0].slice(0, 80)}…"`];
+  }
+  decision.causal_check = { hard: causalCheck.hard.length, soft: causalCheck.soft.length };
   decision.number_check = { checked: numCheck.checked, invented: numCheck.invented.length };
   console.log("Review:\n" + JSON.stringify(decision, null, 2).slice(0, 500) + "\n");
   return decision;
@@ -1480,6 +1529,20 @@ async function agentApprove(finalText, computeResults = null, fetchedData = null
       number_check: { checked: numCheck.checked, invented: numCheck.invented.length }
     };
   }
+  // Mismo criterio para lenguaje causal sin matiz: si una afirmacion causal
+  // sobrevivio hasta QA, el texto no es publicable tal cual.
+  const causalCheck = causalClaimCheck(finalText);
+  if (causalCheck.hard.length) {
+    console.log(`QA: ${causalCheck.hard.length} afirmación(es) causal(es) sin matiz detectadas por linter automático.`);
+    return {
+      veredicto: "RECHAZADO",
+      checklist: { estructura_ok: true, datos_verificados: true, resumen_ok: true, bibliografia_ok: true, citas_apa_ok: true, coherencia_ok: false, tono_academico: false, extension_ok: true },
+      palabras: finalText.split(/\s+/).length,
+      issues: causalCheck.hard.slice(0, 5).map(s => `Afirmación causal sin matiz: "${s}"`),
+      causal_check: { hard: causalCheck.hard.length, soft: causalCheck.soft.length },
+      number_check: { checked: numCheck.checked, invented: numCheck.invented.length }
+    };
+  }
   const hasBrokenTables = /\|[^\n]*(?:…|\.{3})[^\n]*\|/.test(finalText);
   if (hasBrokenTables) {
     return {
@@ -1514,7 +1577,7 @@ function transparencyNote(state) {
   const s = state.suggestDecision || {};
   const cr = state.computeResults || {};
   const corrs = (cr.correlations || []).filter(c => c.pearson_r !== undefined);
-  const sigCorrs = corrs.filter(c => c.significant);
+  const sigCorrs = corrs.filter(c => c.significant_fdr ?? c.significant);
   const trends = cr.trends || [];
   const sigTrends = trends.filter(t => t.trend !== "no_trend");
   const ind = state.fetchedData?.indicators || [];
@@ -1548,7 +1611,7 @@ function transparencyNote(state) {
     "**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-" + latestYear + ". Muestra analizada: " + sampleStr + " (referencia regional agregada: LCN). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.",
     "",
     "**Métodos analíticos ejecutados (Cómputo Determinístico):**",
-    `- Python 3.12 (scipy/statsmodels): Estadísticas descriptivas de ${ind.length} series, ${corrs.length} correlaciones Pearson/Spearman (${sigCorrs.length} sig. p<0.05).`,
+    `- Python 3.12 (scipy/statsmodels): Estadísticas descriptivas de ${ind.length} series, ${corrs.length} correlaciones Pearson/Spearman (${sigCorrs.length} significativas tras corrección FDR Benjamini-Hochberg, q<0.05).`,
     reg?.dependent ? `- Python 3.12 (Regresión OLS): ${reg.dependent} ~ ${reg.independent.join(" + ")} (n=${reg.n}, R²=${reg.r_squared?.toFixed(3)})${reg.bootstrap ? ", con intervalos de confianza bootstrap (2000 réplicas)" : ""}.` : "- Sin regresión OLS ejecutada.",
     cr.r_econometrics?.coefficients?.length ? `- R 4.x (Panel Econometrics): Estimación de Efectos Fijos Bidireccionales (${cr.r_econometrics.formula}), R²=${cr.r_econometrics.r_squared?.toFixed(3)}, F=${cr.r_econometrics.f_statistic?.toFixed(2)} (n=${cr.r_econometrics.n}, ${cr.r_econometrics.n_countries} países).` : (cr.panel?.coefficients?.length ? `- Regresión de panel con efectos fijos por país: ${cr.panel.dependent} ~ ${cr.panel.independent.join(" + ")} (n=${cr.panel.n} obs, ${cr.panel.n_countries} países).` : ""),
     sigTrends.length ? `- Test de tendencia Mann-Kendall: ${sigTrends.length} de ${trends.length} series con tendencia significativa.` : "",
@@ -1558,6 +1621,7 @@ function transparencyNote(state) {
     "**Proceso editorial.** Siete nodos automáticos: FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE.",
     state.reviewDecision ? `Revisión de rigor: veredicto ${state.reviewDecision.veredicto}${state.reviewDecision.datos_inventados?.length ? ` (detectó ${state.reviewDecision.datos_inventados.length} datos inventados, corregidos en reescritura)` : ""}.` : "",
     state.reviewDecision?.number_check?.checked ? `Verificación automática de cifras: ${state.reviewDecision.number_check.checked} cifras del texto cotejadas contra los resultados computados${state.reviewDecision.number_check.invented ? `; ${state.reviewDecision.number_check.invented} sin respaldo detectada(s) y corregida(s) en reescritura` : ""}.` : "",
+    `Linter automático de lenguaje causal: el texto completo fue escaneado contra verbos de atribución causal; el diseño es correlacional, por lo que las relaciones se reportan como asociaciones, no efectos.`,
     state.qaDecision ? `Control de calidad final: veredicto ${state.qaDecision.veredicto}.` : "",
     `Iteraciones: ${it.rewrite} reescritura(s), ${it.edit} reedición(es).`,
     "",
@@ -1796,7 +1860,7 @@ class MoAGraph {
         chartsDir: this.state.computeResults.chartsDir || null,
         regression: this.state.computeResults.regression ? { r_squared: this.state.computeResults.regression.r_squared, n: this.state.computeResults.regression.n } : null,
         correlations: this.state.computeResults.correlations?.length || 0,
-        significantCorrelations: (this.state.computeResults.correlations || []).filter(c => c.significant).slice(0, 8).map(c => ({ x: c.x, y: c.y, r: c.pearson_r, p: c.pearson_p, diff_r: c.diff_pearson_r, diff_p: c.diff_pearson_p, country: c.country || null })),
+        significantCorrelations: (this.state.computeResults.correlations || []).filter(c => c.significant_fdr ?? c.significant).slice(0, 8).map(c => ({ x: c.x, y: c.y, r: c.pearson_r, p: c.pearson_p, q: c.pearson_q ?? null, diff_r: c.diff_pearson_r, diff_p: c.diff_pearson_p, country: c.country || null })),
       } : null,
       truncations: truncationLog.length ? truncationLog : null,
       elapsed: parseFloat(((Date.now() - this.t0) / 1000).toFixed(1)),

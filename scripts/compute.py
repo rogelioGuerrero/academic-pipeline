@@ -115,6 +115,22 @@ def _align_by_years(var_a, var_b):
         return [], [], []
     return [map_a[y] for y in common], [map_b[y] for y in common], common
 
+def _bh_qvalues(pvals):
+    """Benjamini-Hochberg adjusted p-values (q-values).
+
+    Con ~50 pares por run a p<0.05, ~2-3 correlaciones "significativas" son
+    falsos positivos por azar. La familia de tests se ajusta completa y el
+    flag de significancia debe leerse del q-value, no del p crudo."""
+    import numpy as np
+    m = len(pvals)
+    order = np.argsort(np.asarray(pvals, dtype=float))
+    ranked = np.asarray(pvals, dtype=float)[order]
+    q = ranked * m / (np.arange(m) + 1)
+    q = np.minimum.accumulate(q[::-1])[::-1]
+    out = np.empty(m)
+    out[order] = np.minimum(q, 1.0)
+    return out.tolist()
+
 def correlation_analysis(data):
     import numpy as np
     from scipy import stats
@@ -194,7 +210,47 @@ def correlation_analysis(data):
                 result["diff_n"] = len(dx)
                 result["diff_significant"] = bool(p_d < 0.05)
         results.append(result)
+    # ── Correccion por comparaciones multiples (Benjamini-Hochberg FDR) ──
+    # Cada familia de tests (Pearson niveles, Pearson diferencias, Spearman)
+    # se ajusta por separado: son inferencias distintas sobre el mismo run.
+    for field, qname, flag in (
+        ("pearson_p", "pearson_q", "significant_fdr"),
+        ("diff_pearson_p", "diff_pearson_q", "diff_significant_fdr"),
+        ("spearman_p", "spearman_q", "spearman_significant_fdr"),
+    ):
+        idxs = [i for i, c in enumerate(results)
+                if isinstance(c.get(field), float) and c[field] == c[field]]  # != nan
+        qs = _bh_qvalues([results[i][field] for i in idxs]) if idxs else []
+        for i, q in zip(idxs, qs):
+            results[i][qname] = float(q)
+            results[i][flag] = bool(q < 0.05)
     return results
+
+def _regression_arrays(dep_var, indep_vars):
+    """Alinea dependiente + regresores por anos comunes (o min len sin anos).
+    Devuelve (y_arr, X_arr, n, err)."""
+    import numpy as np
+    all_vars = [dep_var] + indep_vars
+    all_years = [v.get("years", []) for v in all_vars]
+    if all(all_years):
+        year_sets = [set(y for y, v in zip(yrs, vals) if v is not None) for yrs, vals in zip(all_years, [v.get("values", []) for v in all_vars])]
+        common = sorted(set.intersection(*year_sets)) if year_sets else []
+        if len(common) < len(indep_vars) + 2:
+            return None, None, 0, f"insufficient common years (n={len(common)}, need {len(indep_vars)+2})"
+        y_arr = np.array([next(v for y, v in zip(dep_var["years"], dep_var["values"]) if y == yr) for yr in common], dtype=float)
+        X_cols = []
+        for iv in indep_vars:
+            col = [next(v for y, v in zip(iv["years"], iv["values"]) if y == yr) for yr in common]
+            X_cols.append(np.array(col, dtype=float))
+        return y_arr, np.column_stack(X_cols), len(common), None
+    y = dep_var.get("values", [])
+    X_raw = [v.get("values", []) for v in indep_vars]
+    min_len = min(len(y), *[len(x) for x in X_raw])
+    if min_len < len(indep_vars) + 2:
+        return None, None, 0, f"insufficient observations (n={min_len}, need {len(indep_vars)+2})"
+    y_arr = np.array(y[:min_len], dtype=float)
+    X_arr = np.column_stack([np.array(x[:min_len], dtype=float) for x in X_raw])
+    return y_arr, X_arr, min_len, None
 
 def ols_regression(data):
     import numpy as np
@@ -213,31 +269,23 @@ def ols_regression(data):
     if not all(indep_vars):
         missing = [n for n, v in zip(indep_names, indep_vars) if not v]
         return {"error": f"independent variables not found: {missing}"}
-    # Align all by years
-    all_vars = [dep_var] + indep_vars
-    all_years = [v.get("years", []) for v in all_vars]
-    if all(all_years):
-        year_sets = [set(y for y, v in zip(yrs, vals) if v is not None) for yrs, vals in zip(all_years, [v.get("values", []) for v in all_vars])]
-        common = sorted(set.intersection(*year_sets)) if year_sets else []
-        if len(common) < len(indep_names) + 2:
-            return {"error": f"insufficient common years (n={len(common)}, need {len(indep_names)+2})", "dependent": dep_name}
-        y_arr = np.array([next(v for y, v in zip(dep_var["years"], dep_var["values"]) if y == yr) for yr in common], dtype=float)
-        X_cols = []
-        for iv in indep_vars:
-            col = [next(v for y, v in zip(iv["years"], iv["values"]) if y == yr) for yr in common]
-            X_cols.append(np.array(col, dtype=float))
-        X_arr = np.column_stack(X_cols)
-        n = len(common)
-    else:
-        y = dep_var.get("values", [])
-        X_raw = [v.get("values", []) for v in indep_vars]
-        min_len = min(len(y), *[len(x) for x in X_raw])
-        if min_len < len(indep_names) + 2:
-            return {"error": f"insufficient observations (n={min_len}, need {len(indep_names)+2})", "dependent": dep_name}
-        y_arr = np.array(y[:min_len], dtype=float)
-        X_arr = np.column_stack([np.array(x[:min_len], dtype=float) for x in X_raw])
-        n = min_len
-    k = len(indep_names)
+    # ── Cap de regresores segun n: ~4 observaciones por parametro ──
+    # Con n~10, un modelo de 3+ regresores queda con dof<=5 y el R2 se infla
+    # por construccion. Se trunca la lista en el orden dado por la spec (la
+    # hipotesis principal va primero) hasta que n/k sea defendible. Al quitar
+    # un regresor la interseccion de anos puede crecer -> se re-alinea.
+    dropped = []
+    while True:
+        y_arr, X_arr, n, err = _regression_arrays(dep_var, indep_vars)
+        if err:
+            return {"error": err, "dependent": dep_name}
+        k = len(indep_names)
+        max_k = max(1, (n - 2) // 4)
+        if k <= max_k:
+            break
+        dropped.extend(indep_names[max_k:])
+        indep_names = indep_names[:max_k]
+        indep_vars = indep_vars[:max_k]
     # OLS: beta = (X'X)^-1 X'y
     X_with_const = np.column_stack([np.ones(n), X_arr])
     try:
@@ -420,7 +468,9 @@ def ols_regression(data):
     return {
         "dependent": dep_name,
         "independent": indep_names,
+        "dropped_regressors": dropped or None,
         "n": n,
+        "dof": int(dof),
         "r_squared": float(r_squared),
         "adj_r_squared": float(adj_r_squared),
         "f_statistic": float(f_stat),
@@ -1344,10 +1394,14 @@ def _evidence_badge(p, ci=None):
 
 def _corr_badge(c):
     """Semaforo para correlaciones: una r significativa que no sobrevive en
-    primeras diferencias es probable co-tendencia, no evidencia robusta."""
-    if c.get("significant"):
-        return "🟢 Robusta" if c.get("diff_significant") else "🟡 Co-tendencia probable"
-    if (c.get("pearson_p") or 1) < 0.10:
+    primeras diferencias es probable co-tendencia, no evidencia robusta.
+    La significancia se lee del q-value FDR cuando existe (correccion por
+    comparaciones multiples); el p crudo queda como fallback."""
+    sig = c.get("significant_fdr", c.get("significant"))
+    diff_sig = c.get("diff_significant_fdr", c.get("diff_significant"))
+    if sig:
+        return "🟢 Robusta" if diff_sig else "🟡 Co-tendencia probable"
+    if (c.get("pearson_q") or c.get("pearson_p") or 1) < 0.10:
         return "🟡 Marginal"
     return "🔴 Sin evidencia"
 
@@ -1434,7 +1488,10 @@ def generate_markdown_tables(data, results):
             stat_str = f"t = {c.get('t_stat', 0):.2f}"
             var_name = c['name'].split(" [")[0]
             model_rows.append(f"| OLS Agregado (LCN) | {var_name} | {c.get('beta', 0):.4f} | {c.get('se', 0):.4f} | {stat_str} | {c.get('p_value', 1):.4f} | {ci_str} | {sig_mark} |")
-        model_rows.append(f"| *Diagnóstico OLS* | *R² = {reg.get('r_squared', 0):.4f}, R²-adj = {reg.get('adj_r_squared', 0):.4f}, F = {reg.get('f_statistic', 0):.2f} (p = {reg.get('f_p_value', 1):.4f}), n = {reg.get('n', 0)}* | — | — | — | — | — | — |")
+        model_rows.append(f"| *Diagnóstico OLS* | *R² = {reg.get('r_squared', 0):.4f}, R²-adj = {reg.get('adj_r_squared', 0):.4f}, F = {reg.get('f_statistic', 0):.2f} (p = {reg.get('f_p_value', 1):.4f}), n = {reg.get('n', 0)}, dof = {reg.get('dof', 0)}* | — | — | — | — | — | — |")
+        if reg.get("dropped_regressors"):
+            dropped_names = ", ".join(n.split(" [")[0] for n in reg["dropped_regressors"])
+            model_rows.append(f"| *Nota* | *Regresores excluidos por n insuficiente (regla ~4 obs/parámetro): {dropped_names}* | — | — | — | — | — | — |")
 
     if panel and isinstance(panel, dict) and "coefficients" in panel:
         has_model = True
@@ -1452,10 +1509,10 @@ def generate_markdown_tables(data, results):
 
     corrs = results.get("correlations", [])
     if corrs:
-        top_corrs = sorted(corrs, key=lambda c: (1 if c.get("significant") else 0, abs(c.get("pearson_r") or 0)), reverse=True)[:15]
+        top_corrs = sorted(corrs, key=lambda c: (1 if c.get("significant_fdr", c.get("significant")) else 0, abs(c.get("pearson_r") or 0)), reverse=True)[:15]
         corr_rows = [
-            "| Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Evidencia |",
-            "|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|"
+            "| Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | q (FDR) | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Evidencia |",
+            "|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|"
         ]
         for c in top_corrs:
             vx = c["x"].split(" [")[0]
@@ -1463,10 +1520,12 @@ def generate_markdown_tables(data, results):
             cc = c["x"].split(" [")[-1].replace("]", "") if " [" in c["x"] else "Regional"
             r_val = f"{c['pearson_r']:.3f}" if c.get("pearson_r") is not None else "—"
             p_val = f"{c['pearson_p']:.3f}" if c.get("pearson_p") is not None else "—"
+            q_val = f"{c['pearson_q']:.3f}" if c.get("pearson_q") is not None else "—"
             sp_val = f"{c['spearman_rho']:.3f}" if c.get("spearman_rho") is not None else "—"
             diff_r = f"{c['diff_pearson_r']:.3f}" if c.get("diff_pearson_r") is not None else "—"
             diff_p = f"{c['diff_pearson_p']:.3f}" if c.get("diff_pearson_p") is not None else "—"
-            corr_rows.append(f"| {vx} | {vy} | {cc} | {r_val} | {p_val} | {sp_val} | {diff_r} | {diff_p} | {_corr_badge(c)} |")
+            corr_rows.append(f"| {vx} | {vy} | {cc} | {r_val} | {p_val} | {q_val} | {sp_val} | {diff_r} | {diff_p} | {_corr_badge(c)} |")
+        corr_rows.append("*q (FDR): p-valor ajustado por Benjamini-Hochberg sobre la familia de correlaciones del análisis — la significancia debe leerse de q, no de p.*")
         tables["correlations"] = "\n".join(corr_rows)
 
     # Tabla de derivados: cifras que el LLM tiende a calcular a mano

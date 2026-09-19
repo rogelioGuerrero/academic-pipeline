@@ -61,7 +61,7 @@ jobs:
 
       - name: Install Python dependencies
         if: steps.guard.outputs.skip != 'true'
-        run: pip install numpy scipy matplotlib typst pandas pyarrow requests
+        run: pip install -r requirements.txt
 
       - name: Setup R & packages
         if: steps.guard.outputs.skip != 'true'
