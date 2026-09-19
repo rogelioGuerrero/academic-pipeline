@@ -1,6 +1,6 @@
 {
-  "generated": "2026-09-17T16:51:00.746Z",
-  "total": 50,
+  "generated": "2026-09-19T15:46:06.717Z",
+  "total": 53,
   "entries": [
     {
       "code": "SL.UEM.1524.ZS",
@@ -51,12 +51,12 @@
       "source_url": "https://data.worldbank.org/indicator/SL.UEM.TOTL.FE.ZS"
     },
     {
-      "code": "SL.EMP.1524.ZS",
-      "label": "Youth employment (% of population 15-24)",
+      "code": "SL.EMP.TOTL.SP.ZS",
+      "label": "Employment to population ratio, 15+, total (%)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
-      "source_url": "https://data.worldbank.org/indicator/SL.EMP.1524.ZS"
+      "source_url": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.ZS"
     },
     {
       "code": "SL.TLF.TOTL.IN",
@@ -73,6 +73,22 @@
       "unit": "count",
       "source": "World Bank",
       "source_url": "https://data.worldbank.org/indicator/SL.TLF.1524.IN"
+    },
+    {
+      "code": "SL.UEM.NEET.ZS",
+      "label": "Share of youth not in education, employment or training (NEET, % of youth population)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.UEM.NEET.ZS"
+    },
+    {
+      "code": "SL.TLF.CACT.ZS",
+      "label": "Labor force participation rate (% of population ages 15+)",
+      "category": "employment",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SL.TLF.CACT.ZS"
     },
     {
       "code": "SL.EMP.VULN.ZS",
@@ -267,6 +283,14 @@
       "source_url": "https://data.worldbank.org/indicator/SI.POV.NAHC"
     },
     {
+      "code": "SI.POV.DDAY",
+      "label": "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)",
+      "category": "inequality",
+      "unit": "%",
+      "source": "World Bank",
+      "source_url": "https://data.worldbank.org/indicator/SI.POV.DDAY"
+    },
+    {
       "code": "LO.PISA.MAT",
       "label": "PISA Mathematics score",
       "category": "education",
@@ -331,12 +355,12 @@
       "source_url": "https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS"
     },
     {
-      "code": "EN.ATM.CO2E.PC",
-      "label": "CO2 emissions (metric tons per capita)",
+      "code": "EG.FEC.RNEW.ZS",
+      "label": "Renewable energy consumption (% of total final energy)",
       "category": "environment",
-      "unit": "t",
+      "unit": "%",
       "source": "World Bank",
-      "source_url": "https://data.worldbank.org/indicator/EN.ATM.CO2E.PC"
+      "source_url": "https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS"
     },
     {
       "code": "EG.USE.ELEC.KH.PC",

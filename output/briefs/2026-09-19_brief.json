@@ -1,0 +1,64 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la interrupción eléctrica en la economía cubana",
+      "noticia_inspiradora": "Cuba faces another nationwide blackout amid US fuel blockade",
+      "indicadores_respaldan": [
+        "Electric power consumption (kWh per capita)",
+        "GDP growth (annual %)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
+      ],
+      "correlaciones_relevantes": [
+        "electric power consumption ↔ GDP growth",
+        "electric power consumption ↔ poverty headcount ratio"
+      ],
+      "justificacion": "El apagón nacional afecta directamente el consumo eléctrico per cápita, variable que históricamente se correlaciona con el desempeño del PIB y con la incidencia de pobreza; por lo tanto, los indicadores disponibles permiten medir el posible impacto económico del corte de energía."
+    },
+    {
+      "titulo": "Desinversión de operadores móviles y su efecto en la conectividad digital en El Salvador",
+      "noticia_inspiradora": "Digicel to sell El Salvador operations to ‘sharpen focus’ on Caribbean",
+      "indicadores_respaldan": [
+        "Mobile cellular subscriptions (per 100 people)",
+        "Internet users (% of population)",
+        "Foreign direct investment, net inflows (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "mobile cellular subscriptions ↔ internet users",
+        "FDI net inflows ↔ mobile cellular subscriptions"
+      ],
+      "justificacion": "La venta de Digicel refleja cambios en la inversión extranjera en el sector de telecomunicaciones; los indicadores de suscripciones móviles, usuarios de internet y flujos de IED permiten analizar cómo la desinversión afecta la penetración digital."
+    },
+    {
+      "titulo": "Energías renovables y estabilidad del suministro eléctrico en América Latina",
+      "noticia_inspiradora": "Cuba faces another nationwide blackout amid US fuel blockade",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "Electric power consumption (kWh per capita)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "renewable energy consumption ↔ electric power consumption per capita",
+        "renewable energy consumption ↔ GDP per capita"
+      ],
+      "justificacion": "Los apagones ponen de relieve la vulnerabilidad de los sistemas eléctricos; la proporción de energía renovable es un factor que puede mejorar la resiliencia del suministro, y los indicadores disponibles permiten evaluar su relación con el consumo eléctrico y el nivel de desarrollo económico."
+    },
+    {
+      "titulo": "Penetración móvil y empleo vulnerable: evidencia de El Salvador y la región",
+      "noticia_inspiradora": "Digicel to sell El Salvador operations to ‘sharpen focus’ on Caribbean",
+      "indicadores_respaldan": [
+        "Mobile cellular subscriptions (per 100 people)",
+        "Vulnerable employment (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "mobile cellular subscriptions ↔ vulnerable employment",
+        "mobile cellular subscriptions ↔ youth unemployment"
+      ],
+      "justificacion": "La reducción de presencia de un operador móvil sugiere cambios en la disponibilidad de tecnología; la literatura previa muestra que mayor digitalización reduce el empleo vulnerable, por lo que los indicadores de suscripciones móviles y empleo permiten probar esa relación en El Salvador y compararla con otros países latinoamericanos."
+    }
+  ],
+  "topic": "Penetración móvil y empleo vulnerable en El Salvador y América Latina",
+  "angle": "Analizar si mayores niveles de suscripción a telefonía móvil se asocian a menores tasas de empleo vulnerable y desempleo juvenil, a partir de la reciente venta de Digicel en El Salvador.",
+  "pregunta": "¿Existe una relación negativa significativa entre el número de suscripciones móviles por 100 habitantes y el porcentaje de empleo vulnerable y de desempleo juvenil en los países latinoamericanos?",
+  "hipotesis": "Los países latinoamericanos con mayor densidad de suscripciones móviles presentan menores tasas de empleo vulnerable y de desempleo juvenil."
+}

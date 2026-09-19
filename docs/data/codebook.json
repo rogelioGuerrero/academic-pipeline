@@ -1,15 +1,15 @@
 {
-  "generated": "2026-09-17T16:51:00+00:00",
+  "generated": "2026-09-19T15:46:06+00:00",
   "window": {
     "from": 2015,
     "to": 2024
   },
   "totals": {
-    "indicators_with_data": 23,
-    "countries": 7,
-    "series": 158,
-    "observations": 1492,
-    "papers": 3
+    "indicators_with_data": 30,
+    "countries": 13,
+    "series": 387,
+    "observations": 3629,
+    "papers": 6
   },
   "countries": [
     {
@@ -29,6 +29,18 @@
       "name": "Colombia"
     },
     {
+      "code": "CRI",
+      "name": "Costa Rica"
+    },
+    {
+      "code": "DOM",
+      "name": "Dominican Republic"
+    },
+    {
+      "code": "ECU",
+      "name": "Ecuador"
+    },
+    {
       "code": "GTM",
       "name": "Guatemala"
     },
@@ -39,9 +51,67 @@
     {
       "code": "MEX",
       "name": "Mexico"
+    },
+    {
+      "code": "PAN",
+      "name": "Panama"
+    },
+    {
+      "code": "PER",
+      "name": "Peru"
+    },
+    {
+      "code": "URY",
+      "name": "Uruguay"
     }
   ],
   "papers": [
+    {
+      "date": "2026-09-19",
+      "file": "2026-09-19_penetraci-n-m-vil-y-empleo-vulnerable-en.md",
+      "topic": "Penetración móvil y empleo vulnerable en El Salvador y América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Electric power consumption (kWh per capita)",
+        "GDP growth (annual %)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
+      ],
+      "indicators": [
+        "Electric power consumption (kWh per capita)",
+        "GDP growth (annual %)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
+      ]
+    },
+    {
+      "date": "2026-09-18",
+      "file": "2026-09-18_desempleo-juvenil-y-desarrollo-educativo.md",
+      "topic": "desempleo juvenil y desarrollo educativo en America Latina",
+      "sample_countries": [],
+      "sample_indicators": [],
+      "indicators": []
+    },
+    {
+      "date": "2026-09-17",
+      "file": "2026-09-17_efectos-de-la-inversi-n-en-veh-culos-el-.md",
+      "topic": "Efectos de la inversión en vehículos eléctricos sobre la manufactura y el comercio exterior de Brasil",
+      "sample_countries": [],
+      "sample_indicators": [
+        "Manufacturing, value added (% of GDP)",
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "indicators": [
+        "GDP growth (annual %)",
+        "Manufacturing, value added (% of GDP)",
+        "Trade (% of GDP)"
+      ]
+    },
     {
       "date": "2026-09-16",
       "file": "2026-09-16_financiamiento-del-sector-el-ctrico-medi.md",
@@ -112,25 +182,31 @@
   "categories": [
     {
       "name": "employment",
-      "n_indicators": 4,
-      "n_observations": 280,
+      "n_indicators": 8,
+      "n_observations": 1031,
       "indicators": [
         {
-          "code": "SL.SRV.EMPL.ZS",
-          "label": "Employment in services (% of total employment)",
+          "code": "SL.AGR.EMPL.ZS",
+          "label": "Employment in agriculture (% of total employment)",
           "category": "employment",
           "unit": "%",
           "source": "World Bank",
-          "source_url": "https://data.worldbank.org/indicator/SL.SRV.EMPL.ZS",
-          "n_countries": 7,
+          "source_url": "https://data.worldbank.org/indicator/SL.AGR.EMPL.ZS",
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -138,14 +214,200 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
+          "papers": []
+        },
+        {
+          "code": "SL.SRV.EMPL.ZS",
+          "label": "Employment in services (% of total employment)",
+          "category": "employment",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SL.SRV.EMPL.ZS",
+          "n_countries": 13,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "CRI",
+            "DOM",
+            "ECU",
+            "GTM",
+            "LCN",
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 130,
+          "n_observations_expected": 130,
+          "papers": []
+        },
+        {
+          "code": "SL.EMP.TOTL.SP.ZS",
+          "label": "Employment to population ratio, 15+, total (%)",
+          "category": "employment",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.ZS",
+          "n_countries": 13,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "CRI",
+            "DOM",
+            "ECU",
+            "GTM",
+            "LCN",
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 130,
+          "n_observations_expected": 130,
+          "papers": []
+        },
+        {
+          "code": "SL.TLF.CACT.ZS",
+          "label": "Labor force participation rate (% of population ages 15+)",
+          "category": "employment",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SL.TLF.CACT.ZS",
+          "n_countries": 13,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "CRI",
+            "DOM",
+            "ECU",
+            "GTM",
+            "LCN",
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 10,
+            "BRA": 10,
+            "CHL": 10,
+            "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
+            "GTM": 10,
+            "LCN": 10,
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 130,
+          "n_observations_expected": 130,
+          "papers": []
+        },
+        {
+          "code": "SL.UEM.NEET.ZS",
+          "label": "Share of youth not in education, employment or training (NEET, % of youth population)",
+          "category": "employment",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SL.UEM.NEET.ZS",
+          "n_countries": 13,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "CRI",
+            "DOM",
+            "ECU",
+            "GTM",
+            "LCN",
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 8,
+            "BRA": 10,
+            "CHL": 8,
+            "COL": 9,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 9,
+            "GTM": 9,
+            "LCN": 10,
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 8,
+            "URY": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 121,
+          "n_observations_expected": 130,
           "papers": []
         },
         {
@@ -155,15 +417,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -171,14 +439,20 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": [
             {
               "date": "2026-09-13",
@@ -194,15 +468,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SL.EMP.VULN.ZS",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -210,14 +490,20 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": [
             {
               "date": "2026-09-13",
@@ -238,15 +524,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SL.UEM.1524.ZS",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -254,14 +546,20 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": []
         }
       ]
@@ -269,7 +567,7 @@
     {
       "name": "economy",
       "n_indicators": 7,
-      "n_observations": 487,
+      "n_observations": 907,
       "indicators": [
         {
           "code": "BX.KLT.DINV.WD.GD.ZS",
@@ -278,15 +576,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/BX.KLT.DINV.WD.GD.ZS",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -294,14 +598,20 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": []
         },
         {
@@ -311,15 +621,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -327,15 +643,31 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-09-19",
+              "file": "2026-09-19_penetraci-n-m-vil-y-empleo-vulnerable-en.md",
+              "topic": "Penetración móvil y empleo vulnerable en El Salvador y América Latina"
+            },
+            {
+              "date": "2026-09-17",
+              "file": "2026-09-17_efectos-de-la-inversi-n-en-veh-culos-el-.md",
+              "topic": "Efectos de la inversión en vehículos eléctricos sobre la manufactura y el comercio exterior de Brasil"
+            },
             {
               "date": "2026-09-16",
               "file": "2026-09-16_financiamiento-del-sector-el-ctrico-medi.md",
@@ -355,15 +687,21 @@
           "unit": "USD",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -371,14 +709,20 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": []
         },
         {
@@ -388,15 +732,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -404,14 +754,20 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 67,
-          "n_observations_expected": 70,
+          "n_observations": 127,
+          "n_observations_expected": 130,
           "papers": []
         },
         {
@@ -421,15 +777,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/NV.IND.MANF.ZS",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -437,15 +799,26 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-09-17",
+              "file": "2026-09-17_efectos-de-la-inversi-n-en-veh-culos-el-.md",
+              "topic": "Efectos de la inversión en vehículos eléctricos sobre la manufactura y el comercio exterior de Brasil"
+            },
             {
               "date": "2026-09-16",
               "file": "2026-09-16_financiamiento-del-sector-el-ctrico-medi.md",
@@ -460,15 +833,21 @@
           "unit": "USD",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/BX.TRF.PWKR.CD.DT",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -476,14 +855,20 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": []
         },
         {
@@ -493,15 +878,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/NE.TRD.GNFS.ZS",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -509,22 +900,34 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
-          "papers": []
+          "n_observations": 130,
+          "n_observations_expected": 130,
+          "papers": [
+            {
+              "date": "2026-09-17",
+              "file": "2026-09-17_efectos-de-la-inversi-n-en-veh-culos-el-.md",
+              "topic": "Efectos de la inversión en vehículos eléctricos sobre la manufactura y el comercio exterior de Brasil"
+            }
+          ]
         }
       ]
     },
     {
       "name": "education",
-      "n_indicators": 3,
-      "n_observations": 172,
+      "n_indicators": 4,
+      "n_observations": 424,
       "indicators": [
         {
           "code": "SE.XPD.TOTL.GD.ZS",
@@ -533,15 +936,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -549,14 +958,20 @@
             "BRA": 8,
             "CHL": 8,
             "COL": 6,
+            "CRI": 9,
+            "DOM": 9,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 9,
-            "MEX": 7
+            "MEX": 7,
+            "PAN": 9,
+            "PER": 10,
+            "URY": 9
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 57,
-          "n_observations_expected": 70,
+          "n_observations": 113,
+          "n_observations_expected": 130,
           "papers": []
         },
         {
@@ -566,15 +981,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SE.SEC.ENRR",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -582,14 +1003,65 @@
             "BRA": 9,
             "CHL": 10,
             "COL": 8,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 9,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 3,
+            "PER": 10,
+            "URY": 9
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 66,
-          "n_observations_expected": 70,
+          "n_observations": 117,
+          "n_observations_expected": 130,
+          "papers": []
+        },
+        {
+          "code": "SE.TER.ENRR",
+          "label": "Tertiary school enrollment (% gross)",
+          "category": "education",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SE.TER.ENRR",
+          "n_countries": 13,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "CRI",
+            "DOM",
+            "ECU",
+            "GTM",
+            "LCN",
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 9,
+            "BRA": 9,
+            "CHL": 10,
+            "COL": 8,
+            "CRI": 5,
+            "DOM": 8,
+            "ECU": 6,
+            "GTM": 3,
+            "LCN": 10,
+            "MEX": 10,
+            "PAN": 6,
+            "PER": 2,
+            "URY": 9
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 95,
+          "n_observations_expected": 130,
           "papers": []
         },
         {
@@ -599,15 +1071,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SE.ADT.1524.LT.ZS",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -615,14 +1093,20 @@
             "BRA": 10,
             "CHL": 3,
             "COL": 10,
+            "CRI": 1,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 5,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 9,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 49,
-          "n_observations_expected": 70,
+          "n_observations": 99,
+          "n_observations_expected": 130,
           "papers": []
         }
       ]
@@ -630,7 +1114,7 @@
     {
       "name": "technology",
       "n_indicators": 2,
-      "n_observations": 140,
+      "n_observations": 259,
       "indicators": [
         {
           "code": "IT.NET.USER.ZS",
@@ -639,15 +1123,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/IT.NET.USER.ZS",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -655,14 +1145,20 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": [
             {
               "date": "2026-09-13",
@@ -678,15 +1174,21 @@
           "unit": "per100",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -694,14 +1196,20 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 9,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 129,
+          "n_observations_expected": 130,
           "papers": [
             {
               "date": "2026-09-13",
@@ -715,7 +1223,7 @@
     {
       "name": "demographics",
       "n_indicators": 2,
-      "n_observations": 140,
+      "n_observations": 260,
       "indicators": [
         {
           "code": "SM.POP.NETM",
@@ -724,15 +1232,21 @@
           "unit": "count",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SM.POP.NETM",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -740,14 +1254,20 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": []
         },
         {
@@ -757,15 +1277,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -773,22 +1299,28 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": []
         }
       ]
     },
     {
       "name": "inequality",
-      "n_indicators": 2,
-      "n_observations": 69,
+      "n_indicators": 3,
+      "n_observations": 285,
       "indicators": [
         {
           "code": "SI.POV.GINI",
@@ -797,14 +1329,20 @@
           "unit": "index",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SI.POV.GINI",
-          "n_countries": 6,
+          "n_countries": 12,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [
             "LCN"
@@ -814,13 +1352,19 @@
             "BRA": 10,
             "CHL": 5,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 1,
-            "MEX": 5
+            "MEX": 5,
+            "PAN": 8,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 40,
-          "n_observations_expected": 60,
+          "n_observations": 98,
+          "n_observations_expected": 120,
           "papers": []
         },
         {
@@ -830,13 +1374,19 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SI.POV.NAHC",
-          "n_countries": 5,
+          "n_countries": 11,
           "countries": [
             "ARG",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [
             "BRA",
@@ -846,21 +1396,78 @@
             "ARG": 9,
             "CHL": 4,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 9,
+            "ECU": 10,
             "GTM": 1,
-            "MEX": 5
+            "MEX": 5,
+            "PAN": 8,
+            "PER": 10,
+            "URY": 3
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 29,
-          "n_observations_expected": 50,
+          "n_observations": 79,
+          "n_observations_expected": 110,
           "papers": []
+        },
+        {
+          "code": "SI.POV.DDAY",
+          "label": "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)",
+          "category": "inequality",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/SI.POV.DDAY",
+          "n_countries": 13,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "CRI",
+            "DOM",
+            "ECU",
+            "GTM",
+            "LCN",
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 9,
+            "BRA": 10,
+            "CHL": 5,
+            "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
+            "GTM": 1,
+            "LCN": 10,
+            "MEX": 5,
+            "PAN": 8,
+            "PER": 10,
+            "URY": 10
+          },
+          "year_from": 2015,
+          "year_to": 2024,
+          "n_observations": 108,
+          "n_observations_expected": 130,
+          "papers": [
+            {
+              "date": "2026-09-19",
+              "file": "2026-09-19_penetraci-n-m-vil-y-empleo-vulnerable-en.md",
+              "topic": "Penetración móvil y empleo vulnerable en El Salvador y América Latina"
+            }
+          ]
         }
       ]
     },
     {
       "name": "health",
       "n_indicators": 2,
-      "n_observations": 135,
+      "n_observations": 249,
       "indicators": [
         {
           "code": "SH.XPD.CHEX.GD.ZS",
@@ -869,15 +1476,21 @@
           "unit": "%",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -885,14 +1498,20 @@
             "BRA": 9,
             "CHL": 10,
             "COL": 10,
+            "CRI": 9,
+            "DOM": 9,
+            "ECU": 9,
             "GTM": 9,
             "LCN": 9,
-            "MEX": 9
+            "MEX": 9,
+            "PAN": 9,
+            "PER": 9,
+            "URY": 9
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 65,
-          "n_observations_expected": 70,
+          "n_observations": 119,
+          "n_observations_expected": 130,
           "papers": []
         },
         {
@@ -902,15 +1521,21 @@
           "unit": "years",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/SP.DYN.LE00.IN",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -918,22 +1543,28 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 10,
+            "ECU": 10,
             "GTM": 10,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 10,
+            "PER": 10,
+            "URY": 10
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 70,
-          "n_observations_expected": 70,
+          "n_observations": 130,
+          "n_observations_expected": 130,
           "papers": []
         }
       ]
     },
     {
       "name": "environment",
-      "n_indicators": 1,
-      "n_observations": 69,
+      "n_indicators": 2,
+      "n_observations": 214,
       "indicators": [
         {
           "code": "EG.USE.ELEC.KH.PC",
@@ -942,15 +1573,21 @@
           "unit": "kWh",
           "source": "World Bank",
           "source_url": "https://data.worldbank.org/indicator/EG.USE.ELEC.KH.PC",
-          "n_countries": 7,
+          "n_countries": 13,
           "countries": [
             "ARG",
             "BRA",
             "CHL",
             "COL",
+            "CRI",
+            "DOM",
+            "ECU",
             "GTM",
             "LCN",
-            "MEX"
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
           ],
           "missing_countries": [],
           "by_country": {
@@ -958,21 +1595,77 @@
             "BRA": 10,
             "CHL": 10,
             "COL": 10,
+            "CRI": 10,
+            "DOM": 9,
+            "ECU": 9,
             "GTM": 9,
             "LCN": 10,
-            "MEX": 10
+            "MEX": 10,
+            "PAN": 9,
+            "PER": 9,
+            "URY": 9
           },
           "year_from": 2015,
           "year_to": 2024,
-          "n_observations": 69,
-          "n_observations_expected": 70,
+          "n_observations": 124,
+          "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-09-19",
+              "file": "2026-09-19_penetraci-n-m-vil-y-empleo-vulnerable-en.md",
+              "topic": "Penetración móvil y empleo vulnerable en El Salvador y América Latina"
+            },
             {
               "date": "2026-09-16",
               "file": "2026-09-16_financiamiento-del-sector-el-ctrico-medi.md",
               "topic": "Financiamiento del sector eléctrico mediante bonos soberanos y su impacto en el consumo de energía y el crecimiento del PIB en América Latina"
             }
           ]
+        },
+        {
+          "code": "EG.FEC.RNEW.ZS",
+          "label": "Renewable energy consumption (% of total final energy)",
+          "category": "environment",
+          "unit": "%",
+          "source": "World Bank",
+          "source_url": "https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS",
+          "n_countries": 13,
+          "countries": [
+            "ARG",
+            "BRA",
+            "CHL",
+            "COL",
+            "CRI",
+            "DOM",
+            "ECU",
+            "GTM",
+            "LCN",
+            "MEX",
+            "PAN",
+            "PER",
+            "URY"
+          ],
+          "missing_countries": [],
+          "by_country": {
+            "ARG": 7,
+            "BRA": 7,
+            "CHL": 7,
+            "COL": 7,
+            "CRI": 7,
+            "DOM": 7,
+            "ECU": 7,
+            "GTM": 7,
+            "LCN": 6,
+            "MEX": 7,
+            "PAN": 7,
+            "PER": 7,
+            "URY": 7
+          },
+          "year_from": 2015,
+          "year_to": 2021,
+          "n_observations": 90,
+          "n_observations_expected": 91,
+          "papers": []
         }
       ]
     }

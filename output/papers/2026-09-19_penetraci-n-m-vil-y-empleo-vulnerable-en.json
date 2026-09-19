@@ -1,0 +1,246 @@
+{
+  "generated": "2026-09-19T15:46:05.334Z",
+  "topic": "Penetración móvil y empleo vulnerable en El Salvador y América Latina",
+  "angle": "Analizar si mayores niveles de suscripción a telefonía móvil se asocian a menores tasas de empleo vulnerable y desempleo juvenil, a partir de la reciente venta de Digicel en El Salvador.",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 2,
+    "edit": 2
+  },
+  "pregunta": "¿Existe una relación negativa significativa entre el número de suscripciones móviles por 100 habitantes y el porcentaje de empleo vulnerable y de desempleo juvenil en los países latinoamericanos?",
+  "hipotesis": "Los países latinoamericanos con mayor densidad de suscripciones móviles presentan menores tasas de empleo vulnerable y de desempleo juvenil.",
+  "inspiringNews": {
+    "title": "Cuba faces another nationwide blackout amid US fuel blockade",
+    "url": "https://www.dw.com/en/cuba-faces-another-nationwide-blackout-amid-us-fuel-blockade/a-79335396?maca=en-rss-en-all-1573-rdf",
+    "source": "DW",
+    "section": "Internacional",
+    "image": "https://images.pexels.com/photos/14884603/pexels-photo-14884603.jpeg?auto=compress&cs=tinysrgb&h=350"
+  },
+  "suggestMode": "suggest",
+  "suggestions": [
+    {
+      "titulo": "Impacto de la interrupción eléctrica en la economía cubana",
+      "noticia_inspiradora": "Cuba faces another nationwide blackout amid US fuel blockade",
+      "indicadores_respaldan": [
+        "Electric power consumption (kWh per capita)",
+        "GDP growth (annual %)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
+      ],
+      "correlaciones_relevantes": [
+        "electric power consumption ↔ GDP growth",
+        "electric power consumption ↔ poverty headcount ratio"
+      ],
+      "justificacion": "El apagón nacional afecta directamente el consumo eléctrico per cápita, variable que históricamente se correlaciona con el desempeño del PIB y con la incidencia de pobreza; por lo tanto, los indicadores disponibles permiten medir el posible impacto económico del corte de energía."
+    },
+    {
+      "titulo": "Desinversión de operadores móviles y su efecto en la conectividad digital en El Salvador",
+      "noticia_inspiradora": "Digicel to sell El Salvador operations to ‘sharpen focus’ on Caribbean",
+      "indicadores_respaldan": [
+        "Mobile cellular subscriptions (per 100 people)",
+        "Internet users (% of population)",
+        "Foreign direct investment, net inflows (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "mobile cellular subscriptions ↔ internet users",
+        "FDI net inflows ↔ mobile cellular subscriptions"
+      ],
+      "justificacion": "La venta de Digicel refleja cambios en la inversión extranjera en el sector de telecomunicaciones; los indicadores de suscripciones móviles, usuarios de internet y flujos de IED permiten analizar cómo la desinversión afecta la penetración digital."
+    },
+    {
+      "titulo": "Energías renovables y estabilidad del suministro eléctrico en América Latina",
+      "noticia_inspiradora": "Cuba faces another nationwide blackout amid US fuel blockade",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "Electric power consumption (kWh per capita)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "renewable energy consumption ↔ electric power consumption per capita",
+        "renewable energy consumption ↔ GDP per capita"
+      ],
+      "justificacion": "Los apagones ponen de relieve la vulnerabilidad de los sistemas eléctricos; la proporción de energía renovable es un factor que puede mejorar la resiliencia del suministro, y los indicadores disponibles permiten evaluar su relación con el consumo eléctrico y el nivel de desarrollo económico."
+    },
+    {
+      "titulo": "Penetración móvil y empleo vulnerable: evidencia de El Salvador y la región",
+      "noticia_inspiradora": "Digicel to sell El Salvador operations to ‘sharpen focus’ on Caribbean",
+      "indicadores_respaldan": [
+        "Mobile cellular subscriptions (per 100 people)",
+        "Vulnerable employment (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "mobile cellular subscriptions ↔ vulnerable employment",
+        "mobile cellular subscriptions ↔ youth unemployment"
+      ],
+      "justificacion": "La reducción de presencia de un operador móvil sugiere cambios en la disponibilidad de tecnología; la literatura previa muestra que mayor digitalización reduce el empleo vulnerable, por lo que los indicadores de suscripciones móviles y empleo permiten probar esa relación en El Salvador y compararla con otros países latinoamericanos."
+    }
+  ],
+  "reviewDecision": {
+    "datos_correctos": true,
+    "detalle_datos": "El artículo indica n=10 para la regresión OLS, p=0.0989 del test de White, n=92 observaciones (11 países × 10 años) para el modelo de panel y usa q<0.05 como criterio de significancia en correlaciones; todos coinciden con los resultados reales proporcionados.",
+    "datos_inventados": [],
+    "estructura_ok": false,
+    "coherencia_ok": true,
+    "correcciones": [
+      "Agregar una sección de Resumen al inicio del manuscrito.",
+      "Incluir una sección de Análisis donde se presenten los resultados numéricos (R2, coeficientes, etc.).",
+      "Añadir una sección de Discusión que interprete los hallazgos en contexto.",
+      "Incorporar una sección de Conclusiones que sintetice la respuesta a la pregunta de investigación.",
+      "Proveer una Bibliografía con las fuentes citadas (World Bank, etc.)."
+    ],
+    "datos_faltantes": null,
+    "veredicto": "REESCRIBIR",
+    "feedback": "El contenido numérico es correcto, pero el manuscrito no cumple con la estructura requerida; se deben añadir las secciones faltantes para su aprobación.",
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 396,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "RECHAZADO",
+    "checklist": {
+      "estructura_ok": true,
+      "datos_verificados": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": false,
+      "tono_academico": false,
+      "extension_ok": true
+    },
+    "palabras": 1305,
+    "issues": [
+      "Afirmación causal sin matiz: \"**Impacto de la crisis de 2020**: Los valores atípicos detectados en 2020 reflejan la perturbación económica y energética provocada por la p\""
+    ],
+    "causal_check": {
+      "hard": 1,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 20,
+      "invented": 0
+    }
+  },
+  "editorial": "¿Será que en América Latina, donde los teléfonos móviles se multiplican, también disminuye el empleo precario y el desempleo de los jóvenes? Esa duda surgió al ver que, mientras en algunos países los celulares llegan a más de 120 por cada 100 habitantes, el número de jóvenes sin trabajo parece estar bajo.\n\nAl revisar los datos del Banco Mundial, el análisis comparó diez naciones y, con otro enfoque, siguió a once países durante varios años, acumulando noventa y dos observaciones. Cuando se miró la relación entre la densidad de suscripciones móviles y los índices de empleo vulnerable, se observó una leve tendencia a la baja: a mayor número de móviles, el empleo precario tiende a reducirse un poco. Sin embargo, al observar los cambios dentro de cada país a lo largo del tiempo, la conexión parecía mucho más estrecha, como si los movimientos anuales de suscripciones explicaran casi todo lo que ocurría con el empleo vulnerable.\n\nAun así, las pruebas de consistencia no mostraron problemas graves, pero tampoco fueron lo suficientemente contundentes como para afirmar con certeza que más teléfonos hacen menos desempleo juvenil. En otras palabras, la idea inicial no se confirma de forma clara; los datos son mixtos y podrían deberse a coincidencias más que a una relación firme. Para quien busca respuestas, la lección es que la tecnología móvil no garantiza por sí sola mejores oportunidades laborales.",
+  "sample": {
+    "countries": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "COL",
+      "CRI"
+    ],
+    "indicators": [
+      "Electric power consumption (kWh per capita)",
+      "GDP growth (annual %)",
+      "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
+    ]
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-09-19-15-36",
+    "regression": {
+      "r_squared": 0.7018602939091165,
+      "n": 10
+    },
+    "correlations": 37,
+    "significantCorrelations": []
+  },
+  "truncations": [
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8135,
+      "after": 4295,
+      "cutChars": 10368
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8555,
+      "after": 5275,
+      "cutChars": 8856
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8216,
+      "after": 4295,
+      "cutChars": 10589
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8216,
+      "after": 4295,
+      "cutChars": 10589
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8216,
+      "after": 4295,
+      "cutChars": 10589
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8555,
+      "after": 5217,
+      "cutChars": 9013
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8223,
+      "after": 4295,
+      "cutChars": 10608
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8555,
+      "after": 5226,
+      "cutChars": 8987
+    }
+  ],
+  "elapsed": 579.1
+}
