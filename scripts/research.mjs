@@ -859,8 +859,23 @@ function dataDigest(fetchedData, suggestDecision = null, compact = false) {
     const matched = countryInds.filter(i => topCcs.includes(i.country_code));
     if (matched.length) countryInds = matched;
   }
+  // El corte no es arbitrario: se ordena por relevancia — indicadores en el
+  // orden que SUGGEST los eligio (la dependiente primero) y paises en el orden
+  // de la muestra SQLite — asi lo que cae fuera del cap es lo menos relevante.
+  const indRank = new Map();
+  if (used) {
+    for (const i of countryInds) {
+      const idx = used.findIndex(u => matchesIndicator(i.indicator_label, [u]));
+      if (idx >= 0 && !indRank.has(i.indicator_label)) indRank.set(i.indicator_label, idx);
+    }
+  }
+  const ccRank = new Map(topCcs.map((c, i) => [c, i]));
+  countryInds.sort((a, b) =>
+    (indRank.get(a.indicator_label) ?? 999) - (indRank.get(b.indicator_label) ?? 999) ||
+    (ccRank.get(a.country_code) ?? 999) - (ccRank.get(b.country_code) ?? 999)
+  );
   const countries = countryInds
-    .slice(0, 25)
+    .slice(0, 18)
     .map(i => {
       const first = i.series[0]; const latest = i.series[i.series.length - 1];
       return `- ${i.indicator_label} [${i.country_code}] (${i.unit}): ${first.year}=${first.value.toFixed(2)} -> ${latest.year}=${latest.value.toFixed(2)}`;
