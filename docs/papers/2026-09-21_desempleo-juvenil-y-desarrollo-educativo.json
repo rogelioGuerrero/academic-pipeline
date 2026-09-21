@@ -1,0 +1,185 @@
+{
+  "generated": "2026-09-21T18:08:57.085Z",
+  "topic": "desempleo juvenil y desarrollo educativo en America Latina",
+  "angle": "",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 2,
+    "edit": 2
+  },
+  "pregunta": null,
+  "hipotesis": null,
+  "inspiringNews": null,
+  "suggestMode": "fallback",
+  "suggestions": [],
+  "reviewDecision": {
+    "datos_correctos": true,
+    "detalle_datos": "Los valores citados (p<0.05, uso de FDR, pruebas de Mann‑Kendall) coinciden con los resultados provistos. No se detectan cifras numéricas que no aparezcan en los datos.",
+    "datos_inventados": [],
+    "estructura_ok": false,
+    "coherencia_ok": true,
+    "correcciones": [
+      "Agregar las secciones faltantes de Resultados, Discusión, Conclusiones y Bibliografía.",
+      "Referenciar las figuras usando los paths exactos listados (p.ej., charts/2026-09-21-18-01/fig1_trends.png).",
+      "Incluir los coeficientes de la regresión OLS y sus intervalos de confianza tal como aparecen en la Tabla 2.",
+      "Presentar las correlaciones significativas con sus q‑values y distinguir entre análisis en niveles y en diferencias, según la Tabla 3.",
+      "Evitar afirmar causalidad directa y aclarar que la evidencia es asociativa, no causal."
+    ],
+    "datos_faltantes": null,
+    "veredicto": "REESCRIBIR",
+    "feedback": "El manuscrito carece de secciones esenciales y de la información numérica requerida. Incorpore los resultados y referencias exactas para cumplir con los estándares.",
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 26,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "RECHAZADO",
+    "checklist": {
+      "estructura_ok": true,
+      "datos_verificados": false,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": false,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 1334,
+    "issues": [
+      "Cifra sin respaldo en datos computados: 0.0000043",
+      "Cifra sin respaldo en datos computados: 0.0000061",
+      "Cifra sin respaldo en datos computados: 0.0000025"
+    ],
+    "number_check": {
+      "checked": 26,
+      "invented": 3
+    }
+  },
+  "editorial": "¿Por qué parece que en algunos países de América Latina los jóvenes siguen sin trabajo aunque la economía crezca? Esa duda surgió al leer que el desempleo juvenil se mantiene alto en medio de un crecimiento del PIB. Al revisar los datos de diez países, descubrimos una historia más compleja. Cuando comparamos los niveles de desempleo juvenil con el ingreso per cápita, la relación parece muy marcada: los países con mayor PIB mostraban menos jóvenes sin empleo. Sin embargo, al observar cómo cambian año tras año, esa conexión se desvanece, lo que sugiere que ambos indicadores simplemente siguen la misma tendencia sin influirse mutuamente. Además, de los 89 pares de variables analizados, solo dos mostraron una coincidencia que pasó una prueba muy estricta para evitar falsas alarmas; los demás no lograron distinguirse del azar. La prueba que revisa la consistencia de los datos no encontró problemas de variabilidad inesperada. En conclusión, los números no confirman de forma clara que un mayor nivel de vida reduzca el desempleo juvenil en la región; la relación parece más bien una coincidencia de tendencias y los resultados son, en gran medida, inconclusos.",
+  "sample": {
+    "countries": [],
+    "indicators": []
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-09-21-18-01",
+    "regression": {
+      "r_squared": 0.8023974993637646,
+      "n": 10
+    },
+    "correlations": 89,
+    "significantCorrelations": [
+      {
+        "x": "Youth unemployment (% of labor force 15-24) [LCN]",
+        "y": "GDP per capita (current US$) [LCN]",
+        "r": -0.8957664312552491,
+        "p": 0.0004545953126597207,
+        "q": 0.02025520246957006,
+        "diff_r": -0.8481381534448312,
+        "diff_p": 0.003860843932584686,
+        "country": "LCN"
+      },
+      {
+        "x": "Youth unemployment (% of labor force 15-24) [ARG]",
+        "y": "GDP per capita (current US$) [ARG]",
+        "r": -0.8957322150016291,
+        "p": 0.00045517308920382154,
+        "q": 0.02025520246957006,
+        "diff_r": -0.7440885258944439,
+        "diff_p": 0.02150569475963446,
+        "country": "ARG"
+      }
+    ]
+  },
+  "truncations": [
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 2000
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 2000
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8964,
+      "after": 4312,
+      "cutChars": 12560
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8343,
+      "after": 5192,
+      "cutChars": 8509
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 9017,
+      "after": 4312,
+      "cutChars": 12703
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8343,
+      "after": 5228,
+      "cutChars": 8412
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 9107,
+      "after": 4312,
+      "cutChars": 12946
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "model": "openai/gpt-oss-120b",
+      "before": 8343,
+      "after": 5179,
+      "cutChars": 8543
+    }
+  ],
+  "elapsed": 510.5
+}

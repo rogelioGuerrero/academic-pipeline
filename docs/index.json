@@ -1,5 +1,93 @@
 [
   {
+    "file": "2026-09-21_desempleo-juvenil-y-desarrollo-educativo.md",
+    "date": "2026-09-21",
+    "topic": "¿El crecimiento económico reduce el desempleo juvenil en América Latina y el Caribe?",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "REESCRIBIR",
+    "qa": "RECHAZADO",
+    "editorial": "¿Por qué parece que en algunos países de América Latina los jóvenes siguen sin trabajo aunque la economía crezca? Esa duda surgió al leer que el desempleo juvenil se mantiene alto en medio de un crecimiento del PIB. Al revisar los datos de diez países, descubrimos una historia más compleja. Cuando comparamos los niveles de desempleo juvenil con el ingreso per cápita, la relación parece muy marcada: los países con mayor PIB mostraban menos jóvenes sin empleo. Sin embargo, al observar cómo cambian año tras año, esa conexión se desvanece, lo que sugiere que ambos indicadores simplemente siguen la misma tendencia sin influirse mutuamente. Además, de los 89 pares de variables analizados, solo dos mostraron una coincidencia que pasó una prueba muy estricta para evitar falsas alarmas; los demás no lograron distinguirse del azar. La prueba que revisa la consistencia de los datos no encontró problemas de variabilidad inesperada. En conclusión, los números no confirman de forma clara que un mayor nivel de vida reduzca el desempleo juvenil en la región; la relación parece más bien una coincidencia de tendencias y los resultados son, en gran medida, inconclusos.",
+    "charts": "2026-09-21-18-01",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 2000
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 2000
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 8964,
+        "after": 4312,
+        "cutChars": 12560
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 8343,
+        "after": 5192,
+        "cutChars": 8509
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 9017,
+        "after": 4312,
+        "cutChars": 12703
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 8343,
+        "after": 5228,
+        "cutChars": 8412
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 9107,
+        "after": 4312,
+        "cutChars": 12946
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 8343,
+        "after": 5179,
+        "cutChars": 8543
+      }
+    ],
+    "ts": "2026-09-21T18:08:57.085Z"
+  },
+  {
     "file": "2026-09-19_penetraci-n-m-vil-y-empleo-vulnerable-en.md",
     "date": "2026-09-19",
     "topic": "Consumo de energía eléctrica, crecimiento del PIB y pobreza en América Latina y el Caribe (2015‑2024)",

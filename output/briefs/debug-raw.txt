@@ -1,35 +1,38 @@
 {
   "suggestions": [
     {
-      "titulo": "Repatriación del manuscrito azteca y su posible impulso a la inversión en educación en México",
-      "noticia_inspiradora": "Aztec manuscript returns to Mexico after two centuries, on loan",
+      "titulo": "La transición a vehículos eléctricos y su impacto fiscal en América Latina",
+      "noticia_inspiradora": "Germany faces energy tax losses as EV sales rise",
+      "afirmacion_noticia": "El rápido crecimiento de los vehículos eléctricos está reduciendo los ingresos del impuesto a los combustibles, obligando a los gobiernos a buscar fuentes de ingresos alternativas.",
+      "verificable_con_datos": "Podemos comprobar si los países con mayor consumo eléctrico per cápita (proxy de adopción de EV) presentan menores ingresos fiscales tradicionales (no disponible) y si esa transición se asocia a cambios estructurales en la economía, como mayor valor agregado manufacturero y mayor participación del comercio exterior en el PIB. No podemos medir directamente los ingresos fiscales por combustibles.",
       "indicadores_respaldan": [
-        "Government expenditure on education (% of GDP)",
-        "Youth literacy rate (% of people 15-24)",
-        "Secondary school enrollment (% gross)"
-      ],
-      "correlaciones_relevantes": [
-        "Gasto educativo ↔ Tasa de alfabetización juvenil",
-        "Gasto educativo ↔ Matrícula secundaria"
-      ],
-      "justificacion": "Los eventos de restitución cultural suelen generar mayor orgullo nacional y pueden traducirse en políticas de fortalecimiento educativo; los indicadores de gasto educativo, alfabetización juvenil y matrícula secundaria permiten medir si existe una asociación temporal entre la repatriación y la inversión en educación."
-    },
-    {
-      "titulo": "Efectos de la caída de los precios del crudo en el crecimiento económico y el comercio de los exportadores latinoamericanos",
-      "noticia_inspiradora": "Oil Prices Slide as Saudi Arabia Reroutes Crude via Oman",
-      "indicadores_respaldan": [
-        "GDP growth (annual %)",
+        "Electric power consumption (kWh per capita)",
+        "Renewable energy consumption (% of total final energy)",
+        "Manufacturing, value added (% of GDP)",
         "Trade (% of GDP)",
-        "Inflation, consumer prices (annual %)",
-        "Foreign direct investment, net inflows (% of GDP)"
+        "GDP growth (annual %)"
       ],
       "correlaciones_relevantes": [
-        "GDP growth ↔ Trade (% of GDP) (r=0.66, p=0.0386 en LATAM)",
-        "FDI ↔ GDP growth (r=0.74, p=0.0140 en LATAM)",
-        "Inflación ↔ Precio del crudo (proxy mediante variación del Trade % del PIB)"
+        "corr_consumo_electrico_vs_manufactura",
+        "corr_energia_renovable_vs_crecimiento_PIB",
+        "corr_manufactura_vs_comercio_PIB"
       ],
-      "justificacion": "Una caída del precio del petróleo afecta directamente a los países exportadores de crudo de América Latina, modificando sus ingresos por exportaciones, su crecimiento del PIB y la atracción de inversión extranjera; los indicadores disponibles capturan esas dimensiones y existen correlaciones previamente verificadas que facilitan el análisis."
+      "justificacion": "La noticia ofrece un fenómeno fiscal observable que puede trasladarse a América Latina mediante indicadores de consumo eléctrico y energía renovable, que sirven como proxies de la adopción de EV. Además, permite analizar efectos estructurales en manufactura y comercio, dominios donde disponemos de datos fiables."
     },
     {
-      "titulo": "Cómo la política monetaria del Reino Unido influye en la entrada de inversión extranjera directa en América Latina",
-      "noticia_inspiradora": "Bank of England set to defy Fed’s rate-hike lead, despite rising
+      "titulo": "Seguridad marítima y flujos de inversión extranjera en el Caribe",
+      "noticia_inspiradora": "US military says it killed four in strike on alleged drug-smuggling boat in the Caribbean",
+      "afirmacion_noticia": "Los operativos militares contra el narcotráfico en el Caribe podrían afectar la percepción de seguridad y, por ende, la atracción de inversión extranjera directa y el comercio.",
+      "verificable_con_datos": "Podemos evaluar la relación entre la intensidad de incidentes de seguridad (proxied por años con alta mortalidad en operativos) y los niveles de inversión extranjera neta y comercio como porcentaje del PIB. No disponemos de indicadores directos de incidentes de seguridad.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)",
+        "GDP growth (annual %)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "corr_seguridad_vs_FDI",
+        "corr_seguridad_vs_comercio"
+      ],
+      "justificacion": "Aunque la noticia se centra en un evento puntual, permite explorar una posible correlación entre la percepción de seguridad y los flujos de inversión/comercio, variables que están registradas en el catálogo."
+   

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-19T15:46:06+00:00",
+  "generated": "2026-09-21T18:08:59+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 6
+    "papers": 7
   },
   "countries": [
     {
@@ -66,6 +66,14 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-09-21",
+      "file": "2026-09-21_desempleo-juvenil-y-desarrollo-educativo.md",
+      "topic": "desempleo juvenil y desarrollo educativo en America Latina",
+      "sample_countries": [],
+      "sample_indicators": [],
+      "indicators": []
+    },
     {
       "date": "2026-09-19",
       "file": "2026-09-19_penetraci-n-m-vil-y-empleo-vulnerable-en.md",
