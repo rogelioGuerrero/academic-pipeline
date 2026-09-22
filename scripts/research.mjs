@@ -180,6 +180,16 @@ function fitPrompt(text, budgetTokens) {
       // presupuesto (cada segmento cortado agrega un CUT_MARK).
       const avail = q - CUT_MARK.length;
       if (avail < 40) return CUT_MARK;
+      // El ultimo segmento libre conserva su FINAL: ahi viven las
+      // instrucciones de formato de salida ("Responde como JSON", estructura
+      // del paper). Cortar su final dejo el prompt sin la palabra "json" y
+      // Groq rechazo el request con 400 (run 2026-09-22).
+      if (i === freeIdx[freeIdx.length - 1]) {
+        let cut = s.t.slice(-avail);
+        const nl = cut.indexOf("\n");
+        if (nl !== -1 && nl < avail * 0.4) cut = cut.slice(nl + 1);
+        return CUT_MARK + cut;
+      }
       let cut = s.t.slice(0, avail);
       const nl = cut.lastIndexOf("\n");
       if (nl > avail * 0.6) cut = cut.slice(0, nl);
@@ -590,7 +600,7 @@ REGLAS:
 - Justifica el puente: en "justificacion" explica por que ESE dominio (y no otro) es el que mejor conecta la noticia con los datos — esto evita mapear todo al mismo lugar por costumbre.
 - La hipotesis debe ser una afirmacion concreta que los datos puedan apoyar o refutar.
 
-Responde EXACTAMENTE como JSON (sin markdown):
+Responde EXACTAMENTE como JSON (json puro, sin markdown):
 {
   "suggestions": [
     {
@@ -1443,7 +1453,7 @@ VERIFICACION OBLIGATORIA:
 4. CONSISTENCIA INTERNA: verifica que la prosa no contradiga las tablas ni los datos — ej. si dice "cinco paises" pero la tabla lista seis, si enumera paises distintos a los que aparecen en tablas, o si describe una tendencia opuesta a la que muestran las cifras citadas. Estas contradicciones cuentan como datos_inventados.
 5. Verifica estructura (Resumen, Metodologia, Analisis, Discusion, Conclusiones, Bibliografia) y coherencia.
 
-Responde EXACTAMENTE como JSON (sin markdown). La respuesta debe EMPEZAR directamente con { y TERMINAR con } — prohibido cualquier encabezado, tabla o prosa antes o despues del JSON:
+Responde EXACTAMENTE como JSON (json puro, sin markdown). La respuesta debe EMPEZAR directamente con { y TERMINAR con } — prohibido cualquier encabezado, tabla o prosa antes o despues del JSON:
 {"datos_correctos":true,"detalle_datos":"...","datos_inventados":["lista de cada valor fabricado"],"estructura_ok":true,"coherencia_ok":true,"correcciones":["..."],"datos_faltantes":null,"veredicto":"APROBADO","feedback":null}
 
 Veredicto: "APROBADO" solo si datos_correctos=true Y datos_inventados esta vacio Y estructura_ok=true. Si hay CUALQUIER dato inventado o incompleto: "REESCRIBIR" con feedback detallado listando cada correccion.
@@ -1452,11 +1462,19 @@ SE CONCISO: el JSON completo debe caber en ~800 tokens. detalle_datos en 2 frase
   // gpt-oss quema tokens de razonamiento y a veces redacta la revision en
   // prosa antes del JSON: con 2200 la respuesta se cortaba a mitad y el
   // veredicto nunca se emitia (run 2026-09-22 murio asi, 3 veces).
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3000, completion_floor: 1500, temperature: 0.2, reasoning_effort: "low", response_format: { type: "json_object" } });
-  const raw = data.choices[0]?.message?.content || "";
-  const decision = parseJSONResponse(raw);
+  let raw = "", decision = null, apiFailed = false;
+  try {
+    const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3000, completion_floor: 1500, temperature: 0.2, reasoning_effort: "low", response_format: { type: "json_object" } });
+    raw = data.choices[0]?.message?.content || "";
+    decision = parseJSONResponse(raw);
+  } catch (e) {
+    // Error de API duro (400/outage): callLLM ya reintento los transitorios
+    // por dentro — degradar de una vez en vez de quemar reintentos del nodo.
+    console.log(`Review: API fallo (${e.message}). Veredicto degradado.`);
+    apiFailed = true;
+  }
   if (!decision) {
-    if (attempt < 2) {
+    if (!apiFailed && attempt < 2) {
       // No auto-aprobar: sin veredicto valido los guardrails reintentan con el LLM
       console.log("Review: respuesta no parseable (no se auto-aprueba):\n" + raw.slice(0, 500) + "\n");
       return { veredicto: undefined, datos_correctos: false, correcciones: [], feedback: "review response unparseable" };
@@ -1681,7 +1699,7 @@ async function agentApprove(finalText, computeResults = null, fetchedData = null
 
 ${truncate(finalText, 4000)}
 
-Responde EXACTAMENTE como JSON (sin markdown):
+Responde EXACTAMENTE como JSON (json puro, sin markdown):
 {"checklist":{"estructura_ok":true,"resumen_ok":true,"bibliografia_ok":true,"citas_apa_ok":true,"coherencia_ok":true,"datos_verificados":true,"tono_academico":true,"extension_ok":true},"palabras":3000,"veredicto":"APROBADO","issues":[]}
 
 CRITERIOS:
