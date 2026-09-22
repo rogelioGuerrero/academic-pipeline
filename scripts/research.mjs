@@ -123,6 +123,13 @@ function calibrateTokenRatio(promptChars, requestedTotal, maxTokens) {
   }
 }
 
+// Bloques ⟦KEEP⟧...⟦/KEEP⟧: zonas del prompt que fitPrompt nunca recorta —
+// las cifras exactas (coeficientes, correlaciones, paths de figuras) sin las
+// cuales el modelo inventa numeros. Se quitan antes de enviar el prompt.
+const KEEP_RE = /⟦KEEP⟧[\s\S]*?⟦\/KEEP⟧/g;
+const CUT_MARK = "\n[...contenido recortado por limite de tokens...]\n";
+const stripKeeps = t => t.replace(/⟦\/?KEEP⟧/g, "");
+
 // Recorta por caracteres garantizando el presupuesto, y ajusta los cortes al
 // limite de linea mas cercano cuando existe: una fila cortada a la mitad puede
 // partir un numero. Si la linea es gigante (sin saltos cerca), se corta por
@@ -131,19 +138,68 @@ function fitPrompt(text, budgetTokens) {
   const before = estimateTokens(text);
   if (before <= budgetTokens) return { text, before, after: before, cutChars: 0 };
   const maxChars = Math.floor(budgetTokens * CHARS_PER_TOKEN);
-  // 60% cabeza (instrucciones + datos) + 35% cola (formato de salida) = 95%
-  // del presupuesto: siempre queda por debajo del limite.
-  let headEnd = Math.floor(maxChars * 0.6);
-  let tailStart = Math.max(headEnd, text.length - Math.floor(maxChars * 0.35));
-  const snapBack = Math.max(Math.floor(headEnd * 0.15), 1);
-  const newlineBefore = text.lastIndexOf("\n", headEnd);
-  if (newlineBefore > headEnd - snapBack) headEnd = newlineBefore;
-  const snapFwd = Math.max(Math.floor((text.length - tailStart) * 0.15), 1);
-  const newlineAfter = text.indexOf("\n", tailStart);
-  if (newlineAfter !== -1 && newlineAfter < tailStart + snapFwd) tailStart = newlineAfter + 1;
-  const head = text.slice(0, headEnd);
-  const tail = text.slice(Math.max(tailStart, headEnd));
-  const fitted = `${head}\n[...contenido recortado por limite de tokens...]\n${tail}`;
+
+  // Segmentar en bloques protegidos y elasticos.
+  const segs = [];
+  let pos = 0, keepChars = 0, m;
+  KEEP_RE.lastIndex = 0;
+  while ((m = KEEP_RE.exec(text))) {
+    if (m.index > pos) segs.push({ t: text.slice(pos, m.index), keep: false });
+    segs.push({ t: m[0], keep: true });
+    keepChars += m[0].length;
+    pos = m.index + m[0].length;
+  }
+  if (pos < text.length) segs.push({ t: text.slice(pos), keep: false });
+
+  let fitted;
+  if (keepChars > 0 && keepChars < maxChars * 0.8) {
+    // El presupuesto elastico es lo que sobra tras reservar los KEEP.
+    // Prioridad: primer segmento libre (instrucciones + datos) 35%, ultimo
+    // (formato de salida) 45%; los intermedios comparten el resto en orden —
+    // son datos sacrificables (literatura, tablas de contexto).
+    const elastic = Math.max(0, maxChars - keepChars);
+    const freeIdx = segs.map((s, i) => (s.keep ? -1 : i)).filter(i => i >= 0);
+    const quota = new Map();
+    if (freeIdx.length) {
+      const first = freeIdx[0], last = freeIdx[freeIdx.length - 1];
+      quota.set(first, Math.min(segs[first].t.length, Math.floor(elastic * 0.35)));
+      if (last !== first) quota.set(last, Math.min(segs[last].t.length, Math.floor(elastic * 0.45)));
+      let rem = elastic - [...quota.values()].reduce((a, b) => a + b, 0);
+      for (const i of freeIdx) {
+        if (quota.has(i) || rem <= 0) continue;
+        const q = Math.min(segs[i].t.length, rem);
+        quota.set(i, q);
+        rem -= q;
+      }
+    }
+    fitted = segs.map((s, i) => {
+      if (s.keep) return s.t;
+      const q = quota.get(i) ?? 0;
+      if (q >= s.t.length) return s.t;
+      // La cuota incluye la marca de recorte: descontarla para no exceder el
+      // presupuesto (cada segmento cortado agrega un CUT_MARK).
+      const avail = q - CUT_MARK.length;
+      if (avail < 40) return CUT_MARK;
+      let cut = s.t.slice(0, avail);
+      const nl = cut.lastIndexOf("\n");
+      if (nl > avail * 0.6) cut = cut.slice(0, nl);
+      return cut + CUT_MARK;
+    }).join("");
+  } else {
+    // 60% cabeza (instrucciones + datos) + 35% cola (formato de salida) = 95%
+    // del presupuesto: siempre queda por debajo del limite.
+    let headEnd = Math.floor(maxChars * 0.6);
+    let tailStart = Math.max(headEnd, text.length - Math.floor(maxChars * 0.35));
+    const snapBack = Math.max(Math.floor(headEnd * 0.15), 1);
+    const newlineBefore = text.lastIndexOf("\n", headEnd);
+    if (newlineBefore > headEnd - snapBack) headEnd = newlineBefore;
+    const snapFwd = Math.max(Math.floor((text.length - tailStart) * 0.15), 1);
+    const newlineAfter = text.indexOf("\n", tailStart);
+    if (newlineAfter !== -1 && newlineAfter < tailStart + snapFwd) tailStart = newlineAfter + 1;
+    const head = text.slice(0, headEnd);
+    const tail = text.slice(Math.max(tailStart, headEnd));
+    fitted = `${head}${CUT_MARK}${tail}`;
+  }
   return { text: fitted, before, after: estimateTokens(fitted), cutChars: text.length - fitted.length };
 }
 
@@ -178,8 +234,10 @@ async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
   // de la API: se saca del body antes de enviarlo.
   const { completion_floor, ...apiOpts } = opts;
   const plan = planRequest(prompt, apiOpts.max_tokens, completion_floor);
+  // safePrompt conserva los marcadores KEEP para que un reintento 413 pueda
+  // volver a recortar respetandolos; se quitan solo al construir el body.
   let safePrompt = plan.prompt;
-  const body = { model, messages: [{ role: "user", content: safePrompt }], ...apiOpts, max_tokens: plan.maxTokens };
+  const body = { model, messages: [{ role: "user", content: stripKeeps(safePrompt) }], ...apiOpts, max_tokens: plan.maxTokens };
   if (plan.fit && plan.fit.cutChars > 0) {
     console.log(`  ⚠ Prompt ${plan.fit.before} tokens: recortado a ~${plan.fit.after} (${plan.fit.cutChars} chars) para caber en ${TPM_LIMIT} TPM con max_tokens=${plan.maxTokens}.`);
     truncationLog.push({ model, before: plan.fit.before, after: plan.fit.after, cutChars: plan.fit.cutChars });
@@ -238,7 +296,7 @@ async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
       if (fitted.cutChars === 0) newMax = Math.max(400, Math.floor(newMax / 2));
       console.log(`  Prompt demasiado largo (413): la API reporta ${requested} tokens con limite ${limit}. Prompt ~${fitted.after}, max_tokens ${newMax}. (recorte ${shrinkAttempts}/3)`);
       safePrompt = fitted.text;
-      body.messages = [{ role: "user", content: safePrompt }];
+      body.messages = [{ role: "user", content: stripKeeps(safePrompt) }];
       body.max_tokens = newMax;
       await new Promise((r) => setTimeout(r, 3000));
       continue;
@@ -551,7 +609,9 @@ Responde EXACTAMENTE como JSON (sin markdown):
   "hipotesis": "afirmacion concreta que los datos pueden apoyar o refutar"
 }`;
 
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2000, temperature: 0.7 });
+  // gpt-oss quema tokens de razonamiento antes de emitir el JSON: con 2000 la
+  // respuesta se cortaba a mitad del JSON y SUGGEST caia al tema fallback.
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3400, completion_floor: 1400, temperature: 0.7, reasoning_effort: "low" });
   const raw = data.choices[0]?.message?.content || "";
   const decision = parseJSONResponse(raw);
 
@@ -892,6 +952,7 @@ function computeDigest(computeResults, suggestDecision = null) {
   const parts = [];
   if (computeResults.regression && !computeResults.error && computeResults.regression.dependent) {
     const r = computeResults.regression;
+    parts.push("⟦KEEP⟧");
     parts.push(`REGRESION OLS: ${r.dependent} ~ ${r.independent.join(" + ")}`);
     parts.push(`  n=${r.n}, dof=${r.dof ?? r.n - r.independent.length - 1}, R2=${r.r_squared?.toFixed(4)}, R2_adj=${r.adj_r_squared?.toFixed(4)}, F=${r.f_statistic?.toFixed(2)} (p=${r.f_p_value?.toFixed(4)})`);
     if (r.dropped_regressors?.length) {
@@ -911,11 +972,13 @@ function computeDigest(computeResults, suggestDecision = null) {
     }
     if (r.white_test) parts.push(`  White test: p=${r.white_test.p_value?.toFixed(4)} (${r.white_test.heteroscedastic ? "heterocedastico" : "homocedastico"})`);
     else parts.push(`  White test: NO calculado`);
+    parts.push("⟦/KEEP⟧");
   }
   // Panel econométrico: R sustituye a Python para evitar duplicidad de tokens y redundancia
   const rEcon = computeResults.r_econometrics;
   const panel = computeResults.panel;
   if (rEcon && rEcon.coefficients?.length) {
+    parts.push("⟦KEEP⟧");
     parts.push(`REGRESION PANEL EN R (Efectos Fijos Bidireccionales - Pais + Año):`);
     parts.push(`  Especificación: ${rEcon.formula}`);
     parts.push(`  R2=${rEcon.r_squared?.toFixed(4)}, R2_adj=${rEcon.adj_r_squared?.toFixed(4)}, F=${rEcon.f_statistic?.toFixed(2)} (p=${rEcon.f_p_value?.toFixed(4)}), n=${rEcon.n} (${rEcon.n_countries} países)`);
@@ -927,7 +990,9 @@ function computeDigest(computeResults, suggestDecision = null) {
       }
     }
     parts.push(`  NOTA METODOLOGICA (R): Controla simultaneamente por shocks globales de año (tendencias compartidas) y caracteristicas fijas de cada pais.`);
+    parts.push("⟦/KEEP⟧");
   } else if (panel && panel.coefficients?.length) {
+    parts.push("⟦KEEP⟧");
     parts.push(`REGRESION PANEL (efectos fijos por pais): ${panel.dependent} ~ ${panel.independent.join(" + ")}`);
     parts.push(`  n=${panel.n} obs (${panel.n_countries} paises x anos), R2=${panel.r_squared?.toFixed(4)}, dof=${panel.dof}`);
     if (computeResults.tables?.regression) {
@@ -938,9 +1003,11 @@ function computeDigest(computeResults, suggestDecision = null) {
       }
     }
     parts.push(`  NOTA: el panel usa variacion INTRA-pais en el tiempo (controla caracteristicas fijas por pais). Si el OLS agregado y el panel discrepan, reportar ambos — la discrepancia es informacion (el agregado puede estar dominado por diferencias entre paises).`);
+    parts.push("⟦/KEEP⟧");
   }
   const corrs = (computeResults.correlations || []).filter(c => c.pearson_r !== undefined && relevant(c.x) && relevant(c.y));
   if (corrs.length) {
+    parts.push("⟦KEEP⟧");
     // Top correlaciones: significativas primero, luego por |r| — evita inflar
     // el digest con 100+ pares irrelevantes que rompen el limite TPM de Groq.
     const fdr = c => c.significant_fdr ?? c.significant;
@@ -973,6 +1040,7 @@ function computeDigest(computeResults, suggestDecision = null) {
         parts.push(`    ${c.x} <-> ${c.y}: r_nivel=${c.pearson_r.toFixed(3)} (q=${(c.pearson_q ?? c.pearson_p).toFixed(3)}) vs r_dif=${c.diff_pearson_r.toFixed(3)} (${c.diff_pearson_q !== undefined ? `q=${c.diff_pearson_q.toFixed(3)}` : `p=${c.diff_pearson_p.toFixed(3)}`})`);
       }
     }
+    parts.push("⟦/KEEP⟧");
   }
   const sigTrends = (computeResults.trends || []).filter(t => t.trend !== "no_trend" && relevant(t.indicator));
   if (sigTrends.length) {
@@ -991,17 +1059,17 @@ function computeDigest(computeResults, suggestDecision = null) {
   if (computeResults.charts?.length) {
     const cdir = computeResults.chartsDir ? `${computeResults.chartsDir}/` : "";
     // Solo paths, no captions — el LLM solo necesita referenciar, no leer el caption
-    parts.push(`FIGURAS (referenciar con path exacto): ${computeResults.charts.map(c => `charts/${cdir}${c.file}${c.howto ? ` — guia de lectura: "${c.howto}"` : ""}`).join(", ")}`);
+    parts.push(`⟦KEEP⟧FIGURAS (referenciar con path exacto): ${computeResults.charts.map(c => `charts/${cdir}${c.file}${c.howto ? ` — guia de lectura: "${c.howto}"` : ""}`).join(", ")}⟦/KEEP⟧`);
   }
   if (computeResults.tables) {
     if (computeResults.tables.descriptive) {
       parts.push(`TABLA 1 PRE-COMPUTADA (Descriptiva / Series reales):\n${computeResults.tables.descriptive}`);
     }
     if (computeResults.tables.regression) {
-      parts.push(`TABLA 2 PRE-COMPUTADA (Modelos OLS y Panel):\n${computeResults.tables.regression}`);
+      parts.push(`⟦KEEP⟧TABLA 2 PRE-COMPUTADA (Modelos OLS y Panel):\n${computeResults.tables.regression}⟦/KEEP⟧`);
     }
     if (computeResults.tables.correlations) {
-      parts.push(`TABLA 3 PRE-COMPUTADA (Correlaciones):\n${computeResults.tables.correlations}`);
+      parts.push(`⟦KEEP⟧TABLA 3 PRE-COMPUTADA (Correlaciones):\n${computeResults.tables.correlations}⟦/KEEP⟧`);
     }
     if (computeResults.tables.derived) {
       parts.push(`TABLA 4 PRE-COMPUTADA (Derivados: cambio anual, % cambio, CAGR — cifras citables, no recalcular):\n${computeResults.tables.derived}`);
@@ -1092,12 +1160,12 @@ ${digest}
 LITERATURA REAL VERIFICADA (recuperada de OpenAlex — obras que EXISTEN y puedes citar; usa sus hallazgos para contextualizar el analisis):
 ${literature.length ? literature.map((w, i) => `${i + 1}. ${w.apa}\n   Resumen: ${w.abstract || "(sin resumen)"}`).join("\n") : "(sin literatura verificada — no cites literatura academica, solo Banco Mundial y la noticia)"}
 
-Escribe un paper academico sobre: ${effectiveTopic}
+⟦KEEP⟧Escribe un paper academico sobre: ${effectiveTopic}
 
 ${angleSection}
 ${questionSection}
 ${claimSection}
-${feedbackSection}
+${feedbackSection}⟦/KEEP⟧
 
 ESTRUCTURA OBLIGATORIA:
 1. **Resumen** (100-150 palabras)
