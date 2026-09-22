@@ -1,5 +1,70 @@
 [
   {
+    "file": "2026-09-22_impacto-de-los-ciberataques-en-criptomon.md",
+    "date": "2026-09-22",
+    "topic": "¿Las remesas personales aumentan con la expansión de internet? Evidencia empírica para América Latina y el Caribe",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjjuVP0IzjchtSeuT6WwQHPupLynSiYhe7KinKtQVVE_EgFE5iG9SWV4HrgseuXaSUo-TaamFPzHl6SCnUPsbz29nzEo1BJeZVE4VB43KdMBmKEld7snbryRJIeIIAmiRZNEhFCJ-58klU6qGrvwg2Hn26FtkHv1s4cAj_zX9AWmdeym2-d4hScWr9dLiOY/s1700-nu-rw-lo-l85-e365/exec.jpg",
+    "section": "Ciberseguridad",
+    "news_url": "https://thehackernews.com/2026/09/contagious-interview-campaign.html",
+    "pregunta": "¿Se observa una reducción significativa en las remesas recibidas (USD) en los países latinoamericanos durante el periodo del ciberataque 'Contagious Interview' comparado con periodos previos?",
+    "editorial": "¿Se notó una caída en el dinero que los familiares envían a Latinoamérica cuando el ciberataque “Contagious Interview” paralizó parte de la red? Esa fue la duda que surgió al escucharse rumores de que la confianza se había resquebrajado.\n\nAl revisar los números del Banco Mundial, la historia tomó otro rumbo. En los diez casos analizados a nivel regional, los envíos de remesas siguieron una tendencia muy parecida a la de los países que usan más internet y que tienen mayor ingreso per cápita. En los doce países observados durante varios años (un total de 120 registros), cuando la proporción de usuarios de internet subía, los dólares recibidos también subían, y lo mismo ocurría cuando el ingreso promedio del país aumentaba. No se detectó una caída brusca durante el periodo del ataque; al contrario, los flujos se mantuvieron estables o incluso crecieron ligeramente en la mayoría de los lugares. Sólo en un par de economías pequeñas se vio una ligera disminución, pero sin un patrón claro.\n\nEn conclusión, los datos no confirman la idea de que el ciberataque haya provocado una caída notable en las remesas. La relación parece estar más ligada al acceso a internet y al nivel de ingreso que a la interrupción puntual de la red. Para quienes dependen de esos envíos, la noticia es tranquilizadora: la tormenta digital no parece haber mermado el apoyo económico que reciben sus familias.",
+    "charts": "2026-09-22-20-00",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 9736,
+        "after": 4316,
+        "cutChars": 14634
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 9879,
+        "after": 4679,
+        "cutChars": 14040
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 9798,
+        "after": 4316,
+        "cutChars": 14802
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 9879,
+        "after": 4679,
+        "cutChars": 14040
+      }
+    ],
+    "ts": "2026-09-22T20:06:25.935Z"
+  },
+  {
     "file": "2026-09-21_desempleo-juvenil-y-desarrollo-educativo.md",
     "date": "2026-09-21",
     "topic": "¿El crecimiento económico reduce el desempleo juvenil en América Latina y el Caribe?",

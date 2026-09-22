@@ -1,0 +1,57 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Ciberataques y flujos de remesas: ¿Cómo afecta el robo de criptoactivos a la economía familiar latinoamericana?",
+      "noticia_inspiradora": "Contagious Interview Campaign Compromises 30,000 Devices, Steals $10.71M in Crypto",
+      "afirmacion_noticia": "Los actores norcoreanos robaron fondos en criptomonedas a través de una campaña que comprometió 30,000 dispositivos en más de 100 países.",
+      "verificable_con_datos": "Se puede verificar si la caída de las remesas recibidas en dólares (Personal remittances received) coincide temporalmente con el periodo del ciberataque; no se pueden medir directamente los montos robados ni la proporción de remesas realizadas en cripto.",
+      "indicadores_respaldan": [
+        "Personal remittances received (current US$)",
+        "Internet users (% of population)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Remesas vs Internet penetration (hipótesis de mayor vulnerabilidad digital)",
+        "Remesas vs GDP per capita (impacto de la pérdida de ingresos en el ingreso per cápita)"
+      ],
+      "justificacion": "El ciberataque está directamente relacionado con la seguridad digital y el uso de cripto, lo que puede reflejarse en la variación de las remesas recibidas, un indicador disponible que captura ingresos externos a los hogares latinoamericanos."
+    },
+    {
+      "titulo": "Tensiones geopolíticas en Oriente Medio y su repercusión en el comercio latinoamericano",
+      "noticia_inspiradora": "UK to refuel Saudi jets amid conflict with Yemen's Houthis",
+      "afirmacion_noticia": "El Reino Unido comenzará a reabastecer aviones saudíes, señalando un apoyo logístico en medio del conflicto con los hutíes, lo que podría elevar los precios del petróleo.",
+      "verificable_con_datos": "Se pueden observar cambios en el Trade (% of GDP) y GDP growth de los países latinoamericanos exportadores de petróleo; no se dispone de datos específicos de precios del petróleo ni de la exposición directa de cada país al conflicto.",
+      "indicadores_respaldan": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)",
+        "GDP per capita (current US$)",
+        "Inflation, consumer prices (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Exportaciones de petróleo vs Trade % del PIB",
+        "Trade % del PIB vs Crecimiento del PIB"
+      ],
+      "justificacion": "La noticia implica un posible aumento del precio del crudo, que afecta a los países latinoamericanos dependientes de sus exportaciones; los indicadores de comercio y crecimiento permiten medir esa posible repercusión macroeconómica."
+    },
+    {
+      "titulo": "Restricciones mediáticas y flujos migratorios: ¿Influye la censura en la percepción de seguridad y la migración hacia América Latina?",
+      "noticia_inspiradora": "Presidential TV pool suspended after Trump bans CNN",
+      "afirmacion_noticia": "El presidente de EE.UU. prohibió a varios medios cubrir la Casa Blanca, generando incertidumbre informativa.",
+      "verificable_con_datos": "Se puede analizar si el Net migration (total people) muestra variaciones tras la medida; no se pueden atribuir directamente los cambios migratorios a la censura mediática ni medir la percepción de seguridad.",
+      "indicadores_respaldan": [
+        "Net migration (total people)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)",
+        "Urban population (% of total)"
+      ],
+      "correlaciones_relevantes": [
+        "Migración neta vs Pobreza",
+        "Migración neta vs Urbanización"
+      ],
+      "justificacion": "Aunque la noticia es política, la restricción informativa puede influir en la percepción de estabilidad en EE.UU., afectando decisiones migratorias; los datos de migración permiten evaluar tendencias cuantitativas."
+    }
+  ],
+  "topic": "Impacto de los ciberataques en criptomonedas sobre los flujos de remesas hacia América Latina",
+  "angle": "Evaluar si los episodios de robo masivo de criptoactivos coinciden con disminuciones mensuales en las remesas recibidas, señalando vulnerabilidades digitales en la cadena de envío de fondos.",
+  "pregunta": "¿Se observa una reducción significativa en las remesas recibidas (USD) en los países latinoamericanos durante el periodo del ciberataque 'Contagious Interview' comparado con periodos previos?",
+  "hipotesis": "Los ciberataques que comprometen dispositivos en América Latina provocan una caída observable en las remesas recibidas, reflejando la pérdida de confianza y la interrupción de transferencias en cripto."
+}

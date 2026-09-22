@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-21T18:08:59+00:00",
+  "generated": "2026-09-22T20:06:28+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 7
+    "papers": 8
   },
   "countries": [
     {
@@ -66,6 +66,28 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-09-22",
+      "file": "2026-09-22_impacto-de-los-ciberataques-en-criptomon.md",
+      "topic": "Impacto de los ciberataques en criptomonedas sobre los flujos de remesas hacia América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Personal remittances received (current US$)",
+        "Internet users (% of population)",
+        "GDP per capita (current US$)"
+      ],
+      "indicators": [
+        "Personal remittances received (current US$)",
+        "Internet users (% of population)",
+        "GDP per capita (current US$)"
+      ]
+    },
     {
       "date": "2026-09-21",
       "file": "2026-09-21_desempleo-juvenil-y-desarrollo-educativo.md",
@@ -181,8 +203,8 @@
         "Mobile cellular subscriptions (per 100 people)"
       ],
       "indicators": [
-        "Vulnerable employment (% of total employment)",
         "Internet users (% of population)",
+        "Vulnerable employment (% of total employment)",
         "Mobile cellular subscriptions (per 100 people)"
       ]
     }
@@ -731,7 +753,13 @@
           "year_to": 2024,
           "n_observations": 130,
           "n_observations_expected": 130,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-09-22",
+              "file": "2026-09-22_impacto-de-los-ciberataques-en-criptomon.md",
+              "topic": "Impacto de los ciberataques en criptomonedas sobre los flujos de remesas hacia América Latina"
+            }
+          ]
         },
         {
           "code": "FP.CPI.TOTL.ZG",
@@ -877,7 +905,13 @@
           "year_to": 2024,
           "n_observations": 130,
           "n_observations_expected": 130,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-09-22",
+              "file": "2026-09-22_impacto-de-los-ciberataques-en-criptomon.md",
+              "topic": "Impacto de los ciberataques en criptomonedas sobre los flujos de remesas hacia América Latina"
+            }
+          ]
         },
         {
           "code": "NE.TRD.GNFS.ZS",
@@ -1168,6 +1202,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-09-22",
+              "file": "2026-09-22_impacto-de-los-ciberataques-en-criptomon.md",
+              "topic": "Impacto de los ciberataques en criptomonedas sobre los flujos de remesas hacia América Latina"
+            },
             {
               "date": "2026-09-13",
               "file": "2026-09-13_penetraci-n-digital-y-empleo-vulnerable-.md",
