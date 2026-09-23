@@ -1,0 +1,54 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la intensificación de la lucha antidrogas de EE.UU. sobre el comercio exterior latinoamericano",
+      "noticia_inspiradora": "Trump's 'drug boat' strikes may be crimes against humanity, UN says",
+      "afirmacion_noticia": "Los ataques estadounidenses contra embarcaciones sospechosas de narcotráfico podrían reducir los flujos comerciales legales y alterar la balanza comercial de los países latinoamericanos afectados.",
+      "verificable_con_datos": "Se puede confirmar si los países con mayor exposición a interdicciones (proxied por volumen de exportaciones de productos agrícolas y manufacturados) presentan variaciones en el indicador Trade (% of GDP). No se pueden medir directamente los efectos de la violencia o de posibles crímenes de lesa humanidad con los indicadores disponibles.",
+      "indicadores_respaldan": [
+        "Trade (% of GDP)",
+        "Manufacturing, value added (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Trade vs GDP growth",
+        "Manufacturing value added vs Trade"
+      ],
+      "justificacion": "El dominio económico‑comercial conecta directamente con los indicadores de comercio y manufactura del Banco Mundial, permitiendo cuantificar cambios macroeconómicos atribuibles a la presión antidrogas."
+    },
+    {
+      "titulo": "Relación entre la penetración de internet y el desempleo juvenil en América Latina",
+      "noticia_inspiradora": "Trump's 'drug boat' strikes may be crimes against humanity, UN says",
+      "afirmacion_noticia": "La creciente vigilancia y control digital en la región, reflejada en mayores niveles de acceso a internet, podría estar asociada a menores tasas de desempleo juvenil.",
+      "verificable_con_datos": "Se pueden comparar los indicadores Youth unemployment (% of labor force 15-24) y Internet users (% of population) a nivel país para verificar la correlación. No se pueden medir los efectos de la vigilancia específica ni la percepción de seguridad digital con los datos disponibles.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Youth unemployment vs Internet users"
+      ],
+      "justificacion": "Los indicadores de empleo juvenil y de adopción tecnológica están presentes en el catálogo y permiten una prueba estadística directa de la hipótesis sugerida por la noticia sobre control digital."
+    },
+    {
+      "titulo": "Efectos de la inseguridad en las comunicaciones aéreas sobre la productividad del sector servicios en América Latina",
+      "noticia_inspiradora": "Aircraft Communications with FAA ‘Incredibly Insecure,’ Senator Says",
+      "afirmacion_noticia": "La vulnerabilidad de las comunicaciones entre controladores y aviones podría reducir la eficiencia operativa del sector servicios, afectando su contribución al empleo.",
+      "verificable_con_datos": "Se puede evaluar la relación entre Employment in services (% of total employment) y indicadores de tecnología como Internet users (% of population) y Mobile cellular subscriptions (per 100 people). No se dispone de un indicador directo de seguridad de comunicaciones aéreas.",
+      "indicadores_respaldan": [
+        "Employment in services (% of total employment)",
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)"
+      ],
+      "correlaciones_relevantes": [
+        "Services employment vs Internet users",
+        "Services employment vs Mobile subscriptions"
+      ],
+      "justificacion": "Aunque no hay un indicador de seguridad aérea, la conexión entre tecnología de la información y empleo en servicios permite explorar cómo la percepción de inseguridad tecnológica puede reflejarse en la estructura del empleo."
+    }
+  ],
+  "topic": "Impacto de la intensificación de la lucha antidrogas de EE.UU. sobre el comercio exterior latinoamericano",
+  "angle": "Análisis de cómo la mayor presión de interdicciones marítimas afecta la participación del comercio en el PIB y la dinámica del sector manufacturero en los países latinoamericanos más vulnerables.",
+  "pregunta": "¿La intensificación de las operaciones antidrogas de EE.UU. está asociada a una disminución del Trade (% of GDP) y del valor agregado manufacturero en los países latinoamericanos?",
+  "hipotesis": "Los países latinoamericanos con mayor exposición a interdicciones antidrogas experimentan una reducción significativa del Trade (% of GDP) y del Manufacturing, value added (% of GDP) en el período posterior a la intensificación de dichas operaciones."
+}

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-22T20:06:28+00:00",
+  "generated": "2026-09-23T16:28:09+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 8
+    "papers": 9
   },
   "countries": [
     {
@@ -67,6 +67,28 @@
   ],
   "papers": [
     {
+      "date": "2026-09-23",
+      "file": "2026-09-23_impacto-de-la-intensificaci-n-de-la-luch.md",
+      "topic": "Impacto de la intensificación de la lucha antidrogas de EE.UU. sobre el comercio exterior latinoamericano",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Trade (% of GDP)",
+        "Manufacturing, value added (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "indicators": [
+        "Trade (% of GDP)",
+        "Manufacturing, value added (% of GDP)",
+        "GDP growth (annual %)"
+      ]
+    },
+    {
       "date": "2026-09-22",
       "file": "2026-09-22_impacto-de-los-ciberataques-en-criptomon.md",
       "topic": "Impacto de los ciberataques en criptomonedas sobre los flujos de remesas hacia América Latina",
@@ -113,8 +135,8 @@
         "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
       ],
       "indicators": [
-        "Electric power consumption (kWh per capita)",
         "GDP growth (annual %)",
+        "Electric power consumption (kWh per capita)",
         "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
       ]
     },
@@ -137,9 +159,9 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
+        "Trade (% of GDP)",
         "Manufacturing, value added (% of GDP)",
-        "Trade (% of GDP)"
+        "GDP growth (annual %)"
       ]
     },
     {
@@ -159,9 +181,9 @@
         "Manufacturing, value added (% of GDP)"
       ],
       "indicators": [
-        "Electric power consumption (kWh per capita)",
+        "Manufacturing, value added (% of GDP)",
         "GDP growth (annual %)",
-        "Manufacturing, value added (% of GDP)"
+        "Electric power consumption (kWh per capita)"
       ]
     },
     {
@@ -689,6 +711,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-09-23",
+              "file": "2026-09-23_impacto-de-la-intensificaci-n-de-la-luch.md",
+              "topic": "Impacto de la intensificación de la lucha antidrogas de EE.UU. sobre el comercio exterior latinoamericano"
+            },
+            {
               "date": "2026-09-19",
               "file": "2026-09-19_penetraci-n-m-vil-y-empleo-vulnerable-en.md",
               "topic": "Penetración móvil y empleo vulnerable en El Salvador y América Latina"
@@ -851,6 +878,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-09-23",
+              "file": "2026-09-23_impacto-de-la-intensificaci-n-de-la-luch.md",
+              "topic": "Impacto de la intensificación de la lucha antidrogas de EE.UU. sobre el comercio exterior latinoamericano"
+            },
+            {
               "date": "2026-09-17",
               "file": "2026-09-17_efectos-de-la-inversi-n-en-veh-culos-el-.md",
               "topic": "Efectos de la inversión en vehículos eléctricos sobre la manufactura y el comercio exterior de Brasil"
@@ -957,6 +989,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-09-23",
+              "file": "2026-09-23_impacto-de-la-intensificaci-n-de-la-luch.md",
+              "topic": "Impacto de la intensificación de la lucha antidrogas de EE.UU. sobre el comercio exterior latinoamericano"
+            },
             {
               "date": "2026-09-17",
               "file": "2026-09-17_efectos-de-la-inversi-n-en-veh-culos-el-.md",

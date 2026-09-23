@@ -1,5 +1,92 @@
 [
   {
+    "file": "2026-09-23_impacto-de-la-intensificaci-n-de-la-luch.md",
+    "date": "2026-09-23",
+    "topic": "Impacto de la intensificación de la lucha antidrogas de EE. UU. sobre el comercio exterior latinoamericano",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "REESCRIBIR",
+    "qa": "APROBADO",
+    "image": "https://live-production.wcms.abc-cdn.net.au/4e38e8094d1b5a6439695bd525ab001b?impolicy=wcms_watermark_news&cropH=2431&cropW=4322&xPos=678&yPos=0&width=862&height=485&imformat=generic",
+    "section": "América Latina",
+    "news_url": "https://www.abc.net.au/news/2026-09-22/us-drug-boat-strikes-legality-explained-in-un-report/107180978",
+    "pregunta": "¿La intensificación de las operaciones antidrogas de EE.UU. está asociada a una disminución del Trade (% of GDP) y del valor agregado manufacturero en los países latinoamericanos?",
+    "editorial": "La noticia sobre los “barcos de droga” de Trump despertó la pregunta que cualquiera se haría: ¿las intensas operaciones antidrogas de EE. UU. están mermando el comercio y la industria manufacturera de los países latinoamericanos? Al revisar los datos del Banco Mundial descubrimos una historia más matizada que la expectativa inicial.\n\nEn el análisis que agrupa diez observaciones, los países que mostraron mayor exposición a interdicciones también presentaron una caída visible del comercio como parte del PIB y una reducción del valor agregado manufacturero. Cuando miramos la serie de 120 observaciones – doce países durante diez años – la relación se vuelve aún más evidente: los cambios internos en cada país revelan que, al incrementarse la presión antidroga, el comercio y la manufactura tienden a retroceder de forma consistente. Sin embargo, al comparar todas las posibles parejas de variables (39 en total) ninguna resultó suficientemente robusta después de corregir por el número de pruebas, lo que sugiere que muchas de esas coincidencias podrían ser casuales.\n\nEn conclusión, los datos no confirman de manera clara que la ofensiva antidroga sea la causa directa de la caída del comercio y la manufactura. Hay indicios de una asociación, pero la evidencia es heterogénea y no definitiva, por lo que la hipótesis sigue abierta a debate.",
+    "charts": "2026-09-23-16-22",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 7966,
+        "after": 4460,
+        "cutChars": 9466
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 8036,
+        "after": 4694,
+        "cutChars": 9023
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 8055,
+        "after": 4549,
+        "cutChars": 9466
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 8036,
+        "after": 4694,
+        "cutChars": 9023
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 8104,
+        "after": 4540,
+        "cutChars": 9623
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 8036,
+        "after": 4694,
+        "cutChars": 9023
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      }
+    ],
+    "ts": "2026-09-23T16:28:07.731Z"
+  },
+  {
     "file": "2026-09-22_impacto-de-los-ciberataques-en-criptomon.md",
     "date": "2026-09-22",
     "topic": "¿Las remesas personales aumentan con la expansión de internet? Evidencia empírica para América Latina y el Caribe",
