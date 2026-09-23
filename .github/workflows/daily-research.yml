@@ -70,16 +70,20 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
 
-      # Verde tiene que significar paper: hoy un run puede terminar en verde
-      # sin producir nada (p.ej. cuota agotada a mitad) y el checkmark miente.
-      - name: Verify a paper was produced
+      # Verde tiene que significar paper O checkpoint: el pipeline corre en 3
+      # dias (dia1 datos+stats, dia2 draft, dia3 revision+publicacion). Un run
+      # que deja checkpoint es progreso legitimo; sin paper NI checkpoint es fallo.
+      - name: Verify a paper or checkpoint was produced
         run: |
           today=$(date -u +%Y-%m-%d)
-          if ! ls output/papers/${today}_*.md >/dev/null 2>&1; then
-            echo "::error::El run termino sin generar ningun paper con fecha ${today}. Verde sin producto es peor que rojo: revisa los logs del paso anterior."
+          if [ -f output/checkpoint.json ]; then
+            echo "Pipeline multi-dia: checkpoint '$(python -c "import json;print(json.load(open('output/checkpoint.json'))['stage'])")' guardado. El paper se completa en el proximo run."
+          elif ! ls output/papers/${today}_*.md >/dev/null 2>&1; then
+            echo "::error::El run termino sin paper ni checkpoint. Verde sin producto es peor que rojo: revisa los logs del paso anterior."
             exit 1
+          else
+            echo "Paper del dia: $(ls output/papers/${today}_*.md)"
           fi
-          echo "Paper del dia: $(ls output/papers/${today}_*.md)"
 
       - name: Copy papers to docs/ for GitHub Pages
         run: |
@@ -114,14 +118,23 @@ jobs:
           # compute-r-results.json solo existe cuando R corre el panel (opcional).
           # Exigirlo en el git add abortaba todo el staging y el commit quedaba vacio.
           [ -f output/raw/compute-r-results.json ] && git add output/raw/compute-r-results.json || true
-          git commit -m "Daily research paper - $(date -u +%Y-%m-%d)" || echo "::warning::No changes to commit (revisar git add)"
+          # Checkpoint del pipeline multi-dia (existe en dias 1-2 del ciclo)
+          [ -f output/checkpoint.json ] && git add output/checkpoint.json || true
+          if [ -f output/checkpoint.json ]; then
+            git commit -m "Research checkpoint ($(python -c "import json;print(json.load(open('output/checkpoint.json'))['stage'])")) - $(date -u +%Y-%m-%d)" || echo "::warning::No changes to commit (revisar git add)"
+          else
+            git commit -m "Daily research paper - $(date -u +%Y-%m-%d)" || echo "::warning::No changes to commit (revisar git add)"
+          fi
           git push
 
       - name: Notify new paper via Resend
         # Requiere secrets RESEND_API_KEY/RESEND_FROM/RESEND_TO y variable EMAIL_ON_PUBLISH=true
         if: ${{ vars.EMAIL_ON_PUBLISH == 'true' }}
         continue-on-error: true
-        run: python scripts/notify-email.py
+        run: |
+          # En dias de checkpoint no hay paper nuevo — no notificar
+          [ -f output/checkpoint.json ] && { echo "Dia de checkpoint, sin paper. Skip notify."; exit 0; }
+          python scripts/notify-email.py
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           RESEND_FROM: ${{ secrets.RESEND_FROM }}

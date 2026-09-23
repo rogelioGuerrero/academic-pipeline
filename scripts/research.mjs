@@ -15,7 +15,7 @@
  *   Con argumento: usa el tema dado (modo v3)
  */
 
-import { writeFileSync, readFileSync, mkdirSync, readdirSync, existsSync } from "fs";
+import { writeFileSync, readFileSync, mkdirSync, readdirSync, existsSync, unlinkSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { execFileSync } from "child_process";
@@ -63,6 +63,9 @@ const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/openai/
 const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 const OUTPUT_DIR = "output/papers";
 const OUTPUT_FILE = `${OUTPUT_DIR}/paper.txt`;
+// Pipeline multi-dia: el estado se serializa aqui al terminar cada etapa y el
+// run del dia siguiente lo retoma (cuota de Groq fresca por etapa).
+const CHECKPOINT_FILE = "output/checkpoint.json";
 const BRIEF_DIR = "output/briefs";
 
 // Path to job-hunter news_found.json (relative to project root)
@@ -1895,6 +1898,30 @@ function rebuildKnowledge() {
   }
 }
 
+function saveCheckpoint(stage, nextNode, state) {
+  mkdirSync(OUTPUT_DIR, { recursive: true });
+  writeFileSync(CHECKPOINT_FILE, JSON.stringify({ stage, nextNode, savedAt: new Date().toISOString(), state }), "utf-8");
+  console.log(`\n== Checkpoint '${stage}' guardado. El proximo run retoma en ${nextNode}. ==`);
+}
+
+function loadCheckpoint() {
+  if (!existsSync(CHECKPOINT_FILE)) return null;
+  try {
+    const cp = JSON.parse(readFileSync(CHECKPOINT_FILE, "utf-8"));
+    const ageDays = (Date.now() - new Date(cp.savedAt).getTime()) / 864e5;
+    if (ageDays > 7) {
+      console.log(`  Checkpoint con ${ageDays.toFixed(0)} dias — descartado, ciclo nuevo.`);
+      unlinkSync(CHECKPOINT_FILE);
+      return null;
+    }
+    return cp;
+  } catch { return null; }
+}
+
+function deleteCheckpoint() {
+  if (existsSync(CHECKPOINT_FILE)) unlinkSync(CHECKPOINT_FILE);
+}
+
 class MoAGraph {
   constructor() {
     this.state = {
@@ -1983,10 +2010,27 @@ class MoAGraph {
   }
   async run() {
     const nodes = { FETCH: () => this.nodeFetch(), SUGGEST: () => this.nodeSuggest(), COMPUTE: () => this.nodeCompute(), WRITE: () => this.nodeWrite(), REVIEW: () => this.nodeReview(), EDIT: () => this.nodeEdit(), APPROVE: () => this.nodeApprove() };
+    // Pipeline multi-dia (solo corrida programada): un checkpoint en disco retoma
+    // donde quedo el run anterior. TOPIC explicito o --suggest-only = single-shot.
+    const multiDay = !TOPIC && !SUGGEST_ONLY;
+    const checkpoint = multiDay ? loadCheckpoint() : null;
     let current = "FETCH"; let steps = 0; const MAX_STEPS = 15;
+    if (checkpoint) {
+      Object.assign(this.state, checkpoint.state);
+      current = checkpoint.nextNode;
+      this.state.nodeHistory.push(`RESUME@${checkpoint.stage}`);
+      console.log(`== Checkpoint '${checkpoint.stage}' (${checkpoint.savedAt.slice(0, 10)}) — retomando en ${current} ==`);
+    }
     while (current !== "END" && steps < MAX_STEPS) {
       steps++;
-      try { current = await nodes[current](); }
+      try {
+        const next = await nodes[current]();
+        // Corte dia 1: datos + stats + tablas + figuras listos
+        if (multiDay && !checkpoint && current === "COMPUTE" && next !== "END") { saveCheckpoint("compute_done", next, this.state); process.exit(0); }
+        // Corte dia 2: draft listo; dia 3 revisa/edita/publica con cuota fresca
+        if (multiDay && checkpoint?.stage === "compute_done" && current === "WRITE") { saveCheckpoint("write_done", "REVIEW", this.state); process.exit(0); }
+        current = next;
+      }
       catch (err) {
         console.error(`\nX Error en ${current}: ${err.message}`);
         console.error(`  Historial: ${this.state.nodeHistory.join(" -> ")}`);
@@ -2022,6 +2066,7 @@ class MoAGraph {
     const date = new Date().toISOString().slice(0, 10);
     const slug = this.state.topic.slice(0, 40).replace(/[^a-z0-9]/gi, "-").toLowerCase();
     writeFileSync(`${OUTPUT_DIR}/${date}_${slug}.md`, finalPaper, "utf-8");
+    deleteCheckpoint(); // ciclo multi-dia completado — proximo run arranca fresco
     writeFileSync(`${OUTPUT_DIR}/${date}_${slug}.json`, JSON.stringify({
       generated: new Date().toISOString(),
       topic: this.state.topic, angle: this.state.angle, nodes: this.state.nodeHistory, iterations: this.state.iterations,
