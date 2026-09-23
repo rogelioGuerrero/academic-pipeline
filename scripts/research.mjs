@@ -1183,7 +1183,7 @@ ESTRUCTURA OBLIGATORIA:
 3. **Metodologia** (150-250 palabras): datos del Banco Mundial 2015-2024, OLS, correlaciones Pearson/Spearman, Mann-Kendall. Menciona regresion de panel con efectos fijos por pais y/o intervalos bootstrap SOLO si aparecen en RESULTADOS. NO menciones metodos que no aparezcan en RESULTADOS (nada de Durbin-Watson, simulaciones ni proyecciones).
 4. **Analisis** (500-800 palabras): usa SOLO datos y resultados listados.
 OBLIGATORIO PARA TABLAS Y FIGURAS:
-- Incluye las tablas pre-computadas provistas en RESULTADOS ESTADISTICOS tal cual están.
+- Las tablas pre-computadas (TABLA 1-4) se insertan AUTOMATICAMENTE en la seccion "## Tablas" al final del paper — NO las copies, NO las resumas, NO las reconstruyas. Solo refiérelas en el texto (ej: "ver Tabla 2", "como muestra la Tabla 1"). Si escribes una tabla propia sera descartada.
 - ESTÁ ESTRICTAMENTE PROHIBIDO usar puntos suspensivos ("…"), omitir celdas o dejar datos incompletos.
 - Referencia al menos 2-3 de las figuras reales provistas usando EXACTAMENTE la sintaxis: ![descripcion](charts/<path-exacto>).
 - PROHIBIDO inventar nombres de archivo de figuras (como charts/consumo_pib.png o cualquier nombre que no esté en la lista de FIGURAS).
@@ -1451,7 +1451,7 @@ VERIFICACION OBLIGATORIA:
    - Apoya una conclusion en una correlacion en niveles significativa cuyo contraste en diferencias NO lo es (estos pares aparecen listados en ALERTA CO-TENDENCIA): eso es co-tendencia — el paper debe liderar con el resultado en diferencias y reportar el nivel como descriptivo/probablemente espurio, nunca como evidencia de asociacion robusta
    - Presenta correlaciones como causalidad sin matizar
 4. CONSISTENCIA INTERNA: verifica que la prosa no contradiga las tablas ni los datos — ej. si dice "cinco paises" pero la tabla lista seis, si enumera paises distintos a los que aparecen en tablas, o si describe una tendencia opuesta a la que muestran las cifras citadas. Estas contradicciones cuentan como datos_inventados.
-5. Verifica estructura (Resumen, Metodologia, Analisis, Discusion, Conclusiones, Bibliografia) y coherencia.
+5. Verifica estructura (Resumen, Metodologia, Analisis, Discusion, Conclusiones, Bibliografia) y coherencia. NOTA: la seccion "## Tablas" con las tablas pre-computadas se inserta AUTOMATICAMENTE despues de esta revision — su ausencia en el draft NO es un defecto; no la exijas ni la evalues.
 
 Responde EXACTAMENTE como JSON (json puro, sin markdown). La respuesta debe EMPEZAR directamente con { y TERMINAR con } — prohibido cualquier encabezado, tabla o prosa antes o despues del JSON:
 {"datos_correctos":true,"detalle_datos":"...","datos_inventados":["lista de cada valor fabricado"],"estructura_ok":true,"coherencia_ok":true,"correcciones":["..."],"datos_faltantes":null,"veredicto":"APROBADO","feedback":null}
@@ -1653,7 +1653,39 @@ function repairTablesAndCharts(markdownText, computeResults) {
     }
   }
 
+  // 3. Garantia determinista: si el draft no trae tablas reales (el LLM las
+  //    corto por tokens o nunca las escribio), se reconstruye la seccion
+  //    "## Tablas" completa desde computeResults — nunca se publica vacia.
+  text = ensureTables(text, computeResults);
+
   return text;
+}
+
+function ensureTables(text, computeResults) {
+  const tables = computeResults?.tables;
+  if (!tables || !text) return text;
+  text = text.replace(/\r\n/g, "\n");
+  const canonical = [
+    ["descriptive", "**Tabla 1.** Estadísticas descriptivas de las series analizadas."],
+    ["regression", "**Tabla 2.** Resultados de los modelos de regresión."],
+    ["correlations", "**Tabla 3.** Correlaciones entre las variables del estudio."],
+    ["derived", "**Tabla 4.** Indicadores derivados (cambio anual, % cambio, CAGR)."],
+  ].filter(([k]) => tables[k]);
+  if (!canonical.length) return text;
+  const countRows = (s) => (s.match(/\|[^\n|]+\|[^\n|]+\|/g) || []).length;
+  const section = "\n## Tablas\n\n" +
+    canonical.map(([k, cap]) => `${cap}\n\n${tables[k]}`).join("\n\n") + "\n";
+  // ¿Existe ya una seccion '## Tablas'?
+  const secMatch = text.match(/\n##\s*(Tablas|Anexos?)\b([\s\S]*?)(?=\n##\s|$)/i);
+  if (secMatch) {
+    if (countRows(secMatch[2]) >= 6) return text; // seccion completa, no tocar
+    console.log("  ensureTables: seccion Tablas vacia/rota — reconstruida desde compute.");
+    return text.replace(secMatch[0], section);
+  }
+  // sin seccion: si el documento ya trae tablas reales inline, no duplicar
+  if (countRows(text) >= 6) return text;
+  console.log("  ensureTables: sin tablas en el draft — seccion anexada desde compute.");
+  return text.trimEnd() + "\n" + section;
 }
 
 async function agentApprove(finalText, computeResults = null, fetchedData = null) {
