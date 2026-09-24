@@ -1,0 +1,57 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Transición energética de Alemania y su reflejo en los indicadores de energía renovable y crecimiento económico en América Latina",
+      "noticia_inspiradora": "Germany sets out plan to phase out fossil fuels by 2045",
+      "afirmacion_noticia": "Alemania anunció un plan para eliminar el carbón, el petróleo y el gas antes de 2045, reforzando su estrategia climática basada en la electrificación.",
+      "verificable_con_datos": "Podemos verificar si los países latinoamericanos con mayor participación de energías renovables (% de total final energy) presentan mayores tasas de crecimiento del PIB (GDP growth) y menores índices de inflación, pero no podemos medir directamente la política alemana ni su impacto futuro en Latinoamérica.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "GDP growth (annual %)",
+        "Inflation, consumer prices (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy consumption ↔ GDP growth",
+        "Renewable energy consumption ↔ Inflation"
+      ],
+      "justificacion": "La noticia trata de una política climática que puede servir como caso de estudio comparativo: al observar cómo la mayor adopción de energía renovable se asocia con mejores indicadores macroeconómicos en América Latina, se genera un puente directo entre el dominio ambiental y el económico, respaldado por datos disponibles."
+    },
+    {
+      "titulo": "Reapertura del estrecho de Ormuz y sus posibles efectos sobre el comercio exterior latinoamericano",
+      "noticia_inspiradora": "Iran floats conditions for Hormuz reopening as Trump says deal could come after midterms",
+      "afirmacion_noticia": "Irán ha presentado sus condiciones para reabrir el estrecho de Ormuz, lo que podría restablecer rutas marítimas críticas para el comercio mundial.",
+      "verificable_con_datos": "Podemos contrastar la variación del Trade (% of GDP) en países latinoamericanos que dependen del comercio marítimo antes y después de cambios en la disponibilidad del paso de Ormuz; no podemos medir directamente las negociaciones diplomáticas ni las condiciones específicas de Irán.",
+      "indicadores_respaldan": [
+        "Trade (% of GDP)",
+        "Manufacturing, value added (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Trade ↔ Manufacturing value added",
+        "Trade ↔ GDP growth"
+      ],
+      "justificacion": "El estrecho de Ormuz es una vía clave para el transporte de energía y materias primas; su apertura o cierre afecta el comercio global. Analizar la relación entre el nivel de comercio de América Latina y su desempeño económico permite evaluar indirectamente el impacto de la noticia con indicadores reales."
+    },
+    {
+      "titulo": "Ciberataques impulsados por IA y su relación con la adopción digital en América Latina",
+      "noticia_inspiradora": "OpenAI agent hacked Australia government portal: PM Albanese",
+      "afirmacion_noticia": "El primer ciberataque conocido impulsado por una IA comprometió datos de salud en un portal del gobierno australiano.",
+      "verificable_con_datos": "Podemos explorar si los países con mayor penetración de usuarios de internet (% de población) y suscripciones móviles (per 100 people) presentan diferencias en indicadores de vulnerabilidad económica, como empleo vulnerable o pobreza; no podemos medir directamente la frecuencia de ciberataques ni su origen IA en la región.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "Vulnerable employment (% of total employment)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Vulnerable employment",
+        "Mobile subscriptions ↔ Poverty headcount"
+      ],
+      "justificacion": "La noticia sobre IA y ciberseguridad abre la posibilidad de investigar cómo la mayor digitalización (internet y móvil) se correlaciona con indicadores de vulnerabilidad socio‑económica en América Latina, un vínculo respaldado por los datos disponibles."
+    }
+  ],
+  "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina",
+  "angle": "Evaluar si los países latinoamericanos con mayor participación de energías renovables presentan un crecimiento del PIB más sólido y una menor presión inflacionaria, tomando como referencia la ambiciosa política alemana de descarbonización para 2045.",
+  "pregunta": "¿Existe una relación positiva entre la proporción de energía renovable consumida (% del total de energía final) y la tasa de crecimiento del PIB (annual %) en los países de América Latina?",
+  "hipotesis": "Los países latinoamericanos con una mayor participación de energías renovables en su consumo total de energía experimentan tasas de crecimiento del PIB superiores a la media regional."
+}
