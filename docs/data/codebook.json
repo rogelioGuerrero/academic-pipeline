@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-25T16:49:32+00:00",
+  "generated": "2026-09-26T16:04:08+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 9
+    "papers": 10
   },
   "countries": [
     {
@@ -67,6 +67,28 @@
   ],
   "papers": [
     {
+      "date": "2026-09-26",
+      "file": "2026-09-26_impacto-de-la-transici-n-a-energ-as-reno.md",
+      "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Renewable energy consumption (% of total final energy)",
+        "GDP growth (annual %)",
+        "Inflation, consumer prices (annual %)"
+      ],
+      "indicators": [
+        "Renewable energy consumption (% of total final energy)",
+        "GDP growth (annual %)",
+        "Inflation, consumer prices (annual %)"
+      ]
+    },
+    {
       "date": "2026-09-23",
       "file": "2026-09-23_impacto-de-la-intensificaci-n-de-la-luch.md",
       "topic": "Impacto de la intensificación de la lucha antidrogas de EE.UU. sobre el comercio exterior latinoamericano",
@@ -83,9 +105,9 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
+        "GDP growth (annual %)",
         "Trade (% of GDP)",
-        "Manufacturing, value added (% of GDP)",
-        "GDP growth (annual %)"
+        "Manufacturing, value added (% of GDP)"
       ]
     },
     {
@@ -159,9 +181,9 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
+        "GDP growth (annual %)",
         "Trade (% of GDP)",
-        "Manufacturing, value added (% of GDP)",
-        "GDP growth (annual %)"
+        "Manufacturing, value added (% of GDP)"
       ]
     },
     {
@@ -181,8 +203,8 @@
         "Manufacturing, value added (% of GDP)"
       ],
       "indicators": [
-        "Manufacturing, value added (% of GDP)",
         "GDP growth (annual %)",
+        "Manufacturing, value added (% of GDP)",
         "Electric power consumption (kWh per capita)"
       ]
     },
@@ -711,6 +733,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-09-26",
+              "file": "2026-09-26_impacto-de-la-transici-n-a-energ-as-reno.md",
+              "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina"
+            },
+            {
               "date": "2026-09-23",
               "file": "2026-09-23_impacto-de-la-intensificaci-n-de-la-luch.md",
               "topic": "Impacto de la intensificación de la lucha antidrogas de EE.UU. sobre el comercio exterior latinoamericano"
@@ -831,7 +858,13 @@
           "year_to": 2024,
           "n_observations": 127,
           "n_observations_expected": 130,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-09-26",
+              "file": "2026-09-26_impacto-de-la-transici-n-a-energ-as-reno.md",
+              "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina"
+            }
+          ]
         },
         {
           "code": "NV.IND.MANF.ZS",
@@ -1749,7 +1782,13 @@
           "year_to": 2021,
           "n_observations": 90,
           "n_observations_expected": 91,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-09-26",
+              "file": "2026-09-26_impacto-de-la-transici-n-a-energ-as-reno.md",
+              "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina"
+            }
+          ]
         }
       ]
     }

@@ -1,5 +1,42 @@
 [
   {
+    "file": "2026-09-26_impacto-de-la-transici-n-a-energ-as-reno.md",
+    "date": "2026-09-26",
+    "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://images.pexels.com/photos/968308/pexels-photo-968308.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "section": "Internacional",
+    "news_url": "https://www.dw.com/en/germany-sets-out-plan-to-phase-out-fossil-fuels-by-2045/a-79404028?maca=en-rss-en-all-1573-rdf",
+    "pregunta": "¿Existe una relación positiva entre la proporción de energía renovable consumida (% del total de energía final) y la tasa de crecimiento del PIB (annual %) en los países de América Latina?",
+    "editorial": "¿Será que los países latinoamericanos que usan más energía renovable crecen más rápido en su economía? Esa duda surgió al ver los últimos titulares sobre la transición verde y el desempeño del PIB.\n\nAl revisar los datos del Banco Mundial, primero se miró un conjunto pequeño de seis casos, donde parecía que al subir la proporción de energía limpia también subía la tasa de crecimiento del PIB. Sin embargo, cuando el análisis se amplió a doce naciones observadas durante varios años —un total de 81 registros— la historia cambió. Allí, el comportamiento de cada país a lo largo del tiempo mostró que la relación entre energía renovable y crecimiento era mucho menos clara, y los resultados variaron mucho entre ellos. Además, se examinaron 39 pares de variables para buscar patrones; ninguno de esos pares pasó la prueba de control de falsas alarmas, lo que indica que los hallazgos podrían deberse al azar.\n\nEn conclusión, los datos no confirman de forma robusta que una mayor participación de energías renovables garantice un crecimiento económico superior en América Latina. La idea sigue siendo atractiva, pero por ahora la evidencia es inconclusa y sugiere que otros factores también juegan un papel importante.",
+    "charts": "2026-09-24-16-43",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 7857,
+        "after": 4675,
+        "cutChars": 8592
+      }
+    ],
+    "ts": "2026-09-26T16:04:06.370Z"
+  },
+  {
     "file": "2026-09-23_impacto-de-la-intensificaci-n-de-la-luch.md",
     "date": "2026-09-23",
     "topic": "Impacto de la intensificación de la lucha antidrogas de EE. UU. sobre el comercio exterior latinoamericano",
