@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-26T16:04:08+00:00",
+  "generated": "2026-09-27T16:38:52+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 10
+    "papers": 11
   },
   "countries": [
     {
@@ -66,6 +66,28 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-09-27",
+      "file": "2026-09-27_impacto-de-la-transici-n-a-energ-as-reno.md",
+      "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Renewable energy consumption (% of total final energy)",
+        "GDP growth (annual %)",
+        "Inflation, consumer prices (annual %)"
+      ],
+      "indicators": [
+        "Renewable energy consumption (% of total final energy)",
+        "GDP growth (annual %)",
+        "Inflation, consumer prices (annual %)"
+      ]
+    },
     {
       "date": "2026-09-26",
       "file": "2026-09-26_impacto-de-la-transici-n-a-energ-as-reno.md",
@@ -733,6 +755,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-09-27",
+              "file": "2026-09-27_impacto-de-la-transici-n-a-energ-as-reno.md",
+              "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina"
+            },
+            {
               "date": "2026-09-26",
               "file": "2026-09-26_impacto-de-la-transici-n-a-energ-as-reno.md",
               "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina"
@@ -859,6 +886,11 @@
           "n_observations": 127,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-09-27",
+              "file": "2026-09-27_impacto-de-la-transici-n-a-energ-as-reno.md",
+              "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina"
+            },
             {
               "date": "2026-09-26",
               "file": "2026-09-26_impacto-de-la-transici-n-a-energ-as-reno.md",
@@ -1783,6 +1815,11 @@
           "n_observations": 90,
           "n_observations_expected": 91,
           "papers": [
+            {
+              "date": "2026-09-27",
+              "file": "2026-09-27_impacto-de-la-transici-n-a-energ-as-reno.md",
+              "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina"
+            },
             {
               "date": "2026-09-26",
               "file": "2026-09-26_impacto-de-la-transici-n-a-energ-as-reno.md",
