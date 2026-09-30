@@ -10,6 +10,9 @@ import urllib.request
 from datetime import date
 
 BASE = "https://rogelioguerrero.github.io/academic-pipeline"
+# Dedup de correos: papers ya anunciados. La marca se commitea desde el
+# paso de notify del workflow (corre despues del commit de artifacts).
+NOTIFIED_FILE = "output/notified.txt"
 
 
 def load_env_fallback():
@@ -48,6 +51,13 @@ def main():
         return
 
     p = new_today[0]
+    notified = set()
+    if os.path.exists(NOTIFIED_FILE):
+        notified = set(open(NOTIFIED_FILE, encoding="utf-8").read().split())
+    if p["file"] in notified:
+        print(f"Paper {p['file']} ya notificado. No se reenvía.")
+        return
+
     topic = p.get("topic", "Nuevo artículo")
     link = f"{BASE}/#{p['file']}"
     pdf_link = f"{BASE}/papers/{p['file'].replace('.md', '.pdf')}"
@@ -85,6 +95,9 @@ def main():
         with urllib.request.urlopen(req) as response:
             status = response.status
             print(f"Correo enviado ({status}): {topic}")
+        os.makedirs(os.path.dirname(NOTIFIED_FILE), exist_ok=True)
+        with open(NOTIFIED_FILE, "a", encoding="utf-8") as fh:
+            fh.write(p["file"] + "\n")
     except urllib.error.HTTPError as e:
         err_body = e.read().decode("utf-8", errors="ignore")
         print(f"Aviso: Resend devolvió HTTP {e.code}: {err_body}")

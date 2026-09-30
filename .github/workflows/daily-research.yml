@@ -118,8 +118,10 @@ jobs:
           # compute-r-results.json solo existe cuando R corre el panel (opcional).
           # Exigirlo en el git add abortaba todo el staging y el commit quedaba vacio.
           [ -f output/raw/compute-r-results.json ] && git add output/raw/compute-r-results.json || true
-          # Checkpoint del pipeline multi-dia (existe en dias 1-2 del ciclo)
-          [ -f output/checkpoint.json ] && git add output/checkpoint.json || true
+          # Checkpoint del pipeline multi-dia: -A registra alta Y baja. El guard
+          # [ -f ] anterior descartaba el borrado post-publish y el ciclo
+          # republicaba el mismo paper cada dia (checkpoint stale en el repo).
+          git add -A output/checkpoint.json || true
           if [ -f output/checkpoint.json ]; then
             git commit -m "Research checkpoint ($(python -c "import json;print(json.load(open('output/checkpoint.json'))['stage'])")) - $(date -u +%Y-%m-%d)" || echo "::warning::No changes to commit (revisar git add)"
           else
@@ -135,6 +137,15 @@ jobs:
           # En dias de checkpoint no hay paper nuevo — no notificar
           [ -f output/checkpoint.json ] && { echo "Dia de checkpoint, sin paper. Skip notify."; exit 0; }
           python scripts/notify-email.py
+          # La marca de "ya notificado" se persiste aqui (el commit de artifacts
+          # ya corrio); sin este push un re-run del job no veria la marca.
+          if [ -f output/notified.txt ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add output/notified.txt
+            git commit -m "Paper notificado - $(date -u +%Y-%m-%d)" || true
+            git push || true
+          fi
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           RESEND_FROM: ${{ secrets.RESEND_FROM }}
