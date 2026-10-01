@@ -1,0 +1,53 @@
+{
+  "suggestions": [
+    {
+      "titulo": "El auge de los unicornios de ciberseguridad y su vínculo con la digitalización de la fuerza laboral en América Latina",
+      "noticia_inspiradora": "Blackwall jumps 368% to become Estonia’s newest unicorn (Ciberseguridad)",
+      "afirmacion_noticia": "El rápido crecimiento de una startup de ciberseguridad en Estonia indica una expansión del sector tecnológico y la demanda de talento especializado.",
+      "verificable_con_datos": "Se pueden verificar con datos de Internet users (% de la población) y Employment in services (% del total de empleo) si la digitalización y la expansión del sector servicios están correlacionadas con menores tasas de youth unemployment; no se puede medir directamente la creación de startups ni su valoración.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Employment in services",
+        "Internet users ↔ Youth unemployment",
+        "Employment in services ↔ Youth unemployment"
+      ],
+      "justificacion": "La noticia habla de un unicornio tecnológico; el dominio más cercano disponible en el catálogo es tecnología (Internet users) y empleo en servicios, lo que permite explorar si la mayor adopción digital se traduce en mejores oportunidades laborales para jóvenes en la región."
+    },
+    {
+      "titulo": "Restricciones a la subida de tarifas de gas en España y su posible efecto sobre la inflación y el crecimiento económico latinoamericano",
+      "noticia_inspiradora": "Spain caps gas tariff rises, extends fuel tax cuts (Economía)",
+      "afirmacion_noticia": "Limitar el aumento de tarifas de gas y mantener recortes fiscales ayuda a contener la inflación y favorecer el crecimiento económico.",
+      "verificable_con_datos": "Se pueden contrastar con los indicadores de Inflation, consumer prices (annual %) y GDP growth (annual %) en los países latinoamericanos; no se dispone de datos directos sobre políticas tarifarias locales ni sobre precios del gas en la región.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflation ↔ GDP growth"
+      ],
+      "justificacion": "Aunque la medida es europea, sirve como caso de estudio para investigar si menores presiones de precios energéticos están asociadas a menores tasas de inflación y a un mayor crecimiento en América Latina, usando los indicadores macroeconómicos disponibles."
+    },
+    {
+      "titulo": "Reformas regulatorias en Europa y su posible repercusión en la inversión extranjera directa en América Latina",
+      "noticia_inspiradora": "Germany shields parts of Deutsche Börse from EU oversight (Economía)",
+      "afirmacion_noticia": "Eximir a ciertos mercados financieros de supervisión europea podría hacer más atractiva la inversión extranjera directa al reducir incertidumbre regulatoria.",
+      "verificable_con_datos": "Se pueden examinar con el indicador Foreign direct investment, net inflows (% of GDP) y Trade (% of GDP) en los países latinoamericanos; no se dispone de datos sobre la percepción regulatoria ni sobre flujos específicos vinculados a la Bolsa alemana.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI inflows ↔ Trade intensity"
+      ],
+      "justificacion": "La noticia trata de cambios regulatorios en un mercado financiero importante; el puente más directo con los datos disponibles es el flujo de inversión extranjera y el comercio, permitiendo analizar si la liberalización financiera en Europa se refleja en mayores ingresos de FDI en América Latina."
+    }
+  ],
+  "topic": "Impacto de la digitalización y la política energética en el empleo juvenil y el crecimiento económico de América Latina",
+  "angle": "Analizar cómo la expansión del acceso a internet y las políticas de contención de precios energéticos influyen en la creación de empleo en el sector servicios y en la dinámica macroeconómica de los países latinoamericanos.",
+  "pregunta": "¿En qué medida el aumento del porcentaje de usuarios de internet y la moderación de la inflación están asociados a menores tasas de desempleo juvenil y a mayores tasas de crecimiento del PIB en América Latina?",
+  "hipotesis": "Los países latinoamericanos con mayor penetración de internet y menor inflación experimentan menores tasas de desempleo juvenil y mayores tasas de crecimiento del PIB."
+}
