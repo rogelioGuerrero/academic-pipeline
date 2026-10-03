@@ -1,5 +1,42 @@
 [
   {
+    "file": "2026-10-03_impacto-de-la-digitalizaci-n-y-la-pol-ti.md",
+    "date": "2026-10-03",
+    "topic": "Impacto de la digitalización y la política energética en el empleo juvenil y el crecimiento económico de América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://biztoc.com/cdn/66768333466fa9ef_s.webp",
+    "section": "Ciberseguridad",
+    "news_url": "https://biztoc.com/x/66768333466fa9ef",
+    "pregunta": "¿En qué medida el aumento del porcentaje de usuarios de internet y la moderación de la inflación están asociados a menores tasas de desempleo juvenil y a mayores tasas de crecimiento del PIB en América Latina?",
+    "editorial": "La pregunta que surgió al leer la noticia era sencilla: ¿el mayor acceso a internet y una inflación bajo control están ayudando a que menos jóvenes estén sin trabajo y que la economía crezca en América Latina? Al revisar los datos del Banco Mundial, la historia que se dibuja es mixta. En los diez países que analizamos de forma global, cuando la proporción de usuarios de internet sube, el empleo en el sector servicios tiende a incrementarse ligeramente y el desempleo juvenil a disminuir, aunque la evidencia no es lo suficientemente firme como para afirmarlo con seguridad. Cuando desmenuzamos la información por país y por año –12 naciones durante varios años, 120 observaciones en total– la tendencia se vuelve más clara: los cambios internos en cada país muestran una relación más consistente entre más internet y menos jóvenes sin trabajo. Sin embargo, de los 39 pares de variables que cruzamos, solo tres pasaron una prueba muy estricta que controla los falsos positivos, lo que indica que muchas de las coincidencias pueden ser casualidad. En conclusión, los datos no confirman de manera rotunda que el acceso a internet y la inflación baja sean la receta segura para reducir el desempleo juvenil y acelerar el crecimiento; la relación parece existir, pero de forma tenue y con diferencias importantes entre países.",
+    "charts": "2026-10-01-18-19",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 8944,
+        "after": 4707,
+        "cutChars": 11440
+      }
+    ],
+    "ts": "2026-10-03T15:58:24.960Z"
+  },
+  {
     "file": "2026-09-30_impacto-de-la-transici-n-a-energ-as-reno.md",
     "date": "2026-09-30",
     "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina",

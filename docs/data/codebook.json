@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-02T17:40:30+00:00",
+  "generated": "2026-10-03T15:58:27+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 14
+    "papers": 15
   },
   "countries": [
     {
@@ -66,6 +66,28 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-10-03",
+      "file": "2026-10-03_impacto-de-la-digitalizaci-n-y-la-pol-ti.md",
+      "topic": "Impacto de la digitalización y la política energética en el empleo juvenil y el crecimiento económico de América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "indicators": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ]
+    },
     {
       "date": "2026-09-30",
       "file": "2026-09-30_impacto-de-la-transici-n-a-energ-as-reno.md",
@@ -215,8 +237,8 @@
         "GDP per capita (current US$)"
       ],
       "indicators": [
-        "Personal remittances received (current US$)",
         "Internet users (% of population)",
+        "Personal remittances received (current US$)",
         "GDP per capita (current US$)"
       ]
     },
@@ -435,7 +457,13 @@
           "year_to": 2024,
           "n_observations": 130,
           "n_observations_expected": 130,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-10-03",
+              "file": "2026-10-03_impacto-de-la-digitalizaci-n-y-la-pol-ti.md",
+              "topic": "Impacto de la digitalización y la política energética en el empleo juvenil y el crecimiento económico de América Latina"
+            }
+          ]
         },
         {
           "code": "SL.EMP.TOTL.SP.ZS",
@@ -722,7 +750,13 @@
           "year_to": 2024,
           "n_observations": 130,
           "n_observations_expected": 130,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-10-03",
+              "file": "2026-10-03_impacto-de-la-digitalizaci-n-y-la-pol-ti.md",
+              "topic": "Impacto de la digitalización y la política energética en el empleo juvenil y el crecimiento económico de América Latina"
+            }
+          ]
         }
       ]
     },
@@ -1400,6 +1434,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-10-03",
+              "file": "2026-10-03_impacto-de-la-digitalizaci-n-y-la-pol-ti.md",
+              "topic": "Impacto de la digitalización y la política energética en el empleo juvenil y el crecimiento económico de América Latina"
+            },
             {
               "date": "2026-09-22",
               "file": "2026-09-22_impacto-de-los-ciberataques-en-criptomon.md",
