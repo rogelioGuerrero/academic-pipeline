@@ -1,0 +1,72 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Influencia de la conectividad digital y la inversión educativa en el desempleo juvenil latinoamericano",
+      "noticia_inspiradora": "Les Etats-Unis ou la Chine: quelle est l'influence la plus positive en Amérique latine? Ce que révèle un sondage",
+      "afirmacion_noticia": "La encuesta muestra que la población latinoamericana percibe a China con una influencia más positiva que a EE.UU., lo que sugiere que la expansión tecnológica china podría estar mejorando oportunidades para los jóvenes.",
+      "verificable_con_datos": "Se puede comprobar la relación entre la penetración de internet (Internet users %) y el desempleo juvenil (Youth unemployment %). No se dispone de datos que midan la percepción de influencia de China vs EE.UU., por lo que esa parte queda fuera de alcance.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Government expenditure on education (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs Youth unemployment (negativa)",
+        "Government expenditure on education vs Youth unemployment (negativa)",
+        "Internet users vs Government expenditure on education (positiva)"
+      ],
+      "justificacion": "La noticia habla de percepción de influencia tecnológica; el dominio tecnológico se conecta directamente con los indicadores de usuarios de internet y empleo juvenil, y la educación es un canal mediador que también está disponible en el catálogo."
+    },
+    {
+      "titulo": "Remesas digitales y su vínculo con la adopción de internet en América Latina",
+      "noticia_inspiradora": "Les Etats-Unis ou la Chine: quelle est l'influence la plus positive en Amérique latine? Ce que révèle un sondage",
+      "afirmacion_noticia": "El estudio sugiere que la creciente influencia de China se traduce en mayores flujos de remesas gracias a plataformas digitales.",
+      "verificable_con_datos": "Se pueden comparar los flujos de remesas recibidas (Personal remittances received) con la tasa de usuarios de internet. No se dispone de datos sobre la procedencia de esas remesas (China vs EE.UU.) ni de la percepción de influencia, por lo que esa parte no es verificable.",
+      "indicadores_respaldan": [
+        "Personal remittances received (current US$)",
+        "Internet users (% of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Remesas vs Internet users (positiva, r≈0.96 en Colombia y LCN)",
+        "Remesas vs GDP per capita (potencial)"
+      ],
+      "justificacion": "La noticia menciona la influencia de China en la región, lo que puede estar mediado por la expansión de servicios digitales que facilitan remesas. Los indicadores disponibles permiten medir directamente esa relación."
+    },
+    {
+      "titulo": "Impacto de la inflación y la inversión extranjera en la percepción de seguridad económica en América Latina",
+      "noticia_inspiradora": "Les Etats-Unis ou la Chine: quelle est l'influence la plus positive en Amérique latine? Ce que révèle un sondage",
+      "afirmacion_noticia": "Los encuestados asocian una mayor influencia positiva de China con mejor seguridad económica, mientras que la percepción de EE.UU. está vinculada a mayores riesgos inflacionarios.",
+      "verificable_con_datos": "Se pueden analizar la relación entre inflación (Consumer price inflation) y la entrada de inversión extranjera directa (FDI net inflows % of GDP). No hay indicadores que capturen la percepción de seguridad económica, por lo que esa dimensión queda fuera de alcance.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Foreign direct investment, net inflows (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflation vs FDI inflows (negativa)",
+        "Inflation vs GDP growth (negativa)",
+        "FDI inflows vs GDP growth (positiva)"
+      ],
+      "justificacion": "Aunque la noticia es sobre percepción, el vínculo con la seguridad económica puede traducirse a variables macroeconómicas como inflación e inversión extranjera, que están disponibles en el catálogo."
+    },
+    {
+      "titulo": "Relación entre la adopción de tecnologías móviles y la participación de la fuerza laboral juvenil",
+      "noticia_inspiradora": "Les Etats-Unis ou la Chine: quelle est l'influence la plus positive en Amérique latine? Ce que révèle un sondage",
+      "afirmacion_noticia": "La mayor influencia percibida de China se debe a su impulso de la infraestructura móvil, lo que favorece la inserción laboral de los jóvenes.",
+      "verificable_con_datos": "Se pueden cruzar las suscripciones móviles (Mobile cellular subscriptions per 100 people) con la tasa de desempleo juvenil. No se dispone de datos que midan directamente la infraestructura impulsada por China, por lo que esa parte no es verificable.",
+      "indicadores_respaldan": [
+        "Mobile cellular subscriptions (per 100 people)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Labor force participation rate (% of population ages 15+)"
+      ],
+      "correlaciones_relevantes": [
+        "Mobile subscriptions vs Youth unemployment (negativa)",
+        "Mobile subscriptions vs Labor force participation (positiva)"
+      ],
+      "justificacion": "La noticia alude al papel de China en la expansión tecnológica; el dominio de telecomunicaciones se refleja en el indicador de suscripciones móviles, que puede relacionarse con la inserción laboral juvenil."
+    }
+  ],
+  "topic": "Influencia de la conectividad digital y la inversión educativa en el desempleo juvenil en América Latina",
+  "angle": "Analizar cómo la penetración de internet y el gasto público en educación explican las variaciones en la tasa de desempleo juvenil entre los países latinoamericanos, a la luz de la percepción de una mayor influencia positiva de China en la región.",
+  "pregunta": "¿En qué medida la tasa de usuarios de internet y el gasto gubernamental en educación están asociados negativamente con el desempleo juvenil en los países latinoamericanos?",
+  "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor gasto en educación (como % del PIB) presentan tasas de desempleo juvenil significativamente más bajas."
+}
