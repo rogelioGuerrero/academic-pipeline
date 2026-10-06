@@ -337,7 +337,10 @@ async function callGroq(model, prompt, opts = {}) {
     }
   }
   if (GEMINI_API_KEY) {
-    return await callLLM(GEMINI_API_KEY, GEMINI_API_URL, GEMINI_MODEL, prompt, opts);
+    // reasoning_effort es parametro de Groq; el endpoint OpenAI-compat de
+    // Gemini responde 400 ante campos desconocidos.
+    const { reasoning_effort, ...geminiOpts } = opts;
+    return await callLLM(GEMINI_API_KEY, GEMINI_API_URL, GEMINI_MODEL, prompt, geminiOpts);
   }
   throw new Error("No LLM provider available (Groq and Gemini both missing/failed)");
 }
@@ -1908,6 +1911,11 @@ function loadCheckpoint() {
   if (!existsSync(CHECKPOINT_FILE)) return null;
   try {
     const cp = JSON.parse(readFileSync(CHECKPOINT_FILE, "utf-8"));
+    if (cp.stage === "abandoned") {
+      console.log(`  Ciclo anterior abandonado por QA — arrancando ciclo nuevo.`);
+      unlinkSync(CHECKPOINT_FILE);
+      return null;
+    }
     const ageDays = (Date.now() - new Date(cp.savedAt).getTime()) / 864e5;
     if (ageDays > 7) {
       console.log(`  Checkpoint con ${ageDays.toFixed(0)} dias — descartado, ciclo nuevo.`);
@@ -2046,6 +2054,26 @@ class MoAGraph {
       console.log(`  Tiempo: ${((Date.now() - this.t0) / 1000).toFixed(1)}s | Nodos: ${this.state.nodeHistory.join(" -> ")}`);
       console.log(`==================================================\n`);
       return;
+    }
+    // Gate de calidad (solo pipeline automatico): si QA sigue rechazando tras
+    // agotar las ediciones del run, NO se publica. Se reprograma WRITE para
+    // manana con el feedback de QA y contadores frescos (cuota nueva). Tras 2
+    // reprogramas el ciclo se abandona — mejor un dia sin paper que publicar
+    // algo que el propio sistema sabe que no cumple.
+    if (multiDay && this.state.qaDecision?.veredicto === "RECHAZADO") {
+      this.state.qaRetries = (this.state.qaRetries || 0) + 1;
+      if (this.state.qaRetries <= 2) {
+        this.state.iterations = { rewrite: 0, edit: 0 };
+        this.state.writeFeedback = "QA rechazo el intento anterior — corregir de raiz: " + decisionToFeedback(this.state.qaDecision);
+        this.state.currentDraft = "";
+        this.state.editedArticle = "";
+        saveCheckpoint("qa_retry", "WRITE", this.state);
+        console.log(`== QA RECHAZADO persistente — reintento ${this.state.qaRetries}/2 programado para manana. Hoy no se publica ni se envia correo. ==`);
+        process.exit(0);
+      }
+      saveCheckpoint("abandoned", "FETCH", {});
+      console.log("== QA rechazo el paper tras 2 reintentos — ciclo abandonado SIN publicar. El proximo run inicia un tema nuevo. ==");
+      process.exit(0);
     }
     mkdirSync(OUTPUT_DIR, { recursive: true });
     // Muestra del estudio: se fija antes de la nota de transparencia para que
