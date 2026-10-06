@@ -1074,8 +1074,16 @@ function computeDigest(computeResults, suggestDecision = null) {
   }
   if (computeResults.charts?.length) {
     const cdir = computeResults.chartsDir ? `${computeResults.chartsDir}/` : "";
-    // Solo paths, no captions — el LLM solo necesita referenciar, no leer el caption
-    parts.push(`⟦KEEP⟧FIGURAS (referenciar con path exacto): ${computeResults.charts.map(c => `charts/${cdir}${c.file}${c.howto ? ` — guia de lectura: "${c.howto}"` : ""}`).join(", ")}⟦/KEEP⟧`);
+    // Narrativas van al cuerpo; diagnosticas se anexan solas — ofrecerlas al
+    // writer las terminaba citando sin que aportaran al argumento.
+    const narrativas = computeResults.charts.filter(c => c.role !== "diagnostic");
+    const diag = computeResults.charts.filter(c => c.role === "diagnostic");
+    if (narrativas.length) {
+      parts.push(`⟦KEEP⟧FIGURAS (referenciar con path exacto): ${narrativas.map(c => `charts/${cdir}${c.file}${c.howto ? ` — guia de lectura: "${c.howto}"` : ""}`).join(", ")}⟦/KEEP⟧`);
+    }
+    if (diag.length) {
+      parts.push(`FIGURAS DIAGNOSTICAS (NO citar en el cuerpo — se insertan solas en el "## Anexo estadístico" al final del paper): ${diag.map(c => `charts/${cdir}${c.file}`).join(", ")}`);
+    }
   }
   if (computeResults.tables) {
     if (computeResults.tables.descriptive) {
@@ -1213,6 +1221,7 @@ REGLAS CRITICAS (incumplir = rechazo):
 - Justo despues del Resumen, agrega un blockquote: "> **En breve:** <la respuesta en una frase a la pregunta de investigacion, con el veredicto honesto segun los resultados>".
 - Bajo cada sub-encabezado ### del Analisis, agrega UNA linea en cursiva que explique con lenguaje sencillo que muestra esa seccion (para lectores no tecnicos). NO uses la frase "En palabras simples" — empieza directo con la explicacion.
 - Bajo cada figura referenciada, agrega una linea en cursiva "*Como leerla: <guia>*" usando la guia de lectura provista en la lista FIGURAS.
+- Las FIGURAS DIAGNOSTICAS (robustez del modelo) NO se citan en el cuerpo: se insertan automaticamente en el "## Anexo estadístico" al final.
 - Total: 1200-1800 palabras. La Bibliografia es OBLIGATORIA y va AL FINAL — si te quedas sin espacio, acorta el Analisis, nunca omitas la Bibliografia.
 
 Devuelve el paper completo en Markdown.`;
@@ -1457,7 +1466,7 @@ VERIFICACION OBLIGATORIA:
    - Apoya una conclusion en una correlacion en niveles significativa cuyo contraste en diferencias NO lo es (estos pares aparecen listados en ALERTA CO-TENDENCIA): eso es co-tendencia — el paper debe liderar con el resultado en diferencias y reportar el nivel como descriptivo/probablemente espurio, nunca como evidencia de asociacion robusta
    - Presenta correlaciones como causalidad sin matizar
 4. CONSISTENCIA INTERNA: verifica que la prosa no contradiga las tablas ni los datos — ej. si dice "cinco paises" pero la tabla lista seis, si enumera paises distintos a los que aparecen en tablas, o si describe una tendencia opuesta a la que muestran las cifras citadas. Estas contradicciones cuentan como datos_inventados.
-5. Verifica estructura (Resumen, Metodologia, Analisis, Discusion, Conclusiones, Bibliografia) y coherencia. NOTA: la seccion "## Tablas" con las tablas pre-computadas se inserta AUTOMATICAMENTE despues de esta revision — su ausencia en el draft NO es un defecto; no la exijas ni la evalues.
+5. Verifica estructura (Resumen, Metodologia, Analisis, Discusion, Conclusiones, Bibliografia) y coherencia. NOTA: la seccion "## Tablas" con las tablas pre-computadas se inserta AUTOMATICAMENTE despues de esta revision — su ausencia en el draft NO es un defecto; no la exijas ni la evalues. Lo mismo aplica al "## Anexo estadístico" con las figuras de diagnostico.
 
 Responde EXACTAMENTE como JSON (json puro, sin markdown). La respuesta debe EMPEZAR directamente con { y TERMINAR con } — prohibido cualquier encabezado, tabla o prosa antes o despues del JSON:
 {"datos_correctos":true,"detalle_datos":"...","datos_inventados":["lista de cada valor fabricado"],"estructura_ok":true,"coherencia_ok":true,"correcciones":["..."],"datos_faltantes":null,"veredicto":"APROBADO","feedback":null}
@@ -1605,16 +1614,20 @@ function repairTablesAndCharts(markdownText, computeResults) {
 
   // 1. Normalizar y reparar rutas de figuras
   if (validCharts.length > 0) {
+    // El reemplazo de rutas inventadas y la inyeccion de respaldo usan solo
+    // figuras narrativas: las diagnosticas pertenecen al anexo, no al cuerpo.
+    const narrativeFiles = (computeResults.charts || []).filter(c => c.role !== "diagnostic").map(c => c.file);
+    const fallbackFig = narrativeFiles[0] || validCharts[0];
     text = text.replace(/!\[(.*?)\]\((charts\/[^\)]+)\)/g, (match, caption, p) => {
       const filename = p.split("/").pop();
       if (validCharts.includes(filename)) {
         return `![${caption}](charts/${cdir}${filename})`;
       }
-      return `![${caption || "Evolución de indicadores"}](charts/${cdir}${validCharts[0]})`;
+      return `![${caption || "Evolución de indicadores"}](charts/${cdir}${fallbackFig})`;
     });
 
     if (!/!\[.*?\]\(charts\/.*?\)/.test(text)) {
-      const topCharts = computeResults.charts.slice(0, 3);
+      const topCharts = (computeResults.charts || []).filter(c => c.role !== "diagnostic").slice(0, 3);
       const chartSnippets = topCharts.map(c => `\n\n![${c.caption || c.file}](charts/${cdir}${c.file})${c.howto ? `\n\n*Cómo leerla: ${c.howto}.*` : ""}\n`).join("");
       if (/## Análisis/i.test(text)) {
         text = text.replace(/## Análisis/i, `## Análisis${chartSnippets}`);
@@ -1664,7 +1677,23 @@ function repairTablesAndCharts(markdownText, computeResults) {
   //    "## Tablas" completa desde computeResults — nunca se publica vacia.
   text = ensureTables(text, computeResults);
 
+  // 4. Anexo estadistico: las figuras de diagnostico (robustez, residuos,
+  //    anomalies) documentan la calidad de la estimacion sin inflar el cuerpo.
+  text = ensureDiagnosticsAnnex(text, computeResults);
+
   return text;
+}
+
+function ensureDiagnosticsAnnex(text, computeResults) {
+  const charts = computeResults?.charts || [];
+  const cdir = computeResults.chartsDir ? `${computeResults.chartsDir}/` : "";
+  const pending = charts.filter(c => c.role === "diagnostic" && !text.includes(`charts/${cdir}${c.file}`));
+  if (!pending.length) return text;
+  const blocks = pending
+    .map(c => `![${c.caption || c.file}](charts/${cdir}${c.file})${c.howto ? `\n\n*Cómo leerla: ${c.howto}.*` : ""}`)
+    .join("\n\n");
+  return text.trimEnd() +
+    `\n\n## Anexo estadístico\n\n*Diagnósticos de robustez del modelo: no forman parte del argumento central, documentan la calidad de la estimación.*\n\n${blocks}\n`;
 }
 
 function ensureTables(text, computeResults) {

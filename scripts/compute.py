@@ -1363,6 +1363,7 @@ def make_charts(data, results, outdir):
             pass
     for c in charts:
         c["howto"] = FIG_GUIDE.get(c["file"], "")
+        c["role"] = FIG_ROLE.get(c["file"], "narrative")
     return charts
 
 # Guia de lectura en lenguaje llano por figura — llega al prompt de WRITE y,
@@ -1379,6 +1380,16 @@ FIG_GUIDE = {
     "fig9_residuals.png": "puntos regados sin patrón cerca del cero = modelo sano; si dibujan una forma, el modelo se perdió algo",
     "fig10_panels.png": "la misma relación dentro de cada país; si las pendientes apuntan en direcciones distintas, la respuesta depende del país",
     "fig11_anomaly.png": "los pines marcan años estadísticamente atípicos — choques como 2020 que se leen como contexto, no como tendencia",
+}
+
+# Rol editorial por figura: "narrative" se ofrece al cuerpo del articulo;
+# "diagnostic" documenta la robustez del modelo y va a un anexo estadistico
+# automatico — el cuerpo no se infla con graficos tecnicos ajenos al argumento.
+FIG_ROLE = {
+    "fig5_forest.png": "diagnostic",
+    "fig8_bootdist.png": "diagnostic",
+    "fig9_residuals.png": "diagnostic",
+    "fig11_anomaly.png": "diagnostic",
 }
 
 def _evidence_badge(p, ci=None):
