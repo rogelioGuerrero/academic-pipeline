@@ -1,5 +1,42 @@
 [
   {
+    "file": "2026-10-06_influencia-de-la-conectividad-digital-y-.md",
+    "date": "2026-10-06",
+    "topic": "Influencia de la conectividad digital y la inversión educativa en el desempleo juvenil en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://www.dhnet.be/resizer/v2/642VVG2IJBCBLP62RYHM7TLLKU.jpg?auth=d5fee14762cbf784ff10f3d16ec82c927190764f77c7708129b91761a2e6b8f5&width=1200&height=630&quality=85&focal=1710%2C1248",
+    "section": "Amérique Latine",
+    "news_url": "https://www.dhnet.be/actu/monde/2026/10/02/les-etats-unis-ou-la-chine-quelle-est-linfluence-la-plus-positive-en-amerique-latine-ce-que-revele-un-sondage-KAVD7S3KAFE6VCDFXXXB5S5VHE/",
+    "pregunta": "¿En qué medida la tasa de usuarios de internet y el gasto gubernamental en educación están asociados negativamente con el desempleo juvenil en los países latinoamericanos?",
+    "editorial": "¿Por qué algunos jóvenes en Latinoamérica siguen sin trabajo a pesar de que cada vez más personas usan internet y los gobiernos gastan más en educación? Al revisar los datos del Banco Mundial para diez países, la relación entre la penetración de internet y el desempleo juvenil resultó casi nula: los países con más usuarios en línea no mostraron una reducción clara del paro entre los jóvenes. Cuando ampliamos la mirada a doce países y varios años, la historia cambió un poco. En la mayoría de los casos, cuando la proporción de usuarios de internet subió y el gasto público en educación aumentó, el índice de desempleo juvenil tendió a bajar. Sin embargo, esa tendencia no se dio en todos los lugares; en algunos países los números se mantuvieron estables o incluso subieron ligeramente, y solo tres pares de variables mostraron una coincidencia que superó la barrera de la casualidad. En resumen, la idea de que más internet y más inversión educativa garantizan menos desempleo juvenil no se confirma de forma contundente. Los datos sugieren una relación tenue y muy dependiente del contexto, por lo que aún queda mucho por entender antes de afirmar que la conectividad y el gasto en escuelas son la solución directa al problema del trabajo juvenil.",
+    "charts": "2026-10-04-16-39",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 8134,
+        "after": 4720,
+        "cutChars": 9217
+      }
+    ],
+    "ts": "2026-10-06T20:00:42.792Z"
+  },
+  {
     "file": "2026-10-03_impacto-de-la-digitalizaci-n-y-la-pol-ti.md",
     "date": "2026-10-03",
     "topic": "Impacto de la digitalización y la política energética en el empleo juvenil y el crecimiento económico de América Latina",

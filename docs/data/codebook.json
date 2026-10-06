@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-05T20:22:31+00:00",
+  "generated": "2026-10-06T20:00:45+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 15
+    "papers": 16
   },
   "countries": [
     {
@@ -67,6 +67,28 @@
   ],
   "papers": [
     {
+      "date": "2026-10-06",
+      "file": "2026-10-06_influencia-de-la-conectividad-digital-y-.md",
+      "topic": "Influencia de la conectividad digital y la inversión educativa en el desempleo juvenil en América Latina",
+      "sample_countries": [
+        "ECU",
+        "GTM",
+        "PER",
+        "ARG",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Government expenditure on education (% of GDP)"
+      ],
+      "indicators": [
+        "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Government expenditure on education (% of GDP)"
+      ]
+    },
+    {
       "date": "2026-10-03",
       "file": "2026-10-03_impacto-de-la-digitalizaci-n-y-la-pol-ti.md",
       "topic": "Impacto de la digitalización y la política energética en el empleo juvenil y el crecimiento económico de América Latina",
@@ -84,8 +106,8 @@
       ],
       "indicators": [
         "Internet users (% of population)",
-        "Employment in services (% of total employment)",
-        "Youth unemployment (% of labor force 15-24)"
+        "Youth unemployment (% of labor force 15-24)",
+        "Employment in services (% of total employment)"
       ]
     },
     {
@@ -752,6 +774,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-10-06",
+              "file": "2026-10-06_influencia-de-la-conectividad-digital-y-.md",
+              "topic": "Influencia de la conectividad digital y la inversión educativa en el desempleo juvenil en América Latina"
+            },
+            {
               "date": "2026-10-03",
               "file": "2026-10-03_impacto-de-la-digitalizaci-n-y-la-pol-ti.md",
               "topic": "Impacto de la digitalización y la política energética en el empleo juvenil y el crecimiento económico de América Latina"
@@ -1246,7 +1273,13 @@
           "year_to": 2024,
           "n_observations": 113,
           "n_observations_expected": 130,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-10-06",
+              "file": "2026-10-06_influencia-de-la-conectividad-digital-y-.md",
+              "topic": "Influencia de la conectividad digital y la inversión educativa en el desempleo juvenil en América Latina"
+            }
+          ]
         },
         {
           "code": "SE.SEC.ENRR",
@@ -1434,6 +1467,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-10-06",
+              "file": "2026-10-06_influencia-de-la-conectividad-digital-y-.md",
+              "topic": "Influencia de la conectividad digital y la inversión educativa en el desempleo juvenil en América Latina"
+            },
             {
               "date": "2026-10-03",
               "file": "2026-10-03_impacto-de-la-digitalizaci-n-y-la-pol-ti.md",
