@@ -1,0 +1,75 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la digitalización y la inversión educativa en el desempleo juvenil latinoamericano",
+      "noticia_inspiradora": "South Korea warns of possible AI use in banking hacks (Última Hora)",
+      "afirmacion_noticia": "La adopción de tecnologías avanzadas como la IA está transformando sectores críticos, lo que podría influir en la demanda de mano de obra calificada en América Latina.",
+      "verificable_con_datos": "Se pueden verificar con datos la relación entre la penetración de internet (proxy de digitalización) y la tasa de desempleo juvenil, así como el efecto del gasto público en educación; no se pueden medir directamente los efectos de la IA específica en el sector financiero latinoamericano.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Government expenditure on education (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment (negativa)",
+        "Government expenditure on education ↔ Youth unemployment (negativa)",
+        "Internet users ↔ Government expenditure on education (positiva)"
+      ],
+      "justificacion": "La noticia menciona IA como motor de cambio; el dominio tecnológico‑educativo es el puente más directo porque contamos con indicadores de conectividad y gasto educativo que previamente mostraron correlaciones significativas con el desempleo juvenil en la base de investigaciones."
+    },
+    {
+      "titulo": "Relación entre la transición a energías renovables y el crecimiento económico en América Latina",
+      "noticia_inspiradora": "Germany news: Government presents plan for railroad revamp (Internacional)",
+      "afirmacion_noticia": "Las inversiones estructurales en infraestructura verde pueden impulsar el crecimiento económico regional.",
+      "verificable_con_datos": "Se pueden contrastar los niveles de consumo de energías renovables con la tasa de crecimiento del PIB; no se dispone de datos específicos sobre inversiones ferroviarias verdes en América Latina.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "GDP growth (annual %)",
+        "Inflation, consumer prices (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy consumption ↔ GDP growth (positiva)",
+        "Renewable energy consumption ↔ Inflation (negativa o neutra)"
+      ],
+      "justificacion": "Aunque la noticia se centra en Alemania, su enfoque en infraestructura verde permite extrapolar a América Latina usando el dominio de energía‑crecimiento, para el cual ya existen hallazgos robustos en la base de datos."
+    },
+    {
+      "titulo": "Efectos de la migración neta y la conectividad digital en la resiliencia económica de los países latinoamericanos",
+      "noticia_inspiradora": "Here's how Labor, the Coalition and One Nation's migration cuts compare (Desarrollo Internacional)",
+      "afirmacion_noticia": "Políticas restrictivas de migración pueden afectar la fuerza laboral y la dinamización económica.",
+      "verificable_con_datos": "Se pueden analizar la relación entre net migration y usuarios de internet como indicadores de integración y potencial de remesas; no se pueden medir directamente los efectos de políticas migratorias específicas en América Latina.",
+      "indicadores_respaldan": [
+        "Net migration (total people)",
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Net migration ↔ Internet users (positiva)",
+        "Internet users ↔ Personal remittances (muy positiva, r=0.96)",
+        "Personal remittances ↔ GDP per capita (positiva)"
+      ],
+      "justificacion": "La noticia aborda migración; el dominio migración‑digital‑remesas permite conectar los indicadores disponibles para evaluar cómo la conectividad y los flujos migratorios influyen en la capacidad económica de los países latinoamericanos."
+    },
+    {
+      "titulo": "Inflación y gasto público en educación: efectos combinados sobre el empleo juvenil",
+      "noticia_inspiradora": "Canada: Quebec separatists return to power, promise new independence referendum (Internacional)",
+      "afirmacion_noticia": "Cambios políticos que aumentan el gasto público pueden modificar la inflación y, a su vez, el mercado laboral juvenil.",
+      "verificable_con_datos": "Se pueden evaluar la relación entre inflación, gasto en educación y desempleo juvenil; no se dispone de datos sobre la intención de referéndum ni sobre la política fiscal específica de Quebec en América Latina.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Government expenditure on education (% of GDP)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflation ↔ Youth unemployment (positiva)",
+        "Government expenditure on education ↔ Youth unemployment (negativa)"
+      ],
+      "justificacion": "Aunque la noticia es de Canadá, su foco en política fiscal y social permite trasladar el análisis a América Latina mediante los indicadores de inflación, gasto educativo y desempleo juvenil, dominios ya explorados en investigaciones previas."
+    }
+  ],
+  "topic": "Digitalización, gasto educativo y desempleo juvenil en América Latina",
+  "angle": "Evaluar cómo la penetración de internet y la inversión pública en educación interactúan para reducir la tasa de desempleo juvenil en los países latinoamericanos.",
+  "pregunta": "¿En qué medida la combinación de mayor uso de internet y mayor gasto público en educación se asocia con menores tasas de desempleo juvenil en América Latina?",
+  "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor gasto en educación como % del PIB presentan tasas de desempleo juvenil significativamente más bajas que aquellos con menores niveles de ambos indicadores."
+}
