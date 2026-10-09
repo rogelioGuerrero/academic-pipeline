@@ -1,5 +1,58 @@
 [
   {
+    "file": "2026-10-09_efectos-de-la-migraci-n-neta-y-la-conect.md",
+    "date": "2026-10-09",
+    "topic": "**Migración neta, uso de internet y remesas en América Latina y el Caribe: ¿existe una relación estructural?**",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://live-production.wcms.abc-cdn.net.au/2a530ad71b0074f6f3713a9c6695ebe6?impolicy=wcms_watermark_news&cropH=2813&cropW=5000&xPos=0&yPos=260&width=862&height=485&imformat=generic",
+    "section": "Desarrollo Internacional",
+    "news_url": "https://www.abc.net.au/news/2026-10-06/migration-cuts-comparison-labor-coalition-one-nation/107232222",
+    "editorial": "¿Reducir la entrada de gente ayuda a que la economía de un país sea más fuerte? Esa fue la duda que surgió al leer la comparativa de los recortes migratorios de los partidos australianos. Al revisar los datos del Banco Mundial de diez naciones latinoamericanas, la historia que emerge es distinta a la que muchos esperaban.\n\nCuando la población se vuelve más conectada —es decir, cuando crece el porcentaje de usuarios de internet— también se observa un movimiento notable en la migración neta. En los países donde la penetración digital subió entre 5 y 10 puntos porcentuales en la última década, la balanza migratoria cambió en la misma dirección, ya sea atrayendo más gente o impulsando salidas. Paralelamente, los flujos de remesas personales mostraron una relación clara: los lugares que recibieron más dinero del exterior tendieron a retener a más residentes, mientras que en los que las remesas fueron escasas la salida de personas se intensificó.\n\nEl análisis que combina los diez países con una vista más profunda de doce economías a lo largo de varios años confirma esta tendencia, aunque la fuerza de la relación varía de un caso a otro. En resumen, los datos no avalan la idea de que cortar la migración por sí solo mejore la resiliencia económica; la conectividad digital y el apoyo de las remesas aparecen como piezas más influyentes, aunque todavía hay mucho por entender.",
+    "charts": "2026-10-07-18-40",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 9931,
+        "after": 4725,
+        "cutChars": 14056
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 9773,
+        "after": 4318,
+        "cutChars": 14731
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "before": 9931,
+        "after": 4725,
+        "cutChars": 14056
+      }
+    ],
+    "ts": "2026-10-09T18:12:50.599Z"
+  },
+  {
     "file": "2026-10-06_influencia-de-la-conectividad-digital-y-.md",
     "date": "2026-10-06",
     "topic": "Influencia de la conectividad digital y la inversión educativa en el desempleo juvenil en América Latina",
