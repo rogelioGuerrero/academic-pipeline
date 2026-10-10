@@ -1,0 +1,71 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la digitalización y la inversión educativa en el desempleo juvenil latinoamericano",
+      "noticia_inspiradora": "L’Argentine ouvre son premier salon auto chinois (Amérique Latine)",
+      "afirmacion_noticia": "El auge de las marcas chinas en el sector automotriz latinoamericano sugiere una mayor demanda de mano‑de‑obra calificada y de competencias digitales.",
+      "verificable_con_datos": "Se pueden contrastar los niveles de desempleo juvenil y el gasto público en educación con la penetración de internet (indicador de digitalización). No se dispone de datos específicos sobre la industria automotriz china ni sobre la oferta de empleos técnicos en el sector.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Government expenditure on education (% of GDP)",
+        "Internet users (% of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Government expenditure on education ↔ Youth unemployment",
+        "Internet users ↔ Government expenditure on education"
+      ],
+      "justificacion": "La noticia menciona expansión de la industria automotriz, lo que implica necesidad de habilidades digitales y educativas. Los indicadores disponibles permiten medir la relación entre digitalización, inversión educativa y desempleo juvenil, dominios que ya se han explorado en estudios previos y que pueden ampliarse con este nuevo contexto sectorial."
+    },
+    {
+      "titulo": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina",
+      "noticia_inspiradora": "El Niño's storm-killer winds and climate's warming waters in fight over future of Hurricane Isaias (América Latina)",
+      "afirmacion_noticia": "Los vientos intensos y el aumento de temperaturas asociados al El Niño agravan la vulnerabilidad sanitaria y pueden impulsar flujos migratorios internos.",
+      "verificable_con_datos": "Se pueden analizar la relación entre indicadores de salud (Life expectancy, Current health expenditure) y demográficos (Net migration, Urban population) durante años con alta actividad de El Niño. No se cuenta con un indicador directo de eventos climáticos, por lo que la exposición a El Niño se tomará como variable externa.",
+      "indicadores_respaldan": [
+        "Life expectancy at birth (years)",
+        "Current health expenditure (% of GDP)",
+        "Net migration (total people)",
+        "Urban population (% of total)"
+      ],
+      "correlaciones_relevantes": [
+        "Current health expenditure ↔ Life expectancy",
+        "Net migration ↔ Urban population",
+        "Net migration ↔ Current health expenditure"
+      ],
+      "justificacion": "Aunque no hay un indicador climático, la noticia permite formular una hipótesis sobre cómo eventos extremos pueden influir en salud y migración, variables que sí están disponibles en el catálogo y que pueden relacionarse mediante análisis de series temporales."
+    },
+    {
+      "titulo": "Relación entre la adopción de energías renovables y la atracción de inversión extranjera directa en la región",
+      "noticia_inspiradora": "How the Houthi-Saudi conflict is affecting countries on Africa's Red Sea coast — and beyond (Internacional)",
+      "afirmacion_noticia": "Los conflictos geopolíticos que alteran rutas marítimas reducen la seguridad de las inversiones, mientras que la transición a energías renovables puede compensar esa incertidumbre al ofrecer nuevas oportunidades de inversión.",
+      "verificable_con_datos": "Se pueden examinar la correlación entre Renewable energy consumption y Foreign direct investment, net inflows (% of GDP). No se dispone de datos directos sobre la percepción de riesgo geopolítico, por lo que esa parte queda fuera de alcance.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "Foreign direct investment, net inflows (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy consumption ↔ Foreign direct investment"
+      ],
+      "justificacion": "La noticia brinda un contexto de incertidumbre que justifica explorar si la energía limpia actúa como factor estabilizador para la IED. Los indicadores permiten medir directamente esa relación sin necesidad de datos políticos."
+    },
+    {
+      "titulo": "Inflación y remesas: ¿Cómo la presión de precios afecta los flujos de dinero desde el exterior?",
+      "noticia_inspiradora": "Trump says US will not strike Iran before midterm elections (Política)",
+      "afirmacion_noticia": "La estabilidad política reduce la volatilidad de los flujos financieros internacionales, lo que podría reflejarse en menores remesas en contextos de alta inflación.",
+      "verificable_con_datos": "Se pueden correlacionar Inflation, consumer prices (annual %) con Personal remittances received (current US$). No se cuenta con un indicador de estabilidad política, por lo que esa dimensión no se verifica.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Personal remittances received (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflation ↔ Personal remittances received"
+      ],
+      "justificacion": "Los datos muestran una fuerte relación entre usuarios de internet y remesas; añadir inflación permite explorar un posible canal adicional que la noticia sugiere, manteniendo el análisis dentro de indicadores disponibles."
+    }
+  ],
+  "topic": "Digitalización, educación e inserción laboral juvenil en América Latina frente al auge de la industria automotriz china",
+  "angle": "Evaluar si la expansión de la industria automotriz china está asociada a menores tasas de desempleo juvenil en los países latinoamericanos con mayor penetración de internet y mayor gasto público en educación.",
+  "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor gasto en educación presentan menores tasas de desempleo juvenil en el contexto de la creciente presencia de fabricantes automotrices chinos?",
+  "hipotesis": "En América Latina, una mayor penetración de internet y un mayor gasto público en educación están vinculados a menores tasas de desempleo juvenil, particularmente en aquellos países donde la industria automotriz china está expandiéndose."
+}

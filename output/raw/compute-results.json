@@ -3813,213 +3813,278 @@
   },
   "correlations": [
     {
-      "x": "Net migration (total people) [LCN]",
-      "y": "Internet users (% of population) [LCN]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [LCN]",
+      "y": "Current health expenditure (% of GDP) [LCN]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [BRA]",
-      "y": "Internet users (% of population) [BRA]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [BRA]",
+      "y": "Current health expenditure (% of GDP) [BRA]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [MEX]",
-      "y": "Internet users (% of population) [MEX]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [MEX]",
+      "y": "Current health expenditure (% of GDP) [MEX]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [COL]",
-      "y": "Internet users (% of population) [COL]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [COL]",
+      "y": "Current health expenditure (% of GDP) [COL]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [ARG]",
-      "y": "Internet users (% of population) [ARG]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [ARG]",
+      "y": "Current health expenditure (% of GDP) [ARG]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [PER]",
-      "y": "Internet users (% of population) [PER]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [PER]",
+      "y": "Current health expenditure (% of GDP) [PER]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [CHL]",
-      "y": "Internet users (% of population) [CHL]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [CHL]",
+      "y": "Current health expenditure (% of GDP) [CHL]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [ECU]",
-      "y": "Internet users (% of population) [ECU]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [ECU]",
+      "y": "Current health expenditure (% of GDP) [ECU]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [GTM]",
-      "y": "Internet users (% of population) [GTM]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [GTM]",
+      "y": "Current health expenditure (% of GDP) [GTM]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [DOM]",
-      "y": "Internet users (% of population) [DOM]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [DOM]",
+      "y": "Current health expenditure (% of GDP) [DOM]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [CRI]",
-      "y": "Internet users (% of population) [CRI]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [CRI]",
+      "y": "Current health expenditure (% of GDP) [CRI]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [PAN]",
-      "y": "Internet users (% of population) [PAN]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [PAN]",
+      "y": "Current health expenditure (% of GDP) [PAN]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [URY]",
-      "y": "Internet users (% of population) [URY]",
-      "error": "incompatible units: count vs %"
+      "x": "Life expectancy at birth (years) [URY]",
+      "y": "Current health expenditure (% of GDP) [URY]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [LCN]",
-      "y": "Personal remittances received (current US$) [LCN]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [LCN]",
+      "y": "Net migration (total people) [LCN]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [BRA]",
-      "y": "Personal remittances received (current US$) [BRA]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [BRA]",
+      "y": "Net migration (total people) [BRA]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [MEX]",
-      "y": "Personal remittances received (current US$) [MEX]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [MEX]",
+      "y": "Net migration (total people) [MEX]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [COL]",
-      "y": "Personal remittances received (current US$) [COL]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [COL]",
+      "y": "Net migration (total people) [COL]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [ARG]",
-      "y": "Personal remittances received (current US$) [ARG]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [ARG]",
+      "y": "Net migration (total people) [ARG]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [PER]",
-      "y": "Personal remittances received (current US$) [PER]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [PER]",
+      "y": "Net migration (total people) [PER]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [CHL]",
-      "y": "Personal remittances received (current US$) [CHL]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [CHL]",
+      "y": "Net migration (total people) [CHL]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [ECU]",
-      "y": "Personal remittances received (current US$) [ECU]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [ECU]",
+      "y": "Net migration (total people) [ECU]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [GTM]",
-      "y": "Personal remittances received (current US$) [GTM]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [GTM]",
+      "y": "Net migration (total people) [GTM]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [DOM]",
-      "y": "Personal remittances received (current US$) [DOM]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [DOM]",
+      "y": "Net migration (total people) [DOM]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [CRI]",
-      "y": "Personal remittances received (current US$) [CRI]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [CRI]",
+      "y": "Net migration (total people) [CRI]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [PAN]",
-      "y": "Personal remittances received (current US$) [PAN]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [PAN]",
+      "y": "Net migration (total people) [PAN]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [URY]",
-      "y": "Personal remittances received (current US$) [URY]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [URY]",
+      "y": "Net migration (total people) [URY]",
+      "error": "incompatible units: years vs count"
     },
     {
-      "x": "Net migration (total people) [LCN]",
-      "y": "GDP per capita (current US$) [LCN]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [LCN]",
+      "y": "Urban population (% of total) [LCN]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [BRA]",
-      "y": "GDP per capita (current US$) [BRA]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [BRA]",
+      "y": "Urban population (% of total) [BRA]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [MEX]",
-      "y": "GDP per capita (current US$) [MEX]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [MEX]",
+      "y": "Urban population (% of total) [MEX]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [COL]",
-      "y": "GDP per capita (current US$) [COL]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [COL]",
+      "y": "Urban population (% of total) [COL]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [ARG]",
-      "y": "GDP per capita (current US$) [ARG]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [ARG]",
+      "y": "Urban population (% of total) [ARG]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [PER]",
-      "y": "GDP per capita (current US$) [PER]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [PER]",
+      "y": "Urban population (% of total) [PER]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [CHL]",
-      "y": "GDP per capita (current US$) [CHL]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [CHL]",
+      "y": "Urban population (% of total) [CHL]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [ECU]",
-      "y": "GDP per capita (current US$) [ECU]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [ECU]",
+      "y": "Urban population (% of total) [ECU]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [GTM]",
-      "y": "GDP per capita (current US$) [GTM]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [GTM]",
+      "y": "Urban population (% of total) [GTM]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [DOM]",
-      "y": "GDP per capita (current US$) [DOM]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [DOM]",
+      "y": "Urban population (% of total) [DOM]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [CRI]",
-      "y": "GDP per capita (current US$) [CRI]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [CRI]",
+      "y": "Urban population (% of total) [CRI]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [PAN]",
-      "y": "GDP per capita (current US$) [PAN]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [PAN]",
+      "y": "Urban population (% of total) [PAN]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Net migration (total people) [URY]",
-      "y": "GDP per capita (current US$) [URY]",
-      "error": "incompatible units: count vs USD"
+      "x": "Life expectancy at birth (years) [URY]",
+      "y": "Urban population (% of total) [URY]",
+      "error": "incompatible units: years vs %"
     },
     {
-      "x": "Internet users (% of population) [LCN]",
-      "y": "Personal remittances received (current US$) [LCN]",
-      "pearson_r": 0.957995882717334,
-      "pearson_p": 0.000012944485892918594,
+      "x": "Current health expenditure (% of GDP) [LCN]",
+      "y": "Net migration (total people) [LCN]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [BRA]",
+      "y": "Net migration (total people) [BRA]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [MEX]",
+      "y": "Net migration (total people) [MEX]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [COL]",
+      "y": "Net migration (total people) [COL]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [ARG]",
+      "y": "Net migration (total people) [ARG]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [PER]",
+      "y": "Net migration (total people) [PER]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [CHL]",
+      "y": "Net migration (total people) [CHL]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [ECU]",
+      "y": "Net migration (total people) [ECU]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [GTM]",
+      "y": "Net migration (total people) [GTM]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [DOM]",
+      "y": "Net migration (total people) [DOM]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [CRI]",
+      "y": "Net migration (total people) [CRI]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [PAN]",
+      "y": "Net migration (total people) [PAN]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [URY]",
+      "y": "Net migration (total people) [URY]",
+      "error": "incompatible units: % vs count"
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [LCN]",
+      "y": "Urban population (% of total) [LCN]",
+      "pearson_r": 0.4169887631487636,
+      "pearson_p": 0.26417885320867057,
       "pearson_ci_95": [
-        0.8274970661490046,
-        0.9902962832499619
+        -0.3417964720382916,
+        0.8466514970011384
       ],
-      "spearman_rho": 0.9999999999999999,
-      "spearman_p": 6.64689742203186e-64,
-      "significant": true,
-      "n": 10,
+      "spearman_rho": 0.5166666666666667,
+      "spearman_p": 0.15439012098622507,
+      "significant": false,
+      "n": 9,
       "years": [
         2015,
         2016,
@@ -4029,35 +4094,34 @@
         2020,
         2021,
         2022,
-        2023,
-        2024
+        2023
       ],
-      "units": "% vs USD",
+      "units": "% vs %",
       "country": "LCN",
-      "diff_pearson_r": -0.4450160941763666,
-      "diff_pearson_p": 0.23002330488719164,
-      "diff_n": 9,
+      "diff_pearson_r": 0.6811492608133759,
+      "diff_pearson_p": 0.0628965157677889,
+      "diff_n": 8,
       "diff_significant": false,
-      "pearson_q": 0.00010096698996476504,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.6010684021520701,
+      "pearson_q": 0.3815916768569686,
+      "significant_fdr": false,
+      "diff_pearson_q": 0.2915826245556724,
       "diff_significant_fdr": false,
-      "spearman_q": 1.2961449972962127e-62,
-      "spearman_significant_fdr": true
+      "spearman_q": 0.2508839466026157,
+      "spearman_significant_fdr": false
     },
     {
-      "x": "Internet users (% of population) [BRA]",
-      "y": "Personal remittances received (current US$) [BRA]",
-      "pearson_r": 0.8412068365552837,
-      "pearson_p": 0.0022858906798651833,
+      "x": "Current health expenditure (% of GDP) [BRA]",
+      "y": "Urban population (% of total) [BRA]",
+      "pearson_r": 0.7876817980002498,
+      "pearson_p": 0.011715759519510042,
       "pearson_ci_95": [
-        0.449821635979624,
-        0.9615523833492529
+        0.2590854370311154,
+        0.9531808477385297
       ],
-      "spearman_rho": 0.8181818181818182,
-      "spearman_p": 0.003814920082550713,
+      "spearman_rho": 0.7333333333333334,
+      "spearman_p": 0.024554150071469705,
       "significant": true,
-      "n": 10,
+      "n": 9,
       "years": [
         2015,
         2016,
@@ -4067,757 +4131,34 @@
         2020,
         2021,
         2022,
-        2023,
-        2024
+        2023
       ],
-      "units": "% vs USD",
+      "units": "% vs %",
       "country": "BRA",
-      "diff_pearson_r": -0.4771567840014866,
-      "diff_pearson_p": 0.1940027577853523,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.005571858532171384,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.5820082733560569,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.009918792214631853,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [MEX]",
-      "y": "Personal remittances received (current US$) [MEX]",
-      "pearson_r": 0.9395589058386019,
-      "pearson_p": 0.000054256854179076656,
-      "pearson_ci_95": [
-        0.7588350621126335,
-        0.9859351631054597
-      ],
-      "spearman_rho": 0.9030303030303028,
-      "spearman_p": 0.0003436121977632824,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "MEX",
-      "diff_pearson_r": 0.08113722808331798,
-      "diff_pearson_p": 0.8356127075036964,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.0002645021641229987,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.0011167396427306678,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [COL]",
-      "y": "Personal remittances received (current US$) [COL]",
-      "pearson_r": 0.9588247314596906,
-      "pearson_p": 0.000011964698297861787,
-      "pearson_ci_95": [
-        0.8306783056215455,
-        0.9904908578471654
-      ],
-      "spearman_rho": 0.9757575757575757,
-      "spearman_p": 0.000001467546187404219,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "COL",
-      "diff_pearson_r": -0.23630806046491082,
-      "diff_pearson_p": 0.5404398853530322,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.00010096698996476504,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.000008176328758394934,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [ARG]",
-      "y": "Personal remittances received (current US$) [ARG]",
-      "pearson_r": 0.9021898078949157,
-      "pearson_p": 0.0003553093960085451,
-      "pearson_ci_95": [
-        0.6309878288037946,
-        0.9768977247470146
-      ],
-      "spearman_rho": 0.9272727272727272,
-      "spearman_p": 0.00011203450639397586,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "ARG",
-      "diff_pearson_r": -0.025071743510399636,
-      "diff_pearson_p": 0.9489510108103937,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.0012597333131212055,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.000397213249942278,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [PER]",
-      "y": "Personal remittances received (current US$) [PER]",
-      "pearson_r": 0.8592708344127444,
-      "pearson_p": 0.001442852093279192,
-      "pearson_ci_95": [
-        0.500325958127494,
-        0.9661775946886217
-      ],
-      "spearman_rho": 0.8787878787878788,
-      "spearman_p": 0.0008138621117322101,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "PER",
-      "diff_pearson_r": -0.08446418571436443,
-      "diff_pearson_p": 0.82895067129404,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.0037514154425258993,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.0024415863351966304,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [CHL]",
-      "y": "Personal remittances received (current US$) [CHL]",
-      "pearson_r": 0.868163157328589,
-      "pearson_p": 0.0011238515504249165,
-      "pearson_ci_95": [
-        0.5261183315034857,
-        0.9684294508872716
-      ],
-      "spearman_rho": 0.7696969696969697,
-      "spearman_p": 0.009221952722215994,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "CHL",
-      "diff_pearson_r": 0.15323954405815027,
-      "diff_pearson_p": 0.6938674696844604,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.0033073353879226595,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.018929271377180198,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [ECU]",
-      "y": "Personal remittances received (current US$) [ECU]",
-      "pearson_r": 0.8958889859293944,
-      "pearson_p": 0.00045253025911007495,
-      "pearson_ci_95": [
-        0.6107911426557717,
-        0.9753471297704241
-      ],
-      "spearman_rho": 0.9636363636363635,
-      "spearman_p": 0.0000073209748095299185,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "ECU",
-      "diff_pearson_r": -0.3586510357744587,
-      "diff_pearson_p": 0.3432176875140618,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.0014707233421077436,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.78738175370873,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.000035689752196458356,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [GTM]",
-      "y": "Personal remittances received (current US$) [GTM]",
-      "pearson_r": 0.9630011254850537,
-      "pearson_p": 0.000007840038194533217,
-      "pearson_ci_95": [
-        0.8468362261379343,
-        0.9914693547253831
-      ],
-      "spearman_rho": 0.9999999999999999,
-      "spearman_p": 6.64689742203186e-64,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "GTM",
-      "diff_pearson_r": -0.1965565346856626,
-      "diff_pearson_p": 0.6122469543926867,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.00010096698996476504,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 1.2961449972962127e-62,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [DOM]",
-      "y": "Personal remittances received (current US$) [DOM]",
-      "pearson_r": 0.9154415307126044,
-      "pearson_p": 0.00020176357306360036,
-      "pearson_ci_95": [
-        0.674699448576867,
-        0.9801334269233154
-      ],
-      "spearman_rho": 0.9757575757575757,
-      "spearman_p": 0.000001467546187404219,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "DOM",
-      "diff_pearson_r": 0.23517786412402247,
-      "diff_pearson_p": 0.5424356203745787,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.0007868779349480415,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.000008176328758394934,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [CRI]",
-      "y": "Personal remittances received (current US$) [CRI]",
-      "pearson_r": 0.631285416548909,
-      "pearson_p": 0.050290490567687744,
-      "pearson_ci_95": [
-        0.0027399880283521224,
-        0.9022817900034086
-      ],
-      "spearman_rho": 0.7454545454545454,
-      "spearman_p": 0.013330146315440054,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "CRI",
-      "diff_pearson_r": 0.02276892312859052,
-      "diff_pearson_p": 0.9536355650290382,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.0676320390393042,
-      "significant_fdr": false,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.022603291578354872,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [PAN]",
-      "y": "Personal remittances received (current US$) [PAN]",
-      "pearson_r": -0.08057810647734509,
-      "pearson_p": 0.8248753968694262,
-      "pearson_ci_95": [
-        -0.6759199865952522,
-        0.5784014679752861
-      ],
-      "spearman_rho": -0.19999999999999998,
-      "spearman_p": 0.5795840000000002,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "PAN",
-      "diff_pearson_r": 0.13005264985935547,
-      "diff_pearson_p": 0.7387648289261376,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.8465826441554638,
-      "significant_fdr": false,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.6278826666666668,
-      "spearman_significant_fdr": false
-    },
-    {
-      "x": "Internet users (% of population) [URY]",
-      "y": "Personal remittances received (current US$) [URY]",
-      "pearson_r": 0.9291742064029747,
-      "pearson_p": 0.00010100573996539457,
-      "pearson_ci_95": [
-        0.7218522261803814,
-        0.9834506215778088
-      ],
-      "spearman_rho": 0.9393939393939393,
-      "spearman_p": 0.000054840529985136686,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "URY",
-      "diff_pearson_r": 0.10147301589273691,
-      "diff_pearson_p": 0.7950464439754412,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.0004376915398500431,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.00023764229660225896,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [LCN]",
-      "y": "GDP per capita (current US$) [LCN]",
-      "pearson_r": 0.4736354021215521,
-      "pearson_p": 0.1667334129629209,
-      "pearson_ci_95": [
-        -0.22228973660012874,
-        0.8498346199687231
-      ],
-      "spearman_rho": 0.5272727272727272,
-      "spearman_p": 0.11730806555020232,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "LCN",
-      "diff_pearson_r": -0.8283635881050645,
-      "diff_pearson_p": 0.005806104473472911,
-      "diff_n": 9,
+      "diff_pearson_r": 0.9084256619138615,
+      "diff_pearson_p": 0.001790383768649281,
+      "diff_n": 8,
       "diff_significant": true,
-      "pearson_q": 0.20320634704855986,
-      "significant_fdr": false,
-      "diff_pearson_q": 0.056609518616360884,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.1429692048893091,
-      "spearman_significant_fdr": false
-    },
-    {
-      "x": "Internet users (% of population) [BRA]",
-      "y": "GDP per capita (current US$) [BRA]",
-      "pearson_r": 0.036760703921560126,
-      "pearson_p": 0.9196945395519935,
-      "pearson_ci_95": [
-        -0.6069215011005448,
-        0.6513198951206376
-      ],
-      "spearman_rho": 0.2727272727272727,
-      "spearman_p": 0.4458383415427516,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "BRA",
-      "diff_pearson_r": -0.4311602030795605,
-      "diff_pearson_p": 0.24659216498546466,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.9196945395519935,
-      "significant_fdr": false,
-      "diff_pearson_q": 0.6010684021520701,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.5114028035343327,
-      "spearman_significant_fdr": false
-    },
-    {
-      "x": "Internet users (% of population) [MEX]",
-      "y": "GDP per capita (current US$) [MEX]",
-      "pearson_r": 0.7262360025989086,
-      "pearson_p": 0.017386185974953818,
-      "pearson_ci_95": [
-        0.17798958133425588,
-        0.9304224991806811
-      ],
-      "spearman_rho": 0.709090909090909,
-      "spearman_p": 0.02166592336753244,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "MEX",
-      "diff_pearson_r": 0.03069897338802381,
-      "diff_pearson_p": 0.9375096598405114,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.028252552209299953,
+      "pearson_q": 0.04589216838077074,
       "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.033798840453350604,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [COL]",
-      "y": "GDP per capita (current US$) [COL]",
-      "pearson_r": 0.5281503420951326,
-      "pearson_p": 0.11658696111909246,
-      "pearson_ci_95": [
-        -0.1520457115113548,
-        0.868854514167137
-      ],
-      "spearman_rho": 0.49090909090909085,
-      "spearman_p": 0.1496556734208368,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "COL",
-      "diff_pearson_r": -0.2088492108047892,
-      "diff_pearson_p": 0.5896988267618124,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.14667391882724534,
-      "significant_fdr": false,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.17686579586098894,
-      "spearman_significant_fdr": false
-    },
-    {
-      "x": "Internet users (% of population) [ARG]",
-      "y": "GDP per capita (current US$) [ARG]",
-      "pearson_r": -0.10937639793228005,
-      "pearson_p": 0.7635809673026493,
-      "pearson_ci_95": [
-        -0.6913964103442991,
-        0.5587367275913689
-      ],
-      "spearman_rho": 0.16363636363636364,
-      "spearman_p": 0.6514773427962428,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "ARG",
-      "diff_pearson_r": -0.4335294809246937,
-      "diff_pearson_p": 0.2437149233042786,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.8048556141838736,
-      "significant_fdr": false,
-      "diff_pearson_q": 0.6010684021520701,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.6866923342987424,
-      "spearman_significant_fdr": false
-    },
-    {
-      "x": "Internet users (% of population) [PER]",
-      "y": "GDP per capita (current US$) [PER]",
-      "pearson_r": 0.7906534333670316,
-      "pearson_p": 0.006470766236099839,
-      "pearson_ci_95": [
-        0.32064156306030367,
-        0.9482350329040005
-      ],
-      "spearman_rho": 0.7454545454545454,
-      "spearman_p": 0.013330146315440054,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "PER",
-      "diff_pearson_r": -0.2956613809490497,
-      "diff_pearson_p": 0.43985229263076525,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.014019993511549651,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9028547059263077,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.022603291578354872,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [CHL]",
-      "y": "GDP per capita (current US$) [CHL]",
-      "pearson_r": 0.7561978475810102,
-      "pearson_p": 0.01137831702576175,
-      "pearson_ci_95": [
-        0.24159221223589988,
-        0.9388292303989313
-      ],
-      "spearman_rho": 0.6848484848484848,
-      "spearman_p": 0.028882797506732765,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "CHL",
-      "diff_pearson_r": 0.06406798809736611,
-      "diff_pearson_p": 0.8699273914297039,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.02017065290930492,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.04332419626009915,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [ECU]",
-      "y": "GDP per capita (current US$) [ECU]",
-      "pearson_r": 0.4145589413196519,
-      "pearson_p": 0.23358939510615379,
-      "pearson_ci_95": [
-        -0.29104408126434816,
-        0.82805423036819
-      ],
-      "spearman_rho": 0.5393939393939393,
-      "spearman_p": 0.10759318778241479,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "ECU",
-      "diff_pearson_r": -0.9172289696737489,
-      "diff_pearson_p": 0.0004950337867669811,
-      "diff_n": 9,
-      "diff_significant": true,
-      "pearson_q": 0.2760601942163636,
-      "significant_fdr": false,
-      "diff_pearson_q": 0.013221033090216551,
+      "diff_pearson_q": 0.023274988992440654,
       "diff_significant_fdr": true,
-      "spearman_q": 0.13987114411713925,
+      "spearman_q": 0.06384079018582124,
       "spearman_significant_fdr": false
     },
     {
-      "x": "Internet users (% of population) [GTM]",
-      "y": "GDP per capita (current US$) [GTM]",
-      "pearson_r": 0.9435656897240291,
-      "pearson_p": 0.0000414411668973916,
+      "x": "Current health expenditure (% of GDP) [MEX]",
+      "y": "Urban population (% of total) [MEX]",
+      "pearson_r": 0.4816178066746505,
+      "pearson_p": 0.18927172558555352,
       "pearson_ci_95": [
-        0.7734228975693941,
-        0.9868883378743293
+        -0.26834366498373613,
+        0.8680848817929058
       ],
-      "spearman_rho": 0.9878787878787878,
-      "spearman_p": 9.307459988955516e-8,
-      "significant": true,
-      "n": 10,
+      "spearman_rho": 0.38333333333333336,
+      "spearman_p": 0.3084952723803716,
+      "significant": false,
+      "n": 9,
       "years": [
         2015,
         2016,
@@ -4827,144 +4168,29 @@
         2020,
         2021,
         2022,
-        2023,
-        2024
+        2023
       ],
-      "units": "% vs USD",
-      "country": "GTM",
-      "diff_pearson_r": -0.17736378637730468,
-      "diff_pearson_p": 0.6480159223477004,
-      "diff_n": 9,
+      "units": "% vs %",
+      "country": "MEX",
+      "diff_pearson_r": 0.6731601502392892,
+      "diff_pearson_p": 0.06728829797438594,
+      "diff_n": 8,
       "diff_significant": false,
-      "pearson_q": 0.0002308865012854675,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
+      "pearson_q": 0.3515046332303137,
+      "significant_fdr": false,
+      "diff_pearson_q": 0.2915826245556724,
       "diff_significant_fdr": false,
-      "spearman_q": 9.074773489231628e-7,
-      "spearman_significant_fdr": true
+      "spearman_q": 0.44560428232720345,
+      "spearman_significant_fdr": false
     },
     {
-      "x": "Internet users (% of population) [DOM]",
-      "y": "GDP per capita (current US$) [DOM]",
-      "pearson_r": 0.7681831555058949,
-      "pearson_p": 0.009448071617547358,
+      "x": "Current health expenditure (% of GDP) [COL]",
+      "y": "Urban population (% of total) [COL]",
+      "pearson_r": 0.4098014267329084,
+      "pearson_p": 0.23954232352059568,
       "pearson_ci_95": [
-        0.2683359118199435,
-        0.9421322195675685
-      ],
-      "spearman_rho": 0.7939393939393938,
-      "spearman_p": 0.006099923313696911,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "DOM",
-      "diff_pearson_r": -0.2966756459030479,
-      "diff_pearson_p": 0.4382097870820665,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.017546418718302235,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9028547059263077,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.013993941719657618,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [CRI]",
-      "y": "GDP per capita (current US$) [CRI]",
-      "pearson_r": 0.6988902612734584,
-      "pearson_p": 0.024529834816587315,
-      "pearson_ci_95": [
-        0.12368100687653436,
-        0.9225575446963018
-      ],
-      "spearman_rho": 0.9757575757575757,
-      "spearman_p": 0.000001467546187404219,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "CRI",
-      "diff_pearson_r": -0.07542253054251839,
-      "diff_pearson_p": 0.8470769893975717,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.035431983623959454,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.000008176328758394934,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [PAN]",
-      "y": "GDP per capita (current US$) [PAN]",
-      "pearson_r": 0.7124934947666612,
-      "pearson_p": 0.020764379735482702,
-      "pearson_ci_95": [
-        0.1502730426708358,
-        0.9264933630904998
-      ],
-      "spearman_rho": 0.709090909090909,
-      "spearman_p": 0.02166592336753244,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "% vs USD",
-      "country": "PAN",
-      "diff_pearson_r": 0.050127465247243305,
-      "diff_pearson_p": 0.8980947583027669,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.031146569603224053,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.033798840453350604,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Internet users (% of population) [URY]",
-      "y": "GDP per capita (current US$) [URY]",
-      "pearson_r": 0.5900256258214495,
-      "pearson_p": 0.07256925532176989,
-      "pearson_ci_95": [
-        -0.06302135581250386,
-        0.8892888793165122
+        -0.29628104211368883,
+        0.8262441854733938
       ],
       "spearman_rho": 0.6606060606060605,
       "spearman_p": 0.03758837757140934,
@@ -4982,184 +4208,32 @@
         2023,
         2024
       ],
-      "units": "% vs USD",
-      "country": "URY",
-      "diff_pearson_r": -0.13346473251340715,
-      "diff_pearson_p": 0.7321115713609794,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.09434003191830084,
-      "significant_fdr": false,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.05235524018874872,
-      "spearman_significant_fdr": false
-    },
-    {
-      "x": "Personal remittances received (current US$) [LCN]",
-      "y": "GDP per capita (current US$) [LCN]",
-      "pearson_r": 0.6746433260097768,
-      "pearson_p": 0.03235843017012395,
-      "pearson_ci_95": [
-        0.07824607929581964,
-        0.9154248446974296
-      ],
-      "spearman_rho": 0.5272727272727272,
-      "spearman_p": 0.11730806555020232,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "country": "LCN",
-      "diff_pearson_r": 0.5895122584009042,
-      "diff_pearson_p": 0.09479662143362567,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.04507067059410121,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.45267045414421664,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.1429692048893091,
-      "spearman_significant_fdr": false
-    },
-    {
-      "x": "Personal remittances received (current US$) [BRA]",
-      "y": "GDP per capita (current US$) [BRA]",
-      "pearson_r": 0.20945616634981123,
-      "pearson_p": 0.5613924858846441,
-      "pearson_ci_95": [
-        -0.48400999034618025,
-        0.7413242269644293
-      ],
-      "spearman_rho": 0.2121212121212121,
-      "spearman_p": 0.5563057751029299,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "country": "BRA",
-      "diff_pearson_r": -0.0796481945617677,
-      "diff_pearson_p": 0.8385973650218955,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.6081751930416978,
-      "significant_fdr": false,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.6198835779718361,
-      "spearman_significant_fdr": false
-    },
-    {
-      "x": "Personal remittances received (current US$) [MEX]",
-      "y": "GDP per capita (current US$) [MEX]",
-      "pearson_r": 0.8253398251802373,
-      "pearson_p": 0.003278692519751098,
-      "pearson_ci_95": [
-        0.4074328674777897,
-        0.9574325861291559
-      ],
-      "spearman_rho": 0.7575757575757575,
-      "spearman_p": 0.011143446799694208,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "country": "MEX",
-      "diff_pearson_r": 0.48371766849181647,
-      "diff_pearson_p": 0.187067508961284,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.007521706368840754,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.5820082733560569,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.02069497262800353,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Personal remittances received (current US$) [COL]",
-      "y": "GDP per capita (current US$) [COL]",
-      "pearson_r": 0.7127556646890966,
-      "pearson_p": 0.02069600961405734,
-      "pearson_ci_95": [
-        0.15079365761870436,
-        0.9265687595312062
-      ],
-      "spearman_rho": 0.5878787878787878,
-      "spearman_p": 0.07387770688865808,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
+      "units": "% vs %",
       "country": "COL",
-      "diff_pearson_r": 0.9092387349591043,
-      "diff_pearson_p": 0.0006780016969341821,
+      "diff_pearson_r": -0.06208927345738184,
+      "diff_pearson_p": 0.8739184145975187,
       "diff_n": 9,
-      "diff_significant": true,
-      "pearson_q": 0.031146569603224053,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.013221033090216551,
-      "diff_significant_fdr": true,
-      "spearman_q": 0.09935277822957465,
+      "diff_significant": false,
+      "pearson_q": 0.3815916768569686,
+      "significant_fdr": false,
+      "diff_pearson_q": 0.8739184145975187,
+      "diff_significant_fdr": false,
+      "spearman_q": 0.08144148473805357,
       "spearman_significant_fdr": false
     },
     {
-      "x": "Personal remittances received (current US$) [ARG]",
-      "y": "GDP per capita (current US$) [ARG]",
-      "pearson_r": 0.23750357296323432,
-      "pearson_p": 0.508788528198853,
+      "x": "Current health expenditure (% of GDP) [ARG]",
+      "y": "Urban population (% of total) [ARG]",
+      "pearson_r": 0.3443119196219581,
+      "pearson_p": 0.36422504569226666,
       "pearson_ci_95": [
-        -0.4610812380961771,
-        0.7543345616479185
+        -0.4146307221677201,
+        0.8207603429614163
       ],
-      "spearman_rho": 0.09090909090909088,
-      "spearman_p": 0.8027717312071619,
+      "spearman_rho": 0.2333333333333333,
+      "spearman_p": 0.5456987782182728,
       "significant": false,
-      "n": 10,
+      "n": 9,
       "years": [
         2015,
         2016,
@@ -5169,35 +4243,34 @@
         2020,
         2021,
         2022,
-        2023,
-        2024
+        2023
       ],
-      "units": "USD vs USD",
+      "units": "% vs %",
       "country": "ARG",
-      "diff_pearson_r": 0.5704082340303094,
-      "diff_pearson_p": 0.10876102041661752,
-      "diff_n": 9,
+      "diff_pearson_r": 0.08878177351916372,
+      "diff_pearson_p": 0.8344068511625078,
+      "diff_n": 8,
       "diff_significant": false,
-      "pearson_q": 0.5669357885644363,
+      "pearson_q": 0.4734925593999467,
       "significant_fdr": false,
-      "diff_pearson_q": 0.45267045414421664,
+      "diff_pearson_q": 0.8739184145975187,
       "diff_significant_fdr": false,
-      "spearman_q": 0.8027717312071619,
+      "spearman_q": 0.5911736764031289,
       "spearman_significant_fdr": false
     },
     {
-      "x": "Personal remittances received (current US$) [PER]",
-      "y": "GDP per capita (current US$) [PER]",
-      "pearson_r": 0.9687547732096254,
-      "pearson_p": 0.00000401546012912196,
+      "x": "Current health expenditure (% of GDP) [PER]",
+      "y": "Urban population (% of total) [PER]",
+      "pearson_r": 0.7304539636568039,
+      "pearson_p": 0.025415941775160534,
       "pearson_ci_95": [
-        0.8694531626046703,
-        0.9928121548641413
+        0.1288136375188037,
+        0.9390401648062792
       ],
-      "spearman_rho": 0.9272727272727272,
-      "spearman_p": 0.00011203450639397586,
+      "spearman_rho": 0.7833333333333333,
+      "spearman_p": 0.012519873019449885,
       "significant": true,
-      "n": 10,
+      "n": 9,
       "years": [
         2015,
         2016,
@@ -5207,261 +4280,32 @@
         2020,
         2021,
         2022,
-        2023,
-        2024
+        2023
       ],
-      "units": "USD vs USD",
+      "units": "% vs %",
       "country": "PER",
-      "diff_pearson_r": 0.8427498009011101,
-      "diff_pearson_p": 0.004337838166838561,
-      "diff_n": 9,
-      "diff_significant": true,
-      "pearson_q": 0.00007830147251787821,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.0563918961689013,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.000397213249942278,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Personal remittances received (current US$) [CHL]",
-      "y": "GDP per capita (current US$) [CHL]",
-      "pearson_r": 0.769434884386434,
-      "pearson_p": 0.00926082420972536,
-      "pearson_ci_95": [
-        0.27117414116895483,
-        0.9424752423890236
-      ],
-      "spearman_rho": 0.8060606060606059,
-      "spearman_p": 0.004862061101964607,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "country": "CHL",
-      "diff_pearson_r": 0.007641852634665328,
-      "diff_pearson_p": 0.9844329032373861,
-      "diff_n": 9,
+      "diff_pearson_r": -0.12351371871484303,
+      "diff_pearson_p": 0.7707563485309251,
+      "diff_n": 8,
       "diff_significant": false,
-      "pearson_q": 0.017546418718302235,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.01185127393603873,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Personal remittances received (current US$) [ECU]",
-      "y": "GDP per capita (current US$) [ECU]",
-      "pearson_r": 0.7374610577305155,
-      "pearson_p": 0.014926309884154653,
-      "pearson_ci_95": [
-        0.20129320248906205,
-        0.9335974130727256
-      ],
-      "spearman_rho": 0.6606060606060605,
-      "spearman_p": 0.03758837757140934,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "country": "ECU",
-      "diff_pearson_r": 0.5367605946351091,
-      "diff_pearson_p": 0.13622214407914454,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.025309829803566587,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.48296941991696696,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.05235524018874872,
-      "spearman_significant_fdr": false
-    },
-    {
-      "x": "Personal remittances received (current US$) [GTM]",
-      "y": "GDP per capita (current US$) [GTM]",
-      "pearson_r": 0.9864255231184988,
-      "pearson_p": 1.4614313666993096e-7,
-      "pearson_ci_95": [
-        0.9416186074282076,
-        0.996898676033005
-      ],
-      "spearman_rho": 0.9878787878787878,
-      "spearman_p": 9.307459988955516e-8,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "country": "GTM",
-      "diff_pearson_r": 0.7512538672655328,
-      "diff_pearson_p": 0.01962047100361995,
-      "diff_n": 9,
-      "diff_significant": true,
-      "pearson_q": 0.000005699582330127308,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.12753306152352967,
-      "diff_significant_fdr": false,
-      "spearman_q": 9.074773489231628e-7,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Personal remittances received (current US$) [DOM]",
-      "y": "GDP per capita (current US$) [DOM]",
-      "pearson_r": 0.8662618574793125,
-      "pearson_p": 0.0011872486007927494,
-      "pearson_ci_95": [
-        0.5205501689828849,
-        0.967949344712923
-      ],
-      "spearman_rho": 0.8424242424242423,
-      "spearman_p": 0.002220031225916843,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "country": "DOM",
-      "diff_pearson_r": 0.0008958892745104195,
-      "diff_pearson_p": 0.9981749105774907,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.0033073353879226595,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.9981749105774907,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.0061843727007683475,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Personal remittances received (current US$) [CRI]",
-      "y": "GDP per capita (current US$) [CRI]",
-      "pearson_r": 0.9486969110780548,
-      "pearson_p": 0.0000284813816678102,
-      "pearson_ci_95": [
-        0.7923715042378809,
-        0.9881046084855538
-      ],
-      "spearman_rho": 0.7696969696969697,
-      "spearman_p": 0.009221952722215994,
-      "significant": true,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "country": "CRI",
-      "diff_pearson_r": 0.5786337177984183,
-      "diff_pearson_p": 0.10260553321490122,
-      "diff_n": 9,
-      "diff_significant": false,
-      "pearson_q": 0.00018512898084076628,
-      "significant_fdr": true,
-      "diff_pearson_q": 0.45267045414421664,
-      "diff_significant_fdr": false,
-      "spearman_q": 0.018929271377180198,
-      "spearman_significant_fdr": true
-    },
-    {
-      "x": "Personal remittances received (current US$) [PAN]",
-      "y": "GDP per capita (current US$) [PAN]",
-      "pearson_r": 0.38243789353249513,
-      "pearson_p": 0.27541106981866526,
-      "pearson_ci_95": [
-        -0.325599779368035,
-        0.8156637593292743
-      ],
-      "spearman_rho": 0.09090909090909088,
-      "spearman_p": 0.8027717312071619,
-      "significant": false,
-      "n": 10,
-      "years": [
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024
-      ],
-      "units": "USD vs USD",
-      "country": "PAN",
-      "diff_pearson_r": 0.7734729922931814,
-      "diff_pearson_p": 0.014478659579000457,
-      "diff_n": 9,
-      "diff_significant": true,
-      "pearson_q": 0.3159126977331748,
+      "pearson_q": 0.05506787384618116,
       "significant_fdr": false,
-      "diff_pearson_q": 0.11293354471620357,
+      "diff_pearson_q": 0.8739184145975187,
       "diff_significant_fdr": false,
-      "spearman_q": 0.8027717312071619,
-      "spearman_significant_fdr": false
+      "spearman_q": 0.04068958731321213,
+      "spearman_significant_fdr": true
     },
     {
-      "x": "Personal remittances received (current US$) [URY]",
-      "y": "GDP per capita (current US$) [URY]",
-      "pearson_r": 0.7811965252401469,
-      "pearson_p": 0.0076272074355189425,
+      "x": "Current health expenditure (% of GDP) [CHL]",
+      "y": "Urban population (% of total) [CHL]",
+      "pearson_r": 0.9893714814872361,
+      "pearson_p": 5.5121253387369725e-8,
       "pearson_ci_95": [
-        0.29827308100007494,
-        0.9456806911690793
+        0.9540637764492288,
+        0.9975745064550984
       ],
-      "spearman_rho": 0.7575757575757575,
-      "spearman_p": 0.011143446799694208,
+      "spearman_rho": 0.9999999999999999,
+      "spearman_p": 6.64689742203186e-64,
       "significant": true,
       "n": 10,
       "years": [
@@ -5476,42 +4320,326 @@
         2023,
         2024
       ],
-      "units": "USD vs USD",
-      "country": "URY",
-      "diff_pearson_r": 0.5609992270072292,
-      "diff_pearson_p": 0.11606934721646579,
+      "units": "% vs %",
+      "country": "CHL",
+      "diff_pearson_r": 0.29037690646811876,
+      "diff_pearson_p": 0.4484535401076164,
       "diff_n": 9,
       "diff_significant": false,
-      "pearson_q": 0.015655846841328355,
+      "pearson_q": 7.165762940358064e-7,
       "significant_fdr": true,
-      "diff_pearson_q": 0.45267045414421664,
+      "diff_pearson_q": 0.8739184145975187,
       "diff_significant_fdr": false,
-      "spearman_q": 0.02069497262800353,
+      "spearman_q": 8.640966648641419e-63,
       "spearman_significant_fdr": true
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [ECU]",
+      "y": "Urban population (% of total) [ECU]",
+      "pearson_r": 0.23838674561997109,
+      "pearson_p": 0.5367766528220248,
+      "pearson_ci_95": [
+        -0.505825331532107,
+        0.7791602057934667
+      ],
+      "spearman_rho": 0.11666666666666665,
+      "spearman_p": 0.765007942926146,
+      "significant": false,
+      "n": 9,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "units": "% vs %",
+      "country": "ECU",
+      "diff_pearson_r": 0.2381746124071967,
+      "diff_pearson_p": 0.5700238947964794,
+      "diff_n": 8,
+      "diff_significant": false,
+      "pearson_q": 0.5367766528220248,
+      "significant_fdr": false,
+      "diff_pearson_q": 0.8739184145975187,
+      "diff_significant_fdr": false,
+      "spearman_q": 0.765007942926146,
+      "spearman_significant_fdr": false
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [GTM]",
+      "y": "Urban population (% of total) [GTM]",
+      "pearson_r": 0.8522220519888359,
+      "pearson_p": 0.0035242541418923318,
+      "pearson_ci_95": [
+        0.4333781833381533,
+        0.9683048347949303
+      ],
+      "spearman_rho": 0.9166666666666666,
+      "spearman_p": 0.0005066190663052083,
+      "significant": true,
+      "n": 9,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "units": "% vs %",
+      "country": "GTM",
+      "diff_pearson_r": 0.1776258581312761,
+      "diff_pearson_p": 0.6738905382776503,
+      "diff_n": 8,
+      "diff_significant": false,
+      "pearson_q": 0.022907651922300157,
+      "significant_fdr": true,
+      "diff_pearson_q": 0.8739184145975187,
+      "diff_significant_fdr": false,
+      "spearman_q": 0.003293023930983854,
+      "spearman_significant_fdr": true
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [DOM]",
+      "y": "Urban population (% of total) [DOM]",
+      "pearson_r": -0.32013185716514814,
+      "pearson_p": 0.40099321874727084,
+      "pearson_ci_95": [
+        -0.8116892289679466,
+        0.43688349627817663
+      ],
+      "spearman_rho": -0.2833333333333333,
+      "spearman_p": 0.46003032896572005,
+      "significant": false,
+      "n": 9,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "units": "% vs %",
+      "country": "DOM",
+      "diff_pearson_r": 0.0772385587101268,
+      "diff_pearson_p": 0.8557526583073796,
+      "diff_n": 8,
+      "diff_significant": false,
+      "pearson_q": 0.47390107670132003,
+      "significant_fdr": false,
+      "diff_pearson_q": 0.8739184145975187,
+      "diff_significant_fdr": false,
+      "spearman_q": 0.5436722069594873,
+      "spearman_significant_fdr": false
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [CRI]",
+      "y": "Urban population (% of total) [CRI]",
+      "pearson_r": -0.2395849026497771,
+      "pearson_p": 0.5346695222945704,
+      "pearson_ci_95": [
+        -0.7796589950565602,
+        0.5048791187512754
+      ],
+      "spearman_rho": -0.2833333333333333,
+      "spearman_p": 0.46003032896572005,
+      "significant": false,
+      "n": 9,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "units": "% vs %",
+      "country": "CRI",
+      "diff_pearson_r": 0.16229924550611557,
+      "diff_pearson_p": 0.700990600067078,
+      "diff_n": 8,
+      "diff_significant": false,
+      "pearson_q": 0.5367766528220248,
+      "significant_fdr": false,
+      "diff_pearson_q": 0.8739184145975187,
+      "diff_significant_fdr": false,
+      "spearman_q": 0.5436722069594873,
+      "spearman_significant_fdr": false
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [PAN]",
+      "y": "Urban population (% of total) [PAN]",
+      "pearson_r": 0.7752052361579572,
+      "pearson_p": 0.014120667194083305,
+      "pearson_ci_95": [
+        0.22894431186109926,
+        0.950158443364456
+      ],
+      "spearman_rho": 0.8333333333333333,
+      "spearman_p": 0.005265691029161747,
+      "significant": true,
+      "n": 9,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "units": "% vs %",
+      "country": "PAN",
+      "diff_pearson_r": 0.1488762507940155,
+      "diff_pearson_p": 0.724954246238153,
+      "diff_n": 8,
+      "diff_significant": false,
+      "pearson_q": 0.04589216838077074,
+      "significant_fdr": true,
+      "diff_pearson_q": 0.8739184145975187,
+      "diff_significant_fdr": false,
+      "spearman_q": 0.022817994459700907,
+      "spearman_significant_fdr": true
+    },
+    {
+      "x": "Current health expenditure (% of GDP) [URY]",
+      "y": "Urban population (% of total) [URY]",
+      "pearson_r": 0.7513775017813272,
+      "pearson_p": 0.019588942604212657,
+      "pearson_ci_95": [
+        0.1741511278791472,
+        0.9442934139393595
+      ],
+      "spearman_rho": 0.65,
+      "spearman_p": 0.058073058017148654,
+      "significant": true,
+      "n": 9,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "units": "% vs %",
+      "country": "URY",
+      "diff_pearson_r": 0.5693781148644392,
+      "diff_pearson_p": 0.14070978788657865,
+      "diff_n": 8,
+      "diff_significant": false,
+      "pearson_q": 0.05093125077095291,
+      "significant_fdr": false,
+      "diff_pearson_q": 0.4573068106313806,
+      "diff_significant_fdr": false,
+      "spearman_q": 0.10784996488899036,
+      "spearman_significant_fdr": false
+    },
+    {
+      "x": "Net migration (total people) [LCN]",
+      "y": "Urban population (% of total) [LCN]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [BRA]",
+      "y": "Urban population (% of total) [BRA]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [MEX]",
+      "y": "Urban population (% of total) [MEX]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [COL]",
+      "y": "Urban population (% of total) [COL]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [ARG]",
+      "y": "Urban population (% of total) [ARG]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [PER]",
+      "y": "Urban population (% of total) [PER]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [CHL]",
+      "y": "Urban population (% of total) [CHL]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [ECU]",
+      "y": "Urban population (% of total) [ECU]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [GTM]",
+      "y": "Urban population (% of total) [GTM]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [DOM]",
+      "y": "Urban population (% of total) [DOM]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [CRI]",
+      "y": "Urban population (% of total) [CRI]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [PAN]",
+      "y": "Urban population (% of total) [PAN]",
+      "error": "incompatible units: count vs %"
+    },
+    {
+      "x": "Net migration (total people) [URY]",
+      "y": "Urban population (% of total) [URY]",
+      "error": "incompatible units: count vs %"
     }
   ],
   "regression": {
-    "dependent": "Net migration (total people) [LCN]",
+    "dependent": "Life expectancy at birth (years) [LCN]",
     "independent": [
-      "Internet users (% of population) [LCN]",
-      "Personal remittances received (current US$) [LCN]"
+      "Current health expenditure (% of GDP) [LCN]"
     ],
     "dropped_regressors": [
-      "GDP per capita (current US$) [LCN]"
+      "Net migration (total people) [LCN]",
+      "Urban population (% of total) [LCN]"
     ],
-    "n": 10,
+    "n": 9,
     "dof": 7,
-    "r_squared": 0.7487255203591603,
-    "adj_r_squared": 0.676932811890349,
-    "f_statistic": 10.428991137511218,
-    "f_p_value": 0.00795278676453215,
-    "vif": {
-      "Internet users (% of population) [LCN]": 12.158958140812002,
-      "Personal remittances received (current US$) [LCN]": 12.158958140812018
-    },
+    "r_squared": 0.682596020354973,
+    "adj_r_squared": 0.6372525946913977,
+    "f_statistic": 15.053913778360767,
+    "f_p_value": 0.006053477925587303,
+    "vif": null,
     "white_test": {
-      "lm_stat": 1.8580546759223138,
-      "p_value": 0.8684165410496242,
+      "lm_stat": 2.6197782157712917,
+      "p_value": 0.2698499789602926,
       "heteroscedastic": false
     },
     "robust_se": true,
@@ -5519,215 +4647,143 @@
     "coefficients": [
       {
         "name": "intercept",
-        "beta": -796913.1647336155,
-        "se": 509201.7624375981,
-        "t": -1.5650243646422493,
-        "p_value": 0.1615563668343203,
+        "beta": 112.48990684060706,
+        "se": 9.814199442203158,
+        "t": 11.461954436841419,
+        "p_value": 0.000008645468134949041,
         "ci_95": [
-          -2000984.0011473475,
-          407157.67168011656
+          89.2830128296051,
+          135.69680085160903
         ],
-        "robust_se": 261927.407140938,
-        "robust_t": -3.0424962909849755,
-        "robust_p": 0.01878071986501828,
+        "robust_se": 6.213224805891171,
+        "robust_t": 18.104914976510734,
+        "robust_p": 3.878318903804967e-7,
         "robust_ci_95": [
-          -1416273.0638158945,
-          -177553.26565133652
+          97.79796478399894,
+          127.18184889721519
         ],
         "boot_ci_95": [
-          -1781882.5040671953,
-          1697897.0657574567
-        ],
-        "boot_includes_zero": true,
-        "boot_hist": {
-          "counts": [
-            6,
-            2,
-            7,
-            12,
-            17,
-            76,
-            289,
-            441,
-            365,
-            170,
-            135,
-            138,
-            103,
-            72,
-            37,
-            24,
-            20,
-            41,
-            12,
-            13
-          ],
-          "edges": [
-            -3083432.3788701575,
-            -2809089.8657171596,
-            -2534747.352564161,
-            -2260404.8394111632,
-            -1986062.326258165,
-            -1711719.813105167,
-            -1437377.299952169,
-            -1163034.7867991708,
-            -888692.2736461726,
-            -614349.7604931747,
-            -340007.24734017625,
-            -65664.73418717831,
-            208677.77896581963,
-            483020.29211881803,
-            757362.805271816,
-            1031705.3184248144,
-            1306047.8315778123,
-            1580390.3447308103,
-            1854732.8578838082,
-            2129075.371036807,
-            2403417.8841898046
-          ]
-        }
-      },
-      {
-        "name": "Internet users (% of population) [LCN]",
-        "beta": -8225.66213442581,
-        "se": 12662.167451077876,
-        "t": -0.6496251266781023,
-        "p_value": 0.5366608494610645,
-        "significant": false,
-        "ci_95": [
-          -38166.93036697334,
-          21715.606098121723
-        ],
-        "robust_se": 6340.920790346595,
-        "robust_t": -1.29723464562884,
-        "robust_p": 0.2356658087809851,
-        "robust_significant": false,
-        "robust_ci_95": [
-          -23219.55721270825,
-          6768.232943856632
-        ],
-        "boot_ci_95": [
-          -70652.96815514029,
-          11204.325555559322
-        ],
-        "boot_includes_zero": true,
-        "boot_hist": {
-          "counts": [
-            18,
-            34,
-            38,
-            37,
-            90,
-            169,
-            126,
-            146,
-            404,
-            649,
-            232,
-            12,
-            4,
-            10,
-            2,
-            2,
-            0,
-            2,
-            3,
-            2
-          ],
-          "edges": [
-            -87595.0071700636,
-            -78563.65782999135,
-            -69532.30848991912,
-            -60500.959149846865,
-            -51469.60980977462,
-            -42438.26046970238,
-            -33406.91112963013,
-            -24375.561789557883,
-            -15344.21244948564,
-            -6312.863109413389,
-            2718.4862306588475,
-            11749.835570731098,
-            20781.18491080335,
-            29812.534250875586,
-            38843.88359094784,
-            47875.23293102007,
-            56906.582271092324,
-            65937.93161116457,
-            74969.28095123683,
-            84000.63029130905,
-            93031.97963138128
-          ]
-        }
-      },
-      {
-        "name": "Personal remittances received (current US$) [LCN]",
-        "beta": 0.000006787604011777196,
-        "se": 0.0000035374773109841867,
-        "t": 1.9187696245290597,
-        "p_value": 0.09650433062004327,
-        "significant": false,
-        "ci_95": [
-          -0.0000015772006272352411,
-          0.000015152408650789633
-        ],
-        "robust_se": 0.0000017153865868673454,
-        "robust_t": 3.956894652052037,
-        "robust_p": 0.005483407583106281,
-        "robust_significant": true,
-        "robust_ci_95": [
-          0.000002731359287613699,
-          0.000010843848735940694
-        ],
-        "boot_ci_95": [
-          0.000002404448922397074,
-          0.000022715800047916742
+          68.41478508011897,
+          133.74589014854863
         ],
         "boot_includes_zero": false,
         "boot_hist": {
           "counts": [
-            1,
-            2,
-            1,
-            2,
-            1,
-            0,
-            2,
-            0,
-            2,
-            1,
-            2,
-            7,
-            171,
-            921,
-            325,
-            147,
-            205,
-            105,
-            63,
-            22
+            4,
+            4,
+            6,
+            9,
+            21,
+            38,
+            54,
+            51,
+            12,
+            8,
+            55,
+            249,
+            169,
+            263,
+            302,
+            259,
+            221,
+            145,
+            83,
+            27
           ],
           "edges": [
-            -0.00004029939795918181,
-            -0.0000369183764210748,
-            -0.00003353735488296779,
-            -0.00003015633334486078,
-            -0.000026775311806753767,
-            -0.000023394290268646755,
-            -0.000020013268730539746,
-            -0.000016632247192432735,
-            -0.000013251225654325723,
-            -0.00000987020411621871,
-            -0.000006489182578111699,
-            -0.000003108161040004687,
-            2.728604981023182e-7,
-            0.00000365388203620933,
-            0.000007034903574316342,
-            0.000010415925112423354,
-            0.000013796946650530366,
-            0.000017177968188637378,
-            0.00002055898972674439,
-            0.000023940011264851395,
-            0.000027321032802958417
+            44.91013827192486,
+            49.64001809795528,
+            54.369897923985704,
+            59.09977775001612,
+            63.82965757604654,
+            68.55953740207697,
+            73.2894172281074,
+            78.01929705413781,
+            82.74917688016824,
+            87.47905670619866,
+            92.20893653222907,
+            96.9388163582595,
+            101.66869618428993,
+            106.39857601032034,
+            111.12845583635078,
+            115.8583356623812,
+            120.5882154884116,
+            125.31809531444205,
+            130.04797514047246,
+            134.77785496650287,
+            139.5077347925333
+          ]
+        }
+      },
+      {
+        "name": "Current health expenditure (% of GDP) [LCN]",
+        "beta": -4.760239225040003,
+        "se": 1.2268855925661732,
+        "t": -3.879937342065784,
+        "p_value": 0.006053477925591855,
+        "significant": true,
+        "ci_95": [
+          -7.66136265115176,
+          -1.8591157989282463
+        ],
+        "robust_se": 0.7819016729108175,
+        "robust_t": -6.088027932359916,
+        "robust_p": 0.0004969137630763676,
+        "robust_significant": true,
+        "robust_ci_95": [
+          -6.609142883165891,
+          -2.9113355669141154
+        ],
+        "boot_ci_95": [
+          -7.434090584905851,
+          0.8349806589110991
+        ],
+        "boot_includes_zero": true,
+        "boot_hist": {
+          "counts": [
+            29,
+            85,
+            157,
+            220,
+            272,
+            309,
+            248,
+            172,
+            240,
+            41,
+            8,
+            16,
+            50,
+            53,
+            41,
+            16,
+            9,
+            6,
+            4,
+            4
+          ],
+          "edges": [
+            -8.126366880932398,
+            -7.5283625118693305,
+            -6.930358142806262,
+            -6.332353773743193,
+            -5.734349404680126,
+            -5.136345035617058,
+            -4.53834066655399,
+            -3.940336297490921,
+            -3.3423319284278534,
+            -2.744327559364786,
+            -2.1463231903017173,
+            -1.5483188212386487,
+            -0.9503144521755811,
+            -0.35231008311251344,
+            0.24569428595055598,
+            0.8436986550136236,
+            1.4417030240766913,
+            2.039707393139759,
+            2.6377117622028265,
+            3.235716131265896,
+            3.833720500328963
           ]
         }
       }
@@ -5735,13 +4791,13 @@
   },
   "panel": {
     "type": "fixed_effects_country",
-    "dependent": "Net migration (total people)",
+    "dependent": "Life expectancy at birth (years)",
     "independent": [
-      "Internet users (% of population)",
-      "Personal remittances received (current US$)",
-      "GDP per capita (current US$)"
+      "Current health expenditure (% of GDP)",
+      "Net migration (total people)",
+      "Urban population (% of total)"
     ],
-    "n": 120,
+    "n": 110,
     "n_countries": 12,
     "countries": [
       "ARG",
@@ -5757,43 +4813,43 @@
       "PER",
       "URY"
     ],
-    "r_squared": 0.7632110805093647,
-    "dof": 105,
+    "r_squared": 0.84754982117706,
+    "dof": 95,
     "coefficients": [
       {
-        "name": "Internet users (% of population)",
-        "beta": -1697.5118078833495,
-        "se": 804.6690246704732,
-        "t": -2.1095776721099857,
-        "p_value": 0.03727164261396476,
+        "name": "Current health expenditure (% of GDP)",
+        "beta": -1.0839027281985998,
+        "se": 0.24600742114329063,
+        "t": -4.405975735046077,
+        "p_value": 0.000027655930402659124,
         "significant": true,
         "ci_95": [
-          -3293.0218403497274,
-          -102.00177541697144
+          -1.572289207893117,
+          -0.5955162485040825
         ]
       },
       {
-        "name": "Personal remittances received (current US$)",
-        "beta": 0.000005163816353186603,
-        "se": 0.0000014979113048135893,
-        "t": 3.4473445367509425,
-        "p_value": 0.0008155817708825897,
-        "significant": true,
-        "ci_95": [
-          0.000002193734939211949,
-          0.000008133897767161258
-        ]
-      },
-      {
-        "name": "GDP per capita (current US$)",
-        "beta": 1.3441437507264478,
-        "se": 4.439931571393694,
-        "t": 0.30273974477145404,
-        "p_value": 0.7626871436288363,
+        "name": "Net migration (total people)",
+        "beta": -3.418158400769755e-8,
+        "se": 0.0000017478588263772132,
+        "t": -0.019556261347803312,
+        "p_value": 0.9844383708371844,
         "significant": false,
         "ci_95": [
-          -7.459420383637814,
-          10.147707885090709
+          -0.0000035041200730590017,
+          0.0000034357569050436066
+        ]
+      },
+      {
+        "name": "Urban population (% of total)",
+        "beta": 0.17160188516341293,
+        "se": 0.18223844461889646,
+        "t": 0.9416338332028289,
+        "p_value": 0.3487684902889834,
+        "significant": false,
+        "ci_95": [
+          -0.19018716989353232,
+          0.5333909402203582
         ]
       }
     ],
@@ -18817,19 +17873,19 @@
     },
     {
       "file": "fig2_correlation.png",
-      "caption": "Correlación de Pearson entre Personal remittances received (current US$) y GDP per capita (current US$) (n=10).",
+      "caption": "Correlación de Pearson entre Current health expenditure (% of GDP) y Urban population (% of total) (n=10).",
       "howto": "cada punto es un año; si se alinean cerca de la línea punteada, las variables se mueven juntas",
       "role": "narrative"
     },
     {
       "file": "fig3_regression.png",
-      "caption": "Ajuste del modelo de regresión OLS sobre Net migration (total people) (n=10, R²=0.749).",
+      "caption": "Ajuste del modelo de regresión OLS sobre Life expectancy at birth (years) (n=9, R²=0.683).",
       "howto": "los datos observados frente a lo que el modelo predijo; donde se separan, el modelo no captura la realidad",
       "role": "narrative"
     },
     {
       "file": "fig4_countries.png",
-      "caption": "Comparación internacional de Net migration (total people) (último año disponible). Fuente: World Bank API.",
+      "caption": "Comparación internacional de Life expectancy at birth (years) (último año disponible). Fuente: World Bank API.",
       "howto": "barra más larga o país más oscuro = valor más alto del indicador",
       "role": "narrative"
     },
@@ -18847,13 +17903,13 @@
     },
     {
       "file": "fig7_boxplot.png",
-      "caption": "Distribución de Net migration (total people) por país (2015-2024): caja = rango intercuartílico, línea = mediana. La dispersión revela heterogeneidad que el promedio esconde.",
+      "caption": "Distribución de Life expectancy at birth (years) por país (2015-2024): caja = rango intercuartílico, línea = mediana. La dispersión revela heterogeneidad que el promedio esconde.",
       "howto": "cada caja resume un país: la línea central es el valor típico; una caja alta significa mucha variación año a año",
       "role": "narrative"
     },
     {
       "file": "fig8_bootdist.png",
-      "caption": "Estabilidad del coeficiente de Internet users (% of population) tras 2000 remuestreos (rango recortado al 99% central): las barras muestran dónde cayó la estimación en cada réplica; si toca la línea roja (cero = sin efecto), el resultado es frágil.",
+      "caption": "Estabilidad del coeficiente de Current health expenditure (% of GDP) tras 2000 remuestreos (rango recortado al 99% central): las barras muestran dónde cayó la estimación en cada réplica; si toca la línea roja (cero = sin efecto), el resultado es frágil.",
       "howto": "repetimos el cálculo 2000 veces barajando los datos; si las barras no tocan la línea roja del cero, el coeficiente es estable",
       "role": "diagnostic"
     },
@@ -18865,7 +17921,7 @@
     },
     {
       "file": "fig10_panels.png",
-      "caption": "Relación Net migration (total people) vs Internet users (% of population) dentro de cada país: las pendientes de signo distinto evidencian heterogeneidad que el agregado regional oculta.",
+      "caption": "Relación Life expectancy at birth (years) vs Current health expenditure (% of GDP) dentro de cada país: las pendientes de signo distinto evidencian heterogeneidad que el agregado regional oculta.",
       "howto": "la misma relación dentro de cada país; si las pendientes apuntan en direcciones distintas, la respuesta depende del país",
       "role": "narrative"
     },
@@ -18877,10 +17933,10 @@
     }
   ],
   "tables": {
-    "descriptive": "| Serie / Indicador | País / Región | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |\n| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n| Internet users (% of population) [LCN] (%) | Latin America & Caribbean (regional) | 54.40 | 57.50 | 60.20 | 63.50 | 67.80 | 73.80 | 75.80 | 77.10 | 80.00 | 81.70 |\n| Net migration (total people) [LCN] (count) | Latin America & Caribbean (regional) | -807,387.0 | -585,141.0 | -773,087.0 | -744,817.0 | -863,096.0 | -598,237.0 | -536,658.0 | -377,357.0 | -367,375.0 | -378,373.0 |\n| Personal remittances received (current US$) [LCN] (USD) | Latin America & Caribbean (regional) | 70,142,527,686.7 | 75,045,969,002.1 | 82,819,937,211.0 | 90,758,843,075.0 | 98,169,401,832.8 | 105,211,973,250.0 | 132,754,118,497.0 | 146,291,585,644.3 | 157,004,282,786.3 | 165,632,003,793.0 |\n| Internet users (% of population) [ARG] (%) | Argentina | 68.04 | 70.97 | 74.29 | 77.70 | 79.95 | 85.51 | 87.15 | 88.38 | 89.23 | 89.67 |\n| Net migration (total people) [ARG] (count) | Argentina | 5,464.0 | 5,215.0 | 4,931.0 | 5,742.0 | 5,397.0 | 292.00 | 314.00 | 5,589.0 | 4,133.0 | 3,454.0 |\n| Personal remittances received (current US$) [ARG] (USD) | Argentina | 494,433,532.1 | 391,579,047.7 | 479,937,459.8 | 522,441,503.0 | 561,398,444.7 | 648,090,050.0 | 902,789,422.0 | 1,056,459,895.7 | 1,008,986,442.6 | 1,044,365,105.0 |\n| Internet users (% of population) [BRA] (%) | Brazil | 58.33 | 60.87 | 67.47 | 70.43 | 73.91 | 81.34 | 80.69 | 80.53 | 84.15 | 84.46 |\n| Net migration (total people) [BRA] (count) | Brazil | -173,611.0 | -92,989.0 | -156,296.0 | -230,334.0 | -129,216.0 | -78,437.0 | -208,581.0 | -253,639.0 | -240,059.0 | -225,510.0 |\n| Personal remittances received (current US$) [BRA] (USD) | Brazil | 2,896,909,951.7 | 2,739,786,526.6 | 2,698,770,651.2 | 2,933,489,276.5 | 3,213,621,676.7 | 3,566,219,438.5 | 4,102,018,147.7 | 4,973,758,734.6 | 4,433,700,953.4 | 4,902,400,448.2 |\n| Internet users (% of population) [CHL] (%) | Chile | 76.63 | 83.56 | 82.33 | 84.90 | 85.02 | 87.46 | 90.23 | 92.32 | 94.46 | 95.59 |\n| Net migration (total people) [CHL] (count) | Chile | 55,689.0 | 135,864.0 | 220,621.0 | 237,807.0 | 181,339.0 | 26,042.0 | 65,480.0 | 59,374.0 | 62,679.0 | 58,316.0 |\n| Personal remittances received (current US$) [CHL] (USD) | Chile | 58,992,215.8 | 64,551,112.7 | 66,541,753.6 | 69,856,849.8 | 69,372,771.4 | 66,197,477.6 | 66,484,973.0 | 85,172,251.2 | 97,067,400.6 | 100,334,643.8 |\n| Internet users (% of population) [COL] (%) | Colombia | 55.90 | 58.14 | 62.26 | 64.13 | 65.01 | 69.80 | 73.03 | 72.80 | 77.34 | 79.35 |\n| Net migration (total people) [COL] (count) | Colombia | -41,123.0 | 104,373.0 | 431,072.0 | 495,524.0 | 396,826.0 | 227,130.0 | 199,070.0 | 183,180.0 | 154,521.0 | 141,643.0 |\n| Personal remittances received (current US$) [COL] (USD) | Colombia | 5,001,596,492.3 | 5,191,956,875.2 | 5,818,773,635.1 | 6,675,079,294.0 | 7,116,297,148.7 | 6,924,526,135.6 | 8,608,268,970.9 | 9,454,507,516.9 | 10,111,593,424.1 | 11,873,232,976.3 |\n| Internet users (% of population) [CRI] (%) | Costa Rica | 59.76 | 65.88 | 71.58 | 73.48 | 81.20 | 80.53 | 82.75 | 82.60 | 85.40 | 87.17 |\n| Net migration (total people) [CRI] (count) | Costa Rica | 1,617.0 | 1,649.0 | 1,671.0 | 1,673.0 | 1,653.0 | 1,029.0 | 1,018.0 | 1,006.0 | 995.00 | 967.00 |\n| Personal remittances received (current US$) [CRI] (USD) | Costa Rica | 551,988,507.6 | 545,423,773.1 | 560,366,619.1 | 533,509,663.1 | 553,377,977.1 | 524,786,747.8 | 594,130,696.4 | 620,315,525.7 | 662,104,341.0 | 724,796,054.7 |\n| Internet users (% of population) [DOM] (%) | Dominican Republic | 54.22 | 63.87 | 67.57 | 74.82 | 79.72 | 81.62 | 85.24 | 81.51 | 86.13 | 91.00 |\n| Net migration (total people) [DOM] (count) | Dominican Republic | -36,375.0 | -36,219.0 | -36,069.0 | -35,934.0 | -35,797.0 | -17,957.0 | -17,957.0 | -35,153.0 | -34,915.0 | -34,806.0 |\n| Personal remittances received (current US$) [DOM] (USD) | Dominican Republic | 5,196,200,000.0 | 5,508,400,000.0 | 6,177,800,000.0 | 6,817,700,000.0 | 7,420,600,000.0 | 8,331,600,000.0 | 10,742,800,000.0 | 10,278,100,000.0 | 10,619,200,000.0 | 11,350,000,000.0 |\n| Internet users (% of population) [ECU] (%) | Ecuador | 48.94 | 54.06 | 55.80 | 57.50 | 59.20 | 70.70 | 69.11 | 69.72 | 72.69 | 77.17 |\n| Net migration (total people) [ECU] (count) | Ecuador | 14,724.0 | 35,461.0 | 53,707.0 | 95,482.0 | 54,921.0 | -10,320.0 | -28,503.0 | -23,090.0 | -21,948.0 | -19,704.0 |\n| Personal remittances received (current US$) [ECU] (USD) | Ecuador | 2,387,555,892.0 | 2,612,078,851.8 | 2,849,068,577.2 | 3,039,078,508.9 | 3,242,684,317.0 | 3,343,696,163.5 | 4,367,441,780.6 | 4,747,980,446.4 | 5,452,432,476.7 | 6,544,355,900.6 |\n| Internet users (% of population) [GTM] (%) | Guatemala | 28.81 | 34.51 | 37.90 | 41.50 | 44.40 | 47.51 | 50.84 | 54.40 | 56.73 | 60.22 |\n| Net migration (total people) [GTM] (count) | Guatemala | -48,179.0 | -30,980.0 | -42,779.0 | -56,487.0 | -57,746.0 | -23,927.0 | -29,908.0 | -8,463.0 | -8,940.0 | -7,725.0 |\n| Personal remittances received (current US$) [GTM] (USD) | Guatemala | 6,481,896,460.0 | 7,362,674,020.0 | 8,393,882,100.0 | 9,437,674,500.0 | 10,655,601,360.0 | 11,405,439,200.0 | 15,407,572,610.0 | 18,204,553,280.0 | 19,980,963,760.0 | 21,644,521,520.0 |\n| Internet users (% of population) [MEX] (%) | Mexico | 57.43 | 59.54 | 53.03 | 56.66 | 69.63 | 71.49 | 75.63 | 78.63 | 81.18 | 83.12 |\n| Net migration (total people) [MEX] (count) | Mexico | -291,044.0 | -304,472.0 | -227,499.0 | -175,356.0 | -169,628.0 | -147,456.0 | -122,791.0 | -108,438.0 | -101,044.0 | -104,581.0 |\n| Personal remittances received (current US$) [MEX] (USD) | Mexico | 26,824,907,167.0 | 29,328,819,630.0 | 32,922,876,924.0 | 36,526,305,945.0 | 39,833,517,538.0 | 43,977,653,965.0 | 55,067,029,560.0 | 61,457,717,975.0 | 66,237,847,600.0 | 67,637,913,797.0 |\n| Internet users (% of population) [PAN] (%) | Panama | 51.21 | 54.00 | 59.95 | 61.81 | 63.63 | 64.82 | 66.04 | 67.28 | 68.55 | 72.77 |\n| Net migration (total people) [PAN] (count) | Panama | 8,648.0 | 10,109.0 | 11,059.0 | 11,130.0 | 10,623.0 | 5,473.0 | 5,473.0 | 7,967.0 | 7,262.0 | 6,706.0 |\n| Personal remittances received (current US$) [PAN] (USD) | Panama | 554,200,000.0 | 502,518,500.0 | 533,355,900.0 | 537,877,175.6 | 580,854,126.0 | 386,538,182.8 | 566,699,967.8 | 526,398,352.7 | 515,681,077.4 | 531,591,166.8 |\n| Internet users (% of population) [PER] (%) | Peru | 40.85 | 45.46 | 50.45 | 55.05 | 59.95 | 65.25 | 71.11 | 74.67 | 79.48 | 81.96 |\n| Net migration (total people) [PER] (count) | Peru | 2,421.0 | 96,740.0 | 114,382.0 | 339,067.0 | 74,270.0 | 55,375.0 | 41,868.0 | 33,982.0 | 24,783.0 | 18,406.0 |\n| Personal remittances received (current US$) [PER] (USD) | Peru | 2,765,008,768.1 | 2,943,093,588.9 | 3,112,765,345.6 | 3,234,308,884.1 | 3,344,555,059.2 | 2,906,814,456.2 | 3,607,925,053.9 | 3,710,805,234.5 | 4,446,814,854.9 | 4,933,771,110.1 |\n| Internet users (% of population) [URY] (%) | Uruguay | 64.57 | 66.40 | 70.32 | 80.73 | 83.35 | 85.47 | 87.64 | 89.87 | 90.93 | 91.99 |\n| Net migration (total people) [URY] (count) | Uruguay | -4,157.0 | -3,506.0 | -3,091.0 | -2,963.0 | -2,899.0 | -1,482.0 | -1,482.0 | -1,501.0 | -1,501.0 | -1,348.0 |\n| Personal remittances received (current US$) [URY] (USD) | Uruguay | 90,267,058.2 | 90,443,153.0 | 109,381,554.8 | 113,957,699.4 | 112,271,708.0 | 111,117,391.3 | 125,733,415.2 | 125,166,608.4 | 134,608,432.6 | 136,121,983.6 |",
-    "regression": "| Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Evidencia |\n|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|\n| OLS Agregado (LCN) | intercept | -796913.1647 | 509201.7624 | t = 0.00 | 0.1616 | [-1781882.504, 1697897.066] | 🔴 Sin evidencia |\n| OLS Agregado (LCN) | Internet users (% of population) | -8225.6621 | 12662.1675 | t = 0.00 | 0.5367 | [-70652.968, 11204.326] | 🔴 Sin evidencia |\n| OLS Agregado (LCN) | Personal remittances received (current US$) | 0.0000 | 0.0000 | t = 0.00 | 0.0965 | [0.000, 0.000] | 🟡 Marginal |\n| *Diagnóstico OLS* | *R² = 0.7487, R²-adj = 0.6769, F = 10.43 (p = 0.0080), n = 10, dof = 7* | — | — | — | — | — | — |\n| *Nota* | *Regresores excluidos por n insuficiente (regla ~4 obs/parámetro): GDP per capita (current US$)* | — | — | — | — | — | — |\n| Panel Efectos Fijos (País) | Internet users (% of population) | -1697.5118 | 804.6690 | t = -2.11 | 0.0373 | [-3293.022, -102.002] | 🟢 Robusta |\n| Panel Efectos Fijos (País) | Personal remittances received (current US$) | 0.0000 | 0.0000 | t = 3.45 | 0.0008 | [0.000, 0.000] | 🟢 Robusta |\n| Panel Efectos Fijos (País) | GDP per capita (current US$) | 1.3441 | 4.4399 | t = 0.30 | 0.7627 | [-7.459, 10.148] | 🔴 Sin evidencia |\n| *Diagnóstico Panel* | *R² = 0.7632, n = 120 obs (12 países), dof = 105* | — | — | — | — | — | — |",
-    "correlations": "| Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | q (FDR) | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Evidencia |\n|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|\n| Personal remittances received (current US$) | GDP per capita (current US$) | GTM | 0.986 | 0.000 | 0.000 | 0.988 | 0.751 | 0.020 | 🟡 Co-tendencia probable |\n| Personal remittances received (current US$) | GDP per capita (current US$) | PER | 0.969 | 0.000 | 0.000 | 0.927 | 0.843 | 0.004 | 🟡 Co-tendencia probable |\n| Internet users (% of population) | Personal remittances received (current US$) | GTM | 0.963 | 0.000 | 0.000 | 1.000 | -0.197 | 0.612 | 🟡 Co-tendencia probable |\n| Internet users (% of population) | Personal remittances received (current US$) | COL | 0.959 | 0.000 | 0.000 | 0.976 | -0.236 | 0.540 | 🟡 Co-tendencia probable |\n| Internet users (% of population) | Personal remittances received (current US$) | LCN | 0.958 | 0.000 | 0.000 | 1.000 | -0.445 | 0.230 | 🟡 Co-tendencia probable |\n| Personal remittances received (current US$) | GDP per capita (current US$) | CRI | 0.949 | 0.000 | 0.000 | 0.770 | 0.579 | 0.103 | 🟡 Co-tendencia probable |\n| Internet users (% of population) | GDP per capita (current US$) | GTM | 0.944 | 0.000 | 0.000 | 0.988 | -0.177 | 0.648 | 🟡 Co-tendencia probable |\n| Internet users (% of population) | Personal remittances received (current US$) | MEX | 0.940 | 0.000 | 0.000 | 0.903 | 0.081 | 0.836 | 🟡 Co-tendencia probable |\n| Internet users (% of population) | Personal remittances received (current US$) | URY | 0.929 | 0.000 | 0.000 | 0.939 | 0.101 | 0.795 | 🟡 Co-tendencia probable |\n| Internet users (% of population) | Personal remittances received (current US$) | DOM | 0.915 | 0.000 | 0.001 | 0.976 | 0.235 | 0.542 | 🟡 Co-tendencia probable |\n| Internet users (% of population) | Personal remittances received (current US$) | ARG | 0.902 | 0.000 | 0.001 | 0.927 | -0.025 | 0.949 | 🟡 Co-tendencia probable |\n| Internet users (% of population) | Personal remittances received (current US$) | ECU | 0.896 | 0.000 | 0.001 | 0.964 | -0.359 | 0.343 | 🟡 Co-tendencia probable |\n| Internet users (% of population) | Personal remittances received (current US$) | CHL | 0.868 | 0.001 | 0.003 | 0.770 | 0.153 | 0.694 | 🟡 Co-tendencia probable |\n| Personal remittances received (current US$) | GDP per capita (current US$) | DOM | 0.866 | 0.001 | 0.003 | 0.842 | 0.001 | 0.998 | 🟡 Co-tendencia probable |\n| Internet users (% of population) | Personal remittances received (current US$) | PER | 0.859 | 0.001 | 0.004 | 0.879 | -0.084 | 0.829 | 🟡 Co-tendencia probable |\n*q (FDR): p-valor ajustado por Benjamini-Hochberg sobre la familia de correlaciones del análisis — la significancia debe leerse de q, no de p.*",
-    "derived": "| Serie | Ámbito | Inicial (año) | Final (año) | Cambio anual prom. | % cambio total | CAGR |\n|:---|:---:|:---:|:---:|:---:|:---:|:---:|\n| Net migration (total people) [LCN] | Latin America & Caribbean (regional) | -807387.00 (2015) | -378373.00 (2024) | 47668.2222 | 53.14% | — |\n| Net migration (total people) [ARG] | Argentina | 5464.00 (2015) | 3454.00 (2024) | -223.3333 | -36.79% | -4.97% |\n| Net migration (total people) [BRA] | Brazil | -173611.00 (2015) | -225510.00 (2024) | -5766.5556 | -29.89% | — |\n| Net migration (total people) [CHL] | Chile | 55689.00 (2015) | 58316.00 (2024) | 291.8889 | 4.72% | 0.51% |\n| Net migration (total people) [COL] | Colombia | -41123.00 (2015) | 141643.00 (2024) | 20307.3333 | 444.44% | — |\n| Net migration (total people) [CRI] | Costa Rica | 1617.00 (2015) | 967.00 (2024) | -72.2222 | -40.20% | -5.55% |\n| Net migration (total people) [DOM] | Dominican Republic | -36375.00 (2015) | -34806.00 (2024) | 174.3333 | 4.31% | — |\n| Net migration (total people) [ECU] | Ecuador | 14724.00 (2015) | -19704.00 (2024) | -3825.3333 | -233.82% | — |"
+    "descriptive": "| Serie / Indicador | País / Región | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |\n| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n| Current health expenditure (% of GDP) [LCN] (%) | Latin America & Caribbean (regional) | 7.803 | 7.873 | 8.053 | 7.815 | 7.866 | 8.363 | 8.301 | 7.954 | 7.944 | — |\n| Life expectancy at birth (years) [LCN] (years) | Latin America & Caribbean (regional) | 74.74 | 74.68 | 74.83 | 75.05 | 75.20 | 73.19 | 71.81 | 74.65 | 75.64 | 75.82 |\n| Current health expenditure (% of GDP) [ARG] (%) | Argentina | 10.27 | 10.05 | 10.26 | 10.17 | 10.12 | 10.67 | 11.01 | 10.16 | 10.27 | — |\n| Life expectancy at birth (years) [ARG] (years) | Argentina | 76.60 | 76.11 | 76.54 | 76.77 | 76.85 | 75.88 | 73.95 | 75.81 | 77.39 | 77.54 |\n| Current health expenditure (% of GDP) [BRA] (%) | Brazil | 8.909 | 9.169 | 9.471 | 9.465 | 9.614 | 9.623 | 9.636 | 9.387 | 9.731 | — |\n| Life expectancy at birth (years) [BRA] (years) | Brazil | 75.11 | 75.08 | 75.38 | 75.63 | 75.81 | 74.51 | 73.04 | 74.87 | 75.85 | 76.02 |\n| Current health expenditure (% of GDP) [CHL] (%) | Chile | 8.351 | 8.558 | 9.091 | 9.150 | 9.310 | 9.697 | 9.725 | 10.01 | 10.17 | 10.53 |\n| Life expectancy at birth (years) [CHL] (years) | Chile | 80.01 | 80.30 | 80.61 | 80.56 | 80.32 | 79.35 | 78.88 | 79.18 | 81.17 | 81.36 |\n| Current health expenditure (% of GDP) [COL] (%) | Colombia | 7.523 | 7.531 | 7.679 | 7.718 | 7.834 | 8.698 | 9.142 | 7.590 | 8.158 | 8.141 |\n| Life expectancy at birth (years) [COL] (years) | Colombia | 76.07 | 76.23 | 76.42 | 76.58 | 76.79 | 74.76 | 72.70 | 76.51 | 77.72 | 77.91 |\n| Current health expenditure (% of GDP) [CRI] (%) | Costa Rica | 7.592 | 7.317 | 7.045 | 7.286 | 7.221 | 7.825 | 7.611 | 7.184 | 6.866 | — |\n| Life expectancy at birth (years) [CRI] (years) | Costa Rica | 80.41 | 79.99 | 79.99 | 80.09 | 80.30 | 79.72 | 78.05 | 79.32 | 80.80 | 81.00 |\n| Current health expenditure (% of GDP) [DOM] (%) | Dominican Republic | 4.735 | 4.586 | 4.446 | 4.218 | 4.368 | 4.965 | 5.088 | 4.645 | 4.599 | — |\n| Life expectancy at birth (years) [DOM] (years) | Dominican Republic | 72.98 | 72.89 | 73.37 | 73.56 | 73.11 | 72.64 | 71.76 | 74.21 | 73.72 | 73.87 |\n| Current health expenditure (% of GDP) [ECU] (%) | Ecuador | 7.768 | 7.588 | 7.525 | 7.834 | 7.809 | 8.606 | 8.375 | 7.602 | 7.562 | — |\n| Life expectancy at birth (years) [ECU] (years) | Ecuador | 76.22 | 76.09 | 76.22 | 77.25 | 77.29 | 72.00 | 72.75 | 76.58 | 77.39 | 77.58 |\n| Current health expenditure (% of GDP) [GTM] (%) | Guatemala | 6.006 | 6.070 | 6.136 | 6.107 | 6.174 | 6.459 | 7.357 | 7.168 | 6.802 | — |\n| Life expectancy at birth (years) [GTM] (years) | Guatemala | 70.92 | 71.22 | 71.58 | 71.50 | 71.64 | 69.97 | 67.86 | 71.21 | 72.60 | 72.75 |\n| Current health expenditure (% of GDP) [MEX] (%) | Mexico | 5.527 | 5.385 | 5.312 | 5.238 | 5.301 | 6.052 | 5.877 | 5.709 | 5.504 | — |\n| Life expectancy at birth (years) [MEX] (years) | Mexico | 74.43 | 74.38 | 74.26 | 74.30 | 74.53 | 70.45 | 69.75 | 73.97 | 75.07 | 75.26 |\n| Current health expenditure (% of GDP) [PAN] (%) | Panama | 6.937 | 7.094 | 7.165 | 7.601 | 8.135 | 10.22 | 9.136 | 9.046 | 8.330 | — |\n| Life expectancy at birth (years) [PAN] (years) | Panama | 77.58 | 77.77 | 77.90 | 78.27 | 78.51 | 76.33 | 77.00 | 79.32 | 79.59 | 79.78 |\n| Current health expenditure (% of GDP) [PER] (%) | Peru | 4.905 | 4.894 | 4.809 | 5.084 | 5.125 | 6.347 | 6.673 | 6.097 | 5.638 | — |\n| Life expectancy at birth (years) [PER] (years) | Peru | 75.73 | 75.95 | 75.96 | 76.02 | 76.28 | 73.83 | 71.60 | 76.83 | 77.74 | 77.94 |\n| Current health expenditure (% of GDP) [URY] (%) | Uruguay | 8.257 | 8.639 | 8.717 | 8.900 | 9.241 | 9.088 | 8.920 | 8.890 | 9.019 | — |\n| Life expectancy at birth (years) [URY] (years) | Uruguay | 77.28 | 77.35 | 77.62 | 77.53 | 77.50 | 78.38 | 75.43 | 76.47 | 78.14 | 78.29 |",
+    "regression": "| Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Evidencia |\n|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|\n| OLS Agregado (LCN) | intercept | 112.4899 | 9.8142 | t = 0.00 | 0.0000 | [68.415, 133.746] | 🟢 Robusta |\n| OLS Agregado (LCN) | Current health expenditure (% of GDP) | -4.7602 | 1.2269 | t = 0.00 | 0.0061 | [-7.434, 0.835] | 🟡 Marginal |\n| *Diagnóstico OLS* | *R² = 0.6826, R²-adj = 0.6373, F = 15.05 (p = 0.0061), n = 9, dof = 7* | — | — | — | — | — | — |\n| *Nota* | *Regresores excluidos por n insuficiente (regla ~4 obs/parámetro): Net migration (total people), Urban population (% of total)* | — | — | — | — | — | — |\n| Panel Efectos Fijos (País) | Current health expenditure (% of GDP) | -1.0839 | 0.2460 | t = -4.41 | 0.0000 | [-1.572, -0.596] | 🟢 Robusta |\n| Panel Efectos Fijos (País) | Net migration (total people) | -0.0000 | 0.0000 | t = -0.02 | 0.9844 | [-0.000, 0.000] | 🔴 Sin evidencia |\n| Panel Efectos Fijos (País) | Urban population (% of total) | 0.1716 | 0.1822 | t = 0.94 | 0.3488 | [-0.190, 0.533] | 🔴 Sin evidencia |\n| *Diagnóstico Panel* | *R² = 0.8475, n = 110 obs (12 países), dof = 95* | — | — | — | — | — | — |",
+    "correlations": "| Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | q (FDR) | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Evidencia |\n|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|\n| Current health expenditure (% of GDP) | Urban population (% of total) | CHL | 0.989 | 0.000 | 0.000 | 1.000 | 0.290 | 0.448 | 🟡 Co-tendencia probable |\n| Current health expenditure (% of GDP) | Urban population (% of total) | GTM | 0.852 | 0.004 | 0.023 | 0.917 | 0.178 | 0.674 | 🟡 Co-tendencia probable |\n| Current health expenditure (% of GDP) | Urban population (% of total) | BRA | 0.788 | 0.012 | 0.046 | 0.733 | 0.908 | 0.002 | 🟢 Robusta |\n| Current health expenditure (% of GDP) | Urban population (% of total) | PAN | 0.775 | 0.014 | 0.046 | 0.833 | 0.149 | 0.725 | 🟡 Co-tendencia probable |\n| Current health expenditure (% of GDP) | Urban population (% of total) | URY | 0.751 | 0.020 | 0.051 | 0.650 | 0.569 | 0.141 | 🟡 Marginal |\n| Current health expenditure (% of GDP) | Urban population (% of total) | PER | 0.730 | 0.025 | 0.055 | 0.783 | -0.124 | 0.771 | 🟡 Marginal |\n| Current health expenditure (% of GDP) | Urban population (% of total) | MEX | 0.482 | 0.189 | 0.352 | 0.383 | 0.673 | 0.067 | 🔴 Sin evidencia |\n| Current health expenditure (% of GDP) | Urban population (% of total) | LCN | 0.417 | 0.264 | 0.382 | 0.517 | 0.681 | 0.063 | 🔴 Sin evidencia |\n| Current health expenditure (% of GDP) | Urban population (% of total) | COL | 0.410 | 0.240 | 0.382 | 0.661 | -0.062 | 0.874 | 🔴 Sin evidencia |\n| Current health expenditure (% of GDP) | Urban population (% of total) | ARG | 0.344 | 0.364 | 0.473 | 0.233 | 0.089 | 0.834 | 🔴 Sin evidencia |\n| Current health expenditure (% of GDP) | Urban population (% of total) | DOM | -0.320 | 0.401 | 0.474 | -0.283 | 0.077 | 0.856 | 🔴 Sin evidencia |\n| Current health expenditure (% of GDP) | Urban population (% of total) | CRI | -0.240 | 0.535 | 0.537 | -0.283 | 0.162 | 0.701 | 🔴 Sin evidencia |\n| Current health expenditure (% of GDP) | Urban population (% of total) | ECU | 0.238 | 0.537 | 0.537 | 0.117 | 0.238 | 0.570 | 🔴 Sin evidencia |\n| Life expectancy at birth (years) | Current health expenditure (% of GDP) | LCN | — | — | — | — | — | — | 🔴 Sin evidencia |\n| Life expectancy at birth (years) | Current health expenditure (% of GDP) | BRA | — | — | — | — | — | — | 🔴 Sin evidencia |\n*q (FDR): p-valor ajustado por Benjamini-Hochberg sobre la familia de correlaciones del análisis — la significancia debe leerse de q, no de p.*",
+    "derived": "| Serie | Ámbito | Inicial (año) | Final (año) | Cambio anual prom. | % cambio total | CAGR |\n|:---|:---:|:---:|:---:|:---:|:---:|:---:|\n| Life expectancy at birth (years) [LCN] | Latin America & Caribbean (regional) | 74.74 (2015) | 75.82 (2024) | 0.1194 | 1.44% | 0.16% |\n| Life expectancy at birth (years) [ARG] | Argentina | 76.60 (2015) | 77.54 (2024) | 0.1048 | 1.23% | 0.14% |\n| Life expectancy at birth (years) [BRA] | Brazil | 75.11 (2015) | 76.02 (2024) | 0.1019 | 1.22% | 0.13% |\n| Life expectancy at birth (years) [CHL] | Chile | 80.01 (2015) | 81.36 (2024) | 0.1501 | 1.69% | 0.19% |\n| Life expectancy at birth (years) [COL] | Colombia | 76.07 (2015) | 77.91 (2024) | 0.2051 | 2.43% | 0.27% |\n| Life expectancy at birth (years) [CRI] | Costa Rica | 80.41 (2015) | 81.00 (2024) | 0.0654 | 0.73% | 0.08% |\n| Life expectancy at birth (years) [DOM] | Dominican Republic | 72.98 (2015) | 73.87 (2024) | 0.0984 | 1.21% | 0.13% |\n| Life expectancy at birth (years) [ECU] | Ecuador | 76.22 (2015) | 77.58 (2024) | 0.1508 | 1.78% | 0.20% |"
   },
-  "chartsDir": "2026-10-07-18-40"
+  "chartsDir": "2026-10-10-17-07"
 }
