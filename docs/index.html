@@ -136,12 +136,30 @@
     #viewer .annex-fig img { width: 100%; display: block; }
     #viewer .annex-fig span { display: block; font-family: Verdana, sans-serif; font-size: 0.7em; color: #777; padding: 6px 8px; }
 
+    /* ── TOC lateral (tocbot): indice con scroll-spy en pantallas anchas ── */
+    .toc-panel { position: fixed; top: 96px; left: 14px; width: 190px; max-height: calc(100vh - 140px); overflow-y: auto; display: none; z-index: 40; font-family: Verdana, sans-serif; }
+    .toc-panel .toc-tag { display: block; font-size: 0.66em; font-weight: 700; letter-spacing: 1.5px; color: #8fa3c4; margin-bottom: 8px; }
+    .toc-panel .toc-list { list-style: none; margin: 0; padding: 0; }
+    .toc-panel .toc-list .toc-list { padding-left: 14px; }
+    .toc-panel a.toc-link { display: block; font-size: 0.74em; line-height: 1.45; color: #7a8398; text-decoration: none; padding: 2px 0 2px 10px; border-left: 2px solid #e3e0da; }
+    .toc-panel a.toc-link:hover { color: #1a56db; }
+    .toc-panel a.toc-link.is-active-link { color: #14213d; font-weight: 700; border-left-color: #1a56db; }
+    @media (min-width: 1420px) { .toc-panel.on { display: block; } }
+
+    /* Anclas § en encabezados (enlazar directo a una seccion) */
+    #viewer h1, #viewer h2, #viewer h3, #viewer h4 { scroll-margin-top: 18px; }
+    .h-anchor { opacity: 0; margin-left: 8px; font-size: 0.68em; color: #1a56db; text-decoration: none; vertical-align: middle; transition: opacity 0.15s; }
+    #viewer h1:hover .h-anchor, #viewer h2:hover .h-anchor, #viewer h3:hover .h-anchor, #viewer h4:hover .h-anchor { opacity: 1; }
+    .h-anchor:hover { text-decoration: underline; }
+
     @media (max-width: 640px) {
       header { padding: 26px 18px 22px; }
       #viewer { padding: 22px 18px; }
       .echart { height: 300px; }
     }
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.8/dist/tocbot.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/css/glightbox.min.css">
 </head>
 <body>
   <header>
@@ -171,6 +189,7 @@
       <span class="back" onclick="closePaper()">← Volver a la lista</span>
       <a id="pdfdownload" class="pdf-btn" href="#" target="_blank" download>📄 Descargar PDF</a>
       <span class="news-link" id="newslink"></span>
+      <nav class="toc-panel" id="tocPanel" aria-label="Contenido del artículo"><span class="toc-tag">CONTENIDO</span><div id="tocBody"></div></nav>
       <div id="content"></div>
     </div>
   </main>
@@ -180,6 +199,8 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tocbot@4.36.8/dist/tocbot.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/js/glightbox.min.js"></script>
   <script>
     const list = document.getElementById('list');
     const viewer = document.getElementById('viewer');
@@ -339,6 +360,7 @@
         content.querySelectorAll('blockquote').forEach(b => { if (/^\s*En (corto|breve)/.test(b.textContent)) b.classList.add('tldr'); });
         applyGlossary(content);
         enhanceFigures(p);
+        initPaperExtras();
         list.style.display = 'none';
         hero.style.display = 'none';
         status.style.display = 'none';
@@ -353,9 +375,41 @@
       }
     }
 
+    // Extras del lector: TOC con scroll-spy (tocbot) + lightbox del anexo (GLightbox).
+    // Ambos degradan en silencio si el CDN no cargo.
+    let lightbox = null;
+    function initPaperExtras() {
+      if (window.tocbot) {
+        try { tocbot.destroy(); } catch {}
+        try {
+          tocbot.init({
+            tocSelector: '#tocBody',
+            contentSelector: '#content',
+            headingSelector: 'h2, h3',
+            collapseDepth: 3,
+            scrollSmooth: true,
+            scrollSmoothOffset: -24,
+            headingsOffset: 24,
+            activeLinkClass: 'is-active-link',
+            linkClass: 'toc-link',
+            listClass: 'toc-list',
+            headingLabelCallback: t => t.replace(/\s*§\s*$/, '').trim()
+          });
+          document.getElementById('tocPanel').classList.add('on');
+        } catch {}
+      }
+      if (window.GLightbox) {
+        try { lightbox && lightbox.destroy(); } catch {}
+        try { lightbox = GLightbox({ selector: '.annex-fig', touchNavigation: true, loop: true, zoomable: true }); } catch {}
+      }
+    }
+
     function closePaper() {
       liveCharts.forEach(c => { try { c.dispose(); } catch {} });
       liveCharts = [];
+      if (window.tocbot) { try { tocbot.destroy(); } catch {} }
+      if (lightbox) { try { lightbox.destroy(); } catch {} lightbox = null; }
+      document.getElementById('tocPanel').classList.remove('on');
       viewer.classList.remove('open');
       history.replaceState(null, '', location.pathname);
       list.style.display = '';
@@ -407,11 +461,11 @@
       const citedFiles = new Set(cited.map(c => c.file));
       const extra = (p.figs || []).filter(f => !citedFiles.has(f));
       const figCard = (f, label) =>
-        `<a class="annex-fig" href="charts/${p.charts}/${f}" target="_blank" rel="noopener"><img src="charts/${p.charts}/${f}" loading="lazy" alt="${esc(label)}"><span>${esc(label)}</span></a>`;
+        `<a class="annex-fig" href="charts/${p.charts}/${f}" target="_blank" rel="noopener" data-title="${esc(label).replace(/"/g, '&quot;')}"><img src="charts/${p.charts}/${f}" loading="lazy" alt="${esc(label)}"><span>${esc(label)}</span></a>`;
       const citedHtml = cited.length
         ? `<h3 class="annex-sub">Figuras del artículo</h3><div class="annex-figs">${cited.map(c => figCard(c.file, c.caption)).join('')}</div>` : '';
       const extraHtml = extra.length
-        ? `<h3 class="annex-sub">Material suplementario del análisis <span class="annex-note">(generado por Python; el texto no lo discute)</span></h3><div class="annex-figs">${extra.map(f => figCard(f, figLabel(f))).join('')}</div>` : '';
+        ? `<h3 class="annex-sub" data-heading-label="Material suplementario del análisis">Material suplementario del análisis <span class="annex-note">(generado por Python; el texto no lo discute)</span></h3><div class="annex-figs">${extra.map(f => figCard(f, figLabel(f))).join('')}</div>` : '';
       return `<div class="annex">
         <h2 class="annex-h">Evidencia y anexos</h2>
         <ul class="annex-links">
@@ -534,6 +588,7 @@
           if (fd.type === 'forest') div.style.height = Math.max(180, fd.entries.length * 38 + 90) + 'px';
           if (fd.type === 'heatmap') div.style.height = Math.max(220, fd.pairs.length * 36 + 120) + 'px';
           if (fd.type === 'panels') { const rows = Math.ceil(fd.panels.length / 3); div.style.height = Math.max(240, rows * 190 + 40) + 'px'; }
+          if (fd.type === 'trends') { const rows = Math.ceil(fd.series.length / 3); div.style.height = Math.max(260, rows * 190 + 40) + 'px'; }
           figEl.insertBefore(div, img);
           img.remove();
           const chart = echarts.init(div);
@@ -701,7 +756,29 @@
           }]
         };
       }
-      return null; // 'trends' u otros: queda el PNG (unidades distintas → mosaico)
+      if (f.type === 'trends') {
+        // Mosaico de mini-series: cada indicador con su propia escala — las
+        // unidades difieren entre indicadores y un solo eje las aplastaria.
+        const cols = 3, rows = Math.ceil(f.series.length / cols);
+        const w = 100 / cols, h = 100 / rows;
+        const grids = [], xAxes = [], yAxes = [], series = [], graphics = [];
+        const fmt = v => Math.abs(v) >= 1e9 ? (v / 1e9).toFixed(0) + 'B' : Math.abs(v) >= 1e6 ? (v / 1e6).toFixed(1) + 'M' : Math.abs(v) >= 1e3 ? (v / 1e3).toFixed(0) + 'k' : (v % 1 ? (+v).toFixed(1) : v);
+        const short = t => t.length > 34 ? t.slice(0, 33) + '…' : t;
+        f.series.forEach((s, i) => {
+          const col = i % cols, row = Math.floor(i / cols);
+          grids.push({ left: `${col * w + 5}%`, top: `${row * h + 10}%`, width: `${w - 9}%`, height: `${h - 18}%`, show: true, borderColor: '#eee', borderWidth: 1 });
+          xAxes.push({ type: 'category', gridIndex: i, data: s.years, axisLabel: { fontSize: 8, color: EC.txt, interval: Math.max(0, Math.ceil(s.years.length / 3) - 1) }, splitLine: { show: false } });
+          yAxes.push({ type: 'value', gridIndex: i, scale: true, axisLabel: { fontSize: 8, color: EC.txt, formatter: fmt }, splitLine: { lineStyle: { color: EC.grid } } });
+          series.push({ name: s.name, type: 'line', xAxisIndex: i, yAxisIndex: i, data: s.values, symbolSize: 4, lineStyle: { width: 1.8, color: EC.blue }, itemStyle: { color: EC.blue } });
+          graphics.push({ type: 'text', left: `${col * w + 6}%`, top: `${row * h + 10.5}%`, style: { text: short((s.name || '').split(' [')[0]), fontSize: 10, fill: EC.navy, fontWeight: 'bold' } });
+        });
+        return {
+          title: { text: f.title || 'Indicadores del análisis', textStyle: { fontSize: 12, color: '#888', fontWeight: 'normal' }, left: 'center', top: 2 },
+          tooltip: { ...tt, trigger: 'axis' },
+          grid: grids, xAxis: xAxes, yAxis: yAxes, series, graphic: graphics
+        };
+      }
+      return null; // otros tipos sin renderer: queda el PNG
     }
 
     function buildMapOption(f) {
@@ -716,8 +793,12 @@
 
     // Markdown renderer: tables, images, lists, headers, blockquotes
     function renderMd(md) {
+      // CRLF -> LF: los .md se generan en Windows y el \r residual rompia todo
+      // regex anclado en $ (los headers se renderizaban como texto "## ...").
+      md = md.replace(/\r\n?/g, '\n');
       // Normalizar: LaTeX delimiters a texto plano visible
       md = md.replace(/\\\[([\s\S]*?)\\\]/g, '`$1`').replace(/\\\(([\s\S]*?)\\\)/g, '`$1`');
+      const slugCounts = {};
       const lines = md.split('\n');
       let html = '';
       let i = 0;
@@ -744,9 +825,14 @@
           html += `<figure><img src="${src}" alt="${imgMatch[1]}" loading="lazy"><figcaption>${imgMatch[1]}</figcaption></figure>`;
           i++; continue;
         }
-        // Headers
+        // Headers (con id para el TOC y ancla § para enlazar la seccion)
         const h = line.match(/^(#{1,4})\s+(.+)$/);
-        if (h) { html += `<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`; i++; continue; }
+        if (h) {
+          const base = h[2].toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'seccion';
+          const id = slugCounts[base] ? `${base}-${++slugCounts[base]}` : (slugCounts[base] = 1, base);
+          html += `<h${h[1].length} id="${id}">${inline(h[2])}<a class="h-anchor toc-skip" href="#${id}" aria-label="Enlace a esta sección">§</a></h${h[1].length}>`;
+          i++; continue;
+        }
         // HR
         if (/^\s*-{3,}\s*$/.test(line)) { html += '<hr>'; i++; continue; }
         // Blockquote
