@@ -311,7 +311,8 @@
           const parts = [];
           if (promptCuts.length) parts.push(`${promptCuts.length} recorte(s) de contexto (~${chars.toLocaleString('es')} caracteres)`);
           if (outCuts.length) parts.push(`${outCuts.length} respuesta(s) cortada(s) al tope de tokens`);
-          return `<div class="warn-banner">⚠ Este paper tuvo ${p.truncations.length} ajuste(s) por límites de tokens del modelo (${parts.join(' + ')}). El análisis puede tener menos contexto del ideal.</div>`;
+          const stages = [...new Set(p.truncations.map(t => t.stage).filter(Boolean))];
+          return `<div class="warn-banner">⚠ Este paper tuvo ${p.truncations.length} ajuste(s) por límites de tokens del modelo (${parts.join(' + ')})${stages.length ? ` en ${stages.join(', ')}` : ''}. El análisis puede tener menos contexto del ideal.</div>`;
         })() : '';
         const banner = (p.warning ? `<div class="warn-banner">${esc(p.warning)}</div>` : '') + truncWarn;
         const verdicts = [];

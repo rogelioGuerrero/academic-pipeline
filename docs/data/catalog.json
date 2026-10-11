@@ -1,10 +1,11 @@
 {
-  "generated": "2026-10-10T17:07:25.541Z",
+  "generated": "2026-10-11T02:11:39.402Z",
   "total": 53,
   "entries": [
     {
       "code": "SL.UEM.1524.ZS",
       "label": "Youth unemployment (% of labor force 15-24)",
+      "label_es": "Desempleo juvenil (% de la fuerza laboral de 15 a 24 años)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -13,6 +14,7 @@
     {
       "code": "SL.UEM.1524.MA.ZS",
       "label": "Youth unemployment, male (% of male labor force 15-24)",
+      "label_es": "Desempleo juvenil masculino (% de la fuerza laboral masculina de 15 a 24 años)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -21,6 +23,7 @@
     {
       "code": "SL.UEM.1524.FE.ZS",
       "label": "Youth unemployment, female (% of female labor force 15-24)",
+      "label_es": "Desempleo juvenil femenino (% de la fuerza laboral femenina de 15 a 24 años)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -29,6 +32,7 @@
     {
       "code": "SL.UEM.TOTL.ZS",
       "label": "Total unemployment (% of total labor force)",
+      "label_es": "Desempleo total (% de la fuerza laboral total)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -37,6 +41,7 @@
     {
       "code": "SL.UEM.TOTL.MA.ZS",
       "label": "Unemployment, male (% of male labor force)",
+      "label_es": "Desempleo masculino (% de la fuerza laboral masculina)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -45,6 +50,7 @@
     {
       "code": "SL.UEM.TOTL.FE.ZS",
       "label": "Unemployment, female (% of female labor force)",
+      "label_es": "Desempleo femenino (% de la fuerza laboral femenina)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -53,6 +59,7 @@
     {
       "code": "SL.EMP.TOTL.SP.ZS",
       "label": "Employment to population ratio, 15+, total (%)",
+      "label_es": "Ratio empleo-población, 15+, total (%)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -61,6 +68,7 @@
     {
       "code": "SL.TLF.TOTL.IN",
       "label": "Total labor force (total)",
+      "label_es": "Fuerza laboral total",
       "category": "employment",
       "unit": "count",
       "source": "World Bank",
@@ -69,6 +77,7 @@
     {
       "code": "SL.TLF.1524.IN",
       "label": "Labor force, youth total (ages 15-24)",
+      "label_es": "Fuerza laboral juvenil (15 a 24 años)",
       "category": "employment",
       "unit": "count",
       "source": "World Bank",
@@ -77,6 +86,7 @@
     {
       "code": "SL.UEM.NEET.ZS",
       "label": "Share of youth not in education, employment or training (NEET, % of youth population)",
+      "label_es": "Jóvenes que no estudian ni trabajan (NEET, % de la población juvenil)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -85,6 +95,7 @@
     {
       "code": "SL.TLF.CACT.ZS",
       "label": "Labor force participation rate (% of population ages 15+)",
+      "label_es": "Tasa de participación laboral (% de la población de 15+ años)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -93,6 +104,7 @@
     {
       "code": "SL.EMP.VULN.ZS",
       "label": "Vulnerable employment (% of total employment)",
+      "label_es": "Empleo vulnerable (% del empleo total)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -101,6 +113,7 @@
     {
       "code": "SL.AGR.EMPL.ZS",
       "label": "Employment in agriculture (% of total employment)",
+      "label_es": "Empleo en agricultura (% del empleo total)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -109,6 +122,7 @@
     {
       "code": "SL.IND.EMPL.ZS",
       "label": "Employment in industry (% of total employment)",
+      "label_es": "Empleo en industria (% del empleo total)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -117,6 +131,7 @@
     {
       "code": "SL.SRV.EMPL.ZS",
       "label": "Employment in services (% of total employment)",
+      "label_es": "Empleo en servicios (% del empleo total)",
       "category": "employment",
       "unit": "%",
       "source": "World Bank",
@@ -125,6 +140,7 @@
     {
       "code": "NY.GDP.PCAP.CD",
       "label": "GDP per capita (current US$)",
+      "label_es": "PIB per cápita (US$ actuales)",
       "category": "economy",
       "unit": "USD",
       "source": "World Bank",
@@ -133,6 +149,7 @@
     {
       "code": "NY.GDP.MKTP.CD",
       "label": "GDP (current US$)",
+      "label_es": "PIB (US$ actuales)",
       "category": "economy",
       "unit": "USD",
       "source": "World Bank",
@@ -141,6 +158,7 @@
     {
       "code": "NY.GDP.PCAP.PP.CD",
       "label": "GDP per capita, PPP (current US$)",
+      "label_es": "PIB per cápita, PPA (US$ actuales)",
       "category": "economy",
       "unit": "USD",
       "source": "World Bank",
@@ -149,6 +167,7 @@
     {
       "code": "NY.GDP.MKTP.KD.ZG",
       "label": "GDP growth (annual %)",
+      "label_es": "Crecimiento del PIB (% anual)",
       "category": "economy",
       "unit": "%",
       "source": "World Bank",
@@ -157,6 +176,7 @@
     {
       "code": "NV.IND.MANF.ZS",
       "label": "Manufacturing, value added (% of GDP)",
+      "label_es": "Manufactura, valor agregado (% del PIB)",
       "category": "economy",
       "unit": "%",
       "source": "World Bank",
@@ -165,6 +185,7 @@
     {
       "code": "GC.TAX.TOTL.GD.ZS",
       "label": "Tax revenue (% of GDP)",
+      "label_es": "Ingresos tributarios (% del PIB)",
       "category": "economy",
       "unit": "%",
       "source": "World Bank",
@@ -173,6 +194,7 @@
     {
       "code": "SE.ADT.1524.LT.ZS",
       "label": "Youth literacy rate (% of people 15-24)",
+      "label_es": "Tasa de alfabetización juvenil (% de personas de 15 a 24 años)",
       "category": "education",
       "unit": "%",
       "source": "World Bank",
@@ -181,6 +203,7 @@
     {
       "code": "SE.ADT.1524.LT.MA.ZS",
       "label": "Youth literacy rate, male",
+      "label_es": "Tasa de alfabetización juvenil, hombres",
       "category": "education",
       "unit": "%",
       "source": "World Bank",
@@ -189,6 +212,7 @@
     {
       "code": "SE.ADT.1524.LT.FE.ZS",
       "label": "Youth literacy rate, female",
+      "label_es": "Tasa de alfabetización juvenil, mujeres",
       "category": "education",
       "unit": "%",
       "source": "World Bank",
@@ -197,6 +221,7 @@
     {
       "code": "SE.XPD.TOTL.GD.ZS",
       "label": "Government expenditure on education (% of GDP)",
+      "label_es": "Gasto público en educación (% del PIB)",
       "category": "education",
       "unit": "%",
       "source": "World Bank",
@@ -205,6 +230,7 @@
     {
       "code": "SE.SEC.ENRR",
       "label": "Secondary school enrollment (% gross)",
+      "label_es": "Matrícula en educación secundaria (% bruto)",
       "category": "education",
       "unit": "%",
       "source": "World Bank",
@@ -213,6 +239,7 @@
     {
       "code": "SE.TER.ENRR",
       "label": "Tertiary school enrollment (% gross)",
+      "label_es": "Matrícula en educación terciaria (% bruto)",
       "category": "education",
       "unit": "%",
       "source": "World Bank",
@@ -221,6 +248,7 @@
     {
       "code": "IT.NET.USER.ZS",
       "label": "Internet users (% of population)",
+      "label_es": "Usuarios de internet (% de la población)",
       "category": "technology",
       "unit": "%",
       "source": "World Bank",
@@ -229,6 +257,7 @@
     {
       "code": "IT.CEL.SETS.P2",
       "label": "Mobile cellular subscriptions (per 100 people)",
+      "label_es": "Suscripciones de telefonía móvil (por cada 100 personas)",
       "category": "technology",
       "unit": "per100",
       "source": "World Bank",
@@ -237,6 +266,7 @@
     {
       "code": "IT.NET.BNDW.PC",
       "label": "Fixed broadband subscriptions (per 100 people)",
+      "label_es": "Suscripciones de banda ancha fija (por cada 100 personas)",
       "category": "technology",
       "unit": "per100",
       "source": "World Bank",
@@ -245,6 +275,7 @@
     {
       "code": "SP.POP.TOTL",
       "label": "Total population",
+      "label_es": "Población total",
       "category": "demographics",
       "unit": "count",
       "source": "World Bank",
@@ -253,6 +284,7 @@
     {
       "code": "SP.POP.1524.TO",
       "label": "Youth population (ages 15-24)",
+      "label_es": "Población juvenil (15 a 24 años)",
       "category": "demographics",
       "unit": "count",
       "source": "World Bank",
@@ -261,6 +293,7 @@
     {
       "code": "SP.URB.TOTL.IN.ZS",
       "label": "Urban population (% of total)",
+      "label_es": "Población urbana (% del total)",
       "category": "demographics",
       "unit": "%",
       "source": "World Bank",
@@ -269,6 +302,7 @@
     {
       "code": "SI.POV.GINI",
       "label": "Gini index",
+      "label_es": "Índice de Gini",
       "category": "inequality",
       "unit": "index",
       "source": "World Bank",
@@ -277,6 +311,7 @@
     {
       "code": "SI.POV.NAHC",
       "label": "Poverty headcount at national poverty line (% of population)",
+      "label_es": "Incidencia de la pobreza según línea nacional (% de la población)",
       "category": "inequality",
       "unit": "%",
       "source": "World Bank",
@@ -285,6 +320,7 @@
     {
       "code": "SI.POV.DDAY",
       "label": "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)",
+      "label_es": "Incidencia de la pobreza a US$2,15 al día (PPA 2017, % de la población)",
       "category": "inequality",
       "unit": "%",
       "source": "World Bank",
@@ -293,6 +329,7 @@
     {
       "code": "LO.PISA.MAT",
       "label": "PISA Mathematics score",
+      "label_es": "Puntaje PISA en matemáticas",
       "category": "education",
       "unit": "score",
       "source": "World Bank",
@@ -301,6 +338,7 @@
     {
       "code": "LO.PISA.REA",
       "label": "PISA Reading score",
+      "label_es": "Puntaje PISA en lectura",
       "category": "education",
       "unit": "score",
       "source": "World Bank",
@@ -309,6 +347,7 @@
     {
       "code": "LO.PISA.SCI",
       "label": "PISA Science score",
+      "label_es": "Puntaje PISA en ciencias",
       "category": "education",
       "unit": "score",
       "source": "World Bank",
@@ -317,6 +356,7 @@
     {
       "code": "SM.POP.NETM",
       "label": "Net migration (total people)",
+      "label_es": "Migración neta (personas)",
       "category": "demographics",
       "unit": "count",
       "source": "World Bank",
@@ -325,6 +365,7 @@
     {
       "code": "BX.TRF.PWKR.CD.DT",
       "label": "Personal remittances received (current US$)",
+      "label_es": "Remesas personales recibidas (US$ actuales)",
       "category": "economy",
       "unit": "USD",
       "source": "World Bank",
@@ -333,6 +374,7 @@
     {
       "code": "FP.CPI.TOTL.ZG",
       "label": "Inflation, consumer prices (annual %)",
+      "label_es": "Inflación, precios al consumidor (% anual)",
       "category": "economy",
       "unit": "%",
       "source": "World Bank",
@@ -341,6 +383,7 @@
     {
       "code": "SP.DYN.LE00.IN",
       "label": "Life expectancy at birth (years)",
+      "label_es": "Esperanza de vida al nacer (años)",
       "category": "health",
       "unit": "years",
       "source": "World Bank",
@@ -349,6 +392,7 @@
     {
       "code": "SH.XPD.CHEX.GD.ZS",
       "label": "Current health expenditure (% of GDP)",
+      "label_es": "Gasto corriente en salud (% del PIB)",
       "category": "health",
       "unit": "%",
       "source": "World Bank",
@@ -357,6 +401,7 @@
     {
       "code": "EG.FEC.RNEW.ZS",
       "label": "Renewable energy consumption (% of total final energy)",
+      "label_es": "Consumo de energía renovable (% de la energía final total)",
       "category": "environment",
       "unit": "%",
       "source": "World Bank",
@@ -365,6 +410,7 @@
     {
       "code": "EG.USE.ELEC.KH.PC",
       "label": "Electric power consumption (kWh per capita)",
+      "label_es": "Consumo de energía eléctrica (kWh per cápita)",
       "category": "environment",
       "unit": "kWh",
       "source": "World Bank",
@@ -373,6 +419,7 @@
     {
       "code": "NE.TRD.GNFS.ZS",
       "label": "Trade (% of GDP)",
+      "label_es": "Comercio (% del PIB)",
       "category": "economy",
       "unit": "%",
       "source": "World Bank",
@@ -381,6 +428,7 @@
     {
       "code": "BX.KLT.DINV.WD.GD.ZS",
       "label": "Foreign direct investment, net inflows (% of GDP)",
+      "label_es": "Inversión extranjera directa, flujos netos (% del PIB)",
       "category": "economy",
       "unit": "%",
       "source": "World Bank",
@@ -389,6 +437,7 @@
     {
       "code": "UNE_DEAP_SEX_AGE_RT",
       "label": "Youth unemployment rate (ILO, 15-24)",
+      "label_es": "Tasa de desempleo juvenil (OIT, 15-24)",
       "category": "employment",
       "unit": "%",
       "source": "ILO",
@@ -398,6 +447,7 @@
     {
       "code": "EMP_DWAP_SEX_AGE_RT",
       "label": "Youth employment-to-population ratio (ILO, 15-24)",
+      "label_es": "Ratio empleo-población juvenil (OIT, 15-24)",
       "category": "employment",
       "unit": "%",
       "source": "ILO",
@@ -407,6 +457,7 @@
     {
       "code": "UNE_DEAP_SEX_AGE_NB",
       "label": "Youth unemployed, total (ILO, 15-24)",
+      "label_es": "Jóvenes desempleados, total (OIT, 15-24)",
       "category": "employment",
       "unit": "count",
       "source": "ILO",
@@ -416,6 +467,7 @@
     {
       "code": "EMP_NINS_SEX_AGE_RT",
       "label": "Informal employment rate (ILO)",
+      "label_es": "Tasa de empleo informal (OIT)",
       "category": "employment",
       "unit": "%",
       "source": "ILO",
@@ -425,6 +477,7 @@
     {
       "code": "EAR_GAP_SEX_AGE_RT",
       "label": "Gender wage gap (ILO)",
+      "label_es": "Brecha salarial de género (OIT)",
       "category": "employment",
       "unit": "%",
       "source": "ILO",

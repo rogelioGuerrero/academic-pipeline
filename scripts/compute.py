@@ -25,9 +25,38 @@ Input JSON format:
 """
 
 import sys
+import os
 import json
+import re
 import warnings
 warnings.filterwarnings("ignore")
+
+# Etiquetas de indicadores en espanol: los `name` internos quedan en ingles
+# (los regex del pipeline los usan), pero todo texto visible — tablas,
+# figuras, captions — se traduce. Diccionario compartido con research.mjs.
+def _load_ind_es():
+    try:
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "indicadores-es.json")
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {"labels": {}, "patterns": []}
+
+_IND_ES = _load_ind_es()
+_IND_ES_PATTERNS = [(re.compile(p, re.IGNORECASE), out) for p, out in _IND_ES.get("patterns", [])]
+
+def _es_label(name):
+    """Traduce una etiqueta de indicador al espanol (dict -> patrones -> original)."""
+    if not name:
+        return name
+    base = name.split(" [")[0]
+    suffix = name[len(base):]
+    out = _IND_ES.get("labels", {}).get(base)
+    if out is None:
+        out = base
+        for rx, sub in _IND_ES_PATTERNS:
+            out = rx.sub(sub, out)
+    return out + suffix
 
 def load_input(path):
     with open(path, "r", encoding="utf-8") as f:
@@ -38,10 +67,10 @@ def _get_variables(data):
     variables = []
     if "variables" in data:
         for v in data["variables"]:
-            variables.append({"name": v["name"], "label": v.get("label", v["name"]), "values": v.get("values", []), "years": v.get("years", []), "unit": v.get("unit", "unknown"), "country": v.get("country", ""), "country_code": v.get("country_code", "")})
+            variables.append({"name": v["name"], "label": v.get("label", v["name"]), "values": v.get("values", []), "years": v.get("years", []), "unit": v.get("unit", "unknown"), "country": v.get("country", ""), "country_code": v.get("country_code", ""), "source": v.get("source", "")})
     if "series" in data:
         for s in data["series"]:
-            variables.append({"name": s["name"], "label": s.get("label", s["name"]), "values": s.get("values", []), "years": s.get("years", []), "unit": s.get("unit", "unknown"), "country": s.get("country", ""), "country_code": s.get("country_code", "")})
+            variables.append({"name": s["name"], "label": s.get("label", s["name"]), "values": s.get("values", []), "years": s.get("years", []), "unit": s.get("unit", "unknown"), "country": s.get("country", ""), "country_code": s.get("country_code", ""), "source": s.get("source", "")})
     return variables
 
 # Unit compatibility matrix: which units can be correlated together.
@@ -842,8 +871,8 @@ def derived_stats(data):
 
 
 def _short_label(name, maxlen=42):
-    """Shorten an indicator name for chart labels."""
-    name = name.split(" [")[0]  # drop [CC] suffix for display
+    """Shorten an indicator name for chart labels (en espanol)."""
+    name = _es_label(name.split(" [")[0])  # drop [CC] suffix for display
     return name if len(name) <= maxlen else name[:maxlen - 1] + "…"
 
 def make_charts(data, results, outdir):
@@ -928,7 +957,7 @@ def make_charts(data, results, outdir):
         fig.savefig(os.path.join(outdir, fname), dpi=150)
         plt.close(fig)
         charts.append({"file": fname, "caption": "Evolución temporal 2015-2024 de los indicadores usados en el análisis (agregado regional). Fuente: World Bank API."})
-        chart_data["figures"][fname] = {"type": "trends", "title": "Indicadores del análisis — América Latina y Caribe", "series": [{"name": v["name"], "years": v.get("years", []), "values": v["values"]} for v in lcn_vars]}
+        chart_data["figures"][fname] = {"type": "trends", "title": "Indicadores del análisis — América Latina y Caribe", "series": [{"name": _es_label(v["name"]), "years": v.get("years", []), "values": v["values"]} for v in lcn_vars]}
 
     # ── Fig 2: scatter of top significant correlation ──
     corr_results = [c for c in results.get("correlations", []) if c.get("significant")]
@@ -1047,7 +1076,8 @@ def make_charts(data, results, outdir):
                 panel_entries.append({"name": c["name"].split(" [")[0], "beta": float(c["beta"]), "lo": float(ci[0]), "hi": float(ci[1]), "p": float(c.get("p_value", 1.0))})
 
     if ols_entries or panel_entries:
-        # Etiquetas en español para lectura directa
+        # Etiquetas en español para lectura directa: el diccionario canonico
+        # (indicadores-es.json) + aliases cortos para el espacio del grafico.
         ES_NAMES = {
             "GDP growth (annual %)": "Crecimiento del PIB",
             "Manufacturing, value added (% of GDP)": "Manufactura (% del PIB)",
@@ -1466,7 +1496,7 @@ def generate_markdown_tables(data, results):
             "| " + " | ".join(sep) + " |"
         ]
         for v in selected_vars:
-            label = v.get("label", v["name"].split(" [")[0])
+            label = _es_label(v.get("label", v["name"].split(" [")[0]))
             cc = v.get("country", "") or v.get("country_code", "")
             unit = f" ({v['unit']})" if v.get("unit") and v['unit'] != "unknown" else ""
             y_map = dict(zip(v.get("years", []), v.get("values", [])))
@@ -1497,11 +1527,11 @@ def generate_markdown_tables(data, results):
             boot_ci = c.get("boot_ci_95")
             ci_str = f"[{boot_ci[0]:.3f}, {boot_ci[1]:.3f}]" if boot_ci else "—"
             stat_str = f"t = {c.get('t_stat', 0):.2f}"
-            var_name = c['name'].split(" [")[0]
+            var_name = _es_label(c['name'].split(" [")[0])
             model_rows.append(f"| OLS Agregado (LCN) | {var_name} | {c.get('beta', 0):.4f} | {c.get('se', 0):.4f} | {stat_str} | {c.get('p_value', 1):.4f} | {ci_str} | {sig_mark} |")
         model_rows.append(f"| *Diagnóstico OLS* | *R² = {reg.get('r_squared', 0):.4f}, R²-adj = {reg.get('adj_r_squared', 0):.4f}, F = {reg.get('f_statistic', 0):.2f} (p = {reg.get('f_p_value', 1):.4f}), n = {reg.get('n', 0)}, dof = {reg.get('dof', 0)}* | — | — | — | — | — | — |")
         if reg.get("dropped_regressors"):
-            dropped_names = ", ".join(n.split(" [")[0] for n in reg["dropped_regressors"])
+            dropped_names = ", ".join(_es_label(n.split(" [")[0]) for n in reg["dropped_regressors"])
             model_rows.append(f"| *Nota* | *Regresores excluidos por n insuficiente (regla ~4 obs/parámetro): {dropped_names}* | — | — | — | — | — | — |")
 
     if panel and isinstance(panel, dict) and "coefficients" in panel:
@@ -1511,7 +1541,7 @@ def generate_markdown_tables(data, results):
             sig_mark = _evidence_badge(c.get("p_value"), ci)
             ci_str = f"[{ci[0]:.3f}, {ci[1]:.3f}]" if ci else "—"
             stat_str = f"t = {c.get('t', 0):.2f}"
-            var_name = c['name'].split(" [")[0]
+            var_name = _es_label(c['name'].split(" [")[0])
             model_rows.append(f"| Panel Efectos Fijos (País) | {var_name} | {c.get('beta', 0):.4f} | {c.get('se', 0):.4f} | {stat_str} | {c.get('p_value', 1):.4f} | {ci_str} | {sig_mark} |")
         model_rows.append(f"| *Diagnóstico Panel* | *R² = {panel.get('r_squared', 0):.4f}, n = {panel.get('n', 0)} obs ({panel.get('n_countries', 0)} países), dof = {panel.get('dof', 0)}* | — | — | — | — | — | — |")
 
@@ -1526,8 +1556,8 @@ def generate_markdown_tables(data, results):
             "|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|"
         ]
         for c in top_corrs:
-            vx = c["x"].split(" [")[0]
-            vy = c["y"].split(" [")[0]
+            vx = _es_label(c["x"].split(" [")[0])
+            vy = _es_label(c["y"].split(" [")[0])
             cc = c["x"].split(" [")[-1].replace("]", "") if " [" in c["x"] else "Regional"
             r_val = f"{c['pearson_r']:.3f}" if c.get("pearson_r") is not None else "—"
             p_val = f"{c['pearson_p']:.3f}" if c.get("pearson_p") is not None else "—"
@@ -1565,7 +1595,7 @@ def generate_markdown_tables(data, results):
         if not d:
             continue
         n_deriv += 1
-        label = v.get("label", v["name"].split(" [")[0])
+        label = _es_label(v.get("label", v["name"].split(" [")[0]))
         cc = v.get("country", "") or v.get("country_code", "")
         pct = f"{d['pct_change_total']:.2f}%" if "pct_change_total" in d else "—"
         cagr = f"{d['cagr']:.2f}%" if "cagr" in d else "—"

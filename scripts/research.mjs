@@ -104,6 +104,9 @@ const CACHE_MAX_AGE_HOURS = 8760; // 1 año: los datos del World Bank se actuali
 // es grande, se le da el resto. Solo se recorta el prompt si ya no cabe una
 // respuesta minima util, porque recortar el prompt pierde datos del estudio.
 const TPM_LIMIT = Number(process.env.GROQ_TPM_LIMIT || 8000);
+// Gemini free tier (2.5-flash) admite ~250k TPM: su presupuesto es otro orden
+// de magnitud. Se usa cuando Groq no da mas de si (413) o corta la salida.
+const GEMINI_TPM_LIMIT = Number(process.env.GEMINI_TPM_LIMIT || 60000);
 const COMPLETION_FLOOR = 1500; // bajo esto el paper sale cortado
 const TPM_MARGIN = 250;        // holgura: la estimacion de tokens no es exacta
 // chars/token medido contra la API, no supuesto: con 3.5 el plan se quedaba
@@ -222,10 +225,10 @@ function fitPrompt(text, budgetTokens) {
 // JSON de veredicto (1.500) que un paper completo (~2.900). Un paper cortado
 // a la mitad no sirve de nada: REVIEW lo rebota y el bucle de reescritura
 // agranda el prompt. Mejor recortar el prompt un 15% con aviso.
-function planRequest(promptText, desiredMaxTokens, completionFloor = COMPLETION_FLOOR) {
+function planRequest(promptText, desiredMaxTokens, completionFloor = COMPLETION_FLOOR, tpmLimit = TPM_LIMIT) {
   const promptTokens = estimateTokens(promptText);
   const desired = desiredMaxTokens || completionFloor;
-  const room = TPM_LIMIT - promptTokens - TPM_MARGIN;
+  const room = tpmLimit - promptTokens - TPM_MARGIN;
   if (room >= desired) {
     return { prompt: promptText, maxTokens: desired, promptTokens, clamped: false };
   }
@@ -234,28 +237,31 @@ function planRequest(promptText, desiredMaxTokens, completionFloor = COMPLETION_
     // la reserva de respuesta. No se pierde ningun dato del estudio.
     return { prompt: promptText, maxTokens: room, promptTokens, clamped: true };
   }
-  const fitted = fitPrompt(promptText, TPM_LIMIT - desired - TPM_MARGIN);
+  const fitted = fitPrompt(promptText, tpmLimit - desired - TPM_MARGIN);
   return { prompt: fitted.text, maxTokens: desired, promptTokens, clamped: true, fit: fitted };
 }
 
 // Registro de truncamientos para transparencia: si el safety net se activa,
 // el paper sale pero la metadata lo dice — asi sabemos si hay que ajustar.
 const truncationLog = [];
+// Nodo en curso: cada ajuste registrado dice en que fase del pipeline ocurrio.
+let currentStage = null;
 
 async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
-  // `completion_floor` es una instruccion para el presupuesto, no un parametro
-  // de la API: se saca del body antes de enviarlo.
-  const { completion_floor, ...apiOpts } = opts;
-  const plan = planRequest(prompt, apiOpts.max_tokens, completion_floor);
+  // `completion_floor` y `tpm_limit` son instrucciones para el presupuesto,
+  // no parametros de la API: se sacan del body antes de enviarlo.
+  const { completion_floor, tpm_limit, ...apiOpts } = opts;
+  const tpmLimit = tpm_limit || TPM_LIMIT;
+  const plan = planRequest(prompt, apiOpts.max_tokens, completion_floor, tpmLimit);
   // safePrompt conserva los marcadores KEEP para que un reintento 413 pueda
   // volver a recortar respetandolos; se quitan solo al construir el body.
   let safePrompt = plan.prompt;
   const body = { model, messages: [{ role: "user", content: stripKeeps(safePrompt) }], ...apiOpts, max_tokens: plan.maxTokens };
   if (plan.fit && plan.fit.cutChars > 0) {
-    console.log(`  ⚠ Prompt ${plan.fit.before} tokens: recortado a ~${plan.fit.after} (${plan.fit.cutChars} chars) para caber en ${TPM_LIMIT} TPM con max_tokens=${plan.maxTokens}.`);
-    truncationLog.push({ model, before: plan.fit.before, after: plan.fit.after, cutChars: plan.fit.cutChars });
+    console.log(`  ⚠ Prompt ${plan.fit.before} tokens: recortado a ~${plan.fit.after} (${plan.fit.cutChars} chars) para caber en ${tpmLimit} TPM con max_tokens=${plan.maxTokens}.`);
+    truncationLog.push({ stage: currentStage, model, before: plan.fit.before, after: plan.fit.after, cutChars: plan.fit.cutChars });
   } else if (plan.clamped) {
-    console.log(`  max_tokens ajustado a ${plan.maxTokens} (prompt ~${plan.promptTokens} tokens) para no pasar de ${TPM_LIMIT} TPM.`);
+    console.log(`  max_tokens ajustado a ${plan.maxTokens} (prompt ~${plan.promptTokens} tokens) para no pasar de ${tpmLimit} TPM.`);
   }
   // El presupuesto de 413 es propio: los 429 consumian los intentos y un 413
   // en el ultimo era fatal, aunque recortar el prompt si hace progreso.
@@ -274,7 +280,7 @@ async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
       // paper salga con la advertencia en vez de pasar por completo.
       if (choice?.finish_reason === "length") {
         console.log(`  ⚠ Respuesta cortada por max_tokens=${body.max_tokens} en ${model}.`);
-        truncationLog.push({ model, outputTruncated: true, maxTokens: body.max_tokens });
+        truncationLog.push({ stage: currentStage, model, outputTruncated: true, maxTokens: body.max_tokens });
       }
       if (!content.trim() && attempt < 4) {
         console.log(`  Respuesta vacia de ${model}. Reintentando... (${attempt}/4)`);
@@ -298,7 +304,7 @@ async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
       // nada: reintentaba la MISMA peticion hasta agotar los intentos.
       shrinkAttempts++;
       const errText = await res.text();
-      const limit = Number(errText.match(/Limit\s+(\d+)/i)?.[1]) || TPM_LIMIT;
+      const limit = Number(errText.match(/Limit\s+(\d+)/i)?.[1]) || tpmLimit;
       const requested = Number(errText.match(/Requested\s+(\d+)/i)?.[1]) || 0;
       const desired = body.max_tokens || COMPLETION_FLOOR;
       calibrateTokenRatio(safePrompt.length, requested, desired);
@@ -328,19 +334,45 @@ async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
 }
 
 async function callGroq(model, prompt, opts = {}) {
+  // reasoning_effort es parametro de Groq; el endpoint OpenAI-compat de
+  // Gemini responde 400 ante campos desconocidos.
+  const { reasoning_effort, ...geminiOpts } = opts;
+  const callGemini = () => callLLM(GEMINI_API_KEY, GEMINI_API_URL, GEMINI_MODEL, prompt, { ...geminiOpts, tpm_limit: GEMINI_TPM_LIMIT });
   // Intentar Groq primero, Gemini como fallback
   if (GROQ_API_KEY) {
     try {
-      return await callLLM(GROQ_API_KEY, GROQ_API_URL, model, prompt, opts);
+      const logMark = truncationLog.length;
+      const res = await callLLM(GROQ_API_KEY, GROQ_API_URL, model, prompt, opts);
+      // Salida cortada por el techo de Groq: la peticion "exito" pero el
+      // contenido quedo a la mitad. Gemini tiene presupuesto de sobra — una
+      // respuesta completa de otro modelo vale mas que media de Groq.
+      if (res.choices?.[0]?.finish_reason === "length" && GEMINI_API_KEY) {
+        console.log(`  Salida cortada en Groq — reintentando en ${GEMINI_MODEL} (TPM ${GEMINI_TPM_LIMIT})...`);
+        try {
+          const g = await callGemini();
+          const gChoice = g.choices?.[0];
+          const gLen = (gChoice?.message?.content || "").length;
+          const rLen = (res.choices?.[0]?.message?.content || "").length;
+          if (gChoice?.finish_reason !== "length" || gLen > rLen) {
+            // Los ajustes registrados por la llamada de Groq ya no aplican:
+            // su salida se descarta y la del paper sale de Gemini.
+            for (let i = truncationLog.length - 1; i >= logMark; i--) {
+              if (truncationLog[i].model === model) truncationLog.splice(i, 1);
+            }
+            return g;
+          }
+          console.log("  Gemini tampoco mejoro la salida — conservando la de Groq.");
+        } catch (e2) {
+          console.log(`  Gemini fallo (${e2.message}). Conservando salida cortada de Groq.`);
+        }
+      }
+      return res;
     } catch (e) {
       console.log(`  Groq fallo (${e.message}). Intentando Gemini...`);
     }
   }
   if (GEMINI_API_KEY) {
-    // reasoning_effort es parametro de Groq; el endpoint OpenAI-compat de
-    // Gemini responde 400 ante campos desconocidos.
-    const { reasoning_effort, ...geminiOpts } = opts;
-    return await callLLM(GEMINI_API_KEY, GEMINI_API_URL, GEMINI_MODEL, prompt, geminiOpts);
+    return await callGemini();
   }
   throw new Error("No LLM provider available (Groq and Gemini both missing/failed)");
 }
@@ -903,6 +935,31 @@ function sampleCountriesFor(suggestDecision) {
   return _sampleCache;
 }
 
+// Etiquetas de indicadores en espanol: el `name` interno sigue en ingles
+// (matchesIndicator, VALID_PAIRS y la regresion lo usan), pero el texto que
+// ve el LLM — y que termina en el paper y el sitio — va traducido: si no,
+// el modelo copia "Internet users (% of population)" dentro de la prosa
+// en espanol. Diccionario compartido con compute.py (indicadores-es.json).
+const IND_ES = (() => {
+  try {
+    return JSON.parse(readFileSync(resolve(__rootdirname, "indicadores-es.json"), "utf-8"));
+  } catch { return { labels: {}, patterns: [] }; }
+})();
+const IND_ES_PATTERNS = (IND_ES.patterns || []).map(([re, out]) => [new RegExp(re, "i"), out]);
+function esLabel(label) {
+  if (!label) return label;
+  if (IND_ES.labels?.[label]) return IND_ES.labels[label];
+  let out = label;
+  for (const [re, sub] of IND_ES_PATTERNS) out = out.replace(re, sub);
+  return out;
+}
+// "Label [CC]" -> "Etiqueta [CC]": las series llevan el pais entre corchetes.
+const esSeriesName = name => {
+  if (!name) return name;
+  const i = name.lastIndexOf(" [");
+  return i > 0 && name.endsWith("]") ? `${esLabel(name.slice(0, i))}${name.slice(i)}` : esLabel(name);
+};
+
 function dataDigest(fetchedData, suggestDecision = null, compact = false) {
   let inds = fetchedData.indicators;
   const used = chosenIndicators(suggestDecision);
@@ -919,7 +976,7 @@ function dataDigest(fetchedData, suggestDecision = null, compact = false) {
     // puede detectar paises o indicadores inventados contra esta lista.
     const coverages = [...new Set(inds.map(i => i.country_code))].sort().join(", ");
     const indList = [...new Map(inds.map(i => [i.indicator_label, i.unit || "?"]))]
-      .map(([label, unit]) => `- ${label} (${unit})`).join("\n");
+      .map(([label, unit]) => `- ${esLabel(label)} (${unit})`).join("\n");
     return {
       lcn: "(las series regionales están en TABLA 1, año por año)",
       countries: `Coberturas con datos: ${coverages}.\nIndicadores del estudio:\n${indList}\n(los valores año por año de cada serie están en TABLA 1)`,
@@ -929,7 +986,7 @@ function dataDigest(fetchedData, suggestDecision = null, compact = false) {
   const lcnInds = inds.filter(i => i.country_code === "LCN").slice(0, 12);
   const lcn = lcnInds.map(i => {
     const pts = i.series.map(s => `${s.year}=${s.value.toFixed(2)}`).join(", ");
-    return `- ${i.indicator_label} [LCN] (${i.unit}): ${pts}`;
+    return `- ${esLabel(i.indicator_label)} [LCN] (${i.unit}): ${pts}`;
   }).join("\n");
   // Series por pais: acotado prioritariamente a la muestra de Top 5 países de SQLite
   let countryInds = inds.filter(i => i.country_code !== "LCN");
@@ -956,7 +1013,7 @@ function dataDigest(fetchedData, suggestDecision = null, compact = false) {
     .slice(0, 18)
     .map(i => {
       const first = i.series[0]; const latest = i.series[i.series.length - 1];
-      return `- ${i.indicator_label} [${i.country_code}] (${i.unit}): ${first.year}=${first.value.toFixed(2)} -> ${latest.year}=${latest.value.toFixed(2)}`;
+      return `- ${esLabel(i.indicator_label)} [${i.country_code}] (${i.unit}): ${first.year}=${first.value.toFixed(2)} -> ${latest.year}=${latest.value.toFixed(2)}`;
     }).join("\n");
   return { lcn, countries };
 }
@@ -969,10 +1026,10 @@ function computeDigest(computeResults, suggestDecision = null) {
   if (computeResults.regression && !computeResults.error && computeResults.regression.dependent) {
     const r = computeResults.regression;
     parts.push("⟦KEEP⟧");
-    parts.push(`REGRESION OLS: ${r.dependent} ~ ${r.independent.join(" + ")}`);
+    parts.push(`REGRESION OLS: ${esSeriesName(r.dependent)} ~ ${r.independent.map(esSeriesName).join(" + ")}`);
     parts.push(`  n=${r.n}, dof=${r.dof ?? r.n - r.independent.length - 1}, R2=${r.r_squared?.toFixed(4)}, R2_adj=${r.adj_r_squared?.toFixed(4)}, F=${r.f_statistic?.toFixed(2)} (p=${r.f_p_value?.toFixed(4)})`);
     if (r.dropped_regressors?.length) {
-      parts.push(`  NOTA: ${r.dropped_regressors.length} regresor(es) excluidos por n insuficiente (regla ~4 obs/parametro): ${r.dropped_regressors.join(", ")}. NO citarlos como parte del modelo estimado.`);
+      parts.push(`  NOTA: ${r.dropped_regressors.length} regresor(es) excluidos por n insuficiente (regla ~4 obs/parametro): ${r.dropped_regressors.map(esSeriesName).join(", ")}. NO citarlos como parte del modelo estimado.`);
     }
     // Con TABLA 2 en el prompt, repetir coeficiente por coeficiente es
     // duplicacion: la tabla ya trae beta, error estandar, estadistico, p,
@@ -981,7 +1038,7 @@ function computeDigest(computeResults, suggestDecision = null) {
       parts.push(`  Los coeficientes estan en la TABLA 2 (con IC95% y veredicto de evidencia por parametro).`);
     } else {
       for (const c of r.coefficients || []) {
-        let line = `  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}${c.robust_p !== undefined ? `, robust_p=${c.robust_p?.toFixed(4)}${c.robust_significant ? " *" : ""}` : ""}`;
+        let line = `  ${esSeriesName(c.name)}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}${c.robust_p !== undefined ? `, robust_p=${c.robust_p?.toFixed(4)}${c.robust_significant ? " *" : ""}` : ""}`;
         if (c.boot_ci_95) line += ` | IC95% bootstrap=[${c.boot_ci_95[0].toFixed(4)}, ${c.boot_ci_95[1].toFixed(4)}]${c.boot_includes_zero ? " (incluye 0 -> fragil)" : " (no incluye 0)"}`;
         parts.push(line);
       }
@@ -1002,20 +1059,20 @@ function computeDigest(computeResults, suggestDecision = null) {
       parts.push(`  Los coeficientes estan en la TABLA 2.`);
     } else {
       for (const c of rEcon.coefficients) {
-        parts.push(`  ${c.name}: estimate=${c.estimate?.toFixed(4)}, std_error=${c.std_error?.toFixed(4)}, t=${c.t_stat?.toFixed(2)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}`);
+        parts.push(`  ${esSeriesName(c.name)}: estimate=${c.estimate?.toFixed(4)}, std_error=${c.std_error?.toFixed(4)}, t=${c.t_stat?.toFixed(2)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}`);
       }
     }
     parts.push(`  NOTA METODOLOGICA (R): Controla simultaneamente por shocks globales de año (tendencias compartidas) y caracteristicas fijas de cada pais.`);
     parts.push("⟦/KEEP⟧");
   } else if (panel && panel.coefficients?.length) {
     parts.push("⟦KEEP⟧");
-    parts.push(`REGRESION PANEL (efectos fijos por pais): ${panel.dependent} ~ ${panel.independent.join(" + ")}`);
+    parts.push(`REGRESION PANEL (efectos fijos por pais): ${esSeriesName(panel.dependent)} ~ ${panel.independent.map(esSeriesName).join(" + ")}`);
     parts.push(`  n=${panel.n} obs (${panel.n_countries} paises x anos), R2=${panel.r_squared?.toFixed(4)}, dof=${panel.dof}`);
     if (computeResults.tables?.regression) {
       parts.push(`  Los coeficientes estan en la TABLA 2.`);
     } else {
       for (const c of panel.coefficients) {
-        parts.push(`  ${c.name}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}, IC95%=[${c.ci_95[0].toFixed(4)}, ${c.ci_95[1].toFixed(4)}]`);
+        parts.push(`  ${esSeriesName(c.name)}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}, IC95%=[${c.ci_95[0].toFixed(4)}, ${c.ci_95[1].toFixed(4)}]`);
       }
     }
     parts.push(`  NOTA: el panel usa variacion INTRA-pais en el tiempo (controla caracteristicas fijas por pais). Si el OLS agregado y el panel discrepan, reportar ambos — la discrepancia es informacion (el agregado puede estar dominado por diferencias entre paises).`);
@@ -1037,7 +1094,7 @@ function computeDigest(computeResults, suggestDecision = null) {
     } else {
       parts.push(`CORRELACIONES (${corrs.length} calculadas, ${nSigFdr} sig. FDR, top ${top.length} mostradas):`);
       for (const c of top) {
-        let line = `  ${c.x} <-> ${c.y}: pearson_r=${c.pearson_r.toFixed(4)}, p=${c.pearson_p.toFixed(4)}${c.pearson_q !== undefined ? `, q_fdr=${c.pearson_q.toFixed(4)}` : ""}, spearman=${c.spearman_rho.toFixed(4)}, n=${c.n}, significativa_fdr=${fdr(c)}`;
+        let line = `  ${esSeriesName(c.x)} <-> ${esSeriesName(c.y)}: pearson_r=${c.pearson_r.toFixed(4)}, p=${c.pearson_p.toFixed(4)}${c.pearson_q !== undefined ? `, q_fdr=${c.pearson_q.toFixed(4)}` : ""}, spearman=${c.spearman_rho.toFixed(4)}, n=${c.n}, significativa_fdr=${fdr(c)}`;
         if (c.diff_pearson_r !== undefined) {
           line += ` | en diferencias (Δ año a año): r=${c.diff_pearson_r.toFixed(4)}, p=${c.diff_pearson_p.toFixed(4)}${c.diff_pearson_q !== undefined ? `, q=${c.diff_pearson_q.toFixed(4)}` : ""}, n=${c.diff_n}`;
         }
@@ -1053,7 +1110,7 @@ function computeDigest(computeResults, suggestDecision = null) {
     if (fragiles.length) {
       parts.push(`  ALERTA CO-TENDENCIA (${fragiles.length} pares significativos en niveles pero NO en diferencias — reportar como descriptivos/probablemente espurios, nunca como asociacion robusta):`);
       for (const c of fragiles.slice(0, 10)) {
-        parts.push(`    ${c.x} <-> ${c.y}: r_nivel=${c.pearson_r.toFixed(3)} (q=${(c.pearson_q ?? c.pearson_p).toFixed(3)}) vs r_dif=${c.diff_pearson_r.toFixed(3)} (${c.diff_pearson_q !== undefined ? `q=${c.diff_pearson_q.toFixed(3)}` : `p=${c.diff_pearson_p.toFixed(3)}`})`);
+        parts.push(`    ${esSeriesName(c.x)} <-> ${esSeriesName(c.y)}: r_nivel=${c.pearson_r.toFixed(3)} (q=${(c.pearson_q ?? c.pearson_p).toFixed(3)}) vs r_dif=${c.diff_pearson_r.toFixed(3)} (${c.diff_pearson_q !== undefined ? `q=${c.diff_pearson_q.toFixed(3)}` : `p=${c.diff_pearson_p.toFixed(3)}`})`);
       }
     }
     parts.push("⟦/KEEP⟧");
@@ -1062,14 +1119,14 @@ function computeDigest(computeResults, suggestDecision = null) {
   if (sigTrends.length) {
     parts.push(`TENDENCIAS SIGNIFICATIVAS (Mann-Kendall p<0.05):`);
     for (const t of sigTrends.slice(0, 10)) {
-      parts.push(`  ${t.indicator}: ${t.trend}, slope=${t.slope.toFixed(3)}/año, p=${t.mann_kendall_p.toFixed(4)}`);
+      parts.push(`  ${esSeriesName(t.indicator)}: ${t.trend}, slope=${t.slope.toFixed(3)}/año, p=${t.mann_kendall_p.toFixed(4)}`);
     }
   }
   const anomalies = (computeResults.anomalies || []).filter(a => relevant(a.indicator));
   if (anomalies.length) {
     parts.push(`ANOMALIAS (${anomalies.length}):`);
     for (const a of anomalies.slice(0, 3)) {
-      parts.push(`  ${a.indicator} [${a.country_code}] ${a.year}: ${a.value.toFixed(2)} (z=${a.z_score.toFixed(1)})`);
+      parts.push(`  ${esSeriesName(a.indicator)} ${a.year}: ${a.value.toFixed(2)} (z=${a.z_score.toFixed(1)})`);
     }
   }
   if (computeResults.charts?.length) {
@@ -1153,7 +1210,7 @@ async function fetchLiterature(topic, pregunta) {
 }
 
 async function agentWrite(fetchedData, computeResults, feedback = null, topic = null, angle = null, suggestDecision = null, literature = []) {
-  console.log("[4/7] GPT-OSS 120B redactando paper con datos reales...\n");
+  console.log("[4/7] GPT-OSS 120B redactando paper por secciones con datos reales...\n");
   if (feedback) console.log(`Aplicando feedback: ${feedback.slice(0, 100)}\n`);
   const effectiveTopic = topic || TOPIC;
   const effectiveAngle = angle || ANGLE;
@@ -1168,9 +1225,17 @@ async function agentWrite(fetchedData, computeResults, feedback = null, topic = 
     : "";
   const { lcn, countries } = dataDigest(fetchedData, suggestDecision, !!computeResults?.tables?.descriptive);
   const digest = computeDigest(computeResults, suggestDecision);
-  const prompt = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
+  const litText = literature.length
+    ? literature.map((w, i) => `${i + 1}. ${w.apa}\n   Resumen: ${w.abstract || "(sin resumen)"}`).join("\n")
+    : "(sin literatura verificada — no cites literatura academica, solo Banco Mundial y la noticia)";
 
-DATOS REALES (World Bank API, unicos datos disponibles):
+  // El paper se redacta en 3 llamadas: cada parte recibe el contexto completo
+  // y su PROPIO presupuesto de salida. Antes el paper entero (1200-1800
+  // palabras, ~2900 tokens) competia con un prompt de ~8000 tokens dentro de
+  // una sola peticion de 8000 TPM: salia cortado a la mitad, REVIEW lo
+  // rebotaba y cada reescritura agrandaba el prompt. Por secciones cada
+  // parte cabe holgada y el presupuesto de prompt se reparte por llamada.
+  const contexto = `DATOS REALES (World Bank API, unicos datos disponibles):
 
 Series regionales America Latina & Caribe (serie completa):
 ${lcn}
@@ -1182,56 +1247,134 @@ RESULTADOS ESTADISTICOS REALES (Python/statsmodels/scipy):
 ${digest}
 
 LITERATURA REAL VERIFICADA (recuperada de OpenAlex — obras que EXISTEN y puedes citar; usa sus hallazgos para contextualizar el analisis):
-${literature.length ? literature.map((w, i) => `${i + 1}. ${w.apa}\n   Resumen: ${w.abstract || "(sin resumen)"}`).join("\n") : "(sin literatura verificada — no cites literatura academica, solo Banco Mundial y la noticia)"}
+${litText}`;
 
-⟦KEEP⟧Escribe un paper academico sobre: ${effectiveTopic}
+  const encargo = `⟦KEEP⟧Paper academico sobre: ${effectiveTopic}
 
 ${angleSection}
 ${questionSection}
 ${claimSection}
-${feedbackSection}⟦/KEEP⟧
+${feedbackSection}⟦/KEEP⟧`;
 
-ESTRUCTURA OBLIGATORIA:
-1. **Resumen** (100-150 palabras)
-2. **Introduccion** (300-400 palabras): plantea la pregunta de investigacion explicitamente
-3. **Metodologia** (150-250 palabras): datos del Banco Mundial 2015-2024, OLS, correlaciones Pearson/Spearman, Mann-Kendall. Menciona regresion de panel con efectos fijos por pais y/o intervalos bootstrap SOLO si aparecen en RESULTADOS. NO menciones metodos que no aparezcan en RESULTADOS (nada de Durbin-Watson, simulaciones ni proyecciones).
-4. **Analisis** (500-800 palabras): usa SOLO datos y resultados listados.
+  const reglas = `REGLAS CRITICAS (incumplir = rechazo):
+- Todo numero citado debe aparecer LITERALMENTE en DATOS o RESULTADOS de arriba. Prohibido redondear a valores diferentes, inventar valores por pais no listados, o reportar estadisticos no calculados.
+- NO existe informacion de paises fuera de la lista. NO uses fuentes que no sean World Bank (nada de CEPAL, OECD, IMF, ECLAC).
+- NO inventes tests diagnosticos (White, Durbin-Watson), simulaciones, escenarios futuros ni proyecciones: solo reporta lo que Python calculo.
+- Si un resultado no es significativo (p>0.05), dilo explicitamente; no lo presentes como evidencia solida. Si el IC95% bootstrap "incluye 0 -> fragil", reporta esa fragilidad.
+- Regla de estacionariedad: cuando una correlacion en niveles es significativa pero la correlacion en diferencias (Δ año a año) no lo es, la relacion debe reportarse como co-tendencia o descriptiva, NUNCA como evidencia de asociacion robusta. Lidera la interpretacion con el resultado en diferencias (diff_r) y usa el de niveles solo como contexto. Los pares en "ALERTA CO-TENDENCIA" de RESULTADOS deben tratarse asi.
+- Si aparece "REGRESION PANEL EN R" en RESULTADOS, menciónala explícitamente como estimación econométrica de efectos fijos bidireccionales (país + año) ejecutada en R 4.x, contrastándola con las correlaciones y OLS de Python. Si solo aparece Python, reporta solo Python.
+- Si aparece "REGRESION PANEL" en RESULTADOS, reportala: explica que usa variacion intra-pais (n paises x anos) y contrasta su veredicto con el OLS agregado. Si discrepan, dilo.
+- Cuando una correlacion en niveles es significativa pero su correlacion "en diferencias" no lo es (o viceversa), dilo explicitamente: la primera puede ser co-tendencia espuria, la segunda es evidencia mas honesta de co-movimiento.
+- Cita cada dato como (Banco Mundial, 2024).
+- Contrastar con la literatura listada ("consistente con Autor (año)" / "nuestros datos no replican el efecto de Autor (año)") solo donde sea pertinente y sin inventarles cifras.`;
+
+  const fecha = new Date().toLocaleDateString("es-ES", { month: "long", year: "numeric" });
+  const fechaCap = fecha.charAt(0).toUpperCase() + fecha.slice(1);
+
+  const writePart = async (stage, prompt, maxTokens, floor) => {
+    currentStage = `WRITE:${stage}`;
+    const data = await callGroq("openai/gpt-oss-120b", prompt, {
+      max_tokens: maxTokens, completion_floor: floor,
+      temperature: 0.6, reasoning_effort: "low",
+    });
+    const text = (data.choices[0]?.message?.content || "").trim();
+    console.log(`  WRITE ${stage}: ${text.split(/\s+/).filter(Boolean).length} palabras.`);
+    return text;
+  };
+
+  // ── Parte 1: portada + Resumen + En breve + Introduccion + Metodologia ──
+  const promptApertura = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
+
+${contexto}
+
+${encargo}
+
+PARTE 1 DE 3 — escribe SOLO la apertura del paper. Otro agente redactara despues el Analisis, la Discusion y las Conclusiones: no las adelantes.
+
+Estructura exacta de esta parte:
+
+# ${effectiveTopic}
+
+**Autor:** Investigador Academico
+**Revista:** *Ciencias Sociales*
+**Fecha:** ${fechaCap}
+
+## Resumen
+100-150 palabras. Justo despues agrega un blockquote:
+"> **En breve:** <la respuesta en una frase a la pregunta de investigacion, con el veredicto honesto segun los resultados>"
+
+## Introduccion
+300-400 palabras. Plantea la pregunta de investigacion explicitamente. Distingue explicitamente que afirma la noticia de que pueden verificar los datos. Plantea la hipotesis en blockquote "> **Hipotesis:** ...".
+
+## Metodologia
+150-250 palabras. Datos del Banco Mundial 2015-2024, OLS, correlaciones Pearson/Spearman, Mann-Kendall. Menciona regresion de panel con efectos fijos por pais y/o intervalos bootstrap SOLO si aparecen en RESULTADOS. NO menciones metodos que no aparezcan en RESULTADOS (nada de Durbin-Watson, simulaciones ni proyecciones).
+
+${reglas}
+
+Devuelve SOLO el Markdown de esta parte.`;
+  const apertura = await writePart("apertura", promptApertura, 2000, 1400);
+  await delay(25); // el TPM es por minuto: espaciar las partes evita el 429
+
+  // ── Parte 2: Analisis + Discusion (ve la apertura ya escrita) ──
+  const promptCuerpo = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
+
+${contexto}
+
+${encargo}
+
+PARTE 2 DE 3 — escribe SOLO el cuerpo analitico. El paper ya tiene esta apertura (no la repitas ni la contradigas):
+
+⟦KEEP⟧${truncate(apertura, 2500)}⟦/KEEP⟧
+
+## Analisis
+500-800 palabras. Usa SOLO datos y resultados listados. Organiza con sub-encabezados ###; bajo cada ### agrega UNA linea en cursiva que explique con lenguaje sencillo que muestra esa seccion (para lectores no tecnicos). NO uses la frase "En palabras simples" — empieza directo con la explicacion.
 OBLIGATORIO PARA TABLAS Y FIGURAS:
 - Las tablas pre-computadas (TABLA 1-4) se insertan AUTOMATICAMENTE en la seccion "## Tablas" al final del paper — NO las copies, NO las resumas, NO las reconstruyas. Solo refiérelas en el texto (ej: "ver Tabla 2", "como muestra la Tabla 1"). Si escribes una tabla propia sera descartada.
 - ESTÁ ESTRICTAMENTE PROHIBIDO usar puntos suspensivos ("…"), omitir celdas o dejar datos incompletos.
 - Referencia al menos 2-3 de las figuras reales provistas usando EXACTAMENTE la sintaxis: ![descripcion](charts/<path-exacto>).
 - PROHIBIDO inventar nombres de archivo de figuras (como charts/consumo_pib.png o cualquier nombre que no esté en la lista de FIGURAS).
-5. **Discusion** (200-350 palabras): interpreta; reconoce que n=10 observaciones por serie es muestra pequena y las correlaciones no implican causalidad.
-6. **Conclusiones** (150-250 palabras): DEBE dar un veredicto explicito sobre la hipotesis — "los datos apoyan / no apoyan / son insuficientes para evaluar" — basado SOLO en los resultados calculados.
-7. **Bibliografia**: formato APA. Solo puedes citar: Banco Mundial/World Development Indicators, la noticia que inspiro el tema, y las obras listadas en LITERATURA REAL VERIFICADA (usa exactamente la cita APA provista, incluyendo el DOI). PROHIBIDO citar cualquier obra que no este en esa lista — no cites de memoria.
-
-REGLAS CRITICAS (incumplir = rechazo):
-- Todo numero citado debe aparecer LITERALMENTE en DATOS o RESULTADOS de arriba. Prohibido redondear a valores diferentes, inventar valores por pais no listados, o reportar estadisticos no calculados.
-- NO existe informacion de paises fuera de la lista. NO uses fuentes que no sean World Bank (nada de CEPAL, OECD, IMF, ECLAC).
-- NO inventes tests diagnosticos (White, Durbin-Watson), simulaciones, escenarios futuros ni proyecciones: solo reporta lo que Python calculo.
-- Si un resultado no es significativo (p>0.05), dilo explicitamente; no lo presentes como evidencia solida. Si el IC95% bootstrap "incluye 0 -> fragil", reporta esa fragilidad.
-- En la Introduccion distingue explicitamente que afirma la noticia de que pueden verificar los datos; en Discusion o Conclusiones declara que parte de la afirmacion quedo fuera del alcance de los indicadores (si aplica).
-- Regla de estacionariedad: cuando una correlacion en niveles es significativa pero la correlacion en diferencias (Δ año a año) no lo es, la relacion debe reportarse como co-tendencia o descriptiva, NUNCA como evidencia de asociacion robusta. Lidera la interpretacion con el resultado en diferencias (diff_r) y usa el de niveles solo como contexto. Los pares en "ALERTA CO-TENDENCIA" de RESULTADOS deben tratarse asi.
-- Si aparece "REGRESION PANEL EN R" en RESULTADOS, menciónala explícitamente en Metodología y Análisis como estimación econométrica de efectos fijos bidireccionales (país + año) ejecutada en R 4.x, contrastándola con las correlaciones y OLS de Python. Si solo aparece Python, reporta solo Python.
-- Si aparece "REGRESION PANEL" en RESULTADOS, reportala: explica que usa variacion intra-pais (n paises x anos) y contrasta su veredicto con el OLS agregado. Si discrepan, dilo.
-- Cuando una correlacion en niveles es significativa pero su correlacion "en diferencias" no lo es (o viceversa), dilo explicitamente: la primera puede ser co-tendencia espuria, la segunda es evidencia mas honesta de co-movimiento.
-- Referencia las figuras reales listadas con el path EXACTO de la lista: ![descripcion](charts/<path-completo>). NO inventes figuras ni cambies los paths.
-- Cita cada dato como (Banco Mundial, 2024).
-- En Introduccion o Discusion, contrasta los hallazgos con la literatura listada (ej: "consistente con Autor (año)" o "nuestros datos no replican el efecto reportado por Autor (año)") — solo si es pertinente y sin inventarles cifras.
-- Justo despues del Resumen, agrega un blockquote: "> **En breve:** <la respuesta en una frase a la pregunta de investigacion, con el veredicto honesto segun los resultados>".
-- Bajo cada sub-encabezado ### del Analisis, agrega UNA linea en cursiva que explique con lenguaje sencillo que muestra esa seccion (para lectores no tecnicos). NO uses la frase "En palabras simples" — empieza directo con la explicacion.
 - Bajo cada figura referenciada, agrega una linea en cursiva "*Como leerla: <guia>*" usando la guia de lectura provista en la lista FIGURAS.
 - Las FIGURAS DIAGNOSTICAS (robustez del modelo) NO se citan en el cuerpo: se insertan automaticamente en el "## Anexo estadístico" al final.
-- Total: 1200-1800 palabras. La Bibliografia es OBLIGATORIA y va AL FINAL — si te quedas sin espacio, acorta el Analisis, nunca omitas la Bibliografia.
 
-Devuelve el paper completo en Markdown.`;
-  // Reserva dimensionada al producto: el paper mide 1200-1800 palabras
-  // (~2900 tokens con tablas). Reservar 4500 regalaba 1300 tokens de prompt
-  // que Groq cuenta igual, usados o no. El suelo marca el minimo util: un
-  // paper cortado antes de tiempo lo rebota REVIEW y el bucle agranda el
-  // prompt — con 2900 garantizados se prefiere recortar el prompt.
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3200, completion_floor: 2900, temperature: 0.6 });
-  let result = data.choices[0]?.message?.content || "";
+## Discusion
+200-350 palabras. Interpreta; reconoce que n=10 observaciones por serie es muestra pequena y las correlaciones no implican causalidad. Declara que parte de la afirmacion de la noticia quedo fuera del alcance de los indicadores (si aplica).
+
+${reglas}
+
+Devuelve SOLO el Markdown de estas dos secciones.`;
+  const cuerpo = await writePart("cuerpo", promptCuerpo, 2800, 2100);
+  await delay(25);
+
+  // ── Parte 3: Conclusiones + Bibliografia (ve el paper hasta Discusion) ──
+  const news = suggestDecision?.inspiringNews;
+  const newsCite = news?.title
+    ? `- ${news.source || "Noticia"}. "${news.title}".${news.url ? ` ${news.url}` : ""}`
+    : "- La noticia que inspiro el tema (citala por su medio y titulo si la identificas en el encargo)";
+  const promptCierre = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
+
+RESULTADOS ESTADISTICOS REALES (Python/statsmodels/scipy):
+${digest}
+
+${encargo}
+
+PARTE 3 DE 3 — escribe SOLO el cierre. El paper ya esta redactado hasta la Discusion (no lo repitas ni lo contradigas):
+
+⟦KEEP⟧${truncate(`${apertura}\n\n${cuerpo}`, 3000)}⟦/KEEP⟧
+
+## Conclusiones
+150-250 palabras. DEBE dar un veredicto explicito sobre la hipotesis — "los datos apoyan / no apoyan / son insuficientes para evaluar" — basado SOLO en los resultados calculados. Si aplica, declara que parte de la afirmacion de la noticia quedo fuera del alcance de los indicadores.
+
+## Bibliografia
+Formato APA. Solo puedes citar las fuentes de esta lista, usando exactamente la cita APA provista (incluyendo el DOI cuando exista). PROHIBIDO citar cualquier obra que no este aqui — no cites de memoria:
+- Banco Mundial. (2024). *World Development Indicators*. Washington, DC: World Bank. https://databank.worldbank.org/source/world-development-indicators
+${newsCite}
+${literature.length ? literature.map(w => `- ${w.apa}`).join("\n") : "- (sin literatura verificada — solo Banco Mundial y la noticia)"}
+
+El paper completo debe quedar en 1200-1800 palabras: se conciso.
+Devuelve SOLO el Markdown de estas dos secciones.`;
+  const cierre = await writePart("cierre", promptCierre, 1600, 1100);
+
+  let result = [apertura, cuerpo, cierre].filter(Boolean).join("\n\n");
   // Fallback: si el modelo no generó bibliografía (común en modelos Flash),
   // appendear una mínima basada en las fuentes usadas
   if (result && !/## Bibliograf/i.test(result)) {
@@ -1585,8 +1728,8 @@ async function agentEdit(draft, review, computeResults = null) {
   const originalBib = bibMatch ? bibMatch[0] : "";
   const prompt = `Eres el editor de una revista de ciencias sociales. Pule este paper.
 
-PAPER:
-${truncate(draft, 5000)}
+PAPER COMPLETO (editar sobre el texto entero — no omitas el final):
+⟦KEEP⟧${draft}⟦/KEEP⟧
 
 REVISION:
 ${truncate(typeof review === "string" ? review : JSON.stringify(review), 1500)}
@@ -1596,7 +1739,7 @@ IMPORTANTE: Preserva la seccion de Bibliografia, las tablas Markdown y todas las
 NO agregues numeros, estadisticos ni tests que la REVISION no haya verificado.
 NO uses puntos suspensivos ("…") en las tablas ni inventes rutas de figuras.
 Devuelve SOLO el paper final en Markdown.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3200, temperature: 0.5 });
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3200, temperature: 0.5, reasoning_effort: "low" });
   let result = data.choices[0]?.message?.content || "";
   // If EDIT truncated the bibliography, re-append from original
   if (originalBib && !/## Bibliograf/i.test(result)) {
@@ -1848,6 +1991,7 @@ function transparencyNote(state) {
 // Se genera post-APPROVE desde el paper final + resultados; solo puede usar
 // cifras literales del compute. Aparece en el PWA/archivo como "Datos al dia".
 async function agentEditorial(state) {
+  currentStage = "EDITORIAL";
   const s = state.suggestDecision || {};
   const digest = computeDigest(state.computeResults, s);
   const prompt = `Eres un columnista de datos que escribe para lectores sin formacion estadistica. Escribe una COLUMNA corta en espanol (150-220 palabras) que cuente una historia, no que reporte estadisticas.
@@ -1869,7 +2013,7 @@ PROHIBIDO TERMINOS TECNICOS: no uses "coeficiente", "p-valor", "correlacion r", 
 Devuelve SOLO el texto de la columna.`;
   // gpt-oss consume tokens en razonamiento — 2000 de margen para que la
   // columna de ~200 palabras no quede truncada a mitad de frase
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2000, temperature: 0.5 });
+  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2000, temperature: 0.5, reasoning_effort: "low" });
   return (data.choices[0]?.message?.content || "").trim();
 }
 
@@ -1970,7 +2114,7 @@ class MoAGraph {
     };
     this.t0 = Date.now();
   }
-  logNode(node) { this.state.nodeHistory.push(node); const i = this.state.iterations; console.log(`\n[Nodo: ${node}]${i.rewrite + i.edit > 0 ? ` (rewrite:${i.rewrite} edit:${i.edit})` : ""}`); }
+  logNode(node) { currentStage = node; this.state.nodeHistory.push(node); const i = this.state.iterations; console.log(`\n[Nodo: ${node}]${i.rewrite + i.edit > 0 ? ` (rewrite:${i.rewrite} edit:${i.edit})` : ""}`); }
   async runWithGuardrails(node, agentFn, maxRetries = 2) {
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       const output = await agentFn(attempt);
