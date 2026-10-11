@@ -1446,24 +1446,6 @@ def _corr_badge(c):
         return "🟡 Marginal"
     return "🔴 Sin evidencia"
 
-def _fmt_num(v):
-    """Formato magnitud-aware para celdas de tabla: 70_142_527_686 -> '70.14 mil M'.
-    Convención española: M = millones (10^6), mil M = mil millones (10^9), B = billones (10^12)."""
-    if v is None:
-        return "—"
-    a = abs(v)
-    if a >= 1e12:
-        return f"{v / 1e12:.2f} B"
-    if a >= 1e9:
-        return f"{v / 1e9:.2f} mil M"
-    if a >= 1e6:
-        return f"{v / 1e6:.2f} M"
-    if a >= 1000:
-        return f"{v:,.1f}"
-    if a >= 10:
-        return f"{v:.2f}"
-    return f"{v:.4f}"
-
 def generate_markdown_tables(data, results):
     """
     Genera tablas Markdown determinísticas con datos reales y resultados estadísticos.
@@ -1521,7 +1503,15 @@ def generate_markdown_tables(data, results):
             row_vals = []
             for y in years_list:
                 val = y_map.get(y)
-                row_vals.append("—" if val is None else _fmt_num(val))
+                if val is None:
+                    row_vals.append("—")
+                else:
+                    if abs(val) >= 1000:
+                        row_vals.append(f"{val:,.1f}")
+                    elif abs(val) >= 10:
+                        row_vals.append(f"{val:.2f}")
+                    else:
+                        row_vals.append(f"{val:.3f}")
             rows.append(f"| {label}{unit} | {cc} | " + " | ".join(row_vals) + " |")
         tables["descriptive"] = "\n".join(rows)
 
@@ -1535,10 +1525,10 @@ def generate_markdown_tables(data, results):
         for c in reg["coefficients"]:
             sig_mark = _evidence_badge(c.get("p_value"), c.get("boot_ci_95"))
             boot_ci = c.get("boot_ci_95")
-            ci_str = f"[{_fmt_num(boot_ci[0])}, {_fmt_num(boot_ci[1])}]" if boot_ci else "—"
+            ci_str = f"[{boot_ci[0]:.3f}, {boot_ci[1]:.3f}]" if boot_ci else "—"
             stat_str = f"t = {c.get('t_stat', 0):.2f}"
             var_name = _es_label(c['name'].split(" [")[0])
-            model_rows.append(f"| OLS Agregado (LCN) | {var_name} | {_fmt_num(c.get('beta', 0))} | {_fmt_num(c.get('se', 0))} | {stat_str} | {c.get('p_value', 1):.4f} | {ci_str} | {sig_mark} |")
+            model_rows.append(f"| OLS Agregado (LCN) | {var_name} | {c.get('beta', 0):.4f} | {c.get('se', 0):.4f} | {stat_str} | {c.get('p_value', 1):.4f} | {ci_str} | {sig_mark} |")
         model_rows.append(f"| *Diagnóstico OLS* | *R² = {reg.get('r_squared', 0):.4f}, R²-adj = {reg.get('adj_r_squared', 0):.4f}, F = {reg.get('f_statistic', 0):.2f} (p = {reg.get('f_p_value', 1):.4f}), n = {reg.get('n', 0)}, dof = {reg.get('dof', 0)}* | — | — | — | — | — | — |")
         if reg.get("dropped_regressors"):
             dropped_names = ", ".join(_es_label(n.split(" [")[0]) for n in reg["dropped_regressors"])
@@ -1549,10 +1539,10 @@ def generate_markdown_tables(data, results):
         for c in panel["coefficients"]:
             ci = c.get("ci_95")
             sig_mark = _evidence_badge(c.get("p_value"), ci)
-            ci_str = f"[{_fmt_num(ci[0])}, {_fmt_num(ci[1])}]" if ci else "—"
+            ci_str = f"[{ci[0]:.3f}, {ci[1]:.3f}]" if ci else "—"
             stat_str = f"t = {c.get('t', 0):.2f}"
             var_name = _es_label(c['name'].split(" [")[0])
-            model_rows.append(f"| Panel Efectos Fijos (País) | {var_name} | {_fmt_num(c.get('beta', 0))} | {_fmt_num(c.get('se', 0))} | {stat_str} | {c.get('p_value', 1):.4f} | {ci_str} | {sig_mark} |")
+            model_rows.append(f"| Panel Efectos Fijos (País) | {var_name} | {c.get('beta', 0):.4f} | {c.get('se', 0):.4f} | {stat_str} | {c.get('p_value', 1):.4f} | {ci_str} | {sig_mark} |")
         model_rows.append(f"| *Diagnóstico Panel* | *R² = {panel.get('r_squared', 0):.4f}, n = {panel.get('n', 0)} obs ({panel.get('n_countries', 0)} países), dof = {panel.get('dof', 0)}* | — | — | — | — | — | — |")
 
     if has_model:
@@ -1610,8 +1600,8 @@ def generate_markdown_tables(data, results):
         pct = f"{d['pct_change_total']:.2f}%" if "pct_change_total" in d else "—"
         cagr = f"{d['cagr']:.2f}%" if "cagr" in d else "—"
         deriv_rows.append(
-            f"| {label} | {cc} | {_fmt_num(d['first_value'])} ({d['first_year']}) | {_fmt_num(d['last_value'])} ({d['last_year']}) "
-            f"| {_fmt_num(d['avg_annual_change'])} | {pct} | {cagr} |"
+            f"| {label} | {cc} | {d['first_value']:.2f} ({d['first_year']}) | {d['last_value']:.2f} ({d['last_year']}) "
+            f"| {d['avg_annual_change']:.4f} | {pct} | {cagr} |"
         )
     if n_deriv:
         tables["derived"] = "\n".join(deriv_rows)
