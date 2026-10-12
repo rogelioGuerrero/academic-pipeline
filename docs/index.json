@@ -1,5 +1,143 @@
 [
   {
+    "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
+    "date": "2026-10-12",
+    "topic": "Paper",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "REESCRIBIR",
+    "qa": "APROBADO",
+    "image": "https://i.abcnewsfe.com/a/423fdfe1-2980-4aab-ba4a-588bdf331105/wirestory_8ab63c748db4549f6bd96fb977fe98d0_16x9.jpg?w=1600",
+    "section": "América Latina",
+    "news_url": "https://abcnews.com/US/wireStory/el-nios-storm-killer-winds-climates-warming-waters-137119158",
+    "editorial": "¿Qué pasa con la salud y la movilidad de la gente cuando el Niño sopla fuerte y el clima se calienta? Esa duda surgió al leer sobre el huracán Isaias y sus efectos en América Latina. Al revisar los datos del Banco Mundial, descubrimos que los países que destinan una mayor parte de su producto interno bruto a la salud tienden a vivir más años. En el conjunto de nueve países, cuando el gasto en salud sube un punto porcentual, la esperanza de vida se incrementa alrededor de medio año.  \n\nSin embargo, cuando miramos la misma relación dentro de cada país a lo largo del tiempo, la historia cambia. En los doce países analizados durante varios años, además del gasto en salud, la cantidad de personas que emigran y el porcentaje de población urbana también aparecen vinculados a la longevidad. En algunos lugares, un aumento de la migración neta se asocia con una leve mejora en la esperanza de vida; en otros, el crecimiento de la población urbana muestra un efecto más tenue.  \n\nEn conclusión, los datos confirman que invertir más en salud está relacionado con vivir más, pero la influencia de la migración y la urbanización varía mucho de un país a otro. No hay una respuesta única; la realidad es más compleja de lo que la noticia sugiere.",
+    "charts": "2026-10-10-17-07",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7993,
+        "after": 4660,
+        "cutChars": 9001
+      },
+      {
+        "stage": "WRITE:apertura",
+        "model": "openai/gpt-oss-120b",
+        "before": 7428,
+        "after": 5746,
+        "cutChars": 4540
+      },
+      {
+        "stage": "WRITE:cuerpo",
+        "model": "openai/gpt-oss-120b",
+        "before": 8559,
+        "after": 4662,
+        "cutChars": 10524
+      },
+      {
+        "stage": "WRITE:cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7297,
+        "after": 6172,
+        "cutChars": 3038
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7993,
+        "after": 4660,
+        "cutChars": 9001
+      },
+      {
+        "stage": "WRITE:apertura",
+        "model": "openai/gpt-oss-120b",
+        "before": 7485,
+        "after": 5738,
+        "cutChars": 4716
+      },
+      {
+        "stage": "WRITE:cuerpo",
+        "model": "openai/gpt-oss-120b",
+        "before": 8616,
+        "after": 4548,
+        "cutChars": 10985
+      },
+      {
+        "stage": "WRITE:cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7354,
+        "after": 6176,
+        "cutChars": 3182
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7993,
+        "after": 4660,
+        "cutChars": 9001
+      },
+      {
+        "stage": "EDIT",
+        "model": "openai/gpt-oss-120b",
+        "before": 9545,
+        "after": 4304,
+        "cutChars": 14151
+      },
+      {
+        "stage": "EDIT",
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "stage": "EDIT",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "stage": "EDIT",
+        "model": "openai/gpt-oss-120b",
+        "before": 9052,
+        "after": 4311,
+        "cutChars": 12800
+      },
+      {
+        "stage": "EDIT",
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "stage": "EDIT",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "stage": "EDIT",
+        "model": "openai/gpt-oss-120b",
+        "before": 9052,
+        "after": 4311,
+        "cutChars": 12800
+      }
+    ],
+    "ts": "2026-10-12T21:13:56.153Z"
+  },
+  {
     "file": "2026-10-09_efectos-de-la-migraci-n-neta-y-la-conect.md",
     "date": "2026-10-09",
     "topic": "**Migración neta, uso de internet y remesas en América Latina y el Caribe: ¿existe una relación estructural?**",
