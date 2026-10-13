@@ -1,0 +1,67 @@
+{
+  "suggestions": [
+    {
+      "title": "Impacto del calor extremo del Niño en el empleo juvenil y la educación en América Latina",
+      "news_inspirer": "El Niño breaks temperature record in key area of Pacific (Desarrollo Internacional)",
+      "news_claim": "El fenómeno de El Niño ha batido récords de temperatura, lo que podría afectar la salud, la migración y la capacidad productiva de los países latinoamericanos.",
+      "verifiable_with_data": "Se pueden analizar cómo las variaciones climáticas se relacionan con la tasa de desempleo juvenil y el gasto público en educación; no se dispone de datos directos de salud o migración en el catálogo.",
+      "indicators_support": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Government expenditure on education (% of GDP)"
+      ],
+      "correlations_relevant": [
+        "Youth unemployment vs Government expenditure on education",
+        "Youth unemployment vs Internet users (% of population) (por efecto de adaptación digital)"
+      ],
+      "justification": "El registro de temperatura es un evento climático que puede traducirse en shocks económicos; los indicadores de empleo juvenil y gasto educativo permiten medir la respuesta socio‑económica."
+    },
+    {
+      "title": "Ciberataques y vulnerabilidad de la cadena de suministro: efectos en la productividad y el empleo en América Latina",
+      "news_inspirer": "Hundreds of French supermarkets hit by a cyberattack that defrosted refrigeration systems (Internacional)",
+      "news_claim": "Un ciberataque masivo a supermercados europeos muestra la exposición de infraestructuras críticas y podría generar interrupciones en la cadena de suministro global, afectando a los países exportadores latinoamericanos.",
+      "verifiable_with_data": "Se pueden evaluar si la intensidad de la digitalización (Internet users) y la participación en sectores de servicios están asociados a la resiliencia económica; no hay datos sobre incidentes de ciberseguridad específicos.",
+      "indicators_support": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "GDP growth (annual %)"
+      ],
+      "correlations_relevant": [
+        "Internet users vs GDP growth",
+        "Employment in services vs GDP growth"
+      ],
+      "justification": "El nivel de conectividad digital y la estructura del empleo en servicios son proxies de la capacidad de una economía para absorber choques tecnológicos como ciberataques."
+    },
+    {
+      "title": "Censura digital en Turquía y su posible eco en la inversión extranjera de América Latina",
+      "news_inspirer": "Türkiye: End Internet Censorship (Ciberseguridad)",
+      "news_claim": "El aumento de la censura en internet en Turquía indica que los regímenes autoritarios pueden restringir la libertad digital, lo que podría desalentar la inversión extranjera directa (IED) en regiones con entornos regulatorios similares.",
+      "verifiable_with_data": "Se pueden correlacionar la penetración de internet y la IED net inflows en América Latina; la censura concreta no está medida en el catálogo.",
+      "indicators_support": [
+        "Internet users (% of population)",
+        "Foreign direct investment, net inflows (% of GDP)"
+      ],
+      "correlations_relevant": [
+        "Internet users vs FDI net inflows"
+      ],
+      "justification": "La libertad digital es un factor reconocido para atraer IED; usar internet users como proxy permite probar la relación en la región."
+    },
+    {
+      "title": "Crecimiento económico alemán y su dependencia del sector agrícola: lecciones para la diversificación latinoamericana",
+      "news_inspirer": "Germany news: Economy set for stronger growth, wine harvest hit by drought (Internacional)",
+      "news_claim": "El FMI prevé un crecimiento más fuerte para Alemania, pero la sequía afecta la cosecha de vino, evidenciando la vulnerabilidad de sectores agrícolas frente al clima.",
+      "verifiable_with_data": "Se pueden comparar la participación del empleo agrícola y el crecimiento del PIB en América Latina; la situación específica del vino alemán no está cubierta por los datos.",
+      "indicators_support": [
+        "Employment in agriculture (% of total employment)",
+        "GDP growth (annual %)"
+      ],
+      "correlations_relevant": [
+        "Employment in agriculture vs GDP growth"
+      ],
+      "justification": "La noticia sugiere que la dependencia agrícola puede limitar el crecimiento; los indicadores permiten evaluar esa relación en países latinoamericanos."
+    }
+  ],
+  "topic": "Relación entre digitalización, empleo juvenil y gasto educativo frente a choques climáticos extremos en América Latina",
+  "angle": "Analizar si los países latinoamericanos con mayor penetración de internet y mayor inversión en educación muestran mayor resiliencia del empleo juvenil ante el aumento de temperaturas asociado al fenómeno de El Niño",
+  "question": "¿Cómo se asocian la tasa de desempleo juvenil y el gasto público en educación con la intensidad de la conectividad digital en los países latinoamericanos durante periodos de calor extremo registrado por El Niño?",
+  "hypothesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor gasto en educación (% del PIB) presentan tasas de desempleo juvenil significativamente más bajas durante los años en que El Niño registra temperaturas récord."
+}
