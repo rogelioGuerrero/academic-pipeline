@@ -1576,6 +1576,42 @@ function causalClaimCheck(draft) {
   return { hard: hard.slice(0, 10), soft: soft.slice(0, 10) };
 }
 
+// Divide el draft en preambulo + una pieza por cada "## ..." (el encabezado
+// queda incluido en su pieza). Base del EDIT por secciones.
+function splitMdSections(md) {
+  return md.split(/^(?=## )/m).filter(p => p.trim());
+}
+
+// Secciones que EDIT no toca: se regeneran deterministicamente post-edicion.
+const APPENDIX_RE = /^## (Bibliograf|Tablas|Anexo|Nota de transparencia)/i;
+
+// Copia del draft para el LLM revisor/QA: prosa completa, pero sin filas de
+// tabla ni apendices generados por codigo (Nota de transparencia, etc. — son
+// boilerplate deterministico sin claims que juzgar). Las cifras exactas ya
+// estan en el digest de resultados y verifyNumbers chequea el documento
+// entero. En el run 2026-10-12 esto baja el texto de ~22.8k a ~8k chars:
+// el revisor vuelve a ver el paper completo en vez de un prefijo.
+function proseOnly(md) {
+  const noTables = md.replace(/^(?:[ \t]*\|[^\n]*\r?\n?)+/gm, "_[tabla omitida en esta vista — cifras verificadas por codigo]_\n");
+  return splitMdSections(noTables)
+    .map(s => APPENDIX_RE.test(s) ? s.split("\n", 1)[0] + "\n_[seccion generada por codigo — contenido fijo]_" : s)
+    .join("\n");
+}
+
+// Marcadores sin valor: "β = ?", "p = ?", "r = ?", "??". El LLM a veces deja
+// placeholders cuando el dato no llego a su contexto (run 2026-10-09 salio
+// publicado con "β = ?" en el resumen). Un placeholder es un dato faltante:
+// fuerza correccion igual que una cifra inventada. El "?" suelto no se
+// marca — es puntuacion legitima en espanol.
+const PLACEHOLDER_RE = /(?:β|\bR2?\b|\bR²\b|p\s*[-‑]?valor|\bp\b|\br\b|\bt\b|\bF\b|\bn\b|coef(?:iciente)?|IC\s*9\d|media|pendiente|slope)\s*[=≈<>≤≥]\s*\?+|\?\?/gi;
+function placeholderCheck(text) {
+  if (!text) return [];
+  const hits = [];
+  let m; PLACEHOLDER_RE.lastIndex = 0;
+  while ((m = PLACEHOLDER_RE.exec(text)) && hits.length < 8) hits.push(m[0].slice(0, 60).trim());
+  return hits;
+}
+
 async function agentReview(fetchedData, computeResults, draft, suggestDecision = null, attempt = 0) {
   console.log("[5/7] GPT-OSS 120B revisando rigor academico...\n");
   const { lcn, countries } = dataDigest(fetchedData, suggestDecision, !!computeResults?.tables?.descriptive);
@@ -1593,8 +1629,8 @@ ${countries || "Sin datos por pais."}
 RESULTADOS ESTADISTICOS REALES (Python):
 ${digest}
 
-PAPER A REVISAR:
-${truncate(draft, 4000)}
+PAPER A REVISAR (completo, con las tablas omitidas — sus cifras estan en RESULTADOS y las verifica codigo aparte):
+⟦KEEP⟧${proseOnly(draft)}⟦/KEEP⟧
 
 VERIFICACION OBLIGATORIA:
 1. Extrae TODOS los numeros/estadisticas que el paper afirma (porcentajes, coeficientes, r, p, R2, betas, medias).
@@ -1644,11 +1680,13 @@ SE CONCISO: el JSON completo debe caber en ~800 tokens. detalle_datos en 2 frase
     console.log("Review: LLM no emitio JSON tras los reintentos. Veredicto degradado por chequeos deterministas.");
     const numCheck = verifyNumbers(draft, computeResults, fetchedData);
     const causalCheck = causalClaimCheck(draft);
+    const placeholders = placeholderCheck(draft);
     const estructuraOk = /Resumen|Abstract/i.test(draft) && /Bibliograf|References/i.test(draft);
     const hasBrokenTables = /\|[^\n]*(?:…|\.{3})[^\n]*\|/.test(draft);
     const issues = [
       ...numCheck.invented.slice(0, 5).map(c => `Cifra sin respaldo: ${c.text}`),
       ...causalCheck.hard.slice(0, 3).map(s => `Afirmación causal sin matiz: "${s.slice(0, 80)}"`),
+      ...placeholders.slice(0, 3).map(t => `Marcador sin valor: "${t}"`),
       ...(estructuraOk ? [] : ["Estructura incompleta: falta Resumen o Bibliografía"]),
       ...(hasBrokenTables ? ["Tablas con elipses o celdas incompletas (…)"] : []),
     ];
@@ -1671,6 +1709,14 @@ SE CONCISO: el JSON completo debe caber en ~800 tokens. detalle_datos en 2 frase
   }
   // Forzar consistencia: si reporta datos inventados o incompletos, el veredicto no puede ser APROBADO
   const hasBrokenTables = /\|[^\n]*(?:…|\.{3})[^\n]*\|/.test(draft);
+  const placeholders = placeholderCheck(draft);
+  if (placeholders.length) {
+    decision.veredicto = "REESCRIBIR";
+    decision.datos_correctos = false;
+    decision.correcciones = [...(decision.correcciones || []),
+      `Marcador sin valor: "${placeholders[0]}" — reemplazar por la cifra computada real o eliminar la afirmación.`];
+    decision.feedback = (decision.feedback ? decision.feedback + "; " : "") + `Placeholder sin valor detectado (${placeholders[0]}).`;
+  }
   if (hasBrokenTables) {
     decision.veredicto = "REESCRIBIR";
     decision.datos_correctos = false;
@@ -1726,25 +1772,97 @@ async function agentEdit(draft, review, computeResults = null) {
   // Extract bibliography from original draft to re-append if EDIT truncates it
   const bibMatch = draft.match(/^## Bibliograf[\s\S]*$/m);
   const originalBib = bibMatch ? bibMatch[0] : "";
-  const prompt = `Eres el editor de una revista de ciencias sociales. Pule este paper.
+  const feedback = truncate(typeof review === "string" ? review : JSON.stringify(review), 1500);
+  const rules = `Aplica correcciones, mejora flujo, verifica APA. Manten estructura y formato Markdown.
+NO agregues numeros, estadisticos ni tests que la REVISION no haya verificado.
+NO uses puntos suspensivos ("…") en las tablas ni inventes rutas de figuras.
+NO reemplaces cifras por marcadores ("?", "X", "N/A") — si un dato no esta en la seccion, deja la frase original.`;
+
+  // Draft grande: editar por secciones. El paper completo no cabe en una
+  // sola respuesta de Groq (3200 max_tokens < ~5-8k tokens del texto), y una
+  // salida cortada adoptada como draft mutila el documento en silencio
+  // (run 2026-10-12 perdio Conclusiones asi). Por seccion cada salida cabe,
+  // y un truncamiento deja intacta solo ESA seccion — nunca el resto.
+  const sections = splitMdSections(draft);
+  const singleShot = estimateTokens(draft) + 3200 + TPM_MARGIN <= TPM_LIMIT;
+
+  if (singleShot || sections.length <= 1) {
+    const prompt = `Eres el editor de una revista de ciencias sociales. Pule este paper.
 
 PAPER COMPLETO (editar sobre el texto entero — no omitas el final):
 ⟦KEEP⟧${draft}⟦/KEEP⟧
 
 REVISION:
-${truncate(typeof review === "string" ? review : JSON.stringify(review), 1500)}
+${feedback}
 
-Aplica correcciones, mejora flujo, verifica APA. Manten estructura y formato Markdown.
+${rules}
 IMPORTANTE: Preserva la seccion de Bibliografia, las tablas Markdown y todas las referencias a figuras ![..](charts/..) del paper original.
-NO agregues numeros, estadisticos ni tests que la REVISION no haya verificado.
-NO uses puntos suspensivos ("…") en las tablas ni inventes rutas de figuras.
 Devuelve SOLO el paper final en Markdown.`;
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3200, temperature: 0.5, reasoning_effort: "low" });
-  let result = data.choices[0]?.message?.content || "";
-  // If EDIT truncated the bibliography, re-append from original
+    let data;
+    try {
+      data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3200, temperature: 0.5, reasoning_effort: "low" });
+    } catch (e) {
+      console.log(`  EDIT fallo (${e.message}) — conservando draft sin editar.`);
+      return repairTablesAndCharts(draft, computeResults);
+    }
+    const ch = data.choices?.[0];
+    if (ch?.finish_reason === "length") {
+      // Guardrail anti-mutilacion: una edicion cortada nunca reemplaza al draft.
+      console.log("  EDIT salio truncada — conservando draft sin editar.");
+      return repairTablesAndCharts(draft, computeResults);
+    }
+    let result = ch?.message?.content || "";
+    if (!result.trim() || result.length < draft.length * 0.5) {
+      // Salida vacia o sospechosamente corta: no reemplazar un draft completo.
+      console.log("  EDIT devolvio salida vacia o muy corta — conservando draft sin editar.");
+      return repairTablesAndCharts(draft, computeResults);
+    }
+    // If EDIT truncated the bibliography, re-append from original
+    if (originalBib && !/## Bibliograf/i.test(result)) {
+      console.log("  EDIT trunco bibliografia. Re-appendiendo del draft original.");
+      result = result.trimEnd() + "\n\n" + originalBib;
+    }
+    return repairTablesAndCharts(result, computeResults);
+  }
+
+  console.log(`  Draft grande (${draft.length} chars): edicion por secciones (${sections.length} partes).`);
+  const parts = [];
+  for (const sec of sections) {
+    const title = sec.split("\n", 1)[0].trim();
+    if (APPENDIX_RE.test(sec)) {
+      parts.push(sec.replace(/\n+$/, "") + "\n\n");
+      console.log(`  "${title}": seccion generada por codigo — intacta.`);
+      continue;
+    }
+    const prompt = `Eres el editor de una revista de ciencias sociales. Pule esta SECCION de un paper academico.
+
+SECCION A EDITAR (devuelve solo esta seccion pulida, conservando su encabezado "## ..." si lo tiene):
+⟦KEEP⟧${sec.trimEnd()}⟦/KEEP⟧
+
+CORRECCIONES DE LA REVISION (aplican a todo el paper; aqui solo toca lo que competa a esta seccion):
+${feedback}
+
+${rules}
+Devuelve SOLO la seccion editada en Markdown.`;
+    try {
+      const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2400, completion_floor: 900, temperature: 0.5, reasoning_effort: "low" });
+      const ch = data.choices?.[0];
+      const edited = (ch?.message?.content || "").trim();
+      if (ch?.finish_reason === "length" || !edited) {
+        console.log(`  "${title}": salida cortada — seccion intacta.`);
+        parts.push(sec.replace(/\n+$/, "") + "\n\n");
+      } else {
+        parts.push(edited + "\n\n");
+      }
+    } catch (e) {
+      console.log(`  "${title}": fallo (${e.message}) — seccion intacta.`);
+      parts.push(sec.replace(/\n+$/, "") + "\n\n");
+    }
+    await delay(20);
+  }
+  let result = parts.join("").trimEnd() + "\n";
   if (originalBib && !/## Bibliograf/i.test(result)) {
-    console.log("  EDIT trunco bibliografia. Re-appendiendo del draft original.");
-    result = result.trimEnd() + "\n\n" + originalBib;
+    result += "\n" + originalBib;
   }
   return repairTablesAndCharts(result, computeResults);
 }
@@ -1905,9 +2023,21 @@ async function agentApprove(finalText, computeResults = null, fetchedData = null
       issues: ["El paper contiene tablas con celdas incompletas o elipses (…)"]
     };
   }
+  // Marcadores sin valor ("β = ?"): una cifra placeholder publicada es un
+  // dato faltante — motivo de rechazo igual que una cifra inventada.
+  const placeholders = placeholderCheck(finalText);
+  if (placeholders.length) {
+    return {
+      veredicto: "RECHAZADO",
+      checklist: { estructura_ok: true, datos_verificados: false, resumen_ok: true, bibliografia_ok: true, citas_apa_ok: true, coherencia_ok: false, tono_academico: true, extension_ok: true },
+      palabras: finalText.split(/\s+/).length,
+      issues: placeholders.map(t => `Marcador sin valor en el texto: "${t}"`),
+      number_check: { checked: numCheck.checked, invented: numCheck.invented.length }
+    };
+  }
   const prompt = `Eres control de calidad de una revista de ciencias sociales. Verifica:
 
-${truncate(finalText, 4000)}
+⟦KEEP⟧${proseOnly(finalText)}⟦/KEEP⟧
 
 Responde EXACTAMENTE como JSON (json puro, sin markdown):
 {"checklist":{"estructura_ok":true,"resumen_ok":true,"bibliografia_ok":true,"citas_apa_ok":true,"coherencia_ok":true,"datos_verificados":true,"tono_academico":true,"extension_ok":true},"palabras":3000,"veredicto":"APROBADO","issues":[]}
