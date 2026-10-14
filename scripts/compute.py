@@ -58,6 +58,28 @@ def _es_label(name):
             out = rx.sub(sub, out)
     return out + suffix
 
+# Nombres de paises en espanol para la columna "Pais / Region" de las tablas.
+COUNTRY_ES = {
+    "Argentina": "Argentina",
+    "Brazil": "Brasil",
+    "Chile": "Chile",
+    "Colombia": "Colombia",
+    "Costa Rica": "Costa Rica",
+    "Dominican Republic": "República Dominicana",
+    "Ecuador": "Ecuador",
+    "Guatemala": "Guatemala",
+    "Mexico": "México",
+    "Panama": "Panamá",
+    "Peru": "Perú",
+    "Uruguay": "Uruguay",
+    "Latin America & Caribbean": "América Latina y el Caribe (LCN)",
+    "Latin America & Caribbean (regional)": "América Latina y el Caribe (LCN)",
+    "Latin America & Caribbean (aggregate)": "América Latina y el Caribe (LCN)",
+}
+
+def _es_country(country):
+    return COUNTRY_ES.get(country, country)
+
 def load_input(path):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -75,29 +97,38 @@ def _get_variables(data):
 
 # Unit compatibility matrix: which units can be correlated together.
 # Pearson r es invariante a escala, pero el guardia evita pares sin sentido semantico.
-UNIT_COMPAT = {
-    ("%", "%"): True,
-    ("%", "index"): True,   # Gini index vs % is semantically comparable
-    ("%", "USD"): True,     # % vs USD: correlation is scale-invariant (Pearson r)
-    ("USD", "USD"): True,
-    ("count", "count"): True,
-    ("count", "USD"): True,    # net migration vs remittances / GDP
-    ("count", "%"): True,      # net migration vs unemployment %
-    ("per100", "per100"): True,
-    ("per100", "%"): True,   # per100 and % are comparable (both rates)
-    ("per100", "USD"): True,   # mobile subs vs GDP per capita
-    ("score", "score"): True,  # PISA scores
-    ("score", "USD"): True,    # PISA score vs GDP per capita
-    ("score", "%"): True,      # PISA score vs % indicators
-    ("score", "index"): True,  # PISA score vs Gini index
-    ("years", "%"): True,      # life expectancy vs rates
-    ("years", "USD"): True,    # life expectancy vs GDP per capita
-    ("years", "count"): True,  # life expectancy vs population
-    ("t", "%"): True,          # CO2 per capita vs rates
-    ("t", "USD"): True,        # CO2 per capita vs GDP per capita
-    ("kWh", "%"): True,        # power consumption vs rates
-    ("kWh", "USD"): True,      # power consumption vs GDP per capita
-}
+# Las claves se normalizan con tuple(sorted(...)) al construir el dict: la
+# consulta ordena el par antes de buscarlo, asi que una clave declarada en
+# orden inverso al ASCII ("years","%") nunca encontraba match y bloqueaba
+# correlaciones enteras (salud, energia, migracion, PISA) — bug 2026-10-12.
+_RAW_UNIT_COMPAT = [
+    ("%", "%"),
+    ("%", "index"),
+    ("%", "USD"),
+    ("USD", "USD"),
+    ("count", "count"),
+    ("count", "USD"),
+    ("count", "%"),
+    ("per100", "per100"),
+    ("per100", "%"),
+    ("per100", "USD"),
+    ("score", "score"),
+    ("score", "USD"),
+    ("score", "%"),
+    ("score", "index"),
+    ("years", "years"),
+    ("years", "%"),
+    ("years", "USD"),
+    ("years", "count"),
+    ("years", "index"),
+    ("t", "t"),
+    ("t", "%"),
+    ("t", "USD"),
+    ("kWh", "kWh"),
+    ("kWh", "%"),
+    ("kWh", "USD"),
+]
+UNIT_COMPAT = {tuple(sorted(pair)): True for pair in _RAW_UNIT_COMPAT}
 
 def _units_compatible(unit_a, unit_b):
     """Check if two units can be meaningfully correlated."""
@@ -1496,8 +1527,10 @@ def generate_markdown_tables(data, results):
             "| " + " | ".join(sep) + " |"
         ]
         for v in selected_vars:
-            label = _es_label(v.get("label", v["name"].split(" [")[0]))
-            cc = v.get("country", "") or v.get("country_code", "")
+            # Pais va en su propia columna: quitar el sufijo [CC] del nombre
+            # para no duplicarlo dentro de la etiqueta del indicador.
+            label = _es_label((v.get("label") or v["name"]).split(" [")[0])
+            cc = _es_country(v.get("country", "") or v.get("country_code", ""))
             unit = f" ({v['unit']})" if v.get("unit") and v['unit'] != "unknown" else ""
             y_map = dict(zip(v.get("years", []), v.get("values", [])))
             row_vals = []
@@ -1526,7 +1559,8 @@ def generate_markdown_tables(data, results):
             sig_mark = _evidence_badge(c.get("p_value"), c.get("boot_ci_95"))
             boot_ci = c.get("boot_ci_95")
             ci_str = f"[{boot_ci[0]:.3f}, {boot_ci[1]:.3f}]" if boot_ci else "—"
-            stat_str = f"t = {c.get('t_stat', 0):.2f}"
+            t_val = c.get("t", c.get("t_stat", 0.0))
+            stat_str = f"t = {t_val:.2f}" if t_val == t_val else "—"
             var_name = _es_label(c['name'].split(" [")[0])
             model_rows.append(f"| OLS Agregado (LCN) | {var_name} | {c.get('beta', 0):.4f} | {c.get('se', 0):.4f} | {stat_str} | {c.get('p_value', 1):.4f} | {ci_str} | {sig_mark} |")
         model_rows.append(f"| *Diagnóstico OLS* | *R² = {reg.get('r_squared', 0):.4f}, R²-adj = {reg.get('adj_r_squared', 0):.4f}, F = {reg.get('f_statistic', 0):.2f} (p = {reg.get('f_p_value', 1):.4f}), n = {reg.get('n', 0)}, dof = {reg.get('dof', 0)}* | — | — | — | — | — | — |")
@@ -1548,7 +1582,9 @@ def generate_markdown_tables(data, results):
     if has_model:
         tables["regression"] = "\n".join(model_rows)
 
-    corrs = results.get("correlations", [])
+    # Pares con "error" (unidades incompatibles, pocos años comunes, país
+    # distinto) no llevan fila a la tabla: entraban con — | — | Sin evidencia.
+    corrs = [c for c in results.get("correlations", []) if c.get("pearson_r") is not None]
     if corrs:
         top_corrs = sorted(corrs, key=lambda c: (1 if c.get("significant_fdr", c.get("significant")) else 0, abs(c.get("pearson_r") or 0)), reverse=True)[:15]
         corr_rows = [
@@ -1595,8 +1631,8 @@ def generate_markdown_tables(data, results):
         if not d:
             continue
         n_deriv += 1
-        label = _es_label(v.get("label", v["name"].split(" [")[0]))
-        cc = v.get("country", "") or v.get("country_code", "")
+        label = _es_label((v.get("label") or v["name"]).split(" [")[0])
+        cc = _es_country(v.get("country", "") or v.get("country_code", ""))
         pct = f"{d['pct_change_total']:.2f}%" if "pct_change_total" in d else "—"
         cagr = f"{d['cagr']:.2f}%" if "cagr" in d else "—"
         deriv_rows.append(

@@ -158,7 +158,7 @@ function fitPrompt(text, budgetTokens) {
   if (pos < text.length) segs.push({ t: text.slice(pos), keep: false });
 
   let fitted;
-  if (keepChars > 0 && keepChars < maxChars * 0.8) {
+  if (keepChars > 0 && keepChars < maxChars * 0.85) {
     // El presupuesto elastico es lo que sobra tras reservar los KEEP.
     // Prioridad: primer segmento libre (instrucciones + datos) 35%, ultimo
     // (formato de salida) 45%; los intermedios comparten el resto en orden —
@@ -186,21 +186,65 @@ function fitPrompt(text, budgetTokens) {
       // presupuesto (cada segmento cortado agrega un CUT_MARK).
       const avail = q - CUT_MARK.length;
       if (avail < 40) return CUT_MARK;
-      // El ultimo segmento libre conserva su FINAL: ahi viven las
-      // instrucciones de formato de salida ("Responde como JSON", estructura
-      // del paper). Cortar su final dejo el prompt sin la palabra "json" y
-      // Groq rechazo el request con 400 (run 2026-09-22).
+      // El ultimo segmento libre conserva INICIO (60%: encabezados y
+      // estructura exigida de la etapa) + FINAL (40%: instrucciones de
+      // formato/JSON). Conservar solo el final borraba los encabezados
+      // "## Analisis"/"## Discusion" al inicio del bloque de instrucciones.
       if (i === freeIdx[freeIdx.length - 1]) {
-        let cut = s.t.slice(-avail);
-        const nl = cut.indexOf("\n");
-        if (nl !== -1 && nl < avail * 0.4) cut = cut.slice(nl + 1);
-        return CUT_MARK + cut;
+        const headLen = Math.floor(avail * 0.6);
+        let head = s.t.slice(0, headLen);
+        const nlH = head.lastIndexOf("\n");
+        if (nlH > headLen * 0.6) head = head.slice(0, nlH);
+        const tailLen = avail - head.length;
+        let tail = tailLen > 0 ? s.t.slice(-tailLen) : "";
+        const nlT = tail.indexOf("\n");
+        if (nlT !== -1 && nlT < tail.length * 0.4) tail = tail.slice(nlT + 1);
+        return head + CUT_MARK + tail;
       }
       let cut = s.t.slice(0, avail);
       const nl = cut.lastIndexOf("\n");
       if (nl > avail * 0.6) cut = cut.slice(0, nl);
       return cut + CUT_MARK;
     }).join("");
+  } else if (keepChars > 0) {
+    // Los bloques KEEP dominan el prompt (>=85% del presupuesto): el corte
+    // ciego 60/35 partiria un KEEP a la mitad y el LLM perderia justo las
+    // cifras protegidas. En su lugar se adelgaza el INTERIOR de los bloques
+    // KEEP mas largos por lineas completas, conservando siempre la primera y
+    // la ultima linea de cada bloque (titulo del bloque y nota de cierre).
+    const work = segs.map(s => ({ keep: s.keep, text: s.t }));
+    const total = () => work.reduce((a, s) => a + s.text.length, 0);
+    while (total() > maxChars) {
+      let bi = -1, blen = 0;
+      for (let i = 0; i < work.length; i++) {
+        const s = work[i];
+        if (!s.keep) continue;
+        if (s.text.split("\n").length > 4 && s.text.length > blen) { bi = i; blen = s.text.length; }
+      }
+      if (bi < 0) break; // ya no hay KEEP encogible por lineas
+      const lines = work[bi].text.split("\n");
+      const inner = lines.slice(1, -1);
+      const keepN = Math.max(2, Math.ceil(inner.length / 2));
+      const start = Math.max(0, Math.floor((inner.length - keepN) / 2));
+      work[bi].text = [lines[0], CUT_MARK.trim(), ...inner.slice(start, start + keepN), lines[lines.length - 1]].join("\n");
+    }
+    // Si aun excede (KEEP no encogibles o segmentos libres enormes), recortar
+    // los libres a partes iguales conservando inicio (60%) + fin (40%).
+    if (total() > maxChars) {
+      const keepNow = work.filter(s => s.keep).reduce((a, s) => a + s.text.length, 0);
+      const elastic = Math.max(0, maxChars - keepNow);
+      const freeIdx = work.map((s, i) => (s.keep ? -1 : i)).filter(i => i >= 0);
+      const per = freeIdx.length ? Math.floor(elastic / freeIdx.length) : 0;
+      for (const i of freeIdx) {
+        const s = work[i];
+        if (s.text.length <= per) continue;
+        const avail = per - CUT_MARK.length;
+        if (avail < 40) { s.text = CUT_MARK; continue; }
+        const headLen = Math.floor(avail * 0.6);
+        s.text = s.text.slice(0, headLen) + CUT_MARK + s.text.slice(-(avail - headLen));
+      }
+    }
+    fitted = work.map(s => s.text).join("");
   } else {
     // 60% cabeza (instrucciones + datos) + 35% cola (formato de salida) = 95%
     // del presupuesto: siempre queda por debajo del limite.
@@ -276,6 +320,22 @@ async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
       const json = await res.json();
       const choice = json.choices?.[0];
       const content = choice?.message?.content || "";
+      // Telemetria real de la API: calibrar el estimador con usage (media
+      // movil suave, en vez de esperar a que falle un 413) y guardar el
+      // rate-limit restante del MODELO para espaciar llamadas sin sleeps fijos.
+      const ptok = json.usage?.prompt_tokens;
+      if (ptok > 0) {
+        const measured = body.messages[0].content.length / ptok;
+        if (measured > 1 && measured < 6) {
+          CHARS_PER_TOKEN = Math.min(4.5, Math.max(1.5, CHARS_PER_TOKEN * 0.85 + measured * 0.15));
+        }
+      }
+      const remTok = res.headers.get("x-ratelimit-remaining-tokens");
+      if (remTok !== null) {
+        const rst = res.headers.get("x-ratelimit-reset-tokens") || "";
+        const secs = /ms/i.test(rst) ? parseFloat(rst) / 1000 : (parseFloat(rst) || 60);
+        rateState[model] = { remainingTokens: Number(remTok), resetAt: Date.now() + secs * 1000 };
+      }
       // Salida cortada por el techo de respuesta: queda registrado para que el
       // paper salga con la advertencia en vez de pasar por completo.
       if (choice?.finish_reason === "length") {
@@ -291,6 +351,9 @@ async function callLLM(apiKey, apiUrl, model, prompt, opts = {}) {
     }
     if (res.status === 429 && attempt < 4) {
       const errText = await res.text();
+      // Cuota diaria agotada (TPD, no TPM): no se recupera esperando un
+      // minuto — lo marca el grafo para guardar checkpoint y salir limpio.
+      if (/tokens?[_ ]per[_ ]day|\bTPD\b|daily/i.test(errText)) rateState.dailyExhausted = true;
       const match = errText.match(/try again in ([\d.]+)s/i);
       const waitSec = match ? Math.ceil(parseFloat(match[1])) + 2 : 35;
       console.log(`  Rate limit (429). Esperando ${waitSec}s... (intento ${attempt}/4)`);
@@ -398,6 +461,22 @@ function decisionToFeedback(decision) {
   return parts.join("\n");
 }
 
+// Rate-limit por modelo (Groq contabiliza TPM/TPD por modelo): se alimenta
+// de los headers x-ratelimit-* de cada respuesta 200. waitForTokenBudget
+// solo duerme cuando el saldo del minuto actual no alcanza para la siguiente
+// llamada estimada — reemplaza los delay(20-40) fijos entre etapas.
+const rateState = {};
+
+async function waitForTokenBudget(model, estimatedNextTokens) {
+  const st = rateState[model];
+  if (!st || !Number.isFinite(st.remainingTokens)) return;
+  if (st.remainingTokens >= estimatedNextTokens) return;
+  const wait = st.resetAt - Date.now();
+  if (wait > 0 && wait <= 120000) {
+    await delay(Math.ceil(wait / 1000) + 1);
+  }
+}
+
 function delay(seconds) {
   console.log(`  Esperando ${seconds}s...`);
   return new Promise((r) => setTimeout(r, seconds * 1000));
@@ -409,6 +488,20 @@ function truncate(text, maxChars) {
   return text.slice(0, maxChars) + "\n[...truncado]";
 }
 
+// Secciones de prosa obligatorias. Bibliografia/Tablas/Anexo/Nota NO van en
+// la lista: se ensamblan deterministicamente post-APPROVE — exigirlas aqui
+// (como hacia el guardrail viejo solo con Bibliografia) dejaba publicar
+// papers sin Discusion ni Conclusiones (run 2026-10-12).
+const REQUIRED_SECTIONS = [
+  /##\s+Resumen/i,
+  /##\s+(?:\d+\.\s*)?Introducci[oó]n/i,
+  /##\s+(?:\d+\.\s*)?(?:Metodolog[ií]a|M[eé]todos)/i,
+  /##\s+(?:\d+\.\s*)?(?:An[aá]lisis|Resultados)/i,
+  /##\s+(?:\d+\.\s*)?Discusi[oó]n/i,
+  /##\s+(?:\d+\.\s*)?Conclusiones/i,
+];
+const REQUIRED_SECTIONS_MSG = "Faltan secciones obligatorias (Resumen, Introducción, Metodología, Análisis, Discusión, Conclusiones)";
+
 const GUARDRAILS = {
   FETCH: [{ check: out => out && out.indicators && out.indicators.length > 0, msg: "No se obtuvieron indicadores" }],
   SUGGEST: [{ check: out => out && out.topic && out.topic.length > 10, msg: "SUGGEST no genero tema" }],
@@ -418,8 +511,7 @@ const GUARDRAILS = {
   ],
   WRITE: [
     { check: out => out && out.length > 1000, msg: "Paper muy corto" },
-    { check: out => out && /Resumen|Abstract/i.test(out), msg: "Falta Resumen" },
-    { check: out => out && /Bibliograf|References/i.test(out), msg: "Falta Bibliografia" },
+    { check: out => out && REQUIRED_SECTIONS.every(re => re.test(out)), msg: REQUIRED_SECTIONS_MSG },
   ],
   REVIEW: [
     { check: out => out && out.veredicto !== undefined, msg: "Falta veredicto" },
@@ -427,7 +519,7 @@ const GUARDRAILS = {
   ],
   EDIT: [
     { check: out => out && out.length > 1000, msg: "Paper editado muy corto" },
-    { check: out => out && /Bibliograf|References/i.test(out), msg: "Falta Bibliografia" },
+    { check: out => out && REQUIRED_SECTIONS.every(re => re.test(out)), msg: REQUIRED_SECTIONS_MSG },
   ],
   APPROVE: [
     { check: out => out && out.veredicto !== undefined, msg: "Falta veredicto" },
@@ -451,6 +543,13 @@ const TRANSITIONS = {
   WRITE: [{ next: "REVIEW" }],
   REVIEW: [
     { condition: s => s.reviewDecision?.veredicto === "REESCRIBIR" && s.iterations.rewrite < MAX_REWRITE_ITERATIONS, next: "WRITE", action: s => { console.log("-> REESCRIBIR\n"); s.writeFeedback = s.reviewDecision.feedback || s.reviewDecision.correcciones?.join("; ") || ""; s.iterations.rewrite++; } },
+    // APROBADO sin correcciones ni senales pendientes: EDIT es una pasada
+    // mecanica de ~5-15k tokens que no cambia nada — saltar a APPROVE.
+    { condition: s => {
+        const d = s.reviewDecision;
+        if (d?.veredicto !== "APROBADO") return false;
+        return !(d.correcciones?.length) && !(d.causal_check?.soft) && !(d.datos_inventados?.length);
+      }, next: "APPROVE", action: s => { console.log("-> REVIEW aprobo sin correcciones: EDIT omitido (0 tokens).\n"); s.editedArticle = s.currentDraft; } },
     { condition: () => true, next: "EDIT", action: s => { s.editFeedback = decisionToFeedback(s.reviewDecision); } },
   ],
   EDIT: [{ next: "APPROVE" }],
@@ -648,7 +747,10 @@ Responde EXACTAMENTE como JSON (json puro, sin markdown):
       "verificable_con_datos": "que parte puede confirmarse/refutarse con los indicadores disponibles y que parte queda fuera de alcance",
       "indicadores_respaldan": ["indicador 1", "indicador 2"],
       "correlaciones_relevantes": ["corr 1", "corr 2"],
-      "justificacion": "por que esta linea tiene respaldo de datos"
+      "justificacion": "por que esta linea tiene respaldo de datos",
+      "pregunta": "pregunta de investigacion verificable con los indicadores disponibles",
+      "hipotesis": "afirmacion concreta que los datos pueden apoyar o refutar",
+      "keywords_en": "3 to 5 English academic search terms for OpenAlex (e.g. 'health expenditure life expectancy Latin America')"
     }
   ],
   "topic": "el mejor tema para investigar (especifico)",
@@ -873,6 +975,17 @@ async function agentCompute(fetchedData, suggestDecision = null) {
         const rData = JSON.parse(readFileSync(rOutputPath, "utf-8"));
         results.r_econometrics = rData;
         console.log(`    R Econometria (Two-Way FE): R²=${rData.r_squared?.toFixed(4)}, ${rData.coefficients?.length || 0} coeficientes`);
+        // La TABLA 2 la arma compute.py ANTES de que corra Rscript: sin estas
+        // filas el paper publicaba "los coeficientes estan en la TABLA 2" con
+        // una tabla que no los tenia (placeholders "β = ?" del run 2026-10-09).
+        if (rData?.coefficients?.length && results.tables?.regression) {
+          const badge = p => (p == null ? "—" : p < 0.05 ? "🟢 Robusta" : p < 0.10 ? "🟡 Marginal" : "🔴 Sin evidencia");
+          const rows = rData.coefficients.map(c =>
+            `| Panel Efectos Fijos Bidireccional (País + Año, R) | ${esSeriesName(String(c.name).split(" [")[0])} | ${(c.estimate ?? 0).toFixed(4)} | ${(c.std_error ?? 0).toFixed(4)} | t = ${(c.t_stat ?? 0).toFixed(2)} | ${(c.p_value ?? 1).toFixed(4)} | — | ${badge(c.p_value)} |`
+          );
+          rows.push(`| *Diagnóstico Panel R* | *R² = ${(rData.r_squared ?? 0).toFixed(4)}, F = ${(rData.f_statistic ?? 0).toFixed(2)} (p = ${(rData.f_p_value ?? 1).toFixed(4)}), n = ${rData.n ?? 0} (${rData.n_countries ?? 0} países)* | — | — | — | — | — | — |`);
+          results.tables.regression += "\n" + rows.join("\n");
+        }
       }
     } catch {
       // Rscript no disponible o sin jsonlite: continuar normalmente con Python
@@ -960,8 +1073,14 @@ const esSeriesName = name => {
   return i > 0 && name.endsWith("]") ? `${esLabel(name.slice(0, i))}${name.slice(i)}` : esLabel(name);
 };
 
-function dataDigest(fetchedData, suggestDecision = null, compact = false) {
-  let inds = fetchedData.indicators;
+// Resumen Compacto de Series y Derivados: una linea por serie con primer y
+// ultimo año + extremos/media/% cambio/cambio anual/CAGR tomados de
+// computeResults.derived — cada cifra que el LLM puede citar existe literal en
+// collectAllowedNumbers. Limitado a LCN + los 5 paises de la muestra SQLite
+// para los indicadores del estudio (~24 lineas, ~400 tokens); la TABLA 1/4
+// completa se ensambla por codigo al final del paper, nunca viaja en prompts.
+function dataDigest(fetchedData, suggestDecision = null, computeResults = null) {
+  let inds = fetchedData?.indicators || [];
   const used = chosenIndicators(suggestDecision);
   let topCcs = [];
   if (used) {
@@ -969,26 +1088,29 @@ function dataDigest(fetchedData, suggestDecision = null, compact = false) {
     if (filtered.length) inds = filtered; // si nada coincide, mostrar todo (fallback seguro)
     topCcs = sampleCountriesFor(suggestDecision);
   }
-  if (compact) {
-    // Con TABLA 1 en el prompt, las series crudas son duplicacion pura: la
-    // tabla trae esas mismas series con todos los años (~1400 tokens de
-    // diferencia). Aqui basta el inventario: WRITE sabe que existe y REVIEW
-    // puede detectar paises o indicadores inventados contra esta lista.
-    const coverages = [...new Set(inds.map(i => i.country_code))].sort().join(", ");
-    const indList = [...new Map(inds.map(i => [i.indicator_label, i.unit || "?"]))]
-      .map(([label, unit]) => `- ${esLabel(label)} (${unit})`).join("\n");
-    return {
-      lcn: "(las series regionales están en TABLA 1, año por año)",
-      countries: `Coberturas con datos: ${coverages}.\nIndicadores del estudio:\n${indList}\n(los valores año por año de cada serie están en TABLA 1)`,
-    };
-  }
-  // Series LCN: comprimir a primero/ultimo (no todos los años) + cap duro
-  const lcnInds = inds.filter(i => i.country_code === "LCN").slice(0, 12);
-  const lcn = lcnInds.map(i => {
-    const pts = i.series.map(s => `${s.year}=${s.value.toFixed(2)}`).join(", ");
-    return `- ${esLabel(i.indicator_label)} [LCN] (${i.unit}): ${pts}`;
-  }).join("\n");
-  // Series por pais: acotado prioritariamente a la muestra de Top 5 países de SQLite
+  const derived = computeResults?.derived || {};
+  const sgn = v => (v >= 0 ? "+" : "") + v;
+  const line = (i) => {
+    const label = esLabel(i.indicator_label);
+    const d = derived[`${i.indicator_label} [${i.country_code}]`];
+    if (d) {
+      const bits = [
+        `min=${d.min_value?.toFixed(2)} en ${d.min_year}`,
+        `max=${d.max_value?.toFixed(2)} en ${d.max_year}`,
+        `media=${d.mean?.toFixed(2)}`,
+      ];
+      if (d.pct_change_total != null) bits.push(`Δtotal=${sgn(d.pct_change_total.toFixed(2))}%`);
+      else if (d.delta_total != null) bits.push(`Δtotal=${sgn(d.delta_total.toFixed(2))}`);
+      if (d.avg_annual_change != null) bits.push(`cambio anual=${sgn(d.avg_annual_change.toFixed(4))}`);
+      if (d.cagr != null) bits.push(`CAGR=${sgn(d.cagr.toFixed(2))}%`);
+      return `- ${label} (${i.unit || "?"}) [${i.country_code}]: ${d.first_year}=${d.first_value?.toFixed(2)} -> ${d.last_year}=${d.last_value?.toFixed(2)} (${bits.join(", ")})`;
+    }
+    const pts = (i.series || []).filter(s => s.value != null);
+    if (!pts.length) return null;
+    const f = pts[0], l = pts[pts.length - 1];
+    return `- ${label} (${i.unit || "?"}) [${i.country_code}]: ${f.year}=${f.value?.toFixed(2)} -> ${l.year}=${l.value?.toFixed(2)}`;
+  };
+  const lcn = inds.filter(i => i.country_code === "LCN").map(line).filter(Boolean).join("\n");
   let countryInds = inds.filter(i => i.country_code !== "LCN");
   if (topCcs.length) {
     const matched = countryInds.filter(i => topCcs.includes(i.country_code));
@@ -1009,97 +1131,113 @@ function dataDigest(fetchedData, suggestDecision = null, compact = false) {
     (indRank.get(a.indicator_label) ?? 999) - (indRank.get(b.indicator_label) ?? 999) ||
     (ccRank.get(a.country_code) ?? 999) - (ccRank.get(b.country_code) ?? 999)
   );
+  const lcnLines = lcn ? lcn.split("\n").length : 0;
   const countries = countryInds
-    .slice(0, 18)
-    .map(i => {
-      const first = i.series[0]; const latest = i.series[i.series.length - 1];
-      return `- ${esLabel(i.indicator_label)} [${i.country_code}] (${i.unit}): ${first.year}=${first.value.toFixed(2)} -> ${latest.year}=${latest.value.toFixed(2)}`;
-    }).join("\n");
+    .slice(0, Math.max(0, 20 - lcnLines))
+    .map(line)
+    .filter(Boolean)
+    .join("\n");
   return { lcn, countries };
 }
+
+// ── Formato compacto del digest estadistico ──
+// Las tablas Markdown completas se ensamblan deterministicamente al final del
+// paper (ensureTables): el LLM solo necesita las cifras para citarlas en la
+// prosa. Un coeficiente por linea con su veredicto — los "β = ?" del run
+// 2026-10-09 nacieron de ocultar los coeficientes tras "ver TABLA 2" cuando la
+// tabla no llegaba (R corre despues de compute.py).
+const _f2 = v => (v == null || !Number.isFinite(v) ? "—" : Number(v).toFixed(2));
+const _f3 = v => (v == null || !Number.isFinite(v) ? "—" : Number(v).toFixed(3));
+const _f4 = v => (v == null || !Number.isFinite(v) ? "—" : Number(v).toFixed(4));
+
+// Mismo semaforo que _evidence_badge de compute.py.
+function evidenceBadge(p, ci = null) {
+  if (p == null) return "—";
+  const ciHasZero = Array.isArray(ci) && ci.length === 2 && ci[0] <= 0 && ci[1] >= 0;
+  if (p < 0.05 && !ciHasZero) return "🟢 Robusta";
+  if (p < 0.10) return "🟡 Marginal";
+  return "🔴 Sin evidencia";
+}
+
+// Mismo semaforo que _corr_badge de compute.py.
+function corrBadge(c) {
+  const sig = c.significant_fdr ?? c.significant;
+  const diffSig = c.diff_significant_fdr ?? c.diff_significant;
+  if (sig) return diffSig ? "🟢 Robusta" : "🟡 Co-tendencia probable";
+  if ((c.pearson_q ?? c.pearson_p ?? 1) < 0.10) return "🟡 Marginal";
+  return "🔴 Sin evidencia";
+}
+
+const _ccOf = name => (name?.match(/\[([A-Z]{2,4})\]/) || [])[1] || null;
 
 function computeDigest(computeResults, suggestDecision = null) {
   if (!computeResults) return "Sin analisis estadistico.";
   const inds = chosenIndicators(suggestDecision);
   const relevant = (name) => !inds || matchesIndicator(name, inds);
+  const sampleCcs = sampleCountriesFor(suggestDecision);
   const parts = [];
-  if (computeResults.regression && !computeResults.error && computeResults.regression.dependent) {
-    const r = computeResults.regression;
+
+  const reg = computeResults.regression;
+  if (reg && !computeResults.error && reg.dependent) {
     parts.push("⟦KEEP⟧");
-    parts.push(`REGRESION OLS: ${esSeriesName(r.dependent)} ~ ${r.independent.map(esSeriesName).join(" + ")}`);
-    parts.push(`  n=${r.n}, dof=${r.dof ?? r.n - r.independent.length - 1}, R2=${r.r_squared?.toFixed(4)}, R2_adj=${r.adj_r_squared?.toFixed(4)}, F=${r.f_statistic?.toFixed(2)} (p=${r.f_p_value?.toFixed(4)})`);
-    if (r.dropped_regressors?.length) {
-      parts.push(`  NOTA: ${r.dropped_regressors.length} regresor(es) excluidos por n insuficiente (regla ~4 obs/parametro): ${r.dropped_regressors.map(esSeriesName).join(", ")}. NO citarlos como parte del modelo estimado.`);
-    }
-    // Con TABLA 2 en el prompt, repetir coeficiente por coeficiente es
-    // duplicacion: la tabla ya trae beta, error estandar, estadistico, p,
-    // IC95% y veredicto de evidencia.
-    if (computeResults.tables?.regression) {
-      parts.push(`  Los coeficientes estan en la TABLA 2 (con IC95% y veredicto de evidencia por parametro).`);
-    } else {
-      for (const c of r.coefficients || []) {
-        let line = `  ${esSeriesName(c.name)}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}${c.robust_p !== undefined ? `, robust_p=${c.robust_p?.toFixed(4)}${c.robust_significant ? " *" : ""}` : ""}`;
-        if (c.boot_ci_95) line += ` | IC95% bootstrap=[${c.boot_ci_95[0].toFixed(4)}, ${c.boot_ci_95[1].toFixed(4)}]${c.boot_includes_zero ? " (incluye 0 -> fragil)" : " (no incluye 0)"}`;
-        parts.push(line);
-      }
-    }
-    if (r.white_test) parts.push(`  White test: p=${r.white_test.p_value?.toFixed(4)} (${r.white_test.heteroscedastic ? "heterocedastico" : "homocedastico"})`);
+    parts.push(`REGRESION OLS: ${esSeriesName(reg.dependent)} ~ ${(reg.independent || []).map(esSeriesName).join(" + ")}`);
+    parts.push(`  n=${reg.n}, dof=${reg.dof ?? "?"}, R2=${_f4(reg.r_squared)}, R2_adj=${_f4(reg.adj_r_squared)}, F=${_f2(reg.f_statistic)} (p=${_f4(reg.f_p_value)})`);
+    if (reg.white_test) parts.push(`  White test: p=${_f4(reg.white_test.p_value)} (${reg.white_test.heteroscedastic ? "heterocedastico" : "homocedastico"})`);
     else parts.push(`  White test: NO calculado`);
+    if (reg.dropped_regressors?.length) {
+      parts.push(`  NOTA: ${reg.dropped_regressors.length} regresor(es) excluidos por n insuficiente (regla ~4 obs/parametro): ${reg.dropped_regressors.map(esSeriesName).join(", ")}. NO citarlos como parte del modelo estimado.`);
+    }
+    for (const c of reg.coefficients || []) {
+      const ci = c.boot_ci_95 || c.ci_95;
+      let line = `  ${esSeriesName(c.name)}: beta=${_f4(c.beta)}, se=${_f4(c.se)}, t=${_f2(c.t)}, p=${_f4(c.p_value)}`;
+      if (c.robust_p !== undefined) line += `, robust_p=${_f4(c.robust_p)}`;
+      if (ci) line += `, IC95%=[${_f4(ci[0])}, ${_f4(ci[1])}]${c.boot_includes_zero ? " (incluye 0 -> fragil)" : ""}`;
+      line += ` -> ${evidenceBadge(c.robust_p ?? c.p_value, ci)}`;
+      parts.push(line);
+    }
     parts.push("⟦/KEEP⟧");
   }
-  // Panel econométrico: R sustituye a Python para evitar duplicidad de tokens y redundancia
+
+  // Panel econometrico: el modelo R (Two-Way FE) tiene prioridad sobre el
+  // panel FE de Python cuando existe — es la estimacion mas estricta.
   const rEcon = computeResults.r_econometrics;
   const panel = computeResults.panel;
   if (rEcon && rEcon.coefficients?.length) {
     parts.push("⟦KEEP⟧");
-    parts.push(`REGRESION PANEL EN R (Efectos Fijos Bidireccionales - Pais + Año):`);
-    parts.push(`  Especificación: ${rEcon.formula}`);
-    parts.push(`  R2=${rEcon.r_squared?.toFixed(4)}, R2_adj=${rEcon.adj_r_squared?.toFixed(4)}, F=${rEcon.f_statistic?.toFixed(2)} (p=${rEcon.f_p_value?.toFixed(4)}), n=${rEcon.n} (${rEcon.n_countries} países)`);
-    if (computeResults.tables?.regression) {
-      parts.push(`  Los coeficientes estan en la TABLA 2.`);
-    } else {
-      for (const c of rEcon.coefficients) {
-        parts.push(`  ${esSeriesName(c.name)}: estimate=${c.estimate?.toFixed(4)}, std_error=${c.std_error?.toFixed(4)}, t=${c.t_stat?.toFixed(2)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}`);
-      }
+    parts.push(`REGRESION PANEL EN R (Efectos Fijos Bidireccionales - Pais + Año): ${rEcon.formula || ""}`);
+    parts.push(`  n=${rEcon.n} (${rEcon.n_countries} países), R2=${_f4(rEcon.r_squared)}, R2_adj=${_f4(rEcon.adj_r_squared)}, F=${_f2(rEcon.f_statistic)} (p=${_f4(rEcon.f_p_value)})`);
+    for (const c of rEcon.coefficients) {
+      parts.push(`  ${esSeriesName(c.name)}: beta=${_f4(c.estimate)}, se=${_f4(c.std_error)}, t=${_f2(c.t_stat)}, p=${_f4(c.p_value)} -> ${evidenceBadge(c.p_value)}`);
     }
     parts.push(`  NOTA METODOLOGICA (R): Controla simultaneamente por shocks globales de año (tendencias compartidas) y caracteristicas fijas de cada pais.`);
     parts.push("⟦/KEEP⟧");
   } else if (panel && panel.coefficients?.length) {
     parts.push("⟦KEEP⟧");
     parts.push(`REGRESION PANEL (efectos fijos por pais): ${esSeriesName(panel.dependent)} ~ ${panel.independent.map(esSeriesName).join(" + ")}`);
-    parts.push(`  n=${panel.n} obs (${panel.n_countries} paises x anos), R2=${panel.r_squared?.toFixed(4)}, dof=${panel.dof}`);
-    if (computeResults.tables?.regression) {
-      parts.push(`  Los coeficientes estan en la TABLA 2.`);
-    } else {
-      for (const c of panel.coefficients) {
-        parts.push(`  ${esSeriesName(c.name)}: beta=${c.beta?.toFixed(4)}, p=${c.p_value?.toFixed(4)}${c.significant ? " *" : ""}, IC95%=[${c.ci_95[0].toFixed(4)}, ${c.ci_95[1].toFixed(4)}]`);
-      }
+    parts.push(`  n=${panel.n} obs (${panel.n_countries} paises x anos), R2=${_f4(panel.r_squared)}, dof=${panel.dof}`);
+    for (const c of panel.coefficients) {
+      const ci = c.ci_95;
+      parts.push(`  ${esSeriesName(c.name)}: beta=${_f4(c.beta)}, se=${_f4(c.se)}, t=${_f2(c.t)}, p=${_f4(c.p_value)}${ci ? `, IC95%=[${_f4(ci[0])}, ${_f4(ci[1])}]` : ""} -> ${evidenceBadge(c.p_value, ci)}`);
     }
     parts.push(`  NOTA: el panel usa variacion INTRA-pais en el tiempo (controla caracteristicas fijas por pais). Si el OLS agregado y el panel discrepan, reportar ambos — la discrepancia es informacion (el agregado puede estar dominado por diferencias entre paises).`);
     parts.push("⟦/KEEP⟧");
   }
+
   const corrs = (computeResults.correlations || []).filter(c => c.pearson_r !== undefined && relevant(c.x) && relevant(c.y));
   if (corrs.length) {
     parts.push("⟦KEEP⟧");
-    // Top correlaciones: significativas primero, luego por |r| — evita inflar
-    // el digest con 100+ pares irrelevantes que rompen el limite TPM de Groq.
-    const fdr = c => c.significant_fdr ?? c.significant;
-    const top = [...corrs].sort((a, b) => (fdr(b) - fdr(a)) || (Math.abs(b.pearson_r) - Math.abs(a.pearson_r))).slice(0, 20);
+    // Top 12: significativas FDR primero, luego ambito LCN/muestra, luego |r|.
+    const fdr = c => (c.significant_fdr ?? c.significant) ? 1 : 0;
+    const scopeRank = c => { const cc = _ccOf(c.x); return cc === "LCN" ? 0 : (sampleCcs.includes(cc) ? 1 : 2); };
+    const top = [...corrs].sort((a, b) => (fdr(b) - fdr(a)) || (scopeRank(a) - scopeRank(b)) || (Math.abs(b.pearson_r) - Math.abs(a.pearson_r))).slice(0, 12);
     const nSigFdr = corrs.filter(c => c.significant_fdr).length;
-    if (computeResults.tables?.correlations) {
-      // La TABLA 3 trae exactamente estos pares, con sus valores, el Δ año a
-      // año y un veredicto de evidencia: repetirlos aqui costaba ~1000 tokens
-      // de prompt (12% del TPM) sin anadir un solo dato.
-      parts.push(`CORRELACIONES: ${corrs.length} pares calculados (${nSigFdr} significativas tras FDR). Los ${top.length} mas relevantes estan en la TABLA 3, con q-value (FDR), el contraste Δ año a año y el veredicto de evidencia de cada uno.`);
-    } else {
-      parts.push(`CORRELACIONES (${corrs.length} calculadas, ${nSigFdr} sig. FDR, top ${top.length} mostradas):`);
-      for (const c of top) {
-        let line = `  ${esSeriesName(c.x)} <-> ${esSeriesName(c.y)}: pearson_r=${c.pearson_r.toFixed(4)}, p=${c.pearson_p.toFixed(4)}${c.pearson_q !== undefined ? `, q_fdr=${c.pearson_q.toFixed(4)}` : ""}, spearman=${c.spearman_rho.toFixed(4)}, n=${c.n}, significativa_fdr=${fdr(c)}`;
-        if (c.diff_pearson_r !== undefined) {
-          line += ` | en diferencias (Δ año a año): r=${c.diff_pearson_r.toFixed(4)}, p=${c.diff_pearson_p.toFixed(4)}${c.diff_pearson_q !== undefined ? `, q=${c.diff_pearson_q.toFixed(4)}` : ""}, n=${c.diff_n}`;
-        }
-        parts.push(line);
-      }
+    parts.push(`CORRELACIONES TOP ${top.length} (de ${corrs.length} calculadas, ${nSigFdr} sig. FDR):`);
+    for (const c of top) {
+      const cc = _ccOf(c.x) || c.country || "";
+      let line = `  ${esSeriesName(c.x.split(" [")[0])} <-> ${esSeriesName(c.y.split(" [")[0])}${cc ? ` [${cc}]` : ""}: r=${_f3(c.pearson_r)}, p=${_f3(c.pearson_p)}, q_fdr=${_f3(c.pearson_q)}, spearman=${_f3(c.spearman_rho)}`;
+      if (c.diff_pearson_r !== undefined) line += `, diff_r=${_f3(c.diff_pearson_r)}, diff_p=${_f3(c.diff_pearson_p)}`;
+      line += `, evidencia=${corrBadge(c)}`;
+      parts.push(line);
     }
     parts.push(`  NOTA: la significancia de correlaciones se evalua por q-value (Benjamini-Hochberg FDR), no por p crudo — con ${corrs.length} tests, p<0.05 produce falsos positivos por azar. Solo citar como "significativa" lo que tenga q<0.05. Correlaciones en niveles entre series con tendencia pueden ser espurias (co-tendencia): el test honesto es "en diferencias" (cambios año a año); si la relacion en niveles desaparece en diferencias, era co-tendencia, no asociacion real.`);
     // Pares fragiles: significativos en niveles pero no en diferencias.
@@ -1109,51 +1247,32 @@ function computeDigest(computeResults, suggestDecision = null) {
       && !(c.diff_significant_fdr ?? c.diff_significant));
     if (fragiles.length) {
       parts.push(`  ALERTA CO-TENDENCIA (${fragiles.length} pares significativos en niveles pero NO en diferencias — reportar como descriptivos/probablemente espurios, nunca como asociacion robusta):`);
-      for (const c of fragiles.slice(0, 10)) {
-        parts.push(`    ${esSeriesName(c.x)} <-> ${esSeriesName(c.y)}: r_nivel=${c.pearson_r.toFixed(3)} (q=${(c.pearson_q ?? c.pearson_p).toFixed(3)}) vs r_dif=${c.diff_pearson_r.toFixed(3)} (${c.diff_pearson_q !== undefined ? `q=${c.diff_pearson_q.toFixed(3)}` : `p=${c.diff_pearson_p.toFixed(3)}`})`);
+      for (const c of fragiles.slice(0, 8)) {
+        parts.push(`    ${esSeriesName(c.x.split(" [")[0])} <-> ${esSeriesName(c.y.split(" [")[0])}${_ccOf(c.x) ? ` [${_ccOf(c.x)}]` : ""}: r_nivel=${_f3(c.pearson_r)} (q=${_f3(c.pearson_q ?? c.pearson_p)}) vs r_dif=${_f3(c.diff_pearson_r)} (${c.diff_pearson_q !== undefined ? `q=${_f3(c.diff_pearson_q)}` : `p=${_f3(c.diff_pearson_p)}`})`);
       }
     }
     parts.push("⟦/KEEP⟧");
   }
-  const sigTrends = (computeResults.trends || []).filter(t => t.trend !== "no_trend" && relevant(t.indicator));
-  if (sigTrends.length) {
-    parts.push(`TENDENCIAS SIGNIFICATIVAS (Mann-Kendall p<0.05):`);
-    for (const t of sigTrends.slice(0, 10)) {
-      parts.push(`  ${esSeriesName(t.indicator)}: ${t.trend}, slope=${t.slope.toFixed(3)}/año, p=${t.mann_kendall_p.toFixed(4)}`);
+
+  const sigTrends = (computeResults.trends || []).filter(t => t.trend !== "no_trend" && relevant(t.indicator)).slice(0, 8);
+  const anomalies = (computeResults.anomalies || []).filter(a => relevant(a.indicator)).slice(0, 4);
+  if (sigTrends.length || anomalies.length) {
+    parts.push("TENDENCIAS Y ANOMALIAS:");
+    for (const t of sigTrends) {
+      parts.push(`  ${esSeriesName(t.indicator)}: ${t.trend}, slope=${_f3(t.slope)}/año, p=${_f4(t.mann_kendall_p)}`);
+    }
+    for (const a of anomalies) {
+      parts.push(`  ANOMALIA ${esSeriesName(a.indicator)} ${a.year}: ${a.value.toFixed(2)} (z=${_f2(a.z_score)})`);
     }
   }
-  const anomalies = (computeResults.anomalies || []).filter(a => relevant(a.indicator));
-  if (anomalies.length) {
-    parts.push(`ANOMALIAS (${anomalies.length}):`);
-    for (const a of anomalies.slice(0, 3)) {
-      parts.push(`  ${esSeriesName(a.indicator)} ${a.year}: ${a.value.toFixed(2)} (z=${a.z_score.toFixed(1)})`);
-    }
-  }
+
   if (computeResults.charts?.length) {
     const cdir = computeResults.chartsDir ? `${computeResults.chartsDir}/` : "";
-    // Narrativas van al cuerpo; diagnosticas se anexan solas — ofrecerlas al
-    // writer las terminaba citando sin que aportaran al argumento.
+    // Narrativas van al cuerpo; las diagnosticas se anexan solas — listarlas
+    // aca quemaba tokens y el writer las citaba sin aporte al argumento.
     const narrativas = computeResults.charts.filter(c => c.role !== "diagnostic");
-    const diag = computeResults.charts.filter(c => c.role === "diagnostic");
     if (narrativas.length) {
-      parts.push(`⟦KEEP⟧FIGURAS (referenciar con path exacto): ${narrativas.map(c => `charts/${cdir}${c.file}${c.howto ? ` — guia de lectura: "${c.howto}"` : ""}`).join(", ")}⟦/KEEP⟧`);
-    }
-    if (diag.length) {
-      parts.push(`FIGURAS DIAGNOSTICAS (NO citar en el cuerpo — se insertan solas en el "## Anexo estadístico" al final del paper): ${diag.map(c => `charts/${cdir}${c.file}`).join(", ")}`);
-    }
-  }
-  if (computeResults.tables) {
-    if (computeResults.tables.descriptive) {
-      parts.push(`TABLA 1 PRE-COMPUTADA (Descriptiva / Series reales):\n${computeResults.tables.descriptive}`);
-    }
-    if (computeResults.tables.regression) {
-      parts.push(`⟦KEEP⟧TABLA 2 PRE-COMPUTADA (Modelos OLS y Panel):\n${computeResults.tables.regression}⟦/KEEP⟧`);
-    }
-    if (computeResults.tables.correlations) {
-      parts.push(`⟦KEEP⟧TABLA 3 PRE-COMPUTADA (Correlaciones):\n${computeResults.tables.correlations}⟦/KEEP⟧`);
-    }
-    if (computeResults.tables.derived) {
-      parts.push(`TABLA 4 PRE-COMPUTADA (Derivados: cambio anual, % cambio, CAGR — cifras citables, no recalcular):\n${computeResults.tables.derived}`);
+      parts.push(`⟦KEEP⟧FIGURAS NARRATIVAS (referenciar con path exacto): ${narrativas.map(c => `charts/${cdir}${c.file}${c.howto ? ` — guia de lectura: "${c.howto}"` : ""}`).join(", ")}⟦/KEEP⟧`);
     }
   }
   return parts.join("\n") || "Sin analisis estadistico.";
@@ -1185,22 +1304,40 @@ function formatAPA(work) {
     apa: `${apa_authors} (${work.publication_year}). ${work.title}. ${journal ? `*${journal}*. ` : ""}${doi ? `https://doi.org/${doi}` : ""}`.trim(),
     doi, title: work.title, year: work.publication_year,
     citations: work.cited_by_count,
-    abstract: reconstructAbstract(work.abstract_inverted_index).slice(0, 300),
+    abstract: reconstructAbstract(work.abstract_inverted_index).slice(0, 180),
   };
 }
 
-async function fetchLiterature(topic, pregunta) {
-  const query = (pregunta || topic || "").trim();
+async function fetchLiterature(topic, pregunta, suggestDecision = null) {
+  // Query principal: keywords_en en INGLES de la linea elegida (el titulo
+  // largo en espanol devolvia 0 resultados). Fallback: nombres en ingles de
+  // los indicadores elegidos + "Latin America"; ultimo recurso: pregunta/tema.
+  let query = (suggestDecision?.keywords_en || "").trim();
+  if (!query) {
+    const inds = chosenIndicators(suggestDecision);
+    if (inds?.length) query = `${inds.slice(0, 4).join(" ")} Latin America`;
+  }
+  if (!query) query = (pregunta || topic || "").trim();
   if (!query) return [];
-  const url = `https://api.openalex.org/works?search=${encodeURIComponent(query)}` +
-    `&filter=has_doi:true,type:article,cited_by_count:>30&per-page=10` +
-    `&select=doi,title,publication_year,authorships,primary_location,cited_by_count,abstract_inverted_index`;
-  try {
+  const fetchWorks = async (minCites) => {
+    const url = `https://api.openalex.org/works?search=${encodeURIComponent(query)}` +
+      `&filter=has_doi:true,type:article,cited_by_count:>${minCites}&per-page=10` +
+      `&select=doi,title,publication_year,authorships,primary_location,cited_by_count,abstract_inverted_index`;
     const res = await fetch(url, { headers: { "User-Agent": "AcademicPipeline/1.0 (mailto:pipeline@localhost)" } });
-    if (!res.ok) { console.log(`  OpenAlex respondio ${res.status} — sin literatura verificada.`); return []; }
+    if (!res.ok) return null;
     const json = await res.json();
-    const works = (json.results || []).filter(w => w.doi && w.title).slice(0, 6).map(formatAPA);
-    console.log(`  Literatura OpenAlex: ${works.length} papers reales recuperados`);
+    return (json.results || []).filter(w => w.doi && w.title).slice(0, 6).map(formatAPA);
+  };
+  try {
+    let works = await fetchWorks(30);
+    // Umbral estricto puede dejar 0-1 obras en temas de nicho: segundo
+    // intento con el piso de citas bajado antes de rendirse.
+    if (!works || works.length < 2) {
+      const relaxed = await fetchWorks(5);
+      if (relaxed && relaxed.length > (works?.length || 0)) works = relaxed;
+    }
+    works = works || [];
+    console.log(`  Literatura OpenAlex: ${works.length} papers reales recuperados (query: "${query.slice(0, 80)}")`);
     works.forEach((w, i) => console.log(`    ${i + 1}. ${w.apa.slice(0, 90)}`));
     return works;
   } catch (e) {
@@ -1223,31 +1360,29 @@ async function agentWrite(fetchedData, computeResults, feedback = null, topic = 
   const claimSection = chosenSug?.afirmacion_noticia
     ? `LO QUE LA NOTICIA AFIRMA O SUGIERE (contexto editorial, no evidencia):\n${chosenSug.afirmacion_noticia}\n\nALCANCE VERIFICABLE CON LOS DATOS:\n${chosenSug.verificable_con_datos || "(delimitar en el paper que parte queda fuera de alcance)"}\n`
     : "";
-  const { lcn, countries } = dataDigest(fetchedData, suggestDecision, !!computeResults?.tables?.descriptive);
+  const { lcn, countries } = dataDigest(fetchedData, suggestDecision, computeResults);
   const digest = computeDigest(computeResults, suggestDecision);
   const litText = literature.length
     ? literature.map((w, i) => `${i + 1}. ${w.apa}\n   Resumen: ${w.abstract || "(sin resumen)"}`).join("\n")
-    : "(sin literatura verificada — no cites literatura academica, solo Banco Mundial y la noticia)";
+    : "(sin literatura verificada — cita SOLO (Banco Mundial, 2024) y la noticia inspiradora; esta PROHIBIDO usar placeholders como (Autor, 2020) o inventar autores)";
 
-  // El paper se redacta en 3 llamadas: cada parte recibe el contexto completo
-  // y su PROPIO presupuesto de salida. Antes el paper entero (1200-1800
-  // palabras, ~2900 tokens) competia con un prompt de ~8000 tokens dentro de
-  // una sola peticion de 8000 TPM: salia cortado a la mitad, REVIEW lo
-  // rebotaba y cada reescritura agrandaba el prompt. Por secciones cada
-  // parte cabe holgada y el presupuesto de prompt se reparte por llamada.
+  // El paper se redacta en 2 llamadas: cada parte recibe el contexto completo
+  // y su PROPIO presupuesto de salida. La Bibliografia y las Tablas/Anexo se
+  // ensamblan por codigo post-APPROVE — pedirselas al LLM era 1 llamada extra
+  // de ~4.500 tokens y la fuente de TODAS las citas inventadas.
   const contexto = `DATOS REALES (World Bank API, unicos datos disponibles):
 
-Series regionales America Latina & Caribe (serie completa):
+Series regionales America Latina & Caribe (resumen con derivados pre-computados):
 ${lcn}
 
-Series por pais (primer y ultimo valor):
+Series por pais — muestra del estudio (resumen con derivados pre-computados):
 ${countries || "Sin datos por pais."}
 
 RESULTADOS ESTADISTICOS REALES (Python/statsmodels/scipy):
 ${digest}
 
-LITERATURA REAL VERIFICADA (recuperada de OpenAlex — obras que EXISTEN y puedes citar; usa sus hallazgos para contextualizar el analisis):
-${litText}`;
+⟦KEEP⟧LITERATURA REAL VERIFICADA (recuperada de OpenAlex — obras que EXISTEN y puedes citar; usa sus hallazgos para contextualizar el analisis):
+${litText}⟦/KEEP⟧`;
 
   const encargo = `⟦KEEP⟧Paper academico sobre: ${effectiveTopic}
 
@@ -1266,7 +1401,8 @@ ${feedbackSection}⟦/KEEP⟧`;
 - Si aparece "REGRESION PANEL" en RESULTADOS, reportala: explica que usa variacion intra-pais (n paises x anos) y contrasta su veredicto con el OLS agregado. Si discrepan, dilo.
 - Cuando una correlacion en niveles es significativa pero su correlacion "en diferencias" no lo es (o viceversa), dilo explicitamente: la primera puede ser co-tendencia espuria, la segunda es evidencia mas honesta de co-movimiento.
 - Cita cada dato como (Banco Mundial, 2024).
-- Contrastar con la literatura listada ("consistente con Autor (año)" / "nuestros datos no replican el efecto de Autor (año)") solo donde sea pertinente y sin inventarles cifras.`;
+- PROHIBIDAS las citas placeholder o inventadas: nada de "(Autor, 2020)", "(Autor, año)", "(Smith, 2020)" ni apellidos genericos. Solo puedes citar obras de la lista LITERATURA REAL VERIFICADA, (Banco Mundial, 2024) y la noticia inspiradora.
+- Contrastar con la literatura listada ("consistente con Apellido (año)" / "nuestros datos no replican el efecto de Apellido (año)") solo donde sea pertinente y sin inventarles cifras.`;
 
   const fecha = new Date().toLocaleDateString("es-ES", { month: "long", year: "numeric" });
   const fechaCap = fecha.charAt(0).toUpperCase() + fecha.slice(1);
@@ -1289,7 +1425,7 @@ ${contexto}
 
 ${encargo}
 
-PARTE 1 DE 3 — escribe SOLO la apertura del paper. Otro agente redactara despues el Analisis, la Discusion y las Conclusiones: no las adelantes.
+PARTE 1 DE 2 — escribe SOLO la apertura del paper. Otro agente redactara despues el Analisis, la Discusion y las Conclusiones: no las adelantes.
 
 Estructura exacta de esta parte:
 
@@ -1312,17 +1448,17 @@ Estructura exacta de esta parte:
 ${reglas}
 
 Devuelve SOLO el Markdown de esta parte.`;
-  const apertura = await writePart("apertura", promptApertura, 2000, 1400);
-  await delay(25); // el TPM es por minuto: espaciar las partes evita el 429
+  const apertura = await writePart("apertura_metodologia", promptApertura, 2200, 1400);
+  await waitForTokenBudget("openai/gpt-oss-120b", 7000); // TPM por minuto, por modelo
 
-  // ── Parte 2: Analisis + Discusion (ve la apertura ya escrita) ──
+  // ── Parte 2: Analisis + Discusion + Conclusiones (ve la apertura ya escrita) ──
   const promptCuerpo = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
 
 ${contexto}
 
 ${encargo}
 
-PARTE 2 DE 3 — escribe SOLO el cuerpo analitico. El paper ya tiene esta apertura (no la repitas ni la contradigas):
+PARTE 2 DE 2 — escribe SOLO el cuerpo analitico y el cierre. El paper ya tiene esta apertura (no la repitas ni la contradigas):
 
 ⟦KEEP⟧${truncate(apertura, 2500)}⟦/KEEP⟧
 
@@ -1332,56 +1468,44 @@ OBLIGATORIO PARA TABLAS Y FIGURAS:
 - Las tablas pre-computadas (TABLA 1-4) se insertan AUTOMATICAMENTE en la seccion "## Tablas" al final del paper — NO las copies, NO las resumas, NO las reconstruyas. Solo refiérelas en el texto (ej: "ver Tabla 2", "como muestra la Tabla 1"). Si escribes una tabla propia sera descartada.
 - ESTÁ ESTRICTAMENTE PROHIBIDO usar puntos suspensivos ("…"), omitir celdas o dejar datos incompletos.
 - Referencia al menos 2-3 de las figuras reales provistas usando EXACTAMENTE la sintaxis: ![descripcion](charts/<path-exacto>).
-- PROHIBIDO inventar nombres de archivo de figuras (como charts/consumo_pib.png o cualquier nombre que no esté en la lista de FIGURAS).
-- Bajo cada figura referenciada, agrega una linea en cursiva "*Como leerla: <guia>*" usando la guia de lectura provista en la lista FIGURAS.
-- Las FIGURAS DIAGNOSTICAS (robustez del modelo) NO se citan en el cuerpo: se insertan automaticamente en el "## Anexo estadístico" al final.
+- PROHIBIDO inventar nombres de archivo de figuras (como charts/consumo_pib.png o cualquier nombre que no esté en la lista de FIGURAS NARRATIVAS).
+- Bajo cada figura referenciada, agrega una linea en cursiva "*Como leerla: <guia>*" usando la guia de lectura provista en la lista FIGURAS NARRATIVAS.
+- Las figuras de diagnostico (robustez del modelo) NO se citan en el cuerpo: se insertan automaticamente en el "## Anexo estadístico" al final.
 
 ## Discusion
-200-350 palabras. Interpreta; reconoce que n=10 observaciones por serie es muestra pequena y las correlaciones no implican causalidad. Declara que parte de la afirmacion de la noticia quedo fuera del alcance de los indicadores (si aplica).
-
-${reglas}
-
-Devuelve SOLO el Markdown de estas dos secciones.`;
-  const cuerpo = await writePart("cuerpo", promptCuerpo, 2800, 2100);
-  await delay(25);
-
-  // ── Parte 3: Conclusiones + Bibliografia (ve el paper hasta Discusion) ──
-  const news = suggestDecision?.inspiringNews;
-  const newsCite = news?.title
-    ? `- ${news.source || "Noticia"}. "${news.title}".${news.url ? ` ${news.url}` : ""}`
-    : "- La noticia que inspiro el tema (citala por su medio y titulo si la identificas en el encargo)";
-  const promptCierre = `Eres un investigador academico que escribe un paper en espanol para una revista de ciencias sociales.
-
-RESULTADOS ESTADISTICOS REALES (Python/statsmodels/scipy):
-${digest}
-
-${encargo}
-
-PARTE 3 DE 3 — escribe SOLO el cierre. El paper ya esta redactado hasta la Discusion (no lo repitas ni lo contradigas):
-
-⟦KEEP⟧${truncate(`${apertura}\n\n${cuerpo}`, 3000)}⟦/KEEP⟧
+200-300 palabras. Interpreta; reconoce que n=10 observaciones por serie es muestra pequena y las correlaciones no implican causalidad. Declara que parte de la afirmacion de la noticia quedo fuera del alcance de los indicadores (si aplica).
 
 ## Conclusiones
 150-250 palabras. DEBE dar un veredicto explicito sobre la hipotesis — "los datos apoyan / no apoyan / son insuficientes para evaluar" — basado SOLO en los resultados calculados. Si aplica, declara que parte de la afirmacion de la noticia quedo fuera del alcance de los indicadores.
 
-## Bibliografia
-Formato APA. Solo puedes citar las fuentes de esta lista, usando exactamente la cita APA provista (incluyendo el DOI cuando exista). PROHIBIDO citar cualquier obra que no este aqui — no cites de memoria:
-- Banco Mundial. (2024). *World Development Indicators*. Washington, DC: World Bank. https://databank.worldbank.org/source/world-development-indicators
-${newsCite}
-${literature.length ? literature.map(w => `- ${w.apa}`).join("\n") : "- (sin literatura verificada — solo Banco Mundial y la noticia)"}
+${reglas}
 
 El paper completo debe quedar en 1200-1800 palabras: se conciso.
-Devuelve SOLO el Markdown de estas dos secciones.`;
-  const cierre = await writePart("cierre", promptCierre, 1600, 1100);
+Devuelve SOLO el Markdown de estas tres secciones (Analisis, Discusion, Conclusiones).`;
+  const cuerpo = await writePart("analisis_cierre", promptCuerpo, 3200, 2200);
 
-  let result = [apertura, cuerpo, cierre].filter(Boolean).join("\n\n");
-  // Fallback: si el modelo no generó bibliografía (común en modelos Flash),
-  // appendear una mínima basada en las fuentes usadas
-  if (result && !/## Bibliograf/i.test(result)) {
-    console.log("  WRITE: bibliografía faltante — appendando fallback.");
-    result = result.trimEnd() + "\n\n## Bibliografía\n\n- Banco Mundial. (2024). *World Development Indicators*. Washington, DC: World Bank. https://databank.worldbank.org/source/world-development-indicators\n";
+  const result = [apertura, cuerpo].filter(Boolean).join("\n\n");
+  // Solo prosa: las tablas, el anexo y la bibliografia se ensamblan
+  // deterministicamente post-APPROVE (prosa ~7.5k chars en vez de ~23k).
+  return normalizeDraftProse(result, computeResults);
+}
+
+// Bibliografia 100% determinista: Banco Mundial + noticia + las obras de
+// OpenAlex que el texto realmente cita (o el top 3 como contexto). Cero
+// citas inventadas, cero tokens, cero "bibliografia_ok: false".
+function buildDeterministicBibliography(draft, suggestDecision, literature) {
+  const items = ["- Banco Mundial. (2024). *World Development Indicators*. Washington, DC: World Bank. https://databank.worldbank.org/source/world-development-indicators"];
+  const news = suggestDecision?.inspiringNews;
+  if (news?.title) {
+    items.push(`- ${news.source || "Noticia"}. "${news.title}".${news.url ? ` ${news.url}` : ""}`);
   }
-  return repairTablesAndCharts(result, computeResults);
+  const cited = (literature || []).filter(w => {
+    const surname = (w.apa || "").split(",")[0].trim();
+    return surname.length > 2 && draft.toLowerCase().includes(surname.toLowerCase());
+  });
+  const list = cited.length ? cited : (literature || []).slice(0, 3);
+  for (const w of list) items.push(`- ${w.apa}`);
+  return "## Bibliografía\n\n" + items.join("\n");
 }
 
 // ── Verificación determinista de cifras ──
@@ -1422,6 +1546,8 @@ function collectAllowedNumbers(computeResults, fetchedData) {
     if (o.white_test) { push(o.white_test.lm_stat); push(o.white_test.p_value); }
     for (const c of o.coefficients || []) {
       push(c.beta); push(c.se); push(c.t); push(c.p_value); push(c.boot_includes_zero);
+      // R exporta estimate/std_error/t_stat: mismas cifras, otras claves.
+      push(c.estimate); push(c.std_error); push(c.t_stat);
       pushList(c.ci_95); pushList(c.boot_ci_95);
     }
   };
@@ -1604,26 +1730,32 @@ function proseOnly(md) {
 // fuerza correccion igual que una cifra inventada. El "?" suelto no se
 // marca — es puntuacion legitima en espanol.
 const PLACEHOLDER_RE = /(?:β|\bR2?\b|\bR²\b|p\s*[-‑]?valor|\bp\b|\br\b|\bt\b|\bF\b|\bn\b|coef(?:iciente)?|IC\s*9\d|media|pendiente|slope)\s*[=≈<>≤≥]\s*\?+|\?\?/gi;
+// Citas fantasma: cuando la lista de literatura no llega al prompt el modelo
+// fabrica "(Autor, 2020)" o apellidos genericos. Rechazo inmediato igual que
+// un marcador sin valor.
+const GHOST_CITE_RE = /\bAutor(?:es)?,?\s*(?:[A-Z]\.?\s*)?(?:y\s+Autor(?:es)?,?\s*(?:[A-Z]\.?\s*)?)?\(\d{4}\)|\b(?:Smith|Doe|Perez|Gomez|Fulano),?(?:\s+et\s+al\.?)?\s*\(\d{4}\)/gi;
 function placeholderCheck(text) {
   if (!text) return [];
   const hits = [];
   let m; PLACEHOLDER_RE.lastIndex = 0;
   while ((m = PLACEHOLDER_RE.exec(text)) && hits.length < 8) hits.push(m[0].slice(0, 60).trim());
+  GHOST_CITE_RE.lastIndex = 0;
+  while ((m = GHOST_CITE_RE.exec(text)) && hits.length < 8) hits.push(`cita fantasma: ${m[0].slice(0, 60).trim()}`);
   return hits;
 }
 
 async function agentReview(fetchedData, computeResults, draft, suggestDecision = null, attempt = 0) {
   console.log("[5/7] GPT-OSS 120B revisando rigor academico...\n");
-  const { lcn, countries } = dataDigest(fetchedData, suggestDecision, !!computeResults?.tables?.descriptive);
+  const { lcn, countries } = dataDigest(fetchedData, suggestDecision, computeResults);
   const digest = computeDigest(computeResults, suggestDecision);
   const prompt = `Eres un revisor academico riguroso y desconfiado. Tu trabajo es detectar DATOS INVENTADOS comparando el paper contra los datos reales.
 
 DATOS REALES (World Bank API — la unica fuente permitida):
 
-Series regionales America Latina & Caribe:
+Series regionales America Latina & Caribe (resumen con derivados):
 ${lcn}
 
-Series por pais:
+Series por pais — muestra del estudio (resumen con derivados):
 ${countries || "Sin datos por pais."}
 
 RESULTADOS ESTADISTICOS REALES (Python):
@@ -1645,7 +1777,7 @@ VERIFICACION OBLIGATORIA:
    - Apoya una conclusion en una correlacion en niveles significativa cuyo contraste en diferencias NO lo es (estos pares aparecen listados en ALERTA CO-TENDENCIA): eso es co-tendencia — el paper debe liderar con el resultado en diferencias y reportar el nivel como descriptivo/probablemente espurio, nunca como evidencia de asociacion robusta
    - Presenta correlaciones como causalidad sin matizar
 4. CONSISTENCIA INTERNA: verifica que la prosa no contradiga las tablas ni los datos — ej. si dice "cinco paises" pero la tabla lista seis, si enumera paises distintos a los que aparecen en tablas, o si describe una tendencia opuesta a la que muestran las cifras citadas. Estas contradicciones cuentan como datos_inventados.
-5. Verifica estructura (Resumen, Metodologia, Analisis, Discusion, Conclusiones, Bibliografia) y coherencia. NOTA: la seccion "## Tablas" con las tablas pre-computadas se inserta AUTOMATICAMENTE despues de esta revision — su ausencia en el draft NO es un defecto; no la exijas ni la evalues. Lo mismo aplica al "## Anexo estadístico" con las figuras de diagnostico.
+5. Verifica estructura (Resumen, Introduccion, Metodologia, Analisis, Discusion, Conclusiones) y coherencia. NOTA: "## Bibliografía", "## Tablas" con las tablas pre-computadas y "## Anexo estadístico" se generan AUTOMATICAMENTE por codigo despues de esta revision — su ausencia en el draft NO es un defecto; no las exijas ni las evalues.
 
 Responde EXACTAMENTE como JSON (json puro, sin markdown). La respuesta debe EMPEZAR directamente con { y TERMINAR con } — prohibido cualquier encabezado, tabla o prosa antes o despues del JSON:
 {"datos_correctos":true,"detalle_datos":"...","datos_inventados":["lista de cada valor fabricado"],"estructura_ok":true,"coherencia_ok":true,"correcciones":["..."],"datos_faltantes":null,"veredicto":"APROBADO","feedback":null}
@@ -1681,13 +1813,13 @@ SE CONCISO: el JSON completo debe caber en ~800 tokens. detalle_datos en 2 frase
     const numCheck = verifyNumbers(draft, computeResults, fetchedData);
     const causalCheck = causalClaimCheck(draft);
     const placeholders = placeholderCheck(draft);
-    const estructuraOk = /Resumen|Abstract/i.test(draft) && /Bibliograf|References/i.test(draft);
+    const estructuraOk = REQUIRED_SECTIONS.every(re => re.test(draft));
     const hasBrokenTables = /\|[^\n]*(?:…|\.{3})[^\n]*\|/.test(draft);
     const issues = [
       ...numCheck.invented.slice(0, 5).map(c => `Cifra sin respaldo: ${c.text}`),
       ...causalCheck.hard.slice(0, 3).map(s => `Afirmación causal sin matiz: "${s.slice(0, 80)}"`),
       ...placeholders.slice(0, 3).map(t => `Marcador sin valor: "${t}"`),
-      ...(estructuraOk ? [] : ["Estructura incompleta: falta Resumen o Bibliografía"]),
+      ...(estructuraOk ? [] : [`Estructura incompleta: ${REQUIRED_SECTIONS_MSG}`]),
       ...(hasBrokenTables ? ["Tablas con elipses o celdas incompletas (…)"] : []),
     ];
     return {
@@ -1768,7 +1900,10 @@ SE CONCISO: el JSON completo debe caber en ~800 tokens. detalle_datos en 2 frase
 }
 
 async function agentEdit(draft, review, computeResults = null) {
-  console.log("[6/7] GPT-OSS 120B editando paper...\n");
+  // Modelo rapido: pool de TPM propio y sin gasto en reasoning_tokens — las
+  // correcciones mecanicas no necesitan el razonador de 120B. Config por env.
+  const FAST_MODEL = process.env.GROQ_FAST_MODEL || "llama-3.3-70b-versatile";
+  console.log(`[6/7] ${FAST_MODEL} editando paper...\n`);
   // Extract bibliography from original draft to re-append if EDIT truncates it
   const bibMatch = draft.match(/^## Bibliograf[\s\S]*$/m);
   const originalBib = bibMatch ? bibMatch[0] : "";
@@ -1778,6 +1913,16 @@ NO agregues numeros, estadisticos ni tests que la REVISION no haya verificado.
 NO uses puntos suspensivos ("…") en las tablas ni inventes rutas de figuras.
 NO reemplaces cifras por marcadores ("?", "X", "N/A") — si un dato no esta en la seccion, deja la frase original.`;
 
+  // Espera solo si el saldo del modelo (headers reales de Groq) no alcanza;
+  // typeof guard: en tests el helper puede no estar en el bloque extraido.
+  const _budget = (model, est) => {
+    const st = typeof rateState !== "undefined" ? rateState[model] : null;
+    if (st?.remainingTokens < est && st.resetAt > Date.now()) {
+      return delay(Math.min(120, Math.ceil((st.resetAt - Date.now()) / 1000) + 1));
+    }
+    return Promise.resolve();
+  };
+
   // Draft grande: editar por secciones. El paper completo no cabe en una
   // sola respuesta de Groq (3200 max_tokens < ~5-8k tokens del texto), y una
   // salida cortada adoptada como draft mutila el documento en silencio
@@ -1785,6 +1930,23 @@ NO reemplaces cifras por marcadores ("?", "X", "N/A") — si un dato no esta en 
   // y un truncamiento deja intacta solo ESA seccion — nunca el resto.
   const sections = splitMdSections(draft);
   const singleShot = estimateTokens(draft) + 3200 + TPM_MARGIN <= TPM_LIMIT;
+
+  // Edicion quirurgica: localizar las secciones que contienen los fragmentos
+  // o cifras senalados en la revision y pulir SOLO esas (0 tokens en el resto).
+  // Sin agujas concretas (feedback de estilo general) se edita todo como antes.
+  const needles = [
+    ...[...feedback.matchAll(/["“]([^"”]{10,150})["”]/g)].map(m => m[1]),
+    ...[...feedback.matchAll(/\b\d{1,3}(?:[.,]\d+){1,2}%?\b/g)].map(m => m[0]),
+  ];
+  const affected = new Set();
+  if (needles.length) {
+    sections.forEach((sec, i) => {
+      if (APPENDIX_RE.test(sec)) return;
+      const low = sec.toLowerCase();
+      if (needles.some(n => low.includes(n.toLowerCase()))) affected.add(i);
+    });
+  }
+  const surgical = affected.size > 0 && affected.size < sections.filter(s => !APPENDIX_RE.test(s)).length;
 
   if (singleShot || sections.length <= 1) {
     const prompt = `Eres el editor de una revista de ciencias sociales. Pule este paper.
@@ -1796,42 +1958,52 @@ REVISION:
 ${feedback}
 
 ${rules}
-IMPORTANTE: Preserva la seccion de Bibliografia, las tablas Markdown y todas las referencias a figuras ![..](charts/..) del paper original.
+IMPORTANTE: Preserva la seccion de Bibliografia si existe, las tablas Markdown y todas las referencias a figuras ![..](charts/..) del paper original.
 Devuelve SOLO el paper final en Markdown.`;
     let data;
     try {
-      data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3200, temperature: 0.5, reasoning_effort: "low" });
+      data = await callGroq(FAST_MODEL, prompt, { max_tokens: 3200, temperature: 0.5 });
     } catch (e) {
-      console.log(`  EDIT fallo (${e.message}) — conservando draft sin editar.`);
-      return repairTablesAndCharts(draft, computeResults);
+      try {
+        data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3200, temperature: 0.5, reasoning_effort: "low" });
+      } catch (e2) {
+        console.log(`  EDIT fallo (${e2.message}) — conservando draft sin editar.`);
+        return normalizeDraftProse(draft, computeResults);
+      }
     }
     const ch = data.choices?.[0];
     if (ch?.finish_reason === "length") {
       // Guardrail anti-mutilacion: una edicion cortada nunca reemplaza al draft.
       console.log("  EDIT salio truncada — conservando draft sin editar.");
-      return repairTablesAndCharts(draft, computeResults);
+      return normalizeDraftProse(draft, computeResults);
     }
     let result = ch?.message?.content || "";
     if (!result.trim() || result.length < draft.length * 0.5) {
       // Salida vacia o sospechosamente corta: no reemplazar un draft completo.
       console.log("  EDIT devolvio salida vacia o muy corta — conservando draft sin editar.");
-      return repairTablesAndCharts(draft, computeResults);
+      return normalizeDraftProse(draft, computeResults);
     }
     // If EDIT truncated the bibliography, re-append from original
     if (originalBib && !/## Bibliograf/i.test(result)) {
       console.log("  EDIT trunco bibliografia. Re-appendiendo del draft original.");
       result = result.trimEnd() + "\n\n" + originalBib;
     }
-    return repairTablesAndCharts(result, computeResults);
+    return normalizeDraftProse(result, computeResults);
   }
 
-  console.log(`  Draft grande (${draft.length} chars): edicion por secciones (${sections.length} partes).`);
+  console.log(`  Draft grande (${draft.length} chars): edicion por secciones (${sections.length} partes${surgical ? `, ${affected.size} afectada(s)` : ""}).`);
   const parts = [];
-  for (const sec of sections) {
+  for (let si = 0; si < sections.length; si++) {
+    const sec = sections[si];
     const title = sec.split("\n", 1)[0].trim();
     if (APPENDIX_RE.test(sec)) {
       parts.push(sec.replace(/\n+$/, "") + "\n\n");
       console.log(`  "${title}": seccion generada por codigo — intacta.`);
+      continue;
+    }
+    if (surgical && !affected.has(si)) {
+      parts.push(sec.replace(/\n+$/, "") + "\n\n");
+      console.log(`  "${title}": sin issues senalados — intacta (0 tokens).`);
       continue;
     }
     const prompt = `Eres el editor de una revista de ciencias sociales. Pule esta SECCION de un paper academico.
@@ -1845,7 +2017,7 @@ ${feedback}
 ${rules}
 Devuelve SOLO la seccion editada en Markdown.`;
     try {
-      const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2400, completion_floor: 900, temperature: 0.5, reasoning_effort: "low" });
+      const data = await callGroq(FAST_MODEL, prompt, { max_tokens: 2400, completion_floor: 900, temperature: 0.5 });
       const ch = data.choices?.[0];
       const edited = (ch?.message?.content || "").trim();
       if (ch?.finish_reason === "length" || !edited) {
@@ -1855,25 +2027,36 @@ Devuelve SOLO la seccion editada en Markdown.`;
         parts.push(edited + "\n\n");
       }
     } catch (e) {
-      console.log(`  "${title}": fallo (${e.message}) — seccion intacta.`);
-      parts.push(sec.replace(/\n+$/, "") + "\n\n");
+      // Fallback al razonador si el modelo rapido no esta disponible.
+      try {
+        const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2400, completion_floor: 900, temperature: 0.5, reasoning_effort: "low" });
+        const ch = data.choices?.[0];
+        const edited = (ch?.message?.content || "").trim();
+        parts.push((ch?.finish_reason === "length" || !edited ? sec.replace(/\n+$/, "") : edited) + "\n\n");
+      } catch (e2) {
+        console.log(`  "${title}": fallo (${e2.message}) — seccion intacta.`);
+        parts.push(sec.replace(/\n+$/, "") + "\n\n");
+      }
     }
-    await delay(20);
+    await _budget(FAST_MODEL, 4000);
   }
   let result = parts.join("").trimEnd() + "\n";
   if (originalBib && !/## Bibliograf/i.test(result)) {
     result += "\n" + originalBib;
   }
-  return repairTablesAndCharts(result, computeResults);
+  return normalizeDraftProse(result, computeResults);
 }
 
-function repairTablesAndCharts(markdownText, computeResults) {
+// Reparacion ligera de prosa durante WRITE/EDIT: SOLO normaliza rutas de
+// figuras narrativas. Las tablas, el anexo, la bibliografia y la nota de
+// transparencia NO se pegan aqui — viajarian inflando el draft de ~7.5k a
+// ~23k chars en cada REVIEW/EDIT. Eso es ensamblaje final (repairTablesAndCharts).
+function normalizeDraftProse(markdownText, computeResults) {
   if (!markdownText || !computeResults) return markdownText;
   let text = markdownText;
   const cdir = computeResults.chartsDir ? `${computeResults.chartsDir}/` : "";
   const validCharts = (computeResults.charts || []).map(c => c.file);
 
-  // 1. Normalizar y reparar rutas de figuras
   if (validCharts.length > 0) {
     // El reemplazo de rutas inventadas y la inyeccion de respaldo usan solo
     // figuras narrativas: las diagnosticas pertenecen al anexo, no al cuerpo.
@@ -1895,6 +2078,12 @@ function repairTablesAndCharts(markdownText, computeResults) {
       }
     }
   }
+  return text;
+}
+
+function repairTablesAndCharts(markdownText, computeResults) {
+  if (!markdownText || !computeResults) return markdownText;
+  let text = normalizeDraftProse(markdownText, computeResults);
 
   // 2. Corregir tablas incompletas o con puntos suspensivos (…)
   if (computeResults.tables) {
@@ -1984,73 +2173,62 @@ function ensureTables(text, computeResults) {
   return text.trimEnd() + "\n" + section;
 }
 
+// QA 100% determinista (0 tokens de LLM): el modelo 20B que habia aqui no
+// recibia los datos y siempre devolvia "palabras": 3000 copiando el ejemplo
+// del prompt — falsos positivos y negativos. Todos los chequeos reales ya
+// eran codigo; ahora el veredicto tambien.
 async function agentApprove(finalText, computeResults = null, fetchedData = null) {
-  console.log("[7/7] GPT-OSS 20B QA final...\n");
-  // Verificación determinista de cifras sobre el texto COMPLETO (el QA solo
-  // lee 4.000 chars). Una cifra sin respaldo computado es motivo de rechazo:
-  // mejor un run que falla ruidosamente que publicar un numero inventado.
+  console.log("[7/7] QA final determinista (0 tokens de LLM)...\n");
+  const palabras = finalText.split(/\s+/).filter(Boolean).length;
+  const checklist = {
+    estructura_ok: true, resumen_ok: true, bibliografia_ok: true,
+    citas_apa_ok: true, coherencia_ok: true, datos_verificados: true,
+    tono_academico: true, extension_ok: palabras >= 900,
+  };
+  const issues = [];
   const numCheck = verifyNumbers(finalText, computeResults, fetchedData);
-  if (numCheck.invented.length) {
-    console.log(`QA: ${numCheck.invented.length} cifra(s) sin respaldo detectadas por verificación automática.`);
-    return {
-      veredicto: "RECHAZADO",
-      checklist: { estructura_ok: true, datos_verificados: false, resumen_ok: true, bibliografia_ok: true, citas_apa_ok: true, coherencia_ok: false, tono_academico: true, extension_ok: true },
-      palabras: finalText.split(/\s+/).length,
-      issues: numCheck.invented.slice(0, 8).map(c => `Cifra sin respaldo en datos computados: ${c.text}`),
-      number_check: { checked: numCheck.checked, invented: numCheck.invented.length }
-    };
-  }
-  // Mismo criterio para lenguaje causal sin matiz: si una afirmacion causal
-  // sobrevivio hasta QA, el texto no es publicable tal cual.
   const causalCheck = causalClaimCheck(finalText);
-  if (causalCheck.hard.length) {
-    console.log(`QA: ${causalCheck.hard.length} afirmación(es) causal(es) sin matiz detectadas por linter automático.`);
-    return {
-      veredicto: "RECHAZADO",
-      checklist: { estructura_ok: true, datos_verificados: true, resumen_ok: true, bibliografia_ok: true, citas_apa_ok: true, coherencia_ok: false, tono_academico: false, extension_ok: true },
-      palabras: finalText.split(/\s+/).length,
-      issues: causalCheck.hard.slice(0, 5).map(s => `Afirmación causal sin matiz: "${s}"`),
-      causal_check: { hard: causalCheck.hard.length, soft: causalCheck.soft.length },
-      number_check: { checked: numCheck.checked, invented: numCheck.invented.length }
-    };
-  }
-  const hasBrokenTables = /\|[^\n]*(?:…|\.{3})[^\n]*\|/.test(finalText);
-  if (hasBrokenTables) {
-    return {
-      veredicto: "RECHAZADO",
-      checklist: { estructura_ok: false, datos_verificados: false, resumen_ok: true, bibliografia_ok: true, citas_apa_ok: true, coherencia_ok: false, tono_academico: true, extension_ok: true },
-      palabras: finalText.split(/\s+/).length,
-      issues: ["El paper contiene tablas con celdas incompletas o elipses (…)"]
-    };
-  }
-  // Marcadores sin valor ("β = ?"): una cifra placeholder publicada es un
-  // dato faltante — motivo de rechazo igual que una cifra inventada.
   const placeholders = placeholderCheck(finalText);
-  if (placeholders.length) {
-    return {
-      veredicto: "RECHAZADO",
-      checklist: { estructura_ok: true, datos_verificados: false, resumen_ok: true, bibliografia_ok: true, citas_apa_ok: true, coherencia_ok: false, tono_academico: true, extension_ok: true },
-      palabras: finalText.split(/\s+/).length,
-      issues: placeholders.map(t => `Marcador sin valor en el texto: "${t}"`),
-      number_check: { checked: numCheck.checked, invented: numCheck.invented.length }
-    };
+  const hasBrokenTables = /\|[^\n]*(?:…|\.{3})[^\n]*\|/.test(finalText);
+  const missing = REQUIRED_SECTIONS.filter(re => !re.test(finalText));
+
+  // Estructura obligatoria de prosa (Bibliografia/Tablas/Anexo se ensamblan
+  // por codigo despues de este gate — no se exigen aqui).
+  if (missing.length) {
+    checklist.estructura_ok = false;
+    checklist.resumen_ok = /##\s+Resumen/i.test(finalText);
+    issues.push(`Estructura incompleta: ${REQUIRED_SECTIONS_MSG}`);
   }
-  const prompt = `Eres control de calidad de una revista de ciencias sociales. Verifica:
-
-⟦KEEP⟧${proseOnly(finalText)}⟦/KEEP⟧
-
-Responde EXACTAMENTE como JSON (json puro, sin markdown):
-{"checklist":{"estructura_ok":true,"resumen_ok":true,"bibliografia_ok":true,"citas_apa_ok":true,"coherencia_ok":true,"datos_verificados":true,"tono_academico":true,"extension_ok":true},"palabras":3000,"veredicto":"APROBADO","issues":[]}
-
-CRITERIOS:
-- Si la seccion Bibliografia existe (aunque sea minima), aprobar.
-- Si los datos coinciden con las fuentes, aprobar.
-- Solo rechazar si hay datos inventados o estructura incompleta (sin Resumen, sin Conclusiones).
-Veredicto: "APROBADO" o "RECHAZADO" (con issues).`;
-  const data = await callGroq("openai/gpt-oss-20b", prompt, { max_tokens: 1000, temperature: 0.2, reasoning_effort: "low", response_format: { type: "json_object" } });
-  const raw = data.choices[0]?.message?.content || "";
-  const decision = parseJSONResponse(raw);
-  if (!decision) { console.log("QA fallback:\n" + raw.slice(0, 500) + "\n"); return { veredicto: raw.includes("RECHAZADO") ? "RECHAZADO" : "APROBADO", checklist: {}, palabras: 0, issues: [raw.slice(0, 200)] }; }
+  if (palabras < 900) {
+    checklist.extension_ok = false;
+    issues.push(`Extensión insuficiente: ${palabras} palabras (mínimo 900).`);
+  }
+  if (numCheck.invented.length) {
+    checklist.datos_verificados = false;
+    checklist.coherencia_ok = false;
+    console.log(`QA: ${numCheck.invented.length} cifra(s) sin respaldo detectadas por verificación automática.`);
+    issues.push(...numCheck.invented.slice(0, 8).map(c => `Cifra sin respaldo en datos computados: ${c.text}`));
+  }
+  if (causalCheck.hard.length) {
+    checklist.tono_academico = false;
+    checklist.coherencia_ok = false;
+    console.log(`QA: ${causalCheck.hard.length} afirmación(es) causal(es) sin matiz detectadas por linter automático.`);
+    issues.push(...causalCheck.hard.slice(0, 5).map(s => `Afirmación causal sin matiz: "${s}"`));
+  }
+  if (hasBrokenTables) {
+    checklist.estructura_ok = false;
+    issues.push("El paper contiene tablas con celdas incompletas o elipses (…)");
+  }
+  if (placeholders.length) {
+    checklist.datos_verificados = false;
+    issues.push(...placeholders.map(t => `Marcador sin valor en el texto: "${t}"`));
+  }
+  const decision = {
+    veredicto: issues.length ? "RECHAZADO" : "APROBADO",
+    checklist, palabras, issues,
+    causal_check: { hard: causalCheck.hard.length, soft: causalCheck.soft.length },
+    number_check: { checked: numCheck.checked, invented: numCheck.invented.length },
+  };
   console.log("QA Final:\n" + JSON.stringify(decision, null, 2).slice(0, 500) + "\n");
   return decision;
 }
@@ -2141,9 +2319,15 @@ ESTRUCTURA (prosa continua, sin encabezados):
 
 PROHIBIDO TERMINOS TECNICOS: no uses "coeficiente", "p-valor", "correlacion r", "regresion", "significativo", "R2" ni ninguna notacion estadistica. Si un resultado es debil o incierto, dilo en lenguaje normal ("los datos no son concluyentes", "puede ser casualidad"). No inventes cantidades (numero de paises, de años, de observaciones) — usa solo las que aparezcan en RESULTADOS; no confundas el n de observaciones con el numero de paises. Prohibidos tambien: numeros no listados, opinion politica, causas no probadas ("coincide con", no "causa"), alarmismo, las palabras "paper" y "pipeline" — di "el analisis" o "los datos del Banco Mundial".
 Devuelve SOLO el texto de la columna.`;
-  // gpt-oss consume tokens en razonamiento — 2000 de margen para que la
-  // columna de ~200 palabras no quede truncada a mitad de frase
-  const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2000, temperature: 0.5, reasoning_effort: "low" });
+  // Columna divulgativa: transformacion de estilo, no razonamiento — modelo
+  // rapido con pool de TPM propio; fallback al 120B si el rapido no esta.
+  const FAST_MODEL = process.env.GROQ_FAST_MODEL || "llama-3.3-70b-versatile";
+  let data;
+  try {
+    data = await callGroq(FAST_MODEL, prompt, { max_tokens: 2000, temperature: 0.5 });
+  } catch {
+    data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2000, temperature: 0.5, reasoning_effort: "low" });
+  }
   return (data.choices[0]?.message?.content || "").trim();
 }
 
@@ -2276,8 +2460,12 @@ class MoAGraph {
         console.log(`  Dedup: "${chosen?.titulo || decision.topic}" ya cubierto (sim ${dup?.sim.toFixed(2)}). Promoviendo: "${fresh.s.titulo}"`);
         decision.topic = fresh.s.titulo;
         decision.angle = fresh.s.justificacion || decision.angle;
-        decision.pregunta = null;   // la pregunta original era de la linea descartada
-        decision.hipotesis = null;  // WRITE la derivara del nuevo tema
+        // La linea promovida trae su propia pregunta/hipotesis/keywords: sin
+        // esto quedaban en null (papers 2026-10-09, 2026-10-12) y OpenAlex
+        // buscaba el titulo largo en espanol devolviendo 0 resultados.
+        decision.pregunta = fresh.s.pregunta || decision.pregunta;
+        decision.hipotesis = fresh.s.hipotesis || decision.hipotesis;
+        decision.keywords_en = fresh.s.keywords_en || decision.keywords_en || null;
       }
     }
     // ── Adjuntar noticia inspiradora (imagen/url) para metadata e index ──
@@ -2296,25 +2484,30 @@ class MoAGraph {
         console.log(`  Noticia vinculada: "${item.title?.slice(0, 60)}" (${item.source})`);
       }
     }
+    // keywords_en de la linea elegida (post-dedup) para la busqueda OpenAlex.
+    if (decision && !decision.keywords_en) {
+      decision.keywords_en = chosen?.keywords_en || null;
+    }
     if (decision?.topic) { this.state.topic = decision.topic; this.state.angle = decision.angle || this.state.angle; }
-    await delay(20); return resolveTransition("SUGGEST", this.state);
+    await waitForTokenBudget("openai/gpt-oss-120b", 6000); return resolveTransition("SUGGEST", this.state);
   }
   async nodeCompute() { this.logNode("COMPUTE"); this.state.computeResults = await this.runWithGuardrails("COMPUTE", () => agentCompute(this.state.fetchedData, this.state.suggestDecision)); mkdirSync("output/raw", { recursive: true }); writeFileSync("output/raw/compute-results.json", JSON.stringify(this.state.computeResults, null, 2), "utf-8"); return resolveTransition("COMPUTE", this.state); }
   async nodeWrite() {
     this.logNode("WRITE");
     if (this.state.literature === null) {
-      this.state.literature = await fetchLiterature(this.state.topic, this.state.suggestDecision?.pregunta);
+      this.state.literature = await fetchLiterature(this.state.topic, this.state.suggestDecision?.pregunta, this.state.suggestDecision);
       mkdirSync("output/raw", { recursive: true });
       writeFileSync("output/raw/literature.json", JSON.stringify(this.state.literature, null, 2), "utf-8");
     }
     this.state.currentDraft = await this.runWithGuardrails("WRITE", () => agentWrite(this.state.fetchedData, this.state.computeResults, this.state.writeFeedback, this.state.topic, this.state.angle, this.state.suggestDecision, this.state.literature));
-    this.state.drafts.push(this.state.currentDraft); this.state.writeFeedback = null; await delay(20); return resolveTransition("WRITE", this.state);
+    this.state.drafts.push(this.state.currentDraft); this.state.writeFeedback = null; await waitForTokenBudget("openai/gpt-oss-120b", 6000); return resolveTransition("WRITE", this.state);
   }
-  async nodeReview() { this.logNode("REVIEW"); this.state.reviewDecision = await this.runWithGuardrails("REVIEW", (attempt) => agentReview(this.state.fetchedData, this.state.computeResults, this.state.currentDraft, this.state.suggestDecision, attempt)); await delay(20); return resolveTransition("REVIEW", this.state); }
-  async nodeEdit() { this.logNode("EDIT"); try { this.state.editedArticle = await this.runWithGuardrails("EDIT", () => agentEdit(this.state.currentDraft, this.state.editFeedback || "", this.state.computeResults)); } catch (e) { console.log(`  EDIT fallo (${e.message}). Usando draft original.`); this.state.editedArticle = repairTablesAndCharts(this.state.currentDraft, this.state.computeResults); } await delay(20); return resolveTransition("EDIT", this.state); }
+  async nodeReview() { this.logNode("REVIEW"); this.state.reviewDecision = await this.runWithGuardrails("REVIEW", (attempt) => agentReview(this.state.fetchedData, this.state.computeResults, this.state.currentDraft, this.state.suggestDecision, attempt)); await waitForTokenBudget("openai/gpt-oss-120b", 6000); return resolveTransition("REVIEW", this.state); }
+  async nodeEdit() { this.logNode("EDIT"); try { this.state.editedArticle = await this.runWithGuardrails("EDIT", () => agentEdit(this.state.currentDraft, this.state.editFeedback || "", this.state.computeResults)); } catch (e) { console.log(`  EDIT fallo (${e.message}). Usando draft original.`); this.state.editedArticle = normalizeDraftProse(this.state.currentDraft, this.state.computeResults); } return resolveTransition("EDIT", this.state); }
   async nodeApprove() {
-    this.logNode("APPROVE"); await delay(40);
-    this.state.editedArticle = repairTablesAndCharts(this.state.editedArticle, this.state.computeResults);
+    this.logNode("APPROVE");
+    // QA determinista sobre la PROSA: las tablas/anexo/bibliografia todavia
+    // no se pegan — eso es ensamblaje final post-APPROVE.
     try { this.state.qaDecision = await this.runWithGuardrails("APPROVE", () => agentApprove(this.state.editedArticle, this.state.computeResults, this.state.fetchedData)); }
     catch (e) { console.log(`  QA fallo (${e.message}). Auto-aprobando.`); this.state.qaDecision = { veredicto: "APROBADO", checklist: {}, palabras: 0, issues: ["QA no ejecutado"] }; }
     return resolveTransition("APPROVE", this.state);
@@ -2336,15 +2529,18 @@ class MoAGraph {
       steps++;
       try {
         const next = await nodes[current]();
-        // Corte dia 1: datos + stats + tablas + figuras listos
-        if (multiDay && !checkpoint && current === "COMPUTE" && next !== "END") { saveCheckpoint("compute_done", next, this.state); process.exit(0); }
-        // Corte dia 2: draft listo; dia 3 revisa/edita/publica con cuota fresca
-        if (multiDay && checkpoint?.stage === "compute_done" && current === "WRITE") { saveCheckpoint("write_done", "REVIEW", this.state); process.exit(0); }
+        // Pipeline de 1 corrida: una pasada completa cuesta ~15-18k tokens,
+        // <10% del TPD de Groq — el freno de 3 dias ya no aplica. Solo se
+        // guarda checkpoint si la CUOTA DIARIA (TPD) se agoto a mitad de camino.
+        if (multiDay && rateState.dailyExhausted && next !== "END") { saveCheckpoint("quota_exhausted", next, this.state); process.exit(0); }
         current = next;
       }
       catch (err) {
         console.error(`\nX Error en ${current}: ${err.message}`);
         console.error(`  Historial: ${this.state.nodeHistory.join(" -> ")}`);
+        // 429 de cuota DIARIA agotada tras reintentos: checkpoint para retomar
+        // en el mismo nodo manana con cuota fresca — no es un fallo del run.
+        if (multiDay && rateState.dailyExhausted) { saveCheckpoint("quota_exhausted", current, this.state); process.exit(0); }
         if (this.state.editedArticle || this.state.currentDraft) { mkdirSync(OUTPUT_DIR, { recursive: true }); writeFileSync(OUTPUT_FILE, this.state.editedArticle || this.state.currentDraft, "utf-8"); console.log(`  !! Paper guardado de emergencia en ${OUTPUT_FILE}`); }
         process.exit(1);
       }
@@ -2391,7 +2587,15 @@ class MoAGraph {
       this.state.editorial = await agentEditorial(this.state);
       if (this.state.editorial) console.log(`  Editorial "Datos al dia": ${this.state.editorial.split(/\s+/).length} palabras`);
     } catch (e) { console.log(`  Editorial skip: ${e.message}`); }
-    this.state.editedArticle = repairTablesAndCharts(this.state.editedArticle, this.state.computeResults);
+    // Ensamblaje final post-APPROVE: el ciclo WRITE->REVIEW->EDIT->APPROVE
+    // viaja solo con prosa (~7.5k chars). Aqui se pegan por codigo la
+    // bibliografia determinista, las tablas pre-computadas y el anexo.
+    let finalArticle = normalizeDraftProse(this.state.editedArticle, this.state.computeResults);
+    // Si el LLM dejo una Bibliografia propia, se descarta: la determinista es
+    // la unica fuente de citas (elimina las citas fantasma de raiz).
+    finalArticle = finalArticle.replace(/\n##\s*(?:Bibliograf|Referencias|References)[^\n]*\n[\s\S]*?(?=\n##\s|$)/i, "\n");
+    finalArticle += "\n\n" + buildDeterministicBibliography(finalArticle, this.state.suggestDecision, this.state.literature);
+    this.state.editedArticle = repairTablesAndCharts(finalArticle, this.state.computeResults);
     const finalPaper = this.state.editedArticle + "\n\n" + transparencyNote(this.state);
     writeFileSync(OUTPUT_FILE, finalPaper, "utf-8");
     const date = new Date().toISOString().slice(0, 10);

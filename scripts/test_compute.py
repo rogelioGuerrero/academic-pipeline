@@ -92,9 +92,10 @@ def test_correlation_guards():
     xa = var("xa", [float(i) for i in range(10)], country_code="BRA")
     xb = var("xb", [float(i) for i in range(10)], country_code="MEX")
     xc = var("xc", [float(i) for i in range(10)], unit="score")
+    xd = var("xd", [float(i) for i in range(10)], unit="count")
     short = var("short", [1.0, 2.0])
-    data = _corr_data([xa, xb, xc, short],
-                      [["xa", "xb"], ["xa", "xc"], ["xa", "short"]])
+    data = _corr_data([xa, xb, xc, xd, short],
+                      [["xa", "xb"], ["xc", "xd"], ["xa", "short"]])
     res = compute.correlation_analysis(data)
     assert "country mismatch" in res[0]["error"]
     assert "incompatible units" in res[1]["error"]
