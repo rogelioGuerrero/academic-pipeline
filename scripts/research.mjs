@@ -1750,13 +1750,13 @@ async function agentReview(fetchedData, computeResults, draft, suggestDecision =
   const digest = computeDigest(computeResults, suggestDecision);
   const prompt = `Eres un revisor academico riguroso y desconfiado. Tu trabajo es detectar DATOS INVENTADOS comparando el paper contra los datos reales.
 
-DATOS REALES (World Bank API — la unica fuente permitida):
+⟦KEEP⟧DATOS REALES (World Bank API — la unica fuente permitida):
 
 Series regionales America Latina & Caribe (resumen con derivados):
 ${lcn}
 
 Series por pais — muestra del estudio (resumen con derivados):
-${countries || "Sin datos por pais."}
+${countries || "Sin datos por pais."}⟦/KEEP⟧
 
 RESULTADOS ESTADISTICOS REALES (Python):
 ${digest}
@@ -1790,7 +1790,7 @@ SE CONCISO: el JSON completo debe caber en ~800 tokens. detalle_datos en 2 frase
   // veredicto nunca se emitia (run 2026-09-22 murio asi, 3 veces).
   let raw = "", decision = null, apiFailed = false;
   try {
-    const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3000, completion_floor: 1500, temperature: 0.2, reasoning_effort: "low", response_format: { type: "json_object" } });
+    const data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2000, completion_floor: 1100, temperature: 0.2, reasoning_effort: "low", response_format: { type: "json_object" } });
     raw = data.choices[0]?.message?.content || "";
     decision = parseJSONResponse(raw);
   } catch (e) {
@@ -2252,7 +2252,7 @@ function transparencyNote(state) {
       : [...new Set((cr.correlations || []).map(c => c.x.split(' [')[1]?.replace(']', '')).filter(c => c && c !== 'LCN'))];
   const sampleStr = sampleCountries.length ? sampleCountries.join(", ") : allCountries.filter(c => c !== "LCN").join(", ");
   const latestYear = state.fetchedData?.summary?.latest_year_available || "";
-  const inspiring = s.suggestions?.find(x => x.titulo === state.topic) || s.suggestions?.[0];
+  const inspiring = chosenSuggestion({ ...s, topic: state.topic || s.topic });
   const it = state.iterations;
   const reg = cr.regression;
 
@@ -2305,7 +2305,7 @@ async function agentEditorial(state) {
   const prompt = `Eres un columnista de datos que escribe para lectores sin formacion estadistica. Escribe una COLUMNA corta en espanol (150-220 palabras) que cuente una historia, no que reporte estadisticas.
 
 CONTEXTO:
-- Noticia que inspiro el analisis: "${s.suggestions?.find(x => x.titulo === state.topic)?.noticia_inspiradora || "n/a"}"
+- Noticia que inspiro el analisis: "${chosenSuggestion({ ...s, topic: state.topic || s.topic })?.noticia_inspiradora || "n/a"}"
 - Pregunta de investigacion: ${s.pregunta || state.topic}
 - Hipotesis evaluada: ${s.hipotesis || "n/a"}
 
@@ -2350,7 +2350,7 @@ function rebuildKnowledge() {
           topic: m.topic || null,
           pregunta: m.pregunta || null,
           hipotesis: m.hipotesis || null,
-          indicadores: (m.suggestions?.[0]?.indicadores_respaldan) || [],
+          indicadores: (m.sample?.indicators?.length ? m.sample.indicators : chosenSuggestion(m)?.indicadores_respaldan) || [],
           noticia: m.inspiringNews ? { title: m.inspiringNews.title, url: m.inspiringNews.url, source: m.inspiringNews.source } : null,
           stats: {
             correlaciones: m.computeResults?.correlations ?? 0,
