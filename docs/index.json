@@ -1,5 +1,128 @@
 [
   {
+    "file": "2026-10-15_impacto-de-la-conectividad-digital-y-el-.md",
+    "date": "2026-10-15",
+    "topic": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "REESCRIBIR",
+    "qa": "APROBADO",
+    "image": "https://images.pexels.com/photos/39482001/pexels-photo-39482001.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "section": "Internacional",
+    "news_url": "https://www.dw.com/en/india-urges-russia-ukraine-to-protect-black-sea-shipping/a-79662826?maca=en-rss-en-all-1573-rdf",
+    "pregunta": "¿En los países latinoamericanos, mayores niveles de usuarios de internet y mayor gasto público en educación se asocian con menores tasas de desempleo juvenil?",
+    "editorial": "Cuando la India instó a proteger el transporte marítimo en el Mar Negro, me pregunté: ¿Podría ser que en América Latina, un mayor acceso a internet y más inversión en educación ayuden a los jóvenes a encontrar trabajo?\n\nPara intentar responder, analizamos datos de 12 países latinoamericanos a lo largo de los años. Al observar qué pasaba dentro de cada país con",
+    "charts": "2026-10-15-16-33",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "openai/gpt-oss-120b",
+        "before": 6393,
+        "after": 5479,
+        "cutChars": 2653
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7497,
+        "after": 4484,
+        "cutChars": 8866
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9760,
+        "after": 5430,
+        "cutChars": 12790
+      },
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "openai/gpt-oss-120b",
+        "before": 6361,
+        "after": 5463,
+        "cutChars": 2653
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7460,
+        "after": 4541,
+        "cutChars": 8720
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9253,
+        "after": 5634,
+        "cutChars": 10811
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7414,
+        "after": 4529,
+        "cutChars": 8642
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9483,
+        "after": 5286,
+        "cutChars": 12567
+      },
+      {
+        "stage": "EDIT",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 2400
+      },
+      {
+        "stage": "EDIT",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 2400
+      },
+      {
+        "stage": "EDIT",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 2400
+      },
+      {
+        "stage": "EDIT",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 2400
+      },
+      {
+        "stage": "EDIT",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 2400
+      },
+      {
+        "stage": "EDITORIAL",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 2000
+      }
+    ],
+    "ts": "2026-10-15T16:43:22.124Z"
+  },
+  {
     "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
     "date": "2026-10-12",
     "topic": "Paper",

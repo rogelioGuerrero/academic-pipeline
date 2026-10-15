@@ -1,0 +1,82 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano",
+      "noticia_inspiradora": "India urges Russia, Ukraine to protect Black Sea shipping",
+      "afirmacion_noticia": "La noticia destaca la importancia de la infraestructura (digital y logística) para el desarrollo económico, sugiriendo que una mejor conectividad y mayor inversión pública pueden reducir problemas estructurales como el desempleo juvenil.",
+      "verificable_con_datos": "Se puede confirmar la relación entre usuarios de internet y gasto público en educación con la tasa de desempleo juvenil usando los indicadores disponibles; no se pueden medir directamente los efectos de la seguridad marítima o tensiones geopolíticas.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Government expenditure on education (% of GDP)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Government expenditure on education ↔ Youth unemployment",
+        "Internet users ↔ Government expenditure on education"
+      ],
+      "justificacion": "Los datos de la base ya mostraron correlaciones entre conectividad digital, gasto educativo y desempleo juvenil en América Latina, lo que permite extender el análisis a un contexto de infraestructura crítica señalada en la noticia.",
+      "pregunta": "¿En los países latinoamericanos, mayores niveles de usuarios de internet y mayor gasto público en educación se asocian con menores tasas de desempleo juvenil?",
+      "hipotesis": "Los países latinoamericanos con mayor penetración de internet y mayor gasto en educación (% del PIB) presentan tasas de desempleo juvenil significativamente más bajas.",
+      "keywords_en": "digital connectivity youth unemployment education expenditure Latin America"
+    },
+    {
+      "titulo": "Relación entre inversión en energías renovables y crecimiento económico en América Latina",
+      "noticia_inspiradora": "New team to save Antarctic port from climate change",
+      "afirmacion_noticia": "La iniciativa muestra la urgencia de la adaptación climática, implicando que la inversión en energías renovables puede impulsar el crecimiento económico regional.",
+      "verificable_con_datos": "Se pueden analizar los indicadores de consumo de energía renovable y crecimiento del PIB; no se pueden medir directamente los efectos de la investigación antártica ni la logística portuaria.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy consumption ↔ GDP growth"
+      ],
+      "justificacion": "La base contiene un estudio previo que encontró una fuerte correlación (R²=0.705) entre energías renovables y crecimiento del PIB en la región, ofreciendo una base sólida para profundizar.",
+      "pregunta": "¿Los países latinoamericanos con mayor participación de energías renovables en su consumo total experimentan mayores tasas de crecimiento del PIB?",
+      "hipotesis": "Una mayor participación de energías renovables en el consumo total de energía está asociada a un mayor crecimiento anual del PIB en América Latina.",
+      "keywords_en": "renewable energy consumption GDP growth Latin America"
+    },
+    {
+      "titulo": "Efectos de la inflación y la digitalización en la migración neta de América Latina",
+      "noticia_inspiradora": "India urges Russia, Ukraine to protect Black Sea shipping",
+      "afirmacion_noticia": "La seguridad del comercio marítimo influye en los flujos migratorios, sugiriendo que factores macroeconómicos como inflación y conectividad digital pueden afectar la migración neta.",
+      "verificable_con_datos": "Se pueden correlacionar la inflación y usuarios de internet con la migración neta; no se pueden medir directamente los efectos de la seguridad marítima.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Internet users (% of population)",
+        "Net migration (total people)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflation ↔ Net migration",
+        "Internet users ↔ Net migration"
+      ],
+      "justificacion": "Los estudios previos exploraron la migración y la digitalización; añadir la variable inflación permite un análisis más completo de los determinantes macroeconómicos de la migración.",
+      "pregunta": "¿En América Latina, la inflación y la penetración de internet están asociadas con la magnitud de la migración neta?",
+      "hipotesis": "Países latinoamericanos con mayor inflación y menor penetración de internet presentan flujos migratorios netos negativos mayores.",
+      "keywords_en": "inflation internet penetration net migration Latin America"
+    },
+    {
+      "titulo": "Relación entre gasto en salud y urbanización en Chile: evidencia de un vínculo estrecho",
+      "noticia_inspiradora": "Japanese journalist arrest in Russia's Far East draws rebuke from Tokyo",
+      "afirmacion_noticia": "Aunque la noticia trata de un caso diplomático, su trasfondo sugiere que la concentración de recursos en áreas urbanas puede influir en la capacidad institucional, incluyendo la salud pública.",
+      "verificable_con_datos": "Se pueden analizar los indicadores de gasto en salud y porcentaje de población urbana en Chile; no se pueden medir efectos de la diplomacia o arrestos.",
+      "indicadores_respaldan": [
+        "Current health expenditure (% of GDP)",
+        "Urban population (% of total)"
+      ],
+      "correlaciones_relevantes": [
+        "Health expenditure ↔ Urban population (Chile)"
+      ],
+      "justificacion": "La base muestra una correlación casi perfecta (r=0.99) entre gasto en salud y urbanización en Chile, lo que permite una investigación focalizada en ese país.",
+      "pregunta": "¿En Chile, el mayor porcentaje de población urbana está asociado a un mayor gasto en salud como proporción del PIB?",
+      "hipotesis": "En Chile, la urbanización elevada está fuertemente correlacionada con un mayor gasto público en salud (% del PIB).",
+      "keywords_en": "health expenditure urban population Chile"
+    }
+  ],
+  "topic": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano",
+  "angle": "Análisis cuantitativo de cómo la penetración de internet y la inversión pública en educación influyen en la tasa de desempleo juvenil en los países de América Latina, usando correlaciones y regresiones múltiples.",
+  "pregunta": "¿En los países latinoamericanos, mayores niveles de usuarios de internet y mayor gasto público en educación se asocian con menores tasas de desempleo juvenil?",
+  "hipotesis": "Los países latinoamericanos con mayor penetración de internet y mayor gasto en educación (% del PIB) presentan tasas de desempleo juvenil significativamente más bajas.",
+  "keywords_en": "digital connectivity youth unemployment education expenditure Latin America"
+}

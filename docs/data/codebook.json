@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-14T16:49:07+00:00",
+  "generated": "2026-10-15T16:43:24+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 18
+    "papers": 19
   },
   "countries": [
     {
@@ -67,6 +67,28 @@
   ],
   "papers": [
     {
+      "date": "2026-10-15",
+      "file": "2026-10-15_impacto-de-la-conectividad-digital-y-el-.md",
+      "topic": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano",
+      "sample_countries": [
+        "ECU",
+        "GTM",
+        "PER",
+        "ARG",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Internet users (% of population)",
+        "Government expenditure on education (% of GDP)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "indicators": [
+        "Internet users (% of population)",
+        "Government expenditure on education (% of GDP)",
+        "Youth unemployment (% of labor force 15-24)"
+      ]
+    },
+    {
       "date": "2026-10-12",
       "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
       "topic": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina",
@@ -84,9 +106,6 @@
         "Urban population (% of total)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
-        "Government expenditure on education (% of GDP)",
-        "Internet users (% of population)",
         "Life expectancy at birth (years)",
         "Current health expenditure (% of GDP)",
         "Net migration (total people)",
@@ -111,8 +130,6 @@
         "GDP per capita (current US$)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
-        "Government expenditure on education (% of GDP)",
         "Internet users (% of population)",
         "Net migration (total people)",
         "Personal remittances received (current US$)",
@@ -136,9 +153,9 @@
         "Government expenditure on education (% of GDP)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
         "Government expenditure on education (% of GDP)",
-        "Internet users (% of population)"
+        "Youth unemployment (% of labor force 15-24)"
       ]
     },
     {
@@ -158,8 +175,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
         "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
         "Employment in services (% of total employment)"
       ]
     },
@@ -827,14 +844,9 @@
           "n_observations_expected": 130,
           "papers": [
             {
-              "date": "2026-10-12",
-              "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
-              "topic": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina"
-            },
-            {
-              "date": "2026-10-09",
-              "file": "2026-10-09_efectos-de-la-migraci-n-neta-y-la-conect.md",
-              "topic": "Efectos de la migración neta y la conectividad digital en la resiliencia económica de los países latinoamericanos"
+              "date": "2026-10-15",
+              "file": "2026-10-15_impacto-de-la-conectividad-digital-y-el-.md",
+              "topic": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano"
             },
             {
               "date": "2026-10-06",
@@ -1041,6 +1053,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-10-09",
+              "file": "2026-10-09_efectos-de-la-migraci-n-neta-y-la-conect.md",
+              "topic": "Efectos de la migración neta y la conectividad digital en la resiliencia económica de los países latinoamericanos"
+            },
+            {
               "date": "2026-09-22",
               "file": "2026-09-22_impacto-de-los-ciberataques-en-criptomon.md",
               "topic": "Impacto de los ciberataques en criptomonedas sobre los flujos de remesas hacia América Latina"
@@ -1224,6 +1241,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-10-09",
+              "file": "2026-10-09_efectos-de-la-migraci-n-neta-y-la-conect.md",
+              "topic": "Efectos de la migración neta y la conectividad digital en la resiliencia económica de los países latinoamericanos"
+            },
+            {
               "date": "2026-09-22",
               "file": "2026-09-22_impacto-de-los-ciberataques-en-criptomon.md",
               "topic": "Impacto de los ciberataques en criptomonedas sobre los flujos de remesas hacia América Latina"
@@ -1338,14 +1360,9 @@
           "n_observations_expected": 130,
           "papers": [
             {
-              "date": "2026-10-12",
-              "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
-              "topic": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina"
-            },
-            {
-              "date": "2026-10-09",
-              "file": "2026-10-09_efectos-de-la-migraci-n-neta-y-la-conect.md",
-              "topic": "Efectos de la migración neta y la conectividad digital en la resiliencia económica de los países latinoamericanos"
+              "date": "2026-10-15",
+              "file": "2026-10-15_impacto-de-la-conectividad-digital-y-el-.md",
+              "topic": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano"
             },
             {
               "date": "2026-10-06",
@@ -1541,9 +1558,9 @@
           "n_observations_expected": 130,
           "papers": [
             {
-              "date": "2026-10-12",
-              "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
-              "topic": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina"
+              "date": "2026-10-15",
+              "file": "2026-10-15_impacto-de-la-conectividad-digital-y-el-.md",
+              "topic": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano"
             },
             {
               "date": "2026-10-09",
@@ -1673,7 +1690,18 @@
           "year_to": 2024,
           "n_observations": 130,
           "n_observations_expected": 130,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-10-12",
+              "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
+              "topic": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina"
+            },
+            {
+              "date": "2026-10-09",
+              "file": "2026-10-09_efectos-de-la-migraci-n-neta-y-la-conect.md",
+              "topic": "Efectos de la migración neta y la conectividad digital en la resiliencia económica de los países latinoamericanos"
+            }
+          ]
         },
         {
           "code": "SP.URB.TOTL.IN.ZS",
@@ -1718,7 +1746,13 @@
           "year_to": 2024,
           "n_observations": 130,
           "n_observations_expected": 130,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-10-12",
+              "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
+              "topic": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina"
+            }
+          ]
         }
       ]
     },
@@ -1917,7 +1951,13 @@
           "year_to": 2024,
           "n_observations": 119,
           "n_observations_expected": 130,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-10-12",
+              "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
+              "topic": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina"
+            }
+          ]
         },
         {
           "code": "SP.DYN.LE00.IN",
@@ -1962,7 +2002,13 @@
           "year_to": 2024,
           "n_observations": 130,
           "n_observations_expected": 130,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-10-12",
+              "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
+              "topic": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina"
+            }
+          ]
         }
       ]
     },

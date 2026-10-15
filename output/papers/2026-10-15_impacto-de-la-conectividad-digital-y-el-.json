@@ -1,0 +1,318 @@
+{
+  "generated": "2026-10-15T16:43:22.124Z",
+  "topic": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano",
+  "angle": "Análisis cuantitativo de cómo la penetración de internet y la inversión pública en educación influyen en la tasa de desempleo juvenil en los países de América Latina, usando correlaciones y regresiones múltiples.",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "EDIT",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 2,
+    "edit": 0
+  },
+  "pregunta": "¿En los países latinoamericanos, mayores niveles de usuarios de internet y mayor gasto público en educación se asocian con menores tasas de desempleo juvenil?",
+  "hipotesis": "Los países latinoamericanos con mayor penetración de internet y mayor gasto en educación (% del PIB) presentan tasas de desempleo juvenil significativamente más bajas.",
+  "inspiringNews": {
+    "title": "India urges Russia, Ukraine to protect Black Sea shipping",
+    "url": "https://www.dw.com/en/india-urges-russia-ukraine-to-protect-black-sea-shipping/a-79662826?maca=en-rss-en-all-1573-rdf",
+    "source": "DW",
+    "section": "Internacional",
+    "image": "https://images.pexels.com/photos/39482001/pexels-photo-39482001.jpeg?auto=compress&cs=tinysrgb&h=350"
+  },
+  "suggestMode": "suggest",
+  "suggestions": [
+    {
+      "titulo": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano",
+      "noticia_inspiradora": "India urges Russia, Ukraine to protect Black Sea shipping",
+      "afirmacion_noticia": "La noticia destaca la importancia de la infraestructura (digital y logística) para el desarrollo económico, sugiriendo que una mejor conectividad y mayor inversión pública pueden reducir problemas estructurales como el desempleo juvenil.",
+      "verificable_con_datos": "Se puede confirmar la relación entre usuarios de internet y gasto público en educación con la tasa de desempleo juvenil usando los indicadores disponibles; no se pueden medir directamente los efectos de la seguridad marítima o tensiones geopolíticas.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Government expenditure on education (% of GDP)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Government expenditure on education ↔ Youth unemployment",
+        "Internet users ↔ Government expenditure on education"
+      ],
+      "justificacion": "Los datos de la base ya mostraron correlaciones entre conectividad digital, gasto educativo y desempleo juvenil en América Latina, lo que permite extender el análisis a un contexto de infraestructura crítica señalada en la noticia.",
+      "pregunta": "¿En los países latinoamericanos, mayores niveles de usuarios de internet y mayor gasto público en educación se asocian con menores tasas de desempleo juvenil?",
+      "hipotesis": "Los países latinoamericanos con mayor penetración de internet y mayor gasto en educación (% del PIB) presentan tasas de desempleo juvenil significativamente más bajas.",
+      "keywords_en": "digital connectivity youth unemployment education expenditure Latin America"
+    },
+    {
+      "titulo": "Relación entre inversión en energías renovables y crecimiento económico en América Latina",
+      "noticia_inspiradora": "New team to save Antarctic port from climate change",
+      "afirmacion_noticia": "La iniciativa muestra la urgencia de la adaptación climática, implicando que la inversión en energías renovables puede impulsar el crecimiento económico regional.",
+      "verificable_con_datos": "Se pueden analizar los indicadores de consumo de energía renovable y crecimiento del PIB; no se pueden medir directamente los efectos de la investigación antártica ni la logística portuaria.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy consumption ↔ GDP growth"
+      ],
+      "justificacion": "La base contiene un estudio previo que encontró una fuerte correlación (R²=0.705) entre energías renovables y crecimiento del PIB en la región, ofreciendo una base sólida para profundizar.",
+      "pregunta": "¿Los países latinoamericanos con mayor participación de energías renovables en su consumo total experimentan mayores tasas de crecimiento del PIB?",
+      "hipotesis": "Una mayor participación de energías renovables en el consumo total de energía está asociada a un mayor crecimiento anual del PIB en América Latina.",
+      "keywords_en": "renewable energy consumption GDP growth Latin America"
+    },
+    {
+      "titulo": "Efectos de la inflación y la digitalización en la migración neta de América Latina",
+      "noticia_inspiradora": "India urges Russia, Ukraine to protect Black Sea shipping",
+      "afirmacion_noticia": "La seguridad del comercio marítimo influye en los flujos migratorios, sugiriendo que factores macroeconómicos como inflación y conectividad digital pueden afectar la migración neta.",
+      "verificable_con_datos": "Se pueden correlacionar la inflación y usuarios de internet con la migración neta; no se pueden medir directamente los efectos de la seguridad marítima.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Internet users (% of population)",
+        "Net migration (total people)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflation ↔ Net migration",
+        "Internet users ↔ Net migration"
+      ],
+      "justificacion": "Los estudios previos exploraron la migración y la digitalización; añadir la variable inflación permite un análisis más completo de los determinantes macroeconómicos de la migración.",
+      "pregunta": "¿En América Latina, la inflación y la penetración de internet están asociadas con la magnitud de la migración neta?",
+      "hipotesis": "Países latinoamericanos con mayor inflación y menor penetración de internet presentan flujos migratorios netos negativos mayores.",
+      "keywords_en": "inflation internet penetration net migration Latin America"
+    },
+    {
+      "titulo": "Relación entre gasto en salud y urbanización en Chile: evidencia de un vínculo estrecho",
+      "noticia_inspiradora": "Japanese journalist arrest in Russia's Far East draws rebuke from Tokyo",
+      "afirmacion_noticia": "Aunque la noticia trata de un caso diplomático, su trasfondo sugiere que la concentración de recursos en áreas urbanas puede influir en la capacidad institucional, incluyendo la salud pública.",
+      "verificable_con_datos": "Se pueden analizar los indicadores de gasto en salud y porcentaje de población urbana en Chile; no se pueden medir efectos de la diplomacia o arrestos.",
+      "indicadores_respaldan": [
+        "Current health expenditure (% of GDP)",
+        "Urban population (% of total)"
+      ],
+      "correlaciones_relevantes": [
+        "Health expenditure ↔ Urban population (Chile)"
+      ],
+      "justificacion": "La base muestra una correlación casi perfecta (r=0.99) entre gasto en salud y urbanización en Chile, lo que permite una investigación focalizada en ese país.",
+      "pregunta": "¿En Chile, el mayor porcentaje de población urbana está asociado a un mayor gasto en salud como proporción del PIB?",
+      "hipotesis": "En Chile, la urbanización elevada está fuertemente correlacionada con un mayor gasto público en salud (% del PIB).",
+      "keywords_en": "health expenditure urban population Chile"
+    }
+  ],
+  "reviewDecision": {
+    "datos_correctos": false,
+    "detalle_datos": "El paper cita porcentajes de internet, gasto educativo y desempleo juvenil que coinciden con los datos reales, pero incluye valores y pruebas que no aparecen en los resultados proporcionados.",
+    "datos_inventados": [
+      "Coeficiente beta del intercepto = 167.8309 (IC95% incluye 0 pero el intervalo reportado es [-305.0622, 225.2012] que no corresponde a los resultados reales",
+      "Beta de Gasto público en educación = -23.3595 con IC95%=[-37.5955, 82.3509] que difiere del intervalo real",
+      "Menciona una regresión panel con 104 observaciones pero el paper no muestra los coeficientes exactos ni los intervalos reportados en los resultados",
+      "Cita una figura de gasto público en educación para Brasil (charts/2026-10-15-16-33/fig1_trends.png) que no corresponde a ninguna figura listada para Brasil",
+      "Afirma significancia estadística de correlaciones cuyo q‑value FDR > 0.05 (p.ej. r=-0.707, p=0.033, q_fdr=0.169)"
+    ],
+    "estructura_ok": true,
+    "coherencia_ok": true,
+    "correcciones": [
+      "Eliminar o corregir los betas e intervalos que no aparecen en los resultados reales",
+      "Reemplazar la referencia a la figura de Brasil por una figura existente o eliminarla",
+      "Reportar la significancia usando q‑value en lugar de p‑value y reconocer que no hay evidencia robusta",
+      "Ajustar la descripción de la regresión panel para que coincida con los coeficientes y estadísticos publicados",
+      "Verificar que todas las citas de fuentes sean exclusivamente del Banco Mundial y no incluyan otras instituciones"
+    ],
+    "datos_faltantes": null,
+    "veredicto": "REESCRIBIR",
+    "feedback": "Revisa cuidadosamente los valores numéricos y las pruebas estadísticas para que coincidan con los resultados oficiales. Asegúrate de citar solo las figuras y fuentes listadas en los datos proporcionados.",
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 97,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "APROBADO",
+    "checklist": {
+      "estructura_ok": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": true,
+      "datos_verificados": true,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 2143,
+    "issues": [],
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 97,
+      "invented": 0
+    }
+  },
+  "editorial": "Cuando la India instó a proteger el transporte marítimo en el Mar Negro, me pregunté: ¿Podría ser que en América Latina, un mayor acceso a internet y más inversión en educación ayuden a los jóvenes a encontrar trabajo?\n\nPara intentar responder, analizamos datos de 12 países latinoamericanos a lo largo de los años. Al observar qué pasaba dentro de cada país con",
+  "sample": {
+    "countries": [
+      "ECU",
+      "GTM",
+      "PER",
+      "ARG",
+      "CRI"
+    ],
+    "indicators": [
+      "Internet users (% of population)",
+      "Government expenditure on education (% of GDP)",
+      "Youth unemployment (% of labor force 15-24)"
+    ]
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-10-15-16-33",
+    "regression": {
+      "r_squared": 0.49916916792875077,
+      "n": 9
+    },
+    "correlations": 39,
+    "significantCorrelations": [
+      {
+        "x": "Internet users (% of population) [BRA]",
+        "y": "Government expenditure on education (% of GDP) [BRA]",
+        "r": -0.9030273789164411,
+        "p": 0.002117161622846343,
+        "q": 0.041284651645503684,
+        "diff_r": -0.06582507943988064,
+        "diff_p": 0.8884938160198247,
+        "country": "BRA"
+      },
+      {
+        "x": "Internet users (% of population) [ECU]",
+        "y": "Government expenditure on education (% of GDP) [ECU]",
+        "r": -0.8906455670212557,
+        "p": 0.0005472214697494689,
+        "q": 0.021341637320229288,
+        "diff_r": 0.20787435882122718,
+        "diff_p": 0.59147619754044,
+        "country": "ECU"
+      },
+      {
+        "x": "Government expenditure on education (% of GDP) [COL]",
+        "y": "Youth unemployment (% of labor force 15-24) [COL]",
+        "r": 0.9506412168980322,
+        "p": 0.003594308062216106,
+        "q": 0.046726004808809375,
+        "diff_r": 0.9658165683484496,
+        "diff_p": 0.007547756634125547,
+        "country": "COL"
+      }
+    ]
+  },
+  "truncations": [
+    {
+      "stage": "WRITE:apertura_metodologia",
+      "model": "openai/gpt-oss-120b",
+      "before": 6393,
+      "after": 5479,
+      "cutChars": 2653
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7497,
+      "after": 4484,
+      "cutChars": 8866
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 9760,
+      "after": 5430,
+      "cutChars": 12790
+    },
+    {
+      "stage": "WRITE:apertura_metodologia",
+      "model": "openai/gpt-oss-120b",
+      "before": 6361,
+      "after": 5463,
+      "cutChars": 2653
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7460,
+      "after": 4541,
+      "cutChars": 8720
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 9253,
+      "after": 5634,
+      "cutChars": 10811
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7414,
+      "after": 4529,
+      "cutChars": 8642
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 9483,
+      "after": 5286,
+      "cutChars": 12567
+    },
+    {
+      "stage": "EDIT",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 2400
+    },
+    {
+      "stage": "EDIT",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 2400
+    },
+    {
+      "stage": "EDIT",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 2400
+    },
+    {
+      "stage": "EDIT",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 2400
+    },
+    {
+      "stage": "EDIT",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 2400
+    },
+    {
+      "stage": "EDITORIAL",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 2000
+    }
+  ],
+  "elapsed": 607.1
+}
