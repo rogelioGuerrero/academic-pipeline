@@ -1229,7 +1229,7 @@ function computeDigest(computeResults, suggestDecision = null) {
     // Top 12: significativas FDR primero, luego ambito LCN/muestra, luego |r|.
     const fdr = c => (c.significant_fdr ?? c.significant) ? 1 : 0;
     const scopeRank = c => { const cc = _ccOf(c.x); return cc === "LCN" ? 0 : (sampleCcs.includes(cc) ? 1 : 2); };
-    const top = [...corrs].sort((a, b) => (fdr(b) - fdr(a)) || (scopeRank(a) - scopeRank(b)) || (Math.abs(b.pearson_r) - Math.abs(a.pearson_r))).slice(0, 12);
+    const top = [...corrs].sort((a, b) => (fdr(b) - fdr(a)) || (scopeRank(a) - scopeRank(b)) || (Math.abs(b.pearson_r) - Math.abs(a.pearson_r))).slice(0, 8);
     const nSigFdr = corrs.filter(c => c.significant_fdr).length;
     parts.push(`CORRELACIONES TOP ${top.length} (de ${corrs.length} calculadas, ${nSigFdr} sig. FDR):`);
     for (const c of top) {
@@ -1247,14 +1247,14 @@ function computeDigest(computeResults, suggestDecision = null) {
       && !(c.diff_significant_fdr ?? c.diff_significant));
     if (fragiles.length) {
       parts.push(`  ALERTA CO-TENDENCIA (${fragiles.length} pares significativos en niveles pero NO en diferencias — reportar como descriptivos/probablemente espurios, nunca como asociacion robusta):`);
-      for (const c of fragiles.slice(0, 8)) {
+      for (const c of fragiles.slice(0, 6)) {
         parts.push(`    ${esSeriesName(c.x.split(" [")[0])} <-> ${esSeriesName(c.y.split(" [")[0])}${_ccOf(c.x) ? ` [${_ccOf(c.x)}]` : ""}: r_nivel=${_f3(c.pearson_r)} (q=${_f3(c.pearson_q ?? c.pearson_p)}) vs r_dif=${_f3(c.diff_pearson_r)} (${c.diff_pearson_q !== undefined ? `q=${_f3(c.diff_pearson_q)}` : `p=${_f3(c.diff_pearson_p)}`})`);
       }
     }
     parts.push("⟦/KEEP⟧");
   }
 
-  const sigTrends = (computeResults.trends || []).filter(t => t.trend !== "no_trend" && relevant(t.indicator)).slice(0, 8);
+  const sigTrends = (computeResults.trends || []).filter(t => t.trend !== "no_trend" && relevant(t.indicator)).slice(0, 6);
   const anomalies = (computeResults.anomalies || []).filter(a => relevant(a.indicator)).slice(0, 4);
   if (sigTrends.length || anomalies.length) {
     parts.push("TENDENCIAS Y ANOMALIAS:");
@@ -1902,7 +1902,12 @@ SE CONCISO: el JSON completo debe caber en ~800 tokens. detalle_datos en 2 frase
 async function agentEdit(draft, review, computeResults = null) {
   // Modelo rapido: pool de TPM propio y sin gasto en reasoning_tokens — las
   // correcciones mecanicas no necesitan el razonador de 120B. Config por env.
-  const FAST_MODEL = process.env.GROQ_FAST_MODEL || "llama-3.3-70b-versatile";
+  // Default gpt-oss-20b: llama-3.3-70b-versatile fue dado de baja por Groq —
+  // cada llamada fallaba y el pipeline degradaba a Gemini (run 2026-10-15).
+  const FAST_MODEL = process.env.GROQ_FAST_MODEL || "openai/gpt-oss-20b";
+  // gpt-oss quema max_tokens en reasoning si no se pisa el esfuerzo; otros
+  // modelos (llama/qwen) rechazan el param — solo aplica a la familia oss.
+  const FAST_OPTS = FAST_MODEL.includes("gpt-oss") ? { reasoning_effort: "low" } : {};
   console.log(`[6/7] ${FAST_MODEL} editando paper...\n`);
   // Extract bibliography from original draft to re-append if EDIT truncates it
   const bibMatch = draft.match(/^## Bibliograf[\s\S]*$/m);
@@ -1962,7 +1967,7 @@ IMPORTANTE: Preserva la seccion de Bibliografia si existe, las tablas Markdown y
 Devuelve SOLO el paper final en Markdown.`;
     let data;
     try {
-      data = await callGroq(FAST_MODEL, prompt, { max_tokens: 3200, temperature: 0.5 });
+      data = await callGroq(FAST_MODEL, prompt, { max_tokens: 3200, temperature: 0.5, ...FAST_OPTS });
     } catch (e) {
       try {
         data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 3200, temperature: 0.5, reasoning_effort: "low" });
@@ -2017,7 +2022,7 @@ ${feedback}
 ${rules}
 Devuelve SOLO la seccion editada en Markdown.`;
     try {
-      const data = await callGroq(FAST_MODEL, prompt, { max_tokens: 2400, completion_floor: 900, temperature: 0.5 });
+      const data = await callGroq(FAST_MODEL, prompt, { max_tokens: 2400, completion_floor: 900, temperature: 0.5, ...FAST_OPTS });
       const ch = data.choices?.[0];
       const edited = (ch?.message?.content || "").trim();
       if (ch?.finish_reason === "length" || !edited) {
@@ -2321,10 +2326,10 @@ PROHIBIDO TERMINOS TECNICOS: no uses "coeficiente", "p-valor", "correlacion r", 
 Devuelve SOLO el texto de la columna.`;
   // Columna divulgativa: transformacion de estilo, no razonamiento — modelo
   // rapido con pool de TPM propio; fallback al 120B si el rapido no esta.
-  const FAST_MODEL = process.env.GROQ_FAST_MODEL || "llama-3.3-70b-versatile";
+  const FAST_MODEL = process.env.GROQ_FAST_MODEL || "openai/gpt-oss-20b";
   let data;
   try {
-    data = await callGroq(FAST_MODEL, prompt, { max_tokens: 2000, temperature: 0.5 });
+    data = await callGroq(FAST_MODEL, prompt, { max_tokens: 2000, temperature: 0.5, ...(FAST_MODEL.includes("gpt-oss") ? { reasoning_effort: "low" } : {}) });
   } catch {
     data = await callGroq("openai/gpt-oss-120b", prompt, { max_tokens: 2000, temperature: 0.5, reasoning_effort: "low" });
   }
