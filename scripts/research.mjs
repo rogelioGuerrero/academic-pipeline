@@ -2162,19 +2162,19 @@ function ensureTables(text, computeResults) {
     ["derived", "**Tabla 4.** Indicadores derivados (cambio anual, % cambio, CAGR)."],
   ].filter(([k]) => tables[k]);
   if (!canonical.length) return text;
-  const countRows = (s) => (s.match(/\|[^\n|]+\|[^\n|]+\|/g) || []).length;
   const section = "\n## Tablas\n\n" +
     canonical.map(([k, cap]) => `${cap}\n\n${tables[k]}`).join("\n\n") + "\n";
-  // ¿Existe ya una seccion '## Tablas'?
-  const secMatch = text.match(/\n##\s*(Tablas|Anexos?)\b([\s\S]*?)(?=\n##\s|$)/i);
+  // Canonico = contiene los captions "**Tabla N.**" que solo esta funcion
+  // inserta. El run 2026-10-16 quedo sin ## Tablas: el writer metio una tabla
+  // propia inline con 10 filas y el chequeo ">=6 filas" lo tomo como suficiente.
+  const hasCanonical = canonical.every(([, cap]) => text.includes(cap.split(".")[0] + "."));
+  const secMatch = text.match(/\n##\s*Tablas\b([\s\S]*?)(?=\n##\s|$)/i);
+  if (hasCanonical) return text;
   if (secMatch) {
-    if (countRows(secMatch[2]) >= 6) return text; // seccion completa, no tocar
-    console.log("  ensureTables: seccion Tablas vacia/rota — reconstruida desde compute.");
+    console.log("  ensureTables: '## Tablas' sin tablas canonicas — sustituida desde compute.");
     return text.replace(secMatch[0], section);
   }
-  // sin seccion: si el documento ya trae tablas reales inline, no duplicar
-  if (countRows(text) >= 6) return text;
-  console.log("  ensureTables: sin tablas en el draft — seccion anexada desde compute.");
+  console.log("  ensureTables: sin tablas canonicas en el draft — seccion anexada desde compute.");
   return text.trimEnd() + "\n" + section;
 }
 
