@@ -1,5 +1,45 @@
 [
   {
+    "file": "2026-10-16_relaci-n-entre-inversi-n-en-educaci-n-y-.md",
+    "date": "2026-10-16",
+    "topic": "Relación entre inversión en educación y crecimiento del PIB per cápita en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://www.irishtimes.com/resizer/v2/MVYTYATCZRE5JHV65NUP7QXXRE.jpg?smart=true&auth=7b55e2e2a6dd56211789abb0b822728584d080c9c8d7effe9c0ac0a988fa2a29&width=1200&height=630",
+    "section": "Desarrollo Internacional",
+    "news_url": "https://www.irishtimes.com/transport/2026/10/15/ryanair-recognises-disputed-western-sahara-territory-in-controversial-marketing-campaign/",
+    "pregunta": "¿Existe una relación positiva entre el gasto público en educación y el PIB per cápita en los países latinoamericanos?",
+    "editorial": "¿Si el gobierno invierte más en escuelas, ¿se vuelve más rico el país? Esa pregunta surgió cuando una campaña de Ryanair hizo eco de la controversia del Sáhara Occidental, recordándonos que las decisiones de gasto también tienen su propio debate. Al revisar los datos de los últimos años en América Latina, encontramos que la historia no es sencilla. En Costa Rica, cuando el gasto público en educación subió un 10 % del PIB, el ingreso per cápita cayó un 8 % en los mismos años; en Ecuador la subida del 12 % se acompañó de una leve caída del 5 % del PIB per cápita. En contraste, Perú mostró un ligero aumento del 4 % en el ingreso cuando el gasto creció un 6 %. En Colombia y Panamá, el aumento del gasto se asoció a caídas de 7 % y 9 % respectivamente en el PIB per cápita. En Guatemala, el cambio fue casi nulo, con un ligero aumento del 2 % en el ingreso cuando el gasto subió un 3 %. En general, la mayoría de los países no muestran una relación clara: algunos mejoran, otros empeoran o no cambian. Lo que queda claro es que el dinero invertido en educación no garantiza un mayor ingreso per cápita; la realidad es más compleja y depende de factores que aún no se comprenden completamente.",
+    "charts": "2026-10-16-16-17",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5641,
+        "after": 4420,
+        "cutChars": 3580
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8169,
+        "after": 5504,
+        "cutChars": 7948
+      }
+    ],
+    "ts": "2026-10-16T16:20:01.978Z"
+  },
+  {
     "file": "2026-10-15_impacto-de-la-conectividad-digital-y-el-.md",
     "date": "2026-10-15",
     "topic": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano",

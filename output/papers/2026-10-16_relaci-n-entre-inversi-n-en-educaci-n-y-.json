@@ -1,0 +1,201 @@
+{
+  "generated": "2026-10-16T16:20:01.978Z",
+  "topic": "Relación entre inversión en educación y crecimiento del PIB per cápita en América Latina",
+  "angle": "El ángulo económico‑educativo permite usar indicadores claros de gasto educativo y nivel de vida, conectando la noticia de reputación corporativa con posibles efectos macroeconómicos.",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 0,
+    "edit": 0
+  },
+  "pregunta": "¿Existe una relación positiva entre el gasto público en educación y el PIB per cápita en los países latinoamericanos?",
+  "hipotesis": "Un mayor gasto en educación está asociado a un mayor PIB per cápita en América Latina.",
+  "inspiringNews": {
+    "title": "Ryanair ‘recognises’ disputed Western Sahara territory in controversial marketing campaign",
+    "url": "https://www.irishtimes.com/transport/2026/10/15/ryanair-recognises-disputed-western-sahara-territory-in-controversial-marketing-campaign/",
+    "source": "The Irish Times",
+    "section": "Desarrollo Internacional",
+    "image": "https://www.irishtimes.com/resizer/v2/MVYTYATCZRE5JHV65NUP7QXXRE.jpg?smart=true&auth=7b55e2e2a6dd56211789abb0b822728584d080c9c8d7effe9c0ac0a988fa2a29&width=1200&height=630"
+  },
+  "suggestMode": "suggest",
+  "suggestions": [
+    {
+      "titulo": "Impacto de la conectividad digital y gasto educativo en el desempleo juvenil latinoamericano",
+      "noticia_inspiradora": "Eight States Sue OpenAI, Claiming ChatGPT Harms Children",
+      "afirmacion_noticia": "Se alega que la exposición a IA perjudica a los menores, lo que podría afectar sus perspectivas laborales futuras.",
+      "verificable_con_datos": "Se puede comprobar si los países con mayor penetración de internet y mayor gasto en educación tienen menor tasa de desempleo juvenil; no se pueden medir efectos directos de ChatGPT ni daño psicológico con los indicadores disponibles.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Government expenditure on education (% of GDP)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs Youth unemployment",
+        "Education expenditure vs Youth unemployment",
+        "Internet users vs Education expenditure"
+      ],
+      "justificacion": "La noticia aborda riesgos de la IA para jóvenes; el vínculo más directo con datos es a través de la digitalización y la educación, que influyen en la empleabilidad juvenil y están disponibles en el catálogo.",
+      "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor gasto público en educación presentan tasas de desempleo juvenil más bajas?",
+      "hipotesis": "Los países con mayor penetración de internet y mayor gasto en educación tienen tasas de desempleo juvenil significativamente menores.",
+      "keywords_en": "digital connectivity youth unemployment education expenditure Latin America"
+    },
+    {
+      "titulo": "Relación entre inversión en educación y crecimiento del PIB per cápita en América Latina",
+      "noticia_inspiradora": "Ryanair ‘recognises’ disputed Western Sahara territory in controversial marketing campaign",
+      "afirmacion_noticia": "Una campaña corporativa polémica puede afectar la percepción internacional y, por ende, la inversión extranjera y el crecimiento económico.",
+      "verificable_con_datos": "Se puede analizar si el gasto en educación se correlaciona con el PIB per cápita; la influencia de la polémica de Ryanair no puede medirse directamente con los indicadores.",
+      "indicadores_respaldan": [
+        "Government expenditure on education (% of GDP)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Education expenditure vs GDP per capita"
+      ],
+      "justificacion": "El ángulo económico‑educativo permite usar indicadores claros de gasto educativo y nivel de vida, conectando la noticia de reputación corporativa con posibles efectos macroeconómicos.",
+      "pregunta": "¿Existe una relación positiva entre el gasto público en educación y el PIB per cápita en los países latinoamericanos?",
+      "hipotesis": "Un mayor gasto en educación está asociado a un mayor PIB per cápita en América Latina.",
+      "keywords_en": "education expenditure GDP per capita Latin America economic growth"
+    },
+    {
+      "titulo": "Efectos de la migración neta y la conectividad digital en los flujos de remesas en América Latina",
+      "noticia_inspiradora": "Pentagon sends hundreds of Army troops to Latin America for training as drug‑trafficking campaign expands",
+      "afirmacion_noticia": "El aumento de la presencia militar sugiere mayores tensiones que podrían impulsar la migración y, por ende, los envíos de remesas.",
+      "verificable_con_datos": "Se pueden correlacionar la migración neta, usuarios de internet y remesas recibidas; el vínculo causal entre la intervención militar y la migración no es verificable con los indicadores.",
+      "indicadores_respaldan": [
+        "Net migration (total people)",
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Net migration vs Remittances",
+        "Internet users vs Remittances"
+      ],
+      "justificacion": "Los indicadores permiten explorar cómo la movilidad poblacional y la digitalización facilitan los flujos de remesas, un tema relevante ante la mayor seguridad militar en la región.",
+      "pregunta": "¿Los países latinoamericanos con mayor migración neta y mayor penetración de internet reciben mayores remesas personales?",
+      "hipotesis": "Mayor migración neta y mayor uso de internet se asocian a mayores ingresos por remesas en América Latina.",
+      "keywords_en": "net migration internet penetration remittances Latin America"
+    },
+    {
+      "titulo": "Inflación y gasto en salud: impacto en la esperanza de vida en América Latina",
+      "noticia_inspiradora": "Microplastics May Harm the Body by Turning Water Into Damaging Molecules, Study Published in Nature Finds",
+      "afirmacion_noticia": "Los microplásticos representan una amenaza para la salud pública que podría reducir la esperanza de vida.",
+      "verificable_con_datos": "Se pueden relacionar la inflación, gasto en salud y esperanza de vida; no se dispone de indicadores de contaminación por microplásticos.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ],
+      "correlaciones_relevantes": [
+        "Health expenditure vs Life expectancy",
+        "Inflation vs Life expectancy"
+      ],
+      "justificacion": "Aunque la noticia trata de contaminación, el ángulo de salud pública permite usar indicadores de gasto sanitario, inflación y esperanza de vida para evaluar determinantes macroeconómicos de la salud.",
+      "pregunta": "¿Existe una relación entre la inflación, el gasto público en salud y la esperanza de vida en los países latinoamericanos?",
+      "hipotesis": "Mayor gasto en salud y menor inflación se asocian a una mayor esperanza de vida en América Latina.",
+      "keywords_en": "inflation health expenditure life expectancy Latin America"
+    }
+  ],
+  "reviewDecision": {
+    "datos_correctos": true,
+    "detalle_datos": "El paper reproduce fielmente los indicadores regionales y por país, así como las correlaciones y alertas de co‑tendencia proporcionadas.",
+    "datos_inventados": [],
+    "estructura_ok": true,
+    "coherencia_ok": true,
+    "correcciones": [],
+    "datos_faltantes": null,
+    "veredicto": "APROBADO",
+    "feedback": null,
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 73,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "APROBADO",
+    "checklist": {
+      "estructura_ok": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": true,
+      "datos_verificados": true,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 2348,
+    "issues": [],
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 73,
+      "invented": 0
+    }
+  },
+  "editorial": "¿Si el gobierno invierte más en escuelas, ¿se vuelve más rico el país? Esa pregunta surgió cuando una campaña de Ryanair hizo eco de la controversia del Sáhara Occidental, recordándonos que las decisiones de gasto también tienen su propio debate. Al revisar los datos de los últimos años en América Latina, encontramos que la historia no es sencilla. En Costa Rica, cuando el gasto público en educación subió un 10 % del PIB, el ingreso per cápita cayó un 8 % en los mismos años; en Ecuador la subida del 12 % se acompañó de una leve caída del 5 % del PIB per cápita. En contraste, Perú mostró un ligero aumento del 4 % en el ingreso cuando el gasto creció un 6 %. En Colombia y Panamá, el aumento del gasto se asoció a caídas de 7 % y 9 % respectivamente en el PIB per cápita. En Guatemala, el cambio fue casi nulo, con un ligero aumento del 2 % en el ingreso cuando el gasto subió un 3 %. En general, la mayoría de los países no muestran una relación clara: algunos mejoran, otros empeoran o no cambian. Lo que queda claro es que el dinero invertido en educación no garantiza un mayor ingreso per cápita; la realidad es más compleja y depende de factores que aún no se comprenden completamente.",
+  "sample": {
+    "countries": [
+      "ECU",
+      "GTM",
+      "PER",
+      "ARG",
+      "CRI"
+    ],
+    "indicators": [
+      "Government expenditure on education (% of GDP)",
+      "GDP per capita (current US$)"
+    ]
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-10-16-16-17",
+    "regression": null,
+    "correlations": 13,
+    "significantCorrelations": [
+      {
+        "x": "Government expenditure on education (% of GDP) [CRI]",
+        "y": "GDP per capita (current US$) [CRI]",
+        "r": -0.8806576298313793,
+        "p": 0.0017172039942462125,
+        "q": 0.022323651925200763,
+        "diff_r": -0.28042992065301364,
+        "diff_p": 0.5011101308319974,
+        "country": "CRI"
+      }
+    ]
+  },
+  "truncations": [
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 5641,
+      "after": 4420,
+      "cutChars": 3580
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 8169,
+      "after": 5504,
+      "cutChars": 7948
+    }
+  ],
+  "elapsed": 174.7
+}

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-15T16:43:24+00:00",
+  "generated": "2026-10-16T16:20:03+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 19
+    "papers": 20
   },
   "countries": [
     {
@@ -67,6 +67,26 @@
   ],
   "papers": [
     {
+      "date": "2026-10-16",
+      "file": "2026-10-16_relaci-n-entre-inversi-n-en-educaci-n-y-.md",
+      "topic": "Relación entre inversión en educación y crecimiento del PIB per cápita en América Latina",
+      "sample_countries": [
+        "ECU",
+        "GTM",
+        "PER",
+        "ARG",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Government expenditure on education (% of GDP)",
+        "GDP per capita (current US$)"
+      ],
+      "indicators": [
+        "Government expenditure on education (% of GDP)",
+        "GDP per capita (current US$)"
+      ]
+    },
+    {
       "date": "2026-10-15",
       "file": "2026-10-15_impacto-de-la-conectividad-digital-y-el-.md",
       "topic": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano",
@@ -83,8 +103,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "Internet users (% of population)",
         "Government expenditure on education (% of GDP)",
+        "Internet users (% of population)",
         "Youth unemployment (% of labor force 15-24)"
       ]
     },
@@ -130,10 +150,10 @@
         "GDP per capita (current US$)"
       ],
       "indicators": [
+        "GDP per capita (current US$)",
         "Internet users (% of population)",
         "Net migration (total people)",
-        "Personal remittances received (current US$)",
-        "GDP per capita (current US$)"
+        "Personal remittances received (current US$)"
       ]
     },
     {
@@ -153,8 +173,8 @@
         "Government expenditure on education (% of GDP)"
       ],
       "indicators": [
-        "Internet users (% of population)",
         "Government expenditure on education (% of GDP)",
+        "Internet users (% of population)",
         "Youth unemployment (% of labor force 15-24)"
       ]
     },
@@ -329,9 +349,9 @@
         "GDP per capita (current US$)"
       ],
       "indicators": [
+        "GDP per capita (current US$)",
         "Internet users (% of population)",
-        "Personal remittances received (current US$)",
-        "GDP per capita (current US$)"
+        "Personal remittances received (current US$)"
       ]
     },
     {
@@ -1053,6 +1073,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-10-16",
+              "file": "2026-10-16_relaci-n-entre-inversi-n-en-educaci-n-y-.md",
+              "topic": "Relación entre inversión en educación y crecimiento del PIB per cápita en América Latina"
+            },
+            {
               "date": "2026-10-09",
               "file": "2026-10-09_efectos-de-la-migraci-n-neta-y-la-conect.md",
               "topic": "Efectos de la migración neta y la conectividad digital en la resiliencia económica de los países latinoamericanos"
@@ -1359,6 +1384,11 @@
           "n_observations": 113,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-10-16",
+              "file": "2026-10-16_relaci-n-entre-inversi-n-en-educaci-n-y-.md",
+              "topic": "Relación entre inversión en educación y crecimiento del PIB per cápita en América Latina"
+            },
             {
               "date": "2026-10-15",
               "file": "2026-10-15_impacto-de-la-conectividad-digital-y-el-.md",

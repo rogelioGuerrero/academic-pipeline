@@ -1,0 +1,84 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la conectividad digital y gasto educativo en el desempleo juvenil latinoamericano",
+      "noticia_inspiradora": "Eight States Sue OpenAI, Claiming ChatGPT Harms Children",
+      "afirmacion_noticia": "Se alega que la exposición a IA perjudica a los menores, lo que podría afectar sus perspectivas laborales futuras.",
+      "verificable_con_datos": "Se puede comprobar si los países con mayor penetración de internet y mayor gasto en educación tienen menor tasa de desempleo juvenil; no se pueden medir efectos directos de ChatGPT ni daño psicológico con los indicadores disponibles.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Government expenditure on education (% of GDP)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs Youth unemployment",
+        "Education expenditure vs Youth unemployment",
+        "Internet users vs Education expenditure"
+      ],
+      "justificacion": "La noticia aborda riesgos de la IA para jóvenes; el vínculo más directo con datos es a través de la digitalización y la educación, que influyen en la empleabilidad juvenil y están disponibles en el catálogo.",
+      "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor gasto público en educación presentan tasas de desempleo juvenil más bajas?",
+      "hipotesis": "Los países con mayor penetración de internet y mayor gasto en educación tienen tasas de desempleo juvenil significativamente menores.",
+      "keywords_en": "digital connectivity youth unemployment education expenditure Latin America"
+    },
+    {
+      "titulo": "Relación entre inversión en educación y crecimiento del PIB per cápita en América Latina",
+      "noticia_inspiradora": "Ryanair ‘recognises’ disputed Western Sahara territory in controversial marketing campaign",
+      "afirmacion_noticia": "Una campaña corporativa polémica puede afectar la percepción internacional y, por ende, la inversión extranjera y el crecimiento económico.",
+      "verificable_con_datos": "Se puede analizar si el gasto en educación se correlaciona con el PIB per cápita; la influencia de la polémica de Ryanair no puede medirse directamente con los indicadores.",
+      "indicadores_respaldan": [
+        "Government expenditure on education (% of GDP)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Education expenditure vs GDP per capita"
+      ],
+      "justificacion": "El ángulo económico‑educativo permite usar indicadores claros de gasto educativo y nivel de vida, conectando la noticia de reputación corporativa con posibles efectos macroeconómicos.",
+      "pregunta": "¿Existe una relación positiva entre el gasto público en educación y el PIB per cápita en los países latinoamericanos?",
+      "hipotesis": "Un mayor gasto en educación está asociado a un mayor PIB per cápita en América Latina.",
+      "keywords_en": "education expenditure GDP per capita Latin America economic growth"
+    },
+    {
+      "titulo": "Efectos de la migración neta y la conectividad digital en los flujos de remesas en América Latina",
+      "noticia_inspiradora": "Pentagon sends hundreds of Army troops to Latin America for training as drug‑trafficking campaign expands",
+      "afirmacion_noticia": "El aumento de la presencia militar sugiere mayores tensiones que podrían impulsar la migración y, por ende, los envíos de remesas.",
+      "verificable_con_datos": "Se pueden correlacionar la migración neta, usuarios de internet y remesas recibidas; el vínculo causal entre la intervención militar y la migración no es verificable con los indicadores.",
+      "indicadores_respaldan": [
+        "Net migration (total people)",
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Net migration vs Remittances",
+        "Internet users vs Remittances"
+      ],
+      "justificacion": "Los indicadores permiten explorar cómo la movilidad poblacional y la digitalización facilitan los flujos de remesas, un tema relevante ante la mayor seguridad militar en la región.",
+      "pregunta": "¿Los países latinoamericanos con mayor migración neta y mayor penetración de internet reciben mayores remesas personales?",
+      "hipotesis": "Mayor migración neta y mayor uso de internet se asocian a mayores ingresos por remesas en América Latina.",
+      "keywords_en": "net migration internet penetration remittances Latin America"
+    },
+    {
+      "titulo": "Inflación y gasto en salud: impacto en la esperanza de vida en América Latina",
+      "noticia_inspiradora": "Microplastics May Harm the Body by Turning Water Into Damaging Molecules, Study Published in Nature Finds",
+      "afirmacion_noticia": "Los microplásticos representan una amenaza para la salud pública que podría reducir la esperanza de vida.",
+      "verificable_con_datos": "Se pueden relacionar la inflación, gasto en salud y esperanza de vida; no se dispone de indicadores de contaminación por microplásticos.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ],
+      "correlaciones_relevantes": [
+        "Health expenditure vs Life expectancy",
+        "Inflation vs Life expectancy"
+      ],
+      "justificacion": "Aunque la noticia trata de contaminación, el ángulo de salud pública permite usar indicadores de gasto sanitario, inflación y esperanza de vida para evaluar determinantes macroeconómicos de la salud.",
+      "pregunta": "¿Existe una relación entre la inflación, el gasto público en salud y la esperanza de vida en los países latinoamericanos?",
+      "hipotesis": "Mayor gasto en salud y menor inflación se asocian a una mayor esperanza de vida en América Latina.",
+      "keywords_en": "inflation health expenditure life expectancy Latin America"
+    }
+  ],
+  "topic": "Conectividad digital, gasto educativo y desempleo juvenil en América Latina",
+  "angle": "Analizar cómo la combinación de alta penetración de internet y mayor inversión pública en educación reduce las tasas de desempleo juvenil en la región.",
+  "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor gasto público en educación presentan tasas de desempleo juvenil más bajas?",
+  "hipotesis": "Los países con mayor penetración de internet y mayor gasto en educación tienen tasas de desempleo juvenil significativamente menores.",
+  "keywords_en": "digital connectivity youth unemployment education expenditure Latin America"
+}
