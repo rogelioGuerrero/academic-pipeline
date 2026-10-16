@@ -149,6 +149,71 @@ En conclusión, la hipótesis de que “un mayor gasto en educación está asoci
 - Barro, R. J. (1991). Economic Growth in a Cross Section of Countries. *The Quarterly Journal of Economics*. https://doi.org/10.2307/2937943
 - Sahay, R., Goyal, R. (2006). Volatility and Growth in Latin America. *IMF Working Paper*. https://doi.org/10.5089/9781451865479.001
 
+## Tablas
+
+**Tabla 1.** Estadísticas descriptivas de las series analizadas.
+
+| Serie / Indicador | País / Región | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| PIB per cápita (US$ actuales) (USD) | América Latina y el Caribe (LCN) | 8,546.9 | 8,241.5 | 9,065.8 | 8,778.6 | 8,540.0 | 7,169.4 | 8,292.2 | 9,412.1 | 10,507.6 | 10,705.1 |
+| Gasto público en educación (% del PIB) (%) | América Latina y el Caribe (LCN) | 4.447 | 4.414 | 4.408 | 4.461 | 4.511 | 4.535 | 4.087 | 3.861 | 3.820 | — |
+| PIB per cápita (US$ actuales) (USD) | Argentina | 13,679.6 | 12,700.0 | 14,532.5 | 11,752.8 | 9,956.0 | 8,535.6 | 10,738.0 | 13,962.2 | 14,261.8 | 13,969.8 |
+| Gasto público en educación (% del PIB) (%) | Argentina | 5.776 | 5.545 | 5.454 | 4.878 | 4.772 | 5.277 | 4.654 | 4.793 | 5.003 | — |
+| PIB per cápita (US$ actuales) (USD) | Brasil | 8,936.2 | 8,836.3 | 10,080.5 | 9,300.7 | 9,029.8 | 7,074.2 | 7,972.5 | 9,281.3 | 10,377.6 | 10,310.5 |
+| Gasto público en educación (% del PIB) (%) | Brasil | 6.241 | 6.314 | 6.320 | 6.089 | 5.963 | 5.771 | 5.497 | 5.619 | — | — |
+| PIB per cápita (US$ actuales) (USD) | Chile | 13,433.9 | 13,649.9 | 14,879.9 | 15,659.5 | 14,496.9 | 13,118.0 | 16,216.2 | 15,399.1 | 17,081.5 | 16,659.0 |
+| Gasto público en educación (% del PIB) (%) | Chile | 4.904 | 5.366 | 5.433 | 5.473 | 5.626 | 5.630 | 5.002 | 4.912 | — | — |
+| PIB per cápita (US$ actuales) (USD) | Colombia | 6,248.5 | 5,959.8 | 6,479.5 | 6,817.0 | 6,472.5 | 5,339.7 | 6,222.6 | 6,680.4 | 7,012.5 | 7,951.1 |
+| Gasto público en educación (% del PIB) (%) | Colombia | 4.470 | 4.477 | 4.536 | 4.449 | 4.511 | 5.262 | — | — | — | — |
+| PIB per cápita (US$ actuales) (USD) | Costa Rica | 11,714.7 | 12,091.0 | 12,317.1 | 12,620.0 | 12,951.9 | 12,475.7 | 12,962.3 | 13,971.8 | 17,140.8 | 18,853.3 |
+| Gasto público en educación (% del PIB) (%) | Costa Rica | 6.873 | 6.894 | 7.070 | 6.770 | 6.738 | 6.629 | 6.248 | 5.547 | 5.312 | — |
+| PIB per cápita (US$ actuales) (USD) | República Dominicana | 6,801.0 | 7,160.4 | 7,412.7 | 7,883.0 | 8,183.0 | 7,135.2 | 8,527.1 | 10,104.2 | 10,630.4 | 10,875.7 |
+| Gasto público en educación (% del PIB) (%) | República Dominicana | 3.604 | 3.850 | 3.920 | 3.928 | 4.043 | 4.518 | 3.580 | 3.611 | 3.761 | — |
+| PIB per cápita (US$ actuales) (USD) | Ecuador | 5,976.2 | 5,917.6 | 6,233.3 | 6,303.9 | 6,205.1 | 5,463.6 | 6,061.3 | 6,515.6 | 6,718.1 | 6,826.5 |
+| Gasto público en educación (% del PIB) (%) | Ecuador | 5.106 | 4.464 | 4.607 | 4.625 | 4.246 | 4.261 | 3.656 | 3.613 | 3.820 | 3.691 |
+| PIB per cápita (US$ actuales) (USD) | Guatemala | 3,893.5 | 4,060.1 | 4,325.0 | 4,352.9 | 4,512.0 | 4,477.6 | 4,912.6 | 5,356.9 | 5,754.4 | 6,150.9 |
+| Gasto público en educación (% del PIB) (%) | Guatemala | 3.030 | 2.945 | 2.950 | 3.132 | 3.193 | 3.295 | 3.092 | 3.208 | 3.109 | 3.076 |
+| PIB per cápita (US$ actuales) (USD) | México | 10,021.2 | 9,097.9 | 9,649.3 | 10,084.8 | 10,369.6 | 8,841.3 | 10,314.1 | 11,405.8 | 13,830.8 | 13,988.0 |
+| Gasto público en educación (% del PIB) (%) | México | 5.051 | 4.758 | 4.398 | 4.139 | — | 4.500 | 4.238 | 4.060 | — | — |
+| PIB per cápita (US$ actuales) (USD) | Panamá | 14,082.7 | 14,832.4 | 15,694.6 | 16,151.3 | 16,477.9 | 13,290.6 | 15,509.8 | 17,378.6 | 18,797.2 | 19,161.2 |
+| Gasto público en educación (% del PIB) (%) | Panamá | 3.266 | 3.323 | 3.378 | 3.452 | 3.281 | 4.305 | 3.712 | 3.378 | 2.472 | — |
+| PIB per cápita (US$ actuales) (USD) | Perú | 6,231.7 | 6,217.0 | 6,736.2 | 6,978.5 | 7,037.0 | 6,133.3 | 6,828.5 | 7,353.7 | 7,919.0 | 8,526.3 |
+| Gasto público en educación (% del PIB) (%) | Perú | 3.969 | 3.813 | 3.931 | 3.714 | 3.822 | 4.259 | 3.928 | 3.840 | 4.245 | 4.358 |
+| PIB per cápita (US$ actuales) (USD) | Uruguay | 17,125.9 | 17,009.8 | 19,184.7 | 19,249.9 | 18,315.7 | 15,757.5 | 17,881.8 | 21,009.3 | 23,378.6 | 24,308.5 |
+| Gasto público en educación (% del PIB) (%) | Uruguay | 4.206 | 4.364 | 4.418 | 4.604 | 4.628 | 4.552 | 4.462 | 4.480 | 4.765 | — |
+
+**Tabla 3.** Correlaciones entre las variables del estudio.
+
+| Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | q (FDR) | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Evidencia |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | CRI | -0.881 | 0.002 | 0.022 | -0.883 | -0.280 | 0.501 | 🟡 Co-tendencia probable |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | COL | -0.836 | 0.038 | 0.125 | -0.486 | -0.829 | 0.082 | 🔴 Sin evidencia |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | PAN | -0.774 | 0.014 | 0.094 | -0.433 | -0.891 | 0.003 | 🟡 Marginal |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | LCN | -0.730 | 0.026 | 0.111 | -0.667 | -0.623 | 0.099 | 🔴 Sin evidencia |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | URY | 0.574 | 0.106 | 0.275 | 0.533 | 0.213 | 0.612 | 🔴 Sin evidencia |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | BRA | 0.548 | 0.160 | 0.297 | 0.452 | 0.477 | 0.279 | 🔴 Sin evidencia |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | MEX | -0.524 | 0.227 | 0.328 | -0.714 | 0.374 | 0.535 | 🔴 Sin evidencia |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | ECU | -0.489 | 0.152 | 0.297 | -0.418 | -0.113 | 0.772 | 🔴 Sin evidencia |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | PER | 0.450 | 0.192 | 0.312 | 0.139 | -0.427 | 0.252 | 🔴 Sin evidencia |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | DOM | -0.383 | 0.309 | 0.402 | -0.267 | -0.692 | 0.057 | 🔴 Sin evidencia |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | ARG | 0.317 | 0.406 | 0.480 | 0.367 | 0.057 | 0.894 | 🔴 Sin evidencia |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | CHL | -0.285 | 0.493 | 0.501 | -0.214 | -0.590 | 0.163 | 🔴 Sin evidencia |
+| Gasto público en educación (% del PIB) | PIB per cápita (US$ actuales) | GTM | 0.242 | 0.501 | 0.501 | 0.430 | -0.578 | 0.103 | 🔴 Sin evidencia |
+*q (FDR): p-valor ajustado por Benjamini-Hochberg sobre la familia de correlaciones del análisis — la significancia debe leerse de q, no de p.*
+
+**Tabla 4.** Indicadores derivados (cambio anual, % cambio, CAGR).
+
+| Serie | Ámbito | Inicial (año) | Final (año) | Cambio anual prom. | % cambio total | CAGR |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| PIB per cápita (US$ actuales) | América Latina y el Caribe (LCN) | 8546.92 (2015) | 10705.11 (2024) | 239.7988 | 25.25% | 2.53% |
+| Gasto público en educación (% del PIB) | América Latina y el Caribe (LCN) | 4.45 (2015) | 3.82 (2023) | -0.0785 | -14.12% | -1.88% |
+| PIB per cápita (US$ actuales) | Argentina | 13679.63 (2015) | 13969.78 (2024) | 32.2397 | 2.12% | 0.23% |
+| Gasto público en educación (% del PIB) | Argentina | 5.78 (2015) | 5.00 (2023) | -0.0966 | -13.38% | -1.78% |
+| PIB per cápita (US$ actuales) | Brasil | 8936.20 (2015) | 10310.55 (2024) | 152.7058 | 15.38% | 1.60% |
+| Gasto público en educación (% del PIB) | Brasil | 6.24 (2015) | 5.62 (2022) | -0.0888 | -9.96% | -1.49% |
+| PIB per cápita (US$ actuales) | Chile | 13433.92 (2015) | 16658.97 (2024) | 358.3383 | 24.01% | 2.42% |
+| Gasto público en educación (% del PIB) | Chile | 4.90 (2015) | 4.91 (2022) | 0.0012 | 0.17% | 0.02% |
+
 ## Anexo estadístico
 
 *Diagnósticos de robustez del modelo: no forman parte del argumento central, documentan la calidad de la estimación.*
