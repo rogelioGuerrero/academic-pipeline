@@ -15,3 +15,8 @@ output/link-report.json
 docs/test-echarts.html
 docs/test-frag.js
 docs/charts/test-echarts/
+
+# Pruebas de concepto locales (nunca se publican ni versionan)
+output/poc/
+output/charts/poc-*/
+output/raw/_poc-*
