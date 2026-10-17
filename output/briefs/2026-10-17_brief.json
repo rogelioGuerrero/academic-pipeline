@@ -1,0 +1,63 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Reducción de la deforestación amazónica y su relación con el crecimiento económico de Brasil",
+      "noticia_inspiradora": "Brazil: Amazon deforestation lowest in nearly 40 years",
+      "afirmacion_noticia": "La deforestación en la Amazonía brasileña ha alcanzado su nivel más bajo desde 1988, lo que sugiere una mejora en la gestión ambiental.",
+      "verificable_con_datos": "Se puede comprobar la asociación entre la caída de la deforestación y los indicadores macroeconómicos (GDP per capita, GDP growth, Trade % of GDP). No se dispone de datos directos de deforestación, por lo que el nivel exacto de reducción queda fuera de alcance.",
+      "indicadores_respaldan": [
+        "GDP per capita (current US$)",
+        "GDP growth (annual %)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "GDP per capita ↔ Trade % of GDP",
+        "GDP growth ↔ Trade % of GDP"
+      ],
+      "justificacion": "El sector agrícola y la extracción de recursos forestales son componentes clave del PIB y del comercio exterior de Brasil; una disminución de la deforestación probablemente refleja cambios en la producción que se reflejan en los indicadores económicos disponibles.",
+      "pregunta": "¿La reducción de la deforestación amazónica está asociada a un aumento del PIB per cápita y del comercio exterior en Brasil?",
+      "hipotesis": "Los años con menor deforestación en la Amazonía brasileña presentan mayores valores de PIB per cápita y mayor participación del comercio en el PIB.",
+      "keywords_en": "deforestation Brazil GDP per capita trade Latin America"
+    },
+    {
+      "titulo": "Impacto ambiental de la menor deforestación en la salud pública brasileña",
+      "noticia_inspiradora": "Brazil: Amazon deforestation lowest in nearly 40 years",
+      "afirmacion_noticia": "La drástica reducción de la pérdida forestal podría traducirse en mejores condiciones de salud para la población cercana a la Amazonía.",
+      "verificable_con_datos": "Se pueden analizar los indicadores de salud (Life expectancy at birth, Current health expenditure % of GDP) para observar tendencias simultáneas con la reducción de la deforestación. No se cuenta con datos de calidad del aire o enfermedades respiratorias, por lo que esos aspectos quedan fuera de alcance.",
+      "indicadores_respaldan": [
+        "Life expectancy at birth (years)",
+        "Current health expenditure (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Life expectancy ↔ Current health expenditure % of GDP"
+      ],
+      "justificacion": "Mejoras en el medio ambiente suelen asociarse a mayor esperanza de vida y a variaciones en el gasto sanitario; los indicadores de salud disponibles permiten evaluar esa relación a nivel nacional.",
+      "pregunta": "¿Los años de menor deforestación en la Amazonía coinciden con incrementos en la esperanza de vida y cambios en el gasto en salud en Brasil?",
+      "hipotesis": "Una disminución sostenida de la deforestación está correlacionada con un aumento de la esperanza de vida y con un mayor gasto público en salud en Brasil.",
+      "keywords_en": "deforestation health outcomes life expectancy Brazil"
+    },
+    {
+      "titulo": "Conectividad digital y gestión forestal: ¿Internet impulsa la vigilancia de la Amazonía?",
+      "noticia_inspiradora": "Brazil: Amazon deforestation lowest in nearly 40 years",
+      "afirmacion_noticia": "El descenso histórico de la deforestación sugiere una mayor efectividad de los sistemas de monitoreo y control ambiental.",
+      "verificable_con_datos": "Se puede contrastar la penetración de internet (Internet users % of population) con la tendencia de la deforestación, aunque no hay datos directos de deforestación; la hipótesis se verifica indirectamente mediante la asociación entre mayor conectividad y mejores indicadores de gobernanza ambiental que se reflejan en los indicadores económicos (GDP growth, Trade % of GDP). La parte exacta del mecanismo de vigilancia queda fuera de alcance.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "GDP growth (annual %)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ GDP growth",
+        "Internet users ↔ Trade % of GDP"
+      ],
+      "justificacion": "Una mayor adopción de internet facilita la implementación de tecnologías de teledetección y plataformas de reporte ciudadano, lo que puede traducirse en mejores resultados ambientales que a su vez impactan la economía nacional.",
+      "pregunta": "¿Los países latinoamericanos con mayor uso de internet presentan menores tasas de deforestación y mejores indicadores macroeconómicos?",
+      "hipotesis": "En América Latina, una mayor proporción de usuarios de internet está asociada a una reducción de la deforestación y a un crecimiento económico más sólido.",
+      "keywords_en": "internet penetration deforestation monitoring Brazil economic growth"
+    }
+  ],
+  "topic": "Relación entre la disminución de la deforestación amazónica y los indicadores macroeconómicos y de salud en Brasil",
+  "angle": "Analizar cómo la histórica reducción de la deforestación en la Amazonía brasileña se refleja en el crecimiento del PIB per cápita, el comercio exterior y la mejora de la salud pública, considerando también el papel de la conectividad digital en la vigilancia ambiental.",
+  "pregunta": "¿La reducción de la deforestación amazónica está asociada a mejoras en el PIB per cápita, el comercio exterior y la esperanza de vida en Brasil, y qué papel juega la penetración de internet en este proceso?",
+  "hipotesis": "Los años con menor deforestación en la Amazonía presentan mayores niveles de PIB per cápita, mayor participación del comercio en el PIB, mayor esperanza de vida y están correlacionados con una mayor penetración de internet en Brasil."
+}

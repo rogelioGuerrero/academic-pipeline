@@ -430,6 +430,103 @@ _Todas las figuras referenciadas corresponden a los archivos listados en la secc
 - Sahay, R., Goyal, R. (2006). Volatility and Growth in Latin America. _IMF Working Paper_. https://doi.org/10.5089/9781451865479.001
 
 
+== Tablas
+
+
+*Tabla 1.* Estadísticas descriptivas de las series analizadas.
+
+#align(center)[
+#v(6pt)
+#table(
+  columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+  fill: (col, row) => if row == 0 { rgb("#14213d") } else if calc.odd(row) { rgb("#f8fafc") } else { white },
+  stroke: (col, row) => if row == 0 { (bottom: 1.5pt + rgb("#0f172a")) } else { (bottom: 0.5pt + rgb("#e2e8f0")) },
+  inset: (x: 8pt, y: 7pt),
+  align: (col, row) => if row == 0 { center + horizon } else { left + horizon },
+  table.header(text(white, weight: "bold", size: 8.2pt)[Serie / Indicador], text(white, weight: "bold", size: 8.2pt)[País / Región], text(white, weight: "bold", size: 8.2pt)[2015], text(white, weight: "bold", size: 8.2pt)[2016], text(white, weight: "bold", size: 8.2pt)[2017], text(white, weight: "bold", size: 8.2pt)[2018], text(white, weight: "bold", size: 8.2pt)[2019], text(white, weight: "bold", size: 8.2pt)[2020], text(white, weight: "bold", size: 8.2pt)[2021], text(white, weight: "bold", size: 8.2pt)[2022], text(white, weight: "bold", size: 8.2pt)[2023], text(white, weight: "bold", size: 8.2pt)[2024]),
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[América Latina y el Caribe (LCN)], text(size: 8.2pt)[8,546.9], text(size: 8.2pt)[8,241.5], text(size: 8.2pt)[9,065.8], text(size: 8.2pt)[8,778.6], text(size: 8.2pt)[8,540.0], text(size: 8.2pt)[7,169.4], text(size: 8.2pt)[8,292.2], text(size: 8.2pt)[9,412.1], text(size: 8.2pt)[10,507.6], text(size: 8.2pt)[10,705.1],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[América Latina y el Caribe (LCN)], text(size: 8.2pt)[4.447], text(size: 8.2pt)[4.414], text(size: 8.2pt)[4.408], text(size: 8.2pt)[4.461], text(size: 8.2pt)[4.511], text(size: 8.2pt)[4.535], text(size: 8.2pt)[4.087], text(size: 8.2pt)[3.861], text(size: 8.2pt)[3.820], text(size: 8.2pt)[—],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[Argentina], text(size: 8.2pt)[13,679.6], text(size: 8.2pt)[12,700.0], text(size: 8.2pt)[14,532.5], text(size: 8.2pt)[11,752.8], text(size: 8.2pt)[9,956.0], text(size: 8.2pt)[8,535.6], text(size: 8.2pt)[10,738.0], text(size: 8.2pt)[13,962.2], text(size: 8.2pt)[14,261.8], text(size: 8.2pt)[13,969.8],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[Argentina], text(size: 8.2pt)[5.776], text(size: 8.2pt)[5.545], text(size: 8.2pt)[5.454], text(size: 8.2pt)[4.878], text(size: 8.2pt)[4.772], text(size: 8.2pt)[5.277], text(size: 8.2pt)[4.654], text(size: 8.2pt)[4.793], text(size: 8.2pt)[5.003], text(size: 8.2pt)[—],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[Brasil], text(size: 8.2pt)[8,936.2], text(size: 8.2pt)[8,836.3], text(size: 8.2pt)[10,080.5], text(size: 8.2pt)[9,300.7], text(size: 8.2pt)[9,029.8], text(size: 8.2pt)[7,074.2], text(size: 8.2pt)[7,972.5], text(size: 8.2pt)[9,281.3], text(size: 8.2pt)[10,377.6], text(size: 8.2pt)[10,310.5],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[Brasil], text(size: 8.2pt)[6.241], text(size: 8.2pt)[6.314], text(size: 8.2pt)[6.320], text(size: 8.2pt)[6.089], text(size: 8.2pt)[5.963], text(size: 8.2pt)[5.771], text(size: 8.2pt)[5.497], text(size: 8.2pt)[5.619], text(size: 8.2pt)[—], text(size: 8.2pt)[—],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[Chile], text(size: 8.2pt)[13,433.9], text(size: 8.2pt)[13,649.9], text(size: 8.2pt)[14,879.9], text(size: 8.2pt)[15,659.5], text(size: 8.2pt)[14,496.9], text(size: 8.2pt)[13,118.0], text(size: 8.2pt)[16,216.2], text(size: 8.2pt)[15,399.1], text(size: 8.2pt)[17,081.5], text(size: 8.2pt)[16,659.0],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[Chile], text(size: 8.2pt)[4.904], text(size: 8.2pt)[5.366], text(size: 8.2pt)[5.433], text(size: 8.2pt)[5.473], text(size: 8.2pt)[5.626], text(size: 8.2pt)[5.630], text(size: 8.2pt)[5.002], text(size: 8.2pt)[4.912], text(size: 8.2pt)[—], text(size: 8.2pt)[—],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[Colombia], text(size: 8.2pt)[6,248.5], text(size: 8.2pt)[5,959.8], text(size: 8.2pt)[6,479.5], text(size: 8.2pt)[6,817.0], text(size: 8.2pt)[6,472.5], text(size: 8.2pt)[5,339.7], text(size: 8.2pt)[6,222.6], text(size: 8.2pt)[6,680.4], text(size: 8.2pt)[7,012.5], text(size: 8.2pt)[7,951.1],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[Colombia], text(size: 8.2pt)[4.470], text(size: 8.2pt)[4.477], text(size: 8.2pt)[4.536], text(size: 8.2pt)[4.449], text(size: 8.2pt)[4.511], text(size: 8.2pt)[5.262], text(size: 8.2pt)[—], text(size: 8.2pt)[—], text(size: 8.2pt)[—], text(size: 8.2pt)[—],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[Costa Rica], text(size: 8.2pt)[11,714.7], text(size: 8.2pt)[12,091.0], text(size: 8.2pt)[12,317.1], text(size: 8.2pt)[12,620.0], text(size: 8.2pt)[12,951.9], text(size: 8.2pt)[12,475.7], text(size: 8.2pt)[12,962.3], text(size: 8.2pt)[13,971.8], text(size: 8.2pt)[17,140.8], text(size: 8.2pt)[18,853.3],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[Costa Rica], text(size: 8.2pt)[6.873], text(size: 8.2pt)[6.894], text(size: 8.2pt)[7.070], text(size: 8.2pt)[6.770], text(size: 8.2pt)[6.738], text(size: 8.2pt)[6.629], text(size: 8.2pt)[6.248], text(size: 8.2pt)[5.547], text(size: 8.2pt)[5.312], text(size: 8.2pt)[—],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[República Dominicana], text(size: 8.2pt)[6,801.0], text(size: 8.2pt)[7,160.4], text(size: 8.2pt)[7,412.7], text(size: 8.2pt)[7,883.0], text(size: 8.2pt)[8,183.0], text(size: 8.2pt)[7,135.2], text(size: 8.2pt)[8,527.1], text(size: 8.2pt)[10,104.2], text(size: 8.2pt)[10,630.4], text(size: 8.2pt)[10,875.7],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[República Dominicana], text(size: 8.2pt)[3.604], text(size: 8.2pt)[3.850], text(size: 8.2pt)[3.920], text(size: 8.2pt)[3.928], text(size: 8.2pt)[4.043], text(size: 8.2pt)[4.518], text(size: 8.2pt)[3.580], text(size: 8.2pt)[3.611], text(size: 8.2pt)[3.761], text(size: 8.2pt)[—],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[Ecuador], text(size: 8.2pt)[5,976.2], text(size: 8.2pt)[5,917.6], text(size: 8.2pt)[6,233.3], text(size: 8.2pt)[6,303.9], text(size: 8.2pt)[6,205.1], text(size: 8.2pt)[5,463.6], text(size: 8.2pt)[6,061.3], text(size: 8.2pt)[6,515.6], text(size: 8.2pt)[6,718.1], text(size: 8.2pt)[6,826.5],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[Ecuador], text(size: 8.2pt)[5.106], text(size: 8.2pt)[4.464], text(size: 8.2pt)[4.607], text(size: 8.2pt)[4.625], text(size: 8.2pt)[4.246], text(size: 8.2pt)[4.261], text(size: 8.2pt)[3.656], text(size: 8.2pt)[3.613], text(size: 8.2pt)[3.820], text(size: 8.2pt)[3.691],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[Guatemala], text(size: 8.2pt)[3,893.5], text(size: 8.2pt)[4,060.1], text(size: 8.2pt)[4,325.0], text(size: 8.2pt)[4,352.9], text(size: 8.2pt)[4,512.0], text(size: 8.2pt)[4,477.6], text(size: 8.2pt)[4,912.6], text(size: 8.2pt)[5,356.9], text(size: 8.2pt)[5,754.4], text(size: 8.2pt)[6,150.9],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[Guatemala], text(size: 8.2pt)[3.030], text(size: 8.2pt)[2.945], text(size: 8.2pt)[2.950], text(size: 8.2pt)[3.132], text(size: 8.2pt)[3.193], text(size: 8.2pt)[3.295], text(size: 8.2pt)[3.092], text(size: 8.2pt)[3.208], text(size: 8.2pt)[3.109], text(size: 8.2pt)[3.076],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[México], text(size: 8.2pt)[10,021.2], text(size: 8.2pt)[9,097.9], text(size: 8.2pt)[9,649.3], text(size: 8.2pt)[10,084.8], text(size: 8.2pt)[10,369.6], text(size: 8.2pt)[8,841.3], text(size: 8.2pt)[10,314.1], text(size: 8.2pt)[11,405.8], text(size: 8.2pt)[13,830.8], text(size: 8.2pt)[13,988.0],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[México], text(size: 8.2pt)[5.051], text(size: 8.2pt)[4.758], text(size: 8.2pt)[4.398], text(size: 8.2pt)[4.139], text(size: 8.2pt)[—], text(size: 8.2pt)[4.500], text(size: 8.2pt)[4.238], text(size: 8.2pt)[4.060], text(size: 8.2pt)[—], text(size: 8.2pt)[—],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[Panamá], text(size: 8.2pt)[14,082.7], text(size: 8.2pt)[14,832.4], text(size: 8.2pt)[15,694.6], text(size: 8.2pt)[16,151.3], text(size: 8.2pt)[16,477.9], text(size: 8.2pt)[13,290.6], text(size: 8.2pt)[15,509.8], text(size: 8.2pt)[17,378.6], text(size: 8.2pt)[18,797.2], text(size: 8.2pt)[19,161.2],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[Panamá], text(size: 8.2pt)[3.266], text(size: 8.2pt)[3.323], text(size: 8.2pt)[3.378], text(size: 8.2pt)[3.452], text(size: 8.2pt)[3.281], text(size: 8.2pt)[4.305], text(size: 8.2pt)[3.712], text(size: 8.2pt)[3.378], text(size: 8.2pt)[2.472], text(size: 8.2pt)[—],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[Perú], text(size: 8.2pt)[6,231.7], text(size: 8.2pt)[6,217.0], text(size: 8.2pt)[6,736.2], text(size: 8.2pt)[6,978.5], text(size: 8.2pt)[7,037.0], text(size: 8.2pt)[6,133.3], text(size: 8.2pt)[6,828.5], text(size: 8.2pt)[7,353.7], text(size: 8.2pt)[7,919.0], text(size: 8.2pt)[8,526.3],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[Perú], text(size: 8.2pt)[3.969], text(size: 8.2pt)[3.813], text(size: 8.2pt)[3.931], text(size: 8.2pt)[3.714], text(size: 8.2pt)[3.822], text(size: 8.2pt)[4.259], text(size: 8.2pt)[3.928], text(size: 8.2pt)[3.840], text(size: 8.2pt)[4.245], text(size: 8.2pt)[4.358],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales) (USD)], text(size: 8.2pt)[Uruguay], text(size: 8.2pt)[17,125.9], text(size: 8.2pt)[17,009.8], text(size: 8.2pt)[19,184.7], text(size: 8.2pt)[19,249.9], text(size: 8.2pt)[18,315.7], text(size: 8.2pt)[15,757.5], text(size: 8.2pt)[17,881.8], text(size: 8.2pt)[21,009.3], text(size: 8.2pt)[23,378.6], text(size: 8.2pt)[24,308.5],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB) (%)], text(size: 8.2pt)[Uruguay], text(size: 8.2pt)[4.206], text(size: 8.2pt)[4.364], text(size: 8.2pt)[4.418], text(size: 8.2pt)[4.604], text(size: 8.2pt)[4.628], text(size: 8.2pt)[4.552], text(size: 8.2pt)[4.462], text(size: 8.2pt)[4.480], text(size: 8.2pt)[4.765], text(size: 8.2pt)[—],
+)
+#v(6pt)
+]
+
+*Tabla 3.* Correlaciones entre las variables del estudio.
+
+#align(center)[
+#v(6pt)
+#table(
+  columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+  fill: (col, row) => if row == 0 { rgb("#14213d") } else if calc.odd(row) { rgb("#f8fafc") } else { white },
+  stroke: (col, row) => if row == 0 { (bottom: 1.5pt + rgb("#0f172a")) } else { (bottom: 0.5pt + rgb("#e2e8f0")) },
+  inset: (x: 8pt, y: 7pt),
+  align: (col, row) => if row == 0 { center + horizon } else { left + horizon },
+  table.header(text(white, weight: "bold", size: 8.2pt)[Variable X], text(white, weight: "bold", size: 8.2pt)[Variable Y], text(white, weight: "bold", size: 8.2pt)[Ámbito / País], text(white, weight: "bold", size: 8.2pt)[Pearson r], text(white, weight: "bold", size: 8.2pt)[p-valor], text(white, weight: "bold", size: 8.2pt)[q (FDR)], text(white, weight: "bold", size: 8.2pt)[Spearman ρ], text(white, weight: "bold", size: 8.2pt)[Δ Pearson (año a año)], text(white, weight: "bold", size: 8.2pt)[Δ p-valor], text(white, weight: "bold", size: 8.2pt)[Evidencia]),
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[CRI], text(size: 8.2pt)[-0.881], text(size: 8.2pt)[0.002], text(size: 8.2pt)[0.022], text(size: 8.2pt)[-0.883], text(size: 8.2pt)[-0.280], text(size: 8.2pt)[0.501], text(size: 8.2pt)[#text(fill: rgb("b8860b"))[●] Co-tendencia probable],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[COL], text(size: 8.2pt)[-0.836], text(size: 8.2pt)[0.038], text(size: 8.2pt)[0.125], text(size: 8.2pt)[-0.486], text(size: 8.2pt)[-0.829], text(size: 8.2pt)[0.082], text(size: 8.2pt)[#text(fill: rgb("c62828"))[●] Sin evidencia],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[PAN], text(size: 8.2pt)[-0.774], text(size: 8.2pt)[0.014], text(size: 8.2pt)[0.094], text(size: 8.2pt)[-0.433], text(size: 8.2pt)[-0.891], text(size: 8.2pt)[0.003], text(size: 8.2pt)[#text(fill: rgb("b8860b"))[●] Marginal],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[LCN], text(size: 8.2pt)[-0.730], text(size: 8.2pt)[0.026], text(size: 8.2pt)[0.111], text(size: 8.2pt)[-0.667], text(size: 8.2pt)[-0.623], text(size: 8.2pt)[0.099], text(size: 8.2pt)[#text(fill: rgb("c62828"))[●] Sin evidencia],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[URY], text(size: 8.2pt)[0.574], text(size: 8.2pt)[0.106], text(size: 8.2pt)[0.275], text(size: 8.2pt)[0.533], text(size: 8.2pt)[0.213], text(size: 8.2pt)[0.612], text(size: 8.2pt)[#text(fill: rgb("c62828"))[●] Sin evidencia],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[BRA], text(size: 8.2pt)[0.548], text(size: 8.2pt)[0.160], text(size: 8.2pt)[0.297], text(size: 8.2pt)[0.452], text(size: 8.2pt)[0.477], text(size: 8.2pt)[0.279], text(size: 8.2pt)[#text(fill: rgb("c62828"))[●] Sin evidencia],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[MEX], text(size: 8.2pt)[-0.524], text(size: 8.2pt)[0.227], text(size: 8.2pt)[0.328], text(size: 8.2pt)[-0.714], text(size: 8.2pt)[0.374], text(size: 8.2pt)[0.535], text(size: 8.2pt)[#text(fill: rgb("c62828"))[●] Sin evidencia],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[ECU], text(size: 8.2pt)[-0.489], text(size: 8.2pt)[0.152], text(size: 8.2pt)[0.297], text(size: 8.2pt)[-0.418], text(size: 8.2pt)[-0.113], text(size: 8.2pt)[0.772], text(size: 8.2pt)[#text(fill: rgb("c62828"))[●] Sin evidencia],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[PER], text(size: 8.2pt)[0.450], text(size: 8.2pt)[0.192], text(size: 8.2pt)[0.312], text(size: 8.2pt)[0.139], text(size: 8.2pt)[-0.427], text(size: 8.2pt)[0.252], text(size: 8.2pt)[#text(fill: rgb("c62828"))[●] Sin evidencia],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[DOM], text(size: 8.2pt)[-0.383], text(size: 8.2pt)[0.309], text(size: 8.2pt)[0.402], text(size: 8.2pt)[-0.267], text(size: 8.2pt)[-0.692], text(size: 8.2pt)[0.057], text(size: 8.2pt)[#text(fill: rgb("c62828"))[●] Sin evidencia],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[ARG], text(size: 8.2pt)[0.317], text(size: 8.2pt)[0.406], text(size: 8.2pt)[0.480], text(size: 8.2pt)[0.367], text(size: 8.2pt)[0.057], text(size: 8.2pt)[0.894], text(size: 8.2pt)[#text(fill: rgb("c62828"))[●] Sin evidencia],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[CHL], text(size: 8.2pt)[-0.285], text(size: 8.2pt)[0.493], text(size: 8.2pt)[0.501], text(size: 8.2pt)[-0.214], text(size: 8.2pt)[-0.590], text(size: 8.2pt)[0.163], text(size: 8.2pt)[#text(fill: rgb("c62828"))[●] Sin evidencia],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[GTM], text(size: 8.2pt)[0.242], text(size: 8.2pt)[0.501], text(size: 8.2pt)[0.501], text(size: 8.2pt)[0.430], text(size: 8.2pt)[-0.578], text(size: 8.2pt)[0.103], text(size: 8.2pt)[#text(fill: rgb("c62828"))[●] Sin evidencia],
+)
+#v(6pt)
+]
+_q (FDR): p-valor ajustado por Benjamini-Hochberg sobre la familia de correlaciones del análisis — la significancia debe leerse de q, no de p._
+
+*Tabla 4.* Indicadores derivados (cambio anual, % cambio, CAGR).
+
+#align(center)[
+#v(6pt)
+#table(
+  columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+  fill: (col, row) => if row == 0 { rgb("#14213d") } else if calc.odd(row) { rgb("#f8fafc") } else { white },
+  stroke: (col, row) => if row == 0 { (bottom: 1.5pt + rgb("#0f172a")) } else { (bottom: 0.5pt + rgb("#e2e8f0")) },
+  inset: (x: 8pt, y: 7pt),
+  align: (col, row) => if row == 0 { center + horizon } else { left + horizon },
+  table.header(text(white, weight: "bold", size: 8.2pt)[Serie], text(white, weight: "bold", size: 8.2pt)[Ámbito], text(white, weight: "bold", size: 8.2pt)[Inicial (año)], text(white, weight: "bold", size: 8.2pt)[Final (año)], text(white, weight: "bold", size: 8.2pt)[Cambio anual prom.], text(white, weight: "bold", size: 8.2pt)[% cambio total], text(white, weight: "bold", size: 8.2pt)[CAGR]),
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[América Latina y el Caribe (LCN)], text(size: 8.2pt)[8546.92 (2015)], text(size: 8.2pt)[10705.11 (2024)], text(size: 8.2pt)[239.7988], text(size: 8.2pt)[25.25%], text(size: 8.2pt)[2.53%],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[América Latina y el Caribe (LCN)], text(size: 8.2pt)[4.45 (2015)], text(size: 8.2pt)[3.82 (2023)], text(size: 8.2pt)[-0.0785], text(size: 8.2pt)[-14.12%], text(size: 8.2pt)[-1.88%],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[Argentina], text(size: 8.2pt)[13679.63 (2015)], text(size: 8.2pt)[13969.78 (2024)], text(size: 8.2pt)[32.2397], text(size: 8.2pt)[2.12%], text(size: 8.2pt)[0.23%],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[Argentina], text(size: 8.2pt)[5.78 (2015)], text(size: 8.2pt)[5.00 (2023)], text(size: 8.2pt)[-0.0966], text(size: 8.2pt)[-13.38%], text(size: 8.2pt)[-1.78%],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[Brasil], text(size: 8.2pt)[8936.20 (2015)], text(size: 8.2pt)[10310.55 (2024)], text(size: 8.2pt)[152.7058], text(size: 8.2pt)[15.38%], text(size: 8.2pt)[1.60%],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[Brasil], text(size: 8.2pt)[6.24 (2015)], text(size: 8.2pt)[5.62 (2022)], text(size: 8.2pt)[-0.0888], text(size: 8.2pt)[-9.96%], text(size: 8.2pt)[-1.49%],
+  text(size: 8.2pt)[PIB per cápita (US\$ actuales)], text(size: 8.2pt)[Chile], text(size: 8.2pt)[13433.92 (2015)], text(size: 8.2pt)[16658.97 (2024)], text(size: 8.2pt)[358.3383], text(size: 8.2pt)[24.01%], text(size: 8.2pt)[2.42%],
+  text(size: 8.2pt)[Gasto público en educación (% del PIB)], text(size: 8.2pt)[Chile], text(size: 8.2pt)[4.90 (2015)], text(size: 8.2pt)[4.91 (2022)], text(size: 8.2pt)[0.0012], text(size: 8.2pt)[0.17%], text(size: 8.2pt)[0.02%],
+)
+#v(6pt)
+]
+
+
 == Anexo estadístico
 
 
