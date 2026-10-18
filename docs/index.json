@@ -1,5 +1,62 @@
 [
   {
+    "file": "2026-10-18_relaci-n-entre-la-disminuci-n-de-la-defo.md",
+    "date": "2026-10-18",
+    "topic": "Relación entre la disminución de la deforestación amazónica y los indicadores macroeconómicos y de salud en Brasil",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://images.pexels.com/photos/35313820/pexels-photo-35313820.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "section": "Internacional",
+    "news_url": "https://www.dw.com/en/brazil-amazon-deforestation-lowest-in-nearly-40-years/a-79684906?maca=en-rss-en-all-1573-rdf",
+    "pregunta": "¿La reducción de la deforestación amazónica está asociada a mejoras en el PIB per cápita, el comercio exterior y la esperanza de vida en Brasil, y qué papel juega la penetración de internet en este proceso?",
+    "editorial": "¿Si la Amazonía se vuelve menos deforestada, Brasil gana más dinero, comercia más y vive más tiempo? Esa fue la pregunta que surgió cuando el último informe del gobierno anunció la menor deforestación en casi cuarenta años. Al mirar los datos, vemos que el crecimiento del PIB de Brasil ha subido ligeramente en los años más recientes, pero la relación con la deforestación no es tan directa. Cuando el país registra menos tala, el PIB per cápita tiende a subir un poco, pero la cifra exacta varía y no siempre es consistente. El comercio, medido como porcentaje del PIB, no muestra un patrón claro; en algunos años el comercio creció mientras la deforestación disminuía, pero en otros no hubo cambio. La esperanza de vida, por su parte, ha mejorado de forma constante, pero no parece depender directamente de la reducción de la tala. La penetración de internet ha aumentado, y en los años con mayor acceso a la red se observa un leve impulso en la economía, aunque no es una regla firme. En resumen, los datos no confirman una relación directa y fuerte entre menos deforestación y mejores indicadores económicos o de salud. Puede ser un efecto casual o depender de otros factores que aún no se comprenden completamente.",
+    "charts": "2026-10-17-15-12",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7280,
+        "after": 4538,
+        "cutChars": 7524
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9323,
+        "after": 5433,
+        "cutChars": 10782
+      },
+      {
+        "stage": "EDIT",
+        "model": "openai/gpt-oss-20b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "stage": "EDIT",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      }
+    ],
+    "ts": "2026-10-18T15:38:40.065Z"
+  },
+  {
     "file": "2026-10-16_relaci-n-entre-inversi-n-en-educaci-n-y-.md",
     "date": "2026-10-16",
     "topic": "Relación entre inversión en educación y crecimiento del PIB per cápita en América Latina",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-17T15:22:55+00:00",
+  "generated": "2026-10-18T15:38:43+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 20
+    "papers": 21
   },
   "countries": [
     {
@@ -67,6 +67,28 @@
   ],
   "papers": [
     {
+      "date": "2026-10-18",
+      "file": "2026-10-18_relaci-n-entre-la-disminuci-n-de-la-defo.md",
+      "topic": "Relación entre la disminución de la deforestación amazónica y los indicadores macroeconómicos y de salud en Brasil",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "GDP per capita (current US$)",
+        "GDP growth (annual %)",
+        "Trade (% of GDP)"
+      ],
+      "indicators": [
+        "GDP per capita (current US$)",
+        "GDP growth (annual %)",
+        "Trade (% of GDP)"
+      ]
+    },
+    {
       "date": "2026-10-16",
       "file": "2026-10-16_relaci-n-entre-inversi-n-en-educaci-n-y-.md",
       "topic": "Relación entre inversión en educación y crecimiento del PIB per cápita en América Latina",
@@ -82,8 +104,8 @@
         "GDP per capita (current US$)"
       ],
       "indicators": [
-        "Government expenditure on education (% of GDP)",
-        "GDP per capita (current US$)"
+        "GDP per capita (current US$)",
+        "Government expenditure on education (% of GDP)"
       ]
     },
     {
@@ -217,8 +239,8 @@
         "Inflation, consumer prices (annual %)"
       ],
       "indicators": [
-        "Renewable energy consumption (% of total final energy)",
         "GDP growth (annual %)",
+        "Renewable energy consumption (% of total final energy)",
         "Inflation, consumer prices (annual %)"
       ]
     },
@@ -239,8 +261,8 @@
         "Inflation, consumer prices (annual %)"
       ],
       "indicators": [
-        "Renewable energy consumption (% of total final energy)",
         "GDP growth (annual %)",
+        "Renewable energy consumption (% of total final energy)",
         "Inflation, consumer prices (annual %)"
       ]
     },
@@ -261,8 +283,8 @@
         "Inflation, consumer prices (annual %)"
       ],
       "indicators": [
-        "Renewable energy consumption (% of total final energy)",
         "GDP growth (annual %)",
+        "Renewable energy consumption (% of total final energy)",
         "Inflation, consumer prices (annual %)"
       ]
     },
@@ -283,8 +305,8 @@
         "Inflation, consumer prices (annual %)"
       ],
       "indicators": [
-        "Renewable energy consumption (% of total final energy)",
         "GDP growth (annual %)",
+        "Renewable energy consumption (% of total final energy)",
         "Inflation, consumer prices (annual %)"
       ]
     },
@@ -305,8 +327,8 @@
         "Inflation, consumer prices (annual %)"
       ],
       "indicators": [
-        "Renewable energy consumption (% of total final energy)",
         "GDP growth (annual %)",
+        "Renewable energy consumption (% of total final energy)",
         "Inflation, consumer prices (annual %)"
       ]
     },
@@ -977,6 +999,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-10-18",
+              "file": "2026-10-18_relaci-n-entre-la-disminuci-n-de-la-defo.md",
+              "topic": "Relación entre la disminución de la deforestación amazónica y los indicadores macroeconómicos y de salud en Brasil"
+            },
+            {
               "date": "2026-09-30",
               "file": "2026-09-30_impacto-de-la-transici-n-a-energ-as-reno.md",
               "topic": "Impacto de la transición a energías renovables sobre el crecimiento económico en América Latina"
@@ -1072,6 +1099,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-10-18",
+              "file": "2026-10-18_relaci-n-entre-la-disminuci-n-de-la-defo.md",
+              "topic": "Relación entre la disminución de la deforestación amazónica y los indicadores macroeconómicos y de salud en Brasil"
+            },
             {
               "date": "2026-10-16",
               "file": "2026-10-16_relaci-n-entre-inversi-n-en-educaci-n-y-.md",
@@ -1321,6 +1353,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-10-18",
+              "file": "2026-10-18_relaci-n-entre-la-disminuci-n-de-la-defo.md",
+              "topic": "Relación entre la disminución de la deforestación amazónica y los indicadores macroeconómicos y de salud en Brasil"
+            },
             {
               "date": "2026-09-23",
               "file": "2026-09-23_impacto-de-la-intensificaci-n-de-la-luch.md",
