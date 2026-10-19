@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-18T15:38:43+00:00",
+  "generated": "2026-10-19T18:38:46+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 21
+    "papers": 22
   },
   "countries": [
     {
@@ -67,6 +67,26 @@
   ],
   "papers": [
     {
+      "date": "2026-10-19",
+      "file": "2026-10-19_reversi-n-de-la-inversi-n-en-ia-y-su-v-n.md",
+      "topic": "Reversión de la inversión en IA y su vínculo con la participación del comercio en el PIB latinoamericano",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "indicators": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ]
+    },
+    {
       "date": "2026-10-18",
       "file": "2026-10-18_relaci-n-entre-la-disminuci-n-de-la-defo.md",
       "topic": "Relación entre la disminución de la deforestación amazónica y los indicadores macroeconómicos y de salud en Brasil",
@@ -83,9 +103,9 @@
         "Trade (% of GDP)"
       ],
       "indicators": [
-        "GDP per capita (current US$)",
+        "Trade (% of GDP)",
         "GDP growth (annual %)",
-        "Trade (% of GDP)"
+        "GDP per capita (current US$)"
       ]
     },
     {
@@ -349,8 +369,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
         "Trade (% of GDP)",
+        "GDP growth (annual %)",
         "Manufacturing, value added (% of GDP)"
       ]
     },
@@ -425,8 +445,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
         "Trade (% of GDP)",
+        "GDP growth (annual %)",
         "Manufacturing, value added (% of GDP)"
       ]
     },
@@ -999,6 +1019,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-10-19",
+              "file": "2026-10-19_reversi-n-de-la-inversi-n-en-ia-y-su-v-n.md",
+              "topic": "Reversión de la inversión en IA y su vínculo con la participación del comercio en el PIB latinoamericano"
+            },
+            {
               "date": "2026-10-18",
               "file": "2026-10-18_relaci-n-entre-la-disminuci-n-de-la-defo.md",
               "topic": "Relación entre la disminución de la deforestación amazónica y los indicadores macroeconómicos y de salud en Brasil"
@@ -1353,6 +1378,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-10-19",
+              "file": "2026-10-19_reversi-n-de-la-inversi-n-en-ia-y-su-v-n.md",
+              "topic": "Reversión de la inversión en IA y su vínculo con la participación del comercio en el PIB latinoamericano"
+            },
             {
               "date": "2026-10-18",
               "file": "2026-10-18_relaci-n-entre-la-disminuci-n-de-la-defo.md",

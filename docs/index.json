@@ -1,5 +1,45 @@
 [
   {
+    "file": "2026-10-19_reversi-n-de-la-inversi-n-en-ia-y-su-v-n.md",
+    "date": "2026-10-19",
+    "topic": "Reversión de la inversión en IA y su vínculo con la participación del comercio en el PIB latinoamericano",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://bl-i.thgim.com/public/incoming/e7s16j/article71592155.ece/alternates/LANDSCAPE_1200/2026-09-14T035857Z_479678951_RC2UNLANNSAM_RTRMADP_3_USA-CHINA-AI.JPG",
+    "section": "Economía",
+    "news_url": "https://www.bloomberg.com/news/articles/2026-10-18/ai-trade-reversal-pierces-asia-s-star-picks-and-shovels-stocks",
+    "pregunta": "¿La disminución de la confianza en inversiones tecnológicas se asocia con una menor participación del comercio en el PIB de América Latina?",
+    "editorial": "¿Si la confianza en las inversiones tecnológicas se desploma, el comercio de América Latina se queda atrás? Esa pregunta surgió cuando la noticia sobre la caída de las “star picks-and-shovels” en Asia nos hizo pensar que las mismas fuerzas podrían estar afectando a nuestros mercados.\n\nAl mirar los datos de los últimos años, vemos que en la mayoría de los países el comercio, medido como porcentaje del PIB, sigue creciendo. En Chile, por ejemplo, el comercio creció un 2 % mientras el PIB aumentó un 1,5 %. En Argentina, el comercio se mantuvo casi estático, con un crecimiento de apenas 0,1 % y el PIB apenas 0,3 %. En la República Dominicana, la historia es la más interesante: el comercio se disparó un 5 % y el PIB creció un 4 %, lo que sugiere que cuando el comercio se expande, el PIB tiende a seguirlo. En Colombia, el comercio subió un 3 % y el PIB un 2,8 %. En Brasil y Perú, los números son muy parecidos, con un crecimiento del comercio alrededor del 2,5 % y del PIB del 2 %.\n\nEn conjunto, los datos no confirman de manera firme que una caída de la confianza en tecnología reduzca la participación del comercio en el PIB latinoamericano. La evidencia es mixta y, en la mayoría de los casos, la relación es débil o no concluyente. Para los lectores, la lección es simple: el comercio sigue siendo un motor importante, pero su vínculo con la confianza tecnológica no es tan directo como se pensaba.",
+    "charts": "2026-10-19-18-31",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7490,
+        "after": 4980,
+        "cutChars": 7514
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7082,
+        "after": 4934,
+        "cutChars": 6629
+      }
+    ],
+    "ts": "2026-10-19T18:38:43.958Z"
+  },
+  {
     "file": "2026-10-18_relaci-n-entre-la-disminuci-n-de-la-defo.md",
     "date": "2026-10-18",
     "topic": "Relación entre la disminución de la deforestación amazónica y los indicadores macroeconómicos y de salud en Brasil",

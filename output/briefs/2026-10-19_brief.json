@@ -1,0 +1,64 @@
+{
+  "suggestions": [
+    {
+      "titulo": "La IA como motor de reducción del desempleo juvenil en el Caribe y América Latina",
+      "noticia_inspiradora": "AI creating workforce and ‘businesses of one’ (América Latina)",
+      "afirmacion_noticia": "Empresas privadas en Jamaica y el Caribe están integrando herramientas de IA en sus operaciones, lo que podría crear nuevas oportunidades laborales y reducir el desempleo juvenil.",
+      "verificable_con_datos": "Se pueden verificar con los indicadores de Youth unemployment (% of labor force 15-24), Internet users (% of population) y Government expenditure on education (% of GDP). No se puede medir directamente la adopción de IA ni la creación de 'businesses of one' por falta de datos específicos de IA.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
+        "Government expenditure on education (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Government expenditure on education ↔ Youth unemployment"
+      ],
+      "justificacion": "La noticia menciona adopción de IA, lo que se relaciona con la penetración digital (Internet users) y con la capacidad educativa (gasto en educación) para que la fuerza laboral aproveche esas tecnologías. Estos dominios están cubiertos por los indicadores disponibles.",
+      "pregunta": "¿Los países del Caribe y América Latina con mayor penetración de internet y mayor gasto público en educación presentan tasas de desempleo juvenil más bajas?",
+      "hipotesis": "Mayor penetración de internet y mayor gasto en educación están asociados a menores tasas de desempleo juvenil en la región.",
+      "keywords_en": "youth unemployment internet penetration education expenditure Latin America"
+    },
+    {
+      "titulo": "Impacto de la inflación de costos de vida en la vulnerabilidad del empleo juvenil en América Latina",
+      "noticia_inspiradora": "Meloni backs police after cost-of-living protests turn violent in Italian cities (Internacional)",
+      "afirmacion_noticia": "Las protestas por el alto costo de vida reflejan una presión inflacionaria que afecta a los hogares, potencialmente elevando la vulnerabilidad laboral de los jóvenes.",
+      "verificable_con_datos": "Se pueden usar los indicadores de Inflation, consumer prices (annual %), Youth unemployment (% of labor force 15-24) y Vulnerable employment (% of total employment). No se dispone de datos específicos de protestas ni de percepción de costos de vida.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Vulnerable employment (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflation ↔ Youth unemployment",
+        "Inflation ↔ Vulnerable employment"
+      ],
+      "justificacion": "Aunque la noticia es europea, el fenómeno de inflación y su efecto sobre empleo juvenil es comparable en América Latina, donde los indicadores están disponibles para analizar la relación.",
+      "pregunta": "¿Existe una relación positiva entre la inflación anual y las tasas de desempleo juvenil y empleo vulnerable en los países latinoamericanos?",
+      "hipotesis": "A mayor inflación, mayores son las tasas de desempleo juvenil y de empleo vulnerable en América Latina.",
+      "keywords_en": "inflation youth unemployment vulnerable employment Latin America"
+    },
+    {
+      "titulo": "Reversión de la inversión en IA y su vínculo con la participación del comercio en el PIB latinoamericano",
+      "noticia_inspiradora": "AI trade reversal pierces Asia’s star picks-and-shovels stocks (Economía)",
+      "afirmacion_noticia": "La caída de la inversión en tecnología de IA está reduciendo la confianza de los inversores y podría afectar la participación del comercio en el PIB de los países emergentes.",
+      "verificable_con_datos": "Se pueden analizar Trade (% of GDP) y GDP growth (annual %) como proxies de la confianza del mercado y la actividad comercial. No hay indicadores directos de inversión en IA.",
+      "indicadores_respaldan": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Trade ↔ GDP growth"
+      ],
+      "justificacion": "La noticia habla de un retroceso en la inversión en IA que afecta al comercio; aunque no hay datos de IA, los indicadores de comercio y crecimiento económico permiten evaluar si una caída en la confianza tecnológica se refleja en la actividad comercial.",
+      "pregunta": "¿La disminución de la confianza en inversiones tecnológicas se asocia con una menor participación del comercio en el PIB de América Latina?",
+      "hipotesis": "Una menor confianza en inversiones tecnológicas (reflejada en caídas de comercio) está asociada a una reducción de la participación del comercio en el PIB latinoamericano.",
+      "keywords_en": "technology investment trade share GDP growth Latin America"
+    }
+  ],
+  "topic": "Relación entre penetración digital, gasto público en educación y desempleo juvenil en América Latina",
+  "angle": "Analizar cómo la adopción de tecnologías de IA, mediada por la infraestructura digital y la inversión en educación, influye en la reducción del desempleo juvenil en la región.",
+  "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor gasto público en educación presentan tasas de desempleo juvenil significativamente menores?",
+  "hipotesis": "Un mayor nivel de penetración de internet y un mayor gasto público en educación están asociados a menores tasas de desempleo juvenil en América Latina.",
+  "keywords_en": "digital penetration education expenditure youth unemployment Latin America"
+}
