@@ -1,0 +1,63 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la inflación en el desempleo juvenil en América Latina",
+      "noticia_inspiradora": "France: Curfews issued in Paris, Nice after unrest",
+      "afirmacion_noticia": "Las protestas por el alto costo de vida en Francia indican que la inflación elevada genera malestar social y potencialmente afecta el empleo de los jóvenes.",
+      "verificable_con_datos": "Se pueden verificar la relación entre la inflación (indicador disponible) y la tasa de desempleo juvenil en los países latinoamericanos; no se pueden medir directamente los niveles de malestar social ni la causalidad específica de las protestas.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "inflation ↔ youth unemployment",
+        "inflation ↔ total unemployment"
+      ],
+      "justificacion": "La noticia aborda directamente la presión inflacionaria sobre la población; el catálogo incluye inflación y desempleo juvenil, permitiendo un análisis cuantitativo de esa relación en la región.",
+      "pregunta": "¿Existe una correlación positiva significativa entre la inflación anual y la tasa de desempleo juvenil en los países de América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayores tasas de inflación presentan tasas de desempleo juvenil más altas.",
+      "keywords_en": "inflation youth unemployment Latin America correlation"
+    },
+    {
+      "titulo": "Conectividad digital y flujos de remesas: ¿Internet impulsa la economía familiar?",
+      "noticia_inspiradora": "Bulgaria seeks suspects in Germany after Starlink sabotage",
+      "afirmacion_noticia": "El sabotaje de infraestructura de internet (Starlink) sugiere que la interrupción de la conectividad digital puede afectar actividades económicas dependientes de la red, como las remesas.",
+      "verificable_con_datos": "Se pueden comprobar las correlaciones entre usuarios de internet y remesas personales recibidas; no se puede medir directamente el impacto de un sabotaje puntual en América Latina.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ personal remittances",
+        "Internet users ↔ GDP per capita"
+      ],
+      "justificacion": "El caso de sabotaje destaca la importancia de la infraestructura digital; los datos disponibles permiten explorar cómo la penetración de internet se relaciona con los flujos de remesas, un componente clave de la economía familiar latinoamericana.",
+      "pregunta": "¿Existe una asociación positiva entre la proporción de usuarios de internet y el monto de remesas personales recibidas en los países latinoamericanos?",
+      "hipotesis": "Los países con mayor porcentaje de usuarios de internet reciben mayores remesas per cápita.",
+      "keywords_en": "internet penetration remittances Latin America economic development"
+    },
+    {
+      "titulo": "Gasto público en educación y crecimiento del PIB per cápita post‑pandemia",
+      "noticia_inspiradora": "Merchants of death: Two Finns supplying Russia's war machine",
+      "afirmacion_noticia": "El aumento de la inversión en sectores estratégicos (como defensa) plantea preguntas sobre la prioridad del gasto público; en contraste, la inversión en educación podría ser un motor de crecimiento económico.",
+      "verificable_con_datos": "Se pueden analizar la relación entre el gasto público en educación y el PIB per cápita; no se dispone de datos sobre gasto en defensa ni sobre actividades específicas de empresas.",
+      "indicadores_respaldan": [
+        "Government expenditure on education (% of GDP)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "education expenditure ↔ GDP per capita",
+        "education expenditure ↔ youth literacy rate"
+      ],
+      "justificacion": "Aunque la noticia se centra en defensa, sirve como contrapunto para investigar si el gasto en educación, otro sector público, está asociado a mejores resultados económicos en la región.",
+      "pregunta": "¿El mayor gasto gubernamental en educación está asociado a un mayor PIB per cápita en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos que destinan una mayor proporción de su PIB a la educación presentan un PIB per cápita superior.",
+      "keywords_en": "education expenditure GDP per capita Latin America development"
+    }
+  ],
+  "topic": "Relación entre conectividad digital y flujos de remesas en América Latina",
+  "angle": "Analizar cómo la penetración de internet influye en el volumen de remesas recibidas, considerando la evidencia de alta correlación observada en datos de Colombia y extrapolando a la región.",
+  "pregunta": "¿Existe una asociación positiva entre la proporción de usuarios de internet y el monto de remesas personales recibidas en los países latinoamericanos?",
+  "hipotesis": "Los países con mayor porcentaje de usuarios de internet reciben mayores remesas per cápita.",
+  "keywords_en": "internet penetration remittances economic impact Latin America"
+}
