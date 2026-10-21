@@ -11,3 +11,4 @@
 2026-10-16_relaci-n-entre-inversi-n-en-educaci-n-y-.md
 2026-10-18_relaci-n-entre-la-disminuci-n-de-la-defo.md
 2026-10-19_reversi-n-de-la-inversi-n-en-ia-y-su-v-n.md
+2026-10-21_conectividad-digital-y-flujos-de-remesas.md
