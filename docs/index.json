@@ -1,5 +1,97 @@
 [
   {
+    "file": "2026-10-21_conectividad-digital-y-flujos-de-remesas.md",
+    "date": "2026-10-21",
+    "topic": "Conectividad digital y flujos de remesas: ¿Internet impulsa la economía familiar?",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "REESCRIBIR",
+    "qa": "APROBADO",
+    "image": "https://images.pexels.com/photos/8369512/pexels-photo-8369512.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "section": "Internacional",
+    "news_url": "https://www.dw.com/en/bulgaria-seeks-suspects-in-germany-after-starlink-sabotage/a-79706745?maca=en-rss-en-all-1573-rdf",
+    "pregunta": "¿Existe una asociación positiva entre la proporción de usuarios de internet y el monto de remesas personales recibidas en los países latinoamericanos?",
+    "editorial": "¿Es verdad que los países con más gente conectada a internet reciben más remesas de sus familias en el extranjero? Esa pregunta surgió cuando, tras la noticia de Bulgaria buscando sospechosos en Alemania por sabotear Starlink, pensé en cómo la tecnología puede influir en las finanzas de las familias.  \n\nAl mirar los datos del Banco Mundial, la historia es sorprendente. En México, por ejemplo, cuando la proporción de usuarios de internet crece, el dinero que llega de familiares en el exterior también sube, casi como si la conectividad fuera un puente directo. En Guatemala y Colombia la relación es aún más fuerte: cada vez que más personas están en línea, las remesas se disparan. En Chile y Argentina la tendencia sigue la misma línea, aunque el salto no es tan marcado. Por otro lado, en Brasil y Perú la relación es más tenue; el aumento de internet no se traduce en un incremento tan claro de las remesas.  \n\nEn resumen, la mayoría de los países latinoamericanos muestran que, cuando más gente está en línea, más dinero llega a sus hogares. Pero no todos siguen la misma regla: algunos países no muestran el mismo patrón, lo que sugiere que otros factores también están en juego. Así que, aunque la conexión parece ayudar, no es una garantía absoluta.",
+    "charts": "2026-10-20-16-34",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 6705,
+        "after": 4561,
+        "cutChars": 5951
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9129,
+        "after": 4956,
+        "cutChars": 11904
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 6350,
+        "after": 4529,
+        "cutChars": 5354
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8179,
+        "after": 4930,
+        "cutChars": 9817
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 6046,
+        "after": 4520,
+        "cutChars": 4657
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7890,
+        "after": 4956,
+        "cutChars": 9094
+      },
+      {
+        "stage": "EDIT",
+        "model": "openai/gpt-oss-20b",
+        "outputTruncated": true,
+        "maxTokens": 2937
+      },
+      {
+        "stage": "EDIT",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      }
+    ],
+    "ts": "2026-10-21T16:57:49.038Z"
+  },
+  {
     "file": "2026-10-19_reversi-n-de-la-inversi-n-en-ia-y-su-v-n.md",
     "date": "2026-10-19",
     "topic": "Reversión de la inversión en IA y su vínculo con la participación del comercio en el PIB latinoamericano",

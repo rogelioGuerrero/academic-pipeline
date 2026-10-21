@@ -1,0 +1,324 @@
+{
+  "generated": "2026-10-21T16:57:49.038Z",
+  "topic": "Conectividad digital y flujos de remesas: ¿Internet impulsa la economía familiar?",
+  "angle": "El caso de sabotaje destaca la importancia de la infraestructura digital; los datos disponibles permiten explorar cómo la penetración de internet se relaciona con los flujos de remesas, un componente clave de la economía familiar latinoamericana.",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE",
+    "RESUME@qa_retry",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "EDIT",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 2,
+    "edit": 0
+  },
+  "pregunta": "¿Existe una asociación positiva entre la proporción de usuarios de internet y el monto de remesas personales recibidas en los países latinoamericanos?",
+  "hipotesis": "Los países con mayor porcentaje de usuarios de internet reciben mayores remesas per cápita.",
+  "inspiringNews": {
+    "title": "Bulgaria seeks suspects in Germany after Starlink sabotage",
+    "url": "https://www.dw.com/en/bulgaria-seeks-suspects-in-germany-after-starlink-sabotage/a-79706745?maca=en-rss-en-all-1573-rdf",
+    "source": "DW",
+    "section": "Internacional",
+    "image": "https://images.pexels.com/photos/8369512/pexels-photo-8369512.jpeg?auto=compress&cs=tinysrgb&h=350"
+  },
+  "suggestMode": "suggest",
+  "suggestions": [
+    {
+      "titulo": "Impacto de la inflación en el desempleo juvenil en América Latina",
+      "noticia_inspiradora": "France: Curfews issued in Paris, Nice after unrest",
+      "afirmacion_noticia": "Las protestas por el alto costo de vida en Francia indican que la inflación elevada genera malestar social y potencialmente afecta el empleo de los jóvenes.",
+      "verificable_con_datos": "Se pueden verificar la relación entre la inflación (indicador disponible) y la tasa de desempleo juvenil en los países latinoamericanos; no se pueden medir directamente los niveles de malestar social ni la causalidad específica de las protestas.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "inflation ↔ youth unemployment",
+        "inflation ↔ total unemployment"
+      ],
+      "justificacion": "La noticia aborda directamente la presión inflacionaria sobre la población; el catálogo incluye inflación y desempleo juvenil, permitiendo un análisis cuantitativo de esa relación en la región.",
+      "pregunta": "¿Existe una correlación positiva significativa entre la inflación anual y la tasa de desempleo juvenil en los países de América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayores tasas de inflación presentan tasas de desempleo juvenil más altas.",
+      "keywords_en": "inflation youth unemployment Latin America correlation"
+    },
+    {
+      "titulo": "Conectividad digital y flujos de remesas: ¿Internet impulsa la economía familiar?",
+      "noticia_inspiradora": "Bulgaria seeks suspects in Germany after Starlink sabotage",
+      "afirmacion_noticia": "El sabotaje de infraestructura de internet (Starlink) sugiere que la interrupción de la conectividad digital puede afectar actividades económicas dependientes de la red, como las remesas.",
+      "verificable_con_datos": "Se pueden comprobar las correlaciones entre usuarios de internet y remesas personales recibidas; no se puede medir directamente el impacto de un sabotaje puntual en América Latina.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ personal remittances",
+        "Internet users ↔ GDP per capita"
+      ],
+      "justificacion": "El caso de sabotaje destaca la importancia de la infraestructura digital; los datos disponibles permiten explorar cómo la penetración de internet se relaciona con los flujos de remesas, un componente clave de la economía familiar latinoamericana.",
+      "pregunta": "¿Existe una asociación positiva entre la proporción de usuarios de internet y el monto de remesas personales recibidas en los países latinoamericanos?",
+      "hipotesis": "Los países con mayor porcentaje de usuarios de internet reciben mayores remesas per cápita.",
+      "keywords_en": "internet penetration remittances Latin America economic development"
+    },
+    {
+      "titulo": "Gasto público en educación y crecimiento del PIB per cápita post‑pandemia",
+      "noticia_inspiradora": "Merchants of death: Two Finns supplying Russia's war machine",
+      "afirmacion_noticia": "El aumento de la inversión en sectores estratégicos (como defensa) plantea preguntas sobre la prioridad del gasto público; en contraste, la inversión en educación podría ser un motor de crecimiento económico.",
+      "verificable_con_datos": "Se pueden analizar la relación entre el gasto público en educación y el PIB per cápita; no se dispone de datos sobre gasto en defensa ni sobre actividades específicas de empresas.",
+      "indicadores_respaldan": [
+        "Government expenditure on education (% of GDP)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "education expenditure ↔ GDP per capita",
+        "education expenditure ↔ youth literacy rate"
+      ],
+      "justificacion": "Aunque la noticia se centra en defensa, sirve como contrapunto para investigar si el gasto en educación, otro sector público, está asociado a mejores resultados económicos en la región.",
+      "pregunta": "¿El mayor gasto gubernamental en educación está asociado a un mayor PIB per cápita en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos que destinan una mayor proporción de su PIB a la educación presentan un PIB per cápita superior.",
+      "keywords_en": "education expenditure GDP per capita Latin America development"
+    }
+  ],
+  "reviewDecision": {
+    "datos_correctos": false,
+    "detalle_datos": "El paper reproduce correctamente los valores regionales de internet (54,40 %‑81,70 %) y remesas (US$70,14 mil M‑165,63 mil M) y las correlaciones de nivel citadas. Sin embargo, incluye varios números que no aparecen en los datos proporcionados.",
+    "datos_inventados": [
+      "CAGR de internet para México (+3,45 %); valor de penetración de internet de Chile en 2024 (86,12 %); referencia a panel regression y coeficientes R2/betas; figura 3 que no está en la lista de figuras; menciones a países no listados (Perú, Uruguay, Guatemala, Panamá) con datos específicos; valores de remesas para México y Guatemala sin cifras en los datos; cualquier test estadístico no presente (Durbin‑Watson, White); citas de literatura con coeficientes específicos no provistos"
+    ],
+    "estructura_ok": true,
+    "coherencia_ok": false,
+    "correcciones": [
+      "Eliminar o sustentar el CAGR de internet para México; corregir la cifra de penetración de Chile a 95,59 %; suprimir referencias a panel regression y a figuras inexistentes; evitar citar datos de países que no aparecen en la tabla; no reportar valores de remesas para México y Guatemala sin respaldo; ajustar la descripción de la figura 3 o eliminarla"
+    ],
+    "datos_faltantes": null,
+    "veredicto": "REESCRIBIR",
+    "feedback": "Revise el manuscrito para que todas las cifras provengan exclusivamente de los datos y resultados listados. Corrija o elimine los valores y referencias que no están soportados por la fuente del Banco Mundial.",
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 44,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "APROBADO",
+    "checklist": {
+      "estructura_ok": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": true,
+      "datos_verificados": true,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 2019,
+    "issues": [],
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 44,
+      "invented": 0
+    }
+  },
+  "editorial": "¿Es verdad que los países con más gente conectada a internet reciben más remesas de sus familias en el extranjero? Esa pregunta surgió cuando, tras la noticia de Bulgaria buscando sospechosos en Alemania por sabotear Starlink, pensé en cómo la tecnología puede influir en las finanzas de las familias.  \n\nAl mirar los datos del Banco Mundial, la historia es sorprendente. En México, por ejemplo, cuando la proporción de usuarios de internet crece, el dinero que llega de familiares en el exterior también sube, casi como si la conectividad fuera un puente directo. En Guatemala y Colombia la relación es aún más fuerte: cada vez que más personas están en línea, las remesas se disparan. En Chile y Argentina la tendencia sigue la misma línea, aunque el salto no es tan marcado. Por otro lado, en Brasil y Perú la relación es más tenue; el aumento de internet no se traduce en un incremento tan claro de las remesas.  \n\nEn resumen, la mayoría de los países latinoamericanos muestran que, cuando más gente está en línea, más dinero llega a sus hogares. Pero no todos siguen la misma regla: algunos países no muestran el mismo patrón, lo que sugiere que otros factores también están en juego. Así que, aunque la conexión parece ayudar, no es una garantía absoluta.",
+  "sample": {
+    "countries": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "COL",
+      "CRI"
+    ],
+    "indicators": [
+      "Internet users (% of population)",
+      "Personal remittances received (current US$)"
+    ]
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-10-20-16-34",
+    "regression": null,
+    "correlations": 13,
+    "significantCorrelations": [
+      {
+        "x": "Internet users (% of population) [LCN]",
+        "y": "Personal remittances received (current US$) [LCN]",
+        "r": 0.9579958827173339,
+        "p": 0.000012944485892918865,
+        "q": 0.000056092772202648414,
+        "diff_r": -0.4450160941763666,
+        "diff_p": 0.23002330488719164,
+        "country": "LCN"
+      },
+      {
+        "x": "Internet users (% of population) [BRA]",
+        "y": "Personal remittances received (current US$) [BRA]",
+        "r": 0.8412068365552838,
+        "p": 0.0022858906798651833,
+        "q": 0.0027015071671133983,
+        "diff_r": -0.4771567840014866,
+        "diff_p": 0.1940027577853523,
+        "country": "BRA"
+      },
+      {
+        "x": "Internet users (% of population) [MEX]",
+        "y": "Personal remittances received (current US$) [MEX]",
+        "r": 0.9395589058386018,
+        "p": 0.000054256854179076656,
+        "q": 0.00017633477608199914,
+        "diff_r": 0.081137228083318,
+        "diff_p": 0.8356127075036964,
+        "country": "MEX"
+      },
+      {
+        "x": "Internet users (% of population) [COL]",
+        "y": "Personal remittances received (current US$) [COL]",
+        "r": 0.9588247314596907,
+        "p": 0.000011964698297861533,
+        "q": 0.000056092772202648414,
+        "diff_r": -0.23630806046491082,
+        "diff_p": 0.5404398853530322,
+        "country": "COL"
+      },
+      {
+        "x": "Internet users (% of population) [ARG]",
+        "y": "Personal remittances received (current US$) [ARG]",
+        "r": 0.9021898078949157,
+        "p": 0.0003553093960085451,
+        "q": 0.0006598603068730123,
+        "diff_r": -0.025071743510399633,
+        "diff_p": 0.9489510108103937,
+        "country": "ARG"
+      },
+      {
+        "x": "Internet users (% of population) [PER]",
+        "y": "Personal remittances received (current US$) [PER]",
+        "r": 0.8592708344127444,
+        "p": 0.001442852093279192,
+        "q": 0.0018757077212629494,
+        "diff_r": -0.0844641857143644,
+        "diff_p": 0.82895067129404,
+        "country": "PER"
+      },
+      {
+        "x": "Internet users (% of population) [CHL]",
+        "y": "Personal remittances received (current US$) [CHL]",
+        "r": 0.8681631573285888,
+        "p": 0.0011238515504249165,
+        "q": 0.001623341128391546,
+        "diff_r": 0.1532395440581502,
+        "diff_p": 0.6938674696844604,
+        "country": "CHL"
+      },
+      {
+        "x": "Internet users (% of population) [ECU]",
+        "y": "Personal remittances received (current US$) [ECU]",
+        "r": 0.8958889859293944,
+        "p": 0.00045253025911007495,
+        "q": 0.0007353616710538718,
+        "diff_r": -0.3586510357744587,
+        "diff_p": 0.3432176875140618,
+        "country": "ECU"
+      }
+    ]
+  },
+  "truncations": [
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 6705,
+      "after": 4561,
+      "cutChars": 5951
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 9129,
+      "after": 4956,
+      "cutChars": 11904
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 6350,
+      "after": 4529,
+      "cutChars": 5354
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 8179,
+      "after": 4930,
+      "cutChars": 9817
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 6046,
+      "after": 4520,
+      "cutChars": 4657
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 7890,
+      "after": 4956,
+      "cutChars": 9094
+    },
+    {
+      "stage": "EDIT",
+      "model": "openai/gpt-oss-20b",
+      "outputTruncated": true,
+      "maxTokens": 2937
+    },
+    {
+      "stage": "EDIT",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    }
+  ],
+  "elapsed": 451
+}

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-20T16:43:23+00:00",
+  "generated": "2026-10-21T16:57:52+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 22
+    "papers": 23
   },
   "countries": [
     {
@@ -66,6 +66,26 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-10-21",
+      "file": "2026-10-21_conectividad-digital-y-flujos-de-remesas.md",
+      "topic": "Conectividad digital y flujos de remesas: ¿Internet impulsa la economía familiar?",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ],
+      "indicators": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ]
+    },
     {
       "date": "2026-10-19",
       "file": "2026-10-19_reversi-n-de-la-inversi-n-en-ia-y-su-v-n.md",
@@ -145,8 +165,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "Government expenditure on education (% of GDP)",
         "Internet users (% of population)",
+        "Government expenditure on education (% of GDP)",
         "Youth unemployment (% of labor force 15-24)"
       ]
     },
@@ -192,10 +212,10 @@
         "GDP per capita (current US$)"
       ],
       "indicators": [
-        "GDP per capita (current US$)",
         "Internet users (% of population)",
-        "Net migration (total people)",
-        "Personal remittances received (current US$)"
+        "Personal remittances received (current US$)",
+        "GDP per capita (current US$)",
+        "Net migration (total people)"
       ]
     },
     {
@@ -215,8 +235,8 @@
         "Government expenditure on education (% of GDP)"
       ],
       "indicators": [
-        "Government expenditure on education (% of GDP)",
         "Internet users (% of population)",
+        "Government expenditure on education (% of GDP)",
         "Youth unemployment (% of labor force 15-24)"
       ]
     },
@@ -391,9 +411,9 @@
         "GDP per capita (current US$)"
       ],
       "indicators": [
-        "GDP per capita (current US$)",
         "Internet users (% of population)",
-        "Personal remittances received (current US$)"
+        "Personal remittances received (current US$)",
+        "GDP per capita (current US$)"
       ]
     },
     {
@@ -1323,6 +1343,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-10-21",
+              "file": "2026-10-21_conectividad-digital-y-flujos-de-remesas.md",
+              "topic": "Conectividad digital y flujos de remesas: ¿Internet impulsa la economía familiar?"
+            },
+            {
               "date": "2026-10-09",
               "file": "2026-10-09_efectos-de-la-migraci-n-neta-y-la-conect.md",
               "topic": "Efectos de la migración neta y la conectividad digital en la resiliencia económica de los países latinoamericanos"
@@ -1654,6 +1679,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-10-21",
+              "file": "2026-10-21_conectividad-digital-y-flujos-de-remesas.md",
+              "topic": "Conectividad digital y flujos de remesas: ¿Internet impulsa la economía familiar?"
+            },
             {
               "date": "2026-10-15",
               "file": "2026-10-15_impacto-de-la-conectividad-digital-y-el-.md",
