@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-21T16:57:52+00:00",
+  "generated": "2026-10-22T17:04:20+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 23
+    "papers": 24
   },
   "countries": [
     {
@@ -66,6 +66,26 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-10-22",
+      "file": "2026-10-22_relaci-n-entre-inversi-n-extranjera-y-co.md",
+      "topic": "Relación entre inversión extranjera y comercio en tiempos de conflicto geopolítico",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ],
+      "indicators": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ]
+    },
     {
       "date": "2026-10-21",
       "file": "2026-10-21_conectividad-digital-y-flujos-de-remesas.md",
@@ -992,7 +1012,13 @@
           "year_to": 2024,
           "n_observations": 130,
           "n_observations_expected": 130,
-          "papers": []
+          "papers": [
+            {
+              "date": "2026-10-22",
+              "file": "2026-10-22_relaci-n-entre-inversi-n-extranjera-y-co.md",
+              "topic": "Relación entre inversión extranjera y comercio en tiempos de conflicto geopolítico"
+            }
+          ]
         },
         {
           "code": "NY.GDP.MKTP.KD.ZG",
@@ -1403,6 +1429,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-10-22",
+              "file": "2026-10-22_relaci-n-entre-inversi-n-extranjera-y-co.md",
+              "topic": "Relación entre inversión extranjera y comercio en tiempos de conflicto geopolítico"
+            },
             {
               "date": "2026-10-19",
               "file": "2026-10-19_reversi-n-de-la-inversi-n-en-ia-y-su-v-n.md",

@@ -1,5 +1,45 @@
 [
   {
+    "file": "2026-10-22_relaci-n-entre-inversi-n-extranjera-y-co.md",
+    "date": "2026-10-22",
+    "topic": "Relación entre inversión extranjera y comercio en tiempos de conflicto geopolítico",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://img.haarets.co.il/bs/000001a1-5cd6-d99f-a3e5-7df7c3350000/47/16/9ad3281c425692f55ba621b2ab3e/bb.PNG?&width=1200&height=630&cmsprod",
+    "section": "Política",
+    "news_url": "https://www.haaretz.com/middle-east-news/iran/2026-10-21/ty-article/report-trump-opposed-netanyahus-proposed-early-october-strikes-on-iran/000001a1-5cd6-d99f-a3e5-7df7c3350000",
+    "pregunta": "¿Los aumentos de tensiones geopolíticas se traducen en una disminución de la inversión extranjera y la participación del comercio en el PIB de los países latinoamericanos?",
+    "editorial": "¿Y si la tensión entre potencias fuera la razón por la que los países latinoamericanos dejan de atraer inversiones y de comerciar como antes? Esa pregunta surgió cuando se vio que el presidente Trump se opuso a las posibles ofensivas de Netanyahu contra Irán, y de inmediato muchos se preguntaron si el aumento de la incertidumbre internacional se traduce en menor flujo de dinero y comercio para la región.\n\nAl mirar los datos, la historia no es la de un único patrón. En Colombia, cuando la inversión extranjera sube, el comercio también tiende a crecer, aunque la relación no es tan fuerte. En Chile y Brasil la relación se vuelve más incierta: a veces la inversión y el comercio se mueven en direcciones opuestas. En Argentina y Perú los números no muestran una tendencia clara, como si el clima político no afectara de forma directa. Lo que sí destaca es que, en general, cuando la inversión neta aumenta, el comercio también suele subir, especialmente en países donde la economía está más abierta. \n\nEn resumen, la idea de que la tensión global siempre “corta” la inversión y el comercio no se sostiene de forma uniforme. Algunos países siguen vinculados, mientras que otros parecen indiferentes. Los datos no confirman una regla universal, pero sí sugieren que la relación entre inversión y comercio varía mucho según la nación.",
+    "charts": "2026-10-22-17-01",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5552,
+        "after": 4455,
+        "cutChars": 3213
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7936,
+        "after": 5555,
+        "cutChars": 7113
+      }
+    ],
+    "ts": "2026-10-22T17:04:18.429Z"
+  },
+  {
     "file": "2026-10-21_conectividad-digital-y-flujos-de-remesas.md",
     "date": "2026-10-21",
     "topic": "Conectividad digital y flujos de remesas: ¿Internet impulsa la economía familiar?",

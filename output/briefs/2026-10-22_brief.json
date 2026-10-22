@@ -1,0 +1,86 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la conectividad digital y gasto educativo en el desempleo juvenil en América Latina",
+      "noticia_inspiradora": "Man Sentenced in Migrant 'Death Trailer' Tragedy",
+      "afirmacion_noticia": "La tragedia migratoria evidencia la vulnerabilidad de jóvenes sin oportunidades económicas, lo que sugiere que mejorar educación y conectividad podría reducir el desempleo juvenil.",
+      "verificable_con_datos": "Se pueden medir los niveles de Internet users (% of population) y Government expenditure on education (% of GDP) y compararlos con Youth unemployment (% of labor force 15-24). No se pueden validar causas específicas de la migración ni factores políticos o de seguridad.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Government expenditure on education (% of GDP)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs Youth unemployment",
+        "Government expenditure on education vs Youth unemployment",
+        "Internet users vs Government expenditure on education"
+      ],
+      "justificacion": "Existe evidencia previa (memoria de investigaciones) de que la conectividad digital y el gasto educativo influyen en el desempleo juvenil; la noticia brinda un contexto social que motiva explorar esa relación con datos disponibles.",
+      "pregunta": "¿Los países latinoamericanos con mayor penetración de internet y mayor gasto en educación presentan tasas de desempleo juvenil más bajas?",
+      "hipotesis": "En América Latina, una mayor proporción de usuarios de internet y un mayor gasto público en educación se asocian a menores tasas de desempleo juvenil.",
+      "keywords_en": "digital connectivity youth unemployment education spending Latin America"
+    },
+    {
+      "titulo": "Relación entre inversión extranjera y comercio en tiempos de conflicto geopolítico",
+      "noticia_inspiradora": "Report: Trump opposed Netanyahu's proposed early October strikes on Iran",
+      "afirmacion_noticia": "Las tensiones internacionales pueden afectar la confianza de inversionistas y la participación del comercio en el PIB.",
+      "verificable_con_datos": "Se pueden medir Foreign direct investment, net inflows (% of GDP) y Trade (% of GDP). No se pueden cuantificar la postura política de EE. UU. ni decisiones militares específicas.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI inflows vs Trade share of GDP"
+      ],
+      "justificacion": "Aunque la noticia es política, el vínculo entre tensión geopolítica y flujos económicos es mensurable mediante indicadores de comercio e inversión extranjera.",
+      "pregunta": "¿Los aumentos de tensiones geopolíticas se traducen en una disminución de la inversión extranjera y la participación del comercio en el PIB de los países latinoamericanos?",
+      "hipotesis": "En períodos de mayor tensión geopolítica, los países latinoamericanos experimentan una caída en la inversión extranjera neta y en la participación del comercio en el PIB.",
+      "keywords_en": "geopolitical tension foreign direct investment trade share GDP Latin America"
+    },
+    {
+      "titulo": "Efectos de la inflación y gasto en salud sobre la esperanza de vida en América Latina",
+      "noticia_inspiradora": "OpenAI says its agents turned off own safeguards",
+      "afirmacion_noticia": "Los fallos de sistemas críticos (como IA) resaltan la necesidad de fortalecer sistemas de salud y control de precios para proteger la población.",
+      "verificable_con_datos": "Se pueden observar Inflation, consumer prices (annual %) y Current health expenditure (% of GDP) junto a Life expectancy at birth (years). No se pueden validar directamente los incidentes de IA ni su impacto social.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ],
+      "correlaciones_relevantes": [
+        "Health expenditure vs Life expectancy",
+        "Inflation vs Life expectancy",
+        "Inflation vs Health expenditure"
+      ],
+      "justificacion": "La noticia tecnológica sirve como disparador para investigar cómo la calidad y financiación del sistema de salud, en un contexto de inflación, afecta la longevidad, usando indicadores disponibles.",
+      "pregunta": "¿Una mayor inversión en salud y menores tasas de inflación se asocian a mayor esperanza de vida en los países latinoamericanos?",
+      "hipotesis": "En América Latina, mayores gastos en salud y menores niveles de inflación están correlacionados con una mayor esperanza de vida.",
+      "keywords_en": "health expenditure inflation life expectancy Latin America"
+    },
+    {
+      "titulo": "Conexión entre remesas, uso de internet y pobreza en Colombia",
+      "noticia_inspiradora": "Man Sentenced in Migrant 'Death Trailer' Tragedy",
+      "afirmacion_noticia": "La vulnerabilidad económica de migrantes sugiere que las remesas y la conectividad pueden ser claves para reducir la pobreza.",
+      "verificable_con_datos": "Se pueden analizar Personal remittances received (current US$), Internet users (% of population) y Poverty headcount ratio at $2.15 a day (2017 PPP, % of population). No se pueden medir factores migratorios específicos ni decisiones judiciales.",
+      "indicadores_respaldan": [
+        "Personal remittances received (current US$)",
+        "Internet users (% of population)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Remittances vs Poverty headcount",
+        "Internet users vs Remittances",
+        "Internet users vs Poverty headcount"
+      ],
+      "justificacion": "Ya existe evidencia de alta correlación entre internet y remesas en Colombia; la noticia brinda contexto social para explorar su relación con la pobreza.",
+      "pregunta": "¿En Colombia, mayores flujos de remesas y mayor penetración de internet están asociados a menores tasas de pobreza extrema?",
+      "hipotesis": "En Colombia, un mayor nivel de usuarios de internet y mayores remesas per cápita se correlacionan con una reducción del índice de pobreza extrema.",
+      "keywords_en": "remittances internet penetration poverty Colombia"
+    }
+  ],
+  "topic": "Conectividad digital, gasto educativo y desempleo juvenil en América Latina",
+  "angle": "Analizar cómo la combinación de mayor acceso a internet y mayor inversión pública en educación se traduce en menores tasas de desempleo juvenil, ofreciendo evidencia cuantitativa para políticas de desarrollo humano.",
+  "pregunta": "¿Los países latinoamericanos con mayor penetración de internet y mayor gasto público en educación presentan tasas de desempleo juvenil más bajas?",
+  "hipotesis": "En América Latina, una mayor proporción de usuarios de internet y un mayor gasto en educación pública están asociados a menores tasas de desempleo juvenil.",
+  "keywords_en": "digital connectivity education spending youth unemployment Latin America"
+}
