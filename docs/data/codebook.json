@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-22T17:04:20+00:00",
+  "generated": "2026-10-23T16:46:07+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 24
+    "papers": 25
   },
   "countries": [
     {
@@ -66,6 +66,26 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-10-23",
+      "file": "2026-10-23_impacto-de-la-inseguridad-en-la-inversi-.md",
+      "topic": "Impacto de la inseguridad en la inversión extranjera y el comercio en América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ],
+      "indicators": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ]
+    },
     {
       "date": "2026-10-22",
       "file": "2026-10-22_relaci-n-entre-inversi-n-extranjera-y-co.md",
@@ -1014,6 +1034,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-10-23",
+              "file": "2026-10-23_impacto-de-la-inseguridad-en-la-inversi-.md",
+              "topic": "Impacto de la inseguridad en la inversión extranjera y el comercio en América Latina"
+            },
+            {
               "date": "2026-10-22",
               "file": "2026-10-22_relaci-n-entre-inversi-n-extranjera-y-co.md",
               "topic": "Relación entre inversión extranjera y comercio en tiempos de conflicto geopolítico"
@@ -1429,6 +1454,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-10-23",
+              "file": "2026-10-23_impacto-de-la-inseguridad-en-la-inversi-.md",
+              "topic": "Impacto de la inseguridad en la inversión extranjera y el comercio en América Latina"
+            },
             {
               "date": "2026-10-22",
               "file": "2026-10-22_relaci-n-entre-inversi-n-extranjera-y-co.md",

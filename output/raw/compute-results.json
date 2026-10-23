@@ -3815,7 +3815,7 @@
     {
       "x": "Foreign direct investment, net inflows (% of GDP) [LCN]",
       "y": "Trade (% of GDP) [LCN]",
-      "pearson_r": -0.20757685765892583,
+      "pearson_r": -0.2075768576589258,
       "pearson_p": 0.5649902211115584,
       "pearson_ci_95": [
         -0.740437945464225,
@@ -3891,7 +3891,7 @@
     {
       "x": "Foreign direct investment, net inflows (% of GDP) [MEX]",
       "y": "Trade (% of GDP) [MEX]",
-      "pearson_r": 0.053294953520569247,
+      "pearson_r": 0.05329495352056924,
       "pearson_p": 0.8837478611739048,
       "pearson_ci_95": [
         -0.5963509184882859,
@@ -3967,7 +3967,7 @@
     {
       "x": "Foreign direct investment, net inflows (% of GDP) [ARG]",
       "y": "Trade (% of GDP) [ARG]",
-      "pearson_r": -0.12098616043634883,
+      "pearson_r": -0.12098616043634884,
       "pearson_p": 0.739182829329303,
       "pearson_ci_95": [
         -0.697488083483755,
@@ -4005,10 +4005,10 @@
     {
       "x": "Foreign direct investment, net inflows (% of GDP) [PER]",
       "y": "Trade (% of GDP) [PER]",
-      "pearson_r": 0.3547570511153417,
+      "pearson_r": 0.3547570511153418,
       "pearson_p": 0.3144805641817368,
       "pearson_ci_95": [
-        -0.3539349551024005,
+        -0.35393495510240036,
         0.8046574239631333
       ],
       "spearman_rho": 0.2121212121212121,
@@ -4046,7 +4046,7 @@
       "pearson_r": 0.42802431549624026,
       "pearson_p": 0.21719889892079577,
       "pearson_ci_95": [
-        -0.2759889016643592,
+        -0.27598890166435924,
         0.8331309670198805
       ],
       "spearman_rho": 0.4787878787878787,
@@ -4067,7 +4067,7 @@
       ],
       "units": "% vs %",
       "country": "CHL",
-      "diff_pearson_r": 0.3042882412622041,
+      "diff_pearson_r": 0.30428824126220416,
       "diff_pearson_p": 0.42596878591385656,
       "diff_n": 9,
       "diff_significant": false,
@@ -4081,11 +4081,11 @@
     {
       "x": "Foreign direct investment, net inflows (% of GDP) [ECU]",
       "y": "Trade (% of GDP) [ECU]",
-      "pearson_r": -0.4743209366518171,
+      "pearson_r": -0.47432093665181707,
       "pearson_p": 0.1660344376031406,
       "pearson_ci_95": [
         -0.8500800405427215,
-        0.22144909319529624
+        0.22144909319529635
       ],
       "spearman_rho": -0.4424242424242424,
       "spearman_p": 0.20042268671194213,
@@ -4143,7 +4143,7 @@
       ],
       "units": "% vs %",
       "country": "GTM",
-      "diff_pearson_r": 0.2296348137423229,
+      "diff_pearson_r": 0.22963481374232292,
       "diff_pearson_p": 0.552264177123751,
       "diff_n": 9,
       "diff_significant": false,
@@ -4157,7 +4157,7 @@
     {
       "x": "Foreign direct investment, net inflows (% of GDP) [DOM]",
       "y": "Trade (% of GDP) [DOM]",
-      "pearson_r": 0.0905281977051325,
+      "pearson_r": 0.09052819770513251,
       "pearson_p": 0.8035845324133395,
       "pearson_ci_95": [
         -0.571692613644097,
@@ -4233,10 +4233,10 @@
     {
       "x": "Foreign direct investment, net inflows (% of GDP) [PAN]",
       "y": "Trade (% of GDP) [PAN]",
-      "pearson_r": 0.6323224849425048,
-      "pearson_p": 0.04979845432227354,
+      "pearson_r": 0.6323224849425049,
+      "pearson_p": 0.049798454322273436,
       "pearson_ci_95": [
-        0.004466043644874166,
+        0.004466043644874277,
         0.9026021472895263
       ],
       "spearman_rho": 0.5515151515151515,
@@ -4261,7 +4261,7 @@
       "diff_pearson_p": 0.07423522836826359,
       "diff_n": 9,
       "diff_significant": false,
-      "pearson_q": 0.323689953094778,
+      "pearson_q": 0.3236899530947773,
       "significant_fdr": false,
       "diff_pearson_q": 0.17393961349068063,
       "diff_significant_fdr": false,
@@ -17361,5 +17361,5 @@
     "correlations": "| Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | q (FDR) | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Evidencia |\n|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | CRI | 0.887 | 0.001 | 0.008 | 0.806 | 0.941 | 0.000 | 🟢 Robusta |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | PAN | 0.632 | 0.050 | 0.324 | 0.552 | 0.621 | 0.074 | 🔴 Sin evidencia |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | ECU | -0.474 | 0.166 | 0.469 | -0.442 | 0.230 | 0.551 | 🔴 Sin evidencia |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | COL | 0.465 | 0.176 | 0.469 | 0.370 | 0.611 | 0.081 | 🔴 Sin evidencia |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | URY | 0.434 | 0.210 | 0.469 | 0.042 | 0.663 | 0.052 | 🔴 Sin evidencia |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | CHL | 0.428 | 0.217 | 0.469 | 0.479 | 0.304 | 0.426 | 🔴 Sin evidencia |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | BRA | -0.400 | 0.253 | 0.469 | -0.297 | 0.324 | 0.396 | 🔴 Sin evidencia |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | PER | 0.355 | 0.314 | 0.511 | 0.212 | 0.907 | 0.001 | 🔴 Sin evidencia |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | GTM | 0.282 | 0.429 | 0.620 | 0.552 | 0.230 | 0.552 | 🔴 Sin evidencia |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | LCN | -0.208 | 0.565 | 0.734 | -0.297 | 0.641 | 0.063 | 🔴 Sin evidencia |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | ARG | -0.121 | 0.739 | 0.871 | -0.079 | -0.484 | 0.187 | 🔴 Sin evidencia |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | DOM | 0.091 | 0.804 | 0.871 | -0.079 | -0.112 | 0.774 | 🔴 Sin evidencia |\n| Inversión extranjera directa, flujos netos (% del PIB) | Comercio (% del PIB) | MEX | 0.053 | 0.884 | 0.884 | -0.018 | 0.591 | 0.094 | 🔴 Sin evidencia |\n*q (FDR): p-valor ajustado por Benjamini-Hochberg sobre la familia de correlaciones del análisis — la significancia debe leerse de q, no de p.*",
     "derived": "| Serie | Ámbito | Inicial (año) | Final (año) | Cambio anual prom. | % cambio total | CAGR |\n|:---|:---:|:---:|:---:|:---:|:---:|:---:|\n| Inversión extranjera directa, flujos netos (% del PIB) | América Latina y el Caribe (LCN) | 5.02 (2015) | 2.87 (2024) | -0.2385 | -42.75% | -6.01% |\n| Comercio (% del PIB) | América Latina y el Caribe (LCN) | 44.99 (2015) | 49.65 (2024) | 0.5178 | 10.36% | 1.10% |\n| Inversión extranjera directa, flujos netos (% del PIB) | Argentina | 1.98 (2015) | 1.82 (2024) | -0.0170 | -7.74% | -0.89% |\n| Comercio (% del PIB) | Argentina | 22.49 (2015) | 27.93 (2024) | 0.6048 | 24.21% | 2.44% |\n| Inversión extranjera directa, flujos netos (% del PIB) | Brasil | 3.59 (2015) | 3.39 (2024) | -0.0225 | -5.64% | -0.64% |\n| Comercio (% del PIB) | Brasil | 26.95 (2015) | 35.58 (2024) | 0.9590 | 32.02% | 3.13% |\n| Inversión extranjera directa, flujos netos (% del PIB) | Chile | 7.33 (2015) | 3.98 (2024) | -0.3720 | -45.69% | -6.56% |\n| Comercio (% del PIB) | Chile | 59.35 (2015) | 63.96 (2024) | 0.5121 | 7.77% | 0.83% |"
   },
-  "chartsDir": "2026-10-22-17-01"
+  "chartsDir": "2026-10-23-16-41"
 }

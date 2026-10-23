@@ -1,5 +1,59 @@
 [
   {
+    "file": "2026-10-23_impacto-de-la-inseguridad-en-la-inversi-.md",
+    "date": "2026-10-23",
+    "topic": "Impacto de la inseguridad en la inversión extranjera y el comercio en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://www.aljazeera.com/wp-content/uploads/2026/10/afp_6ad981987e7f-1792639384.jpg?resize=1920%2C1440",
+    "section": "América Latina",
+    "news_url": "https://www.aljazeera.com/news/2026/10/22/el-salvadors-bukele-threatens-haitian-gangs-over-abducted-soldiers",
+    "pregunta": "¿Cómo afecta el aumento de la inseguridad a la inversión extranjera neta y a la participación del comercio en el PIB en los países latinoamericanos?",
+    "editorial": "¿Y si la violencia que vemos en las calles de El Salvador y la amenaza de los grupos armados haitianos llegara a afectar el dinero que las empresas extranjeras deciden invertir en Latinoamérica? Esa fue la pregunta que surgió al leer la noticia sobre el presidente Bukele y los soldados secuestrados.  \n\nAl mirar los datos, la historia no es uniforme. En Costa Rica, cuando la inversión extranjera directa sube, el comercio con el resto del mundo también tiende a crecer, casi como si fueran dos amigos que siempre se acompañan. Esa relación es la más fuerte que encontramos y parece bastante confiable. Pero en otros países la relación se vuelve más confusa: en Chile, Brasil, Argentina y Colombia la inversión y el comercio no siguen el mismo rumbo; a veces la inversión sube mientras el comercio se mantiene o incluso baja. En Panamá la evidencia es débil y en Ecuador los números son tan bajos que no podemos decir nada con certeza.  \n\nEn resumen, la idea de que la inseguridad empuja a los inversionistas a alejarse y a que el comercio se retraiga no se sostiene de manera uniforme en toda la región. Solo en Costa Rica vemos una relación clara, mientras que en la mayoría de los demás países los datos son inconclusos o incluso contrarios. Así que, si bien la violencia puede ser un factor, no es la única pieza del rompecabezas que determina la inversión y el comercio en Latinoamérica.",
+    "charts": "2026-10-23-16-41",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5702,
+        "after": 4527,
+        "cutChars": 3446
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7046,
+        "after": 5088,
+        "cutChars": 5875
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5623,
+        "after": 4464,
+        "cutChars": 3526
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7109,
+        "after": 4706,
+        "cutChars": 7439
+      }
+    ],
+    "ts": "2026-10-23T16:46:04.242Z"
+  },
+  {
     "file": "2026-10-22_relaci-n-entre-inversi-n-extranjera-y-co.md",
     "date": "2026-10-22",
     "topic": "Relación entre inversión extranjera y comercio en tiempos de conflicto geopolítico",

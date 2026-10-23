@@ -1,0 +1,81 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la inseguridad en la inversión extranjera y el comercio en América Latina",
+      "noticia_inspiradora": "El Salvador’s Bukele threatens Haitian gangs over abducted soldiers",
+      "afirmacion_noticia": "El aumento de la violencia y la inseguridad en la región reduce la confianza de los inversionistas extranjeros y disminuye la participación del comercio en el PIB.",
+      "verificable_con_datos": "Se pueden verificar los efectos sobre la inversión extranjera neta (% del PIB) y el comercio (% del PIB); no se pueden medir directamente la percepción de seguridad ni incidentes específicos de violencia.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI vs Trade correlation",
+        "FDI vs GDP growth correlation"
+      ],
+      "justificacion": "La noticia aborda seguridad, pero el vínculo más directo con datos disponibles es a través de los indicadores macroeconómicos de inversión y comercio, que históricamente responden a cambios en el riesgo país.",
+      "pregunta": "¿Cómo afecta un aumento percibido de inseguridad a la inversión extranjera neta y a la participación del comercio en el PIB en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos que experimentan aumentos de violencia reportan una reducción significativa de la inversión extranjera neta y del comercio como porcentaje del PIB.",
+      "keywords_en": "security investment foreign direct investment trade Latin America"
+    },
+    {
+      "titulo": "Relación entre la adopción de tecnología de código abierto y la vulnerabilidad de la infraestructura pública en EE.UU. y su eco en América Latina",
+      "noticia_inspiradora": "US Urges Fix for Widely Used Software After Critical Alerts",
+      "afirmacion_noticia": "Las vulnerabilidades en software crítico pueden comprometer la infraestructura pública y afectar la confianza en la digitalización de servicios gubernamentales.",
+      "verificable_con_datos": "Se pueden medir la penetración de usuarios de internet y sus correlaciones con indicadores de desarrollo económico; no se dispone de datos específicos sobre vulnerabilidades de software en América Latina.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "GDP per capita (current US$)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs GDP per capita",
+        "Internet users vs Employment in services"
+      ],
+      "justificacion": "Aunque la noticia es sobre EE.UU., el tema de seguridad tecnológica se traduce a la adopción de tecnologías digitales en la región, lo que puede evaluarse mediante la tasa de usuarios de internet y su relación con indicadores económicos y de empleo.",
+      "pregunta": "¿Existe una asociación positiva entre la alta adopción de internet y mayores niveles de PIB per cápita y empleo en servicios en América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan un PIB per cápita y una participación del empleo en servicios superiores.",
+      "keywords_en": "internet penetration GDP per capita services employment Latin America"
+    },
+    {
+      "titulo": "Efectos de los compromisos climáticos de la ONU sobre la inflación y el crecimiento económico en América Latina",
+      "noticia_inspiradora": "UN Warns Major Emissions Cuts Needed to Limit Warming Overshoot",
+      "afirmacion_noticia": "Los nuevos objetivos de reducción de emisiones pueden generar presiones inflacionarias y afectar el crecimiento económico de los países latinoamericanos.",
+      "verificable_con_datos": "Se pueden observar los indicadores de inflación y crecimiento del PIB; no se dispone de datos directos sobre políticas de mitigación específicas ni sus costos.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflation vs GDP growth correlation",
+        "Inflation vs Renewable energy consumption correlation"
+      ],
+      "justificacion": "La noticia menciona metas de emisión que pueden traducirse en cambios de precios de energía y, por ende, en inflación y crecimiento; los indicadores disponibles permiten explorar esa relación macroeconómica.",
+      "pregunta": "¿Cómo se relacionan los niveles de inflación con la tasa de crecimiento económico en los países latinoamericanos que incrementan su consumo de energía renovable?",
+      "hipotesis": "Los países latinoamericanos con mayor adopción de energía renovable presentan una menor inflación y un crecimiento económico más estable.",
+      "keywords_en": "inflation economic growth renewable energy Latin America"
+    },
+    {
+      "titulo": "Conexión entre la migración internacional y la presión sobre los sistemas de salud pública en América Latina",
+      "noticia_inspiradora": "India news: Thousands of Indian pilgrims stranded in Saudi Arabia as Houthi attacks disrupt flights, government facilitating return",
+      "afirmacion_noticia": "Los choques geopolíticos que alteran flujos migratorios pueden aumentar la demanda de servicios de salud en los países de origen y destino.",
+      "verificable_con_datos": "Se pueden medir el gasto en salud pública (% del PIB) y la tasa de migración neta; no se dispone de datos específicos sobre episodios puntuales de crisis migratoria.",
+      "indicadores_respaldan": [
+        "Current health expenditure (% of GDP)",
+        "Net migration (total people)"
+      ],
+      "correlaciones_relevantes": [
+        "Health expenditure vs Net migration correlation",
+        "Health expenditure vs Urban population correlation"
+      ],
+      "justificacion": "Aunque la noticia se centra en India, el fenómeno de interrupciones de movilidad tiene paralelos en América Latina, donde la migración neta puede influir en la presión sobre los sistemas de salud, medible con los indicadores disponibles.",
+      "pregunta": "¿Existe una relación entre los flujos netos de migración y el gasto público en salud en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con mayores flujos netos de migración tienden a destinar una mayor proporción del PIB al gasto en salud pública.",
+      "keywords_en": "migration health expenditure public health Latin America"
+    }
+  ],
+  "topic": "Impacto de la inseguridad en la inversión extranjera y el comercio en América Latina",
+  "angle": "Analizar cómo los episodios de violencia y amenazas a la seguridad, como los reportados en El Salvador, se traducen en variaciones de la inversión extranjera neta y la participación del comercio en el PIB, utilizando series temporales de los indicadores macroeconómicos disponibles.",
+  "pregunta": "¿Cómo afecta el aumento de la inseguridad a la inversión extranjera neta y a la participación del comercio en el PIB en los países latinoamericanos?",
+  "hipotesis": "Los aumentos de inseguridad están asociados a una disminución significativa de la inversión extranjera neta y de la participación del comercio en el PIB en América Latina."
+}
