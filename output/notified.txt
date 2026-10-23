@@ -13,3 +13,4 @@
 2026-10-19_reversi-n-de-la-inversi-n-en-ia-y-su-v-n.md
 2026-10-21_conectividad-digital-y-flujos-de-remesas.md
 2026-10-22_relaci-n-entre-inversi-n-extranjera-y-co.md
+2026-10-23_impacto-de-la-inseguridad-en-la-inversi-.md
