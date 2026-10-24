@@ -1,0 +1,63 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Tensiones geopolíticas y su impacto en la inversión extranjera y el comercio latinoamericano",
+      "noticia_inspiradora": "India news: India-China border tensions back in focus despite ongoing talks",
+      "afirmacion_noticia": "El aumento de tensiones entre potencias mundiales genera incertidumbre que podría reducir la inversión extranjera y el comercio en regiones vulnerables como América Latina.",
+      "verificable_con_datos": "Se pueden medir cambios en la inversión extranjera neta (% del PIB) y en la participación del comercio en el PIB para los países latinoamericanos; no se pueden medir directamente la percepción de riesgo ni eventos políticos específicos.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI vs Trade correlation",
+        "FDI vs GDP growth correlation"
+      ],
+      "justificacion": "Las tensiones geopolíticas son un factor macroeconómico que afecta flujos de capital y comercio; los indicadores de la base de datos capturan directamente esos flujos en América Latina, permitiendo una prueba empírica de la hipótesis.",
+      "pregunta": "¿Cómo se relaciona la variación anual de la inversión extranjera neta con la participación del comercio en el PIB en los países latinoamericanos durante periodos de alta tensión geopolítica global?",
+      "hipotesis": "Los años con mayor tensión geopolítica global presentan una disminución simultánea de la inversión extranjera neta y de la participación del comercio en el PIB en América Latina.",
+      "keywords_en": "geopolitical tension foreign direct investment trade Latin America"
+    },
+    {
+      "titulo": "Recesión del mercado laboral estadounidense y sus repercusiones en la tasa de desempleo juvenil en América Latina",
+      "noticia_inspiradora": "Most U.S. Economy's Reported Job Gains for 2025 Disappeared",
+      "afirmacion_noticia": "La revisión a la baja de los empleos creados en EE. UU. indica una desaceleración económica que podría afectar la demanda de mano de obra juvenil latinoamericana migrante o remesas.",
+      "verificable_con_datos": "Se pueden analizar la tasa de desempleo juvenil (% de la fuerza laboral 15-24) y la participación laboral juvenil en América Latina; no se pueden medir directamente los flujos migratorios ni remesas específicas vinculadas a EE. UU. en este conjunto de indicadores.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Labor force participation rate (% of population ages 15+)",
+        "Personal remittances received (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Youth unemployment vs Remittances correlation",
+        "Labor participation vs GDP growth correlation"
+      ],
+      "justificacion": "Los indicadores disponibles permiten observar cambios en el empleo juvenil y en las remesas, que son canales típicos de transmisión de choques laborales en EE. UU. a economías latinoamericanas.",
+      "pregunta": "¿Existe una relación negativa entre la disminución de los empleos reportados en EE. UU. y la tasa de desempleo juvenil en los países latinoamericanos?",
+      "hipotesis": "Una caída en la creación de empleo en EE. UU. se asocia con un aumento de la tasa de desempleo juvenil en América Latina.",
+      "keywords_en": "US job market youth unemployment Latin America remittances"
+    },
+    {
+      "titulo": "Transformación digital y caída de ingresos publicitarios: implicaciones para la economía de los servicios en América Latina",
+      "noticia_inspiradora": "Viaplay ad sales drop 0.6% organically as World Cup airs on rivals",
+      "afirmacion_noticia": "La disminución de ingresos publicitarios en plataformas de streaming refleja una reconfiguración del gasto digital que podría impactar la participación del sector servicios en la economía latinoamericana.",
+      "verificable_con_datos": "Se pueden medir la participación del empleo en servicios y la penetración de internet; no se pueden medir directamente los ingresos publicitarios de Viaplay ni su efecto sectorial específico en América Latina.",
+      "indicadores_respaldan": [
+        "Employment in services (% of total employment)",
+        "Internet users (% of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs Employment in services correlation",
+        "Internet users vs GDP per capita correlation"
+      ],
+      "justificacion": "El gasto publicitario digital está estrechamente ligado al uso de internet y al empleo en servicios digitales; los indicadores permiten explorar si mayor digitalización se traduce en mayor peso del sector servicios.",
+      "pregunta": "¿La mayor penetración de internet está asociada a una mayor participación del empleo en servicios en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan una mayor participación del empleo en el sector servicios.",
+      "keywords_en": "digital advertising internet penetration services employment Latin America"
+    }
+  ],
+  "topic": "Impacto de las tensiones geopolíticas globales en la inversión extranjera y el comercio de América Latina",
+  "angle": "Análisis cuantitativo de cómo los choques geopolíticos internacionales, ejemplificados por la escalada India-China, se reflejan en la caída de la inversión extranjera neta y la participación del comercio en el PIB de los países latinoamericanos.",
+  "pregunta": "¿Cómo varían la inversión extranjera neta y la participación del comercio en el PIB de América Latina durante años marcados por altas tensiones geopolíticas a nivel mundial?",
+  "hipotesis": "Durante años con alta tensión geopolítica global, los países latinoamericanos experimentan reducciones simultáneas en la inversión extranjera neta (% del PIB) y en la participación del comercio (% del PIB)."
+}
