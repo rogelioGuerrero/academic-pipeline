@@ -1,0 +1,79 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Seguridad migratoria y su vínculo con la inversión extranjera en América Latina",
+      "noticia_inspiradora": "Smuggling, power, profit: Irregular migration out of eastern Libya (Internacional)",
+      "afirmacion_noticia": "El aumento del tráfico irregular y la presencia de milicias locales en rutas migratorias incrementa la percepción de inseguridad, lo que podría desalentar la inversión extranjera neta en los países de origen y tránsito de migrantes.",
+      "verificable_con_datos": "Se puede contrastar la relación entre la percepción de inseguridad (no disponible directamente) y la variación de la inversión extranjera neta (% del PIB). La parte de \"percepción de inseguridad\" queda fuera de alcance; solo se puede analizar la correlación entre indicadores macroeconómicos como FDI y Trade.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI vs Trade",
+        "FDI vs GDP growth"
+      ],
+      "justificacion": "La noticia aborda inseguridad y migración, que suelen afectar la confianza de los inversores. Los indicadores de FDI y comercio son los más cercanos para medir impactos macroeconómicos de la inseguridad en la región.",
+      "pregunta": "¿Existe una correlación negativa entre la variación anual de la inversión extranjera neta y el nivel de comercio en los países latinoamericanos con alta exposición a flujos migratorios irregulares?",
+      "hipotesis": "Los países latinoamericanos con mayor exposición a flujos migratorios irregulares presentan una disminución en la inversión extranjera neta cuando el comercio representa una menor proporción del PIB.",
+      "keywords_en": "irregular migration foreign direct investment trade Latin America security"
+    },
+    {
+      "titulo": "Impacto de los ciberataques en la confianza digital y la adopción de tecnología en América Latina",
+      "noticia_inspiradora": "Fake IT help desk callers got by on little more than names and email addresses (Ciberseguridad)",
+      "afirmacion_noticia": "Los ciberataques dirigidos a instituciones y empresas reducen la confianza en servicios digitales, lo que podría limitar la penetración de usuarios de internet y, por ende, afectar variables económicas relacionadas con la digitalización.",
+      "verificable_con_datos": "Se puede evaluar la relación entre la penetración de usuarios de internet y variables macroeconómicas como remesas o crecimiento del PIB. No se dispone de un indicador directo de confianza digital o número de ciberataques.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs Remittances",
+        "Internet users vs GDP growth"
+      ],
+      "justificacion": "Aunque la noticia se centra en ciberseguridad, el efecto más medible es la posible reducción de la adopción de internet, para lo cual contamos con datos de usuarios de internet y sus correlaciones económicas.",
+      "pregunta": "¿Existe una asociación positiva entre la tasa de usuarios de internet y el crecimiento del PIB per cápita en los países latinoamericanos que han experimentado altos incidentes de ciberataques?",
+      "hipotesis": "Los países latinoamericanos con mayor penetración de internet muestran un mayor crecimiento del PIB per cápita, a pesar de la presencia de incidentes de ciberseguridad.",
+      "keywords_en": "cybersecurity internet penetration GDP growth Latin America digital trust"
+    },
+    {
+      "titulo": "Relación entre la adopción de criptomonedas y la recepción de remesas en América Latina",
+      "noticia_inspiradora": "Crypto platform Binance confirms $6.3 bln hack (América Latina)",
+      "afirmacion_noticia": "El hack de Binance genera incertidumbre en el ecosistema de criptomonedas, lo que podría reducir el uso de cripto‑activos para enviar remesas y afectar los flujos de remesas recibidas.",
+      "verificable_con_datos": "Se puede analizar la relación entre usuarios de internet (proxy de adopción tecnológica) y el monto total de remesas recibidas. No se dispone de indicadores de uso de criptomonedas ni de incidentes de seguridad específicos.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs Remittances"
+      ],
+      "justificacion": "La noticia sugiere un posible impacto de la confianza en cripto‑activos sobre remesas. La adopción de internet sirve como proxy de acceso a plataformas digitales, permitiendo evaluar la hipótesis con datos disponibles.",
+      "pregunta": "¿La mayor penetración de internet está asociada a mayores ingresos por remesas en los países latinoamericanos, indicando una posible canalización a través de plataformas digitales?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet reciben mayores remesas per cápita.",
+      "keywords_en": "cryptocurrency remittances internet penetration Latin America financial inclusion"
+    },
+    {
+      "titulo": "Energía renovable y gasto público en salud: un análisis de co‑evolución en América Latina",
+      "noticia_inspiradora": "Humanitarian Mission In Russian-Occupied Oleshky Enters Final Phase, Ukraine Says (Desarrollo Internacional)",
+      "afirmacion_noticia": "Las misiones humanitarias y los conflictos internacionales pueden desviar recursos y atención de los gobiernos, potencialmente reduciendo la inversión en energía renovable y gasto en salud.",
+      "verificable_con_datos": "Se pueden comparar indicadores de consumo de energía renovable y gasto en salud, pero la noticia no ofrece datos específicos de América Latina; la conexión es indirecta y la parte de \"desvío de recursos por conflicto\" queda fuera de alcance.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "Current health expenditure (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy vs Health expenditure"
+      ],
+      "justificacion": "Aunque la noticia se refiere a un conflicto fuera de América Latina, permite explorar si los países con mayor foco en energía renovable también destinan más recursos a salud, usando los indicadores disponibles.",
+      "pregunta": "¿Existe una correlación positiva entre el consumo de energía renovable y el gasto público en salud en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con mayor participación de energía renovable en su consumo total destinan un mayor porcentaje del PIB al gasto en salud.",
+      "keywords_en": "renewable energy health expenditure public spending Latin America"
+    }
+  ],
+  "topic": "Impacto de la inseguridad y migración irregular en la inversión extranjera neta y el comercio en América Latina",
+  "angle": "Analizar cómo la percepción de inseguridad asociada a flujos migratorios irregulares afecta la confianza de los inversores y la participación del comercio en el PIB, usando indicadores de FDI y Trade.",
+  "pregunta": "¿Existe una correlación negativa entre la variación anual de la inversión extranjera neta y la participación del comercio en el PIB en los países latinoamericanos con alta exposición a flujos migratorios irregulares?",
+  "hipotesis": "Los países latinoamericanos con mayor exposición a flujos migratorios irregulares presentan una disminución de la inversión extranjera neta cuando la participación del comercio en el PIB es menor."
+}
