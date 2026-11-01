@@ -14,3 +14,4 @@
 2026-10-21_conectividad-digital-y-flujos-de-remesas.md
 2026-10-22_relaci-n-entre-inversi-n-extranjera-y-co.md
 2026-10-23_impacto-de-la-inseguridad-en-la-inversi-.md
+2026-11-01_impacto-de-los-ciberataques-en-la-confia.md
