@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-31T17:09:39+00:00",
+  "generated": "2026-11-01T17:54:01+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 25
+    "papers": 26
   },
   "countries": [
     {
@@ -66,6 +66,28 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-01",
+      "file": "2026-11-01_impacto-de-los-ciberataques-en-la-confia.md",
+      "topic": "Impacto de los ciberataques en la confianza digital y la adopción de tecnología en América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)",
+        "GDP growth (annual %)"
+      ],
+      "indicators": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)",
+        "GDP growth (annual %)"
+      ]
+    },
     {
       "date": "2026-10-23",
       "file": "2026-10-23_impacto-de-la-inseguridad-en-la-inversi-.md",
@@ -142,8 +164,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "Trade (% of GDP)",
-        "GDP growth (annual %)"
+        "GDP growth (annual %)",
+        "Trade (% of GDP)"
       ]
     },
     {
@@ -163,8 +185,8 @@
         "Trade (% of GDP)"
       ],
       "indicators": [
-        "Trade (% of GDP)",
         "GDP growth (annual %)",
+        "Trade (% of GDP)",
         "GDP per capita (current US$)"
       ]
     },
@@ -429,8 +451,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "Trade (% of GDP)",
         "GDP growth (annual %)",
+        "Trade (% of GDP)",
         "Manufacturing, value added (% of GDP)"
       ]
     },
@@ -505,8 +527,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "Trade (% of GDP)",
         "GDP growth (annual %)",
+        "Trade (% of GDP)",
         "Manufacturing, value added (% of GDP)"
       ]
     },
@@ -1090,6 +1112,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-01",
+              "file": "2026-11-01_impacto-de-los-ciberataques-en-la-confia.md",
+              "topic": "Impacto de los ciberataques en la confianza digital y la adopción de tecnología en América Latina"
+            },
+            {
               "date": "2026-10-19",
               "file": "2026-10-19_reversi-n-de-la-inversi-n-en-ia-y-su-v-n.md",
               "topic": "Reversión de la inversión en IA y su vínculo con la participación del comercio en el PIB latinoamericano"
@@ -1393,6 +1420,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-01",
+              "file": "2026-11-01_impacto-de-los-ciberataques-en-la-confia.md",
+              "topic": "Impacto de los ciberataques en la confianza digital y la adopción de tecnología en América Latina"
+            },
             {
               "date": "2026-10-21",
               "file": "2026-10-21_conectividad-digital-y-flujos-de-remesas.md",
@@ -1740,6 +1772,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-01",
+              "file": "2026-11-01_impacto-de-los-ciberataques-en-la-confia.md",
+              "topic": "Impacto de los ciberataques en la confianza digital y la adopción de tecnología en América Latina"
+            },
             {
               "date": "2026-10-21",
               "file": "2026-10-21_conectividad-digital-y-flujos-de-remesas.md",
