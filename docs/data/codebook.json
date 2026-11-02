@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-01T17:54:01+00:00",
+  "generated": "2026-11-02T21:37:19+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 26
+    "papers": 27
   },
   "countries": [
     {
@@ -67,6 +67,28 @@
   ],
   "papers": [
     {
+      "date": "2026-11-02",
+      "file": "2026-11-02_impacto-econ-mico-del-fen-meno-de-el-ni-.md",
+      "topic": "Impacto económico del fenómeno de El Niño en Bolivia",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "GDP growth (annual %)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "indicators": [
+        "GDP growth (annual %)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)",
+        "Youth unemployment (% of labor force 15-24)"
+      ]
+    },
+    {
       "date": "2026-11-01",
       "file": "2026-11-01_impacto-de-los-ciberataques-en-la-confia.md",
       "topic": "Impacto de los ciberataques en la confianza digital y la adopción de tecnología en América Latina",
@@ -83,9 +105,9 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
+        "GDP growth (annual %)",
         "Internet users (% of population)",
-        "Personal remittances received (current US$)",
-        "GDP growth (annual %)"
+        "Personal remittances received (current US$)"
       ]
     },
     {
@@ -227,9 +249,9 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
+        "Youth unemployment (% of labor force 15-24)",
         "Internet users (% of population)",
-        "Government expenditure on education (% of GDP)",
-        "Youth unemployment (% of labor force 15-24)"
+        "Government expenditure on education (% of GDP)"
       ]
     },
     {
@@ -297,9 +319,9 @@
         "Government expenditure on education (% of GDP)"
       ],
       "indicators": [
+        "Youth unemployment (% of labor force 15-24)",
         "Internet users (% of population)",
-        "Government expenditure on education (% of GDP)",
-        "Youth unemployment (% of labor force 15-24)"
+        "Government expenditure on education (% of GDP)"
       ]
     },
     {
@@ -319,8 +341,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "Internet users (% of population)",
         "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
         "Employment in services (% of total employment)"
       ]
     },
@@ -504,8 +526,8 @@
       ],
       "indicators": [
         "GDP growth (annual %)",
-        "Electric power consumption (kWh per capita)",
-        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)",
+        "Electric power consumption (kWh per capita)"
       ]
     },
     {
@@ -988,6 +1010,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-02",
+              "file": "2026-11-02_impacto-econ-mico-del-fen-meno-de-el-ni-.md",
+              "topic": "Impacto económico del fenómeno de El Niño en Bolivia"
+            },
+            {
               "date": "2026-10-15",
               "file": "2026-10-15_impacto-de-la-conectividad-digital-y-el-.md",
               "topic": "Impacto de la conectividad digital y el gasto educativo en el desempleo juvenil latinoamericano"
@@ -1111,6 +1138,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-02",
+              "file": "2026-11-02_impacto-econ-mico-del-fen-meno-de-el-ni-.md",
+              "topic": "Impacto económico del fenómeno de El Niño en Bolivia"
+            },
             {
               "date": "2026-11-01",
               "file": "2026-11-01_impacto-de-los-ciberataques-en-la-confia.md",
@@ -2119,6 +2151,11 @@
           "n_observations": 108,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-02",
+              "file": "2026-11-02_impacto-econ-mico-del-fen-meno-de-el-ni-.md",
+              "topic": "Impacto económico del fenómeno de El Niño en Bolivia"
+            },
             {
               "date": "2026-09-19",
               "file": "2026-09-19_penetraci-n-m-vil-y-empleo-vulnerable-en.md",

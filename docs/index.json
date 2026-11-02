@@ -1,5 +1,64 @@
 [
   {
+    "file": "2026-11-02_impacto-econ-mico-del-fen-meno-de-el-ni-.md",
+    "date": "2026-11-02",
+    "topic": "Impacto económico del fenómeno de El Niño en Bolivia",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://static.dw.com/image/67050826_6.jpg",
+    "section": "Desarrollo Internacional",
+    "news_url": "https://www.dw.com/en/bolivia-declares-emergency-as-el-nino-intensifies-threatens-severe-weather/a-79820253",
+    "pregunta": "¿Cómo afecta la intensificación de El Niño al crecimiento del PIB y a la tasa de pobreza en Bolivia?",
+    "editorial": "¿Y si el temblor de El Niño realmente hace que Bolivia pierda terreno en su economía y que más gente quede en la pobreza? Esa pregunta surgió cuando la noticia anunciaba una emergencia por la intensificación del fenómeno. Al mirar los datos, la historia no es tan clara como parecía. En los años con El Niño fuerte, el crecimiento del PIB no cayó de forma consistente; en algunos periodos se mantuvo estable, en otros apenas bajó. Lo que sí se observó con más fuerza es que cuando la pobreza a la línea de 2,15 USD al día subía, el crecimiento del PIB tendía a bajar. En el panel de 11 países, el efecto de la pobreza sobre el PIB era negativo y bastante marcado, mientras que el desempleo juvenil no mostró ningún patrón claro. En Bolivia, la variación dentro del país mostró que los años con mayor pobreza coincidían con un crecimiento más lento, pero no siempre de manera contundente. En resumen, los datos no confirman de forma absoluta que El Niño sea el culpable directo de un peor PIB y más pobreza. Hay una relación, pero la historia es más compleja y no se puede decir que sea la única causa.",
+    "charts": "2026-11-02-21-31",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7027,
+        "after": 4511,
+        "cutChars": 7306
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8304,
+        "after": 5482,
+        "cutChars": 8215
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7077,
+        "after": 4550,
+        "cutChars": 7362
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9130,
+        "after": 5617,
+        "cutChars": 10247
+      }
+    ],
+    "ts": "2026-11-02T21:37:15.203Z"
+  },
+  {
     "file": "2026-11-01_impacto-de-los-ciberataques-en-la-confia.md",
     "date": "2026-11-01",
     "topic": "Impacto de los ciberataques en la confianza digital y la adopción de tecnología en América Latina",
