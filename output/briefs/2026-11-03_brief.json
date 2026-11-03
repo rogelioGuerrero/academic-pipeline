@@ -1,0 +1,91 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de los ciberataques en la confianza digital y la inversión extranjera en América Latina",
+      "noticia_inspiradora": "Emergency alert apps hacked in Russia and Ukraine as truce ends (Desarrollo Internacional)",
+      "afirmacion_noticia": "Los ciberataques coordinados contra aplicaciones de alerta reducen la confianza digital y podrían desalentar la inversión extranjera en la región",
+      "verificable_con_datos": "Se pueden analizar la relación entre la penetración de internet (Internet users %) y la inversión extranjera neta (% del PIB). No se dispone de datos directos sobre incidentes de ciberseguridad ni confianza digital, por lo que esa parte queda fuera de alcance",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Foreign direct investment, net inflows (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs FDI net inflows"
+      ],
+      "justificacion": "La noticia vincula ciberseguridad con el entorno de negocios; el indicador de usuarios de internet captura la exposición digital y el FDI refleja la confianza de inversores, permitiendo una prueba empírica indirecta",
+      "pregunta": "¿Existe una asociación positiva entre la tasa de usuarios de internet y los flujos netos de inversión extranjera en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet reciben mayores flujos netos de inversión extranjera como proporción del PIB",
+      "keywords_en": "internet penetration foreign direct investment Latin America digital security"
+    },
+    {
+      "titulo": "Efectos de la exclusión de Sudáfrica y Ruanda del programa AGOA en los flujos comerciales de América Latina",
+      "noticia_inspiradora": "US to drop South Africa, Rwanda from duty-free trade initiative (Internacional)",
+      "afirmacion_noticia": "La exclusión de países del programa de comercio preferencial genera incertidumbre que puede reducir la participación del comercio en el PIB de América Latina",
+      "verificable_con_datos": "Se pueden medir los cambios en la participación del comercio (% del PIB) y comparar con periodos de tensión comercial; la noticia no brinda datos específicos de comercio latinoamericano, esa parte queda fuera de alcance",
+      "indicadores_respaldan": [
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Trade vs period of trade policy shocks"
+      ],
+      "justificacion": "Aunque la noticia se centra en África, el mecanismo de política comercial afecta a América Latina; el indicador de participación del comercio permite evaluar el impacto de choques de política comercial",
+      "pregunta": "¿Se observa una disminución de la participación del comercio en el PIB de los países latinoamericanos tras la exclusión de socios comerciales de acuerdos de libre comercio?",
+      "hipotesis": "Los choques en acuerdos de libre comercio, como la exclusión de socios, se asocian con una caída temporal de la participación del comercio en el PIB de América Latina",
+      "keywords_en": "trade policy shocks trade share GDP Latin America"
+    },
+    {
+      "titulo": "Relación entre la crisis de empleo de graduados en China y la demanda de mano de obra en servicios en América Latina",
+      "noticia_inspiradora": "China’s graduate jobs crisis deepens as millions chase fewer opportunities (Economía)",
+      "afirmacion_noticia": "El exceso de graduados sin empleo en China podría impulsar la externalización de servicios a América Latina, aumentando la proporción de empleo en servicios",
+      "verificable_con_datos": "Se puede observar la proporción de empleo en servicios en América Latina, pero no hay indicadores de flujos de empleo desde China, esa parte queda fuera de alcance",
+      "indicadores_respaldan": [
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Employment services vs external demand proxies"
+      ],
+      "justificacion": "La noticia sugiere un efecto de oferta laboral china sobre mercados de servicios latinoamericanos; el indicador de empleo en servicios permite medir cambios estructurales aunque la causa directa no es observable",
+      "pregunta": "¿Ha aumentado la participación del empleo en servicios en América Latina en los últimos años, coincidiendo con la crisis de empleo de graduados en China?",
+      "hipotesis": "El aumento de graduados desempleados en China está asociado con un crecimiento de la participación del empleo en servicios en América Latina",
+      "keywords_en": "service employment graduate unemployment China Latin America"
+    },
+    {
+      "titulo": "Efectos del ciclón Murasu en la salud y la pobreza en India y su paralelismo en América Latina",
+      "noticia_inspiradora": "India news: Cyclone Murasu wreaks havoc after landfall (Internacional)",
+      "afirmacion_noticia": "Los desastres climáticos aumentan la mortalidad y la pobreza; se espera que fenómenos similares en América Latina tengan efectos comparables",
+      "verificable_con_datos": "Se pueden analizar la relación entre la esperanza de vida (Life expectancy) y la tasa de pobreza (% de población) en países latinoamericanos; la noticia no provee datos de desastres locales, esa parte queda fuera de alcance",
+      "indicadores_respaldan": [
+        "Life expectancy at birth (years)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Life expectancy vs poverty headcount"
+      ],
+      "justificacion": "El vínculo entre clima, salud y pobreza es bien documentado; los indicadores disponibles permiten evaluar si los países con peor salud presentan mayor pobreza, reflejando potencial impacto de desastres",
+      "pregunta": "¿Existe una correlación negativa entre la esperanza de vida y la tasa de pobreza en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con menor esperanza de vida presentan mayores tasas de pobreza extrema",
+      "keywords_en": "life expectancy poverty Latin America climate disaster"
+    },
+    {
+      "titulo": "Conexión entre la expansión de usuarios de internet y el flujo de remesas familiares en América Latina",
+      "noticia_inspiradora": "US midterms: Boost for Trump as key Democrat endorses Abdul El‑Sayed’s Republican rival (Política)",
+      "afirmacion_noticia": "Aunque la noticia es política, refleja la importancia de los flujos de remesas en la economía familiar; la expansión digital podría facilitar el envío y recepción de remesas",
+      "verificable_con_datos": "Se dispone de indicadores de usuarios de internet y de remesas recibidas; la parte política de la noticia queda fuera de alcance",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs personal remittances"
+      ],
+      "justificacion": "Los datos confirman una fuerte correlación entre penetración de internet y remesas en Colombia; la línea explora si el patrón se mantiene a nivel regional",
+      "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet reciben mayores remesas per cápita?",
+      "hipotesis": "Un mayor nivel de penetración de internet está asociado con mayores ingresos por remesas en América Latina",
+      "keywords_en": "internet penetration remittances household income Latin America"
+    }
+  ],
+  "topic": "Conexión entre penetración de internet y flujos de inversión extranjera y remesas en América Latina",
+  "angle": "Analizar cómo la expansión digital, medida por usuarios de internet, se relaciona simultáneamente con la confianza de inversionistas (FDI net inflows) y la capacidad de los hogares para recibir remesas, ofreciendo evidencia empírica de los efectos económicos de la digitalización en la región",
+  "pregunta": "¿Existe una asociación positiva entre la tasa de usuarios de internet y (i) los flujos netos de inversión extranjera y (ii) los ingresos por remesas en los países latinoamericanos?",
+  "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan tanto mayores flujos netos de inversión extranjera como mayores ingresos por remesas per cápita"
+}

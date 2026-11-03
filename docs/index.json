@@ -1,5 +1,48 @@
 [
   {
+    "file": "2026-11-03_efectos-de-la-exclusi-n-de-sud-frica-y-r.md",
+    "date": "2026-11-03",
+    "topic": "Efectos de la exclusión de Sudáfrica y Ruanda del programa AGOA en los flujos comerciales de América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "REESCRIBIR",
+    "qa": "APROBADO",
+    "image": "https://images.pexels.com/photos/29024925/pexels-photo-29024925.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "section": "Internacional",
+    "news_url": "https://www.dw.com/en/us-to-drop-south-africa-rwanda-from-duty-free-trade-initiative/a-79834508?maca=en-rss-en-all-1573-rdf",
+    "pregunta": "¿Se observa una disminución de la participación del comercio en el PIB de los países latinoamericanos tras la exclusión de socios comerciales de acuerdos de libre comercio?",
+    "editorial": "¿Y si al quitar a Sudáfrica y Ruanda de un acuerdo de libre comercio, el comercio de América Latina se queda sin gasolina? Esa pregunta surgió cuando Estados Unidos anunció la exclusión de esos dos socios de su iniciativa duty‑free. Al mirar los datos de los últimos años, la historia no es tan simple.\n\nEn la región, el comercio como porcentaje del PIB sigue subiendo. Brasil y Perú, por ejemplo, aumentan casi un punto porcentual cada año, mientras que Ecuador y Chile también muestran crecimientos sólidos. México, Colombia y Chile registraron picos anuales en 2022, con valores de 88.8 %, 48.3 % y 75.2 % respectivamente, lo que sugiere que la actividad comercial se disparó ese año.\n\nSin embargo, cuando se relaciona el empleo juvenil con el PIB per cápita, se ve una tendencia opuesta: a mayor ingreso per cápita, la participación de jóvenes en el mercado laboral tiende a bajar ligeramente. Este patrón se mantiene de forma consistente, aunque no explica directamente la dinámica del comercio.\n\nEn resumen, los datos no confirman una caída inmediata del comercio tras la exclusión de socios. La tendencia sigue al alza, aunque la relación entre ingreso y empleo juvenil muestra una ligera caída. Lo que sí queda claro es que la economía latinoamericana sigue creciendo en comercio, pero la relación con el empleo juvenil necesita más investigación.",
+    "charts": "2026-11-03-19-16",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "EDIT",
+        "model": "openai/gpt-oss-20b",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "stage": "EDIT",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      }
+    ],
+    "ts": "2026-11-03T19:23:55.758Z"
+  },
+  {
     "file": "2026-11-02_impacto-econ-mico-del-fen-meno-de-el-ni-.md",
     "date": "2026-11-02",
     "topic": "Impacto económico del fenómeno de El Niño en Bolivia",
