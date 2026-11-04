@@ -1,0 +1,80 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto del fenómeno El Niño en la vulnerabilidad laboral y la pobreza juvenil en América Latina",
+      "noticia_inspiradora": "Banks Start Reviewing Clients’ Loan Terms as El Niño Builds",
+      "afirmacion_noticia": "Los bancos latinoamericanos están revisando condiciones de crédito por riesgos asociados a El Niño, lo que sugiere que el fenómeno climático podría agravar la vulnerabilidad de empleo y la pobreza entre los jóvenes.",
+      "verificable_con_datos": "Se pueden medir cambios en la vulnerabilidad de empleo (Vulnerable employment %), la tasa de desempleo juvenil (Youth unemployment %), y la pobreza extrema (Poverty headcount ratio at $2.15 a day %). No se pueden observar directamente las decisiones de los bancos ni la exposición crediticia específica.",
+      "indicadores_respaldan": [
+        "Vulnerable employment (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
+      ],
+      "correlaciones_relevantes": [
+        "Vulnerable employment ↔ Youth unemployment",
+        "Vulnerable employment ↔ Poverty headcount ratio",
+        "Youth unemployment ↔ Poverty headcount ratio"
+      ],
+      "justificacion": "El vínculo climático‑laboral es directo: El Niño afecta la producción agrícola y la cadena de suministro, lo que se refleja en indicadores de empleo vulnerable y en la pobreza juvenil. Estos indicadores están disponibles para todos los países latinoamericanos y permiten análisis de regresión cruzada.",
+      "pregunta": "¿Los años con eventos intensos de El Niño se asocian a un aumento de la proporción de empleo vulnerable y de la pobreza juvenil en América Latina?",
+      "hipotesis": "En los años en que El Niño es intensamente activo, la proporción de empleo vulnerable y la tasa de pobreza juvenil aumentan significativamente en los países latinoamericanos.",
+      "keywords_en": "El Niño vulnerability employment youth poverty Latin America"
+    },
+    {
+      "titulo": "Relación entre la penetración de internet y la recepción de remesas en América Latina",
+      "noticia_inspiradora": "Banks Start Reviewing Clients’ Loan Terms as El Niño Builds",
+      "afirmacion_noticia": "Los bancos revisan riesgos crediticios porque la conectividad digital influye en la capacidad de los hogares para enviar y recibir remesas, afectando su solvencia.",
+      "verificable_con_datos": "Se pueden comparar usuarios de internet (% de población) y remesas recibidas (USD). No se pueden medir la política crediticia bancaria ni la exposición específica al riesgo de cada cliente.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Personal remittances received"
+      ],
+      "justificacion": "Existe evidencia previa en la base de datos de una alta correlación entre internet y remesas en Colombia; extender el análisis a toda la región permite validar si el patrón es generalizable.",
+      "pregunta": "¿Existe una correlación positiva entre la penetración de internet y el volumen de remesas recibidas en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet reciben mayores flujos de remesas per cápita.",
+      "keywords_en": "internet penetration remittances Latin America digital finance"
+    },
+    {
+      "titulo": "Efectos de la inflación global en la inversión extranjera neta en América Latina",
+      "noticia_inspiradora": "Oil steadies after Monday’s 8% dip",
+      "afirmacion_noticia": "La caída del precio del petróleo y la alta inflación mundial podrían reducir la atracción de inversión extranjera directa en la región.",
+      "verificable_con_datos": "Se pueden medir la inflación al consumidor y los flujos de inversión extranjera neta (% del PIB). No se pueden observar directamente los precios del petróleo ni la percepción de riesgo de los inversionistas.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Foreign direct investment, net inflows (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflation ↔ Foreign direct investment net inflows"
+      ],
+      "justificacion": "Los indicadores macroeconómicos permiten evaluar si periodos de alta inflación coinciden con disminuciones en la inversión extranjera, ofreciendo un ángulo económico‑financiero relevante y medible.",
+      "pregunta": "¿Los aumentos de la inflación al consumidor están asociados a una caída de la inversión extranjera neta en América Latina?",
+      "hipotesis": "En años con inflación al consumidor superior al 5 %, la inversión extranjera neta como porcentaje del PIB disminuye significativamente.",
+      "keywords_en": "inflation foreign direct investment Latin America macroeconomics"
+    },
+    {
+      "titulo": "Conexión entre la urbanización y el gasto público en salud en América Latina",
+      "noticia_inspiradora": "Why South Africa's local elections matter",
+      "afirmacion_noticia": "El crecimiento urbano y la presión sobre los servicios públicos, como la salud, pueden influir en la asignación presupuestaria y los resultados de salud.",
+      "verificable_con_datos": "Se pueden comparar la proporción de población urbana y el gasto en salud (% del PIB). No se pueden medir directamente los resultados electorales ni la calidad del servicio de salud.",
+      "indicadores_respaldan": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Urban population ↔ Current health expenditure"
+      ],
+      "justificacion": "Los datos de urbanización y gasto en salud están disponibles para todos los países y permiten explorar si la presión urbana impulsa mayores inversiones en salud, un tema de política pública muy pertinente.",
+      "pregunta": "¿Existe una relación positiva entre la proporción de población urbana y el gasto público en salud en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de población urbana destinan una mayor proporción de su PIB al gasto en salud.",
+      "keywords_en": "urbanization health expenditure public spending Latin America"
+    }
+  ],
+  "topic": "Impacto del fenómeno El Niño en la vulnerabilidad laboral y la pobreza juvenil en América Latina",
+  "angle": "Analizar cómo los choques climáticos de El Niño aumentan la proporción de empleo vulnerable y la pobreza entre jóvenes, usando indicadores de vulnerabilidad laboral, desempleo juvenil y pobreza extrema.",
+  "pregunta": "¿Los años con eventos intensos de El Niño se asocian a un aumento de la proporción de empleo vulnerable y de la pobreza juvenil en América Latina?",
+  "hipotesis": "En los años en que El Niño es intensamente activo, la proporción de empleo vulnerable y la tasa de pobreza juvenil aumentan significativamente en los países latinoamericanos.",
+  "keywords_en": "El Niño climate shock vulnerable employment youth poverty Latin America"
+}

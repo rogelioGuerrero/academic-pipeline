@@ -1,5 +1,73 @@
 [
   {
+    "file": "2026-11-04_relaci-n-entre-la-penetraci-n-de-interne.md",
+    "date": "2026-11-04",
+    "topic": "Relación entre la penetración de internet y la recepción de remesas en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "REESCRIBIR",
+    "qa": "APROBADO",
+    "image": "https://www.insurancejournal.com/app/uploads/2026/11/crops-in-el-salvador-bloomberg-scaled.jpg",
+    "section": "América Latina",
+    "news_url": "https://www.insurancejournal.com/news/international/2026/11/03/891140.htm",
+    "pregunta": "¿Existe una correlación positiva entre la penetración de internet y el volumen de remesas recibidas en los países latinoamericanos?",
+    "editorial": "¿Es cierto que cuando más gente tiene internet, también llegan más remesas a su país? Esa pregunta surgió cuando los bancos empezaron a revisar los términos de los préstamos mientras El Niño se hacía más fuerte, y muchos pensaron que la conectividad podría ser un puente para el dinero que viajan los migrantes.\n\nAl mirar los datos, la historia se vuelve clara y sorprendente. En casi todos los países latinoamericanos estudiados —Chile, México, Brasil, Guatemala, Colombia, Argentina y Perú— el número de usuarios de internet se ha disparado en los últimos años, y al mismo tiempo el flujo de remesas personales ha crecido de forma casi paralela. Por ejemplo, en Guatemala la penetración de internet se acercó al 90 % y las remesas per cápita se dispararon, mientras que en Chile, con un 86 % de usuarios, también se observó un fuerte aumento en el dinero que llega de los trabajadores en el extranjero. En Brasil, donde el internet alcanza el 84 %, las remesas también se han incrementado notablemente. En todos estos casos, la subida de la conectividad se alinea con un aumento de las remesas, aunque la magnitud exacta varía de un país a otro.\n\nEn resumen, los datos no contradicen la idea inicial: la mayor presencia de internet parece acompañar un mayor flujo de remesas. No obstante, la relación no es perfecta; en algunos lugares la variación es más pronunciada que en otros, y no podemos afirmar que la conectividad sea la única razón. Lo que sí se confirma es que, al menos en Latinoamérica, la internet y el dinero que llega de los migrantes tienden a crecer juntos.",
+    "charts": "2026-11-04-19-31",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 6280,
+        "after": 4538,
+        "cutChars": 5112
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7822,
+        "after": 5730,
+        "cutChars": 6301
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 6124,
+        "after": 4509,
+        "cutChars": 4967
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8416,
+        "after": 5712,
+        "cutChars": 8455
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5902,
+        "after": 4560,
+        "cutChars": 4238
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 6995,
+        "after": 5164,
+        "cutChars": 5847
+      }
+    ],
+    "ts": "2026-11-04T19:39:00.314Z"
+  },
+  {
     "file": "2026-11-03_efectos-de-la-exclusi-n-de-sud-frica-y-r.md",
     "date": "2026-11-03",
     "topic": "Efectos de la exclusión de Sudáfrica y Ruanda del programa AGOA en los flujos comerciales de América Latina",

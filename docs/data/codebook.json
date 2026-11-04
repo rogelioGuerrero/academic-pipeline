@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-03T19:23:58+00:00",
+  "generated": "2026-11-04T19:39:03+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 28
+    "papers": 29
   },
   "countries": [
     {
@@ -67,6 +67,26 @@
   ],
   "papers": [
     {
+      "date": "2026-11-04",
+      "file": "2026-11-04_relaci-n-entre-la-penetraci-n-de-interne.md",
+      "topic": "Relación entre la penetración de internet y la recepción de remesas en América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ],
+      "indicators": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ]
+    },
+    {
       "date": "2026-11-03",
       "file": "2026-11-03_efectos-de-la-exclusi-n-de-sud-frica-y-r.md",
       "topic": "Efectos de la exclusión de Sudáfrica y Ruanda del programa AGOA en los flujos comerciales de América Latina",
@@ -123,9 +143,9 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
         "Internet users (% of population)",
-        "Personal remittances received (current US$)"
+        "Personal remittances received (current US$)",
+        "GDP growth (annual %)"
       ]
     },
     {
@@ -267,8 +287,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
         "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
         "Government expenditure on education (% of GDP)"
       ]
     },
@@ -337,8 +357,8 @@
         "Government expenditure on education (% of GDP)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
         "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
         "Government expenditure on education (% of GDP)"
       ]
     },
@@ -359,8 +379,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
         "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
         "Employment in services (% of total employment)"
       ]
     },
@@ -1471,6 +1491,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-04",
+              "file": "2026-11-04_relaci-n-entre-la-penetraci-n-de-interne.md",
+              "topic": "Relación entre la penetración de internet y la recepción de remesas en América Latina"
+            },
+            {
               "date": "2026-11-01",
               "file": "2026-11-01_impacto-de-los-ciberataques-en-la-confia.md",
               "topic": "Impacto de los ciberataques en la confianza digital y la adopción de tecnología en América Latina"
@@ -1827,6 +1852,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-04",
+              "file": "2026-11-04_relaci-n-entre-la-penetraci-n-de-interne.md",
+              "topic": "Relación entre la penetración de internet y la recepción de remesas en América Latina"
+            },
             {
               "date": "2026-11-01",
               "file": "2026-11-01_impacto-de-los-ciberataques-en-la-confia.md",
