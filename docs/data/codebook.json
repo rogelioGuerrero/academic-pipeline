@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-04T19:39:03+00:00",
+  "generated": "2026-11-05T19:43:52+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 29
+    "papers": 30
   },
   "countries": [
     {
@@ -66,6 +66,28 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-05",
+      "file": "2026-11-05_relaci-n-entre-la-urbanizaci-n--gasto-en.md",
+      "topic": "Relación entre la urbanización, gasto en salud y esperanza de vida en América Latina",
+      "sample_countries": [
+        "CHL",
+        "COL",
+        "ARG",
+        "BRA",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ],
+      "indicators": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ]
+    },
     {
       "date": "2026-11-04",
       "file": "2026-11-04_relaci-n-entre-la-penetraci-n-de-interne.md",
@@ -310,10 +332,10 @@
         "Urban population (% of total)"
       ],
       "indicators": [
-        "Life expectancy at birth (years)",
+        "Urban population (% of total)",
         "Current health expenditure (% of GDP)",
-        "Net migration (total people)",
-        "Urban population (% of total)"
+        "Life expectancy at birth (years)",
+        "Net migration (total people)"
       ]
     },
     {
@@ -2058,6 +2080,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-05",
+              "file": "2026-11-05_relaci-n-entre-la-urbanizaci-n--gasto-en.md",
+              "topic": "Relación entre la urbanización, gasto en salud y esperanza de vida en América Latina"
+            },
+            {
               "date": "2026-10-12",
               "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
               "topic": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina"
@@ -2268,6 +2295,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-05",
+              "file": "2026-11-05_relaci-n-entre-la-urbanizaci-n--gasto-en.md",
+              "topic": "Relación entre la urbanización, gasto en salud y esperanza de vida en América Latina"
+            },
+            {
               "date": "2026-10-12",
               "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
               "topic": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina"
@@ -2318,6 +2350,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-05",
+              "file": "2026-11-05_relaci-n-entre-la-urbanizaci-n--gasto-en.md",
+              "topic": "Relación entre la urbanización, gasto en salud y esperanza de vida en América Latina"
+            },
             {
               "date": "2026-10-12",
               "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",

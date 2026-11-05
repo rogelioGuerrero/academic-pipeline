@@ -1,0 +1,78 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la expansión del acceso a internet en la recepción de remesas y el crecimiento económico en América Latina",
+      "noticia_inspiradora": "AIB raises outlook after sharp rise in new lending (Economía)",
+      "afirmacion_noticia": "El aumento del crédito y la actividad bancaria sugiere un entorno económico más dinámico, posiblemente impulsado por mayor inclusión digital.",
+      "verificable_con_datos": "Se pueden verificar la relación entre Internet users (% of population) y Personal remittances received (current US$) y su vínculo con GDP growth (annual %). No se puede medir directamente el crédito bancario ni la actividad de AIB con los indicadores disponibles.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Personal remittances (r≈0.96 en Colombia)"
+      ],
+      "justificacion": "La noticia habla de expansión crediticia, pero el dato más cercano es la digitalización que favorece remesas y crecimiento; existen correlaciones documentadas en la base que conectan internet y remesas, y podemos explorar su efecto en el PIB per cápita.",
+      "pregunta": "¿Los países latinoamericanos con mayor penetración de internet reciben más remesas per cápita y presentan mayores tasas de crecimiento del PIB?",
+      "hipotesis": "Los países con mayor porcentaje de usuarios de internet en América Latina reciben mayores flujos de remesas per cápita y experimentan un mayor crecimiento del PIB anual.",
+      "keywords_en": "internet penetration remittances GDP growth Latin America"
+    },
+    {
+      "titulo": "Efectos de la inseguridad percibida en la inversión extranjera y el comercio exterior en América Latina",
+      "noticia_inspiradora": "Crypto dips on Democrat midterm wins, Binance hack dent optimism (Política)",
+      "afirmacion_noticia": "La incertidumbre política y los ciberataques reducen la confianza de inversores y afectan el comercio internacional.",
+      "verificable_con_datos": "Se pueden medir los flujos de Foreign direct investment, net inflows (% of GDP) y Trade (% of GDP). No hay indicadores directos de inseguridad o ciberataques.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI inflows ↔ Trade participation (previa correlación en base)"
+      ],
+      "justificacion": "Aunque la noticia menciona ciberataques, el vínculo más sólido con los datos es la relación entre inseguridad/confianza y variables macroeconómicas de inversión y comercio, que ya se han estudiado en la base.",
+      "pregunta": "¿Existe una relación negativa entre periodos de mayor inseguridad política y la magnitud de la inversión extranjera neta y la participación del comercio en el PIB en América Latina?",
+      "hipotesis": "Los periodos de mayor inseguridad política en América Latina se asocian a una disminución de la inversión extranjera neta y de la participación del comercio en el PIB.",
+      "keywords_en": "political insecurity foreign direct investment trade Latin America"
+    },
+    {
+      "titulo": "Relación entre la urbanización, gasto en salud y esperanza de vida en América Latina",
+      "noticia_inspiradora": "Tokyo Shares Tumble Wednesday Despite Strong Corporate Earnings (IA & Tech)",
+      "afirmacion_noticia": "Los mercados financieros pueden reaccionar negativamente pese a buenos resultados corporativos, reflejando incertidumbres estructurales en salud y urbanización.",
+      "verificable_con_datos": "Se pueden analizar Urban population (% of total), Current health expenditure (% of GDP) y Life expectancy at birth (years). No hay datos directos sobre la reacción del mercado financiero.",
+      "indicadores_respaldan": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ],
+      "correlaciones_relevantes": [
+        "CHL health expenditure ↔ Urban population (r=0.99)"
+      ],
+      "justificacion": "Existe una correlación muy fuerte entre gasto en salud y urbanización en Chile; podemos ampliar el análisis a toda América Latina para ver cómo estos factores se relacionan con la esperanza de vida.",
+      "pregunta": "¿En los países latinoamericanos, un mayor porcentaje de población urbana y mayor gasto en salud están asociados a una mayor esperanza de vida?",
+      "hipotesis": "Los países latinoamericanos con mayor proporción de población urbana y mayor gasto en salud presentan una esperanza de vida más alta.",
+      "keywords_en": "urbanization health expenditure life expectancy Latin America"
+    },
+    {
+      "titulo": "Impacto de la educación terciaria en la productividad y crecimiento económico en América Latina",
+      "noticia_inspiradora": "Meet Dapo Akande, Nigerian-trained lawyer elected ICJ judge (Desarrollo Internacional)",
+      "afirmacion_noticia": "El reconocimiento internacional de profesionales con alta educación sugiere que la educación superior impulsa la competitividad de los países.",
+      "verificable_con_datos": "Se pueden usar Tertiary school enrollment (% gross) y GDP per capita (current US$) como proxies de educación y productividad. No hay indicadores directos de calidad educativa o reconocimiento profesional.",
+      "indicadores_respaldan": [
+        "Tertiary school enrollment (% gross)",
+        "GDP per capita (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Tertiary enrollment ↔ GDP per capita (potencial correlación)"
+      ],
+      "justificacion": "La noticia destaca la trayectoria académica; los indicadores permiten evaluar si mayores tasas de matrícula terciaria se traducen en mayor ingreso per cápita en la región.",
+      "pregunta": "¿Los países latinoamericanos con mayores tasas de matrícula en educación terciaria presentan un mayor PIB per cápita?",
+      "hipotesis": "Existe una relación positiva entre la tasa de matrícula en educación terciaria y el PIB per cápita en América Latina.",
+      "keywords_en": "tertiary education enrollment GDP per capita Latin America"
+    }
+  ],
+  "topic": "Relación entre urbanización, gasto en salud y esperanza de vida en América Latina",
+  "angle": "Analizar cómo la combinación de mayor urbanización y mayor inversión en salud pública se traduce en mejoras de la esperanza de vida, aprovechando la correlación casi perfecta observada en Chile y extendiéndola a la región.",
+  "pregunta": "¿En los países latinoamericanos, un mayor porcentaje de población urbana y mayor gasto en salud están asociados a una mayor esperanza de vida?",
+  "hipotesis": "Los países latinoamericanos con mayor proporción de población urbana y mayor gasto en salud presentan una esperanza de vida más alta."
+}
