@@ -1,5 +1,45 @@
 [
   {
+    "file": "2026-11-06_impacto-de-la-pol-tica-migratoria-europe.md",
+    "date": "2026-11-06",
+    "topic": "Impacto de la política migratoria europea en la tasa de urbanización de América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://en.protothema.gr/wp-content/uploads/2026/11/Screenshot-2026-11-05-at-8.47.02-AM.png",
+    "section": "Desarrollo Internacional",
+    "news_url": "https://en.protothema.gr/2026/11/05/eu-takes-tougher-line-on-turkey-and-north-macedonia-over-aegean-and-prespa-agreement/",
+    "pregunta": "¿Existe una relación entre la magnitud de la migración neta y la proporción de población urbana en los países latinoamericanos?",
+    "editorial": "¿Es verdad que los países latinoamericanos con menos migración neta son los que tienen más gente viviendo en ciudades? Esa pregunta surgió cuando la UE durmió la línea con Turquía y Macedonia, y los lectores curiosos empezaron a mirar los números de migración y de urbanización.\n\nAl mirar los datos, la historia se vuelve un poco confusa. En Uruguay y México la mayoría de la población vive en ciudades y al mismo tiempo la migración neta es alta; en esos dos países la relación parece fuerte. En Guatemala también hay una tendencia similar, aunque la cifra es un poco más débil. Por el contrario, en Brasil, Chile y Argentina la relación se vuelve opuesta: a mayor urbanización, la migración neta tiende a bajar, pero la evidencia es débil y puede ser solo casualidad. En algunos casos, los datos no muestran ningún patrón claro, como en el caso de Argentina donde la relación es casi nula.\n\nEn resumen, los números no confirman de manera firme la idea de que menos migración neta siempre viene acompañada de más población urbana. La realidad es más heterogénea: algunos países siguen la tendencia esperada, otros la invierten y algunos no muestran ninguna relación. Para el lector, la lección es que la migración y la urbanización son fenómenos complejos que no se pueden reducir a una sola regla.",
+    "charts": "2026-11-06-19-03",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5802,
+        "after": 4448,
+        "cutChars": 3941
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7354,
+        "after": 5297,
+        "cutChars": 6094
+      }
+    ],
+    "ts": "2026-11-06T19:06:04.938Z"
+  },
+  {
     "file": "2026-11-05_relaci-n-entre-la-urbanizaci-n--gasto-en.md",
     "date": "2026-11-05",
     "topic": "Relación entre la urbanización, gasto en salud y esperanza de vida en América Latina",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-05T19:43:52+00:00",
+  "generated": "2026-11-06T19:06:09+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 30
+    "papers": 31
   },
   "countries": [
     {
@@ -66,6 +66,26 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-06",
+      "file": "2026-11-06_impacto-de-la-pol-tica-migratoria-europe.md",
+      "topic": "Impacto de la política migratoria europea en la tasa de urbanización de América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Urban population (% of total)",
+        "Net migration (total people)"
+      ],
+      "indicators": [
+        "Urban population (% of total)",
+        "Net migration (total people)"
+      ]
+    },
     {
       "date": "2026-11-05",
       "file": "2026-11-05_relaci-n-entre-la-urbanizaci-n--gasto-en.md",
@@ -333,9 +353,9 @@
       ],
       "indicators": [
         "Urban population (% of total)",
+        "Net migration (total people)",
         "Current health expenditure (% of GDP)",
-        "Life expectancy at birth (years)",
-        "Net migration (total people)"
+        "Life expectancy at birth (years)"
       ]
     },
     {
@@ -356,10 +376,10 @@
         "GDP per capita (current US$)"
       ],
       "indicators": [
+        "Net migration (total people)",
         "Internet users (% of population)",
         "Personal remittances received (current US$)",
-        "GDP per capita (current US$)",
-        "Net migration (total people)"
+        "GDP per capita (current US$)"
       ]
     },
     {
@@ -2024,6 +2044,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-06",
+              "file": "2026-11-06_impacto-de-la-pol-tica-migratoria-europe.md",
+              "topic": "Impacto de la política migratoria europea en la tasa de urbanización de América Latina"
+            },
+            {
               "date": "2026-10-12",
               "file": "2026-10-12_efectos-del-fen-meno-el-ni-o-y-la-variab.md",
               "topic": "Efectos del fenómeno El Niño y la variabilidad climática en la salud y la migración en América Latina"
@@ -2079,6 +2104,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-06",
+              "file": "2026-11-06_impacto-de-la-pol-tica-migratoria-europe.md",
+              "topic": "Impacto de la política migratoria europea en la tasa de urbanización de América Latina"
+            },
             {
               "date": "2026-11-05",
               "file": "2026-11-05_relaci-n-entre-la-urbanizaci-n--gasto-en.md",
