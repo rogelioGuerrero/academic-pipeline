@@ -1,5 +1,62 @@
 [
   {
+    "file": "2026-11-08_efectos-de-la-expansi-n-del-capital-banc.md",
+    "date": "2026-11-08",
+    "topic": "Efectos de la expansión del capital bancario en la inclusión financiera y el crecimiento económico",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://media.prothomalo.com/prothomalo-english%2F2025-10-03%2Fnc7oyv4l%2FIslami-Bank-Bangladesh-PLC.avif?rect=0%2C124%2C1200%2C630&w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&overlay=&overlay_position=bottom&overlay_width_pct=1",
+    "section": "Última Hora",
+    "news_url": "https://en.prothomalo.com/business/local/1m7qj6m66x",
+    "pregunta": "¿Existe una relación positiva entre los flujos de inversión extranjera directa y el crecimiento del PIB y la participación del comercio en América Latina?",
+    "editorial": "¿Es verdad que cuando más inversion extranjera llega a un país de América Latina, su economía crece más rápido y el comercio se vuelve más importante? Esa pregunta surgió al leer que el Islami Bank planea subir su capital autorizado en 80 mil millones de taka, lo que hizo pensar en cómo la entrada de capital externo afecta a los países del continente.\n\nAl mirar los datos, la historia no es tan clara. En un vistazo rápido a todos los países, la relación entre la inversión extranjera y el crecimiento del PIB parece débil: en algunos casos el PIB crece un poco más, en otros casi no cambia. Lo que sí destaca es que cuando el comercio representa una mayor parte del PIB, los países tienden a recibir más inversión extranjera. En el análisis que controla las características propias de cada nación, se ve que el comercio es un buen predictor de la entrada de capital. En cambio, el crecimiento del PIB por sí solo no parece atraer más inversionistas.\n\nEn resumen, la idea de que la inversión extranjera siempre impulsa el crecimiento y el comercio no se sostiene de forma uniforme. Los datos muestran que el comercio es el factor más relevante, mientras que el crecimiento económico por sí solo no garantiza más flujos externos. Así, para los lectores que siguen las noticias, la lección es que la relación entre inversión, crecimiento y comercio es compleja y varía de un país a otro.",
+    "charts": "2026-11-07-17-36",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 1661
+      },
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 2200
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7266,
+        "after": 4493,
+        "cutChars": 7609
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8976,
+        "after": 5574,
+        "cutChars": 9456
+      }
+    ],
+    "ts": "2026-11-08T17:48:49.693Z"
+  },
+  {
     "file": "2026-11-06_impacto-de-la-pol-tica-migratoria-europe.md",
     "date": "2026-11-06",
     "topic": "Impacto de la política migratoria europea en la tasa de urbanización de América Latina",

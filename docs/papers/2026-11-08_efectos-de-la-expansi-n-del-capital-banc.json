@@ -1,0 +1,235 @@
+{
+  "generated": "2026-11-08T17:48:49.693Z",
+  "topic": "Efectos de la expansión del capital bancario en la inclusión financiera y el crecimiento económico",
+  "angle": "Aunque la noticia es específica de Bangladesh, el concepto de expansión de capital bancario se traduce en mayor disponibilidad de financiamiento, que puede aproximarse mediante FDI y su relación con crecimiento y comercio en América Latina.",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE",
+    "RESUME@qa_retry",
+    "WRITE",
+    "REVIEW",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 0,
+    "edit": 0
+  },
+  "pregunta": "¿Existe una relación positiva entre los flujos de inversión extranjera directa y el crecimiento del PIB y la participación del comercio en América Latina?",
+  "hipotesis": "Los países latinoamericanos con mayores ingresos de inversión extranjera directa presentan un mayor crecimiento del PIB y una mayor participación del comercio en su economía.",
+  "inspiringNews": {
+    "title": "Islami Bank to increase authorised capital by Tk 80 billion | Prothom Alo",
+    "url": "https://en.prothomalo.com/business/local/1m7qj6m66x",
+    "source": "",
+    "section": "Última Hora",
+    "image": "https://media.prothomalo.com/prothomalo-english%2F2025-10-03%2Fnc7oyv4l%2FIslami-Bank-Bangladesh-PLC.avif?rect=0%2C124%2C1200%2C630&w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&overlay=&overlay_position=bottom&overlay_width_pct=1"
+  },
+  "suggestMode": "suggest",
+  "suggestions": [
+    {
+      "titulo": "Impacto de la inversión en IA y ciberseguridad en la productividad y empleo digital de América Latina",
+      "noticia_inspiradora": "Palo Alto Networks in talks to buy AI agent security startup Clutch for $500M | TechCrunch",
+      "afirmacion_noticia": "La adquisición de startups de IA y ciberseguridad impulsará la adopción de tecnologías avanzadas en empresas latinoamericanas, potenciando la productividad y la creación de empleos digitales.",
+      "verificable_con_datos": "Se pueden observar cambios en el número de usuarios de internet y suscripciones móviles (indicadores de adopción tecnológica) y su relación con indicadores de empleo y crecimiento económico; no se pueden medir directamente las inversiones privadas ni la calidad del empleo generado.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "GDP growth (annual %)",
+        "Total unemployment (% of total labor force)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs GDP growth",
+        "Mobile subscriptions vs Total unemployment",
+        "Internet users vs Total unemployment"
+      ],
+      "justificacion": "La noticia se centra en una inversión de IA que afecta la infraestructura tecnológica; los indicadores de penetración de internet y móviles capturan la base tecnológica, mientras que crecimiento del PIB y desempleo reflejan efectos macroeconómicos, ofreciendo un puente directo y medible.",
+      "pregunta": "¿Existe una correlación positiva entre la penetración de internet y suscripciones móviles y el crecimiento del PIB, y una correlación negativa con la tasa de desempleo en América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y suscripciones móviles presentan mayor crecimiento del PIB y menor tasa de desempleo.",
+      "keywords_en": "AI investment digital economy Latin America internet penetration unemployment"
+    },
+    {
+      "titulo": "Desafíos climáticos y su efecto en la salud pública y la esperanza de vida en América Latina",
+      "noticia_inspiradora": "COP31 summit faces tough test as climate threats mount (Desarrollo Internacional)",
+      "afirmacion_noticia": "Los crecientes riesgos climáticos discutidos en la COP31 podrían deteriorar la salud pública y reducir la esperanza de vida en la región.",
+      "verificable_con_datos": "Se pueden analizar la relación entre la proporción de energía renovable y la esperanza de vida; no se dispone de datos directos sobre eventos climáticos específicos ni su impacto inmediato en salud.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "Life expectancy at birth (years)",
+        "Current health expenditure (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy vs Life expectancy",
+        "Health expenditure vs Life expectancy"
+      ],
+      "justificacion": "La noticia aborda el clima; el indicador de energía renovable sirve como proxy de políticas climáticas, mientras que esperanza de vida y gasto en salud permiten evaluar efectos en la salud pública, creando un marco analítico viable.",
+      "pregunta": "¿Los países latinoamericanos con mayor consumo de energía renovable presentan una mayor esperanza de vida, controlando por el gasto en salud?",
+      "hipotesis": "Un mayor consumo de energía renovable está asociado a una mayor esperanza de vida en América Latina, incluso después de controlar el gasto público en salud.",
+      "keywords_en": "renewable energy life expectancy health expenditure Latin America climate policy"
+    },
+    {
+      "titulo": "Relación entre la urbanización, gasto en salud y esperanza de vida en el contexto de la migración neta",
+      "noticia_inspiradora": "US asks China to uphold Busan trade deal commitments (Internacional)",
+      "afirmacion_noticia": "Las tensiones comerciales internacionales pueden influir en los flujos migratorios y, a su vez, afectar la urbanización y los resultados de salud en América Latina.",
+      "verificable_con_datos": "Se pueden examinar la asociación entre urbanización, gasto en salud y esperanza de vida; la parte sobre tensiones comerciales y migración solo se puede inferir indirectamente.",
+      "indicadores_respaldan": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)",
+        "Net migration (total people)"
+      ],
+      "correlaciones_relevantes": [
+        "Urban population vs Health expenditure",
+        "Health expenditure vs Life expectancy",
+        "Net migration vs Urban population"
+      ],
+      "justificacion": "Aunque la noticia trata de comercio, el vínculo con migración permite usar los indicadores de migración y urbanización para explorar efectos en salud, ofreciendo un ángulo multidisciplinario.",
+      "pregunta": "¿Cómo se relacionan la migración neta, la urbanización y el gasto en salud con la esperanza de vida en los países latinoamericanos?",
+      "hipotesis": "Los países con mayor migración neta positiva tienden a tener mayor urbanización y gasto en salud, lo que se traduce en una mayor esperanza de vida.",
+      "keywords_en": "migration urbanization health expenditure life expectancy Latin America"
+    },
+    {
+      "titulo": "Efectos de la expansión del capital bancario en la inclusión financiera y el crecimiento económico",
+      "noticia_inspiradora": "Islami Bank to increase authorised capital by Tk 80 billion | Prothom Alo",
+      "afirmacion_noticia": "El aumento del capital autorizado de un gran banco puede mejorar la disponibilidad de crédito y estimular el crecimiento económico en la región.",
+      "verificable_con_datos": "Se pueden observar correlaciones entre la inversión extranjera neta (FDI) y el crecimiento del PIB; no hay indicadores directos de expansión de capital bancario en América Latina.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI vs GDP growth",
+        "FDI vs Trade"
+      ],
+      "justificacion": "Aunque la noticia es específica de Bangladesh, el concepto de expansión de capital bancario se traduce en mayor disponibilidad de financiamiento, que puede aproximarse mediante FDI y su relación con crecimiento y comercio en América Latina.",
+      "pregunta": "¿Existe una relación positiva entre los flujos de inversión extranjera directa y el crecimiento del PIB y la participación del comercio en América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayores ingresos de inversión extranjera directa presentan un mayor crecimiento del PIB y una mayor participación del comercio en su economía.",
+      "keywords_en": "FDI economic growth trade Latin America banking capital"
+    }
+  ],
+  "reviewDecision": {
+    "datos_correctos": true,
+    "detalle_datos": "El paper reproduce fielmente los coeficientes, R², p‑valores y tendencias reportados en los resultados oficiales. No se detectan cifras fuera de los datos proporcionados.",
+    "datos_inventados": [],
+    "estructura_ok": true,
+    "coherencia_ok": true,
+    "correcciones": [],
+    "datos_faltantes": null,
+    "veredicto": "APROBADO",
+    "feedback": null,
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 107,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "APROBADO",
+    "checklist": {
+      "estructura_ok": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": true,
+      "datos_verificados": true,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 2104,
+    "issues": [],
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 107,
+      "invented": 0
+    }
+  },
+  "editorial": "¿Es verdad que cuando más inversion extranjera llega a un país de América Latina, su economía crece más rápido y el comercio se vuelve más importante? Esa pregunta surgió al leer que el Islami Bank planea subir su capital autorizado en 80 mil millones de taka, lo que hizo pensar en cómo la entrada de capital externo afecta a los países del continente.\n\nAl mirar los datos, la historia no es tan clara. En un vistazo rápido a todos los países, la relación entre la inversión extranjera y el crecimiento del PIB parece débil: en algunos casos el PIB crece un poco más, en otros casi no cambia. Lo que sí destaca es que cuando el comercio representa una mayor parte del PIB, los países tienden a recibir más inversión extranjera. En el análisis que controla las características propias de cada nación, se ve que el comercio es un buen predictor de la entrada de capital. En cambio, el crecimiento del PIB por sí solo no parece atraer más inversionistas.\n\nEn resumen, la idea de que la inversión extranjera siempre impulsa el crecimiento y el comercio no se sostiene de forma uniforme. Los datos muestran que el comercio es el factor más relevante, mientras que el crecimiento económico por sí solo no garantiza más flujos externos. Así, para los lectores que siguen las noticias, la lección es que la relación entre inversión, crecimiento y comercio es compleja y varía de un país a otro.",
+  "sample": {
+    "countries": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "COL",
+      "CRI"
+    ],
+    "indicators": [
+      "Foreign direct investment, net inflows (% of GDP)",
+      "GDP growth (annual %)",
+      "Trade (% of GDP)"
+    ]
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-11-07-17-36",
+    "regression": {
+      "r_squared": 0.08927343519621267,
+      "n": 10
+    },
+    "correlations": 39,
+    "significantCorrelations": [
+      {
+        "x": "Foreign direct investment, net inflows (% of GDP) [CRI]",
+        "y": "Trade (% of GDP) [CRI]",
+        "r": 0.8874385344162695,
+        "p": 0.0006118354661090855,
+        "q": 0.023861583178254334,
+        "diff_r": 0.941458769952208,
+        "diff_p": 0.00015089430835110718,
+        "country": "CRI"
+      }
+    ]
+  },
+  "truncations": [
+    {
+      "stage": "WRITE:apertura_metodologia",
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 1661
+    },
+    {
+      "stage": "WRITE:apertura_metodologia",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 2200
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7266,
+      "after": 4493,
+      "cutChars": 7609
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 8976,
+      "after": 5574,
+      "cutChars": 9456
+    }
+  ],
+  "elapsed": 154.9
+}
