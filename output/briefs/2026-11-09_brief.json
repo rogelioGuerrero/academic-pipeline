@@ -1,0 +1,66 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de eventos climáticos extremos en la salud urbana de América Latina",
+      "noticia_inspiradora": "Photos: Heavy rains leave tens of thousands without shelter in Gaza",
+      "afirmacion_noticia": "Las fuertes lluvias provocan desplazamientos masivos y aumentan la vulnerabilidad sanitaria de la población afectada.",
+      "verificable_con_datos": "Se pueden verificar los efectos sobre la salud mediante los indicadores de esperanza de vida y gasto en salud, y la exposición urbana mediante el porcentaje de población urbana; no se dispone de datos directos sobre eventos de inundación o desplazamiento interno.",
+      "indicadores_respaldan": [
+        "Life expectancy at birth (years)",
+        "Current health expenditure (% of GDP)",
+        "Urban population (% of total)"
+      ],
+      "correlaciones_relevantes": [
+        "Urban population ↔ Current health expenditure (r≈0.99 en CHL)",
+        "Current health expenditure ↔ Life expectancy (r≈0.99 en CHL)"
+      ],
+      "justificacion": "El dominio de salud y demografía conecta directamente con la noticia de una catástrofe climática; los indicadores disponibles permiten medir la capacidad del sistema de salud y la concentración urbana, factores críticos en la respuesta a inundaciones.",
+      "pregunta": "¿Cómo se relacionan los niveles de gasto en salud y la proporción de población urbana con la esperanza de vida en los países latinoamericanos más expuestos a eventos climáticos extremos?",
+      "hipotesis": "Los países latinoamericanos con mayor gasto en salud y mayor porcentaje de población urbana presentan una esperanza de vida más alta, incluso en contextos de alta exposición a eventos climáticos extremos.",
+      "keywords_en": "climate shocks health outcomes urban population Latin America"
+    },
+    {
+      "titulo": "Contaminación del aire y sus repercusiones en la salud pública latinoamericana",
+      "noticia_inspiradora": "India news: Delhi air quality level 'severe' after Diwali",
+      "afirmacion_noticia": "Los episodios de contaminación atmosférica severa reducen la calidad de vida y pueden acortar la esperanza de vida.",
+      "verificable_con_datos": "Se pueden contrastar los niveles de esperanza de vida y gasto en salud; falta un indicador directo de calidad del aire, por lo que la intensidad de la contaminación no se mide directamente.",
+      "indicadores_respaldan": [
+        "Life expectancy at birth (years)",
+        "Current health expenditure (% of GDP)",
+        "Urban population (% of total)"
+      ],
+      "correlaciones_relevantes": [
+        "Urban population ↔ Current health expenditure (r≈0.99 en CHL)",
+        "Current health expenditure ↔ Life expectancy (r≈0.99 en CHL)"
+      ],
+      "justificacion": "Aunque no disponemos de datos de contaminación, la urbanización y el gasto sanitario son factores que medían la vulnerabilidad y capacidad de respuesta ante la mala calidad del aire, permitiendo una prueba indirecta de la hipótesis.",
+      "pregunta": "¿Existe una asociación positiva entre el gasto en salud y la esperanza de vida en países latinoamericanos con alta concentración urbana, que podrían ser más vulnerables a la contaminación del aire?",
+      "hipotesis": "En los países latinoamericanos con alta urbanización, un mayor gasto en salud está asociado a una mayor esperanza de vida, mitigando potenciales efectos negativos de la contaminación del aire.",
+      "keywords_en": "air pollution health expenditure urbanization life expectancy Latin America"
+    },
+    {
+      "titulo": "Inestabilidad política y flujos de inversión extranjera en América Latina",
+      "noticia_inspiradora": "South Africa elections: ANC marks its worst-ever performance",
+      "afirmacion_noticia": "Una caída significativa del apoyo político puede generar incertidumbre económica y afectar la atracción de inversión extranjera directa.",
+      "verificable_con_datos": "Se pueden analizar los niveles de inversión extranjera directa y su relación con el crecimiento del PIB; no se dispone de un indicador directo de inestabilidad política en la base de datos.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI inflows ↔ GDP growth (explorado en hipótesis previa)",
+        "FDI inflows ↔ Trade (% of GDP) (explorado en hipótesis previa)"
+      ],
+      "justificacion": "La noticia sugiere que la incertidumbre política afecta la inversión; los indicadores de FDI, crecimiento y comercio permiten evaluar si los países latinoamericanos con mayores fluctuaciones económicas presentan menores ingresos de FDI, sirviendo como proxy de estabilidad política.",
+      "pregunta": "¿Cómo se relaciona la variación del crecimiento del PIB y la participación del comercio con los flujos de inversión extranjera directa en América Latina?",
+      "hipotesis": "Los países latinoamericanos que presentan mayor crecimiento del PIB y mayor participación del comercio en su economía atraen mayores flujos de inversión extranjera directa.",
+      "keywords_en": "political instability foreign direct investment economic growth trade Latin America"
+    }
+  ],
+  "topic": "Relación entre urbanización, gasto en salud y esperanza de vida frente a eventos climáticos extremos en América Latina",
+  "angle": "Analizar cómo la combinación de alta urbanización y mayor gasto sanitario puede amortiguar los efectos negativos de desastres climáticos sobre la esperanza de vida en la región.",
+  "pregunta": "¿En qué medida el gasto en salud y la proporción de población urbana explican la variación en la esperanza de vida de los países latinoamericanos más vulnerables a eventos climáticos extremos?",
+  "hipotesis": "En los países latinoamericanos más expuestos a eventos climáticos extremos, un mayor gasto en salud y una mayor urbanización están asociados a una esperanza de vida más alta.",
+  "keywords_en": "urbanization health expenditure life expectancy climate extremes Latin America"
+}

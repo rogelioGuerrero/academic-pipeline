@@ -1,5 +1,50 @@
 [
   {
+    "file": "2026-11-09_relaci-n-entre-urbanizaci-n--gasto-en-sa.md",
+    "date": "2026-11-09",
+    "topic": "Relación entre urbanización, gasto en salud y esperanza de vida frente a eventos climáticos extremos en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://www.aljazeera.com/wp-content/uploads/2026/11/AFP__20261107__D6QP4T8__v1__HighRes__PalestinianIsraelConflictGaza-1794117615.jpg?resize=1920%2C1440",
+    "section": "Desarrollo Internacional",
+    "news_url": "https://www.aljazeera.com/gallery/2026/11/8/photos-heavy-rains-leave-tens-of-thousands-without-shelter-in-gaza",
+    "pregunta": "¿En qué medida el gasto en salud y la proporción de población urbana explican la variación en la esperanza de vida de los países latinoamericanos más vulnerables a eventos climáticos extremos?",
+    "editorial": "¿Es verdad que cuando los países latinoamericanos invierten más en salud y viven más en ciudades, la esperanza de vida sube? Esa pregunta surgió al ver las fotos de Gaza, donde la lluvia intensa dejó a decenas de miles sin refugio. Si la naturaleza puede ser implacable, quizá la política también lo sea.\n\nAl revisar los datos de nueve países vulnerables a tormentas y huracanes, encontramos que el gasto en salud, medido como porcentaje del PIB, se comporta de forma inesperada. Cuando ese gasto sube, la esperanza de vida tiende a bajar ligeramente. En el análisis de 110 observaciones que compara años dentro de cada país, el efecto se vuelve más claro: cada punto porcentual extra en salud se traduce en casi un año menos de esperanza de vida. Por otro lado, la urbanización, que a primera vista parece un aliado, no muestra ninguna influencia consistente.\n\nEn pocas palabras, los números no respaldan la idea de que más dinero en salud y más habitantes urbanos garantizan vidas más largas. Los resultados son contradictorios y, en algunos casos, incluso sugieren lo contrario. Así que, aunque la intención de mejorar la salud sea noble, la realidad de los datos nos recuerda que la relación entre gasto, urbanización y longevidad es más compleja de lo que pensábamos.",
+    "charts": "2026-11-09-22-04",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7031,
+        "after": 4473,
+        "cutChars": 7443
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8956,
+        "after": 5750,
+        "cutChars": 9341
+      }
+    ],
+    "ts": "2026-11-09T22:06:46.901Z"
+  },
+  {
     "file": "2026-11-08_efectos-de-la-expansi-n-del-capital-banc.md",
     "date": "2026-11-08",
     "topic": "Efectos de la expansión del capital bancario en la inclusión financiera y el crecimiento económico",

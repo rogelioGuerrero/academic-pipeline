@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-08T17:48:52+00:00",
+  "generated": "2026-11-09T22:06:49+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 32
+    "papers": 33
   },
   "countries": [
     {
@@ -66,6 +66,28 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-09",
+      "file": "2026-11-09_relaci-n-entre-urbanizaci-n--gasto-en-sa.md",
+      "topic": "Relación entre urbanización, gasto en salud y esperanza de vida frente a eventos climáticos extremos en América Latina",
+      "sample_countries": [
+        "CHL",
+        "COL",
+        "ARG",
+        "BRA",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Life expectancy at birth (years)",
+        "Current health expenditure (% of GDP)",
+        "Urban population (% of total)"
+      ],
+      "indicators": [
+        "Life expectancy at birth (years)",
+        "Current health expenditure (% of GDP)",
+        "Urban population (% of total)"
+      ]
+    },
     {
       "date": "2026-11-08",
       "file": "2026-11-08_efectos-de-la-expansi-n-del-capital-banc.md",
@@ -125,9 +147,9 @@
         "Life expectancy at birth (years)"
       ],
       "indicators": [
-        "Urban population (% of total)",
+        "Life expectancy at birth (years)",
         "Current health expenditure (% of GDP)",
-        "Life expectancy at birth (years)"
+        "Urban population (% of total)"
       ]
     },
     {
@@ -374,10 +396,10 @@
         "Urban population (% of total)"
       ],
       "indicators": [
-        "Urban population (% of total)",
-        "Net migration (total people)",
+        "Life expectancy at birth (years)",
         "Current health expenditure (% of GDP)",
-        "Life expectancy at birth (years)"
+        "Urban population (% of total)",
+        "Net migration (total people)"
       ]
     },
     {
@@ -2142,6 +2164,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-09",
+              "file": "2026-11-09_relaci-n-entre-urbanizaci-n--gasto-en-sa.md",
+              "topic": "Relación entre urbanización, gasto en salud y esperanza de vida frente a eventos climáticos extremos en América Latina"
+            },
+            {
               "date": "2026-11-06",
               "file": "2026-11-06_impacto-de-la-pol-tica-migratoria-europe.md",
               "topic": "Impacto de la política migratoria europea en la tasa de urbanización de América Latina"
@@ -2362,6 +2389,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-09",
+              "file": "2026-11-09_relaci-n-entre-urbanizaci-n--gasto-en-sa.md",
+              "topic": "Relación entre urbanización, gasto en salud y esperanza de vida frente a eventos climáticos extremos en América Latina"
+            },
+            {
               "date": "2026-11-05",
               "file": "2026-11-05_relaci-n-entre-la-urbanizaci-n--gasto-en.md",
               "topic": "Relación entre la urbanización, gasto en salud y esperanza de vida en América Latina"
@@ -2417,6 +2449,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-09",
+              "file": "2026-11-09_relaci-n-entre-urbanizaci-n--gasto-en-sa.md",
+              "topic": "Relación entre urbanización, gasto en salud y esperanza de vida frente a eventos climáticos extremos en América Latina"
+            },
             {
               "date": "2026-11-05",
               "file": "2026-11-05_relaci-n-entre-la-urbanizaci-n--gasto-en.md",
