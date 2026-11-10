@@ -1,0 +1,103 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la urbanización y el gasto en salud en la esperanza de vida en América Latina frente a la crisis climática",
+      "noticia_inspiradora": "Which countries and industries emit the most greenhouse gases?",
+      "afirmacion_noticia": "Los países con mayores emisiones de CO₂ enfrentan mayores riesgos climáticos, lo que podría afectar la salud y la longevidad de sus poblaciones.",
+      "verificable_con_datos": "Se pueden confirmar relaciones entre Urban population (% of total), Current health expenditure (% of GDP) y Life expectancy at birth (years). No se dispone de datos directos de emisiones de CO₂ por país en el catálogo, por lo que la intensidad de riesgo climático queda fuera de alcance.",
+      "indicadores_respaldan": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ],
+      "correlaciones_relevantes": [
+        "Urban population ↔ Current health expenditure",
+        "Current health expenditure ↔ Life expectancy",
+        "Urban population ↔ Life expectancy"
+      ],
+      "justificacion": "La noticia habla de emisiones y riesgos climáticos; el puente más directo es usar la variable de urbanización y gasto en salud, que ya mostraron alta correlación con la esperanza de vida en estudios previos y están disponibles en el catálogo.",
+      "pregunta": "¿En los países latinoamericanos con mayor proporción urbana y mayor gasto en salud, la esperanza de vida es significativamente más alta, aun considerando su exposición a altas emisiones de CO₂?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de población urbana y mayor gasto en salud presentan una esperanza de vida más alta, independientemente de sus niveles de emisión de CO₂.",
+      "keywords_en": "urbanization health expenditure life expectancy Latin America emissions"
+    },
+    {
+      "titulo": "Relación entre la penetración de internet y la recepción de remesas en América Latina",
+      "noticia_inspiradora": "Will Australia push for fossil fuel exit at UN talks?",
+      "afirmacion_noticia": "Los avances tecnológicos y la conectividad digital facilitan la recepción de remesas, potenciando el ingreso de divisas al sector familiar.",
+      "verificable_con_datos": "Se pueden contrastar Internet users (% of population) con Personal remittances received (current US$). No se dispone de datos de políticas energéticas australianas en el catálogo, por lo que esa parte queda fuera.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Personal remittances"
+      ],
+      "justificacion": "Aunque la noticia es sobre política energética, el mensaje subyacente de tecnología y flujos financieros se conecta directamente con los indicadores de internet y remesas disponibles.",
+      "pregunta": "¿Existe una correlación positiva entre el porcentaje de usuarios de internet y el monto total de remesas recibidas en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet reciben mayores flujos de remesas en términos absolutos.",
+      "keywords_en": "internet penetration remittances Latin America digital finance"
+    },
+    {
+      "titulo": "Efectos de la inversión extranjera directa en el crecimiento económico y la apertura comercial de América Latina",
+      "noticia_inspiradora": "Will Australia push for fossil fuel exit at UN talks?",
+      "afirmacion_noticia": "Los cambios en la política internacional de energía pueden influir en la atracción de inversión extranjera y en la participación del comercio en la región.",
+      "verificable_con_datos": "Se pueden analizar Foreign direct investment, net inflows (% of GDP), GDP growth (annual %) y Trade (% of GDP). No hay datos sobre la política energética específica de Australia en el catálogo.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI ↔ GDP growth",
+        "FDI ↔ Trade",
+        "GDP growth ↔ Trade"
+      ],
+      "justificacion": "La noticia sugiere que la política energética internacional afecta flujos de inversión; los indicadores de FDI, crecimiento y comercio permiten medir ese efecto en América Latina.",
+      "pregunta": "¿Los países latinoamericanos con mayores ingresos de inversión extranjera directa presentan mayor crecimiento del PIB y una mayor participación del comercio en su economía?",
+      "hipotesis": "Un mayor porcentaje de FDI neto sobre el PIB está asociado con un mayor crecimiento anual del PIB y una mayor participación del comercio en el PIB.",
+      "keywords_en": "foreign direct investment GDP growth trade openness Latin America"
+    },
+    {
+      "titulo": "Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet",
+      "noticia_inspiradora": "Will Australia push for fossil fuel exit at UN talks?",
+      "afirmacion_noticia": "La transición tecnológica y la mayor conectividad digital pueden modificar la situación del empleo juvenil en la región.",
+      "verificable_con_datos": "Se pueden relacionar Youth unemployment (% of labor force 15-24) con Internet users (% of population) y con Employment in services (% of total employment). No hay datos directos sobre políticas de transición energética, por lo que esa parte queda fuera.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Employment in services ↔ Youth unemployment"
+      ],
+      "justificacion": "El vínculo entre digitalización y empleo juvenil es plausible y los indicadores disponibles permiten probar si mayor conectividad se asocia con menores tasas de desempleo juvenil.",
+      "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan tasas de desempleo juvenil más bajas, especialmente en el sector de servicios?",
+      "hipotesis": "Un mayor nivel de penetración de internet está asociado con una menor tasa de desempleo juvenil, particularmente en economías con mayor participación del sector servicios.",
+      "keywords_en": "youth unemployment internet penetration services employment Latin America"
+    },
+    {
+      "titulo": "Desigualdad de ingresos y su relación con la urbanización y la educación superior en América Latina",
+      "noticia_inspiradora": "Will Australia push for fossil fuel exit at UN talks?",
+      "afirmacion_noticia": "Los cambios estructurales en la economía global pueden influir en la distribución del ingreso y el acceso a la educación superior.",
+      "verificable_con_datos": "Se pueden analizar Gini index, Urban population (% of total) y Tertiary school enrollment (% gross). No hay datos directos sobre políticas energéticas internacionales.",
+      "indicadores_respaldan": [
+        "Gini index",
+        "Urban population (% of total)",
+        "Tertiary school enrollment (% gross)"
+      ],
+      "correlaciones_relevantes": [
+        "Urban population ↔ Gini index",
+        "Tertiary enrollment ↔ Gini index"
+      ],
+      "justificacion": "La noticia aborda transformaciones estructurales; el puente más directo es observar cómo la urbanización y la expansión de la educación superior se relacionan con la desigualdad medida por el índice de Gini.",
+      "pregunta": "¿En los países latinoamericanos, una mayor urbanización y mayor matrícula en educación terciaria están asociadas a una menor desigualdad de ingresos?",
+      "hipotesis": "Mayor urbanización y mayor tasa de matrícula en educación terciaria se asocian con un índice de Gini más bajo (menos desigualdad).",
+      "keywords_en": "urbanization tertiary education Gini index inequality Latin America"
+    }
+  ],
+  "topic": "Impacto de la urbanización y el gasto en salud en la esperanza de vida frente a riesgos climáticos en América Latina",
+  "angle": "Analizar si la combinación de alta urbanización y mayor inversión en salud pública mitiga los efectos negativos de la exposición a altas emisiones de CO₂ sobre la esperanza de vida en los países latinoamericanos.",
+  "pregunta": "¿Los países latinoamericanos con mayor proporción urbana y mayor gasto en salud presentan una esperanza de vida más alta, independientemente de sus niveles de emisión de CO₂?",
+  "hipotesis": "En América Latina, una mayor proporción de población urbana y un mayor gasto en salud (% del PIB) están asociados a una esperanza de vida más alta, aun en los países con altas emisiones de CO₂."
+}
