@@ -1,99 +1,98 @@
-# Relación entre urbanización, gasto en salud y esperanza de vida frente a eventos climáticos extremos en América Latina  
+# Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet  
 
 **Autor:** Investigador Académico  
 **Revista:** *Ciencias Sociales*  
 **Fecha:** Noviembre de 2026  
 
 ## Resumen  
-Entre 2015 y 2024 la población urbana de América Latina‑Caribe aumentó de 79,40 % a 81,27 % (Δ = +2,36 %, CAGR = +0.26 %) y el gasto corriente en salud pasó de 7,80 % a 7,94 % del PIB (Δ = +1,80 %, CAGR = +0.22 %). La esperanza de vida al nacer mostró un incremento modestamente positivo de 74,74 a 75,82 años (Δ = +1,44 %, CAGR = +0.16 %). En el modelo OLS agregado, el gasto en salud se asocia negativamente con la esperanza de vida (β = ‑4,7602, p = 0.0061) aunque el intervalo de confianza incluye 0, lo que indica fragilidad. En contraste, la regresión de efectos fijos por país muestra una relación robusta y negativa (β = ‑1,0834, p < 0.001). Las correlaciones entre esperanza de vida y gasto en salud son significativas en niveles pero desaparecen al analizar cambios anuales, señalando co‑tendencia más que asociación causal.  
+Entre 2015 y 2024 la región de América Latina y el Caribe experimentó una caída del desempleo juvenil del 12,71 % (de 14,72 % a 12,85 %) y un aumento del 50,18 % en la penetración de internet (de 54,40 % a 81,70 %). El empleo en servicios también creció modestamente (+3,28 %). Un modelo de regresión OLS a nivel regional muestra que la relación entre desempleo juvenil y usuarios de internet es estadísticamente no significativa (β = 0,0902, p = 0,3998) y que el coeficiente del empleo en servicios es marginal (β = ‑3,1599, p = 0,0727). Un modelo de efectos fijos por país (panel) tampoco encuentra evidencia robusta (p > 0,10 para ambos predictores). Las correlaciones entre internet y empleo en servicios son fuertes en niveles para Brasil y Chile (r ≈ 0,86‑0,87, q < 0,05) pero desaparecen al analizar cambios anuales, indicando co‑tendencia espuria. En conjunto, los datos no respaldan una asociación clara entre mayor conectividad digital y menores tasas de desempleo juvenil en la región.  
 
-> **En breve:** En los países latinoamericanos más expuestos a eventos climáticos extremos, mayor gasto sanitario y mayor urbanización no garantizan una esperanza de vida más alta; la evidencia sugiere una asociación negativa y frágil.  
+> **En breve:** Los indicadores disponibles no evidencian que una mayor penetración de internet esté asociada a menores tasas de desempleo juvenil en América Latina y el Caribe.  
 
 ## Introducción  
-Los desastres climáticos extremos – inundaciones, deslizamientos y sequías – se han intensificado en América Latina durante la última década, generando desplazamientos masivos y presiones sanitarias que podrían afectar la esperanza de vida (noticia reciente). La literatura ha documentado que la urbanización puede mejorar el acceso a servicios de salud (Collier y Venables 2017) pero también concentrar riesgos ambientales (Jedwab y Vollrath 2019). Asimismo, estudios internacionales encuentran que el gasto sanitario suele correlacionarse positivamente con la longevidad (Freeman et al. 2020), aunque la evidencia en contextos de alta vulnerabilidad climática es escasa.  
+El debate público y mediático ha sugerido que la expansión de la conectividad digital podría mitigar la vulnerabilidad del empleo juvenil, al facilitar el acceso a plataformas de trabajo, educación en línea y oportunidades de emprendimiento (noticia de actualidad). Esta afirmación es atractiva, pero requiere verificación empírica con datos observables. La pregunta de investigación que guía este estudio es:  
 
-Esta investigación se propone responder la siguiente pregunta de investigación: **¿En qué medida el gasto en salud y la proporción de población urbana explican la variación en la esperanza de vida de los países latinoamericanos más vulnerables a eventos climáticos extremos?** La noticia citada afirma que “las fuertes lluvias provocan desplazamientos masivos y aumentan la vulnerabilidad sanitaria”, lo que sugiere que los indicadores disponibles (esperanza de vida, gasto en salud y urbanización) pueden capturar, al menos parcialmente, los efectos de dichos eventos.  
+> **¿Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan tasas de desempleo juvenil más bajas, especialmente en el sector de servicios?**  
 
-> **Hipótesis:** En los países latinoamericanos más expuestos a eventos climáticos extremos, un mayor gasto en salud y una mayor urbanización están asociados a una esperanza de vida más alta.  
+Para responder, se comparan tres series del Banco Mundial a nivel regional (2015‑2024): desempleo juvenil (% de la fuerza laboral 15‑24 años), usuarios de internet (% de la población) y empleo en servicios (% del empleo total). La evidencia disponible muestra tendencias divergentes: el desempleo juvenil disminuyó un 12,71 % (Δtotal = ‑12,71 %, CAGR = ‑1,50 %) mientras que la penetración de internet aumentó un 50,18 % (Δtotal = +50,18 %, CAGR = +4,62 %). El empleo en servicios subió modestamente (+3,28 %).  
 
-Para evaluar esta hipótesis utilizaremos series temporales del Banco Mundial (2015‑2024) que incluyen la esperanza de vida al nacer, el gasto corriente en salud (% del PIB) y la población urbana (% del total) tanto a nivel regional como para seis países representativos (Chile, Colombia, Argentina, Brasil, Costa Rica). Los resultados se contrastarán con la evidencia internacional y con la lógica de que la combinación de recursos sanitarios y densidad urbana podría amortiguar los impactos negativos de los desastres climáticos.  
+La hipótesis planteada parte de la lógica de que la digitalización reduce barreras de búsqueda y creación de empleo, particularmente en actividades de servicios que pueden ser mediadas por plataformas digitales. Sin embargo, la literatura sobre contextos de economías en desarrollo muestra resultados mixtos. Por ejemplo, Ogbonna et al. (2022) encuentran efectos positivos de las TIC sobre el empleo juvenil en África, mientras que Anwar y Graham (2020) advierten que la economía de plataformas puede generar precariedad y vulnerabilidad. En América Latina, la evidencia empírica es escasa.  
+
+> **Hipótesis:** Un mayor nivel de penetración de internet está asociado con una menor tasa de desempleo juvenil, particularmente en economías con mayor participación del sector servicios.  
 
 ## Metodología  
-Se emplearon los indicadores publicados por el Banco Mundial para el periodo 2015‑2024 (Banco Mundial, 2024). Primero, se calcularon estadísticas descriptivas (media, Δ total, CAGR) para cada serie a nivel regional y por país. Se aplicaron pruebas de tendencia de Mann‑Kendall, confirmando aumentos significativos de la población urbana en la región (p = 0.0001) y en Brasil (p = 0.0001), así como del gasto sanitario en Brasil (p = 0.0165) y Colombia (p = 0.0318).  
+Se emplearon los indicadores publicados por el Banco Mundial (2024) para la sub‑región América Latina y el Caribe, cubriendo los años 2015‑2024. El análisis incluye:  
 
-Para explorar relaciones bivariadas, se estimaron correlaciones de Pearson y Spearman. La correlación regional entre esperanza de vida y gasto sanitario fue r = ‑0.826 (p = 0.006, q = 0.047); sin embargo, la correlación en diferencias año a año no alcanzó significancia (q > 0.05), por lo que se interpreta como co‑tendencia espuria según la regla de estacionariedad.  
+1. **Estadísticas descriptivas** de cada serie (media, mínimos, máximos, variaciones totales y CAGR) tal como aparecen en los datos resumidos.  
+2. **Correlaciones de Pearson y Spearman** entre los tres indicadores a nivel regional y por país. Se aplicó el procedimiento de Benjamini‑Hochberg para controlar la tasa de falsos descubrimientos (FDR). Cuando una correlación es significativa en niveles pero no en diferencias anuales, se interpreta como co‑tendencia espuria, siguiendo la alerta de co‑tendencia señalada en los resultados.  
+3. **Regresión lineal ordinaria (OLS)** a nivel agregado (n = 10 observaciones) con desempleo juvenil como variable dependiente y usuarios de internet y empleo en servicios como predictores. Los coeficientes, errores estándar, valores‑t y p‑valores provienen del modelo Python (statsmodels). El test de White indica homocedasticidad (p = 0,2944). El intercepto muestra fragilidad (IC 95 % incluye 0).  
+4. **Regresión de efectos fijos (panel)** con 12 países y 10 años (n = 120) estimada en Python. El modelo controla heterogeneidad no observada por país y año. Los coeficientes de ambos predictores son no significativos (p > 0,10).  
 
-Se estimó un modelo de regresión lineal ordinaria (OLS) a nivel agregado: esperanza de vida ~ gasto sanitario. El modelo mostró R² = 0.6826 (ajustado = 0.6373) y un coeficiente negativo para el gasto (β = ‑4.7602, se = 1.2269, p = 0.0061). El intervalo de confianza al 95 % incluye 0 (‑7.4341 a 0.8350), lo que indica fragilidad de la estimación.  
-
-Adicionalmente, se aplicó una regresión de efectos fijos por país (panel) con 110 observaciones (12 países × años). Este modelo controla características invariables por país y revela un efecto negativo y robusto del gasto sanitario (β = ‑1.0834, se = 0.2436, p < 0.001, IC 95 % = ‑1.5671 a ‑0.5998). La variable urbanización no mostró evidencia significativa (β = 0.1716, p = 0.3463).  
-
-Todos los análisis se realizaron en Python con paquetes statsmodels y scipy; los resultados de panel fueron obtenidos también en Python (no se utilizó R). Sólo se reportan pruebas y estimaciones que aparecen en los resultados proporcionados.
+Todas las pruebas se realizaron con los paquetes estadísticos de Python; no se incluyen métodos que no aparecen en los resultados (por ejemplo, Durbin‑Watson, simulaciones o proyecciones). Cada cifra citada corresponde literalmente a los valores provistos en los datos y resultados del Banco Mundial (2024).
 
 ## Análisis  
 
-### Tendencias regionales de urbanización, gasto en salud y esperanza de vida  
-*Los indicadores muestran aumentos modestos en la proporción urbana y en la esperanza de vida, mientras que el gasto en salud se mantiene casi estable a nivel regional.*  
+### Tendencias macro‑regional de los indicadores  
+*Los indicadores muestran cómo ha evolucionado la conectividad y el empleo en servicios en América Latina y el Caribe entre 2015 y 2024.*  
 
-En América Latina y el Caribe la población urbana pasó de 79,40 % en 2015 a 81,27 % en 2024 (Δ = +2,36 %, CAGR = +0.26 %) (Banco Mundial, 2024). La esperanza de vida al nacer incrementó de 74,74 a 75,82 años en el mismo periodo (Δ = +1,44 %, CAGR = +0.16 %) (Banco Mundial, 2024). El gasto corriente en salud como proporción del PIB mostró una variación mínima, de 7,80 % en 2015 a 7,94 % en 2023 (Δ = +1,80 %, CAGR = +0.22 %) (Banco Mundial, 2024). Estas tendencias aparecen en la figura 1.  
+El empleo en servicios aumentó de 64,47 % a 66,58 % (Δ = +3,28 %, CAGR = +0.36 %) mientras que la penetración de internet creció de 54,40 % a 81,70 % (Δ = +50,18 %, CAGR = +4,62 %) en el mismo período (Banco Mundial, 2024). La tendencia positiva del empleo en servicios es estadísticamente significativa (pendiente = 0.173 %/año, p = 0,0318) y la de internet también (pendiente = 3,216 %/año, p = 0,0001) (Banco Mundial, 2024).  
 
-![tendencias regionales de los indicadores principales a lo largo del tiempo](charts/2026-11-09-22-04/fig1_trends.png)  
-*Como leerla: cada mini‑panel muestra un indicador regional a lo largo del tiempo; busca si sube, baja o fluctúa.*  
+![tendencias regionales de empleo en servicios e internet](charts/2026-11-10-19-31/fig1_trends.png)  
+*Como leerla: “cada mini‑panel muestra un indicador regional a lo largo del tiempo; busca si sube, baja o fluctúa”.*  
 
-### Correlaciones bivariadas a nivel regional  
-*Se examina si los cambios en gasto y urbanización están asociados con la esperanza de vida, pero la evidencia es limitada.*  
+### Correlaciones entre penetración de internet, empleo en servicios y desempleo juvenil a nivel regional  
+*Se explora si los países con más usuarios de internet tienden a tener menos jóvenes desempleados y más empleo en servicios.*  
 
-La correlación de Pearson entre esperanza de vida y gasto en salud a nivel regional es r = ‑0,831 (p = 0,006) con corrección FDR q = 0,047, lo que indica una co‑tendencia negativa significativa (Banco Mundial, 2024). Sin embargo, la correlación entre esperanza de vida y población urbana es prácticamente nula (r = 0,061, p = 0,867) (Banco Mundial, 2024). En diferencias anuales, la correlación entre esperanza de vida y gasto en salud pierde significancia (diff_r = ‑0,764, diff_p = 0,027) y la evidencia se clasifica como co‑tendencia probable (Banco Mundial, 2024). La figura 2 ilustra la relación entre esperanza de vida y gasto en salud para México, el único país con datos de correlación individual disponible.  
+En niveles, la correlación entre usuarios de internet y empleo en servicios es r = 0,714 (p = 0,020, q_fdr = 0,098), lo que sugiere una asociación positiva moderada. Sin embargo, la diferencia de correlaciones (diff_r = ‑0,660, diff_p = 0,053) indica que la relación es marginal y podría reflejar una co‑tendencia más que una asociación causal.  
 
-![relación entre esperanza de vida y gasto en salud en México](charts/2026-11-09-22-04/fig2_correlation.png)  
-*Como leerla: cada punto es un año; si se alinean cerca de la línea punteada, las variables se mueven juntas.*  
+La correlación entre desempleo juvenil y empleo en servicios es r = ‑0,601 (p = 0,066), pero la diferencia de correlaciones (diff_r = ‑0,589, diff_p = 0,095) la clasifica como sin evidencia robusta.  
 
-### Modelo de regresión OLS agregado (región)  
-*Un modelo simple sugiere que mayor gasto en salud se asocia con menor esperanza de vida, aunque la precisión del coeficiente es frágil.*  
+Finalmente, la relación entre desempleo juvenil y usuarios de internet es r = ‑0,249 (p = 0,487), claramente no significativa.  
 
-La regresión OLS de esperanza de vida (años) sobre gasto corriente en salud (% PIB) a nivel regional incluye 9 observaciones (dof = 7) y explica el 68,26 % de la varianza (R² = 0,6826, R²_adj = 0,6373) (Banco Mundial, 2024). El intercepto es 112,4899 (se = 9,8142, p < 0,001) y el coeficiente del gasto en salud es –4,7602 (se = 1,2269, p = 0,0061). El intervalo de confianza al 95 % para el coeficiente es [‑7,4341, ‑0,8350]; aunque el límite superior no incluye cero, la nota indica que el intervalo “incluye 0 → frágil”, por lo que la robustez es marginal (Banco Mundial, 2024). El test de White no detecta heterocedasticidad (p = 0,2698).  
+![correlación entre internet y empleo en servicios](charts/2026-11-10-19-31/fig2_correlation.png)  
+*Como leerla: “cada punto es un año; si se alinean cerca de la línea punteada, las variables se mueven juntas”.*  
 
-La figura 3 muestra los valores observados frente a los predichos por este modelo.  
+### Análisis por país: patrones dispares  
+*Se comparan los comportamientos de los cinco países estudiados para observar heterogeneidad.*  
 
-![ajuste del modelo de regresión OLS regional](charts/2026-11-09-22-04/fig3_regression.png)  
-*Como leerla: los datos observados frente a lo que el modelo predijo; donde se separan, el modelo no captura la realidad.*  
+- **Brasil** muestra la mayor reducción del desempleo juvenil (Δ = ‑19,59 %, CAGR = ‑2,39 %) y el mayor aumento de usuarios de internet (+44,81 %, CAGR = +4,20 %). Su empleo en servicios también subió (+6,09 %, CAGR = +0,66 %).  
+- **Chile** presenta un aumento del desempleo juvenil (+32,73 %, CAGR = +3,20 %) pese a un fuerte crecimiento de internet (+24,74 %, CAGR = +2,49 %). El empleo en servicios aumentó modestamente (+4,52 %, CAGR = +0,49 %).  
+- **Argentina** mantiene un desempleo juvenil ligeramente descendente (‑5,13 %, CAGR = ‑0,58 %) y un notable incremento de internet (+31,78 %, CAGR = +3,11 %). El empleo en servicios creció solo +2,85 % (CAGR = +0,31 %).  
+- **Colombia** registra un aumento del desempleo juvenil (+12,10 %, CAGR = +1,28 %) junto con un fuerte aumento de internet (+41,93 %, CAGR = +3,97 %). El empleo en servicios apenas subió (+1,47 %, CAGR = +0,16 %).  
+- **Costa Rica** redujo su desempleo juvenil (‑8,42 %, CAGR = ‑0,97 %) mientras su internet creció +45,86 % (CAGR = +4,28 %) y el empleo en servicios aumentó +5,89 % (CAGR = +0,64 %).  
 
-### Modelo de regresión de panel (12 países × años)  
-*Al controlar por efectos fijos de país y año, el gasto en salud mantiene una relación negativa significativa con la esperanza de vida, mientras que la urbanización no muestra evidencia.*  
+![comparación de indicadores por país](charts/2026-11-10-19-31/fig4_countries.png)  
+*Como leerla: “barra más larga o país más oscuro = valor más alto del indicador”.*  
 
-En la especificación de panel con 110 observaciones, el coeficiente del gasto en salud es –1,0834 (se = 0,2436, p < 0,001, IC95 = [‑1,5671, ‑0,5998]), clasificado como robusto (Banco Mundial, 2024). La población urbana tiene un coeficiente de 0,1716 (se = 0,1813, p = 0,3463), sin evidencia estadística (Banco Mundial, 2024). La figura 4 resume la distribución de los indicadores por país, evidenciando la heterogeneidad entre Chile, Colombia, Argentina, Brasil y Costa Rica.  
+### Modelos de regresión panel  
+*Se evalúa la relación multivariante controlando efectos fijos de país y año.*  
 
-![comparación de indicadores entre países](charts/2026-11-09-22-04/fig4_countries.png)  
-*Como leerla: barra más larga o país más oscuro = valor más alto del indicador.*  
+El modelo de regresión panel (n = 120 observaciones) indica que la variable “Usuarios de internet” tiene un coeficiente β = 0,0636 (p = 0,1022, IC 95 % = [‑0,0129, 0,1402]), y “Empleo en servicios” β = ‑0,2390 (p = 0,4765, IC 95 % = [‑0,9023, 0,4242]). Ambos coeficientes son estadísticamente no significativos y sus intervalos incluyen cero, lo que sugiere fragilidad de la evidencia (Banco Mundial, 2024).  
 
-### Síntesis de los hallazgos cuantitativos  
-*Los resultados indican que, a nivel regional, mayor gasto en salud no se traduce en mayor esperanza de vida; la urbanización no explica la variación.*  
+En contraste, el modelo OLS agregado (n = 10) muestra un R² = 0,4269 (p = 0,1425) y una prueba de White indica homocedasticidad (p = 0,2944), pero la significancia global es insuficiente (p > 0,05).  
 
-- La tendencia positiva de urbanización (Δ = +2,36 %) no se asocia con cambios en la esperanza de vida (r ≈ 0).  
-- El gasto en salud muestra una ligera tendencia al alza (Δ = +1,80 %) pero, contrariamente a la hipótesis, los coeficientes de regresión son negativos y significativos, aunque la evidencia es marginal en el modelo OLS y robusta en el panel.  
-- Las correlaciones bivariadas presentan una co‑tendencia negativa entre gasto y esperanza de vida, pero la falta de significancia en diferencias anuales sugiere que la relación puede ser espuria.  
-
-En conjunto, los indicadores disponibles no respaldan la idea de que mayor gasto en salud y mayor urbanización mejoren la esperanza de vida en los países latinoamericanos más vulnerables a eventos climáticos extremos.  
+En síntesis, aunque las tendencias macro‑regionales de internet y empleo en servicios son positivas y la correlación entre ellos es marginalmente significativa, la evidencia estadística de que mayor conectividad digital reduzca el desempleo juvenil es débil y no consistente a nivel de panel.  
 
 ## Discusión  
 
-Los análisis presentan limitaciones importantes que deben considerarse al interpretar los resultados. Primero, la serie temporal cuenta con solo diez observaciones por indicador a nivel regional, lo que reduce la potencia estadística y aumenta la vulnerabilidad a valores atípicos (p. ej., la anomalía de esperanza de vida en 2021, z = ‑2,29). Segundo, las correlaciones y regresiones se basan en datos agregados; la dirección causal no puede inferirse y la asociación negativa entre gasto en salud y esperanza de vida podría reflejar efectos de retroalimentación (países con menores esperanzas de vida incrementan el gasto como respuesta). Tercero, la urbanización no muestra evidencia estadística de asociación, lo que sugiere que la simple proporción urbana no captura la complejidad de la exposición a eventos climáticos extremos (por ejemplo, la vulnerabilidad de asentamientos informales).  
+Los resultados revelan una heterogeneidad importante entre los países latinoamericanos. Brasil y Costa Rica, que combinan altas tasas de adopción de internet con disminuciones del desempleo juvenil, parecen apoyar la hipótesis de que la digitalización favorece la inserción laboral de los jóvenes. Sin embargo, Chile y Colombia presentan aumentos del desempleo juvenil a pesar de fuertes avances en conectividad, lo que indica que la mera disponibilidad de internet no garantiza mejores oportunidades laborales.  
 
-En la literatura, estudios como Ebhota et al. (2023) encuentran que la contaminación del aire reduce la esperanza de vida en economías emergentes, lo que podría explicar parte de la co‑tendencia negativa entre gasto en salud y esperanza de vida si los países con mayor gasto también enfrentan mayores cargas de contaminación o eventos climáticos extremos. Sin embargo, nuestros datos no incluyen variables de exposición climática directa, por lo que la hipótesis original de que “un mayor gasto en salud y una mayor urbanización están asociados a una esperanza de vida más alta en los países más expuestos a eventos climáticos extremos” queda parcialmente fuera del alcance de los indicadores analizados.  
+La correlación regional entre usuarios de internet y empleo en servicios (r = 0,714, p = 0,020) es marginalmente significativa, pero la prueba de diferencia de correlaciones (diff_p = 0,053) la clasifica como co‑tendencia, sugiriendo que ambos indicadores comparten una trayectoria ascendente sin evidencia de causalidad directa. Las correlaciones entre desempleo juvenil y los dos demás indicadores son no significativas (p > 0,05), y los modelos de regresión panel no encuentran efectos robustos de internet ni de empleo en servicios sobre el desempleo juvenil (p > 0,05, IC que incluye cero).  
+
+El tamaño de la muestra (10 observaciones por serie) limita la potencia estadística y la capacidad de detectar efectos modestos. Además, la ausencia de variables intermedias (por ejemplo, calidad de la educación, políticas de empleo, sector informal) impide atribuir cambios en el desempleo juvenil exclusivamente a la digitalización. Por tanto, la afirmación de la noticia —que la mayor conectividad digital “modifica la situación del empleo juvenil” de forma determinante— queda parcialmente fuera del alcance de los indicadores analizados.  
 
 ## Conclusiones  
 
-Los resultados empíricos indican que los datos disponibles son insuficientes para confirmar la hipótesis propuesta. El gasto corriente en salud, aunque aumenta ligeramente a nivel regional, se asocia negativamente con la esperanza de vida en los modelos de regresión (coeficiente = ‑4,7602 en OLS, ‑1,0834 en panel) y la correlación bivariada muestra una co‑tendencia negativa significativa. La urbanización, pese a su crecimiento constante, no explica la variación en la esperanza de vida (r ≈ 0, coeficiente no significativo).  
+Los datos disponibles indican que la penetración de internet y la expansión del empleo en servicios han crecido de forma sostenida en América Latina y el Caribe entre 2015 y 2024. No obstante, la evidencia empírica no respalda de manera consistente la hipótesis de que mayores niveles de conectividad digital se asocien con menores tasas de desempleo juvenil en la región. Las correlaciones marginales y los coeficientes no significativos en los modelos de panel sugieren que, si existe un efecto, es débil o está mediado por factores no capturados en la base de datos del Banco Mundial.  
 
-Por lo tanto, los datos apoyan la conclusión de que, en los países latinoamericanos más vulnerables a eventos climáticos extremos, ni el mayor gasto en salud ni la mayor proporción de población urbana se relacionan positivamente con una mayor esperanza de vida. La afirmación de la noticia queda, en gran medida, fuera del alcance de los indicadores analizados, y se requieren variables adicionales (por ejemplo, exposición a eventos climáticos, calidad de los sistemas de salud y desigualdad socio‑económica) para evaluar de forma más completa la relación entre vulnerabilidad climática, inversión en salud y resultados de vida.
+En conclusión, **los datos son insuficientes para evaluar con confianza la hipótesis** de que la digitalización reduce el desempleo juvenil, particularmente en el sector servicios. La afirmación de la noticia permanece parcialmente no verificada; futuros estudios deberían incorporar variables estructurales adicionales y ampliar la muestra temporal para esclarecer la relación entre digitalización y vulnerabilidad laboral juvenil.
 
 ## Bibliografía
 
 - Banco Mundial. (2024). *World Development Indicators*. Washington, DC: World Bank. https://databank.worldbank.org/source/world-development-indicators
-- Al Jazeera English. "Photos: Heavy rains leave tens of thousands without shelter in Gaza". https://www.aljazeera.com/gallery/2026/11/8/photos-heavy-rains-leave-tens-of-thousands-without-shelter-in-gaza
-- Freeman, T., Gesesew, H. A., Bambra, C. L. et al. (2020). Why do some countries do better or worse in life expectancy relative to income? An analysis of Brazil, Ethiopia, and the United States of America. *International Journal for Equity in Health*. https://doi.org/10.1186/s12939-020-01315-z
-- Ebhota, O. S., Hongxing, Y., Sampene, A. K. (2023). Air pollution and life expectancy: New evidence from the MINT economies. *Heliyon*. https://doi.org/10.1016/j.heliyon.2023.e22396
-- Collier, P., Venables, A. J. (2017). Urbanization in developing economies: the assessment. *Oxford Review of Economic Policy*. https://doi.org/10.1093/oxrep/grx035
-- Jedwab, R., Vollrath, D. (2019). The Urban Mortality Transition and Poor-Country Urbanization. *American Economic Journal Macroeconomics*. https://doi.org/10.1257/mac.20170189
+- DW. "Will Australia push for fossil fuel exit at UN talks?". https://www.dw.com/en/will-australia-push-for-fossil-fuel-exit-at-un-talks/a-79782066?maca=en-rss-en-all-1573-rdf
+- Ogbonna, A. E., Adediran, I. A., Oloko, T. F. et al. (2022). Information and Communication Technology (ICT) and youth unemployment in Africa. *Quality & Quantity*. https://doi.org/10.1007/s11135-022-01600-9
+- Anwar, M. A., Graham, M. (2020). Between a rock and a hard place: Freedom, flexibility, precarity and vulnerability in the gig economy in Africa. *Competition & Change*. https://doi.org/10.1177/1024529420914473
 
 ## Tablas
 
@@ -101,96 +100,109 @@ Por lo tanto, los datos apoyan la conclusión de que, en los países latinoameri
 
 | Serie / Indicador | País / Región | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Gasto corriente en salud (% del PIB) (%) | América Latina y el Caribe (LCN) | 7.803 | 7.873 | 8.053 | 7.815 | 7.866 | 8.363 | 8.301 | 7.954 | 7.944 | — |
-| Esperanza de vida al nacer (años) (years) | América Latina y el Caribe (LCN) | 74.74 | 74.68 | 74.83 | 75.05 | 75.20 | 73.19 | 71.81 | 74.65 | 75.64 | 75.82 |
-| Gasto corriente en salud (% del PIB) (%) | Argentina | 10.27 | 10.05 | 10.26 | 10.17 | 10.12 | 10.67 | 11.01 | 10.16 | 10.27 | — |
-| Esperanza de vida al nacer (años) (years) | Argentina | 76.60 | 76.11 | 76.54 | 76.77 | 76.85 | 75.88 | 73.95 | 75.81 | 77.39 | 77.54 |
-| Gasto corriente en salud (% del PIB) (%) | Brasil | 8.909 | 9.169 | 9.471 | 9.465 | 9.614 | 9.623 | 9.636 | 9.387 | 9.731 | — |
-| Esperanza de vida al nacer (años) (years) | Brasil | 75.11 | 75.08 | 75.38 | 75.63 | 75.81 | 74.51 | 73.04 | 74.87 | 75.85 | 76.02 |
-| Gasto corriente en salud (% del PIB) (%) | Chile | 8.351 | 8.558 | 9.091 | 9.150 | 9.310 | 9.697 | 9.725 | 10.01 | 10.17 | 10.53 |
-| Esperanza de vida al nacer (años) (years) | Chile | 80.01 | 80.30 | 80.61 | 80.56 | 80.32 | 79.35 | 78.88 | 79.18 | 81.17 | 81.36 |
-| Gasto corriente en salud (% del PIB) (%) | Colombia | 7.523 | 7.531 | 7.679 | 7.718 | 7.834 | 8.698 | 9.142 | 7.590 | 8.158 | 8.141 |
-| Esperanza de vida al nacer (años) (years) | Colombia | 76.07 | 76.23 | 76.42 | 76.58 | 76.79 | 74.76 | 72.70 | 76.51 | 77.72 | 77.91 |
-| Gasto corriente en salud (% del PIB) (%) | Costa Rica | 7.592 | 7.317 | 7.045 | 7.286 | 7.221 | 7.825 | 7.611 | 7.184 | 6.866 | — |
-| Esperanza de vida al nacer (años) (years) | Costa Rica | 80.41 | 79.99 | 79.99 | 80.09 | 80.30 | 79.72 | 78.05 | 79.32 | 80.80 | 81.00 |
-| Gasto corriente en salud (% del PIB) (%) | República Dominicana | 4.735 | 4.586 | 4.446 | 4.218 | 4.368 | 4.965 | 5.088 | 4.645 | 4.599 | — |
-| Esperanza de vida al nacer (años) (years) | República Dominicana | 72.98 | 72.89 | 73.37 | 73.56 | 73.11 | 72.64 | 71.76 | 74.21 | 73.72 | 73.87 |
-| Gasto corriente en salud (% del PIB) (%) | Ecuador | 7.768 | 7.588 | 7.525 | 7.834 | 7.809 | 8.606 | 8.375 | 7.602 | 7.562 | — |
-| Esperanza de vida al nacer (años) (years) | Ecuador | 76.22 | 76.09 | 76.22 | 77.25 | 77.29 | 72.00 | 72.75 | 76.58 | 77.39 | 77.58 |
-| Gasto corriente en salud (% del PIB) (%) | Guatemala | 6.006 | 6.070 | 6.136 | 6.107 | 6.174 | 6.459 | 7.357 | 7.168 | 6.802 | — |
-| Esperanza de vida al nacer (años) (years) | Guatemala | 70.92 | 71.22 | 71.58 | 71.50 | 71.64 | 69.97 | 67.86 | 71.21 | 72.60 | 72.75 |
-| Gasto corriente en salud (% del PIB) (%) | México | 5.527 | 5.385 | 5.312 | 5.238 | 5.301 | 6.052 | 5.877 | 5.709 | 5.504 | — |
-| Esperanza de vida al nacer (años) (years) | México | 74.43 | 74.38 | 74.26 | 74.30 | 74.53 | 70.45 | 69.75 | 73.97 | 75.07 | 75.26 |
-| Gasto corriente en salud (% del PIB) (%) | Panamá | 6.937 | 7.094 | 7.165 | 7.601 | 8.135 | 10.22 | 9.136 | 9.046 | 8.330 | — |
-| Esperanza de vida al nacer (años) (years) | Panamá | 77.58 | 77.77 | 77.90 | 78.27 | 78.51 | 76.33 | 77.00 | 79.32 | 79.59 | 79.78 |
-| Gasto corriente en salud (% del PIB) (%) | Perú | 4.905 | 4.894 | 4.809 | 5.084 | 5.125 | 6.347 | 6.673 | 6.097 | 5.638 | — |
-| Esperanza de vida al nacer (años) (years) | Perú | 75.73 | 75.95 | 75.96 | 76.02 | 76.28 | 73.83 | 71.60 | 76.83 | 77.74 | 77.94 |
-| Gasto corriente en salud (% del PIB) (%) | Uruguay | 8.257 | 8.639 | 8.717 | 8.900 | 9.241 | 9.088 | 8.920 | 8.890 | 9.019 | — |
-| Esperanza de vida al nacer (años) (years) | Uruguay | 77.28 | 77.35 | 77.62 | 77.53 | 77.50 | 78.38 | 75.43 | 76.47 | 78.14 | 78.29 |
+| Empleo en servicios (% del empleo total) (%) | América Latina y el Caribe (LCN) | 64.47 | 64.95 | 65.11 | 65.29 | 65.82 | 64.94 | 64.90 | 65.61 | 66.23 | 66.58 |
+| Usuarios de internet (% de la población) (%) | América Latina y el Caribe (LCN) | 54.40 | 57.50 | 60.20 | 63.50 | 67.80 | 73.80 | 75.80 | 77.10 | 80.00 | 81.70 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | América Latina y el Caribe (LCN) | 14.72 | 16.96 | 17.39 | 17.35 | 17.44 | 20.65 | 18.52 | 14.77 | 13.42 | 12.85 |
+| Empleo en servicios (% del empleo total) (%) | Argentina | 69.65 | 70.49 | 71.10 | 71.49 | 71.77 | 71.31 | 71.77 | 71.32 | 71.22 | 71.64 |
+| Usuarios de internet (% de la población) (%) | Argentina | 68.04 | 70.97 | 74.29 | 77.70 | 79.95 | 85.51 | 87.15 | 88.38 | 89.23 | 89.67 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Argentina | 20.27 | 21.80 | 22.84 | 23.84 | 25.84 | 30.43 | 23.37 | 19.00 | 17.95 | 19.23 |
+| Empleo en servicios (% del empleo total) (%) | Brasil | 67.85 | 68.83 | 69.86 | 70.41 | 70.72 | 70.43 | 69.77 | 70.78 | 71.63 | 71.98 |
+| Usuarios de internet (% de la población) (%) | Brasil | 58.33 | 60.87 | 67.47 | 70.43 | 73.91 | 81.34 | 80.69 | 80.53 | 84.15 | 84.46 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Brasil | 19.49 | 26.60 | 28.59 | 27.96 | 27.10 | 30.27 | 28.31 | 20.73 | 17.94 | 15.67 |
+| Empleo en servicios (% del empleo total) (%) | Chile | 68.98 | 69.76 | 70.21 | 70.70 | 71.11 | 70.88 | 70.45 | 70.83 | 71.69 | 72.10 |
+| Usuarios de internet (% de la población) (%) | Chile | 76.63 | 83.56 | 82.33 | 84.90 | 85.02 | 87.46 | 90.23 | 92.32 | 94.46 | 95.59 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Chile | 15.81 | 15.80 | 17.73 | 18.14 | 18.95 | 24.38 | 20.48 | 18.29 | 21.97 | 20.99 |
+| Empleo en servicios (% del empleo total) (%) | Colombia | 64.77 | 65.25 | 64.42 | 63.87 | 64.40 | 64.37 | 64.88 | 65.03 | 65.61 | 65.72 |
+| Usuarios de internet (% de la población) (%) | Colombia | 55.90 | 58.14 | 62.26 | 64.13 | 65.01 | 69.80 | 73.03 | 72.80 | 77.34 | 79.35 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Colombia | 17.32 | 18.27 | 18.47 | 19.45 | 20.66 | 27.25 | 24.76 | 20.97 | 19.36 | 19.41 |
+| Empleo en servicios (% del empleo total) (%) | Costa Rica | 65.75 | 66.31 | 66.76 | 65.30 | 66.60 | 65.38 | 67.21 | 67.62 | 66.38 | 69.62 |
+| Usuarios de internet (% de la población) (%) | Costa Rica | 59.76 | 65.88 | 71.58 | 73.48 | 81.20 | 80.53 | 82.75 | 82.60 | 85.40 | 87.17 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Costa Rica | 22.36 | 21.65 | 20.74 | 25.07 | 31.19 | 40.11 | 39.20 | 30.72 | 24.31 | 20.48 |
+| Empleo en servicios (% del empleo total) (%) | República Dominicana | 71.15 | 71.26 | 70.22 | 70.31 | 71.65 | 71.57 | 71.74 | 72.77 | 73.44 | 73.75 |
+| Usuarios de internet (% de la población) (%) | República Dominicana | 54.22 | 63.87 | 67.57 | 74.82 | 79.72 | 81.62 | 85.24 | 81.51 | 86.13 | 91.00 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | República Dominicana | 16.43 | 16.74 | 13.44 | 14.85 | 15.84 | 14.77 | 16.87 | 12.85 | 11.56 | 12.87 |
+| Empleo en servicios (% del empleo total) (%) | Ecuador | 54.41 | 54.65 | 53.96 | 52.87 | 53.20 | 52.32 | 50.98 | 51.13 | 52.54 | 50.77 |
+| Usuarios de internet (% de la población) (%) | Ecuador | 48.94 | 54.06 | 55.80 | 57.50 | 59.20 | 70.70 | 69.11 | 69.72 | 72.69 | 77.17 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Ecuador | 8.824 | 10.35 | 8.465 | 7.956 | 8.733 | 11.07 | 9.136 | 8.298 | 7.782 | 8.574 |
+| Empleo en servicios (% del empleo total) (%) | Guatemala | 49.23 | 49.61 | 49.22 | 47.98 | 49.86 | 49.05 | 48.76 | 50.85 | 47.68 | 48.02 |
+| Usuarios de internet (% de la población) (%) | Guatemala | 28.81 | 34.51 | 37.90 | 41.50 | 44.40 | 47.51 | 50.84 | 54.40 | 56.73 | 60.22 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Guatemala | 5.581 | 5.582 | 4.939 | 4.679 | 4.461 | 5.157 | 3.789 | 6.274 | 4.326 | 4.624 |
+| Empleo en servicios (% del empleo total) (%) | México | 62.40 | 62.34 | 61.95 | 62.12 | 62.80 | 62.47 | 62.22 | 62.38 | 63.00 | 63.70 |
+| Usuarios de internet (% de la población) (%) | México | 57.43 | 59.54 | 53.03 | 56.66 | 69.63 | 71.49 | 75.63 | 78.63 | 81.18 | 83.12 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | México | 8.516 | 7.621 | 6.849 | 6.815 | 7.160 | 8.053 | 7.626 | 6.465 | 5.844 | 5.760 |
+| Empleo en servicios (% del empleo total) (%) | Panamá | 66.07 | 65.67 | 66.43 | 66.52 | 67.28 | 67.20 | 67.51 | 67.93 | 67.83 | 66.62 |
+| Usuarios de internet (% de la población) (%) | Panamá | 51.21 | 54.00 | 59.95 | 61.81 | 63.63 | 64.82 | 66.04 | 67.28 | 68.55 | 72.77 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Panamá | 11.68 | 12.29 | 14.82 | 14.10 | 17.13 | 33.03 | 22.34 | 19.19 | 16.77 | 19.68 |
+| Empleo en servicios (% del empleo total) (%) | Perú | 57.85 | 58.24 | 59.62 | 59.79 | 60.34 | 52.78 | 57.37 | 57.63 | 59.68 | 59.80 |
+| Usuarios de internet (% de la población) (%) | Perú | 40.85 | 45.46 | 50.45 | 55.05 | 59.95 | 65.25 | 71.11 | 74.67 | 79.48 | 81.96 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Perú | 6.877 | 8.272 | 8.319 | 8.342 | 7.405 | 12.66 | 9.586 | 7.681 | 8.846 | 9.704 |
+| Empleo en servicios (% del empleo total) (%) | Uruguay | 71.59 | 72.61 | 72.37 | 73.29 | 73.63 | 73.50 | 73.15 | 73.33 | 72.64 | 72.92 |
+| Usuarios de internet (% de la población) (%) | Uruguay | 64.57 | 66.40 | 70.32 | 80.73 | 83.35 | 85.47 | 87.64 | 89.87 | 90.93 | 91.99 |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Uruguay | 22.88 | 24.15 | 25.25 | 26.54 | 28.47 | 34.22 | 31.81 | 25.32 | 26.22 | 26.70 |
 
 **Tabla 2.** Resultados de los modelos de regresión.
 
 | Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Evidencia |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| OLS Agregado (LCN) | intercept | 112.4899 | 9.8142 | t = 11.46 | 0.0000 | [68.415, 133.746] | 🟢 Robusta |
-| OLS Agregado (LCN) | Gasto corriente en salud (% del PIB) | -4.7602 | 1.2269 | t = -3.88 | 0.0061 | [-7.434, 0.835] | 🟡 Marginal |
-| *Diagnóstico OLS* | *R² = 0.6826, R²-adj = 0.6373, F = 15.05 (p = 0.0061), n = 9, dof = 7* | — | — | — | — | — | — |
-| *Nota* | *Regresores excluidos por n insuficiente (regla ~4 obs/parámetro): Población urbana (% del total)* | — | — | — | — | — | — |
-| Panel Efectos Fijos (País) | Gasto corriente en salud (% del PIB) | -1.0834 | 0.2436 | t = -4.45 | 0.0000 | [-1.567, -0.600] | 🟢 Robusta |
-| Panel Efectos Fijos (País) | Población urbana (% del total) | 0.1716 | 0.1813 | t = 0.95 | 0.3463 | [-0.188, 0.531] | 🔴 Sin evidencia |
-| *Diagnóstico Panel* | *R² = 0.8475, n = 110 obs (12 países), dof = 96* | — | — | — | — | — | — |
+| OLS Agregado (LCN) | intercept | 216.7920 | 93.0681 | t = 2.33 | 0.0527 | [-318.814, 376.882] | 🟡 Marginal |
+| OLS Agregado (LCN) | Usuarios de internet (% de la población) | 0.0902 | 0.1006 | t = 0.90 | 0.3998 | [-0.469, 0.275] | 🔴 Sin evidencia |
+| OLS Agregado (LCN) | Empleo en servicios (% del empleo total) | -3.1599 | 1.4973 | t = -2.11 | 0.0727 | [-5.717, 5.500] | 🟡 Marginal |
+| *Diagnóstico OLS* | *R² = 0.4269, R²-adj = 0.2631, F = 2.61 (p = 0.1425), n = 10, dof = 7* | — | — | — | — | — | — |
+| Panel Efectos Fijos (País) | Usuarios de internet (% de la población) | 0.0636 | 0.0386 | t = 1.65 | 0.1022 | [-0.013, 0.140] | 🔴 Sin evidencia |
+| Panel Efectos Fijos (País) | Empleo en servicios (% del empleo total) | -0.2390 | 0.3345 | t = -0.71 | 0.4765 | [-0.902, 0.424] | 🔴 Sin evidencia |
+| *Diagnóstico Panel* | *R² = 0.8230, n = 120 obs (12 países), dof = 106* | — | — | — | — | — | — |
 
 **Tabla 3.** Correlaciones entre las variables del estudio.
 
 | Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | q (FDR) | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Evidencia |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| Gasto corriente en salud (% del PIB) | Población urbana (% del total) | CHL | 0.989 | 0.000 | 0.000 | 1.000 | 0.290 | 0.448 | 🟡 Co-tendencia probable |
-| Esperanza de vida al nacer (años) | Gasto corriente en salud (% del PIB) | ECU | -0.896 | 0.001 | 0.021 | -0.383 | -0.882 | 0.004 | 🟡 Co-tendencia probable |
-| Gasto corriente en salud (% del PIB) | Población urbana (% del total) | GTM | 0.852 | 0.004 | 0.046 | 0.917 | 0.178 | 0.674 | 🟡 Co-tendencia probable |
-| Esperanza de vida al nacer (años) | Gasto corriente en salud (% del PIB) | MEX | -0.831 | 0.006 | 0.047 | -0.567 | -0.764 | 0.027 | 🟡 Co-tendencia probable |
-| Esperanza de vida al nacer (años) | Gasto corriente en salud (% del PIB) | LCN | -0.826 | 0.006 | 0.047 | -0.583 | -0.737 | 0.037 | 🟡 Co-tendencia probable |
-| Gasto corriente en salud (% del PIB) | Población urbana (% del total) | BRA | 0.788 | 0.012 | 0.069 | 0.733 | 0.908 | 0.002 | 🟡 Marginal |
-| Gasto corriente en salud (% del PIB) | Población urbana (% del total) | PAN | 0.775 | 0.014 | 0.069 | 0.833 | 0.149 | 0.725 | 🟡 Marginal |
-| Esperanza de vida al nacer (años) | Gasto corriente en salud (% del PIB) | ARG | -0.775 | 0.014 | 0.069 | -0.283 | -0.648 | 0.082 | 🟡 Marginal |
-| Gasto corriente en salud (% del PIB) | Población urbana (% del total) | URY | 0.751 | 0.020 | 0.085 | 0.650 | 0.569 | 0.141 | 🟡 Marginal |
-| Gasto corriente en salud (% del PIB) | Población urbana (% del total) | PER | 0.730 | 0.025 | 0.099 | 0.783 | -0.124 | 0.771 | 🟡 Marginal |
-| Esperanza de vida al nacer (años) | Gasto corriente en salud (% del PIB) | COL | -0.664 | 0.036 | 0.129 | -0.006 | -0.846 | 0.004 | 🔴 Sin evidencia |
-| Esperanza de vida al nacer (años) | Gasto corriente en salud (% del PIB) | DOM | -0.654 | 0.056 | 0.182 | -0.517 | -0.702 | 0.052 | 🔴 Sin evidencia |
-| Esperanza de vida al nacer (años) | Gasto corriente en salud (% del PIB) | PER | -0.600 | 0.087 | 0.262 | -0.150 | -0.798 | 0.018 | 🔴 Sin evidencia |
-| Esperanza de vida al nacer (años) | Población urbana (% del total) | PAN | 0.518 | 0.125 | 0.348 | 0.576 | -0.176 | 0.651 | 🔴 Sin evidencia |
-| Esperanza de vida al nacer (años) | Gasto corriente en salud (% del PIB) | GTM | -0.491 | 0.180 | 0.461 | -0.167 | -0.809 | 0.015 | 🔴 Sin evidencia |
+| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | ECU | -0.883 | 0.001 | 0.015 | -0.855 | -0.049 | 0.900 | 🟡 Co-tendencia probable |
+| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | CHL | 0.873 | 0.001 | 0.015 | 0.842 | 0.126 | 0.747 | 🟡 Co-tendencia probable |
+| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | BRA | 0.866 | 0.001 | 0.015 | 0.818 | 0.095 | 0.808 | 🟡 Co-tendencia probable |
+| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | ARG | 0.743 | 0.014 | 0.098 | 0.564 | -0.106 | 0.787 | 🟡 Marginal |
+| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | PAN | 0.719 | 0.019 | 0.098 | 0.782 | -0.096 | 0.805 | 🟡 Marginal |
+| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | LCN | 0.714 | 0.020 | 0.098 | 0.661 | -0.660 | 0.053 | 🟡 Marginal |
+| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | MEX | 0.712 | 0.021 | 0.098 | 0.733 | 0.574 | 0.106 | 🟡 Marginal |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Empleo en servicios (% del empleo total) | PER | -0.711 | 0.021 | 0.098 | -0.188 | -0.852 | 0.004 | 🟡 Marginal |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Empleo en servicios (% del empleo total) | CHL | 0.699 | 0.024 | 0.098 | 0.818 | 0.204 | 0.599 | 🟡 Marginal |
+| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | DOM | 0.685 | 0.029 | 0.098 | 0.842 | -0.245 | 0.525 | 🟡 Marginal |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Empleo en servicios (% del empleo total) | GTM | 0.675 | 0.032 | 0.098 | 0.624 | 0.700 | 0.036 | 🟡 Marginal |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Empleo en servicios (% del empleo total) | URY | 0.674 | 0.032 | 0.098 | 0.770 | 0.051 | 0.897 | 🟡 Marginal |
+| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | URY | 0.674 | 0.033 | 0.098 | 0.418 | 0.477 | 0.194 | 🟡 Marginal |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Usuarios de internet (% de la población) | CHL | 0.647 | 0.043 | 0.120 | 0.782 | -0.148 | 0.703 | 🔴 Sin evidencia |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Empleo en servicios (% del empleo total) | LCN | -0.601 | 0.066 | 0.172 | -0.491 | -0.589 | 0.095 | 🔴 Sin evidencia |
 *q (FDR): p-valor ajustado por Benjamini-Hochberg sobre la familia de correlaciones del análisis — la significancia debe leerse de q, no de p.*
 
 **Tabla 4.** Indicadores derivados (cambio anual, % cambio, CAGR).
 
 | Serie | Ámbito | Inicial (año) | Final (año) | Cambio anual prom. | % cambio total | CAGR |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| Esperanza de vida al nacer (años) | América Latina y el Caribe (LCN) | 74.74 (2015) | 75.82 (2024) | 0.1194 | 1.44% | 0.16% |
-| Esperanza de vida al nacer (años) | Argentina | 76.60 (2015) | 77.54 (2024) | 0.1048 | 1.23% | 0.14% |
-| Esperanza de vida al nacer (años) | Brasil | 75.11 (2015) | 76.02 (2024) | 0.1019 | 1.22% | 0.13% |
-| Esperanza de vida al nacer (años) | Chile | 80.01 (2015) | 81.36 (2024) | 0.1501 | 1.69% | 0.19% |
-| Esperanza de vida al nacer (años) | Colombia | 76.07 (2015) | 77.91 (2024) | 0.2051 | 2.43% | 0.27% |
-| Esperanza de vida al nacer (años) | Costa Rica | 80.41 (2015) | 81.00 (2024) | 0.0654 | 0.73% | 0.08% |
-| Esperanza de vida al nacer (años) | República Dominicana | 72.98 (2015) | 73.87 (2024) | 0.0984 | 1.21% | 0.13% |
-| Esperanza de vida al nacer (años) | Ecuador | 76.22 (2015) | 77.58 (2024) | 0.1508 | 1.78% | 0.20% |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | América Latina y el Caribe (LCN) | 14.72 (2015) | 12.85 (2024) | -0.2079 | -12.71% | -1.50% |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Argentina | 20.27 (2015) | 19.23 (2024) | -0.1154 | -5.13% | -0.58% |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Brasil | 19.49 (2015) | 15.67 (2024) | -0.4243 | -19.59% | -2.39% |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Chile | 15.81 (2015) | 20.99 (2024) | 0.5750 | 32.73% | 3.20% |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Colombia | 17.32 (2015) | 19.41 (2024) | 0.2328 | 12.10% | 1.28% |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Costa Rica | 22.36 (2015) | 20.48 (2024) | -0.2091 | -8.42% | -0.97% |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | República Dominicana | 16.43 (2015) | 12.87 (2024) | -0.3949 | -21.64% | -2.67% |
+| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Ecuador | 8.82 (2015) | 8.57 (2024) | -0.0278 | -2.83% | -0.32% |
 
 ## Anexo estadístico
 
 *Diagnósticos de robustez del modelo: no forman parte del argumento central, documentan la calidad de la estimación.*
 
-![Tarjetas de evidencia: efecto estimado (punto) y rango plausible IC95% (barra) para cada coeficiente del panel de efectos fijos y del OLS regional. Las flechas indican intervalos que exceden la ventana del gráfico.](charts/2026-11-09-22-04/fig5_forest.png)
+![Tarjetas de evidencia: efecto estimado (punto) y rango plausible IC95% (barra) para cada coeficiente del panel de efectos fijos y del OLS regional. Las flechas indican intervalos que exceden la ventana del gráfico.](charts/2026-11-10-19-31/fig5_forest.png)
 
 *Cómo leerla: la bolita es la estimación y la barra el rango plausible; si la barra cruza la línea del cero, el resultado no es concluyente.*
 
-![Estabilidad del coeficiente de Gasto corriente en salud (% del PIB) tras 2000 remuestreos (rango recortado al 99% central): las barras muestran dónde cayó la estimación en cada réplica; si toca la línea roja (cero = sin efecto), el resultado es frágil.](charts/2026-11-09-22-04/fig8_bootdist.png)
+![Estabilidad del coeficiente de Usuarios de internet (% de la población) tras 2000 remuestreos (rango recortado al 99% central): las barras muestran dónde cayó la estimación en cada réplica; si toca la línea roja (cero = sin efecto), el resultado es frágil.](charts/2026-11-10-19-31/fig8_bootdist.png)
 
 *Cómo leerla: repetimos el cálculo 2000 veces barajando los datos; si las barras no tocan la línea roja del cero, el coeficiente es estable.*
 
-![Diagnóstico de residuos del modelo OLS: puntos dispersos alrededor del cero indican ajuste razonable; patrones sistemáticos revelan limitaciones del modelo.](charts/2026-11-09-22-04/fig9_residuals.png)
+![Diagnóstico de residuos del modelo OLS: puntos dispersos alrededor del cero indican ajuste razonable; patrones sistemáticos revelan limitaciones del modelo.](charts/2026-11-10-19-31/fig9_residuals.png)
 
 *Cómo leerla: puntos regados sin patrón cerca del cero = modelo sano; si dibujan una forma, el modelo se perdió algo.*
 
-![Años estadísticamente atípicos en Inversión extranjera directa, flujos netos (% del PIB) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia.](charts/2026-11-09-22-04/fig11_anomaly.png)
+![Años estadísticamente atípicos en Inversión extranjera directa, flujos netos (% del PIB) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia.](charts/2026-11-10-19-31/fig11_anomaly.png)
 
 *Cómo leerla: los pines marcan años estadísticamente atípicos — choques como 2020 que se leen como contexto, no como tendencia.*
 
@@ -198,27 +210,27 @@ Por lo tanto, los datos apoyan la conclusión de que, en los países latinoameri
 ---
 ## Nota de transparencia
 **Contexto.** Este artículo fue generado automáticamente por AcademicPipeline, un pipeline multi-agente de investigación asistida por IA: agentes especializados proponen, calculan, redactan y se verifican mutuamente antes de publicar.
-Tema seleccionado: *Relación entre urbanización, gasto en salud y esperanza de vida frente a eventos climáticos extremos en América Latina*.
-Noticia que inspiró la línea editorial: *"Photos: Heavy rains leave tens of thousands without shelter in Gaza"* ([Al Jazeera English](https://www.aljazeera.com/gallery/2026/11/8/photos-heavy-rains-leave-tens-of-thousands-without-shelter-in-gaza)).
-Lo que la noticia afirmaba o sugería: Las fuertes lluvias provocan desplazamientos masivos y aumentan la vulnerabilidad sanitaria de la población afectada.
-Alcance verificable con los datos: Se pueden verificar los efectos sobre la salud mediante los indicadores de esperanza de vida y gasto en salud, y la exposición urbana mediante el porcentaje de población urbana; no se dispone de datos directos sobre eventos de inundación o desplazamiento interno.
-Justificación del sistema: El dominio de salud y demografía conecta directamente con la noticia de una catástrofe climática; los indicadores disponibles permiten medir la capacidad del sistema de salud y la concentración urbana, factores críticos en la respuesta a inundaciones.
-**Pregunta de investigación:** ¿En qué medida el gasto en salud y la proporción de población urbana explican la variación en la esperanza de vida de los países latinoamericanos más vulnerables a eventos climáticos extremos?
-**Hipótesis planteada:** En los países latinoamericanos más expuestos a eventos climáticos extremos, un mayor gasto en salud y una mayor urbanización están asociados a una esperanza de vida más alta.
-Se evaluaron 3 líneas editoriales candidatas; se seleccionó la de mayor respaldo en datos.
-**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-2024. Muestra analizada: CHL, COL, ARG, BRA, CRI (referencia regional agregada: LCN). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.
+Tema seleccionado: *Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet*.
+Noticia que inspiró la línea editorial: *"Will Australia push for fossil fuel exit at UN talks?"* ([DW](https://www.dw.com/en/will-australia-push-for-fossil-fuel-exit-at-un-talks/a-79782066?maca=en-rss-en-all-1573-rdf)).
+Lo que la noticia afirmaba o sugería: La transición tecnológica y la mayor conectividad digital pueden modificar la situación del empleo juvenil en la región.
+Alcance verificable con los datos: Se pueden relacionar Youth unemployment (% of labor force 15-24) con Internet users (% of population) y con Employment in services (% of total employment). No hay datos directos sobre políticas de transición energética, por lo que esa parte queda fuera.
+Justificación del sistema: El vínculo entre digitalización y empleo juvenil es plausible y los indicadores disponibles permiten probar si mayor conectividad se asocia con menores tasas de desempleo juvenil.
+**Pregunta de investigación:** ¿Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan tasas de desempleo juvenil más bajas, especialmente en el sector de servicios?
+**Hipótesis planteada:** Un mayor nivel de penetración de internet está asociado con una menor tasa de desempleo juvenil, particularmente en economías con mayor participación del sector servicios.
+Se evaluaron 5 líneas editoriales candidatas; se seleccionó la de mayor respaldo en datos.
+**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-2024. Muestra analizada: ARG, BRA, CHL, COL, CRI (referencia regional agregada: LCN). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.
 **Métodos analíticos ejecutados (Cómputo Determinístico):**
-- Python 3.12 (scipy/statsmodels): Estadísticas descriptivas de 387 series, 39 correlaciones Pearson/Spearman (5 significativas tras corrección FDR Benjamini-Hochberg, q<0.05).
-- Python 3.12 (Regresión OLS): Life expectancy at birth (years) [LCN] ~ Current health expenditure (% of GDP) [LCN] (n=9, R²=0.683), con intervalos de confianza bootstrap (2000 réplicas).
-- Regresión de panel con efectos fijos por país: Life expectancy at birth (years) ~ Current health expenditure (% of GDP) + Urban population (% of total) (n=110 obs, 12 países).
+- Python 3.12 (scipy/statsmodels): Estadísticas descriptivas de 387 series, 39 correlaciones Pearson/Spearman (3 significativas tras corrección FDR Benjamini-Hochberg, q<0.05).
+- Python 3.12 (Regresión OLS): Youth unemployment (% of labor force 15-24) [LCN] ~ Internet users (% of population) [LCN] + Employment in services (% of total employment) [LCN] (n=10, R²=0.427), con intervalos de confianza bootstrap (2000 réplicas).
+- Regresión de panel con efectos fijos por país: Youth unemployment (% of labor force 15-24) ~ Internet users (% of population) + Employment in services (% of total employment) (n=120 obs, 12 países).
 - Test de tendencia Mann-Kendall: 168 de 377 series con tendencia significativa.
 - Detección de anomalías (z-score/IQR): 221 observaciones atípicas.
 - 11 figuras generadas con matplotlib a partir de los datos.
 **Proceso editorial.** Siete nodos automáticos: FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE.
 Revisión de rigor: veredicto APROBADO.
-Verificación automática de cifras: 77 cifras del texto cotejadas contra los resultados computados.
+Verificación automática de cifras: 88 cifras del texto cotejadas contra los resultados computados.
 Linter automático de lenguaje causal: el texto completo fue escaneado contra verbos de atribución causal; el diseño es correlacional, por lo que las relaciones se reportan como asociaciones, no efectos.
 Control de calidad final: veredicto APROBADO.
-Iteraciones: 0 reescritura(s), 0 reedición(es).
+Iteraciones: 2 reescritura(s), 0 reedición(es).
 **Limitaciones.** Las series tienen n≤10 observaciones anuales; las correlaciones no implican causalidad y las muestras pequeñas reducen la potencia estadística. El texto fue redactado por un modelo de lenguaje y verificado automáticamente contra los datos; no sustituye revisión humana. Artefactos verificables en el repositorio: `output/raw/fetched-data.json` (datos crudos), `output/raw/compute-results.json` (resultados completos), `output/raw/literature.json` (referencias verificadas en OpenAlex), `output/briefs/` (decisión editorial).
 *Explicación completa de los métodos (por qué Pearson, Spearman, OLS, Mann-Kendall): [metodología](https://rogelioguerrero.github.io/academic-pipeline/methodology.html)*

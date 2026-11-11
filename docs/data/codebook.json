@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-10T19:43:07+00:00",
+  "generated": "2026-11-11T19:32:10+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 33
+    "papers": 34
   },
   "countries": [
     {
@@ -66,6 +66,28 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-11",
+      "file": "2026-11-11_vulnerabilidad-del-empleo-juvenil-frente.md",
+      "topic": "Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)"
+      ],
+      "indicators": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)"
+      ]
+    },
     {
       "date": "2026-11-09",
       "file": "2026-11-09_relaci-n-entre-urbanizaci-n--gasto-en-sa.md",
@@ -207,9 +229,9 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
+        "Youth unemployment (% of labor force 15-24)",
         "GDP growth (annual %)",
-        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)",
-        "Youth unemployment (% of labor force 15-24)"
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
       ]
     },
     {
@@ -229,8 +251,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
         "Internet users (% of population)",
+        "GDP growth (annual %)",
         "Personal remittances received (current US$)"
       ]
     },
@@ -373,8 +395,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "Internet users (% of population)",
         "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
         "Government expenditure on education (% of GDP)"
       ]
     },
@@ -420,8 +442,8 @@
         "GDP per capita (current US$)"
       ],
       "indicators": [
-        "Net migration (total people)",
         "Internet users (% of population)",
+        "Net migration (total people)",
         "Personal remittances received (current US$)",
         "GDP per capita (current US$)"
       ]
@@ -443,8 +465,8 @@
         "Government expenditure on education (% of GDP)"
       ],
       "indicators": [
-        "Internet users (% of population)",
         "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
         "Government expenditure on education (% of GDP)"
       ]
     },
@@ -465,8 +487,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "Internet users (% of population)",
         "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
         "Employment in services (% of total employment)"
       ]
     },
@@ -841,6 +863,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-11",
+              "file": "2026-11-11_vulnerabilidad-del-empleo-juvenil-frente.md",
+              "topic": "Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet"
+            },
+            {
               "date": "2026-10-03",
               "file": "2026-10-03_impacto-de-la-digitalizaci-n-y-la-pol-ti.md",
               "topic": "Impacto de la digitalización y la política energética en el empleo juvenil y el crecimiento económico de América Latina"
@@ -1133,6 +1160,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-11",
+              "file": "2026-11-11_vulnerabilidad-del-empleo-juvenil-frente.md",
+              "topic": "Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet"
+            },
             {
               "date": "2026-11-02",
               "file": "2026-11-02_impacto-econ-mico-del-fen-meno-de-el-ni-.md",
@@ -1953,6 +1985,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-11",
+              "file": "2026-11-11_vulnerabilidad-del-empleo-juvenil-frente.md",
+              "topic": "Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet"
+            },
             {
               "date": "2026-11-04",
               "file": "2026-11-04_relaci-n-entre-la-penetraci-n-de-interne.md",

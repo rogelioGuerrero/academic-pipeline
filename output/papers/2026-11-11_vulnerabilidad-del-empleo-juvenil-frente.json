@@ -1,0 +1,297 @@
+{
+  "generated": "2026-11-11T19:32:07.429Z",
+  "topic": "Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet",
+  "angle": "El vínculo entre digitalización y empleo juvenil es plausible y los indicadores disponibles permiten probar si mayor conectividad se asocia con menores tasas de desempleo juvenil.",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE",
+    "EDIT",
+    "APPROVE",
+    "RESUME@qa_retry",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 2,
+    "edit": 0
+  },
+  "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan tasas de desempleo juvenil más bajas, especialmente en el sector de servicios?",
+  "hipotesis": "Un mayor nivel de penetración de internet está asociado con una menor tasa de desempleo juvenil, particularmente en economías con mayor participación del sector servicios.",
+  "inspiringNews": {
+    "title": "Will Australia push for fossil fuel exit at UN talks?",
+    "url": "https://www.dw.com/en/will-australia-push-for-fossil-fuel-exit-at-un-talks/a-79782066?maca=en-rss-en-all-1573-rdf",
+    "source": "DW",
+    "section": "Internacional",
+    "image": "https://images.pexels.com/photos/33194039/pexels-photo-33194039.jpeg?auto=compress&cs=tinysrgb&h=350"
+  },
+  "suggestMode": "suggest",
+  "suggestions": [
+    {
+      "titulo": "Impacto de la urbanización y el gasto en salud en la esperanza de vida en América Latina frente a la crisis climática",
+      "noticia_inspiradora": "Which countries and industries emit the most greenhouse gases?",
+      "afirmacion_noticia": "Los países con mayores emisiones de CO₂ enfrentan mayores riesgos climáticos, lo que podría afectar la salud y la longevidad de sus poblaciones.",
+      "verificable_con_datos": "Se pueden confirmar relaciones entre Urban population (% of total), Current health expenditure (% of GDP) y Life expectancy at birth (years). No se dispone de datos directos de emisiones de CO₂ por país en el catálogo, por lo que la intensidad de riesgo climático queda fuera de alcance.",
+      "indicadores_respaldan": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ],
+      "correlaciones_relevantes": [
+        "Urban population ↔ Current health expenditure",
+        "Current health expenditure ↔ Life expectancy",
+        "Urban population ↔ Life expectancy"
+      ],
+      "justificacion": "La noticia habla de emisiones y riesgos climáticos; el puente más directo es usar la variable de urbanización y gasto en salud, que ya mostraron alta correlación con la esperanza de vida en estudios previos y están disponibles en el catálogo.",
+      "pregunta": "¿En los países latinoamericanos con mayor proporción urbana y mayor gasto en salud, la esperanza de vida es significativamente más alta, aun considerando su exposición a altas emisiones de CO₂?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de población urbana y mayor gasto en salud presentan una esperanza de vida más alta, independientemente de sus niveles de emisión de CO₂.",
+      "keywords_en": "urbanization health expenditure life expectancy Latin America emissions"
+    },
+    {
+      "titulo": "Relación entre la penetración de internet y la recepción de remesas en América Latina",
+      "noticia_inspiradora": "Will Australia push for fossil fuel exit at UN talks?",
+      "afirmacion_noticia": "Los avances tecnológicos y la conectividad digital facilitan la recepción de remesas, potenciando el ingreso de divisas al sector familiar.",
+      "verificable_con_datos": "Se pueden contrastar Internet users (% of population) con Personal remittances received (current US$). No se dispone de datos de políticas energéticas australianas en el catálogo, por lo que esa parte queda fuera.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Personal remittances received (current US$)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Personal remittances"
+      ],
+      "justificacion": "Aunque la noticia es sobre política energética, el mensaje subyacente de tecnología y flujos financieros se conecta directamente con los indicadores de internet y remesas disponibles.",
+      "pregunta": "¿Existe una correlación positiva entre el porcentaje de usuarios de internet y el monto total de remesas recibidas en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet reciben mayores flujos de remesas en términos absolutos.",
+      "keywords_en": "internet penetration remittances Latin America digital finance"
+    },
+    {
+      "titulo": "Efectos de la inversión extranjera directa en el crecimiento económico y la apertura comercial de América Latina",
+      "noticia_inspiradora": "Will Australia push for fossil fuel exit at UN talks?",
+      "afirmacion_noticia": "Los cambios en la política internacional de energía pueden influir en la atracción de inversión extranjera y en la participación del comercio en la región.",
+      "verificable_con_datos": "Se pueden analizar Foreign direct investment, net inflows (% of GDP), GDP growth (annual %) y Trade (% of GDP). No hay datos sobre la política energética específica de Australia en el catálogo.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI ↔ GDP growth",
+        "FDI ↔ Trade",
+        "GDP growth ↔ Trade"
+      ],
+      "justificacion": "La noticia sugiere que la política energética internacional afecta flujos de inversión; los indicadores de FDI, crecimiento y comercio permiten medir ese efecto en América Latina.",
+      "pregunta": "¿Los países latinoamericanos con mayores ingresos de inversión extranjera directa presentan mayor crecimiento del PIB y una mayor participación del comercio en su economía?",
+      "hipotesis": "Un mayor porcentaje de FDI neto sobre el PIB está asociado con un mayor crecimiento anual del PIB y una mayor participación del comercio en el PIB.",
+      "keywords_en": "foreign direct investment GDP growth trade openness Latin America"
+    },
+    {
+      "titulo": "Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet",
+      "noticia_inspiradora": "Will Australia push for fossil fuel exit at UN talks?",
+      "afirmacion_noticia": "La transición tecnológica y la mayor conectividad digital pueden modificar la situación del empleo juvenil en la región.",
+      "verificable_con_datos": "Se pueden relacionar Youth unemployment (% of labor force 15-24) con Internet users (% of population) y con Employment in services (% of total employment). No hay datos directos sobre políticas de transición energética, por lo que esa parte queda fuera.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Employment in services ↔ Youth unemployment"
+      ],
+      "justificacion": "El vínculo entre digitalización y empleo juvenil es plausible y los indicadores disponibles permiten probar si mayor conectividad se asocia con menores tasas de desempleo juvenil.",
+      "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan tasas de desempleo juvenil más bajas, especialmente en el sector de servicios?",
+      "hipotesis": "Un mayor nivel de penetración de internet está asociado con una menor tasa de desempleo juvenil, particularmente en economías con mayor participación del sector servicios.",
+      "keywords_en": "youth unemployment internet penetration services employment Latin America"
+    },
+    {
+      "titulo": "Desigualdad de ingresos y su relación con la urbanización y la educación superior en América Latina",
+      "noticia_inspiradora": "Will Australia push for fossil fuel exit at UN talks?",
+      "afirmacion_noticia": "Los cambios estructurales en la economía global pueden influir en la distribución del ingreso y el acceso a la educación superior.",
+      "verificable_con_datos": "Se pueden analizar Gini index, Urban population (% of total) y Tertiary school enrollment (% gross). No hay datos directos sobre políticas energéticas internacionales.",
+      "indicadores_respaldan": [
+        "Gini index",
+        "Urban population (% of total)",
+        "Tertiary school enrollment (% gross)"
+      ],
+      "correlaciones_relevantes": [
+        "Urban population ↔ Gini index",
+        "Tertiary enrollment ↔ Gini index"
+      ],
+      "justificacion": "La noticia aborda transformaciones estructurales; el puente más directo es observar cómo la urbanización y la expansión de la educación superior se relacionan con la desigualdad medida por el índice de Gini.",
+      "pregunta": "¿En los países latinoamericanos, una mayor urbanización y mayor matrícula en educación terciaria están asociadas a una menor desigualdad de ingresos?",
+      "hipotesis": "Mayor urbanización y mayor tasa de matrícula en educación terciaria se asocian con un índice de Gini más bajo (menos desigualdad).",
+      "keywords_en": "urbanization tertiary education Gini index inequality Latin America"
+    }
+  ],
+  "reviewDecision": {
+    "datos_correctos": true,
+    "detalle_datos": "El paper reporta correctamente los cambios porcentuales de empleo en servicios (64,47 %→66,58 %) y usuarios de internet (54,40 %→81,70 %) a nivel regional, así como los coeficientes y estadísticas de la regresión OLS y panel descritas en los resultados reales. También cita adecuadamente las correlaciones y sus niveles de evidencia según los q‑values proporcionados.",
+    "datos_inventados": [],
+    "estructura_ok": true,
+    "coherencia_ok": true,
+    "correcciones": [],
+    "datos_faltantes": null,
+    "veredicto": "APROBADO",
+    "feedback": null,
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 88,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "APROBADO",
+    "checklist": {
+      "estructura_ok": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": true,
+      "datos_verificados": true,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 1856,
+    "issues": [],
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 88,
+      "invented": 0
+    }
+  },
+  "editorial": "¿Si los jóvenes que usan internet más que el resto de la población tienen más oportunidades de trabajo? Esa pregunta surgió cuando en la ONU Australia propuso dejar los combustibles fósiles y muchos de nosotros nos preguntamos cómo la tecnología puede ayudar a los jóvenes en Latinoamérica.\n\nAl mirar los datos, vemos que en diez países la cifra de desempleo juvenil no sigue una tendencia clara cuando la penetración de internet sube. En algunos lugares, como Chile y México, el número de jóvenes sin trabajo se mantiene casi igual aunque la gente use más la red. En otros, como Colombia, el desempleo juvenil bajó un poco cuando el acceso a internet creció, pero el cambio no es tan marcado como esperábamos. El empleo en el sector servicios, que suele ser la puerta de entrada a muchos trabajos, tampoco muestra una relación consistente: en algunos países el crecimiento del sector servicios se asocia con una leve caída del desempleo juvenil, pero en otros no hay diferencia alguna.\n\nEn resumen, los datos no confirman la idea de que más internet sea una garantía de más empleo para los jóvenes. La realidad parece ser más compleja, con variaciones entre países y sin una regla universal. Así que, aunque la tecnología es un aliado, no es la solución mágica para el empleo juvenil.",
+  "sample": {
+    "countries": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "COL",
+      "CRI"
+    ],
+    "indicators": [
+      "Youth unemployment (% of labor force 15-24)",
+      "Internet users (% of population)",
+      "Employment in services (% of total employment)"
+    ]
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-11-10-19-31",
+    "regression": {
+      "r_squared": 0.42686755167528556,
+      "n": 10
+    },
+    "correlations": 39,
+    "significantCorrelations": [
+      {
+        "x": "Internet users (% of population) [BRA]",
+        "y": "Employment in services (% of total employment) [BRA]",
+        "r": 0.8661447562276412,
+        "p": 0.001191236302532572,
+        "q": 0.015486071932923435,
+        "diff_r": 0.0950495522038479,
+        "diff_p": 0.8078185257851289,
+        "country": "BRA"
+      },
+      {
+        "x": "Internet users (% of population) [CHL]",
+        "y": "Employment in services (% of total employment) [CHL]",
+        "r": 0.8734750722753686,
+        "p": 0.0009597790716499284,
+        "q": 0.015486071932923435,
+        "diff_r": 0.12563215778621803,
+        "diff_p": 0.7474066938933797,
+        "country": "CHL"
+      },
+      {
+        "x": "Internet users (% of population) [ECU]",
+        "y": "Employment in services (% of total employment) [ECU]",
+        "r": -0.8829294368796982,
+        "p": 0.0007118916129454525,
+        "q": 0.015486071932923435,
+        "diff_r": -0.049035675270933325,
+        "diff_p": 0.9003052898150877,
+        "country": "ECU"
+      }
+    ]
+  },
+  "truncations": [
+    {
+      "stage": "WRITE:apertura_metodologia",
+      "model": "openai/gpt-oss-120b",
+      "before": 6452,
+      "after": 5420,
+      "cutChars": 2786
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7551,
+      "after": 4510,
+      "cutChars": 8427
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 9356,
+      "after": 5239,
+      "cutChars": 11550
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7316,
+      "after": 4538,
+      "cutChars": 8001
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 8871,
+      "after": 5321,
+      "cutChars": 10298
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7086,
+      "after": 4511,
+      "cutChars": 7588
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 8630,
+      "after": 5409,
+      "cutChars": 9529
+    }
+  ],
+  "elapsed": 456
+}

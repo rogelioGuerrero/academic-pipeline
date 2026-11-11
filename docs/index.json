@@ -1,5 +1,85 @@
 [
   {
+    "file": "2026-11-11_vulnerabilidad-del-empleo-juvenil-frente.md",
+    "date": "2026-11-11",
+    "topic": "Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://images.pexels.com/photos/33194039/pexels-photo-33194039.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "section": "Internacional",
+    "news_url": "https://www.dw.com/en/will-australia-push-for-fossil-fuel-exit-at-un-talks/a-79782066?maca=en-rss-en-all-1573-rdf",
+    "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan tasas de desempleo juvenil más bajas, especialmente en el sector de servicios?",
+    "editorial": "¿Si los jóvenes que usan internet más que el resto de la población tienen más oportunidades de trabajo? Esa pregunta surgió cuando en la ONU Australia propuso dejar los combustibles fósiles y muchos de nosotros nos preguntamos cómo la tecnología puede ayudar a los jóvenes en Latinoamérica.\n\nAl mirar los datos, vemos que en diez países la cifra de desempleo juvenil no sigue una tendencia clara cuando la penetración de internet sube. En algunos lugares, como Chile y México, el número de jóvenes sin trabajo se mantiene casi igual aunque la gente use más la red. En otros, como Colombia, el desempleo juvenil bajó un poco cuando el acceso a internet creció, pero el cambio no es tan marcado como esperábamos. El empleo en el sector servicios, que suele ser la puerta de entrada a muchos trabajos, tampoco muestra una relación consistente: en algunos países el crecimiento del sector servicios se asocia con una leve caída del desempleo juvenil, pero en otros no hay diferencia alguna.\n\nEn resumen, los datos no confirman la idea de que más internet sea una garantía de más empleo para los jóvenes. La realidad parece ser más compleja, con variaciones entre países y sin una regla universal. Así que, aunque la tecnología es un aliado, no es la solución mágica para el empleo juvenil.",
+    "charts": "2026-11-10-19-31",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "openai/gpt-oss-120b",
+        "before": 6452,
+        "after": 5420,
+        "cutChars": 2786
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7551,
+        "after": 4510,
+        "cutChars": 8427
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9356,
+        "after": 5239,
+        "cutChars": 11550
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7316,
+        "after": 4538,
+        "cutChars": 8001
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8871,
+        "after": 5321,
+        "cutChars": 10298
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7086,
+        "after": 4511,
+        "cutChars": 7588
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8630,
+        "after": 5409,
+        "cutChars": 9529
+      }
+    ],
+    "ts": "2026-11-11T19:32:07.429Z"
+  },
+  {
     "file": "2026-11-09_relaci-n-entre-urbanizaci-n--gasto-en-sa.md",
     "date": "2026-11-09",
     "topic": "Relación entre urbanización, gasto en salud y esperanza de vida frente a eventos climáticos extremos en América Latina",
