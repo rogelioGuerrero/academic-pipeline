@@ -1,5 +1,85 @@
 [
   {
+    "file": "2026-11-12_impacto-de-los-flujos-migratorios-netos-.md",
+    "date": "2026-11-12",
+    "topic": "Impacto de los flujos migratorios netos en la urbanización y el gasto en salud en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://image.hurimg.com/i/hurriyet/75/200x200/6af40da1242372ca501772c2.jpg",
+    "section": "América Latina",
+    "news_url": "https://www.hurriyetdailynews.com/mexico-works-to-block-passage-of-us-bound-migrant-caravan-229257",
+    "pregunta": "¿Los países latinoamericanos con mayores ingresos netos migratorios presentan niveles más altos de urbanización y mayor gasto en salud pública?",
+    "editorial": "¿Si los países de Latinoamérica que reciben más migrantes también terminan con más gente en ciudades y gastan más en salud? Esa pregunta surgió cuando México anunció que bloquearía el paso de una gran caravana migratoria hacia Estados Unidos.  \n\nAl mirar los datos, algo sorprendente aparece. Cuando se compara el porcentaje de la población que vive en zonas urbanas con cuánto gasta cada país en salud, la relación no es tan fuerte como uno esperaría. En un vistazo rápido, los países que invierten un poco más en salud pública tienden a tener un poco más de gente viviendo en ciudades, pero la diferencia no es clara: a veces la cifra se mueve un par de puntos porcentuales, otras veces casi no cambia.  \n\nSin embargo, cuando se observa la evolución dentro de cada país a lo largo del tiempo, la historia cambia. En esos 12 países analizados, el gasto en salud se ha asociado de forma más consistente con un aumento en la urbanización. La migración neta, por otro lado, parece no influir en nada; su efecto es prácticamente nulo.  \n\nEn resumen, la idea de que más migrantes traen más ciudades y más gasto en salud no se sostiene de manera general. En el panorama global, la relación es débil y puede ser un mero efecto de otras variables. Pero dentro de cada nación, el dinero que se destina a la salud sí parece acompañar el crecimiento urbano. Así, la respuesta no es sencilla, y la evidencia nos recuerda que las cifras a menudo cuentan historias más complejas de lo que parece a primera vista.",
+    "charts": "2026-11-12-19-41",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 6922,
+        "after": 4449,
+        "cutChars": 7188
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 6893,
+        "after": 4531,
+        "cutChars": 6893
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8660,
+        "after": 5511,
+        "cutChars": 9209
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 6946,
+        "after": 4521,
+        "cutChars": 7098
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9049,
+        "after": 5446,
+        "cutChars": 10557
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 6955,
+        "after": 4517,
+        "cutChars": 7140
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9119,
+        "after": 5681,
+        "cutChars": 10081
+      }
+    ],
+    "ts": "2026-11-12T19:51:49.010Z"
+  },
+  {
     "file": "2026-11-11_vulnerabilidad-del-empleo-juvenil-frente.md",
     "date": "2026-11-11",
     "topic": "Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet",

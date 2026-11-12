@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-11T19:32:10+00:00",
+  "generated": "2026-11-12T19:51:52+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 34
+    "papers": 35
   },
   "countries": [
     {
@@ -67,6 +67,28 @@
   ],
   "papers": [
     {
+      "date": "2026-11-12",
+      "file": "2026-11-12_impacto-de-los-flujos-migratorios-netos-.md",
+      "topic": "Impacto de los flujos migratorios netos en la urbanización y el gasto en salud en América Latina",
+      "sample_countries": [
+        "CHL",
+        "COL",
+        "ARG",
+        "BRA",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)",
+        "Net migration (total people)"
+      ],
+      "indicators": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)",
+        "Net migration (total people)"
+      ]
+    },
+    {
       "date": "2026-11-11",
       "file": "2026-11-11_vulnerabilidad-del-empleo-juvenil-frente.md",
       "topic": "Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet",
@@ -105,9 +127,9 @@
         "Urban population (% of total)"
       ],
       "indicators": [
-        "Life expectancy at birth (years)",
+        "Urban population (% of total)",
         "Current health expenditure (% of GDP)",
-        "Urban population (% of total)"
+        "Life expectancy at birth (years)"
       ]
     },
     {
@@ -169,9 +191,9 @@
         "Life expectancy at birth (years)"
       ],
       "indicators": [
-        "Life expectancy at birth (years)",
+        "Urban population (% of total)",
         "Current health expenditure (% of GDP)",
-        "Urban population (% of total)"
+        "Life expectancy at birth (years)"
       ]
     },
     {
@@ -418,10 +440,10 @@
         "Urban population (% of total)"
       ],
       "indicators": [
-        "Life expectancy at birth (years)",
-        "Current health expenditure (% of GDP)",
         "Urban population (% of total)",
-        "Net migration (total people)"
+        "Current health expenditure (% of GDP)",
+        "Net migration (total people)",
+        "Life expectancy at birth (years)"
       ]
     },
     {
@@ -442,8 +464,8 @@
         "GDP per capita (current US$)"
       ],
       "indicators": [
-        "Internet users (% of population)",
         "Net migration (total people)",
+        "Internet users (% of population)",
         "Personal remittances received (current US$)",
         "GDP per capita (current US$)"
       ]
@@ -2140,6 +2162,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-12",
+              "file": "2026-11-12_impacto-de-los-flujos-migratorios-netos-.md",
+              "topic": "Impacto de los flujos migratorios netos en la urbanización y el gasto en salud en América Latina"
+            },
+            {
               "date": "2026-11-06",
               "file": "2026-11-06_impacto-de-la-pol-tica-migratoria-europe.md",
               "topic": "Impacto de la política migratoria europea en la tasa de urbanización de América Latina"
@@ -2200,6 +2227,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-12",
+              "file": "2026-11-12_impacto-de-los-flujos-migratorios-netos-.md",
+              "topic": "Impacto de los flujos migratorios netos en la urbanización y el gasto en salud en América Latina"
+            },
             {
               "date": "2026-11-09",
               "file": "2026-11-09_relaci-n-entre-urbanizaci-n--gasto-en-sa.md",
@@ -2425,6 +2457,11 @@
           "n_observations": 119,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-12",
+              "file": "2026-11-12_impacto-de-los-flujos-migratorios-netos-.md",
+              "topic": "Impacto de los flujos migratorios netos en la urbanización y el gasto en salud en América Latina"
+            },
             {
               "date": "2026-11-09",
               "file": "2026-11-09_relaci-n-entre-urbanizaci-n--gasto-en-sa.md",

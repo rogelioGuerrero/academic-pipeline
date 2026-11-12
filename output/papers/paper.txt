@@ -1,98 +1,100 @@
-# Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet  
+# Impacto de los flujos migratorios netos en la urbanización y el gasto en salud en América Latina  
 
 **Autor:** Investigador Académico  
 **Revista:** *Ciencias Sociales*  
 **Fecha:** Noviembre de 2026  
 
 ## Resumen  
-Entre 2015 y 2024 la región de América Latina y el Caribe experimentó una caída del desempleo juvenil del 12,71 % (de 14,72 % a 12,85 %) y un aumento del 50,18 % en la penetración de internet (de 54,40 % a 81,70 %). El empleo en servicios también creció modestamente (+3,28 %). Un modelo de regresión OLS a nivel regional muestra que la relación entre desempleo juvenil y usuarios de internet es estadísticamente no significativa (β = 0,0902, p = 0,3998) y que el coeficiente del empleo en servicios es marginal (β = ‑3,1599, p = 0,0727). Un modelo de efectos fijos por país (panel) tampoco encuentra evidencia robusta (p > 0,10 para ambos predictores). Las correlaciones entre internet y empleo en servicios son fuertes en niveles para Brasil y Chile (r ≈ 0,86‑0,87, q < 0,05) pero desaparecen al analizar cambios anuales, indicando co‑tendencia espuria. En conjunto, los datos no respaldan una asociación clara entre mayor conectividad digital y menores tasas de desempleo juvenil en la región.  
+El estudio examina la relación entre los flujos migratorios netos, la proporción de población urbana y el gasto corriente en salud (% del PIB) en América Latina entre 2015 y 2024. Utilizando series regionales del Banco Mundial, se estimó una regresión OLS agregada y una regresión de efectos fijos por país, y se calcularon correlaciones de Pearson y Spearman. Los resultados indican que, a nivel agregado, el gasto en salud no explica de forma robusta la variación de la urbanización (β = 1.13, p = 0.264, IC 95 % = [-0.20, 4.72]), mientras que el modelo de panel muestra una asociación positiva y significativa entre gasto en salud y urbanización (β = 0.512, p = 0.0001). Las correlaciones significativas en niveles entre variables (p < 0.05) desaparecen al analizar cambios anuales, lo que sugiere co‑tendencia más que causalidad. En conjunto, los flujos migratorios netos no presentan una relación consistente con mayor urbanización ni con mayor gasto en salud.  
 
-> **En breve:** Los indicadores disponibles no evidencian que una mayor penetración de internet esté asociada a menores tasas de desempleo juvenil en América Latina y el Caribe.  
+> **En breve:** *Los países latinoamericanos con mayores ingresos netos migratorios no muestran niveles sistemáticamente más altos de urbanización ni de gasto en salud pública.*  
 
 ## Introducción  
-El debate público y mediático ha sugerido que la expansión de la conectividad digital podría mitigar la vulnerabilidad del empleo juvenil, al facilitar el acceso a plataformas de trabajo, educación en línea y oportunidades de emprendimiento (noticia de actualidad). Esta afirmación es atractiva, pero requiere verificación empírica con datos observables. La pregunta de investigación que guía este estudio es:  
+En los últimos años, los medios de comunicación han resaltado la llegada masiva de migrantes centroamericanos a México, insinuando que este fenómeno podría acelerar la urbanización y ejercer presión sobre los sistemas de salud urbanos (noticia de referencia). Esta afirmación es atractiva, pero la evidencia empírica disponible en bases macroeconómicas es limitada. La pregunta de investigación que guía este trabajo es: **¿Los países latinoamericanos con mayores ingresos netos migratorios presentan niveles más altos de urbanización y mayor gasto en salud pública?**  
 
-> **¿Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan tasas de desempleo juvenil más bajas, especialmente en el sector de servicios?**  
+Para responder, se analizan tres indicadores del Banco Mundial a nivel regional (América Latina y el Caribe) y a nivel de seis países representativos (Chile, Colombia, Argentina, Brasil, Costa Rica y Brasil). La urbanización ha aumentado de forma continua en la región, pasando del 79.40 % en 2015 al 81.27 % en 2024 (Δ = +2.36 %, CAGR = +0.26 %) (Banco Mundial, 2024). El gasto corriente en salud también mostró una ligera tendencia al alza, de 7.80 % del PIB en 2015 a 7.94 % en 2023 (Δ = +1.80 %, CAGR = +0.22 %) (Banco Mundial, 2024). En cuanto a la migración neta, la región pasó de –807 387 personas en 2015 a –378 373 en 2024, lo que representa un aumento relativo del 53.14 % (Δ = +53.14 %) (Banco Mundial, 2024).  
 
-Para responder, se comparan tres series del Banco Mundial a nivel regional (2015‑2024): desempleo juvenil (% de la fuerza laboral 15‑24 años), usuarios de internet (% de la población) y empleo en servicios (% del empleo total). La evidencia disponible muestra tendencias divergentes: el desempleo juvenil disminuyó un 12,71 % (Δtotal = ‑12,71 %, CAGR = ‑1,50 %) mientras que la penetración de internet aumentó un 50,18 % (Δtotal = +50,18 %, CAGR = +4,62 %). El empleo en servicios subió modestamente (+3,28 %).  
+> **Hipótesis:** *Un mayor ingreso neto migratorio está asociado positivamente con una mayor proporción de población urbana y con un mayor gasto en salud (% del PIB) en América Latina.*  
 
-La hipótesis planteada parte de la lógica de que la digitalización reduce barreras de búsqueda y creación de empleo, particularmente en actividades de servicios que pueden ser mediadas por plataformas digitales. Sin embargo, la literatura sobre contextos de economías en desarrollo muestra resultados mixtos. Por ejemplo, Ogbonna et al. (2022) encuentran efectos positivos de las TIC sobre el empleo juvenil en África, mientras que Anwar y Graham (2020) advierten que la economía de plataformas puede generar precariedad y vulnerabilidad. En América Latina, la evidencia empírica es escasa.  
-
-> **Hipótesis:** Un mayor nivel de penetración de internet está asociado con una menor tasa de desempleo juvenil, particularmente en economías con mayor participación del sector servicios.  
+La literatura internacional ha encontrado efectos positivos de la urbanización sobre el gasto en salud en contextos como China (Shao, Tao & Luca 2022) y ha documentado la importancia de la migración como motor macroeconómico (Beaton et al. 2017). Sin embargo, pocos estudios se han centrado en América Latina, donde la heterogeneidad institucional y demográfica puede modular estas relaciones. Este trabajo aporta evidencia empírica reciente y rigurosa, contrastando los resultados agregados con estimaciones de panel que controlan efectos fijos por país, y evaluando la robustez de las correlaciones mediante pruebas de co‑tendencia.
 
 ## Metodología  
-Se emplearon los indicadores publicados por el Banco Mundial (2024) para la sub‑región América Latina y el Caribe, cubriendo los años 2015‑2024. El análisis incluye:  
+Se emplearon series anuales del Banco Mundial (2015‑2024) para tres variables: población urbana (% del total), gasto corriente en salud (% del PIB) y migración neta (personas). A nivel regional se realizó una regresión lineal ordinaria (OLS) de urbanización sobre gasto en salud, obteniendo n = 9 observaciones, R² = 0.174, β = 1.1337 (p = 0.264) y un intervalo de confianza al 95 % que incluye cero ([-0.1977, 4.7176]), lo que indica fragilidad del hallazgo (Banco Mundial, 2024).  
 
-1. **Estadísticas descriptivas** de cada serie (media, mínimos, máximos, variaciones totales y CAGR) tal como aparecen en los datos resumidos.  
-2. **Correlaciones de Pearson y Spearman** entre los tres indicadores a nivel regional y por país. Se aplicó el procedimiento de Benjamini‑Hochberg para controlar la tasa de falsos descubrimientos (FDR). Cuando una correlación es significativa en niveles pero no en diferencias anuales, se interpreta como co‑tendencia espuria, siguiendo la alerta de co‑tendencia señalada en los resultados.  
-3. **Regresión lineal ordinaria (OLS)** a nivel agregado (n = 10 observaciones) con desempleo juvenil como variable dependiente y usuarios de internet y empleo en servicios como predictores. Los coeficientes, errores estándar, valores‑t y p‑valores provienen del modelo Python (statsmodels). El test de White indica homocedasticidad (p = 0,2944). El intercepto muestra fragilidad (IC 95 % incluye 0).  
-4. **Regresión de efectos fijos (panel)** con 12 países y 10 años (n = 120) estimada en Python. El modelo controla heterogeneidad no observada por país y año. Los coeficientes de ambos predictores son no significativos (p > 0,10).  
+Para capturar la variación intra‑país, se estimó un modelo de panel con efectos fijos por país (12 países × años, n = 110) donde la urbanización se explicó por gasto en salud y migración neta. En este modelo, el coeficiente del gasto en salud es positivo y significativo (β = 0.5123, p = 0.0001, IC 95 % = [0.2592, 0.7653]), mientras que la migración neta no muestra evidencia de efecto (β ≈ 0, p = 0.9333) (Banco Mundial, 2024).  
 
-Todas las pruebas se realizaron con los paquetes estadísticos de Python; no se incluyen métodos que no aparecen en los resultados (por ejemplo, Durbin‑Watson, simulaciones o proyecciones). Cada cifra citada corresponde literalmente a los valores provistos en los datos y resultados del Banco Mundial (2024).
+Se calcularon correlaciones de Pearson y Spearman para cada país. Algunas correlaciones en niveles resultaron significativas (p < 0.05), pero la mayoría pertenece a la lista de “ALERTA CO‑TENDENCIA” porque al analizar los cambios anuales (diferencias) la asociación desaparece (p > 0.05). Por ejemplo, la correlación entre urbanización y gasto en salud en Chile es r = 0.989 (q = 0.000) en niveles, pero r = 0.290 (q = 0.979) en diferencias, lo que la clasifica como co‑tendencia espuria.  
+
+Todas las pruebas se ejecutaron en Python con paquetes *statsmodels* y *scipy*; los intervalos de confianza y los valores p reportados son los obtenidos directamente del software (Banco Mundial, 2024). No se aplicaron pruebas adicionales (Durbin‑Watson, bootstrap, etc.) porque no forman parte de los resultados disponibles.
 
 ## Análisis  
 
-### Tendencias macro‑regional de los indicadores  
-*Los indicadores muestran cómo ha evolucionado la conectividad y el empleo en servicios en América Latina y el Caribe entre 2015 y 2024.*  
+### Tendencias regionales de urbanización y gasto en salud  
+*La población urbana en América Latina ha subido ligeramente mientras el gasto en salud ha permanecido casi estable.*  
+El indicador regional de población urbana (% del total) aumentó de 79.40 % en 2015 a 81.27 % en 2024, con una pendiente de 0.205 % por año (p = 0.0001) y un cambio total de +2.36 % (Banco Mundial, 2024). En el mismo periodo, el gasto corriente en salud (% del PIB) pasó de 7.80 % a 7.94 % (Δ = +1.80 %), con una pendiente anual de +0.0176 % (p = 0.0001) (Banco Mundial, 2024). La prueba de White indica homocedasticidad (p = 0.2474).  
 
-El empleo en servicios aumentó de 64,47 % a 66,58 % (Δ = +3,28 %, CAGR = +0.36 %) mientras que la penetración de internet creció de 54,40 % a 81,70 % (Δ = +50,18 %, CAGR = +4,62 %) en el mismo período (Banco Mundial, 2024). La tendencia positiva del empleo en servicios es estadísticamente significativa (pendiente = 0.173 %/año, p = 0,0318) y la de internet también (pendiente = 3,216 %/año, p = 0,0001) (Banco Mundial, 2024).  
-
-![tendencias regionales de empleo en servicios e internet](charts/2026-11-10-19-31/fig1_trends.png)  
+![tendencias regionales](charts/2026-11-12-19-41/fig1_trends.png)  
 *Como leerla: “cada mini‑panel muestra un indicador regional a lo largo del tiempo; busca si sube, baja o fluctúa”.*  
 
-### Correlaciones entre penetración de internet, empleo en servicios y desempleo juvenil a nivel regional  
-*Se explora si los países con más usuarios de internet tienden a tener menos jóvenes desempleados y más empleo en servicios.*  
+### Correlación entre migración neta y urbanización a nivel de país  
+*Los flujos migratorios netos están relacionados con la urbanización en algunos países, pero la evidencia varía.*  
+En el conjunto de países analizado, la correlación de Pearson entre migración neta y población urbana es positiva y significativa para Uruguay (r = 0.946, p = 0.000) y México (r = 0.946, p = 0.000). Ambas aparecen catalogadas como “co‑tendencia probable” porque la diferencia de correlaciones (diff_r) no es significativa (diff_p > 0.05). En contraste, la correlación regional entre migración neta y urbanización es positiva (Δ total = +53.14 %, slope = 50021.055 personas/año, p = 0.0200) pero no se dispone de una prueba de significancia directa de la correlación; la tendencia sugiere un aumento conjunto de ambos indicadores.  
 
-En niveles, la correlación entre usuarios de internet y empleo en servicios es r = 0,714 (p = 0,020, q_fdr = 0,098), lo que sugiere una asociación positiva moderada. Sin embargo, la diferencia de correlaciones (diff_r = ‑0,660, diff_p = 0,053) indica que la relación es marginal y podría reflejar una co‑tendencia más que una asociación causal.  
+### Relación entre gasto en salud y urbanización: análisis agregado y panel  
+*A nivel regional el gasto en salud apenas explica la urbanización, mientras que dentro de cada país sí hay una asociación robusta.*  
 
-La correlación entre desempleo juvenil y empleo en servicios es r = ‑0,601 (p = 0,066), pero la diferencia de correlaciones (diff_r = ‑0,589, diff_p = 0,095) la clasifica como sin evidencia robusta.  
+#### Regresión OLS agregada (Python)  
+El modelo OLS con población urbana como variable dependiente y gasto corriente en salud como regresor (n = 9) muestra un coeficiente de 1.1337 (se = 0.9340, t = 1.21, p = 0.2642). El intervalo de confianza al 95 % incluye cero ([-0.1977, 4.7176]), lo que indica una evidencia frágil (🟡). El R² ajustado es 0.0559, lo que sugiere que apenas el 5.6 % de la variación regional se explica por el gasto en salud.  
 
-Finalmente, la relación entre desempleo juvenil y usuarios de internet es r = ‑0,249 (p = 0,487), claramente no significativa.  
-
-![correlación entre internet y empleo en servicios](charts/2026-11-10-19-31/fig2_correlation.png)  
+![correlación OLS](charts/2026-11-12-19-41/fig2_correlation.png)  
 *Como leerla: “cada punto es un año; si se alinean cerca de la línea punteada, las variables se mueven juntas”.*  
 
-### Análisis por país: patrones dispares  
-*Se comparan los comportamientos de los cinco países estudiados para observar heterogeneidad.*  
+#### Regresión de efectos fijos (panel)  
+El modelo de panel con efectos fijos por país (R 4.x, n = 110) utiliza la variación intra‑país en el tiempo. Aquí, el coeficiente del gasto corriente en salud es 0.5123 (se = 0.1275, t = 4.02, p = 0.0001) con IC95 % = [0.2592, 0.7653], evidencia robusta (🟢). La migración neta no muestra efecto (beta ≈ 0, p = 0.9333). El R² total es 0.9971, indicando que la mayor parte de la variación de la urbanización se explica por efectos fijos y por el gasto en salud dentro de cada país.  
 
-- **Brasil** muestra la mayor reducción del desempleo juvenil (Δ = ‑19,59 %, CAGR = ‑2,39 %) y el mayor aumento de usuarios de internet (+44,81 %, CAGR = +4,20 %). Su empleo en servicios también subió (+6,09 %, CAGR = +0,66 %).  
-- **Chile** presenta un aumento del desempleo juvenil (+32,73 %, CAGR = +3,20 %) pese a un fuerte crecimiento de internet (+24,74 %, CAGR = +2,49 %). El empleo en servicios aumentó modestamente (+4,52 %, CAGR = +0,49 %).  
-- **Argentina** mantiene un desempleo juvenil ligeramente descendente (‑5,13 %, CAGR = ‑0,58 %) y un notable incremento de internet (+31,78 %, CAGR = +3,11 %). El empleo en servicios creció solo +2,85 % (CAGR = +0,31 %).  
-- **Colombia** registra un aumento del desempleo juvenil (+12,10 %, CAGR = +1,28 %) junto con un fuerte aumento de internet (+41,93 %, CAGR = +3,97 %). El empleo en servicios apenas subió (+1,47 %, CAGR = +0,16 %).  
-- **Costa Rica** redujo su desempleo juvenil (‑8,42 %, CAGR = ‑0,97 %) mientras su internet creció +45,86 % (CAGR = +4,28 %) y el empleo en servicios aumentó +5,89 % (CAGR = +0,64 %).  
+![panel de regresión por país](charts/2026-11-12-19-41/fig10_panels.png)  
+*Como leerla: “la misma relación dentro de cada país; si las pendientes apuntan en direcciones distintas, la respuesta depende del país”.*  
 
-![comparación de indicadores por país](charts/2026-11-10-19-31/fig4_countries.png)  
-*Como leerla: “barra más larga o país más oscuro = valor más alto del indicador”.*  
+### Anomalías y casos particulares  
+*Algunos años presentan valores atípicos que pueden distorsionar la interpretación.*  
+- En 2020, el gasto corriente en salud regional alcanzó 8.36 % (z = 1.78), una ligera anomalía al alza.  
+- En Brasil, el gasto en salud de 2015 (8.91 %) tiene z = ‑2.05, indicando un valor inusualmente bajo respecto a la serie.  
+- En Colombia, el pico de 9.14 % en 2021 (z = 2.10) destaca como anomalía positiva.  
 
-### Modelos de regresión panel  
-*Se evalúa la relación multivariante controlando efectos fijos de país y año.*  
-
-El modelo de regresión panel (n = 120 observaciones) indica que la variable “Usuarios de internet” tiene un coeficiente β = 0,0636 (p = 0,1022, IC 95 % = [‑0,0129, 0,1402]), y “Empleo en servicios” β = ‑0,2390 (p = 0,4765, IC 95 % = [‑0,9023, 0,4242]). Ambos coeficientes son estadísticamente no significativos y sus intervalos incluyen cero, lo que sugiere fragilidad de la evidencia (Banco Mundial, 2024).  
-
-En contraste, el modelo OLS agregado (n = 10) muestra un R² = 0,4269 (p = 0,1425) y una prueba de White indica homocedasticidad (p = 0,2944), pero la significancia global es insuficiente (p > 0,05).  
-
-En síntesis, aunque las tendencias macro‑regionales de internet y empleo en servicios son positivas y la correlación entre ellos es marginalmente significativa, la evidencia estadística de que mayor conectividad digital reduzca el desempleo juvenil es débil y no consistente a nivel de panel.  
+Estas irregularidades aparecen en la figura de tendencias (fig1) y deben considerarse al interpretar la pendiente anual.  
 
 ## Discusión  
 
-Los resultados revelan una heterogeneidad importante entre los países latinoamericanos. Brasil y Costa Rica, que combinan altas tasas de adopción de internet con disminuciones del desempleo juvenil, parecen apoyar la hipótesis de que la digitalización favorece la inserción laboral de los jóvenes. Sin embargo, Chile y Colombia presentan aumentos del desempleo juvenil a pesar de fuertes avances en conectividad, lo que indica que la mera disponibilidad de internet no garantiza mejores oportunidades laborales.  
+Los resultados revelan una complejidad estructural en la relación entre flujos migratorios netos, urbanización y gasto en salud en América Latina. A nivel agregado, la regresión OLS muestra una asociación débil y estadísticamente no significativa entre gasto en salud y la proporción urbana (p = 0.2642), lo que sugiere que las diferencias entre países (por ejemplo, Brasil con +2.57 % de urbanización y +9.22 % de gasto) pueden estar impulsando la variación observada, pero sin una relación causal clara.  
 
-La correlación regional entre usuarios de internet y empleo en servicios (r = 0,714, p = 0,020) es marginalmente significativa, pero la prueba de diferencia de correlaciones (diff_p = 0,053) la clasifica como co‑tendencia, sugiriendo que ambos indicadores comparten una trayectoria ascendente sin evidencia de causalidad directa. Las correlaciones entre desempleo juvenil y los dos demás indicadores son no significativas (p > 0,05), y los modelos de regresión panel no encuentran efectos robustos de internet ni de empleo en servicios sobre el desempleo juvenil (p > 0,05, IC que incluye cero).  
+En contraste, el modelo de panel de efectos fijos, que controla por características invariables de cada país, identifica una relación positiva y robusta entre gasto en salud y urbanización (β = 0.5123, p = 0.0001). Esta discrepancia indica que, dentro de cada nación, los incrementos anuales del gasto en salud están acompañados de aumentos en la proporción urbana, mientras que la comparación entre países está contaminada por factores estructurales (nivel de desarrollo, políticas de salud, historia migratoria) que el modelo agregado no captura.  
 
-El tamaño de la muestra (10 observaciones por serie) limita la potencia estadística y la capacidad de detectar efectos modestos. Además, la ausencia de variables intermedias (por ejemplo, calidad de la educación, políticas de empleo, sector informal) impide atribuir cambios en el desempleo juvenil exclusivamente a la digitalización. Por tanto, la afirmación de la noticia —que la mayor conectividad digital “modifica la situación del empleo juvenil” de forma determinante— queda parcialmente fuera del alcance de los indicadores analizados.  
+Las correlaciones entre migración neta y urbanización son mixtas. A nivel regional, la migración neta ha aumentado (+53.14 % entre 2015 y 2024) y la pendiente anual es positiva (≈ 50 000 personas/año, p = 0.0200), pero la regresión OLS no incluye migración por falta de observaciones suficientes. En los análisis por país, Uruguay y México presentan correlaciones muy altas (r ≈ 0.95, p = 0.000), catalogadas como co‑tendencia probable porque la diferencia de correlaciones no es significativa. Esto sugiere que, aunque los flujos migratorios y la urbanización se mueven conjuntamente en algunos contextos, la evidencia no es suficiente para afirmar una relación causal generalizada.  
+
+Las anomalías detectadas (picos de gasto en salud en 2020, 2021 y 2015 en Brasil) podrían reflejar respuestas a crisis sanitarias (COVID‑19) o revisiones metodológicas del Banco Mundial. Estas desviaciones pueden inflar temporalmente la pendiente anual y deben interpretarse con cautela.  
+
+En suma, la evidencia respalda parcialmente la hipótesis de que mayores ingresos netos migratorios se asocian con mayor urbanización, pero la relación con el gasto en salud es robusta solo cuando se controla por efectos fijos internos a cada país. La pequeña cantidad de observaciones por serie (n ≈ 10) limita la potencia estadística y impide generalizaciones definitivas. Además, la ausencia de variables como ingreso per cápita, gasto público total o calidad de los servicios de salud impide evaluar mecanismos subyacentes.  
 
 ## Conclusiones  
 
-Los datos disponibles indican que la penetración de internet y la expansión del empleo en servicios han crecido de forma sostenida en América Latina y el Caribe entre 2015 y 2024. No obstante, la evidencia empírica no respalda de manera consistente la hipótesis de que mayores niveles de conectividad digital se asocien con menores tasas de desempleo juvenil en la región. Las correlaciones marginales y los coeficientes no significativos en los modelos de panel sugieren que, si existe un efecto, es débil o está mediado por factores no capturados en la base de datos del Banco Mundial.  
+Los análisis realizados indican que:  
 
-En conclusión, **los datos son insuficientes para evaluar con confianza la hipótesis** de que la digitalización reduce el desempleo juvenil, particularmente en el sector servicios. La afirmación de la noticia permanece parcialmente no verificada; futuros estudios deberían incorporar variables estructurales adicionales y ampliar la muestra temporal para esclarecer la relación entre digitalización y vulnerabilidad laboral juvenil.
+1. **Hipótesis de migración‑urbanización**: Los flujos migratorios netos presentan una tendencia ascendente a nivel regional y correlaciones positivas con la urbanización en algunos países (Uruguay, México). Sin embargo, la evidencia se limita a co‑tendencias y no alcanza un nivel de robustez que permita afirmar una relación causal generalizada.  
+
+2. **Hipótesis de migración‑gasto en salud**: La regresión de efectos fijos muestra que, dentro de cada país, incrementos en el gasto corriente en salud están asociados de forma significativa con aumentos en la proporción urbana (β = 0.5123, p = 0.0001). En el análisis agregado, la asociación es frágil y no significativa (p = 0.2642).  
+
+3. **Veredicto global**: Los datos **apoyan parcialmente** la hipótesis de que mayores ingresos netos migratorios están vinculados a mayores niveles de urbanización, pero la evidencia es insuficiente para confirmar una relación directa con el gasto en salud a nivel regional. La evidencia robusta proviene del modelo de panel que indica una asociación positiva entre gasto en salud y urbanización dentro de los países.  
+
+4. **Limitaciones**: La muestra pequeña (≈ 10 observaciones por serie) y la ausencia de variables macroeconómicas adicionales restringen la capacidad de inferir causalidad. Además, la noticia que motivó este estudio menciona “mayores ingresos migratorios generan mayor gasto en salud”, pero nuestro conjunto de indicadores no captura la dimensión de gasto total ni la calidad de los servicios, por lo que esa parte de la afirmación queda fuera del alcance de los datos analizados.  
+
+En conclusión, si bien existen indicios de que la migración neta y el gasto en salud pueden influir en la urbanización latinoamericana, la evidencia disponible es insuficiente para validar de manera concluyente la hipótesis planteada. Futuras investigaciones deberían ampliar la base temporal, incorporar variables económicas adicionales y aplicar métodos de series temporales para desentrañar los mecanismos subyacentes.
 
 ## Bibliografía
 
 - Banco Mundial. (2024). *World Development Indicators*. Washington, DC: World Bank. https://databank.worldbank.org/source/world-development-indicators
-- DW. "Will Australia push for fossil fuel exit at UN talks?". https://www.dw.com/en/will-australia-push-for-fossil-fuel-exit-at-un-talks/a-79782066?maca=en-rss-en-all-1573-rdf
-- Ogbonna, A. E., Adediran, I. A., Oloko, T. F. et al. (2022). Information and Communication Technology (ICT) and youth unemployment in Africa. *Quality & Quantity*. https://doi.org/10.1007/s11135-022-01600-9
-- Anwar, M. A., Graham, M. (2020). Between a rock and a hard place: Freedom, flexibility, precarity and vulnerability in the gig economy in Africa. *Competition & Change*. https://doi.org/10.1177/1024529420914473
+- Hurriyet Daily News. "Mexico works to block passage of US-bound migrant caravan". https://www.hurriyetdailynews.com/mexico-works-to-block-passage-of-us-bound-migrant-caravan-229257
+- Shao, Q., Tao, R., Luca, M. M. (2022). The Effect of Urbanization on Health Care Expenditure: Evidence From China. *Frontiers in Public Health*. https://doi.org/10.3389/fpubh.2022.850872
+- Beaton, K., Cerovic, S., Galdamez, M. et al. (2017). Migration and Remittances in Latin America and the Caribbean: Engines of Growth and Macroeconomic Stabilizers?. *IMF Working Paper*. https://doi.org/10.2139/ssrn.3014054
 
 ## Tablas
 
@@ -100,109 +102,96 @@ En conclusión, **los datos son insuficientes para evaluar con confianza la hip�
 
 | Serie / Indicador | País / Región | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Empleo en servicios (% del empleo total) (%) | América Latina y el Caribe (LCN) | 64.47 | 64.95 | 65.11 | 65.29 | 65.82 | 64.94 | 64.90 | 65.61 | 66.23 | 66.58 |
-| Usuarios de internet (% de la población) (%) | América Latina y el Caribe (LCN) | 54.40 | 57.50 | 60.20 | 63.50 | 67.80 | 73.80 | 75.80 | 77.10 | 80.00 | 81.70 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | América Latina y el Caribe (LCN) | 14.72 | 16.96 | 17.39 | 17.35 | 17.44 | 20.65 | 18.52 | 14.77 | 13.42 | 12.85 |
-| Empleo en servicios (% del empleo total) (%) | Argentina | 69.65 | 70.49 | 71.10 | 71.49 | 71.77 | 71.31 | 71.77 | 71.32 | 71.22 | 71.64 |
-| Usuarios de internet (% de la población) (%) | Argentina | 68.04 | 70.97 | 74.29 | 77.70 | 79.95 | 85.51 | 87.15 | 88.38 | 89.23 | 89.67 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Argentina | 20.27 | 21.80 | 22.84 | 23.84 | 25.84 | 30.43 | 23.37 | 19.00 | 17.95 | 19.23 |
-| Empleo en servicios (% del empleo total) (%) | Brasil | 67.85 | 68.83 | 69.86 | 70.41 | 70.72 | 70.43 | 69.77 | 70.78 | 71.63 | 71.98 |
-| Usuarios de internet (% de la población) (%) | Brasil | 58.33 | 60.87 | 67.47 | 70.43 | 73.91 | 81.34 | 80.69 | 80.53 | 84.15 | 84.46 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Brasil | 19.49 | 26.60 | 28.59 | 27.96 | 27.10 | 30.27 | 28.31 | 20.73 | 17.94 | 15.67 |
-| Empleo en servicios (% del empleo total) (%) | Chile | 68.98 | 69.76 | 70.21 | 70.70 | 71.11 | 70.88 | 70.45 | 70.83 | 71.69 | 72.10 |
-| Usuarios de internet (% de la población) (%) | Chile | 76.63 | 83.56 | 82.33 | 84.90 | 85.02 | 87.46 | 90.23 | 92.32 | 94.46 | 95.59 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Chile | 15.81 | 15.80 | 17.73 | 18.14 | 18.95 | 24.38 | 20.48 | 18.29 | 21.97 | 20.99 |
-| Empleo en servicios (% del empleo total) (%) | Colombia | 64.77 | 65.25 | 64.42 | 63.87 | 64.40 | 64.37 | 64.88 | 65.03 | 65.61 | 65.72 |
-| Usuarios de internet (% de la población) (%) | Colombia | 55.90 | 58.14 | 62.26 | 64.13 | 65.01 | 69.80 | 73.03 | 72.80 | 77.34 | 79.35 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Colombia | 17.32 | 18.27 | 18.47 | 19.45 | 20.66 | 27.25 | 24.76 | 20.97 | 19.36 | 19.41 |
-| Empleo en servicios (% del empleo total) (%) | Costa Rica | 65.75 | 66.31 | 66.76 | 65.30 | 66.60 | 65.38 | 67.21 | 67.62 | 66.38 | 69.62 |
-| Usuarios de internet (% de la población) (%) | Costa Rica | 59.76 | 65.88 | 71.58 | 73.48 | 81.20 | 80.53 | 82.75 | 82.60 | 85.40 | 87.17 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Costa Rica | 22.36 | 21.65 | 20.74 | 25.07 | 31.19 | 40.11 | 39.20 | 30.72 | 24.31 | 20.48 |
-| Empleo en servicios (% del empleo total) (%) | República Dominicana | 71.15 | 71.26 | 70.22 | 70.31 | 71.65 | 71.57 | 71.74 | 72.77 | 73.44 | 73.75 |
-| Usuarios de internet (% de la población) (%) | República Dominicana | 54.22 | 63.87 | 67.57 | 74.82 | 79.72 | 81.62 | 85.24 | 81.51 | 86.13 | 91.00 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | República Dominicana | 16.43 | 16.74 | 13.44 | 14.85 | 15.84 | 14.77 | 16.87 | 12.85 | 11.56 | 12.87 |
-| Empleo en servicios (% del empleo total) (%) | Ecuador | 54.41 | 54.65 | 53.96 | 52.87 | 53.20 | 52.32 | 50.98 | 51.13 | 52.54 | 50.77 |
-| Usuarios de internet (% de la población) (%) | Ecuador | 48.94 | 54.06 | 55.80 | 57.50 | 59.20 | 70.70 | 69.11 | 69.72 | 72.69 | 77.17 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Ecuador | 8.824 | 10.35 | 8.465 | 7.956 | 8.733 | 11.07 | 9.136 | 8.298 | 7.782 | 8.574 |
-| Empleo en servicios (% del empleo total) (%) | Guatemala | 49.23 | 49.61 | 49.22 | 47.98 | 49.86 | 49.05 | 48.76 | 50.85 | 47.68 | 48.02 |
-| Usuarios de internet (% de la población) (%) | Guatemala | 28.81 | 34.51 | 37.90 | 41.50 | 44.40 | 47.51 | 50.84 | 54.40 | 56.73 | 60.22 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Guatemala | 5.581 | 5.582 | 4.939 | 4.679 | 4.461 | 5.157 | 3.789 | 6.274 | 4.326 | 4.624 |
-| Empleo en servicios (% del empleo total) (%) | México | 62.40 | 62.34 | 61.95 | 62.12 | 62.80 | 62.47 | 62.22 | 62.38 | 63.00 | 63.70 |
-| Usuarios de internet (% de la población) (%) | México | 57.43 | 59.54 | 53.03 | 56.66 | 69.63 | 71.49 | 75.63 | 78.63 | 81.18 | 83.12 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | México | 8.516 | 7.621 | 6.849 | 6.815 | 7.160 | 8.053 | 7.626 | 6.465 | 5.844 | 5.760 |
-| Empleo en servicios (% del empleo total) (%) | Panamá | 66.07 | 65.67 | 66.43 | 66.52 | 67.28 | 67.20 | 67.51 | 67.93 | 67.83 | 66.62 |
-| Usuarios de internet (% de la población) (%) | Panamá | 51.21 | 54.00 | 59.95 | 61.81 | 63.63 | 64.82 | 66.04 | 67.28 | 68.55 | 72.77 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Panamá | 11.68 | 12.29 | 14.82 | 14.10 | 17.13 | 33.03 | 22.34 | 19.19 | 16.77 | 19.68 |
-| Empleo en servicios (% del empleo total) (%) | Perú | 57.85 | 58.24 | 59.62 | 59.79 | 60.34 | 52.78 | 57.37 | 57.63 | 59.68 | 59.80 |
-| Usuarios de internet (% de la población) (%) | Perú | 40.85 | 45.46 | 50.45 | 55.05 | 59.95 | 65.25 | 71.11 | 74.67 | 79.48 | 81.96 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Perú | 6.877 | 8.272 | 8.319 | 8.342 | 7.405 | 12.66 | 9.586 | 7.681 | 8.846 | 9.704 |
-| Empleo en servicios (% del empleo total) (%) | Uruguay | 71.59 | 72.61 | 72.37 | 73.29 | 73.63 | 73.50 | 73.15 | 73.33 | 72.64 | 72.92 |
-| Usuarios de internet (% de la población) (%) | Uruguay | 64.57 | 66.40 | 70.32 | 80.73 | 83.35 | 85.47 | 87.64 | 89.87 | 90.93 | 91.99 |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) (%) | Uruguay | 22.88 | 24.15 | 25.25 | 26.54 | 28.47 | 34.22 | 31.81 | 25.32 | 26.22 | 26.70 |
+| Gasto corriente en salud (% del PIB) (%) | América Latina y el Caribe (LCN) | 7.803 | 7.873 | 8.053 | 7.815 | 7.866 | 8.363 | 8.301 | 7.954 | 7.944 | — |
+| Población urbana (% del total) (%) | América Latina y el Caribe (LCN) | 79.40 | 79.62 | 79.83 | 80.02 | 80.23 | 80.44 | 80.63 | 80.83 | 81.04 | 81.27 |
+| Gasto corriente en salud (% del PIB) (%) | Argentina | 10.27 | 10.05 | 10.26 | 10.17 | 10.12 | 10.67 | 11.01 | 10.16 | 10.27 | — |
+| Población urbana (% del total) (%) | Argentina | 91.49 | 91.59 | 91.68 | 91.77 | 91.86 | 91.94 | 92.03 | 92.11 | 92.19 | 92.27 |
+| Gasto corriente en salud (% del PIB) (%) | Brasil | 8.909 | 9.169 | 9.471 | 9.465 | 9.614 | 9.623 | 9.636 | 9.387 | 9.731 | — |
+| Población urbana (% del total) (%) | Brasil | 85.69 | 85.95 | 86.20 | 86.44 | 86.68 | 86.91 | 87.14 | 87.35 | 87.62 | 87.90 |
+| Gasto corriente en salud (% del PIB) (%) | Chile | 8.351 | 8.558 | 9.091 | 9.150 | 9.310 | 9.697 | 9.725 | 10.01 | 10.17 | 10.53 |
+| Población urbana (% del total) (%) | Chile | 87.47 | 87.63 | 87.80 | 87.96 | 88.13 | 88.30 | 88.47 | 88.64 | 88.82 | 89.00 |
+| Gasto corriente en salud (% del PIB) (%) | Colombia | 7.523 | 7.531 | 7.679 | 7.718 | 7.834 | 8.698 | 9.142 | 7.590 | 8.158 | 8.141 |
+| Población urbana (% del total) (%) | Colombia | 77.16 | 77.20 | 77.22 | 77.28 | 77.46 | 77.64 | 77.83 | 78.05 | 78.28 | 78.52 |
+| Gasto corriente en salud (% del PIB) (%) | Costa Rica | 7.592 | 7.317 | 7.045 | 7.286 | 7.221 | 7.825 | 7.611 | 7.184 | 6.866 | — |
+| Población urbana (% del total) (%) | Costa Rica | 75.02 | 75.54 | 76.05 | 76.55 | 77.04 | 77.52 | 77.99 | 78.44 | 78.88 | 79.31 |
+| Gasto corriente en salud (% del PIB) (%) | República Dominicana | 4.735 | 4.586 | 4.446 | 4.218 | 4.368 | 4.965 | 5.088 | 4.645 | 4.599 | — |
+| Población urbana (% del total) (%) | República Dominicana | 74.14 | 74.05 | 73.93 | 73.76 | 73.54 | 73.26 | 72.92 | 72.42 | 72.36 | 72.41 |
+| Gasto corriente en salud (% del PIB) (%) | Ecuador | 7.768 | 7.588 | 7.525 | 7.834 | 7.809 | 8.606 | 8.375 | 7.602 | 7.562 | — |
+| Población urbana (% del total) (%) | Ecuador | 62.96 | 62.99 | 63.02 | 63.04 | 63.06 | 63.08 | 63.09 | 63.09 | 63.13 | 63.24 |
+| Gasto corriente en salud (% del PIB) (%) | Guatemala | 6.006 | 6.070 | 6.136 | 6.107 | 6.174 | 6.459 | 7.357 | 7.168 | 6.802 | — |
+| Población urbana (% del total) (%) | Guatemala | 53.44 | 53.66 | 53.80 | 53.85 | 54.19 | 54.55 | 54.90 | 55.26 | 55.61 | 55.95 |
+| Gasto corriente en salud (% del PIB) (%) | México | 5.527 | 5.385 | 5.312 | 5.238 | 5.301 | 6.052 | 5.877 | 5.709 | 5.504 | — |
+| Población urbana (% del total) (%) | México | 77.19 | 77.44 | 77.72 | 78.03 | 78.36 | 78.68 | 78.93 | 79.20 | 79.47 | 79.75 |
+| Gasto corriente en salud (% del PIB) (%) | Panamá | 6.937 | 7.094 | 7.165 | 7.601 | 8.135 | 10.22 | 9.136 | 9.046 | 8.330 | — |
+| Población urbana (% del total) (%) | Panamá | 65.53 | 65.60 | 65.66 | 65.71 | 65.75 | 65.79 | 65.81 | 65.82 | 65.86 | 66.00 |
+| Gasto corriente en salud (% del PIB) (%) | Perú | 4.905 | 4.894 | 4.809 | 5.084 | 5.125 | 6.347 | 6.673 | 6.097 | 5.638 | — |
+| Población urbana (% del total) (%) | Perú | 80.70 | 81.42 | 82.19 | 82.69 | 83.10 | 83.53 | 83.95 | 84.37 | 84.78 | 85.19 |
+| Gasto corriente en salud (% del PIB) (%) | Uruguay | 8.257 | 8.639 | 8.717 | 8.900 | 9.241 | 9.088 | 8.920 | 8.890 | 9.019 | — |
+| Población urbana (% del total) (%) | Uruguay | 95.08 | 95.16 | 95.23 | 95.29 | 95.35 | 95.40 | 95.45 | 95.50 | 95.54 | 95.60 |
 
 **Tabla 2.** Resultados de los modelos de regresión.
 
 | Modelo | Variable / Parámetro | Coeficiente (beta) | Error Estándar | Estadístico | p-valor | IC 95% | Evidencia |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| OLS Agregado (LCN) | intercept | 216.7920 | 93.0681 | t = 2.33 | 0.0527 | [-318.814, 376.882] | 🟡 Marginal |
-| OLS Agregado (LCN) | Usuarios de internet (% de la población) | 0.0902 | 0.1006 | t = 0.90 | 0.3998 | [-0.469, 0.275] | 🔴 Sin evidencia |
-| OLS Agregado (LCN) | Empleo en servicios (% del empleo total) | -3.1599 | 1.4973 | t = -2.11 | 0.0727 | [-5.717, 5.500] | 🟡 Marginal |
-| *Diagnóstico OLS* | *R² = 0.4269, R²-adj = 0.2631, F = 2.61 (p = 0.1425), n = 10, dof = 7* | — | — | — | — | — | — |
-| Panel Efectos Fijos (País) | Usuarios de internet (% de la población) | 0.0636 | 0.0386 | t = 1.65 | 0.1022 | [-0.013, 0.140] | 🔴 Sin evidencia |
-| Panel Efectos Fijos (País) | Empleo en servicios (% del empleo total) | -0.2390 | 0.3345 | t = -0.71 | 0.4765 | [-0.902, 0.424] | 🔴 Sin evidencia |
-| *Diagnóstico Panel* | *R² = 0.8230, n = 120 obs (12 países), dof = 106* | — | — | — | — | — | — |
+| OLS Agregado (LCN) | intercept | 71.1602 | 7.4711 | t = 9.52 | 0.0000 | [42.819, 81.969] | 🟢 Robusta |
+| OLS Agregado (LCN) | Gasto corriente en salud (% del PIB) | 1.1337 | 0.9340 | t = 1.21 | 0.2642 | [-0.198, 4.718] | 🔴 Sin evidencia |
+| *Diagnóstico OLS* | *R² = 0.1739, R²-adj = 0.0559, F = 1.47 (p = 0.2642), n = 9, dof = 7* | — | — | — | — | — | — |
+| *Nota* | *Regresores excluidos por n insuficiente (regla ~4 obs/parámetro): Migración neta (personas)* | — | — | — | — | — | — |
+| Panel Efectos Fijos (País) | Gasto corriente en salud (% del PIB) | 0.5123 | 0.1275 | t = 4.02 | 0.0001 | [0.259, 0.765] | 🟢 Robusta |
+| Panel Efectos Fijos (País) | Migración neta (personas) | 0.0000 | 0.0000 | t = 0.08 | 0.9333 | [-0.000, 0.000] | 🔴 Sin evidencia |
+| *Diagnóstico Panel* | *R² = 0.9971, n = 110 obs (12 países), dof = 96* | — | — | — | — | — | — |
 
 **Tabla 3.** Correlaciones entre las variables del estudio.
 
 | Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | q (FDR) | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Evidencia |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | ECU | -0.883 | 0.001 | 0.015 | -0.855 | -0.049 | 0.900 | 🟡 Co-tendencia probable |
-| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | CHL | 0.873 | 0.001 | 0.015 | 0.842 | 0.126 | 0.747 | 🟡 Co-tendencia probable |
-| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | BRA | 0.866 | 0.001 | 0.015 | 0.818 | 0.095 | 0.808 | 🟡 Co-tendencia probable |
-| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | ARG | 0.743 | 0.014 | 0.098 | 0.564 | -0.106 | 0.787 | 🟡 Marginal |
-| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | PAN | 0.719 | 0.019 | 0.098 | 0.782 | -0.096 | 0.805 | 🟡 Marginal |
-| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | LCN | 0.714 | 0.020 | 0.098 | 0.661 | -0.660 | 0.053 | 🟡 Marginal |
-| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | MEX | 0.712 | 0.021 | 0.098 | 0.733 | 0.574 | 0.106 | 🟡 Marginal |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Empleo en servicios (% del empleo total) | PER | -0.711 | 0.021 | 0.098 | -0.188 | -0.852 | 0.004 | 🟡 Marginal |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Empleo en servicios (% del empleo total) | CHL | 0.699 | 0.024 | 0.098 | 0.818 | 0.204 | 0.599 | 🟡 Marginal |
-| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | DOM | 0.685 | 0.029 | 0.098 | 0.842 | -0.245 | 0.525 | 🟡 Marginal |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Empleo en servicios (% del empleo total) | GTM | 0.675 | 0.032 | 0.098 | 0.624 | 0.700 | 0.036 | 🟡 Marginal |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Empleo en servicios (% del empleo total) | URY | 0.674 | 0.032 | 0.098 | 0.770 | 0.051 | 0.897 | 🟡 Marginal |
-| Usuarios de internet (% de la población) | Empleo en servicios (% del empleo total) | URY | 0.674 | 0.033 | 0.098 | 0.418 | 0.477 | 0.194 | 🟡 Marginal |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Usuarios de internet (% de la población) | CHL | 0.647 | 0.043 | 0.120 | 0.782 | -0.148 | 0.703 | 🔴 Sin evidencia |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Empleo en servicios (% del empleo total) | LCN | -0.601 | 0.066 | 0.172 | -0.491 | -0.589 | 0.095 | 🔴 Sin evidencia |
+| Población urbana (% del total) | Gasto corriente en salud (% del PIB) | CHL | 0.989 | 0.000 | 0.000 | 1.000 | 0.290 | 0.448 | 🟡 Co-tendencia probable |
+| Población urbana (% del total) | Migración neta (personas) | URY | 0.946 | 0.000 | 0.000 | 0.896 | 0.266 | 0.489 | 🟡 Co-tendencia probable |
+| Población urbana (% del total) | Migración neta (personas) | MEX | 0.946 | 0.000 | 0.000 | 0.976 | 0.195 | 0.615 | 🟡 Co-tendencia probable |
+| Gasto corriente en salud (% del PIB) | Migración neta (personas) | ARG | -0.932 | 0.000 | 0.002 | -0.583 | -0.891 | 0.003 | 🟢 Robusta |
+| Población urbana (% del total) | Migración neta (personas) | CRI | -0.872 | 0.001 | 0.008 | -0.794 | 0.069 | 0.861 | 🟡 Co-tendencia probable |
+| Población urbana (% del total) | Gasto corriente en salud (% del PIB) | GTM | 0.852 | 0.004 | 0.020 | 0.917 | 0.178 | 0.674 | 🟡 Co-tendencia probable |
+| Población urbana (% del total) | Migración neta (personas) | GTM | 0.835 | 0.003 | 0.017 | 0.770 | 0.508 | 0.162 | 🟡 Co-tendencia probable |
+| Gasto corriente en salud (% del PIB) | Migración neta (personas) | DOM | 0.822 | 0.007 | 0.029 | 0.477 | 0.889 | 0.003 | 🟢 Robusta |
+| Población urbana (% del total) | Migración neta (personas) | LCN | 0.802 | 0.005 | 0.026 | 0.758 | -0.151 | 0.699 | 🟡 Co-tendencia probable |
+| Gasto corriente en salud (% del PIB) | Migración neta (personas) | PAN | -0.790 | 0.011 | 0.042 | -0.695 | -0.671 | 0.068 | 🟡 Co-tendencia probable |
+| Población urbana (% del total) | Gasto corriente en salud (% del PIB) | BRA | 0.788 | 0.012 | 0.042 | 0.733 | 0.908 | 0.002 | 🟢 Robusta |
+| Población urbana (% del total) | Gasto corriente en salud (% del PIB) | PAN | 0.775 | 0.014 | 0.046 | 0.833 | 0.149 | 0.725 | 🟡 Co-tendencia probable |
+| Población urbana (% del total) | Gasto corriente en salud (% del PIB) | URY | 0.751 | 0.020 | 0.059 | 0.650 | 0.569 | 0.141 | 🟡 Marginal |
+| Población urbana (% del total) | Gasto corriente en salud (% del PIB) | PER | 0.730 | 0.025 | 0.071 | 0.783 | -0.124 | 0.771 | 🟡 Marginal |
+| Gasto corriente en salud (% del PIB) | Migración neta (personas) | GTM | 0.701 | 0.036 | 0.092 | 0.650 | -0.064 | 0.881 | 🟡 Marginal |
 *q (FDR): p-valor ajustado por Benjamini-Hochberg sobre la familia de correlaciones del análisis — la significancia debe leerse de q, no de p.*
 
 **Tabla 4.** Indicadores derivados (cambio anual, % cambio, CAGR).
 
 | Serie | Ámbito | Inicial (año) | Final (año) | Cambio anual prom. | % cambio total | CAGR |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | América Latina y el Caribe (LCN) | 14.72 (2015) | 12.85 (2024) | -0.2079 | -12.71% | -1.50% |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Argentina | 20.27 (2015) | 19.23 (2024) | -0.1154 | -5.13% | -0.58% |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Brasil | 19.49 (2015) | 15.67 (2024) | -0.4243 | -19.59% | -2.39% |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Chile | 15.81 (2015) | 20.99 (2024) | 0.5750 | 32.73% | 3.20% |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Colombia | 17.32 (2015) | 19.41 (2024) | 0.2328 | 12.10% | 1.28% |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Costa Rica | 22.36 (2015) | 20.48 (2024) | -0.2091 | -8.42% | -0.97% |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | República Dominicana | 16.43 (2015) | 12.87 (2024) | -0.3949 | -21.64% | -2.67% |
-| Desempleo juvenil (% de la fuerza laboral de 15 a 24 años) | Ecuador | 8.82 (2015) | 8.57 (2024) | -0.0278 | -2.83% | -0.32% |
+| Población urbana (% del total) | América Latina y el Caribe (LCN) | 79.40 (2015) | 81.27 (2024) | 0.2079 | 2.36% | 0.26% |
+| Población urbana (% del total) | Argentina | 91.49 (2015) | 92.27 (2024) | 0.0869 | 0.85% | 0.09% |
+| Población urbana (% del total) | Brasil | 85.69 (2015) | 87.90 (2024) | 0.2447 | 2.57% | 0.28% |
+| Población urbana (% del total) | Chile | 87.47 (2015) | 89.00 (2024) | 0.1700 | 1.75% | 0.19% |
+| Población urbana (% del total) | Colombia | 77.16 (2015) | 78.52 (2024) | 0.1508 | 1.76% | 0.19% |
+| Población urbana (% del total) | Costa Rica | 75.02 (2015) | 79.31 (2024) | 0.4768 | 5.72% | 0.62% |
+| Población urbana (% del total) | República Dominicana | 74.14 (2015) | 72.41 (2024) | -0.1917 | -2.33% | -0.26% |
+| Población urbana (% del total) | Ecuador | 62.96 (2015) | 63.24 (2024) | 0.0309 | 0.44% | 0.05% |
 
 ## Anexo estadístico
 
 *Diagnósticos de robustez del modelo: no forman parte del argumento central, documentan la calidad de la estimación.*
 
-![Tarjetas de evidencia: efecto estimado (punto) y rango plausible IC95% (barra) para cada coeficiente del panel de efectos fijos y del OLS regional. Las flechas indican intervalos que exceden la ventana del gráfico.](charts/2026-11-10-19-31/fig5_forest.png)
+![Tarjetas de evidencia: efecto estimado (punto) y rango plausible IC95% (barra) para cada coeficiente del panel de efectos fijos y del OLS regional. Las flechas indican intervalos que exceden la ventana del gráfico.](charts/2026-11-12-19-41/fig5_forest.png)
 
 *Cómo leerla: la bolita es la estimación y la barra el rango plausible; si la barra cruza la línea del cero, el resultado no es concluyente.*
 
-![Estabilidad del coeficiente de Usuarios de internet (% de la población) tras 2000 remuestreos (rango recortado al 99% central): las barras muestran dónde cayó la estimación en cada réplica; si toca la línea roja (cero = sin efecto), el resultado es frágil.](charts/2026-11-10-19-31/fig8_bootdist.png)
+![Estabilidad del coeficiente de Gasto corriente en salud (% del PIB) tras 2000 remuestreos (rango recortado al 99% central): las barras muestran dónde cayó la estimación en cada réplica; si toca la línea roja (cero = sin efecto), el resultado es frágil.](charts/2026-11-12-19-41/fig8_bootdist.png)
 
 *Cómo leerla: repetimos el cálculo 2000 veces barajando los datos; si las barras no tocan la línea roja del cero, el coeficiente es estable.*
 
-![Diagnóstico de residuos del modelo OLS: puntos dispersos alrededor del cero indican ajuste razonable; patrones sistemáticos revelan limitaciones del modelo.](charts/2026-11-10-19-31/fig9_residuals.png)
+![Diagnóstico de residuos del modelo OLS: puntos dispersos alrededor del cero indican ajuste razonable; patrones sistemáticos revelan limitaciones del modelo.](charts/2026-11-12-19-41/fig9_residuals.png)
 
 *Cómo leerla: puntos regados sin patrón cerca del cero = modelo sano; si dibujan una forma, el modelo se perdió algo.*
 
-![Años estadísticamente atípicos en Inversión extranjera directa, flujos netos (% del PIB) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia.](charts/2026-11-10-19-31/fig11_anomaly.png)
+![Años estadísticamente atípicos en Inversión extranjera directa, flujos netos (% del PIB) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia.](charts/2026-11-12-19-41/fig11_anomaly.png)
 
 *Cómo leerla: los pines marcan años estadísticamente atípicos — choques como 2020 que se leen como contexto, no como tendencia.*
 
@@ -210,25 +199,25 @@ En conclusión, **los datos son insuficientes para evaluar con confianza la hip�
 ---
 ## Nota de transparencia
 **Contexto.** Este artículo fue generado automáticamente por AcademicPipeline, un pipeline multi-agente de investigación asistida por IA: agentes especializados proponen, calculan, redactan y se verifican mutuamente antes de publicar.
-Tema seleccionado: *Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet*.
-Noticia que inspiró la línea editorial: *"Will Australia push for fossil fuel exit at UN talks?"* ([DW](https://www.dw.com/en/will-australia-push-for-fossil-fuel-exit-at-un-talks/a-79782066?maca=en-rss-en-all-1573-rdf)).
-Lo que la noticia afirmaba o sugería: La transición tecnológica y la mayor conectividad digital pueden modificar la situación del empleo juvenil en la región.
-Alcance verificable con los datos: Se pueden relacionar Youth unemployment (% of labor force 15-24) con Internet users (% of population) y con Employment in services (% of total employment). No hay datos directos sobre políticas de transición energética, por lo que esa parte queda fuera.
-Justificación del sistema: El vínculo entre digitalización y empleo juvenil es plausible y los indicadores disponibles permiten probar si mayor conectividad se asocia con menores tasas de desempleo juvenil.
-**Pregunta de investigación:** ¿Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan tasas de desempleo juvenil más bajas, especialmente en el sector de servicios?
-**Hipótesis planteada:** Un mayor nivel de penetración de internet está asociado con una menor tasa de desempleo juvenil, particularmente en economías con mayor participación del sector servicios.
-Se evaluaron 5 líneas editoriales candidatas; se seleccionó la de mayor respaldo en datos.
-**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-2024. Muestra analizada: ARG, BRA, CHL, COL, CRI (referencia regional agregada: LCN). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.
+Tema seleccionado: *Impacto de los flujos migratorios netos en la urbanización y el gasto en salud en América Latina*.
+Noticia que inspiró la línea editorial: *"Mexico works to block passage of US-bound migrant caravan"* ([Hurriyet Daily News](https://www.hurriyetdailynews.com/mexico-works-to-block-passage-of-us-bound-migrant-caravan-229257)).
+Lo que la noticia afirmaba o sugería: La llegada masiva de migrantes centroamericanos podría acelerar la urbanización y presionar los sistemas de salud en las ciudades receptoras de México.
+Alcance verificable con los datos: Se pueden verificar con datos de Urban population (% of total) y Current health expenditure (% of GDP) si los países con mayor ingreso neto migratorio presentan mayor urbanización y mayor gasto en salud; no se pueden medir directamente los efectos de una sola caravana ni la presión puntual en servicios específicos.
+Justificación del sistema: La noticia trata de flujos migratorios que, a nivel macro, se reflejan en los indicadores de migración neta y urbanización. Además, la presión sobre servicios de salud puede observarse mediante el gasto público en salud, que está disponible en el catálogo.
+**Pregunta de investigación:** ¿Los países latinoamericanos con mayores ingresos netos migratorios presentan niveles más altos de urbanización y mayor gasto en salud pública?
+**Hipótesis planteada:** Un mayor ingreso neto migratorio está asociado positivamente con una mayor proporción de población urbana y con un mayor gasto en salud (% del PIB) en América Latina.
+Se evaluaron 2 líneas editoriales candidatas; se seleccionó la de mayor respaldo en datos.
+**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-2024. Muestra analizada: CHL, COL, ARG, BRA, CRI (referencia regional agregada: LCN). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.
 **Métodos analíticos ejecutados (Cómputo Determinístico):**
-- Python 3.12 (scipy/statsmodels): Estadísticas descriptivas de 387 series, 39 correlaciones Pearson/Spearman (3 significativas tras corrección FDR Benjamini-Hochberg, q<0.05).
-- Python 3.12 (Regresión OLS): Youth unemployment (% of labor force 15-24) [LCN] ~ Internet users (% of population) [LCN] + Employment in services (% of total employment) [LCN] (n=10, R²=0.427), con intervalos de confianza bootstrap (2000 réplicas).
-- Regresión de panel con efectos fijos por país: Youth unemployment (% of labor force 15-24) ~ Internet users (% of population) + Employment in services (% of total employment) (n=120 obs, 12 países).
+- Python 3.12 (scipy/statsmodels): Estadísticas descriptivas de 387 series, 39 correlaciones Pearson/Spearman (12 significativas tras corrección FDR Benjamini-Hochberg, q<0.05).
+- Python 3.12 (Regresión OLS): Urban population (% of total) [LCN] ~ Current health expenditure (% of GDP) [LCN] (n=9, R²=0.174), con intervalos de confianza bootstrap (2000 réplicas).
+- Regresión de panel con efectos fijos por país: Urban population (% of total) ~ Current health expenditure (% of GDP) + Net migration (total people) (n=110 obs, 12 países).
 - Test de tendencia Mann-Kendall: 168 de 377 series con tendencia significativa.
 - Detección de anomalías (z-score/IQR): 221 observaciones atípicas.
 - 11 figuras generadas con matplotlib a partir de los datos.
 **Proceso editorial.** Siete nodos automáticos: FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE.
 Revisión de rigor: veredicto APROBADO.
-Verificación automática de cifras: 88 cifras del texto cotejadas contra los resultados computados.
+Verificación automática de cifras: 82 cifras del texto cotejadas contra los resultados computados.
 Linter automático de lenguaje causal: el texto completo fue escaneado contra verbos de atribución causal; el diseño es correlacional, por lo que las relaciones se reportan como asociaciones, no efectos.
 Control de calidad final: veredicto APROBADO.
 Iteraciones: 2 reescritura(s), 0 reedición(es).

@@ -1,0 +1,44 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la llegada de caravanas migratorias en la urbanización y la salud pública de México",
+      "noticia_inspiradora": "Mexico works to block passage of US-bound migrant caravan",
+      "afirmacion_noticia": "La llegada masiva de migrantes centroamericanos podría acelerar la urbanización y presionar los sistemas de salud en las ciudades receptoras de México.",
+      "verificable_con_datos": "Se pueden verificar con datos de Urban population (% of total) y Current health expenditure (% of GDP) si los países con mayor ingreso neto migratorio presentan mayor urbanización y mayor gasto en salud; no se pueden medir directamente los efectos de una sola caravana ni la presión puntual en servicios específicos.",
+      "indicadores_respaldan": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)",
+        "Net migration (total people)"
+      ],
+      "correlaciones_relevantes": [
+        "Urban population ↔ Net migration",
+        "Health expenditure ↔ Urban population"
+      ],
+      "justificacion": "La noticia trata de flujos migratorios que, a nivel macro, se reflejan en los indicadores de migración neta y urbanización. Además, la presión sobre servicios de salud puede observarse mediante el gasto público en salud, que está disponible en el catálogo.",
+      "pregunta": "¿Los países latinoamericanos con mayores ingresos netos migratorios presentan niveles más altos de urbanización y mayor gasto en salud pública?",
+      "hipotesis": "Un mayor ingreso neto migratorio está asociado positivamente con una mayor proporción de población urbana y con un mayor gasto en salud (% del PIB) en América Latina.",
+      "keywords_en": "net migration urbanization health expenditure Latin America"
+    },
+    {
+      "titulo": "Penetración de internet y vulnerabilidad cibernética: ¿un costo oculto para la economía de servicios?",
+      "noticia_inspiradora": "Hackers Exploit Decade-Old OpenSSH Flaw to Bypass Linux Logins",
+      "afirmacion_noticia": "El aumento de vulnerabilidades cibernéticas en infraestructuras críticas puede afectar negativamente la productividad del sector servicios en los países con alta penetración de internet.",
+      "verificable_con_datos": "Se pueden analizar la relación entre Internet users (% of population) y Employment in services (% of total employment); no se dispone de indicadores directos de incidentes cibernéticos ni de pérdidas económicas específicas.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Employment in services"
+      ],
+      "justificacion": "Aunque la noticia es de seguridad informática, el vínculo más directo con los datos disponibles es la relación entre la difusión de internet (potenciadora de vulnerabilidades) y la participación del sector servicios, que es el más expuesto a ataques digitales.",
+      "pregunta": "¿Existe una asociación positiva entre la penetración de internet y la proporción de empleo en el sector servicios en América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan una mayor participación del sector servicios en el empleo total.",
+      "keywords_en": "internet penetration services employment cybersecurity Latin America"
+    }
+  ],
+  "topic": "Impacto de los flujos migratorios netos en la urbanización y el gasto en salud en América Latina",
+  "angle": "Analizar cómo la intensificación de la migración neta influye en la expansión urbana y en la asignación de recursos sanitarios, usando indicadores macroeconómicos disponibles.",
+  "pregunta": "¿Los países latinoamericanos con mayores ingresos netos migratorios presentan niveles más altos de urbanización y mayor gasto en salud pública?",
+  "hipotesis": "Un mayor ingreso neto migratorio está asociado positivamente con una mayor proporción de población urbana y con un mayor gasto en salud (% del PIB) en América Latina."
+}
