@@ -1,0 +1,62 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la ciberseguridad en la inversión extranjera y el crecimiento económico de América Latina",
+      "noticia_inspiradora": "US disrupts North Korea's $400 million crypto scam, FBI says",
+      "afirmacion_noticia": "La interrupción de una gran estafa de criptomonedas por parte de EE. UU. sugiere que la ciberseguridad internacional puede influir en la confianza de los inversores y, por ende, en los flujos de inversión extranjera directa hacia la región.",
+      "verificable_con_datos": "Se pueden analizar los niveles de Inversión Extranjera Directa (FDI) y el crecimiento del PIB; no se pueden medir directamente los incidentes de ciberseguridad o la percepción de riesgo sin datos adicionales.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI vs GDP growth",
+        "FDI vs Internet users (%) (como proxy de digitalización)"
+      ],
+      "justificacion": "La noticia se relaciona con la seguridad digital, que afecta la confianza de los inversores. Los indicadores de FDI y crecimiento económico permiten evaluar si existe una asociación positiva entre mayor seguridad digital (proxied by Internet penetration) y mayores flujos de inversión.",
+      "pregunta": "¿Existe una relación positiva entre la penetración de internet (como proxy de capacidad de ciberseguridad) y los flujos de inversión extranjera directa en América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet presentan mayores ingresos netos de inversión extranjera directa (% del PIB).",
+      "keywords_en": "foreign direct investment, internet penetration, cybersecurity, Latin America, economic growth"
+    },
+    {
+      "titulo": "Efectos de la expansión de centros de datos y la conectividad digital en el empleo del sector servicios juvenil",
+      "noticia_inspiradora": "Data centre industry butts up against community challenges",
+      "afirmacion_noticia": "El crecimiento de la industria de centros de datos en Australia muestra tensiones comunitarias, lo que indica que la expansión de infraestructura digital puede afectar el empleo, especialmente en el sector servicios y entre los jóvenes.",
+      "verificable_con_datos": "Se pueden medir la tasa de desempleo juvenil y la participación del sector servicios; no se dispone de datos sobre tensiones comunitarias específicas ni sobre la ubicación de centros de datos en América Latina.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users (%) vs Youth unemployment",
+        "Employment in services vs Youth unemployment"
+      ],
+      "justificacion": "La noticia enlaza la expansión de infraestructura digital con posibles cambios en el mercado laboral. Los indicadores de empleo juvenil y del sector servicios permiten analizar si mayor digitalización (medida por usuarios de internet) se asocia a menores tasas de desempleo juvenil.",
+      "pregunta": "¿La mayor participación del sector servicios está asociada a menores tasas de desempleo juvenil en América Latina?",
+      "hipotesis": "Un mayor porcentaje de empleo en el sector servicios se relaciona con una menor tasa de desempleo juvenil.",
+      "keywords_en": "youth unemployment, services employment, digital infrastructure, Latin America, internet users"
+    },
+    {
+      "titulo": "Relación entre la seguridad energética regional y los indicadores de comercio y crecimiento económico en América Latina",
+      "noticia_inspiradora": "ASEAN Moves to Build Emergency Oil Reserves Amid Iran Supply Crisis",
+      "afirmacion_noticia": "La creación de reservas estratégicas de petróleo por parte de la ASEAN sugiere que la seguridad energética es clave para la estabilidad del comercio y el crecimiento económico.",
+      "verificable_con_datos": "Se pueden analizar los indicadores de Comercio (% del PIB) y Crecimiento del PIB; no hay datos directos sobre reservas de petróleo o crisis de suministro en América Latina.",
+      "indicadores_respaldan": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Trade vs GDP growth",
+        "Trade vs Renewable energy consumption (%)"
+      ],
+      "justificacion": "Aunque la noticia se centra en Asia, el concepto de seguridad energética puede trasladarse a América Latina. Los datos de comercio y crecimiento permiten evaluar si una mayor apertura comercial está vinculada a un mayor crecimiento económico, lo que podría ser influenciado por la seguridad energética.",
+      "pregunta": "¿Existe una asociación positiva entre la participación del comercio en el PIB y el crecimiento económico anual en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con mayor participación del comercio (% del PIB) presentan tasas de crecimiento económico anual más altas.",
+      "keywords_en": "energy security, trade share, GDP growth, Latin America, economic development"
+    }
+  ],
+  "topic": "Impacto de la digitalización y la seguridad energética en la inversión extranjera y el empleo juvenil en América Latina",
+  "angle": "Analizar cómo la penetración de internet y la expansión de infraestructura digital influyen en la atracción de inversión extranjera directa y en la reducción del desempleo juvenil, mientras se considera el papel de la seguridad energética como factor complementario para el comercio y el crecimiento económico.",
+  "pregunta": "¿Cómo se relacionan la penetración de internet, la participación del sector servicios y la seguridad energética con la inversión extranjera directa, el empleo juvenil y el crecimiento económico en América Latina?",
+  "hipotesis": "Los países latinoamericanos con mayor penetración de internet y mayor participación del sector servicios atraen más inversión extranjera directa (% del PIB) y presentan menores tasas de desempleo juvenil, mientras que una mayor participación del comercio (% del PIB) refuerza el crecimiento económico anual."
+}

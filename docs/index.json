@@ -1,5 +1,59 @@
 [
   {
+    "file": "2026-11-13_impacto-de-la-digitalizaci-n-y-la-seguri.md",
+    "date": "2026-11-13",
+    "topic": "Impacto de la digitalización y la seguridad energética en la inversión extranjera y el empleo juvenil en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://images.pexels.com/photos/21629276/pexels-photo-21629276.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "section": "Internacional",
+    "news_url": "https://www.dw.com/en/us-disrupts-north-korea-s-400-million-crypto-scam-fbi-says/a-79935957?maca=en-rss-en-all-1573-rdf",
+    "pregunta": "¿Cómo se relacionan la penetración de internet, la participación del sector servicios y la seguridad energética con la inversión extranjera directa, el empleo juvenil y el crecimiento económico en América Latina?",
+    "editorial": "¿Cómo se relacionan la penetración de internet, la participación del sector servicios y la seguridad energética con la inversión extranjera directa, el empleo juvenil y el crecimiento económico en América Latina?  \n\nAl mirar los datos, la historia no es tan simple. En Guatemala, cuando la inversión extranjera sube un 7 % del PIB, el crecimiento del PIB también se dispara, casi un 7 % más. En México, el aumento de la inversión extranjera se acompaña de una ligera subida del crecimiento, aunque la cifra es más modesta. En Brasil, a pesar de que la inversión extranjera se mantiene estable, el crecimiento del PIB se mantiene casi sin cambios. En Colombia, el crecimiento del PIB se mantiene bajo, sin importar los cambios en la inversión extranjera. En Argentina, la relación es casi nula, con un crecimiento del PIB que no varía mucho cuando la inversión extranjera sube. En Chile, el crecimiento del PIB se mantiene estable, sin importar la inversión extranjera. En México, el crecimiento del PIB se mantiene estable, sin importar la inversión extranjera. En Guatemala, el crecimiento del PIB se mantiene estable, sin importar la inversión extranjera.  \n\nEn resumen, los datos no confirman una relación directa y consistente entre la inversión extranjera y el crecimiento económico en la región. Los resultados son heterogéneos y, en muchos casos, pueden ser simplemente casualidad. Para el lector, esto significa que no se puede afirmar con certeza que un mayor acceso a internet o una mayor participación del sector servicios atraigan más inversión extranjera o reduzcan el desempleo juvenil. La realidad parece más compleja y requiere un análisis más profundo.",
+    "charts": "2026-11-13-19-28",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5825,
+        "after": 4510,
+        "cutChars": 3877
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7094,
+        "after": 5075,
+        "cutChars": 6111
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5648,
+        "after": 4414,
+        "cutChars": 3796
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7519,
+        "after": 5316,
+        "cutChars": 6915
+      }
+    ],
+    "ts": "2026-11-13T19:33:27.027Z"
+  },
+  {
     "file": "2026-11-12_impacto-de-los-flujos-migratorios-netos-.md",
     "date": "2026-11-12",
     "topic": "Impacto de los flujos migratorios netos en la urbanización y el gasto en salud en América Latina",
