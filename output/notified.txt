@@ -25,3 +25,4 @@
 2026-11-11_vulnerabilidad-del-empleo-juvenil-frente.md
 2026-11-12_impacto-de-los-flujos-migratorios-netos-.md
 2026-11-13_impacto-de-la-digitalizaci-n-y-la-seguri.md
+2026-11-14_relaci-n-entre-digitalizaci-n--sector-se.md
