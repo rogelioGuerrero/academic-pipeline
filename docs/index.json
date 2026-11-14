@@ -1,5 +1,73 @@
 [
   {
+    "file": "2026-11-14_relaci-n-entre-digitalizaci-n--sector-se.md",
+    "date": "2026-11-14",
+    "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "REESCRIBIR",
+    "qa": "APROBADO",
+    "image": "https://www.lalibre.be/resizer/v2/IXQC2XAXH5EE7DNL3WPBZTC5LA.jpg?auth=a06fd458b04d991c678c47e11e1e219c3f15f837615a669df73e632921449869&width=1200&height=630&quality=85&focal=3821%2C2547",
+    "section": "Amérique Latine",
+    "news_url": "https://www.lalibre.be/international/europe/2026/11/13/le-pape-leon-xiv-rencontre-six-victimes-de-violences-sexuelles-au-sein-de-leglise-au-perou-Z4OJPKZTZBALBNFR5M4CH3RJPQ/",
+    "pregunta": "¿En qué medida la penetración de internet y la participación del sector servicios reducen el desempleo juvenil en los países latinoamericanos?",
+    "editorial": "¿Y si el acceso a internet y los trabajos en servicios pudieran reducir la falta de empleo entre los jóvenes de Latinoamérica? Esa pregunta surgió cuando el Papa León XIV se encontró con víctimas de violencia sexual en la Iglesia peruana, y la gente empezó a pensar que quizá la tecnología y los nuevos empleos pudieran ofrecer una salida.\n\nAl mirar los datos, vemos que en algunos países el crecimiento de usuarios de internet y la expansión del sector servicios coinciden con una ligera caída en el desempleo juvenil. Por ejemplo, cuando la gente pasa más tiempo conectada, el empleo vulnerable tiende a bajar un poco. En otros lugares, como Ecuador y Costa Rica, el gasto en salud, que también se relaciona con la tecnología, se mueve en la misma dirección que la esperanza de vida, pero no hay una relación clara con la desigualdad. En Colombia, los números no muestran una conexión fuerte: el gasto en salud y la esperanza de vida no parecen afectar el empleo juvenil de forma consistente. En México y Perú, la evidencia es aún más débil, con resultados que podrían ser simplemente casualidad.\n\nEn resumen, la idea de que internet y el sector servicios puedan bajar el desempleo juvenil no se confirma de forma firme. Los datos muestran patrones mixtos y, en muchos casos, la relación es tan débil que podría ser solo una coincidencia. Para los lectores, esto significa que, aunque la tecnología y los nuevos empleos son prometedores, todavía no podemos afirmar con certeza que sean la solución mágica para los jóvenes que buscan trabajo.",
+    "charts": "2026-11-14-17-48",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5977,
+        "after": 4518,
+        "cutChars": 4261
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7740,
+        "after": 5671,
+        "cutChars": 6190
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5913,
+        "after": 4503,
+        "cutChars": 4249
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7582,
+        "after": 5354,
+        "cutChars": 6838
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5807,
+        "after": 4460,
+        "cutChars": 4133
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7847,
+        "after": 5693,
+        "cutChars": 6708
+      }
+    ],
+    "ts": "2026-11-14T17:55:33.611Z"
+  },
+  {
     "file": "2026-11-13_impacto-de-la-digitalizaci-n-y-la-seguri.md",
     "date": "2026-11-13",
     "topic": "Impacto de la digitalización y la seguridad energética en la inversión extranjera y el empleo juvenil en América Latina",

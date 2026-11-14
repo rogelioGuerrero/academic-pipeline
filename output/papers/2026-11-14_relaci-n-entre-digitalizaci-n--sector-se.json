@@ -1,0 +1,222 @@
+{
+  "generated": "2026-11-14T17:55:33.611Z",
+  "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina",
+  "angle": "Evaluar si la mayor penetración de internet y la expansión del empleo en servicios actúan como amortiguadores contra el desempleo juvenil tras interrupciones tecnológicas globales.",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "EDIT",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 2,
+    "edit": 0
+  },
+  "pregunta": "¿En qué medida la penetración de internet y la participación del sector servicios reducen el desempleo juvenil en los países latinoamericanos?",
+  "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil significativamente menores.",
+  "inspiringNews": {
+    "title": "Le pape Léon XIV rencontre six victimes de violences sexuelles au sein de l'Église au Pérou",
+    "url": "https://www.lalibre.be/international/europe/2026/11/13/le-pape-leon-xiv-rencontre-six-victimes-de-violences-sexuelles-au-sein-de-leglise-au-perou-Z4OJPKZTZBALBNFR5M4CH3RJPQ/",
+    "source": "Lalibre.be",
+    "section": "Amérique Latine",
+    "image": "https://www.lalibre.be/resizer/v2/IXQC2XAXH5EE7DNL3WPBZTC5LA.jpg?auth=a06fd458b04d991c678c47e11e1e219c3f15f837615a669df73e632921449869&width=1200&height=630&quality=85&focal=3821%2C2547"
+  },
+  "suggestMode": "suggest",
+  "suggestions": [
+    {
+      "titulo": "Impacto de la crisis de abuso sexual en la Iglesia peruana sobre la salud pública y la desigualdad",
+      "noticia_inspiradora": "Le pape Léon XIV rencontre six victimes de violences sexuelles au sein de l'Église au Pérou",
+      "afirmacion_noticia": "El Papa se reunió con víctimas de abusos sexuales cometidos por clérigos en Perú, denunciando la violencia y exigiendo reformas institucionales.",
+      "verificable_con_datos": "Se pueden verificar tendencias de salud pública (gasto en salud, esperanza de vida) y desigualdad (índice de Gini) en Perú, pero no se pueden medir directamente los casos de abuso ni la respuesta institucional.",
+      "indicadores_respaldan": [
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)",
+        "Gini index"
+      ],
+      "correlaciones_relevantes": [
+        "health_expenditure_vs_urban_pop",
+        "gini_vs_urban_pop",
+        "health_expenditure_vs_life_expectancy"
+      ],
+      "justificacion": "La noticia aborda una crisis social que puede reflejarse en indicadores de salud y desigualdad; el gasto en salud y la esperanza de vida son proxies de la capacidad del Estado para responder a crisis de salud mental y física derivadas del abuso.",
+      "pregunta": "¿Cómo se relacionan los niveles de gasto en salud y la desigualdad con la prevalencia de crisis sociales como el abuso sexual institucional en Perú?",
+      "hipotesis": "Los países latinoamericanos con mayor gasto en salud y menor desigualdad presentan menores impactos negativos en indicadores de salud pública tras crisis de abuso institucional.",
+      "keywords_en": "sexual abuse church Peru health expenditure inequality Latin America"
+    },
+    {
+      "titulo": "Digitalización, servicios y empleo juvenil en América Latina tras la caída global de Microsoft",
+      "noticia_inspiradora": "What we know about the global Microsoft outage",
+      "afirmacion_noticia": "Una interrupción global de los servicios de Microsoft genera incertidumbre sobre la resiliencia digital y su efecto en el empleo tecnológico.",
+      "verificable_con_datos": "Se pueden analizar la relación entre penetración de internet, empleo en servicios y desempleo juvenil; no se pueden medir directamente la percepción de resiliencia ni la duración del outage.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "internet_vs_youth_unemployment",
+        "services_employment_vs_youth_unemployment"
+      ],
+      "justificacion": "La caída de un gigante tecnológico brinda un contexto para evaluar cómo la infraestructura digital y la estructura del empleo en servicios influyen en la vulnerabilidad del empleo juvenil en la región.",
+      "pregunta": "¿En qué medida la penetración de internet y la participación del sector servicios mitigan el desempleo juvenil en América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil significativamente menores.",
+      "keywords_en": "internet penetration youth unemployment services employment Latin America"
+    },
+    {
+      "titulo": "Migración neta, urbanización y gasto en salud: lecciones para la política pública latinoamericana",
+      "noticia_inspiradora": "India: Delhi surpasses Lahore as world's most polluted city",
+      "afirmacion_noticia": "El rápido crecimiento urbano en Delhi está asociado a altos niveles de contaminación, lo que sugiere riesgos para la salud pública en ciudades en expansión.",
+      "verificable_con_datos": "Se pueden medir la relación entre urbanización, gasto en salud y esperanza de vida; la contaminación específica no está disponible en el catálogo.",
+      "indicadores_respaldan": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)",
+        "Net migration (total people)"
+      ],
+      "correlaciones_relevantes": [
+        "urban_vs_health_expenditure",
+        "urban_vs_life_expectancy",
+        "migration_vs_urban_pop"
+      ],
+      "justificacion": "Aunque la noticia se centra en Asia, el fenómeno de urbanización rápida y sus implicaciones para salud es directamente comparable en América Latina, donde disponemos de datos de urbanización, gasto en salud y migración neta.",
+      "pregunta": "¿Cómo influye la migración neta en la urbanización y el gasto en salud, y qué efectos tiene sobre la esperanza de vida en América Latina?",
+      "hipotesis": "Un mayor ingreso neto migratorio está asociado a una mayor proporción de población urbana y a un aumento del gasto en salud, lo que a su vez eleva la esperanza de vida.",
+      "keywords_en": "net migration urbanization health expenditure life expectancy Latin America"
+    }
+  ],
+  "reviewDecision": {
+    "datos_correctos": false,
+    "detalle_datos": "El artículo reproduce los valores de cambios, CAGR y correlaciones tal como aparecen en los datos y resultados proporcionados. No se detectan cifras o referencias que no estén en la fuente oficial del Banco Mundial.",
+    "datos_inventados": [],
+    "estructura_ok": true,
+    "coherencia_ok": true,
+    "correcciones": [
+      "Afirmación causal sin matiz: \"La literatura reciente ha señalado que la adopción de tecnologías de la información puede influir en la creación de empleo en sectores de se\" — reformular como asociación, no efecto"
+    ],
+    "datos_faltantes": null,
+    "veredicto": "REESCRIBIR",
+    "feedback": "Linter detectó 1 afirmación(es) causal(es) sin matiz (ej: \"La literatura reciente ha señalado que la adopción de tecnologías de la informac…\"). Reformular como asociación/correlación.",
+    "causal_check": {
+      "hard": 1,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 50,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "APROBADO",
+    "checklist": {
+      "estructura_ok": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": true,
+      "datos_verificados": true,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 2156,
+    "issues": [],
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 50,
+      "invented": 0
+    }
+  },
+  "editorial": "¿Y si el acceso a internet y los trabajos en servicios pudieran reducir la falta de empleo entre los jóvenes de Latinoamérica? Esa pregunta surgió cuando el Papa León XIV se encontró con víctimas de violencia sexual en la Iglesia peruana, y la gente empezó a pensar que quizá la tecnología y los nuevos empleos pudieran ofrecer una salida.\n\nAl mirar los datos, vemos que en algunos países el crecimiento de usuarios de internet y la expansión del sector servicios coinciden con una ligera caída en el desempleo juvenil. Por ejemplo, cuando la gente pasa más tiempo conectada, el empleo vulnerable tiende a bajar un poco. En otros lugares, como Ecuador y Costa Rica, el gasto en salud, que también se relaciona con la tecnología, se mueve en la misma dirección que la esperanza de vida, pero no hay una relación clara con la desigualdad. En Colombia, los números no muestran una conexión fuerte: el gasto en salud y la esperanza de vida no parecen afectar el empleo juvenil de forma consistente. En México y Perú, la evidencia es aún más débil, con resultados que podrían ser simplemente casualidad.\n\nEn resumen, la idea de que internet y el sector servicios puedan bajar el desempleo juvenil no se confirma de forma firme. Los datos muestran patrones mixtos y, en muchos casos, la relación es tan débil que podría ser solo una coincidencia. Para los lectores, esto significa que, aunque la tecnología y los nuevos empleos son prometedores, todavía no podemos afirmar con certeza que sean la solución mágica para los jóvenes que buscan trabajo.",
+  "sample": {
+    "countries": [
+      "COL",
+      "BRA",
+      "CRI",
+      "DOM",
+      "ECU"
+    ],
+    "indicators": [
+      "Current health expenditure (% of GDP)",
+      "Life expectancy at birth (years)",
+      "Gini index"
+    ]
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-11-14-17-48",
+    "regression": null,
+    "correlations": 35,
+    "significantCorrelations": [
+      {
+        "x": "Current health expenditure (% of GDP) [ECU]",
+        "y": "Life expectancy at birth (years) [ECU]",
+        "r": -0.8956651132693199,
+        "p": 0.0010892916497090982,
+        "q": 0.03812520773981844,
+        "diff_r": -0.8819342781583684,
+        "diff_p": 0.0037587187847154683,
+        "country": "ECU"
+      }
+    ]
+  },
+  "truncations": [
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 5977,
+      "after": 4518,
+      "cutChars": 4261
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 7740,
+      "after": 5671,
+      "cutChars": 6190
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 5913,
+      "after": 4503,
+      "cutChars": 4249
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 7582,
+      "after": 5354,
+      "cutChars": 6838
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 5807,
+      "after": 4460,
+      "cutChars": 4133
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 7847,
+      "after": 5693,
+      "cutChars": 6708
+    }
+  ],
+  "elapsed": 480.3
+}

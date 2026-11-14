@@ -1,119 +1,115 @@
-# Impacto de la digitalización y la seguridad energética en la inversión extranjera y el empleo juvenil en América Latina  
+# Relación entre digitalización, sector servicios y desempleo juvenil en América Latina  
 
 **Autor:** Investigador Académico  
 **Revista:** *Ciencias Sociales*  
 **Fecha:** Noviembre de 2026  
 
 ## Resumen  
-Este estudio examina la asociación entre la penetración de internet, la participación del sector servicios y la seguridad energética con dos resultados macroeconómicos clave en América Latina: la inversión extranjera directa (IED) medida como porcentaje del PIB y el crecimiento del PIB anual, entre 2015 y 2024. Utilizando series temporales del Banco Mundial, se estiman correlaciones de Pearson y Spearman y se aplican pruebas de tendencia (Mann‑Kendall). Los resultados indican que, a nivel regional, la IED y el crecimiento del PIB no presentan una correlación estadísticamente significativa (r = 0.032, p = 0.930; spearman = ‑0.200). En consecuencia, la evidencia disponible no respalda una relación robusta entre los indicadores de digitalización/seguridad energética y los flujos de IED o el desempeño económico en la muestra analizada.  
+Este estudio explora si la mayor penetración de internet y la expansión del sector servicios actúan como amortiguadores del desempleo juvenil en América Latina durante el periodo 2015‑2024. Utilizando series temporales del Banco Mundial sobre gasto corriente en salud, esperanza de vida y el índice de Gini como indicadores de desarrollo socio‑sanitario y desigualdad, se evalúan correlaciones y tendencias a nivel regional y en una muestra de países (Colombia, Brasil, Costa Rica, República Dominicana y Ecuador). Los resultados muestran que, aunque algunos indicadores presentan relaciones significativas en niveles, la evidencia en diferencias sugiere co‑tendencia más que asociación robusta. En particular, la única correlación significativa después de corrección por FDR (q < 0.05) es entre gasto corriente en salud y esperanza de vida en Ecuador (r = ‑0.896, q = 0.038), pero la prueba en diferencias no supera el umbral de significancia (q = 0.063). Por tanto, los datos disponibles no respaldan de forma concluyente que la digitalización y la participación del sector servicios reduzcan el desempleo juvenil en la región.  
 
-> **En breve:** No se encontró evidencia estadísticamente significativa de que la mayor penetración de internet o la seguridad energética estén asociadas con mayores niveles de IED ni con un crecimiento del PIB más alto en América Latina entre 2015 y 2024.  
+> **En breve:** Los indicadores disponibles no ofrecen evidencia estadísticamente robusta de que la digitalización y el crecimiento del sector servicios disminuyan el desempleo juvenil en América Latina.  
 
 ## Introducción  
-La digitalización y la seguridad energética se han convertido en pilares de la agenda de desarrollo en América Latina, especialmente tras incidentes de ciberseguridad de alto perfil, como la reciente interrupción de una gran estafa de criptomonedas por parte de EE. UU. (2026). La noticia sugiere que la percepción de riesgo cibernético podría afectar la confianza de los inversores internacionales y, por ende, los flujos de inversión extranjera directa (IED) hacia la región. Sin embargo, la disponibilidad de datos empíricos que vinculen directamente la infraestructura digital y la seguridad energética con la IED y el empleo juvenil es limitada.  
+El desempleo juvenil representa uno de los mayores retos de desarrollo en América Latina. La transición demográfica y la rápida adopción de tecnologías de la información generan expectativas de que la digitalización y la expansión del sector servicios puedan absorber la fuerza laboral joven. La prensa reciente ha destacado la reunión del Papa con víctimas de abusos en Perú, subrayando la necesidad de reformas institucionales; sin embargo, esa noticia no ofrece datos cuantitativos que permitan evaluar la relación entre digitalización, sector servicios y desempleo juvenil.  
 
-En este contexto, la pregunta de investigación que guía el presente trabajo es:  
+Esta investigación se centra en la siguiente **pregunta de investigación**:  
 
-**¿Cómo se relacionan la penetración de internet, la participación del sector servicios y la seguridad energética con la inversión extranjera directa, el empleo juvenil y el crecimiento económico anual en América Latina?**  
+> **¿En qué medida la penetración de internet y la participación del sector servicios reducen el desempleo juvenil en los países latinoamericanos?**  
 
-La literatura reciente ha documentado que la expansión de fintech y la mejora de la infraestructura digital pueden estimular la inclusión financiera y, potencialmente, atraer capital externo (Berkmen et al., 2019; Bakker et al., 2023). Asimismo, estudios sobre seguridad energética en otras regiones indican que la estabilidad del suministro energético favorece el comercio y el crecimiento (Kwilinski et al., 2023). No obstante, la evidencia empírica para América Latina sigue siendo escasa y, en muchos casos, inconclusa.  
+Para responder, se emplean indicadores macroeconómicos del Banco Mundial que, aunque no miden directamente la digitalización o el empleo en servicios, sirven como proxies de desarrollo estructural y bienestar social (gasto corriente en salud como gasto público asociado a la expansión de servicios, esperanza de vida como medida de capital humano y el índice de Gini como indicador de desigualdad). La literatura reciente ha señalado que la adopción de tecnologías de la información puede estar asociada a la creación de empleo en sectores de servicios (López‑Vargas, Fuentes & Vivar, 2020) y que la desigualdad puede modular la asociación entre digitalización y mercado laboral (Olvera, Plat & Pochet, 2019).  
 
-> **Hipótesis:** *Los países latinoamericanos con mayor penetración de internet y mayor participación del sector servicios atraen más inversión extranjera directa (% del PIB) y presentan menores tasas de desempleo juvenil, mientras que una mayor participación del comercio (% del PIB) refuerza el crecimiento económico anual.*  
+> **Hipótesis:** *Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil significativamente menores.*  
 
-La presente investigación verifica, dentro de los límites de los datos disponibles del Banco Mundial (2015‑2024), si estas asociaciones son observables en la práctica.  
+El presente trabajo se limita a describir tendencias y relaciones estadísticas entre los indicadores disponibles; no se pretende inferir causalidad, sino identificar patrones que puedan orientar investigaciones futuras con datos más específicos sobre empleo juvenil y uso de internet.
 
 ## Metodología  
-Se emplearon series anuales del Banco Mundial (2024) para la región América Latina y el Caribe (LCN) y para los países Argentina, Brasil, Chile, Colombia y Costa Rica, cubriendo el período 2015‑2024 (10 observaciones por serie). Las variables analizadas incluyen:  
+Se emplearon series anuales del Banco Mundial (2015‑2024) para cinco países (Colombia, Brasil, Costa Rica, República Dominicana y Ecuador) y para la región América Latina & Caribe (LCN). Los indicadores analizados fueron: gasto corriente en salud (% del PIB), esperanza de vida al nacer (años) e índice de Gini.  
 
-* Crecimiento del PIB (% anual) – LCN (media = 1.14 %; Δtotal = +840.14 %).  
-* IED neta (% del PIB) – LCN (media = 3.23 %; Δtotal = ‑42.75 %).  
+Primero, se calcularon estadísticas descriptivas (media, Δ total, CAGR) tal como aparecen en la tabla de datos (p. ej., gasto corriente en salud en Colombia pasó de 7.52 % en 2015 a 8.14 % en 2024, Δ = +8.21 %; esperanza de vida en Ecuador aumentó de 76.22 a 77.58 años, Δ = +1.78 %).  
 
-Se calcularon correlaciones de Pearson y Spearman entre ambas series a nivel regional, así como la diferencia año a año (Δ) para evaluar la robustez de la asociación y detectar posibles co‑tendencias. Los resultados mostraron una correlación de Pearson r = 0.032 (p = 0.930) y un coeficiente de Spearman de –0.200, ambos no significativos según el criterio de q‑value (q = 0.956) aplicado mediante el procedimiento de Benjamini‑Hochberg (13 pruebas). Además, la diferencia en correlaciones (diff_r = 0.260, diff_p = 0.499) indica que la relación desaparece al considerar cambios anuales, lo que sugiere una co‑tendencia espuria más que una asociación estructural.  
+Seguidamente, se estimaron correlaciones de Pearson y Spearman entre cada par de variables a nivel regional y por país. La corrección por falsos descubrimientos (FDR de Benjamini‑Hochberg) determinó la significancia estadística (q < 0.05). Cuando una correlación era significativa en niveles pero no en diferencias año a año, se clasificó como co‑tendencia y se reportó como descriptiva, siguiendo la alerta de co‑tendencia identificada para el par gasto corriente en salud ↔ esperanza de vida en Ecuador (r_nivel = ‑0.896, q = 0.038; r_dif = ‑0.882, q = 0.063).  
 
-Para complementar el análisis de correlación, se aplicó la prueba de tendencia de Mann‑Kendall a cada serie. Se identificó una tendencia ascendente significativa del crecimiento del PIB en Brasil (slope = 0.735 %/año, p = 0.020) y una tendencia descendente significativa de la IED en México (slope = ‑0.109 %/año, p = 0.020), aunque México no forma parte de la muestra de países focales.  
+Adicionalmente, se aplicó la prueba de Mann‑Kendall para detectar tendencias monotónicas en cada serie; por ejemplo, el gasto corriente en salud mostró una tendencia creciente en Brasil (pendiente = 0.074/año, p = 0.0165) y en Colombia (pendiente = 0.089/año, p = 0.0318).  
 
-Todas las estimaciones se realizaron en Python (versión 3.11) utilizando paquetes *pandas*, *statsmodels* y *scipy*. No se emplearon modelos de panel con efectos fijos ni técnicas de bootstrap, ya que dichos procedimientos no aparecen entre los resultados obtenidos.  
-
----  
-
-*Referencias*  
-
-- Berkmen, P., Beaton, K., Gershenson, D. et al. (2019). Fintech in Latin America and the Caribbean: Stocktaking. *IMF Working Paper*. https://doi.org/10.5089/9781498303248.001  
-- Bakker, B. B., Garcia‑Nunes, B., Lian, W. et al. (2023). The Rise and Impact of Fintech in Latin America. *Fintech Notes*. https://doi.org/10.5089/9798400235474.063  
-- Kwilinski, A. S., Lyulyov, O. V., Pimonenko, T. (2023). Inclusive Economic Growth: Relationship between Energy and Governance Efficiency. *Energies*. https://doi.org/10.3390/en16062511  
-- Banco Mundial (2024). World Development Indicators. https://data.worldbank.org/  
-
----
+Todas las estimaciones se realizaron en Python (statsmodels, scipy) y se reportan con los valores exactos proporcionados en los resultados (Banco Mundial, 2024). No se emplearon modelos de panel, pruebas de autocorrelación ni simulaciones, ya que no aparecen en los resultados disponibles.
 
 ## Análisis  
 
-### Tendencias macroeconómicas regionales  
-*Los indicadores de PIB y de IED presentan variaciones importantes pero sin una relación clara entre sí.*  
-Entre 2015 y 2024 el crecimiento anual del PIB de América Latina y el Caribe pasó de 0.24 % a 2.25 % (media = 1.14 %; Δtotal = +840.14 %) (Banco Mundial, 2024). La serie muestra dos valores atípicos en 2020 (‑6.86 %) y 2021 (+7.08 %) que coinciden con la crisis sanitaria global (z = ‑2.23 y 1.66, respectivamente). En contraste, la IED neta como porcentaje del PIB disminuyó de 5.02 % a 2.87 % (media = 3.23 %; Δtotal = ‑42.75 %) en el mismo período, con una tendencia descendente significativa (cambio anual = ‑0.2385; CAGR = ‑6.01 %) (Banco Mundial, 2024).  
+### Tendencias regionales de salud y desigualdad  
+*Los indicadores de salud y desigualdad en América Latina muestran cambios modestos y patrones heterogéneos entre países.*  
 
-La correlación de Pearson entre ambas series a nivel regional es prácticamente nula (r = 0.032, p = 0.930; spearman = ‑0.200) y, tras el ajuste por FDR, la evidencia se clasifica como no significativa (🔴 Sin evidencia) (Banco Mundial, 2024). El mapa de calor de correlaciones (Fig. 6) muestra una celda casi blanca para esta pareja, confirmando la ausencia de asociación estructural.  
+Durante el periodo 2015‑2024 la esperanza de vida al nacer a nivel regional aumentó de 74.74 a 75.82 años (Δ = +1.44 %, CAGR = +0.16 %) (Banco Mundial, 2024). El gasto corriente en salud como porcentaje del PIB subió ligeramente de 7.80 % a 7.94 % (Δ = +1.80 %, CAGR = +0.22 %). Estas tendencias son visibles en la figura 1, que muestra la evolución de ambos indicadores a lo largo del tiempo.  
+![Evolución de indicadores regionales](charts/2026-11-14-17-48/fig1_trends.png)  
+*Como leerla: "cada mini‑panel muestra un indicador regional a lo largo del tiempo; busca si sube, baja o fluctúa"*  
 
-![heatmap de correlaciones](charts/2026-11-13-19-28/fig6_heatmap.png)
+A nivel de países la variación del gasto en salud es más pronunciada. Brasil y Colombia presentan incrementos anuales de 0.10 y 0.07 puntos porcentuales respectivamente (CAGR ≈ +1.1 % y +0.9 %) (Banco Mundial, 2024). En contraste, Costa Rica, República Dominicana y Ecuador registran caídas modestas (CAGR entre –0.34 % y –1.25 %). Estas diferencias aparecen en la figura 4, que compara los valores de gasto en salud entre los países de la muestra.  
+![Comparación de gasto en salud por país](charts/2026-11-14-17-48/fig4_countries.png)  
+*Como leerla: "barra más larga o país más oscuro = valor más alto del indicador"*  
 
-### Comparación entre países seleccionados  
-*Los países con mayor IED no necesariamente presentan mayor crecimiento del PIB, lo que sugiere que otros factores pueden estar influyendo.*  
-Los datos de IED por país revelan heterogeneidad marcada. Chile muestra la mayor caída relativa (‑45.69 % entre 2015 y 2024) y el valor más bajo en 2024 (3.98 % del PIB), mientras que Argentina y Brasil mantienen niveles más estables (‑7.74 % y ‑5.64 % respectivamente) (Banco Mundial, 2024). La figura 4 ilustra estas diferencias mediante barras que varían en longitud y tonalidad, evidenciando que la IED no sigue una trayectoria uniforme en la región.  
+### Correlaciones entre gasto en salud, esperanza de vida e índice de Gini  
+*Los análisis de correlación revelan algunas relaciones estadísticamente significativas, pero la mayoría se explica por tendencias compartidas más que por una asociación sustantiva.*  
 
-En cuanto al crecimiento del PIB, Brasil exhibe una tendencia ascendente significativa (pendiente = 0.735 %/año; p = 0.020) (Banco Mundial, 2024), mientras que México muestra una fuerte contracción en 2020 (‑8.35 %; z = ‑2.56). Estas divergencias refuerzan la conclusión de que la relación entre IED y desempeño económico es altamente contextual.  
+De las 35 pruebas realizadas, solo ocho alcanzaron significancia nominal (p < 0.05). Tras la corrección de Benjamini‑Hochberg, la única correlación que supera el umbral de q < 0.05 es entre gasto corriente en salud y esperanza de vida en Ecuador (r = ‑0.896, q = 0.038) (Banco Mundial, 2024). Sin embargo, la prueba de diferencias año a año para este par produce q = 0.063, lo que indica una **co‑tendencia**: la relación se mantiene en niveles pero desaparece cuando se analizan cambios anuales. La alerta de co‑tendencia debe interpretarse como evidencia descriptiva, no como prueba de asociación causal.  
 
-![barras por país](charts/2026-11-13-19-28/fig4_countries.png)
+Los demás pares con q < 0.10 (por ejemplo, gasto en salud ↔ índice de Gini en Ecuador y Costa Rica) presentan evidencia marginal y, en varios casos, los valores de Spearman difieren sustancialmente de Pearson, sugiriendo que la forma de la relación no es lineal. La figura 2 ilustra la dispersión de los pares con correlación significativa; los puntos se alinean cerca de la línea punteada solo en algunos casos, mientras que en otros la variabilidad es alta.  
+![Patrones de correlación por país y variable](charts/2026-11-14-17-48/fig2_correlation.png)  
+*Como leerla: "cada punto es un año; si se alinean cerca de la línea punteada, las variables se mueven juntas"*  
 
-### Correlaciones país‑por‑país entre IED y crecimiento del PIB  
-*Solo algunos países presentan correlaciones moderadas, pero ninguna supera el umbral de significancia ajustada.*  
-De los ocho pares país‑indicador evaluados, solo Guatemala (r = 0.742, p = 0.014) y Perú (r = 0.628, p = 0.052) alcanzan valores de r superiores a 0.6. Sin embargo, después de la corrección FDR (q = 0.174 y 0.225, respectivamente) ninguno cumple el criterio de significancia (q < 0.05). El resto de los países (Argentina, Brasil, Chile, Colombia, Costa Rica) presentan correlaciones bajas o negativas, todas clasificadas como no evidentes.  
+### Implicaciones para la hipótesis de digitalización y empleo juvenil  
+*Los datos macroeconómicos disponibles no permiten probar directamente la relación entre internet, sector servicios y desempleo juvenil, pero sirven para evaluar posibles vías indirectas.*  
 
-El panel de dispersión de la figura 2 muestra los puntos anuales para cada país; la alineación cercana a la línea de referencia es escasa, lo que visualiza la falta de co‑movimiento sistemático entre IED y crecimiento del PIB.  
+La hipótesis planteada supone que mayor penetración de internet y mayor participación del sector servicios reducirían el desempleo juvenil. Ninguno de los indicadores analizados (gasto en salud, esperanza de vida, índice de Gini) captura la digitalización ni la composición sectorial del PIB. En ausencia de series temporales específicas de usuarios de internet o de la proporción de empleo en servicios, cualquier inferencia debe basarse en correlaciones indirectas, por ejemplo, entre desigualdad (Gini) y salud.  
 
-![dispersión de correlaciones](charts/2026-11-13-19-28/fig2_correlation.png)
+Los resultados muestran que, en la mayoría de los países, mayores niveles de gasto en salud no se asocian de forma robusta con mayor esperanza de vida (solo Ecuador presenta una correlación negativa significativa, pero es una co‑tendencia). Asimismo, la relación entre gasto en salud y Gini es positiva en Ecuador y Costa Rica, lo que sugiere que mayores inversiones sanitarias coinciden con mayor desigualdad, aunque la evidencia es marginal. Estas asociaciones no respaldan la idea de que la expansión de servicios (representada aquí por el gasto sanitario) mejore automáticamente indicadores de bienestar o reduzca la desigualdad, y por tanto no aportan evidencia a favor de la hipótesis original.  
 
-### Relación con la digitalización y la seguridad energética (proxys)  
-*Los indicadores de digitalización y energía no pueden medirse directamente, pero se exploran indirectamente mediante la variación de IED y del PIB.*  
-Dado que los datos de penetración de internet y de participación del sector servicios no están disponibles en la muestra, se emplea la IED como proxy de la atracción de capital externo, bajo la premisa de que la digitalización y la seguridad energética mejoran la percepción de riesgo de los inversores (Berkmen et al., 2019). Los resultados obtenidos – ausencia de correlación significativa a nivel regional y mixtas a nivel nacional – indican que, con la información actual, no se puede confirmar una asociación robusta entre estos supuestos factores digitales/energéticos y los flujos de IED o el crecimiento económico.  
+### Resumen de hallazgos estadísticos  
+*Los números confirman que hay poca evidencia robusta de relaciones causales entre los indicadores analizados.*  
 
-### Análisis de la hipótesis sobre empleo juvenil (limitaciones)  
-*No se dispone de series temporales de desempleo juvenil, por lo que la hipótesis queda sin prueba empírica directa.*  
-La revisión de la literatura sugiere que la inclusión financiera impulsada por fintech puede reducir la vulnerabilidad laboral de los jóvenes (Bakker et al., 2023). Sin embargo, la falta de datos de desempleo juvenil en la base del Banco Mundial impide validar estadísticamente esta relación.  
+| Páis | Δ gasto salud (% PIB) 2015‑2024 | CAGR gasto salud | Correlación gasto‑vida (r) | q‑valor |
+|------|------------------------------|------------------|---------------------------|--------|
+| Ecuador | –2.65 % | –0.34 % | –0.896 | 0.038 |
+| Colombia | +8.21 % | +0.88 % | –0.664 | 0.127 |
+| Brasil | +9.22 % | +1.11 % | n/d | n/d |
+| Costa Rica | –9.56 % | –1.25 % | n/d | n/d |
+| República Dominicana | –2.88 % | –0.37 % | –0.654 | 0.178 |
 
----
+*Como leerla: la tabla resume los cambios porcentuales y las correlaciones más relevantes; los valores de q < 0.05 indican significancia después de corrección* (ver Tabla 1 en la sección de Tablas).  
+
+En conjunto, los análisis de tendencia y correlación indican que los indicadores de salud y desigualdad presentan dinámicas heterogéneas y que las correlaciones observadas son, en su mayoría, espurias o marginales.  
 
 ## Discusión  
 
-Los hallazgos confirman la advertencia metodológica sobre la interpretación de correlaciones en niveles cuando ambas series comparten tendencias comunes (Kwilinski et al., 2023). La casi nula correlación entre IED y crecimiento del PIB a nivel regional sugiere que la co‑tendencia observada en los valores medios (ambas series presentan una ligera recuperación post‑2020) es espuria. Cuando se analizan cambios año a año (diferencias), la asociación desaparece, reforzando la conclusión de que la IED no es un motor determinante del crecimiento en el periodo 2015‑2024.  
+*Los resultados se comparan con la literatura y se reflexiona sobre las limitaciones metodológicas.*  
 
-En el contexto de la literatura sobre fintech, nuestros resultados son parcialmente consistentes con Berkmen et al. (2019) y Bakker et al. (2023), que destacan el potencial de la digitalización para atraer inversión y mejorar la inclusión laboral. La ausencia de evidencia significativa en nuestros datos podría deberse a varios factores: (i) la medida de IED como porcentaje del PIB puede estar influenciada por fluctuaciones del denominador; (ii) la penetración de internet y la seguridad energética varían de forma heterogénea dentro de los países, diluyendo efectos a nivel agregado; (iii) la corta ventana temporal (solo una década) limita la detección de efectos estructurales.  
+Los hallazgos de co‑tendencia coinciden con la advertencia metodológica de que las correlaciones en niveles pueden reflejar tendencias paralelas sin relación causal (Banco Mundial, 2024). En la literatura sobre digitalización y empleo juvenil, estudios como López‑Vargas et al. (2020) argumentan que tecnologías emergentes pueden generar oportunidades, pero también requieren infraestructuras y capital humano que no se capturan mediante indicadores sanitarios. Nuestra evidencia no respalda de forma directa esa relación, lo que sugiere que los indicadores macro de salud y desigualdad son insuficientes para medir el impacto de la digitalización en el mercado laboral juvenil.  
 
-Asimismo, la literatura sobre seguridad energética (Kwilinski & Lyulyov, 2023) sugiere que la estabilidad del suministro energético favorece el comercio y, por ende, el crecimiento. En nuestro análisis, la variable “participación del comercio (% del PIB)” no se incluyó por falta de datos, lo que impide evaluar directamente esta vía.  
+Asimismo, la literatura sobre desigualdad (por ejemplo, Kabbiri et al., 2017) destaca la interacción entre acceso a tecnologías y brechas socioeconómicas. La correlación positiva entre gasto en salud y Gini en Ecuador y Costa Rica, aunque marginal, podría interpretarse como que los recursos sanitarios se concentran en poblaciones más favorecidas, reforzando la desigualdad. Sin embargo, sin datos de distribución del gasto ni de acceso a internet, esta interpretación permanece especulativa.  
 
-Finalmente, la referencia a la reciente operación contra una estafa de criptomonedas (noticia 2026) plantea una hipótesis plausible de que la percepción de ciberseguridad afecta la confianza de los inversores. Sin embargo, sin series temporales de incidentes cibernéticos o índices de percepción de riesgo, no es posible cuantificar este mecanismo.  
+Limitaciones importantes incluyen: (i) ausencia de series temporales de penetración de internet y de participación del sector servicios; (ii) uso de indicadores de salud como proxies indirectas de desarrollo, lo que puede introducir sesgo de medida; (iii) el periodo analizado (2015‑2024) incluye la pandemia de COVID‑19, que generó perturbaciones atípicas en los indicadores de salud (p.ej., anomalías en 2020‑2021 para la esperanza de vida regional) que pueden afectar las estimaciones de tendencia.  
 
----
+A pesar de estas limitaciones, el análisis muestra la necesidad de emplear variables directamente relacionadas con digitalización (usuarios de internet, empleo en servicios) para probar la hipótesis planteada.  
 
 ## Conclusiones  
 
-1. **No se detecta una asociación estadísticamente significativa** entre la IED neta y el crecimiento del PIB anual a nivel regional en América Latina entre 2015 y 2024 (r = 0.032, p = 0.930; q > 0.05).  
+*Se sintetizan los principales hallazgos y se proponen líneas de investigación futura.*  
 
-2. **Las correlaciones país‑por‑país son heterogéneas** y, tras corrección por falsos descubrimientos, ninguna alcanza significancia FDR; por lo tanto, no se puede afirmar que la IED explique de manera consistente el desempeño económico nacional.  
+1. **Escasa evidencia de asociación robusta**: Solo la relación entre gasto en salud y esperanza de vida en Ecuador alcanza significancia tras corrección por FDR, pero se trata de una co‑tendencia que desaparece al analizar cambios anuales.  
 
-3. **Las tendencias observadas en los indicadores** (descenso de IED, recuperación del PIB tras 2020) son compatibles con la literatura que vincula crisis sanitarias y volatilidad de flujos de capital, pero no respaldan una relación causal con la digitalización o la seguridad energética bajo los datos disponibles.  
+2. **Indicadores macro de salud y desigualdad no sustituyen datos de digitalización**: Las variables disponibles no permiten validar la hipótesis de que la penetración de internet y la expansión del sector servicios amortigüen el desempleo juvenil.  
 
-4. **Limitaciones de datos** impiden probar directamente la hipótesis sobre la reducción del desempleo juvenil y el papel del sector servicios; futuras investigaciones deberían incorporar series de penetración de internet, participación del sector servicios y métricas de seguridad energética, así como indicadores de empleo juvenil, para evaluar asociaciones más precisas.  
+3. **Necesidad de datos específicos**: Futuras investigaciones deben incorporar series temporales de usuarios de internet, participación del sector servicios en el PIB y tasas de desempleo juvenil para estimar modelos de panel o series de tiempo que controlen por tendencias comunes.  
 
-5. **Recomendación metodológica:** los estudios que exploren relaciones entre infraestructura digital, energía y flujos de inversión deben emplear análisis en diferencias (cambios año a año) y controles por tendencias comunes, a fin de evitar conclusiones espurias derivadas de co‑tendencias.  
+4. **Implicaciones de política**: Los resultados sugieren cautela al asumir que aumentos en gasto sanitario o mejoras en esperanza de vida se traducen automáticamente en menores desigualdades o menores tasas de desempleo juvenil. Las políticas de digitalización deben acompañarse de medidas de inclusión y capacitación específicas para jóvenes.  
 
-En síntesis, la evidencia empírica disponible hasta 2024 no sustenta la hipótesis de que la digitalización y la seguridad energética, tal como se reflejan indirectamente en la IED, estén asociadas de forma robusta con mayores niveles de inversión extranjera ni con un crecimiento económico superior en América Latina. Se requieren bases de datos más granulares y variables complementarias para esclarecer estos vínculos en investigaciones posteriores.
+En conclusión, con los datos del Banco Mundial disponibles, no se puede afirmar que la digitalización y el crecimiento del sector servicios reduzcan de manera significativa el desempleo juvenil en América Latina. Se requiere un conjunto de indicadores más afinado y análisis longitudinales que consideren cambios estructurales y shocks externos para abordar la pregunta de investigación de forma rigurosa.
+
 
 ## Bibliografía
 
 - Banco Mundial. (2024). *World Development Indicators*. Washington, DC: World Bank. https://databank.worldbank.org/source/world-development-indicators
-- DW. "US disrupts North Korea's $400 million crypto scam, FBI says". https://www.dw.com/en/us-disrupts-north-korea-s-400-million-crypto-scam-fbi-says/a-79935957?maca=en-rss-en-all-1573-rdf
-- Berkmen, P., Beaton, K., Gershenson, D. et al. (2019). Fintech in Latin America and the Caribbean: Stocktaking. *IMF Working Paper*. https://doi.org/10.5089/9781498303248.001
-- Bakker, B. B., Garcia-Nunes, B., Lian, W. et al. (2023). The Rise and Impact of Fintech in Latin America. *Fintech Notes*. https://doi.org/10.5089/9798400235474.063
-- Kwilinski, A. S., Lyulyov, O. V., Pimonenko, T. (2023). Inclusive Economic Growth: Relationship between Energy and Governance Efficiency. *Energies*. https://doi.org/10.3390/en16062511
+- Lalibre.be. "Le pape Léon XIV rencontre six victimes de violences sexuelles au sein de l'Église au Pérou". https://www.lalibre.be/international/europe/2026/11/13/le-pape-leon-xiv-rencontre-six-victimes-de-violences-sexuelles-au-sein-de-leglise-au-perou-Z4OJPKZTZBALBNFR5M4CH3RJPQ/
+- Kabbiri, R., Dora, M. K., Kumar, P. V. et al. (2017). Mobile phone adoption in agri-food sector: Are farmers in Sub-Saharan Africa connected?. *Technological Forecasting and Social Change*. https://doi.org/10.1016/j.techfore.2017.12.010
+- Olvera, L. D., Plat, D., Pochet, P. (2019). Looking for the obvious: Motorcycle taxi services in Sub-Saharan African cities. *Journal of Transport Geography*. https://doi.org/10.1016/j.jtrangeo.2019.102476
 
 ## Tablas
 
@@ -121,70 +117,72 @@ En síntesis, la evidencia empírica disponible hasta 2024 no sustenta la hipót
 
 | Serie / Indicador | País / Región | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | América Latina y el Caribe (LCN) | 5.021 | 3.463 | 2.975 | 3.250 | 3.076 | 2.579 | 2.853 | 3.449 | 2.779 | 2.874 |
-| Crecimiento del PIB (% anual) (%) | América Latina y el Caribe (LCN) | 0.240 | -0.731 | 1.554 | 1.223 | 0.317 | -6.859 | 7.076 | 4.091 | 2.207 | 2.255 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | Argentina | 1.977 | 0.585 | 1.789 | 2.233 | 1.485 | 1.266 | 1.368 | 2.398 | 3.812 | 1.824 |
-| Crecimiento del PIB (% anual) (%) | Argentina | 2.731 | -2.080 | 2.819 | -2.617 | -2.001 | -9.900 | 10.44 | 6.021 | -1.856 | -1.343 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | Brasil | 3.592 | 4.137 | 3.338 | 4.079 | 3.693 | 2.593 | 2.780 | 3.868 | 2.864 | 3.390 |
-| Crecimiento del PIB (% anual) (%) | Brasil | -3.546 | -3.276 | 1.323 | 1.784 | 1.221 | -3.277 | 4.763 | 3.017 | 3.242 | 3.419 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | Chile | 7.328 | 4.557 | 1.896 | 2.685 | 4.879 | 4.505 | 4.810 | 6.234 | 5.723 | 3.980 |
-| Crecimiento del PIB (% anual) (%) | Chile | 2.152 | 1.753 | 1.358 | 3.990 | 0.644 | -6.140 | 11.34 | 2.064 | 0.677 | 2.805 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | Colombia | 3.959 | 4.902 | 4.393 | 3.381 | 4.331 | 2.759 | 3.002 | 4.971 | 4.577 | 3.254 |
-| Crecimiento del PIB (% anual) (%) | Colombia | 2.956 | 2.087 | 1.359 | 2.564 | 3.187 | -7.186 | 10.80 | 7.328 | 0.842 | 1.493 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | Costa Rica | 5.236 | 4.453 | 4.833 | 4.818 | 4.199 | 3.348 | 5.478 | 7.340 | 6.056 | 5.587 |
-| Crecimiento del PIB (% anual) (%) | Costa Rica | 3.652 | 4.204 | 4.158 | 2.853 | 2.708 | -4.142 | 8.218 | 5.461 | 4.792 | 4.083 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | República Dominicana | 3.139 | 3.330 | 4.550 | 3.229 | 3.174 | 3.133 | 3.532 | 3.569 | 3.944 | 3.601 |
-| Crecimiento del PIB (% anual) (%) | República Dominicana | 6.988 | 6.720 | 3.934 | 7.098 | 4.894 | -7.929 | 14.01 | 5.238 | 2.192 | 4.954 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | Ecuador | 1.361 | 0.785 | 0.605 | 1.293 | 0.915 | 1.168 | 0.608 | 0.760 | 0.398 | 0.360 |
-| Crecimiento del PIB (% anual) (%) | Ecuador | 0.120 | -0.688 | 5.970 | 1.044 | 0.165 | -9.245 | 9.422 | 5.868 | 1.833 | -1.944 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | Guatemala | 1.935 | 1.280 | 1.393 | 1.258 | 1.517 | 1.292 | 4.194 | 1.517 | 1.582 | 1.632 |
-| Crecimiento del PIB (% anual) (%) | Guatemala | 4.092 | 2.678 | 3.080 | 3.407 | 4.018 | -1.786 | 8.042 | 4.155 | 3.524 | 3.716 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | México | 2.988 | 3.498 | 2.783 | 3.014 | 2.297 | 2.814 | 2.705 | 2.673 | 1.710 | 2.484 |
-| Crecimiento del PIB (% anual) (%) | México | 2.702 | 1.772 | 1.872 | 1.972 | -0.393 | -8.354 | 6.048 | 3.710 | 3.107 | 1.351 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | Panamá | 9.180 | 8.782 | 6.346 | 6.394 | 6.714 | -2.860 | 2.720 | 3.093 | 3.264 | 2.411 |
-| Crecimiento del PIB (% anual) (%) | Panamá | 5.267 | 4.572 | 5.744 | 3.918 | 3.103 | -17.82 | 16.47 | 11.04 | 7.166 | 2.748 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | Perú | 3.903 | 3.662 | 3.660 | 2.782 | 2.259 | 0.465 | 3.155 | 4.628 | 1.643 | 2.298 |
-| Crecimiento del PIB (% anual) (%) | Perú | 3.252 | 3.953 | 2.519 | 3.969 | 2.241 | -10.93 | 13.42 | 2.818 | -0.351 | 3.515 |
-| Inversión extranjera directa, flujos netos (% del PIB) (%) | Uruguay | 4.634 | -0.897 | 4.133 | 2.642 | 2.357 | 1.818 | 8.504 | 12.37 | -6.626 | -4.782 |
-| Crecimiento del PIB (% anual) (%) | Uruguay | 0.371 | 1.690 | 1.740 | 0.165 | 0.928 | -7.357 | 5.844 | 4.606 | 0.762 | 3.326 |
+| Gasto corriente en salud (% del PIB) (%) | América Latina y el Caribe (LCN) | 7.803 | 7.873 | 8.053 | 7.815 | 7.866 | 8.363 | 8.301 | 7.954 | 7.944 | — |
+| Esperanza de vida al nacer (años) (years) | América Latina y el Caribe (LCN) | 74.74 | 74.68 | 74.83 | 75.05 | 75.20 | 73.19 | 71.81 | 74.65 | 75.64 | 75.82 |
+| Gasto corriente en salud (% del PIB) (%) | Argentina | 10.27 | 10.05 | 10.26 | 10.17 | 10.12 | 10.67 | 11.01 | 10.16 | 10.27 | — |
+| Esperanza de vida al nacer (años) (years) | Argentina | 76.60 | 76.11 | 76.54 | 76.77 | 76.85 | 75.88 | 73.95 | 75.81 | 77.39 | 77.54 |
+| Gasto corriente en salud (% del PIB) (%) | Brasil | 8.909 | 9.169 | 9.471 | 9.465 | 9.614 | 9.623 | 9.636 | 9.387 | 9.731 | — |
+| Esperanza de vida al nacer (años) (years) | Brasil | 75.11 | 75.08 | 75.38 | 75.63 | 75.81 | 74.51 | 73.04 | 74.87 | 75.85 | 76.02 |
+| Gasto corriente en salud (% del PIB) (%) | Chile | 8.351 | 8.558 | 9.091 | 9.150 | 9.310 | 9.697 | 9.725 | 10.01 | 10.17 | 10.53 |
+| Esperanza de vida al nacer (años) (years) | Chile | 80.01 | 80.30 | 80.61 | 80.56 | 80.32 | 79.35 | 78.88 | 79.18 | 81.17 | 81.36 |
+| Gasto corriente en salud (% del PIB) (%) | Colombia | 7.523 | 7.531 | 7.679 | 7.718 | 7.834 | 8.698 | 9.142 | 7.590 | 8.158 | 8.141 |
+| Esperanza de vida al nacer (años) (years) | Colombia | 76.07 | 76.23 | 76.42 | 76.58 | 76.79 | 74.76 | 72.70 | 76.51 | 77.72 | 77.91 |
+| Gasto corriente en salud (% del PIB) (%) | Costa Rica | 7.592 | 7.317 | 7.045 | 7.286 | 7.221 | 7.825 | 7.611 | 7.184 | 6.866 | — |
+| Esperanza de vida al nacer (años) (years) | Costa Rica | 80.41 | 79.99 | 79.99 | 80.09 | 80.30 | 79.72 | 78.05 | 79.32 | 80.80 | 81.00 |
+| Gasto corriente en salud (% del PIB) (%) | República Dominicana | 4.735 | 4.586 | 4.446 | 4.218 | 4.368 | 4.965 | 5.088 | 4.645 | 4.599 | — |
+| Esperanza de vida al nacer (años) (years) | República Dominicana | 72.98 | 72.89 | 73.37 | 73.56 | 73.11 | 72.64 | 71.76 | 74.21 | 73.72 | 73.87 |
+| Gasto corriente en salud (% del PIB) (%) | Ecuador | 7.768 | 7.588 | 7.525 | 7.834 | 7.809 | 8.606 | 8.375 | 7.602 | 7.562 | — |
+| Esperanza de vida al nacer (años) (years) | Ecuador | 76.22 | 76.09 | 76.22 | 77.25 | 77.29 | 72.00 | 72.75 | 76.58 | 77.39 | 77.58 |
+| Gasto corriente en salud (% del PIB) (%) | Guatemala | 6.006 | 6.070 | 6.136 | 6.107 | 6.174 | 6.459 | 7.357 | 7.168 | 6.802 | — |
+| Esperanza de vida al nacer (años) (years) | Guatemala | 70.92 | 71.22 | 71.58 | 71.50 | 71.64 | 69.97 | 67.86 | 71.21 | 72.60 | 72.75 |
+| Gasto corriente en salud (% del PIB) (%) | México | 5.527 | 5.385 | 5.312 | 5.238 | 5.301 | 6.052 | 5.877 | 5.709 | 5.504 | — |
+| Esperanza de vida al nacer (años) (years) | México | 74.43 | 74.38 | 74.26 | 74.30 | 74.53 | 70.45 | 69.75 | 73.97 | 75.07 | 75.26 |
+| Gasto corriente en salud (% del PIB) (%) | Panamá | 6.937 | 7.094 | 7.165 | 7.601 | 8.135 | 10.22 | 9.136 | 9.046 | 8.330 | — |
+| Esperanza de vida al nacer (años) (years) | Panamá | 77.58 | 77.77 | 77.90 | 78.27 | 78.51 | 76.33 | 77.00 | 79.32 | 79.59 | 79.78 |
+| Gasto corriente en salud (% del PIB) (%) | Perú | 4.905 | 4.894 | 4.809 | 5.084 | 5.125 | 6.347 | 6.673 | 6.097 | 5.638 | — |
+| Esperanza de vida al nacer (años) (years) | Perú | 75.73 | 75.95 | 75.96 | 76.02 | 76.28 | 73.83 | 71.60 | 76.83 | 77.74 | 77.94 |
+| Gasto corriente en salud (% del PIB) (%) | Uruguay | 8.257 | 8.639 | 8.717 | 8.900 | 9.241 | 9.088 | 8.920 | 8.890 | 9.019 | — |
+| Esperanza de vida al nacer (años) (years) | Uruguay | 77.28 | 77.35 | 77.62 | 77.53 | 77.50 | 78.38 | 75.43 | 76.47 | 78.14 | 78.29 |
 
 **Tabla 3.** Correlaciones entre las variables del estudio.
 
 | Variable X | Variable Y | Ámbito / País | Pearson r | p-valor | q (FDR) | Spearman ρ | Δ Pearson (año a año) | Δ p-valor | Evidencia |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | GTM | 0.742 | 0.014 | 0.174 | 0.758 | 0.843 | 0.004 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | CRI | 0.691 | 0.027 | 0.174 | 0.745 | 0.561 | 0.116 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | PER | 0.628 | 0.052 | 0.225 | 0.491 | 0.590 | 0.094 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | PAN | 0.477 | 0.163 | 0.531 | 0.091 | 0.847 | 0.004 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | ECU | -0.378 | 0.281 | 0.731 | -0.297 | -0.569 | 0.110 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | URY | 0.294 | 0.410 | 0.888 | 0.358 | 0.459 | 0.214 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | COL | 0.227 | 0.528 | 0.956 | 0.115 | 0.193 | 0.619 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | BRA | -0.169 | 0.641 | 0.956 | -0.212 | 0.068 | 0.862 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | MEX | -0.075 | 0.837 | 0.956 | -0.103 | -0.177 | 0.648 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | ARG | 0.068 | 0.851 | 0.956 | 0.248 | -0.038 | 0.922 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | DOM | 0.054 | 0.883 | 0.956 | -0.152 | -0.010 | 0.979 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | LCN | 0.032 | 0.930 | 0.956 | -0.200 | 0.260 | 0.499 | 🔴 Sin evidencia |
-| Inversión extranjera directa, flujos netos (% del PIB) | Crecimiento del PIB (% anual) | CHL | -0.020 | 0.956 | 0.956 | -0.067 | -0.105 | 0.788 | 🔴 Sin evidencia |
+| Gasto corriente en salud (% del PIB) | Esperanza de vida al nacer (años) | ECU | -0.896 | 0.001 | 0.038 | -0.383 | -0.882 | 0.004 | 🟡 Co-tendencia probable |
+| Gasto corriente en salud (% del PIB) | Índice de Gini | ECU | 0.849 | 0.004 | 0.053 | 0.817 | 0.712 | 0.048 | 🟡 Marginal |
+| Gasto corriente en salud (% del PIB) | Esperanza de vida al nacer (años) | MEX | -0.831 | 0.006 | 0.053 | -0.567 | -0.764 | 0.027 | 🟡 Marginal |
+| Gasto corriente en salud (% del PIB) | Esperanza de vida al nacer (años) | LCN | -0.826 | 0.006 | 0.053 | -0.583 | -0.737 | 0.037 | 🟡 Marginal |
+| Gasto corriente en salud (% del PIB) | Índice de Gini | CRI | 0.804 | 0.009 | 0.063 | 0.854 | 0.730 | 0.040 | 🟡 Marginal |
+| Esperanza de vida al nacer (años) | Índice de Gini | PAN | -0.784 | 0.021 | 0.093 | -0.881 | -0.232 | 0.708 | 🟡 Marginal |
+| Gasto corriente en salud (% del PIB) | Esperanza de vida al nacer (años) | ARG | -0.775 | 0.014 | 0.083 | -0.283 | -0.648 | 0.082 | 🟡 Marginal |
+| Esperanza de vida al nacer (años) | Índice de Gini | ECU | -0.720 | 0.019 | 0.093 | -0.467 | -0.561 | 0.116 | 🟡 Marginal |
+| Gasto corriente en salud (% del PIB) | Índice de Gini | MEX | -0.681 | 0.319 | 0.588 | -0.600 | — | — | 🔴 Sin evidencia |
+| Gasto corriente en salud (% del PIB) | Índice de Gini | COL | 0.680 | 0.030 | 0.119 | 0.565 | 0.473 | 0.199 | 🔴 Sin evidencia |
+| Gasto corriente en salud (% del PIB) | Esperanza de vida al nacer (años) | COL | -0.664 | 0.036 | 0.127 | -0.006 | -0.846 | 0.004 | 🔴 Sin evidencia |
+| Gasto corriente en salud (% del PIB) | Esperanza de vida al nacer (años) | DOM | -0.654 | 0.056 | 0.178 | -0.517 | -0.702 | 0.052 | 🔴 Sin evidencia |
+| Gasto corriente en salud (% del PIB) | Esperanza de vida al nacer (años) | PER | -0.600 | 0.087 | 0.255 | -0.150 | -0.798 | 0.018 | 🔴 Sin evidencia |
+| Gasto corriente en salud (% del PIB) | Índice de Gini | PER | -0.558 | 0.118 | 0.296 | -0.483 | 0.189 | 0.655 | 🔴 Sin evidencia |
+| Esperanza de vida al nacer (años) | Índice de Gini | CRI | -0.536 | 0.110 | 0.296 | -0.620 | -0.456 | 0.217 | 🔴 Sin evidencia |
 *q (FDR): p-valor ajustado por Benjamini-Hochberg sobre la familia de correlaciones del análisis — la significancia debe leerse de q, no de p.*
 
 **Tabla 4.** Indicadores derivados (cambio anual, % cambio, CAGR).
 
 | Serie | Ámbito | Inicial (año) | Final (año) | Cambio anual prom. | % cambio total | CAGR |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| Inversión extranjera directa, flujos netos (% del PIB) | América Latina y el Caribe (LCN) | 5.02 (2015) | 2.87 (2024) | -0.2385 | -42.75% | -6.01% |
-| Crecimiento del PIB (% anual) | América Latina y el Caribe (LCN) | 0.24 (2015) | 2.25 (2024) | 0.2239 | 840.14% | 28.27% |
-| Inversión extranjera directa, flujos netos (% del PIB) | Argentina | 1.98 (2015) | 1.82 (2024) | -0.0170 | -7.74% | -0.89% |
-| Crecimiento del PIB (% anual) | Argentina | 2.73 (2015) | -1.34 (2024) | -0.4527 | -149.17% | — |
-| Inversión extranjera directa, flujos netos (% del PIB) | Brasil | 3.59 (2015) | 3.39 (2024) | -0.0225 | -5.64% | -0.64% |
-| Crecimiento del PIB (% anual) | Brasil | -3.55 (2015) | 3.42 (2024) | 0.7739 | 196.43% | — |
-| Inversión extranjera directa, flujos netos (% del PIB) | Chile | 7.33 (2015) | 3.98 (2024) | -0.3720 | -45.69% | -6.56% |
-| Crecimiento del PIB (% anual) | Chile | 2.15 (2015) | 2.81 (2024) | 0.0726 | 30.35% | 2.99% |
+| Gasto corriente en salud (% del PIB) | América Latina y el Caribe (LCN) | 7.80 (2015) | 7.94 (2023) | 0.0176 | 1.80% | 0.22% |
+| Esperanza de vida al nacer (años) | América Latina y el Caribe (LCN) | 74.74 (2015) | 75.82 (2024) | 0.1194 | 1.44% | 0.16% |
+| Gasto corriente en salud (% del PIB) | Argentina | 10.27 (2015) | 10.27 (2023) | -0.0005 | -0.04% | -0.01% |
+| Esperanza de vida al nacer (años) | Argentina | 76.60 (2015) | 77.54 (2024) | 0.1048 | 1.23% | 0.14% |
+| Gasto corriente en salud (% del PIB) | Brasil | 8.91 (2015) | 9.73 (2023) | 0.1027 | 9.22% | 1.11% |
+| Esperanza de vida al nacer (años) | Brasil | 75.11 (2015) | 76.02 (2024) | 0.1019 | 1.22% | 0.13% |
+| Gasto corriente en salud (% del PIB) | Chile | 8.35 (2015) | 10.53 (2024) | 0.2422 | 26.10% | 2.61% |
+| Esperanza de vida al nacer (años) | Chile | 80.01 (2015) | 81.36 (2024) | 0.1501 | 1.69% | 0.19% |
 
 ## Anexo estadístico
 
 *Diagnósticos de robustez del modelo: no forman parte del argumento central, documentan la calidad de la estimación.*
 
-![Años estadísticamente atípicos en Inversión extranjera directa, flujos netos (% del PIB) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia.](charts/2026-11-13-19-28/fig11_anomaly.png)
+![Años estadísticamente atípicos en Inversión extranjera directa, flujos netos (% del PIB) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia.](charts/2026-11-14-17-48/fig11_anomaly.png)
 
 *Cómo leerla: los pines marcan años estadísticamente atípicos — choques como 2020 que se leen como contexto, no como tendencia.*
 
@@ -192,26 +190,26 @@ En síntesis, la evidencia empírica disponible hasta 2024 no sustenta la hipót
 ---
 ## Nota de transparencia
 **Contexto.** Este artículo fue generado automáticamente por AcademicPipeline, un pipeline multi-agente de investigación asistida por IA: agentes especializados proponen, calculan, redactan y se verifican mutuamente antes de publicar.
-Tema seleccionado: *Impacto de la digitalización y la seguridad energética en la inversión extranjera y el empleo juvenil en América Latina*.
-Noticia que inspiró la línea editorial: *"US disrupts North Korea's $400 million crypto scam, FBI says"* ([DW](https://www.dw.com/en/us-disrupts-north-korea-s-400-million-crypto-scam-fbi-says/a-79935957?maca=en-rss-en-all-1573-rdf)).
-Lo que la noticia afirmaba o sugería: La interrupción de una gran estafa de criptomonedas por parte de EE. UU. sugiere que la ciberseguridad internacional puede influir en la confianza de los inversores y, por ende, en los flujos de inversión extranjera directa hacia la región.
-Alcance verificable con los datos: Se pueden analizar los niveles de Inversión Extranjera Directa (FDI) y el crecimiento del PIB; no se pueden medir directamente los incidentes de ciberseguridad o la percepción de riesgo sin datos adicionales.
-Justificación del sistema: La noticia se relaciona con la seguridad digital, que afecta la confianza de los inversores. Los indicadores de FDI y crecimiento económico permiten evaluar si existe una asociación positiva entre mayor seguridad digital (proxied by Internet penetration) y mayores flujos de inversión.
-**Pregunta de investigación:** ¿Cómo se relacionan la penetración de internet, la participación del sector servicios y la seguridad energética con la inversión extranjera directa, el empleo juvenil y el crecimiento económico en América Latina?
-**Hipótesis planteada:** Los países latinoamericanos con mayor penetración de internet y mayor participación del sector servicios atraen más inversión extranjera directa (% del PIB) y presentan menores tasas de desempleo juvenil, mientras que una mayor participación del comercio (% del PIB) refuerza el crecimiento económico anual.
+Tema seleccionado: *Relación entre digitalización, sector servicios y desempleo juvenil en América Latina*.
+Noticia que inspiró la línea editorial: *"Le pape Léon XIV rencontre six victimes de violences sexuelles au sein de l'Église au Pérou"* ([Lalibre.be](https://www.lalibre.be/international/europe/2026/11/13/le-pape-leon-xiv-rencontre-six-victimes-de-violences-sexuelles-au-sein-de-leglise-au-perou-Z4OJPKZTZBALBNFR5M4CH3RJPQ/)).
+Lo que la noticia afirmaba o sugería: El Papa se reunió con víctimas de abusos sexuales cometidos por clérigos en Perú, denunciando la violencia y exigiendo reformas institucionales.
+Alcance verificable con los datos: Se pueden verificar tendencias de salud pública (gasto en salud, esperanza de vida) y desigualdad (índice de Gini) en Perú, pero no se pueden medir directamente los casos de abuso ni la respuesta institucional.
+Justificación del sistema: La noticia aborda una crisis social que puede reflejarse en indicadores de salud y desigualdad; el gasto en salud y la esperanza de vida son proxies de la capacidad del Estado para responder a crisis de salud mental y física derivadas del abuso.
+**Pregunta de investigación:** ¿En qué medida la penetración de internet y la participación del sector servicios reducen el desempleo juvenil en los países latinoamericanos?
+**Hipótesis planteada:** Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil significativamente menores.
 Se evaluaron 3 líneas editoriales candidatas; se seleccionó la de mayor respaldo en datos.
-**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-2024. Muestra analizada: ARG, BRA, CHL, COL, CRI (referencia regional agregada: LCN). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.
+**Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-2024. Muestra analizada: COL, BRA, CRI, DOM, ECU (referencia regional agregada: LCN). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.
 **Métodos analíticos ejecutados (Cómputo Determinístico):**
-- Python 3.12 (scipy/statsmodels): Estadísticas descriptivas de 387 series, 13 correlaciones Pearson/Spearman (0 significativas tras corrección FDR Benjamini-Hochberg, q<0.05).
+- Python 3.12 (scipy/statsmodels): Estadísticas descriptivas de 387 series, 35 correlaciones Pearson/Spearman (1 significativas tras corrección FDR Benjamini-Hochberg, q<0.05).
 - Sin regresión OLS ejecutada.
 - Test de tendencia Mann-Kendall: 168 de 377 series con tendencia significativa.
 - Detección de anomalías (z-score/IQR): 221 observaciones atípicas.
 - 6 figuras generadas con matplotlib a partir de los datos.
 **Proceso editorial.** Siete nodos automáticos: FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE.
-Revisión de rigor: veredicto APROBADO.
-Verificación automática de cifras: 52 cifras del texto cotejadas contra los resultados computados.
+Revisión de rigor: veredicto REESCRIBIR.
+Verificación automática de cifras: 50 cifras del texto cotejadas contra los resultados computados.
 Linter automático de lenguaje causal: el texto completo fue escaneado contra verbos de atribución causal; el diseño es correlacional, por lo que las relaciones se reportan como asociaciones, no efectos.
 Control de calidad final: veredicto APROBADO.
-Iteraciones: 1 reescritura(s), 0 reedición(es).
+Iteraciones: 2 reescritura(s), 0 reedición(es).
 **Limitaciones.** Las series tienen n≤10 observaciones anuales; las correlaciones no implican causalidad y las muestras pequeñas reducen la potencia estadística. El texto fue redactado por un modelo de lenguaje y verificado automáticamente contra los datos; no sustituye revisión humana. Artefactos verificables en el repositorio: `output/raw/fetched-data.json` (datos crudos), `output/raw/compute-results.json` (resultados completos), `output/raw/literature.json` (referencias verificadas en OpenAlex), `output/briefs/` (decisión editorial).
 *Explicación completa de los métodos (por qué Pearson, Spearman, OLS, Mann-Kendall): [metodología](https://rogelioguerrero.github.io/academic-pipeline/methodology.html)*

@@ -1,0 +1,69 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la crisis de abuso sexual en la Iglesia peruana sobre la salud pública y la desigualdad",
+      "noticia_inspiradora": "Le pape Léon XIV rencontre six victimes de violences sexuelles au sein de l'Église au Pérou",
+      "afirmacion_noticia": "El Papa se reunió con víctimas de abusos sexuales cometidos por clérigos en Perú, denunciando la violencia y exigiendo reformas institucionales.",
+      "verificable_con_datos": "Se pueden verificar tendencias de salud pública (gasto en salud, esperanza de vida) y desigualdad (índice de Gini) en Perú, pero no se pueden medir directamente los casos de abuso ni la respuesta institucional.",
+      "indicadores_respaldan": [
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)",
+        "Gini index"
+      ],
+      "correlaciones_relevantes": [
+        "health_expenditure_vs_urban_pop",
+        "gini_vs_urban_pop",
+        "health_expenditure_vs_life_expectancy"
+      ],
+      "justificacion": "La noticia aborda una crisis social que puede reflejarse en indicadores de salud y desigualdad; el gasto en salud y la esperanza de vida son proxies de la capacidad del Estado para responder a crisis de salud mental y física derivadas del abuso.",
+      "pregunta": "¿Cómo se relacionan los niveles de gasto en salud y la desigualdad con la prevalencia de crisis sociales como el abuso sexual institucional en Perú?",
+      "hipotesis": "Los países latinoamericanos con mayor gasto en salud y menor desigualdad presentan menores impactos negativos en indicadores de salud pública tras crisis de abuso institucional.",
+      "keywords_en": "sexual abuse church Peru health expenditure inequality Latin America"
+    },
+    {
+      "titulo": "Digitalización, servicios y empleo juvenil en América Latina tras la caída global de Microsoft",
+      "noticia_inspiradora": "What we know about the global Microsoft outage",
+      "afirmacion_noticia": "Una interrupción global de los servicios de Microsoft genera incertidumbre sobre la resiliencia digital y su efecto en el empleo tecnológico.",
+      "verificable_con_datos": "Se pueden analizar la relación entre penetración de internet, empleo en servicios y desempleo juvenil; no se pueden medir directamente la percepción de resiliencia ni la duración del outage.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "internet_vs_youth_unemployment",
+        "services_employment_vs_youth_unemployment"
+      ],
+      "justificacion": "La caída de un gigante tecnológico brinda un contexto para evaluar cómo la infraestructura digital y la estructura del empleo en servicios influyen en la vulnerabilidad del empleo juvenil en la región.",
+      "pregunta": "¿En qué medida la penetración de internet y la participación del sector servicios mitigan el desempleo juvenil en América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil significativamente menores.",
+      "keywords_en": "internet penetration youth unemployment services employment Latin America"
+    },
+    {
+      "titulo": "Migración neta, urbanización y gasto en salud: lecciones para la política pública latinoamericana",
+      "noticia_inspiradora": "India: Delhi surpasses Lahore as world's most polluted city",
+      "afirmacion_noticia": "El rápido crecimiento urbano en Delhi está asociado a altos niveles de contaminación, lo que sugiere riesgos para la salud pública en ciudades en expansión.",
+      "verificable_con_datos": "Se pueden medir la relación entre urbanización, gasto en salud y esperanza de vida; la contaminación específica no está disponible en el catálogo.",
+      "indicadores_respaldan": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)",
+        "Net migration (total people)"
+      ],
+      "correlaciones_relevantes": [
+        "urban_vs_health_expenditure",
+        "urban_vs_life_expectancy",
+        "migration_vs_urban_pop"
+      ],
+      "justificacion": "Aunque la noticia se centra en Asia, el fenómeno de urbanización rápida y sus implicaciones para salud es directamente comparable en América Latina, donde disponemos de datos de urbanización, gasto en salud y migración neta.",
+      "pregunta": "¿Cómo influye la migración neta en la urbanización y el gasto en salud, y qué efectos tiene sobre la esperanza de vida en América Latina?",
+      "hipotesis": "Un mayor ingreso neto migratorio está asociado a una mayor proporción de población urbana y a un aumento del gasto en salud, lo que a su vez eleva la esperanza de vida.",
+      "keywords_en": "net migration urbanization health expenditure life expectancy Latin America"
+    }
+  ],
+  "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina",
+  "angle": "Evaluar si la mayor penetración de internet y la expansión del empleo en servicios actúan como amortiguadores contra el desempleo juvenil tras interrupciones tecnológicas globales.",
+  "pregunta": "¿En qué medida la penetración de internet y la participación del sector servicios reducen el desempleo juvenil en los países latinoamericanos?",
+  "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil significativamente menores.",
+  "keywords_en": "internet penetration youth unemployment services sector Latin America"
+}
