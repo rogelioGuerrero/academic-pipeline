@@ -1,5 +1,90 @@
 [
   {
+    "file": "2026-11-15_relaci-n-entre-digitalizaci-n--sector-se.md",
+    "date": "2026-11-15",
+    "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://images.pexels.com/photos/17881598/pexels-photo-17881598.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "section": "Internacional",
+    "news_url": "https://www.dw.com/en/italy-slaps-meta-with-€805mn-fine-over-access-to-android-photos/a-79949032?maca=en-rss-en-all-1573-rdf",
+    "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil más bajas?",
+    "editorial": "¿Y si el número de personas que usan internet y el tamaño del sector servicios en Latinoamérica fueran la clave para que los jóvenes encuentren trabajo? Esa pregunta surgió cuando vimos la noticia sobre la multa de €805 millones que Italia impuso a Meta por el acceso a fotos en Android, y nos preguntamos si algo similar podría estar pasando en nuestra región.\n\nAl revisar los datos de los diez países más conectados, vemos que el porcentaje de usuarios de internet ha subido en la mayoría, pero el empleo en servicios también ha crecido, especialmente en México y Brasil, donde el sector representa casi el 60 % del empleo total. En esos lugares, la tasa de desempleo juvenil ha caído ligeramente, de alrededor del 25 % a 22 % en los últimos años. Sin embargo, en países como Chile y Colombia, donde el empleo en servicios es más estable, el desempleo juvenil no mostró cambios significativos. Cuando miramos la evolución dentro de cada país a lo largo del tiempo, la relación entre más servicios y menos desempleo juvenil aparece más clara, aunque todavía no es una regla absoluta.\n\nEn resumen, los datos sugieren que un mayor acceso a internet y un sector servicios fuerte pueden ayudar a que los jóvenes encuentren trabajo, pero la evidencia no es concluyente y varía de un país a otro. No podemos afirmar con certeza que la tecnología sea la solución, pero sí indica que la economía digital y el empleo en servicios están relacionados de manera interesante.",
+    "charts": "2026-11-15-18-38",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 1701
+      },
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 2200
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7263,
+        "after": 4496,
+        "cutChars": 8019
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9367,
+        "after": 5243,
+        "cutChars": 12028
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7228,
+        "after": 4523,
+        "cutChars": 8026
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9144,
+        "after": 5264,
+        "cutChars": 11558
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7101,
+        "after": 4545,
+        "cutChars": 7655
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9315,
+        "after": 5482,
+        "cutChars": 11517
+      }
+    ],
+    "ts": "2026-11-15T18:46:52.563Z"
+  },
+  {
     "file": "2026-11-14_relaci-n-entre-digitalizaci-n--sector-se.md",
     "date": "2026-11-14",
     "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-14T17:55:38+00:00",
+  "generated": "2026-11-15T18:46:57+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 37
+    "papers": 38
   },
   "countries": [
     {
@@ -66,6 +66,28 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-15",
+      "file": "2026-11-15_relaci-n-entre-digitalizaci-n--sector-se.md",
+      "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "indicators": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ]
+    },
     {
       "date": "2026-11-14",
       "file": "2026-11-14_relaci-n-entre-digitalizaci-n--sector-se.md",
@@ -147,9 +169,9 @@
         "Employment in services (% of total employment)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
         "Internet users (% of population)",
-        "Employment in services (% of total employment)"
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
       ]
     },
     {
@@ -293,8 +315,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
         "Youth unemployment (% of labor force 15-24)",
+        "GDP growth (annual %)",
         "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
       ]
     },
@@ -315,8 +337,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
         "Internet users (% of population)",
+        "GDP growth (annual %)",
         "Personal remittances received (current US$)"
       ]
     },
@@ -459,8 +481,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
         "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
         "Government expenditure on education (% of GDP)"
       ]
     },
@@ -506,8 +528,8 @@
         "GDP per capita (current US$)"
       ],
       "indicators": [
-        "Net migration (total people)",
         "Internet users (% of population)",
+        "Net migration (total people)",
         "Personal remittances received (current US$)",
         "GDP per capita (current US$)"
       ]
@@ -529,8 +551,8 @@
         "Government expenditure on education (% of GDP)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
         "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
         "Government expenditure on education (% of GDP)"
       ]
     },
@@ -551,9 +573,9 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
         "Internet users (% of population)",
-        "Employment in services (% of total employment)"
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
       ]
     },
     {
@@ -927,6 +949,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-15",
+              "file": "2026-11-15_relaci-n-entre-digitalizaci-n--sector-se.md",
+              "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina"
+            },
+            {
               "date": "2026-11-11",
               "file": "2026-11-11_vulnerabilidad-del-empleo-juvenil-frente.md",
               "topic": "Vulnerabilidad del empleo juvenil frente a la digitalización y la penetración de internet"
@@ -1224,6 +1251,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-15",
+              "file": "2026-11-15_relaci-n-entre-digitalizaci-n--sector-se.md",
+              "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina"
+            },
             {
               "date": "2026-11-11",
               "file": "2026-11-11_vulnerabilidad-del-empleo-juvenil-frente.md",
@@ -2059,6 +2091,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-15",
+              "file": "2026-11-15_relaci-n-entre-digitalizaci-n--sector-se.md",
+              "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina"
+            },
             {
               "date": "2026-11-11",
               "file": "2026-11-11_vulnerabilidad-del-empleo-juvenil-frente.md",

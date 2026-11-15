@@ -1,0 +1,250 @@
+{
+  "generated": "2026-11-15T18:46:52.563Z",
+  "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina",
+  "angle": "Analizar cómo la penetración de internet y la participación del sector servicios influyen en las tasas de desempleo juvenil, a la luz de regulaciones y fallas en plataformas digitales globales.",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 2,
+    "edit": 0
+  },
+  "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil más bajas?",
+  "hipotesis": "Un mayor nivel de penetración de internet y una mayor participación del sector servicios están asociados a menores tasas de desempleo juvenil en América Latina.",
+  "inspiringNews": {
+    "title": "Italy slaps Meta with €805mn fine over access to Android photos",
+    "url": "https://www.dw.com/en/italy-slaps-meta-with-€805mn-fine-over-access-to-android-photos/a-79949032?maca=en-rss-en-all-1573-rdf",
+    "source": "DW",
+    "section": "Internacional",
+    "image": "https://images.pexels.com/photos/17881598/pexels-photo-17881598.jpeg?auto=compress&cs=tinysrgb&h=350"
+  },
+  "suggestMode": "suggest",
+  "suggestions": [
+    {
+      "titulo": "Impacto de la regulación de plataformas digitales en la creación de empleo en el sector servicios de América Latina",
+      "noticia_inspiradora": "Italy slaps Meta with €805mn fine over access to Android photos",
+      "afirmacion_noticia": "Los reguladores europeos imponen fuertes multas a gigantes tecnológicos por violaciones de privacidad, lo que podría limitar su expansión y actividad económica en la región.",
+      "verificable_con_datos": "Se puede confirmar si los países con mayor penetración de internet y mayor participación del sector servicios presentan menores tasas de desempleo juvenil; no se pueden medir directamente los efectos de una multa específica a Meta en América Latina.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Employment in services",
+        "Employment in services ↔ Youth unemployment",
+        "Internet users ↔ Youth unemployment"
+      ],
+      "justificacion": "La noticia se centra en la regulación de una empresa digital global; el puente más directo es evaluar cómo la digitalización (usuarios de internet) y la fuerza del sector servicios influyen en el desempleo juvenil, dominios con datos disponibles.",
+      "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios tienen tasas de desempleo juvenil más bajas?",
+      "hipotesis": "Un mayor nivel de penetración de internet y una mayor participación del sector servicios están asociados a menores tasas de desempleo juvenil en América Latina.",
+      "keywords_en": "digital regulation internet penetration services sector youth unemployment Latin America"
+    },
+    {
+      "titulo": "Adopción de energías renovables y su relación con el crecimiento económico en América Latina frente a la agenda climática global",
+      "noticia_inspiradora": "COP31: Protesters, UN urge swift climate deal",
+      "afirmacion_noticia": "Los activistas y la ONU demandan acuerdos climáticos rápidos, lo que impulsa a los países a incrementar su consumo de energía renovable para sostener el crecimiento económico.",
+      "verificable_con_datos": "Se pueden medir los niveles de consumo de energía renovable y el crecimiento del PIB; no se dispone de datos directos sobre la presión de protestas o compromisos internacionales.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy consumption ↔ GDP growth"
+      ],
+      "justificacion": "La noticia aborda la urgencia climática; el vínculo más cuantificable es entre la adopción de energías renovables y el desempeño económico, ambos presentes en el catálogo.",
+      "pregunta": "¿Existe una relación positiva entre la participación de energías renovables en la matriz energética y el crecimiento del PIB en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con mayor participación de energías renovables presentan tasas de crecimiento económico anual superiores.",
+      "keywords_en": "renewable energy consumption GDP growth Latin America climate policy"
+    },
+    {
+      "titulo": "Confiabilidad de la infraestructura digital y su efecto sobre el desempleo juvenil en América Latina",
+      "noticia_inspiradora": "Microsoft’s outage sent the world back decades: Fax machines, landlines and handwritten prescriptions",
+      "afirmacion_noticia": "Una caída masiva de servicios digitales muestra la vulnerabilidad de la infraestructura tecnológica, lo que podría afectar negativamente al empleo juvenil que depende de plataformas digitales.",
+      "verificable_con_datos": "Se pueden analizar la relación entre la penetración de internet y el desempleo juvenil; no se dispone de datos sobre la frecuencia o magnitud de interrupciones de servicios digitales en la región.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Internet users ↔ Employment in services"
+      ],
+      "justificacion": "La noticia destaca una falla tecnológica global; el ángulo verificable es cómo la disponibilidad de internet (como proxy de infraestructura digital) se relaciona con el desempleo juvenil, usando datos existentes.",
+      "pregunta": "¿Los países latinoamericanos con mayor penetración de internet presentan menores tasas de desempleo juvenil, controlando por la participación del sector servicios?",
+      "hipotesis": "Una mayor penetración de internet está asociada a menores tasas de desempleo juvenil en América Latina, especialmente en economías con un sector servicios más amplio.",
+      "keywords_en": "digital infrastructure internet penetration youth unemployment services sector Latin America"
+    }
+  ],
+  "reviewDecision": {
+    "datos_correctos": true,
+    "detalle_datos": "Todas las estadísticas citadas (r, p, R2, betas, medias y tendencias) coinciden con los resultados y datos reales proporcionados. No se detectaron cifras fuera de los rangos ni valores no presentes en la fuente autorizada.",
+    "datos_inventados": [],
+    "estructura_ok": true,
+    "coherencia_ok": true,
+    "correcciones": [],
+    "datos_faltantes": null,
+    "veredicto": "APROBADO",
+    "feedback": null,
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 99,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "APROBADO",
+    "checklist": {
+      "estructura_ok": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": true,
+      "datos_verificados": true,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 2234,
+    "issues": [],
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 99,
+      "invented": 0
+    }
+  },
+  "editorial": "¿Y si el número de personas que usan internet y el tamaño del sector servicios en Latinoamérica fueran la clave para que los jóvenes encuentren trabajo? Esa pregunta surgió cuando vimos la noticia sobre la multa de €805 millones que Italia impuso a Meta por el acceso a fotos en Android, y nos preguntamos si algo similar podría estar pasando en nuestra región.\n\nAl revisar los datos de los diez países más conectados, vemos que el porcentaje de usuarios de internet ha subido en la mayoría, pero el empleo en servicios también ha crecido, especialmente en México y Brasil, donde el sector representa casi el 60 % del empleo total. En esos lugares, la tasa de desempleo juvenil ha caído ligeramente, de alrededor del 25 % a 22 % en los últimos años. Sin embargo, en países como Chile y Colombia, donde el empleo en servicios es más estable, el desempleo juvenil no mostró cambios significativos. Cuando miramos la evolución dentro de cada país a lo largo del tiempo, la relación entre más servicios y menos desempleo juvenil aparece más clara, aunque todavía no es una regla absoluta.\n\nEn resumen, los datos sugieren que un mayor acceso a internet y un sector servicios fuerte pueden ayudar a que los jóvenes encuentren trabajo, pero la evidencia no es concluyente y varía de un país a otro. No podemos afirmar con certeza que la tecnología sea la solución, pero sí indica que la economía digital y el empleo en servicios están relacionados de manera interesante.",
+  "sample": {
+    "countries": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "COL",
+      "CRI"
+    ],
+    "indicators": [
+      "Internet users (% of population)",
+      "Employment in services (% of total employment)",
+      "Youth unemployment (% of labor force 15-24)"
+    ]
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-11-15-18-38",
+    "regression": {
+      "r_squared": 0.5602435577897185,
+      "n": 10
+    },
+    "correlations": 39,
+    "significantCorrelations": [
+      {
+        "x": "Internet users (% of population) [BRA]",
+        "y": "Employment in services (% of total employment) [BRA]",
+        "r": 0.8661447562276412,
+        "p": 0.001191236302532572,
+        "q": 0.015486071932923435,
+        "diff_r": 0.0950495522038479,
+        "diff_p": 0.8078185257851289,
+        "country": "BRA"
+      },
+      {
+        "x": "Internet users (% of population) [CHL]",
+        "y": "Employment in services (% of total employment) [CHL]",
+        "r": 0.8734750722753686,
+        "p": 0.0009597790716499284,
+        "q": 0.015486071932923435,
+        "diff_r": 0.12563215778621803,
+        "diff_p": 0.7474066938933797,
+        "country": "CHL"
+      },
+      {
+        "x": "Internet users (% of population) [ECU]",
+        "y": "Employment in services (% of total employment) [ECU]",
+        "r": -0.8829294368796982,
+        "p": 0.0007118916129454525,
+        "q": 0.015486071932923435,
+        "diff_r": -0.049035675270933325,
+        "diff_p": 0.9003052898150877,
+        "country": "ECU"
+      }
+    ]
+  },
+  "truncations": [
+    {
+      "stage": "WRITE:apertura_metodologia",
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 1701
+    },
+    {
+      "stage": "WRITE:apertura_metodologia",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 2200
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7263,
+      "after": 4496,
+      "cutChars": 8019
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 9367,
+      "after": 5243,
+      "cutChars": 12028
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7228,
+      "after": 4523,
+      "cutChars": 8026
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 9144,
+      "after": 5264,
+      "cutChars": 11558
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7101,
+      "after": 4545,
+      "cutChars": 7655
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 9315,
+      "after": 5482,
+      "cutChars": 11517
+    }
+  ],
+  "elapsed": 510.9
+}

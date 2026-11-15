@@ -1,0 +1,64 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la regulación de plataformas digitales en la creación de empleo en el sector servicios de América Latina",
+      "noticia_inspiradora": "Italy slaps Meta with €805mn fine over access to Android photos",
+      "afirmacion_noticia": "Los reguladores europeos imponen fuertes multas a gigantes tecnológicos por violaciones de privacidad, lo que podría limitar su expansión y actividad económica en la región.",
+      "verificable_con_datos": "Se puede confirmar si los países con mayor penetración de internet y mayor participación del sector servicios presentan menores tasas de desempleo juvenil; no se pueden medir directamente los efectos de una multa específica a Meta en América Latina.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Employment in services",
+        "Employment in services ↔ Youth unemployment",
+        "Internet users ↔ Youth unemployment"
+      ],
+      "justificacion": "La noticia se centra en la regulación de una empresa digital global; el puente más directo es evaluar cómo la digitalización (usuarios de internet) y la fuerza del sector servicios influyen en el desempleo juvenil, dominios con datos disponibles.",
+      "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios tienen tasas de desempleo juvenil más bajas?",
+      "hipotesis": "Un mayor nivel de penetración de internet y una mayor participación del sector servicios están asociados a menores tasas de desempleo juvenil en América Latina.",
+      "keywords_en": "digital regulation internet penetration services sector youth unemployment Latin America"
+    },
+    {
+      "titulo": "Adopción de energías renovables y su relación con el crecimiento económico en América Latina frente a la agenda climática global",
+      "noticia_inspiradora": "COP31: Protesters, UN urge swift climate deal",
+      "afirmacion_noticia": "Los activistas y la ONU demandan acuerdos climáticos rápidos, lo que impulsa a los países a incrementar su consumo de energía renovable para sostener el crecimiento económico.",
+      "verificable_con_datos": "Se pueden medir los niveles de consumo de energía renovable y el crecimiento del PIB; no se dispone de datos directos sobre la presión de protestas o compromisos internacionales.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy consumption ↔ GDP growth"
+      ],
+      "justificacion": "La noticia aborda la urgencia climática; el vínculo más cuantificable es entre la adopción de energías renovables y el desempeño económico, ambos presentes en el catálogo.",
+      "pregunta": "¿Existe una relación positiva entre la participación de energías renovables en la matriz energética y el crecimiento del PIB en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con mayor participación de energías renovables presentan tasas de crecimiento económico anual superiores.",
+      "keywords_en": "renewable energy consumption GDP growth Latin America climate policy"
+    },
+    {
+      "titulo": "Confiabilidad de la infraestructura digital y su efecto sobre el desempleo juvenil en América Latina",
+      "noticia_inspiradora": "Microsoft’s outage sent the world back decades: Fax machines, landlines and handwritten prescriptions",
+      "afirmacion_noticia": "Una caída masiva de servicios digitales muestra la vulnerabilidad de la infraestructura tecnológica, lo que podría afectar negativamente al empleo juvenil que depende de plataformas digitales.",
+      "verificable_con_datos": "Se pueden analizar la relación entre la penetración de internet y el desempleo juvenil; no se dispone de datos sobre la frecuencia o magnitud de interrupciones de servicios digitales en la región.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Internet users ↔ Employment in services"
+      ],
+      "justificacion": "La noticia destaca una falla tecnológica global; el ángulo verificable es cómo la disponibilidad de internet (como proxy de infraestructura digital) se relaciona con el desempleo juvenil, usando datos existentes.",
+      "pregunta": "¿Los países latinoamericanos con mayor penetración de internet presentan menores tasas de desempleo juvenil, controlando por la participación del sector servicios?",
+      "hipotesis": "Una mayor penetración de internet está asociada a menores tasas de desempleo juvenil en América Latina, especialmente en economías con un sector servicios más amplio.",
+      "keywords_en": "digital infrastructure internet penetration youth unemployment services sector Latin America"
+    }
+  ],
+  "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina",
+  "angle": "Analizar cómo la penetración de internet y la participación del sector servicios influyen en las tasas de desempleo juvenil, a la luz de regulaciones y fallas en plataformas digitales globales.",
+  "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil más bajas?",
+  "hipotesis": "Un mayor nivel de penetración de internet y una mayor participación del sector servicios están asociados a menores tasas de desempleo juvenil en América Latina."
+}
