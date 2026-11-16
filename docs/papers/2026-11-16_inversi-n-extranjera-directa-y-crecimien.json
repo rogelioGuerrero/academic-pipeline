@@ -1,0 +1,205 @@
+{
+  "generated": "2026-11-16T21:52:42.507Z",
+  "topic": "Inversión extranjera directa y crecimiento económico frente a la inestabilidad geopolítica",
+  "angle": "La noticia menciona un contexto global que puede repercutir en la inversión; los indicadores de IED y crecimiento permiten evaluar la relación macro sin necesidad de datos de conflicto directo.",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 1,
+    "edit": 0
+  },
+  "pregunta": "¿Existe una correlación positiva entre los ingresos de inversión extranjera directa y el crecimiento del PIB en los países latinoamericanos durante periodos de alta tensión geopolítica?",
+  "hipotesis": "Los países latinoamericanos que mantienen mayores ingresos de IED presentan un crecimiento del PIB más robusto, incluso en contextos de inestabilidad geopolítica.",
+  "inspiringNews": {
+    "title": "ASEAN summit: Who’s attending and what’s at stake?",
+    "url": "https://www.aljazeera.com/news/2026/11/15/asean-summit-whos-attending-and-whats-at-stake",
+    "source": "Al Jazeera English",
+    "section": "Desarrollo Internacional",
+    "image": "https://www.aljazeera.com/wp-content/uploads/2026/10/AP26028267291630-1791246790_c99e6e-1791246925.jpg?resize=1200%2C630&quality=80"
+  },
+  "suggestMode": "suggest",
+  "suggestions": [
+    {
+      "titulo": "Digitalización, sector servicios y desempleo juvenil en América Latina",
+      "noticia_inspiradora": "Nubank Brazil Wins a Bank License, Saving a Brand Used by 120 Million People (América Latina)",
+      "afirmacion_noticia": "La expansión bancaria digital de Nubank sugiere que la mayor penetración de servicios financieros digitales podría reducir el desempleo juvenil en la región.",
+      "verificable_con_datos": "Se pueden comparar la tasa de desempleo juvenil con el porcentaje de usuarios de internet y la participación del sector servicios; no se puede medir directamente el impacto de Nubank porque no hay indicador de fintech específico.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Employment in services ↔ Youth unemployment"
+      ],
+      "justificacion": "La noticia está ligada a la digitalización de servicios financieros, un sub‑campo de la digitalización general que ya se ha demostrado correlacionar con empleo juvenil en estudios previos; los indicadores disponibles permiten analizar esa relación a nivel macro.",
+      "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan menores tasas de desempleo juvenil?",
+      "hipotesis": "Un mayor nivel de penetración de internet y una mayor participación del sector servicios están asociados a menores tasas de desempleo juvenil en América Latina.",
+      "keywords_en": "digitalization internet penetration youth unemployment services sector Latin America"
+    },
+    {
+      "titulo": "Inversión extranjera directa y crecimiento económico frente a la inestabilidad geopolítica",
+      "noticia_inspiradora": "ASEAN summit: Who’s attending and what’s at stake? (Desarrollo Internacional)",
+      "afirmacion_noticia": "La tensión geopolítica por la guerra en Oriente Medio podría afectar la inversión extranjera y el crecimiento económico de América Latina.",
+      "verificable_con_datos": "Se pueden observar los flujos de IED y el crecimiento del PIB; no se pueden medir efectos específicos de la guerra en la región por falta de indicadores de riesgo geopolítico.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI inflows ↔ GDP growth"
+      ],
+      "justificacion": "La noticia menciona un contexto global que puede repercutir en la inversión; los indicadores de IED y crecimiento permiten evaluar la relación macro sin necesidad de datos de conflicto directo.",
+      "pregunta": "¿Existe una correlación positiva entre los ingresos de inversión extranjera directa y el crecimiento del PIB en los países latinoamericanos durante periodos de alta tensión geopolítica?",
+      "hipotesis": "Los países latinoamericanos que mantienen mayores ingresos de IED presentan un crecimiento del PIB más robusto, incluso en contextos de inestabilidad geopolítica.",
+      "keywords_en": "foreign direct investment GDP growth Latin America geopolitics"
+    },
+    {
+      "titulo": "Migración neta, urbanización y gasto en salud en América Latina",
+      "noticia_inspiradora": "Germany news: Germany holds national day of remembrance (Economía)",
+      "afirmacion_noticia": "Aunque la noticia es europea, el aumento de flujos migratorios globales podría influir en la urbanización y el gasto en salud de los países latinoamericanos receptores.",
+      "verificable_con_datos": "Se pueden analizar la relación entre migración neta, porcentaje de población urbana y gasto en salud; no se puede aislar el efecto de políticas específicas de Alemania.",
+      "indicadores_respaldan": [
+        "Net migration (total people)",
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Net migration ↔ Urban population",
+        "Urban population ↔ Health expenditure"
+      ],
+      "justificacion": "Los indicadores disponibles permiten probar la cadena de efectos migratorios → urbanización → gasto en salud, una relación ya confirmada parcialmente en la base de datos.",
+      "pregunta": "¿Los flujos migratorios netos positivos están asociados a mayores niveles de urbanización y mayor gasto en salud en América Latina?",
+      "hipotesis": "Un mayor ingreso neto migratorio está positivamente asociado con una mayor proporción de población urbana y con un mayor gasto en salud (% del PIB) en América Latina.",
+      "keywords_en": "net migration urbanization health expenditure Latin America"
+    },
+    {
+      "titulo": "Impacto de la digitalización y la educación superior en la empleabilidad juvenil",
+      "noticia_inspiradora": "Sebi to issue detailed AI guidelines focusing on investor protection and accountability (Ciberseguridad)",
+      "afirmacion_noticia": "Las nuevas directrices de IA en India sugieren que la regulación tecnológica puede mejorar la empleabilidad de los jóvenes en sectores avanzados.",
+      "verificable_con_datos": "Se pueden relacionar la tasa de desempleo juvenil con la tasa de usuarios de internet y la matrícula terciaria; no se dispone de indicadores de regulación de IA específica.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
+        "Tertiary school enrollment (% gross)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Tertiary enrollment ↔ Youth unemployment"
+      ],
+      "justificacion": "Aunque la noticia es de otro continente, el tema de regulación tecnológica se traduce en mayor digitalización, que se puede medir con usuarios de internet y educación superior, ambos disponibles.",
+      "pregunta": "¿Los países latinoamericanos con mayor penetración de internet y mayor matrícula terciaria presentan menores tasas de desempleo juvenil?",
+      "hipotesis": "Una mayor penetración de internet combinada con mayor matrícula en educación terciaria está asociada a menores tasas de desempleo juvenil en América Latina.",
+      "keywords_en": "internet penetration tertiary education youth unemployment Latin America"
+    }
+  ],
+  "reviewDecision": {
+    "datos_correctos": true,
+    "detalle_datos": "El paper reproduce fielmente los valores de tendencias, correlaciones y estadísticas provistos en los datos reales y resultados. No se detectan discrepancias numéricas ni referencias a fuentes no autorizadas.",
+    "datos_inventados": [],
+    "estructura_ok": true,
+    "coherencia_ok": true,
+    "correcciones": [],
+    "datos_faltantes": null,
+    "veredicto": "APROBADO",
+    "feedback": null,
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 54,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "APROBADO",
+    "checklist": {
+      "estructura_ok": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": true,
+      "datos_verificados": true,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 1895,
+    "issues": [],
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 54,
+      "invented": 0
+    }
+  },
+  "editorial": "¿Es verdad que cuando los países latinoamericanos reciben más dinero del exterior, su economía crece más rápido, incluso cuando el mundo parece tambalearse? Esa pregunta surgió al leer sobre el último cumbre de la ASEAN, donde los líderes se preguntan quiénes se van a reunir y qué está en juego.  \n\nAl mirar los números del Banco Mundial, la historia no es tan sencilla. En Colombia, por ejemplo, los flujos de inversión extranjera y el crecimiento del PIB se movieron casi al mismo ritmo, pero no se pudo afirmar que uno impulsara al otro. En Brasil, la relación fue casi opuesta: cuando la inversión subía, el PIB no mostraba un impulso claro. En México, los datos parecían indicar una ligera tendencia positiva, pero la diferencia era tan pequeña que podría ser solo una fluctuación normal. En Guatemala, la relación fue la más fuerte, con una subida de la inversión acompañada de un crecimiento del PIB más notable, aunque el número de años analizados era limitado.  \n\nEn resumen, la idea de que más inversión extranjera siempre significa un PIB más fuerte no se confirma de forma consistente. Los resultados varían de país a país y, en muchos casos, la evidencia es débil o simplemente no concluyente. Así que, aunque la inversión extranjera es un factor importante, no es un boleto automático al crecimiento económico, especialmente cuando el mundo está en tensión.",
+  "sample": {
+    "countries": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "COL",
+      "CRI"
+    ],
+    "indicators": [
+      "Foreign direct investment, net inflows (% of GDP)",
+      "GDP growth (annual %)"
+    ]
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-11-16-21-48",
+    "regression": null,
+    "correlations": 13,
+    "significantCorrelations": []
+  },
+  "truncations": [
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 5682,
+      "after": 4538,
+      "cutChars": 3373
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 7617,
+      "after": 5192,
+      "cutChars": 7312
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 5584,
+      "after": 4460,
+      "cutChars": 3453
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 6944,
+      "after": 4779,
+      "cutChars": 6769
+    }
+  ],
+  "elapsed": 296.9
+}

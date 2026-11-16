@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-15T18:46:57+00:00",
+  "generated": "2026-11-16T21:52:47+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 38
+    "papers": 39
   },
   "countries": [
     {
@@ -66,6 +66,26 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-16",
+      "file": "2026-11-16_inversi-n-extranjera-directa-y-crecimien.md",
+      "topic": "Inversión extranjera directa y crecimiento económico frente a la inestabilidad geopolítica",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "indicators": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)"
+      ]
+    },
     {
       "date": "2026-11-15",
       "file": "2026-11-15_relaci-n-entre-digitalizaci-n--sector-se.md",
@@ -315,8 +335,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "Youth unemployment (% of labor force 15-24)",
         "GDP growth (annual %)",
+        "Youth unemployment (% of labor force 15-24)",
         "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
       ]
     },
@@ -337,8 +357,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "Internet users (% of population)",
         "GDP growth (annual %)",
+        "Internet users (% of population)",
         "Personal remittances received (current US$)"
       ]
     },
@@ -1335,6 +1355,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-16",
+              "file": "2026-11-16_inversi-n-extranjera-directa-y-crecimien.md",
+              "topic": "Inversión extranjera directa y crecimiento económico frente a la inestabilidad geopolítica"
+            },
+            {
               "date": "2026-11-13",
               "file": "2026-11-13_impacto-de-la-digitalizaci-n-y-la-seguri.md",
               "topic": "Impacto de la digitalización y la seguridad energética en la inversión extranjera y el empleo juvenil en América Latina"
@@ -1400,6 +1425,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-16",
+              "file": "2026-11-16_inversi-n-extranjera-directa-y-crecimien.md",
+              "topic": "Inversión extranjera directa y crecimiento económico frente a la inestabilidad geopolítica"
+            },
             {
               "date": "2026-11-13",
               "file": "2026-11-13_impacto-de-la-digitalizaci-n-y-la-seguri.md",

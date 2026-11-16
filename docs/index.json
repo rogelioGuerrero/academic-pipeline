@@ -1,5 +1,59 @@
 [
   {
+    "file": "2026-11-16_inversi-n-extranjera-directa-y-crecimien.md",
+    "date": "2026-11-16",
+    "topic": "Inversión extranjera directa y crecimiento económico frente a la inestabilidad geopolítica",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://www.aljazeera.com/wp-content/uploads/2026/10/AP26028267291630-1791246790_c99e6e-1791246925.jpg?resize=1200%2C630&quality=80",
+    "section": "Desarrollo Internacional",
+    "news_url": "https://www.aljazeera.com/news/2026/11/15/asean-summit-whos-attending-and-whats-at-stake",
+    "pregunta": "¿Existe una correlación positiva entre los ingresos de inversión extranjera directa y el crecimiento del PIB en los países latinoamericanos durante periodos de alta tensión geopolítica?",
+    "editorial": "¿Es verdad que cuando los países latinoamericanos reciben más dinero del exterior, su economía crece más rápido, incluso cuando el mundo parece tambalearse? Esa pregunta surgió al leer sobre el último cumbre de la ASEAN, donde los líderes se preguntan quiénes se van a reunir y qué está en juego.  \n\nAl mirar los números del Banco Mundial, la historia no es tan sencilla. En Colombia, por ejemplo, los flujos de inversión extranjera y el crecimiento del PIB se movieron casi al mismo ritmo, pero no se pudo afirmar que uno impulsara al otro. En Brasil, la relación fue casi opuesta: cuando la inversión subía, el PIB no mostraba un impulso claro. En México, los datos parecían indicar una ligera tendencia positiva, pero la diferencia era tan pequeña que podría ser solo una fluctuación normal. En Guatemala, la relación fue la más fuerte, con una subida de la inversión acompañada de un crecimiento del PIB más notable, aunque el número de años analizados era limitado.  \n\nEn resumen, la idea de que más inversión extranjera siempre significa un PIB más fuerte no se confirma de forma consistente. Los resultados varían de país a país y, en muchos casos, la evidencia es débil o simplemente no concluyente. Así que, aunque la inversión extranjera es un factor importante, no es un boleto automático al crecimiento económico, especialmente cuando el mundo está en tensión.",
+    "charts": "2026-11-16-21-48",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5682,
+        "after": 4538,
+        "cutChars": 3373
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7617,
+        "after": 5192,
+        "cutChars": 7312
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5584,
+        "after": 4460,
+        "cutChars": 3453
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 6944,
+        "after": 4779,
+        "cutChars": 6769
+      }
+    ],
+    "ts": "2026-11-16T21:52:42.507Z"
+  },
+  {
     "file": "2026-11-15_relaci-n-entre-digitalizaci-n--sector-se.md",
     "date": "2026-11-15",
     "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina",

@@ -1,0 +1,82 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Digitalización, sector servicios y desempleo juvenil en América Latina",
+      "noticia_inspiradora": "Nubank Brazil Wins a Bank License, Saving a Brand Used by 120 Million People (América Latina)",
+      "afirmacion_noticia": "La expansión bancaria digital de Nubank sugiere que la mayor penetración de servicios financieros digitales podría reducir el desempleo juvenil en la región.",
+      "verificable_con_datos": "Se pueden comparar la tasa de desempleo juvenil con el porcentaje de usuarios de internet y la participación del sector servicios; no se puede medir directamente el impacto de Nubank porque no hay indicador de fintech específico.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Employment in services ↔ Youth unemployment"
+      ],
+      "justificacion": "La noticia está ligada a la digitalización de servicios financieros, un sub‑campo de la digitalización general que ya se ha demostrado correlacionar con empleo juvenil en estudios previos; los indicadores disponibles permiten analizar esa relación a nivel macro.",
+      "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan menores tasas de desempleo juvenil?",
+      "hipotesis": "Un mayor nivel de penetración de internet y una mayor participación del sector servicios están asociados a menores tasas de desempleo juvenil en América Latina.",
+      "keywords_en": "digitalization internet penetration youth unemployment services sector Latin America"
+    },
+    {
+      "titulo": "Inversión extranjera directa y crecimiento económico frente a la inestabilidad geopolítica",
+      "noticia_inspiradora": "ASEAN summit: Who’s attending and what’s at stake? (Desarrollo Internacional)",
+      "afirmacion_noticia": "La tensión geopolítica por la guerra en Oriente Medio podría afectar la inversión extranjera y el crecimiento económico de América Latina.",
+      "verificable_con_datos": "Se pueden observar los flujos de IED y el crecimiento del PIB; no se pueden medir efectos específicos de la guerra en la región por falta de indicadores de riesgo geopolítico.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI inflows ↔ GDP growth"
+      ],
+      "justificacion": "La noticia menciona un contexto global que puede repercutir en la inversión; los indicadores de IED y crecimiento permiten evaluar la relación macro sin necesidad de datos de conflicto directo.",
+      "pregunta": "¿Existe una correlación positiva entre los ingresos de inversión extranjera directa y el crecimiento del PIB en los países latinoamericanos durante periodos de alta tensión geopolítica?",
+      "hipotesis": "Los países latinoamericanos que mantienen mayores ingresos de IED presentan un crecimiento del PIB más robusto, incluso en contextos de inestabilidad geopolítica.",
+      "keywords_en": "foreign direct investment GDP growth Latin America geopolitics"
+    },
+    {
+      "titulo": "Migración neta, urbanización y gasto en salud en América Latina",
+      "noticia_inspiradora": "Germany news: Germany holds national day of remembrance (Economía)",
+      "afirmacion_noticia": "Aunque la noticia es europea, el aumento de flujos migratorios globales podría influir en la urbanización y el gasto en salud de los países latinoamericanos receptores.",
+      "verificable_con_datos": "Se pueden analizar la relación entre migración neta, porcentaje de población urbana y gasto en salud; no se puede aislar el efecto de políticas específicas de Alemania.",
+      "indicadores_respaldan": [
+        "Net migration (total people)",
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Net migration ↔ Urban population",
+        "Urban population ↔ Health expenditure"
+      ],
+      "justificacion": "Los indicadores disponibles permiten probar la cadena de efectos migratorios → urbanización → gasto en salud, una relación ya confirmada parcialmente en la base de datos.",
+      "pregunta": "¿Los flujos migratorios netos positivos están asociados a mayores niveles de urbanización y mayor gasto en salud en América Latina?",
+      "hipotesis": "Un mayor ingreso neto migratorio está positivamente asociado con una mayor proporción de población urbana y con un mayor gasto en salud (% del PIB) en América Latina.",
+      "keywords_en": "net migration urbanization health expenditure Latin America"
+    },
+    {
+      "titulo": "Impacto de la digitalización y la educación superior en la empleabilidad juvenil",
+      "noticia_inspiradora": "Sebi to issue detailed AI guidelines focusing on investor protection and accountability (Ciberseguridad)",
+      "afirmacion_noticia": "Las nuevas directrices de IA en India sugieren que la regulación tecnológica puede mejorar la empleabilidad de los jóvenes en sectores avanzados.",
+      "verificable_con_datos": "Se pueden relacionar la tasa de desempleo juvenil con la tasa de usuarios de internet y la matrícula terciaria; no se dispone de indicadores de regulación de IA específica.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Internet users (% of population)",
+        "Tertiary school enrollment (% gross)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Tertiary enrollment ↔ Youth unemployment"
+      ],
+      "justificacion": "Aunque la noticia es de otro continente, el tema de regulación tecnológica se traduce en mayor digitalización, que se puede medir con usuarios de internet y educación superior, ambos disponibles.",
+      "pregunta": "¿Los países latinoamericanos con mayor penetración de internet y mayor matrícula terciaria presentan menores tasas de desempleo juvenil?",
+      "hipotesis": "Una mayor penetración de internet combinada con mayor matrícula en educación terciaria está asociada a menores tasas de desempleo juvenil en América Latina.",
+      "keywords_en": "internet penetration tertiary education youth unemployment Latin America"
+    }
+  ],
+  "topic": "Digitalización, sector servicios y desempleo juvenil en América Latina",
+  "angle": "Analizar cómo la expansión de la digitalización y la creciente participación del sector servicios explican la variación del desempleo juvenil entre los países latinoamericanos, usando la reciente expansión bancaria digital como caso ilustrativo.",
+  "pregunta": "¿Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan menores tasas de desempleo juvenil?",
+  "hipotesis": "Un mayor nivel de penetración de internet y una mayor participación del sector servicios están asociados a menores tasas de desempleo juvenil en América Latina."
+}
