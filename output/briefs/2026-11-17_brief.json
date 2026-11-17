@@ -1,0 +1,62 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Efectos de la reducción arancelaria Canadá‑China sobre el comercio y el crecimiento económico en América Latina",
+      "noticia_inspiradora": "Canada, China agree to ease tariffs amid trade rows with US",
+      "afirmacion_noticia": "La reducción de aranceles entre Canadá y China podría impulsar el comercio global y, por extensión, beneficiar a economías latinoamericanas dependientes de exportaciones agrícolas y manufactureras.",
+      "verificable_con_datos": "Se pueden medir los cambios en la participación del comercio (% del PIB) y el crecimiento del PIB anual en los países latinoamericanos; no se dispone de datos directos sobre acuerdos bilaterales específicos con Canadá o China.",
+      "indicadores_respaldan": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Trade ↔ GDP growth",
+        "Trade ↔ Manufacturing, value added (% of GDP)"
+      ],
+      "justificacion": "El anuncio comercial se traduce directamente en una variable cuantificable (participación del comercio en el PIB), la cual está disponible para todos los países de América Latina y permite evaluar su relación con el crecimiento económico.",
+      "pregunta": "¿La mayor participación del comercio (% del PIB) se asocia a un mayor crecimiento del PIB anual en los países latinoamericanos durante los últimos diez años?",
+      "hipotesis": "Los países latinoamericanos con una mayor participación del comercio en su PIB experimentan tasas de crecimiento del PIB anual más altas.",
+      "keywords_en": "trade share GDP growth Latin America tariff reduction"
+    },
+    {
+      "titulo": "Penetración de internet y desempleo juvenil: ¿una vía para la inclusión laboral en América Latina?",
+      "noticia_inspiradora": "ArcticRAT Android Malware Uses Grok AI to Analyse Stolen Banking Texts",
+      "afirmacion_noticia": "El uso de IA en actividades ilícitas subraya la creciente digitalización, lo que sugiere que mayor acceso a tecnologías podría también generar oportunidades de empleo formal para jóvenes.",
+      "verificable_con_datos": "Se pueden comparar el porcentaje de usuarios de internet con la tasa de desempleo juvenil; no se dispone de datos sobre la calidad del empleo digital ni de la informalidad específica del sector tecnológico.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment",
+        "Internet users ↔ Employment in services (% of total employment)"
+      ],
+      "justificacion": "La noticia destaca la expansión de la IA y la digitalización, lo que permite enlazar directamente la variable de acceso a internet con indicadores de empleo juvenil disponibles en la base.",
+      "pregunta": "¿Existe una relación negativa significativa entre la penetración de internet y la tasa de desempleo juvenil en América Latina?",
+      "hipotesis": "Un mayor porcentaje de usuarios de internet está asociado a menores tasas de desempleo juvenil en los países latinoamericanos.",
+      "keywords_en": "internet penetration youth unemployment Latin America digital inclusion"
+    },
+    {
+      "titulo": "Urbanización acelerada y gasto en salud: implicaciones para la equidad en América Latina",
+      "noticia_inspiradora": "Ecuador’s president denies existence of US military base",
+      "afirmacion_noticia": "La negación de presencia militar extranjera refleja tensiones de seguridad que pueden influir en flujos migratorios internos y en la expansión urbana.",
+      "verificable_con_datos": "Se pueden analizar la relación entre la proporción de población urbana y el gasto público en salud; no se cuenta con datos sobre percepciones de seguridad ni presencia militar.",
+      "indicadores_respaldan": [
+        "Urban population (% of total)",
+        "Current health expenditure (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Urban population ↔ Current health expenditure",
+        "Urban population ↔ Life expectancy at birth"
+      ],
+      "justificacion": "Aunque la noticia es de naturaleza política, su subtexto de seguridad y movimiento poblacional permite explorar la conexión entre urbanización y gasto en salud, variables disponibles y con correlaciones previamente confirmadas para Chile.",
+      "pregunta": "¿Los países latinoamericanos con mayor proporción de población urbana destinan un mayor porcentaje del PIB al gasto en salud?",
+      "hipotesis": "Un mayor nivel de urbanización está positivamente correlacionado con un mayor gasto en salud como porcentaje del PIB en América Latina.",
+      "keywords_en": "urbanization health expenditure public spending Latin America"
+    }
+  ],
+  "topic": "Impacto de la participación del comercio en el crecimiento económico de América Latina",
+  "angle": "Analizar si la mayor integración comercial (participación del comercio en el PIB) se traduce en un crecimiento económico más robusto, aprovechando el contexto de la reciente reducción arancelaria entre Canadá y China como catalizador potencial.",
+  "pregunta": "¿La mayor participación del comercio (% del PIB) está asociada a un mayor crecimiento del PIB anual en los países latinoamericanos?",
+  "hipotesis": "Los países latinoamericanos con una mayor participación del comercio en su PIB experimentan tasas de crecimiento del PIB anual más altas."
+}
