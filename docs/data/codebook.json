@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-19T00:32:18+00:00",
+  "generated": "2026-11-19T20:16:09+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 40
+    "papers": 41
   },
   "countries": [
     {
@@ -66,6 +66,26 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-19",
+      "file": "2026-11-19_reconsideraci-n-de-myanmar-de-la-relaci-.md",
+      "topic": "Reconsideración de Myanmar de la relación con la ASEAN y su posible efecto en la participación del comercio y el crecimiento del PIB latinoamericano",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "indicators": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ]
+    },
     {
       "date": "2026-11-19",
       "file": "2026-11-19_impacto-de-la-participaci-n-del-comercio.md",
@@ -1447,6 +1467,11 @@
           "papers": [
             {
               "date": "2026-11-19",
+              "file": "2026-11-19_reconsideraci-n-de-myanmar-de-la-relaci-.md",
+              "topic": "Reconsideración de Myanmar de la relación con la ASEAN y su posible efecto en la participación del comercio y el crecimiento del PIB latinoamericano"
+            },
+            {
+              "date": "2026-11-19",
               "file": "2026-11-19_impacto-de-la-participaci-n-del-comercio.md",
               "topic": "Impacto de la participación del comercio en el crecimiento económico de América Latina"
             },
@@ -1850,6 +1875,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-19",
+              "file": "2026-11-19_reconsideraci-n-de-myanmar-de-la-relaci-.md",
+              "topic": "Reconsideración de Myanmar de la relación con la ASEAN y su posible efecto en la participación del comercio y el crecimiento del PIB latinoamericano"
+            },
             {
               "date": "2026-11-19",
               "file": "2026-11-19_impacto-de-la-participaci-n-del-comercio.md",

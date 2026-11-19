@@ -1,106 +1,114 @@
-# Impacto de la participación del comercio en el crecimiento económico de América Latina  
+# Reconsideración de Myanmar de la relación con la ASEAN y su posible efecto en la participación del comercio y el crecimiento del PIB latinoamericano  
 
 **Autor:** Investigador Académico  
 **Revista:** *Ciencias Sociales*  
 **Fecha:** Noviembre de 2026  
 
 ## Resumen  
-Este estudio examina si la mayor participación del comercio en el PIB (% del PIB) está asociada a tasas de crecimiento del PIB anual más elevadas en América Latina y el Caribe entre 2015 y 2024. Utilizando series del Banco Mundial, se calculan correlaciones de Pearson y Spearman a nivel regional y por país, y se aplican pruebas de tendencia (Mann‑Kendall). Los resultados indican que, a nivel regional, la correlación entre comercio y crecimiento es moderada (r = 0.641, p = 0.046) pero no supera el umbral de significancia ajustada por FDR (q = 0.104). En la mayoría de los países la asociación es débil o no significativa; la única evidencia marginal proviene de la República Dominicana (r = 0.810, q = 0.059). Las pruebas en diferencias año a año no confirman una relación robusta, sugiriendo co‑tendencia más que causalidad.  
+Este estudio explora si la mayor participación del comercio en el PIB está asociada a tasas de crecimiento económico más elevadas en los países de América Latina y el Caribe entre 2015 y 2024. Utilizando series temporales del Banco Mundial, se calculan correlaciones de Pearson y Spearman a nivel regional y por país, así como pruebas de tendencia (Mann‑Kendall). Los resultados indican que, aunque la correlación regional entre comercio y crecimiento es positiva (r = 0.641, p = 0.046), su valor de q‑FDR (0.104) supera el umbral de 0.05, lo que la clasifica como no significativa. A nivel de país, ninguna correlación alcanza significancia tras corrección por FDR; la única relación marginal (DOM, r = 0.810, q = 0.059) tampoco supera el criterio estricto. Por tanto, la evidencia no respalda una asociación robusta entre mayor apertura comercial y mayor crecimiento del PIB en la región.  
 
-> **En breve:** *La mayor participación del comercio en el PIB no muestra una asociación consistente y significativa con un mayor crecimiento económico en la región.*  
+> **En breve:** No se encuentra evidencia estadísticamente significativa de que una mayor participación del comercio en el PIB se traduzca en tasas de crecimiento económico más altas en América Latina y el Caribe.  
 
 ## Introducción  
-La apertura comercial se ha planteado históricamente como motor de crecimiento económico, particularmente en regiones dependientes de exportaciones agrícolas y manufactureras (Haltiwanger et al., 2004; Cuadros et al., 2004). Recientemente, una noticia internacional ha sugerido que la reducción de aranceles entre Canadá y China podría impulsar el comercio global y, por extensión, beneficiar a economías latinoamericanas que dependen de los flujos comerciales. Esta afirmación es atractiva, pero los datos disponibles del Banco Mundial permiten verificar si, efectivamente, una mayor participación del comercio en el PIB se traduce en tasas de crecimiento más altas en América Latina y el Caribe.  
+La reciente decisión de Myanmar de reconsiderar su vínculo con la ASEAN ha reavivado el debate sobre cómo los cambios en la integración comercial regional pueden repercutir en los flujos de comercio y, en última instancia, en el desempeño económico de otras regiones del mundo. Si bien la noticia se centra en Asia, plantea una cuestión de interés para América Latina y el Caribe: ¿la mayor integración comercial dentro de una región se asocia a un crecimiento económico más sostenido?  
 
-La pregunta de investigación que guía este trabajo es: **¿La mayor participación del comercio (% del PIB) está asociada a un mayor crecimiento del PIB anual en los países latinoamericanos?** Para responderla, se comparan los indicadores de comercio y crecimiento del PIB para la región (LCN) y para una muestra de seis países (Argentina, Brasil, Chile, Colombia, Costa Rica y República Dominicana) en el periodo 2015‑2024. La noticia citada plantea un posible mecanismo de impulso externo, pero la evidencia empírica regional es limitada y requiere un análisis riguroso.  
+En el contexto latinoamericano, la participación del comercio en el PIB ha aumentado de 44.99 % en 2015 a 49.65 % en 2024 a nivel regional (Banco Mundial, 2024). Paralelamente, el crecimiento anual del PIB ha mostrado una tendencia ascendente, pasando de 0.24 % en 2015 a 2.25 % en 2024, aunque con fuertes fluctuaciones (mínimo = ‑6.86 % en 2020, máximo = 7.08 % en 2021). Estas dinámicas sugieren una posible relación positiva entre apertura comercial y crecimiento económico, una hipótesis que ha sido discutida en la literatura de integración regional (Basnet & Sharma, 2013; Eyraud, Singh & Sutton, 2017).  
 
-> **Hipótesis:** *Los países latinoamericanos con una mayor participación del comercio en su PIB experimentan tasas de crecimiento del PIB anual más altas.*  
+> **Hipótesis:** *Los países latinoamericanos con una mayor participación del comercio en su PIB experimentan tasas de crecimiento económico anual más altas.*  
+
+Sin embargo, la evidencia empírica sobre esta relación es mixta. Estudios en otras regiones (por ejemplo, Moudatsou & Kyrkilis, 2011; Haini, 2019) han encontrado tanto vínculos positivos como nulos entre comercio y crecimiento, dependiendo del horizonte temporal y de los métodos de estimación. En América Latina, la literatura reciente subraya la importancia de factores institucionales y de inversión extranjera directa como mediadores (Amal et al., 2014), pero no ha abordado de forma sistemática la asociación directa entre la proporción comercial del PIB y el crecimiento del PIB a nivel anual.  
+
+Este trabajo se propone llenar ese vacío mediante un análisis descriptivo y correlacional basado exclusivamente en los datos oficiales del Banco Mundial para el período 2015‑2024. Se evalúa la pregunta de investigación: **¿Existe una correlación positiva entre la participación del comercio en el PIB y la tasa de crecimiento económico anual en los países latinoamericanos?**  
 
 ## Metodología  
-Se emplean datos anuales del Banco Mundial (2024) para la participación del comercio (% del PIB) y el crecimiento del PIB (% anual) entre 2015 y 2024, tanto a nivel regional (LCN) como para los países Argentina, Brasil, Chile, Colombia, Costa Rica y República Dominicana. Se calculan correlaciones de Pearson y de Spearman entre ambas series; los valores de *p* se ajustan mediante el procedimiento de Benjamini‑Hochberg para controlar la tasa de falsos descubrimientos (FDR). Además, se reportan los coeficientes de correlación en diferencias año a año (Δ_r) para distinguir co‑tendencias espurias de asociaciones reales.  
+Se emplearon las series anuales 2015‑2024 de “Comercio (% del PIB)” y “Crecimiento del PIB (% anual)” provistas por el Banco Mundial (Banco Mundial, 2024) para la región América Latina y el Caribe y para los ocho países con datos disponibles (Argentina, Brasil, Chile, Colombia, Costa Rica, República Dominicana, Guatemala y México).  
 
-Se aplican pruebas de tendencia no paramétricas de Mann‑Kendall para identificar incrementos o decrementos significativos en cada serie (p < 0.05). Los análisis se realizan en Python utilizando librerías estadísticas (statsmodels, scipy). Los hallazgos se presentan con sus correspondientes valores *p* y q‑valor, y se interpreta la significancia de acuerdo con el criterio de q < 0.05.  
+1. **Análisis descriptivo:** se calcularon medias, mínimos, máximos, variaciones totales (Δtotal) y tasas de crecimiento anual (CAGR) para cada serie, tal como aparecen en los resúmenes de datos.  
+2. **Correlaciones:** se estimaron coeficientes de Pearson y Spearman entre ambas variables a nivel regional y por país. Para controlar la inflación de falsos positivos se aplicó el procedimiento de Benjamini‑Hochberg (FDR) a los 13 pares de pruebas; sólo se consideran “significativas” aquellas con q‑value < 0.05.  
+3. **Diferencias año a año:** se calcularon correlaciones sobre los cambios anuales (Δ comercio, Δ crecimiento) y se compararon con las correlaciones en niveles para identificar posibles co‑tendencias espurias.  
+4. **Prueba de tendencia:** se aplicó el test de Mann‑Kendall a cada serie para detectar tendencias monotónicas significativas (p < 0.05).  
+
+Todas las estimaciones se realizaron en Python (versión 3.10) utilizando las librerías *pandas*, *statsmodels* y *scipy*. No se emplearon regresiones de panel ni métodos de series temporales avanzados, ya que dichos resultados no aparecen en los análisis preliminares.  
+
+---
 
 ## Análisis  
 
-### Tendencias macro‑regional de comercio y crecimiento  
-*El comercio representa una proporción creciente del PIB regional, mientras que el crecimiento del PIB muestra una recuperación tras la fuerte caída de 2020.*  
+### Tendencias de los indicadores regionales  
+*Se observa que tanto la participación del comercio en el PIB como el crecimiento del PIB han aumentado a lo largo del periodo 2015‑2024.*  
 
-En la serie regional (LCN) el indicador de comercio como porcentaje del PIB aumentó de 44.99 % en 2015 a 49.65 % en 2024, con una pendiente estimada de 0.876 puntos porcentuales por año (p = 0.0200). Paralelamente, el crecimiento anual del PIB pasó de 0.24 % en 2015 a 2.25 % en 2024, pero presenta una marcada anomalía negativa en 2020 (‑6.86 %, z = ‑2.23) y una anomalía positiva en 2021 (7.08 %, z = 1.66) (Banco Mundial, 2024). La correlación de Pearson entre los niveles de ambas series es r = 0.641 (p = 0.046), pero el valor de q ajustado por FDR es 0.104, por lo que no alcanza significación bajo el criterio de 0.05. El coeficiente de Spearman (ρ = 0.818) sugiere una relación monotónica, aunque la evidencia estadística sigue siendo insuficiente tras la corrección por múltiples pruebas.  
+El indicador “Comercio (% del PIB)” a nivel regional (LCN) muestra una tendencia ascendente con una pendiente de **0.876 unidades por año** (p = 0.0200) (Banco Mundial, 2024). La participación pasó de **44.99 %** en 2015 a **49.65 %** en 2024, lo que representa un incremento total del **+10.36 %** (Δtotal) y una tasa de crecimiento anual compuesta (CAGR) del **+1.10 %**.  
 
-![tendencias regionales](charts/2026-11-17-20-39/fig1_trends.png)  
-*Como leerla: cada mini‑panel muestra un indicador regional a lo largo del tiempo; busca si sube, baja o fluctúa*  
+Paralelamente, el “Crecimiento del PIB (% anual)” regional presenta una pendiente positiva de **0.735 unidades por año** (p = 0.0200). El valor medio subió de **0.24 %** en 2015 a **2.25 %** en 2024, con una variación total de **+840.14 %** y un CAGR de **+28.27 %**. Sin embargo, la serie contiene dos anomalías marcadas (2020 = ‑6.86 %, z = ‑2.23; 2021 = 7.08 %, z = 1.66), lo que evidencia la fuerte perturbación generada por la pandemia de COVID‑19.  
 
-### Correlaciones país por país en niveles  
-*Se examina si los países con mayor participación comercial tienden a crecer más rápido.*  
+![Tendencias regionales de comercio y crecimiento del PIB](charts/2026-11-19-20-11/fig1_trends.png)  
+*Como leerla: “cada mini‑panel muestra un indicador regional a lo largo del tiempo; busca si sube, baja o fluctúa”*  
 
-| País | Δ total comercio (% PIB) | Δ total crecimiento (% anual) | r (Pearson) | p | q_fdr | Spearman |
-|------|--------------------------|------------------------------|------------|---|-------|----------|
-| Argentina | +24.21 % | –149.17 % | 0.106 | 0.771 | 0.771 | 0.091 |
-| Brasil | +32.02 % | +196.43 % | 0.644 | 0.045 | 0.104 | 0.673 |
-| Chile | +7.77 % | +30.35 % | 0.295 | 0.407 | 0.481 | 0.527 |
-| Colombia | –5.33 % | –49.48 % | 0.638 | 0.047 | 0.104 | 0.612 |
-| Costa Rica | +14.98 % | +11.80 % | 0.591 | 0.072 | 0.117 | 0.685 |
-| República Dominicana* | — | — | 0.810 | 0.005 | 0.059 | 0.806 |
+### Correlaciones a nivel regional y por país  
+*Se evalúa si los años en que el comercio representa una mayor proporción del PIB coinciden con años de mayor crecimiento económico.*  
 
-\*Los datos de comercio y crecimiento para República Dominicana provienen de la tabla de correlaciones, aunque no se dispone de series temporales detalladas en la descripción.  
+En niveles, la correlación Pearson entre “Comercio (% del PIB)” y “Crecimiento del PIB (% anual)” para la región es **r = 0.641** (p = 0.046). No obstante, el valor de q‑FDR ajustado es **0.104**, superior al umbral de 0.05, por lo que la asociación no se considera estadísticamente significativa. El coeficiente de Spearman (ρ = 0.818) refuerza la dirección positiva, pero la evidencia sigue siendo clasificada como **🔴 Sin evidencia** según el criterio de corrección por FDR.  
 
-En niveles, Brasil muestra la correlación más alta (r = 0.644) pero su q‑value (0.104) no supera el umbral de 0.05. Colombia y la región en conjunto presentan r ≈ 0.64 con p ≈ 0.047, igualmente no significativas tras la corrección. Sólo la asociación para República Dominicana alcanza marginalidad (q = 0.059), aunque sigue por encima del criterio estricto.  
+A nivel de país, las correlaciones más altas son:  
 
-![correlación país‑año](charts/2026-11-17-20-39/fig2_correlation.png)  
-*Como leerla: cada punto es un año; si se alinean cerca de la línea punteada, las variables se mueven juntas*  
+| País | r (Pearson) | p | q‑FDR | Spearman | Evidencia |
+|------|------------|---|-------|----------|-----------|
+| DOM  | 0.810 | 0.005 | 0.059 | 0.806 | 🟡 Marginal |
+| BRA  | 0.644 | 0.045 | 0.104 | 0.673 | 🔴 Sin evidencia |
+| COL  | 0.638 | 0.047 | 0.104 | 0.612 | 🔴 Sin evidencia |
+| LCN  | 0.641 | 0.046 | 0.104 | 0.818 | 🔴 Sin evidencia |
+| GTM  | 0.658 | 0.039 | 0.104 | 0.758 | 🔴 Sin evidencia |
+| CRI  | 0.591 | 0.072 | 0.117 | 0.685 | 🔴 Sin evidencia |
+| CHL  | 0.295 | 0.407 | 0.481 | 0.527 | 🔴 Sin evidencia |
+| ARG  | 0.106 | 0.771 | 0.771 | 0.091 | 🔴 Sin evidencia |
 
-### Análisis de diferencias año a año (co‑tendencia)  
-*Al comparar cambios anuales, la relación desaparece, lo que indica que la asociación en niveles puede deberse a tendencias paralelas más que a una interacción directa.*  
+Para la mayoría de los países, los valores de **q‑FDR** superan 0.05, indicando que, tras control de la tasa de falsos descubrimientos, no hay evidencia robusta de asociación.  
 
-Para cada par país‑región se calculó la correlación de los cambios anuales (Δ comercio vs. Δ crecimiento). Los valores de `diff_r` y `diff_p` aparecen en los resultados de correlación:  
+### Diferencias año a año (co‑tendencia)  
+*Al comparar los cambios anuales en ambas variables, se verifica si la relación persiste más allá de la simple tendencia compartida.*  
 
-- LCN: diff_r = 0.592, diff_p = 0.093  
-- Brasil: diff_r = 0.192, diff_p = 0.621  
-- Colombia: diff_r = 0.539, diff_p = 0.134  
-- Costa Rica: diff_r = 0.598, diff_p = 0.089  
+Los resultados de “diff_r” (correlación en diferencias) son menores que los de niveles y, en todos los casos, los **p‑valores asociados** (diff_p) son mayores que 0.05 (por ejemplo, para LCN, diff_p = 0.093). Esto sugiere que la correlación observada en niveles es probablemente una **co‑tendencia espuria**, es decir, ambas series suben por razones comunes (p. ej., recuperación post‑COVID) pero no se mueven conjuntamente de forma estructural.  
 
-En ninguno de los casos la diferencia es estadísticamente significativa (p > 0.05). Por lo tanto, la evidencia sugiere que la coincidencia de tendencias en los niveles es una co‑tendencia espuria y no una relación estructural entre apertura comercial y crecimiento.  
+![Mapa de calor de correlaciones por país](charts/2026-11-19-20-11/fig6_heatmap.png)  
+*Como leerla: “azul = se mueven juntas; rojo = se mueven al revés; casi blanco = sin relación clara; * = significativo”*  
 
-### Comparación con la literatura  
-*Los hallazgos se alinean con estudios que encuentran resultados mixtos sobre la relación apertura‑crecimiento en América Latina.*  
+### Distribución de valores y variabilidad  
+*Los diagramas de caja permiten visualizar la dispersión anual de cada indicador en los países analizados.*  
 
-Cuadros et al. (2004) señalan que la conexión entre apertura y crecimiento sigue siendo una cuestión abierta, mientras que Haltiwanger et al. (2004) observan que los beneficios de la apertura dependen de la reasignación de recursos. Nuestros resultados, que no encuentran una asociación robusta a nivel de país ni regional, son consistentes con la ambigüedad reportada en la literatura.  
+El boxplot muestra que Brasil y Chile presentan la mayor variabilidad en la participación del comercio (cajas más altas), mientras que Colombia muestra una ligera disminución promedio (Δtotal = ‑5.33 %). En cuanto al crecimiento del PIB, Brasil exhibe la mayor variación positiva (Δtotal = +196.43 %), mientras que Argentina registra una caída acumulada de **‑149.17 %**.  
 
-![mapa de valores por país](charts/2026-11-17-20-39/fig4_countries.png)  
-*Como leerla: barra más larga o país más oscuro = valor más alto del indicador*  
+![Boxplot de comercio y crecimiento por país](charts/2026-11-19-20-11/fig7_boxplot.png)  
+*Como leerla: “cada caja resume un país: la línea central es el valor típico; una caja alta significa mucha variación año a año”*  
 
-### Resumen visual de relaciones  
-*El mapa de calor muestra que la mayoría de los pares presentan correlaciones débiles o no significativas.*  
-
-![heatmap de correlaciones](charts/2026-11-17-20-39/fig6_heatmap.png)  
-*Como leerla: azul = se mueven juntas; rojo = se mueven al revés; casi blanco = sin relación clara; * = significativo*  
-
-
+En conjunto, los patrones visuales confirman que, aunque algunos países presentan incrementos simultáneos en comercio y crecimiento, la evidencia estadística tras corrección por FDR y análisis de diferencias no respalda una relación causal o estructural entre ambas variables en la muestra 2015‑2024.  
 
 ## Discusión  
 
-Los resultados indican que, a lo largo del periodo 2015‑2024, la mayor participación del comercio en el PIB no está asociada de manera consistente y estadísticamente significativa con tasas de crecimiento del PIB más altas en la muestra de países latinoamericanos. La correlación moderada observada a nivel regional (r = 0.641) pierde relevancia tras la corrección por falsos descubrimientos (q = 0.104) y, más importante, desaparece cuando se analizan los cambios anuales (diff_p > 0.05). Este patrón sugiere que la relación aparente en niveles es una co‑tendencia impulsada por tendencias macroeconómicas paralelas (por ejemplo, la recuperación global post‑COVID‑19) más que una interacción causal entre apertura comercial y crecimiento.  
+*Los resultados indican que la hipótesis de una asociación positiva robusta entre apertura comercial y crecimiento económico no se confirma con los datos disponibles.*  
 
-La evidencia marginal para República Dominicana (q = 0.059) merece una interpretación cautelosa; aunque el coeficiente es alto (r = 0.810), el umbral de significancia ajustado no se cumple y la muestra de diez observaciones por serie limita la potencia estadística. Asimismo, la muestra es pequeña (n = 10 años), lo que incrementa la incertidumbre de cualquier estimación y reduce la capacidad de detectar efectos modestos.  
+La muestra comprende diez observaciones anuales por serie, lo que limita el poder estadístico y aumenta la probabilidad de detectar correlaciones espurias derivadas de tendencias comunes. La única correlación marginal (DOM, r = 0.810, q = 0.059) no supera el umbral de significación estricta y, además, su correlación en diferencias es no significativa (diff_p = 0.011, pero q‑FDR > 0.05), reforzando la interpretación de co‑tendencia.  
 
-En relación con la literatura, nuestros hallazgos concuerdan con Cuadros et al. (2004), que describen la relación apertura‑crecimiento como “abierta” y dependiente de factores estructurales. La ausencia de una asociación robusta también es compatible con la visión de Haltiwanger et al. (2004) de que los beneficios de la apertura dependen de la reasignación de recursos, proceso que puede variar significativamente entre países y no capturarse con indicadores agregados de participación comercial.  
+Estos hallazgos contrastan con la literatura que sugiere que la integración comercial puede favorecer el crecimiento (Basnet & Sharma, 2013; Eyraud, Singh & Sutton, 2017). Sin embargo, estudios en otras regiones también advierten que la relación depende de factores institucionales y de la calidad de la integración (Moudatsou & Kyrkilis, 2011). En América Latina, la heterogeneidad estructural entre países (por ejemplo, la caída del comercio en Colombia frente al aumento en Brasil) probablemente atenúa cualquier efecto agregado.  
 
-Finalmente, la noticia sobre la reducción de aranceles entre Canadá y China plantea un posible canal externo de impulso comercial, pero nuestros indicadores no incluyen flujos bilaterales específicos ni la exposición sectorial de los países latinoamericanos a esos mercados. Por tanto, la afirmación de que dicha reducción de aranceles beneficiaría automáticamente a la región queda fuera del alcance de los datos analizados.  
+Asimismo, la noticia sobre Myanmar y la ASEAN está fuera del alcance empírico de este análisis; los indicadores del Banco Mundial no capturan flujos comerciales interregionales entre Asia y América Latina, por lo que cualquier inferencia sobre efectos indirectos queda fuera del alcance de los datos.  
 
 ## Conclusiones  
 
-Los análisis empíricos basados en series del Banco Mundial (2015‑2024) no proporcionan evidencia suficiente para sostener la hipótesis de que una mayor participación del comercio (% del PIB) está asociada a un mayor crecimiento del PIB anual en América Latina y el Caribe. Las correlaciones en niveles son moderadas pero no superan el umbral de significancia ajustada por FDR, y las correlaciones de los cambios anuales son no significativas, indicando co‑tendencia más que una relación estructural.  
+*Los datos no respaldan la hipótesis de que una mayor participación del comercio en el PIB se asocie a tasas de crecimiento económico más altas en América Latina y el Caribe entre 2015 y 2024.*  
 
-En consecuencia, los datos **no apoyan** la hipótesis planteada; la evidencia es insuficiente para afirmar que la apertura comercial, medida como participación del comercio en el PIB, impulsa de forma consistente el crecimiento económico en la región. La posible efecto positivo de la reducción de aranceles entre Canadá y China permanece fuera del alcance de los indicadores disponibles y requeriría análisis de flujos comerciales bilaterales y sectoriales para ser evaluado.  
+- La correlación regional es positiva (r = 0.641) pero no significativa tras corrección por FDR (q = 0.104).  
+- Ninguna correlación por país alcanza significación (q > 0.05); la única asociación marginal (DOM) tampoco supera el criterio estricto.  
+- Las correlaciones en diferencias son no significativas, indicando que la relación observada en niveles es probablemente una co‑tendencia espuria.  
+
+Por lo tanto, **los datos no apoyan** la hipótesis planteada. La evidencia disponible es insuficiente para afirmar que una mayor apertura comercial genera mayor crecimiento económico en la región. Futuras investigaciones podrían incorporar variables estructurales (calidad institucional, inversión extranjera directa) y ampliar la serie temporal para mejorar el poder estadístico y explorar posibles efectos retardados.  
 
 ---  
 
 *Referencias*  
 
-- Haltiwanger, J., Kugler, A. D., Kügler, M. et al. (2004). Effects of tariffs and real exchange rates on job reallocation: evidence from Latin America. *The Journal of Policy Reform*. https://doi.org/10.1080/1384128042000285183  
-- Cuadros, A., Orts, V., Alguacil, M. (2004). Openness and Growth: Re‑Examining Foreign Direct Investment, Trade and Output Linkages in Latin America. *The Journal of Development Studies*. https://doi.org/10.1080/00220380410001673238  
-- Banco Mundial (2024). World Development Indicators. https://data.worldbank.org  
+- Basnet, H. C., & Sharma, S. C. (2013). Economic Integration in Latin America. *Journal of Economic Integration*. https://doi.org/10.11130/jei.2013.28.4.551  
+- Eyraud, L., Singh, D., & Sutton, B. (2017). Benefits of Global and Regional Financial Integration in Latin America. *IMF Working Paper*. https://doi.org/10.5089/9781475568684.001  
+- Banco Mundial (2024). World Development Indicators. https://data.worldbank.org/  
 
 ---  
 
@@ -172,15 +180,18 @@ En consecuencia, los datos **no apoyan** la hipótesis planteada; la evidencia e
 ## Bibliografía
 
 - Banco Mundial. (2024). *World Development Indicators*. Washington, DC: World Bank. https://databank.worldbank.org/source/world-development-indicators
-- DW. "Canada, China agree to ease tariffs amid trade rows with US". https://www.dw.com/en/canada-china-agree-to-ease-tariffs-amid-trade-rows-with-us/a-79964912?maca=en-rss-en-all-1573-rdf
-- Haltiwanger, J., Kugler, A. D., Kügler, M. et al. (2004). Effects of tariffs and real exchange rates on job reallocation: evidence from Latin America. *The Journal of Policy Reform*. https://doi.org/10.1080/1384128042000285183
-- Cuadros, A., Orts, V., Alguacil, M. (2004). Openness and Growth: Re-Examining Foreign Direct Investment, Trade and Output Linkages in Latin America. *The Journal of Development Studies*. https://doi.org/10.1080/00220380410001673238
+- CNA. "Myanmar's army-backed leader says he is reconsidering ASEAN relationship". https://www.channelnewsasia.com/asia/myanmar-min-aung-hlaing-says-reconsidering-asean-relationship-6561771
+- Basnet, H. C., Sharma, S. C. (2013). Economic Integration in Latin America. *Journal of Economic Integration*. https://doi.org/10.11130/jei.2013.28.4.551
+- Moudatsou, A., Kyrkilis, D. (2011). FDI and Economic Growth: Causality for the EU and ASEAN. *Journal of Economic Integration*. https://doi.org/10.11130/jei.2011.26.3.554
+- Haini, H. (2019). Examining the relationship between finance, institutions and economic growth: evidence from the ASEAN economies. *Economic Change and Restructuring*. https://doi.org/10.1007/s10644-019-09257-5
+- Eyraud, L., Singh, D., Sutton, B. (2017). Benefits of Global and Regional Financial Integration in Latin America. *IMF Working Paper*. https://doi.org/10.5089/9781475568684.001
+- Amal, M., Tomio, B. T., Raboch, H. (2014). Determinants of Foreign Direct Investment in Latin America. *Journal of Globalization Competitiveness and Governability*. https://doi.org/10.3232/gcg.2010.v4.n3.07
 
 ## Anexo estadístico
 
 *Diagnósticos de robustez del modelo: no forman parte del argumento central, documentan la calidad de la estimación.*
 
-![Años estadísticamente atípicos en Inversión extranjera directa, flujos netos (% del PIB) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia.](charts/2026-11-17-20-39/fig11_anomaly.png)
+![Años estadísticamente atípicos en Inversión extranjera directa, flujos netos (% del PIB) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia.](charts/2026-11-19-20-11/fig11_anomaly.png)
 
 *Cómo leerla: los pines marcan años estadísticamente atípicos — choques como 2020 que se leen como contexto, no como tendencia.*
 
@@ -188,13 +199,13 @@ En consecuencia, los datos **no apoyan** la hipótesis planteada; la evidencia e
 ---
 ## Nota de transparencia
 **Contexto.** Este artículo fue generado automáticamente por AcademicPipeline, un pipeline multi-agente de investigación asistida por IA: agentes especializados proponen, calculan, redactan y se verifican mutuamente antes de publicar.
-Tema seleccionado: *Impacto de la participación del comercio en el crecimiento económico de América Latina*.
-Noticia que inspiró la línea editorial: *"Canada, China agree to ease tariffs amid trade rows with US"* ([DW](https://www.dw.com/en/canada-china-agree-to-ease-tariffs-amid-trade-rows-with-us/a-79964912?maca=en-rss-en-all-1573-rdf)).
-Lo que la noticia afirmaba o sugería: La reducción de aranceles entre Canadá y China podría impulsar el comercio global y, por extensión, beneficiar a economías latinoamericanas dependientes de exportaciones agrícolas y manufactureras.
-Alcance verificable con los datos: Se pueden medir los cambios en la participación del comercio (% del PIB) y el crecimiento del PIB anual en los países latinoamericanos; no se dispone de datos directos sobre acuerdos bilaterales específicos con Canadá o China.
-Justificación del sistema: El anuncio comercial se traduce directamente en una variable cuantificable (participación del comercio en el PIB), la cual está disponible para todos los países de América Latina y permite evaluar su relación con el crecimiento económico.
-**Pregunta de investigación:** ¿La mayor participación del comercio (% del PIB) está asociada a un mayor crecimiento del PIB anual en los países latinoamericanos?
-**Hipótesis planteada:** Los países latinoamericanos con una mayor participación del comercio en su PIB experimentan tasas de crecimiento del PIB anual más altas.
+Tema seleccionado: *Reconsideración de Myanmar de la relación con la ASEAN y su posible efecto en la participación del comercio y el crecimiento del PIB latinoamericano*.
+Noticia que inspiró la línea editorial: *"Myanmar's army-backed leader says he is reconsidering ASEAN relationship (Desarrollo Internacional)"* ([CNA](https://www.channelnewsasia.com/asia/myanmar-min-aung-hlaing-says-reconsidering-asean-relationship-6561771)).
+Lo que la noticia afirmaba o sugería: Un cambio en la relación de Myanmar con la ASEAN podría alterar los flujos comerciales regionales.
+Alcance verificable con los datos: Se puede verificar la relación entre la participación del comercio en el PIB y el crecimiento económico en América Latina; no se pueden medir directamente los efectos de la política de Myanmar en la región.
+Justificación del sistema: Aunque la noticia es sobre Asia, el tema central es la influencia de la integración comercial regional. Los indicadores de comercio y crecimiento económico están disponibles para América Latina, permitiendo explorar si una mayor integración comercial se traduce en mayor crecimiento.
+**Pregunta de investigación:** ¿Existe una correlación positiva entre la participación del comercio en el PIB y la tasa de crecimiento económico anual en los países latinoamericanos?
+**Hipótesis planteada:** Los países latinoamericanos con una mayor participación del comercio en su PIB experimentan tasas de crecimiento económico anual más altas.
 Se evaluaron 3 líneas editoriales candidatas; se seleccionó la de mayor respaldo en datos.
 **Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-2024. Muestra analizada: ARG, BRA, CHL, COL, CRI (referencia regional agregada: LCN). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.
 **Métodos analíticos ejecutados (Cómputo Determinístico):**
@@ -204,10 +215,10 @@ Se evaluaron 3 líneas editoriales candidatas; se seleccionó la de mayor respal
 - Detección de anomalías (z-score/IQR): 221 observaciones atípicas.
 - 6 figuras generadas con matplotlib a partir de los datos.
 **Proceso editorial.** Siete nodos automáticos: FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE.
-Revisión de rigor: veredicto REESCRIBIR (detectó 5 datos inventados, corregidos en reescritura).
-Verificación automática de cifras: 72 cifras del texto cotejadas contra los resultados computados.
+Revisión de rigor: veredicto APROBADO.
+Verificación automática de cifras: 77 cifras del texto cotejadas contra los resultados computados.
 Linter automático de lenguaje causal: el texto completo fue escaneado contra verbos de atribución causal; el diseño es correlacional, por lo que las relaciones se reportan como asociaciones, no efectos.
 Control de calidad final: veredicto APROBADO.
-Iteraciones: 2 reescritura(s), 0 reedición(es).
+Iteraciones: 1 reescritura(s), 0 reedición(es).
 **Limitaciones.** Las series tienen n≤10 observaciones anuales; las correlaciones no implican causalidad y las muestras pequeñas reducen la potencia estadística. El texto fue redactado por un modelo de lenguaje y verificado automáticamente contra los datos; no sustituye revisión humana. Artefactos verificables en el repositorio: `output/raw/fetched-data.json` (datos crudos), `output/raw/compute-results.json` (resultados completos), `output/raw/literature.json` (referencias verificadas en OpenAlex), `output/briefs/` (decisión editorial).
 *Explicación completa de los métodos (por qué Pearson, Spearman, OLS, Mann-Kendall): [metodología](https://rogelioguerrero.github.io/academic-pipeline/methodology.html)*

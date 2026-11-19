@@ -1,0 +1,64 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Fallos de control de IA y su relación con la digitalización y el desempleo juvenil en América Latina",
+      "noticia_inspiradora": "California sues OpenAI over more than 80 AI agent control failures (Ciberseguridad)",
+      "afirmacion_noticia": "Los fallos de control de agentes de IA reflejan riesgos crecientes en la adopción de tecnologías digitales avanzadas.",
+      "verificable_con_datos": "Se puede verificar si los países con mayor penetración de internet y mayor participación del sector servicios presentan menores tasas de desempleo juvenil; no se pueden medir directamente los incidentes de fallos de IA.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Youth unemployment (negativa)",
+        "Employment in services ↔ Youth unemployment (negativa)"
+      ],
+      "justificacion": "La noticia trata sobre riesgos de IA, lo que sugiere un mayor nivel de digitalización. Los indicadores disponibles permiten medir la digitalización (usuarios de internet) y la estructura del empleo (sector servicios) y su posible efecto sobre el desempleo juvenil, que es un tema crítico en la región.",
+      "pregunta": "¿En los países latinoamericanos, mayor penetración de internet y mayor participación del sector servicios se asocian a menores tasas de desempleo juvenil?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil significativamente menores.",
+      "keywords_en": "digitalization internet penetration youth unemployment services sector Latin America"
+    },
+    {
+      "titulo": "Reconsideración de Myanmar de la relación con la ASEAN y su posible efecto en la participación del comercio y el crecimiento del PIB latinoamericano",
+      "noticia_inspiradora": "Myanmar's army-backed leader says he is reconsidering ASEAN relationship (Desarrollo Internacional)",
+      "afirmacion_noticia": "Un cambio en la relación de Myanmar con la ASEAN podría alterar los flujos comerciales regionales.",
+      "verificable_con_datos": "Se puede verificar la relación entre la participación del comercio en el PIB y el crecimiento económico en América Latina; no se pueden medir directamente los efectos de la política de Myanmar en la región.",
+      "indicadores_respaldan": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "Trade ↔ GDP growth (positiva)"
+      ],
+      "justificacion": "Aunque la noticia es sobre Asia, el tema central es la influencia de la integración comercial regional. Los indicadores de comercio y crecimiento económico están disponibles para América Latina, permitiendo explorar si una mayor integración comercial se traduce en mayor crecimiento.",
+      "pregunta": "¿Existe una correlación positiva entre la participación del comercio en el PIB y la tasa de crecimiento económico anual en los países latinoamericanos?",
+      "hipotesis": "Los países latinoamericanos con una mayor participación del comercio en su PIB experimentan tasas de crecimiento económico anual más altas.",
+      "keywords_en": "trade share GDP economic growth Latin America integration ASEAN"
+    },
+    {
+      "titulo": "Inversión extranjera directa y su vínculo con la digitalización y el empleo juvenil en América Latina",
+      "noticia_inspiradora": "California sues OpenAI over more than 80 AI agent control failures (Ciberseguridad)",
+      "afirmacion_noticia": "Los problemas de control de IA evidencian la rápida expansión de tecnologías digitales que pueden influir en la atracción de inversión extranjera.",
+      "verificable_con_datos": "Se pueden analizar relaciones entre usuarios de internet, IED net inflows y desempleo juvenil; no se pueden medir directamente los incidentes de IA.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ FDI inflows (positiva)",
+        "Internet users ↔ Youth unemployment (negativa)",
+        "FDI inflows ↔ Youth unemployment (negativa)"
+      ],
+      "justificacion": "La noticia subraya la expansión de IA, lo que implica mayor digitalización. Los indicadores permiten estudiar si la digitalización (internet) está asociada a mayores flujos de IED y a menores tasas de desempleo juvenil.",
+      "pregunta": "¿La mayor penetración de internet en América Latina está asociada a mayores flujos de inversión extranjera directa y a menores tasas de desempleo juvenil?",
+      "hipotesis": "En los países latinoamericanos, una mayor penetración de internet se correlaciona positivamente con los ingresos de IED y negativamente con el desempleo juvenil.",
+      "keywords_en": "foreign direct investment internet penetration youth unemployment Latin America"
+    }
+  ],
+  "topic": "Impacto de la digitalización en el desempleo juvenil en América Latina",
+  "angle": "Analizar cómo la penetración de internet y la expansión del sector servicios, impulsadas por la adopción de tecnologías avanzadas como la IA, están relacionadas con la reducción del desempleo juvenil en la región.",
+  "pregunta": "¿En los países latinoamericanos, mayor penetración de internet y mayor participación del sector servicios se asocian a menores tasas de desempleo juvenil?",
+  "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil significativamente menores."
+}
