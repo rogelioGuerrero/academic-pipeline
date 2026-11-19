@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-17T20:48:55+00:00",
+  "generated": "2026-11-19T00:32:18+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 39
+    "papers": 40
   },
   "countries": [
     {
@@ -67,6 +67,26 @@
   ],
   "papers": [
     {
+      "date": "2026-11-19",
+      "file": "2026-11-19_impacto-de-la-participaci-n-del-comercio.md",
+      "topic": "Impacto de la participación del comercio en el crecimiento económico de América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "indicators": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ]
+    },
+    {
       "date": "2026-11-16",
       "file": "2026-11-16_inversi-n-extranjera-directa-y-crecimien.md",
       "topic": "Inversión extranjera directa y crecimiento económico frente a la inestabilidad geopolítica",
@@ -82,8 +102,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "Foreign direct investment, net inflows (% of GDP)",
-        "GDP growth (annual %)"
+        "GDP growth (annual %)",
+        "Foreign direct investment, net inflows (% of GDP)"
       ]
     },
     {
@@ -146,8 +166,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "Foreign direct investment, net inflows (% of GDP)",
-        "GDP growth (annual %)"
+        "GDP growth (annual %)",
+        "Foreign direct investment, net inflows (% of GDP)"
       ]
     },
     {
@@ -233,9 +253,9 @@
         "Trade (% of GDP)"
       ],
       "indicators": [
-        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)",
         "GDP growth (annual %)",
-        "Trade (% of GDP)"
+        "Foreign direct investment, net inflows (% of GDP)"
       ]
     },
     {
@@ -378,8 +398,8 @@
         "Trade (% of GDP)"
       ],
       "indicators": [
-        "Foreign direct investment, net inflows (% of GDP)",
-        "Trade (% of GDP)"
+        "Trade (% of GDP)",
+        "Foreign direct investment, net inflows (% of GDP)"
       ]
     },
     {
@@ -398,8 +418,8 @@
         "Trade (% of GDP)"
       ],
       "indicators": [
-        "Foreign direct investment, net inflows (% of GDP)",
-        "Trade (% of GDP)"
+        "Trade (% of GDP)",
+        "Foreign direct investment, net inflows (% of GDP)"
       ]
     },
     {
@@ -438,8 +458,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
-        "Trade (% of GDP)"
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
       ]
     },
     {
@@ -459,8 +479,8 @@
         "Trade (% of GDP)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
         "Trade (% of GDP)",
+        "GDP growth (annual %)",
         "GDP per capita (current US$)"
       ]
     },
@@ -725,8 +745,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
         "Trade (% of GDP)",
+        "GDP growth (annual %)",
         "Manufacturing, value added (% of GDP)"
       ]
     },
@@ -801,8 +821,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
         "Trade (% of GDP)",
+        "GDP growth (annual %)",
         "Manufacturing, value added (% of GDP)"
       ]
     },
@@ -1426,6 +1446,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-19",
+              "file": "2026-11-19_impacto-de-la-participaci-n-del-comercio.md",
+              "topic": "Impacto de la participación del comercio en el crecimiento económico de América Latina"
+            },
+            {
               "date": "2026-11-16",
               "file": "2026-11-16_inversi-n-extranjera-directa-y-crecimien.md",
               "topic": "Inversión extranjera directa y crecimiento económico frente a la inestabilidad geopolítica"
@@ -1825,6 +1850,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-19",
+              "file": "2026-11-19_impacto-de-la-participaci-n-del-comercio.md",
+              "topic": "Impacto de la participación del comercio en el crecimiento económico de América Latina"
+            },
             {
               "date": "2026-11-08",
               "file": "2026-11-08_efectos-de-la-expansi-n-del-capital-banc.md",

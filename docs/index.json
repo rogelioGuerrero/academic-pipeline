@@ -1,5 +1,59 @@
 [
   {
+    "file": "2026-11-19_impacto-de-la-participaci-n-del-comercio.md",
+    "date": "2026-11-19",
+    "topic": "Impacto de la participación del comercio en el crecimiento económico de América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "REESCRIBIR",
+    "qa": "APROBADO",
+    "image": "https://images.pexels.com/photos/32302738/pexels-photo-32302738.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "section": "Internacional",
+    "news_url": "https://www.dw.com/en/canada-china-agree-to-ease-tariffs-amid-trade-rows-with-us/a-79964912?maca=en-rss-en-all-1573-rdf",
+    "pregunta": "¿La mayor participación del comercio (% del PIB) está asociada a un mayor crecimiento del PIB anual en los países latinoamericanos?",
+    "editorial": "¿Si un país vende más a otros, crecerá más rápido su economía? Esa pregunta surgió cuando Canadá y China anunciaron que reducirían aranceles tras una disputa con Estados Unidos, y la gente empezó a pensar que el comercio es la llave del crecimiento.  \n\nAl mirar los datos de los países latinoamericanos, la historia no es tan sencilla. En la República Dominicana, por ejemplo, cuando el comercio representó más del 80 % del PIB, el crecimiento anual se disparó a casi el 8 %. En Guatemala, con un comercio que ronda el 60 % del PIB, el crecimiento también fue fuerte, aunque la relación no fue tan clara. Por otro lado, en Chile, donde el comercio es un 30 % del PIB, el crecimiento se mantuvo estable, sin cambios bruscos. Argentina, con un comercio apenas del 10 %, mostró un crecimiento casi nulo.  \n\nEn la mayoría de los casos, la relación entre comercio y crecimiento no es tan directa como se esperaba. Los datos de Brasil, Colombia y Costa Rica sugieren una tendencia moderada, pero no concluyente. En resumen, aunque algunos países parecen beneficiarse de un comercio alto, la evidencia no es uniforme. No se confirma de forma clara que más comercio garantice un mayor crecimiento; la realidad es más compleja y cada nación sigue su propio camino.",
+    "charts": "2026-11-17-20-39",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5936,
+        "after": 4507,
+        "cutChars": 3966
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8217,
+        "after": 5454,
+        "cutChars": 7921
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7566,
+        "after": 5147,
+        "cutChars": 7293
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 6675,
+        "after": 4255,
+        "cutChars": 7528
+      }
+    ],
+    "ts": "2026-11-19T00:32:13.802Z"
+  },
+  {
     "file": "2026-11-16_inversi-n-extranjera-directa-y-crecimien.md",
     "date": "2026-11-16",
     "topic": "Inversión extranjera directa y crecimiento económico frente a la inestabilidad geopolítica",
