@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-19T20:16:09+00:00",
+  "generated": "2026-11-20T19:57:26+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 41
+    "papers": 42
   },
   "countries": [
     {
@@ -66,6 +66,26 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-20",
+      "file": "2026-11-20_impacto-de-la-expansi-n-de-la-cooperaci-.md",
+      "topic": "Impacto de la expansión de la cooperación sanitaria en Emiratos Árabes Unidos sobre la salud pública en América Latina",
+      "sample_countries": [
+        "CHL",
+        "COL",
+        "ARG",
+        "BRA",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ],
+      "indicators": [
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ]
+    },
     {
       "date": "2026-11-19",
       "file": "2026-11-19_reconsideraci-n-de-myanmar-de-la-relaci-.md",
@@ -2643,6 +2663,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-20",
+              "file": "2026-11-20_impacto-de-la-expansi-n-de-la-cooperaci-.md",
+              "topic": "Impacto de la expansión de la cooperación sanitaria en Emiratos Árabes Unidos sobre la salud pública en América Latina"
+            },
+            {
               "date": "2026-11-14",
               "file": "2026-11-14_relaci-n-entre-digitalizaci-n--sector-se.md",
               "topic": "Relación entre digitalización, sector servicios y desempleo juvenil en América Latina"
@@ -2713,6 +2738,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-20",
+              "file": "2026-11-20_impacto-de-la-expansi-n-de-la-cooperaci-.md",
+              "topic": "Impacto de la expansión de la cooperación sanitaria en Emiratos Árabes Unidos sobre la salud pública en América Latina"
+            },
             {
               "date": "2026-11-14",
               "file": "2026-11-14_relaci-n-entre-digitalizaci-n--sector-se.md",

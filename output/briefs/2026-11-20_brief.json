@@ -1,0 +1,80 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la expansión de la cooperación sanitaria en Emiratos Árabes Unidos sobre la salud pública en América Latina",
+      "noticia_inspiradora": "Yas Clinic, ADSCC performs world’s fifth bone marrow transplant for NIK deficiency in UAE",
+      "afirmacion_noticia": "El éxito de trasplantes de médula ósea de alta complejidad en Emiratos Árabes Unidos evidencia un avance tecnológico que podría impulsar la mejora de los sistemas de salud en países en desarrollo.",
+      "verificable_con_datos": "Se pueden comparar indicadores de gasto en salud y esperanza de vida en América Latina antes y después de la adopción de tecnologías médicas avanzadas; no se dispone de datos directos sobre trasplantes específicos ni sobre transferencia de tecnología entre UAE y América Latina.",
+      "indicadores_respaldan": [
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ],
+      "correlaciones_relevantes": [
+        "gasto_salud_vs_esperanza_de_vida"
+      ],
+      "justificacion": "Los indicadores de gasto en salud y esperanza de vida son los más cercanos para medir si la adopción de tecnologías médicas avanzadas se traduce en mejoras poblacionales, y la noticia sugiere una posible transferencia de know‑how que puede reflejarse en esos indicadores.",
+      "pregunta": "¿Los países latinoamericanos que aumentan su gasto en salud experimentan mayores incrementos en la esperanza de vida?",
+      "hipotesis": "Un mayor porcentaje del PIB dedicado al gasto en salud está asociado a aumentos significativos de la esperanza de vida en América Latina.",
+      "keywords_en": "health expenditure life expectancy Latin America technology transfer"
+    },
+    {
+      "titulo": "Reactivación del comercio entre China y Australia: repercusiones para el sector exportador latinoamericano",
+      "noticia_inspiradora": "China's Xi praises 'turnaround' in relationship with Australia",
+      "afirmacion_noticia": "La mejora de las relaciones bilaterales entre China y Australia podría abrir nuevas oportunidades de mercado para exportadores latinoamericanos que compiten en los mismos sectores.",
+      "verificable_con_datos": "Se pueden medir cambios en la participación del comercio en el PIB y su relación con el crecimiento económico; no hay datos directos sobre flujos comerciales específicos con China o Australia a nivel de país latinoamericano.",
+      "indicadores_respaldan": [
+        "Trade (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "comercio_vs_crecimiento"
+      ],
+      "justificacion": "El vínculo entre la apertura comercial y el crecimiento económico está bien documentado y los indicadores disponibles permiten analizar si una mayor apertura (medida por trade % del PIB) se traduce en mayor crecimiento del PIB.",
+      "pregunta": "¿Un mayor porcentaje del PIB proveniente del comercio está asociado a mayores tasas de crecimiento del PIB en América Latina?",
+      "hipotesis": "Los países latinoamericanos con una mayor participación del comercio en su PIB presentan tasas de crecimiento económico anual más altas.",
+      "keywords_en": "trade share GDP growth Latin America China Australia relations"
+    },
+    {
+      "titulo": "Digitalización y sector servicios como motores del empleo juvenil en América Latina",
+      "noticia_inspiradora": "Germany news: Lufthansa to cut 1,000 jobs, reports say",
+      "afirmacion_noticia": "Los recortes de empleo en sectores tradicionales como la aviación subrayan la necesidad de que los jóvenes latinoamericanos accedan a empleos en sectores digitales y de servicios para reducir su desempleo.",
+      "verificable_con_datos": "Se pueden analizar la relación entre usuarios de internet, participación del sector servicios y tasas de desempleo juvenil; no se cuenta con datos sobre la reubicación específica de los trabajadores despedidos de Lufthansa.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "internet_vs_youth_unemployment",
+        "services_vs_youth_unemployment"
+      ],
+      "justificacion": "Los indicadores permiten cuantificar la penetración digital y la estructura del empleo, que son factores clave para explicar variaciones en el desempleo juvenil, como sugiere la noticia sobre la presión en empleos tradicionales.",
+      "pregunta": "¿Mayor penetración de internet y mayor participación del sector servicios están asociados a menores tasas de desempleo juvenil en América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil significativamente menores.",
+      "keywords_en": "internet penetration youth unemployment services sector Latin America"
+    },
+    {
+      "titulo": "Efectos de la migración neta sobre la pobreza y la desigualdad en América Latina",
+      "noticia_inspiradora": "Historic religious shift: Islam set to become world's largest faith by 2035",
+      "afirmacion_noticia": "Los cambios demográficos globales, como el crecimiento de la población musulmana, pueden influir en los patrones migratorios hacia América Latina, afectando indicadores de pobreza y desigualdad.",
+      "verificable_con_datos": "Se pueden correlacionar net migration con la pobreza headcount ratio y el índice de Gini; no se dispone de datos que identifiquen la composición religiosa de los migrantes.",
+      "indicadores_respaldan": [
+        "Net migration (total people)",
+        "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)",
+        "Gini index"
+      ],
+      "correlaciones_relevantes": [
+        "migration_vs_poverty",
+        "migration_vs_inequality"
+      ],
+      "justificacion": "Los indicadores de migración, pobreza y desigualdad permiten evaluar si los flujos migratorios están vinculados a cambios en la distribución del ingreso y la incidencia de pobreza, un puente plausible con la noticia demográfica.",
+      "pregunta": "¿Los aumentos netos de migración están asociados a reducciones de la pobreza y la desigualdad en América Latina?",
+      "hipotesis": "Un mayor flujo neto de migrantes está relacionado con una disminución del porcentaje de población en pobreza extrema y con una reducción del índice de Gini.",
+      "keywords_en": "migration poverty inequality Latin America demographic change"
+    }
+  ],
+  "topic": "Digitalización y sector servicios como motores del empleo juvenil en América Latina",
+  "angle": "Analizar cómo la expansión de la infraestructura digital y la creciente participación del sector servicios pueden reducir el desempleo juvenil, contrastando la presión de recortes en industrias tradicionales como la aviación.",
+  "pregunta": "¿Mayor penetración de internet y mayor participación del sector servicios están asociados a menores tasas de desempleo juvenil en América Latina?",
+  "hipotesis": "Los países latinoamericanos con mayor porcentaje de usuarios de internet y mayor participación del sector servicios presentan tasas de desempleo juvenil significativamente menores."
+}

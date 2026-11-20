@@ -1,5 +1,85 @@
 [
   {
+    "file": "2026-11-20_impacto-de-la-expansi-n-de-la-cooperaci-.md",
+    "date": "2026-11-20",
+    "topic": "Impacto de la expansión de la cooperación sanitaria en Emiratos Árabes Unidos sobre la salud pública en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "REESCRIBIR",
+    "qa": "APROBADO",
+    "image": "https://www.healthcaremea.com/wp-content/uploads/2026/11/image-1600x900-2026-11-19T110343.737.png",
+    "section": "Última Hora",
+    "news_url": "https://www.healthcaremea.com/2026/11/19/yas-clinic-adscc-performs-worlds-fifth-bone-marrow-transplant-for-nik-deficiency-in-uae/",
+    "pregunta": "¿Los países latinoamericanos que aumentan su gasto en salud experimentan mayores incrementos en la esperanza de vida?",
+    "editorial": "¿Y si los países latinoamericanos que ponen más dinero en salud realmente viven más tiempo? Esa pregunta surgió cuando leí que en los Emiratos Árabes Unidos se realizó el quinto trasplante de médula ósea del mundo para tratar la deficiencia de NIK, un avance que parece prometedor. Pensé: si un país puede lograr algo tan complejo, tal vez el gasto en salud sea la clave para que sus ciudadanos vivan más.\n\nAl mirar los datos de los últimos años, la historia no es tan simple. En Ecuador, por ejemplo, cuando el gasto en salud creció un 10 % del PIB, la esperanza de vida aumentó casi 8 años, un salto notable. México y Colombia también mostraron mejoras, aunque más modestas. En Costa Rica, el aumento del gasto no trajo un cambio visible en la esperanza de vida; los números se mantuvieron casi iguales. Y en Chile, donde el gasto se mantuvo estable, la esperanza de vida apenas cambió, casi sin diferencia.\n\nEn resumen, los datos no confirman de forma clara que más gasto garantice más años de vida. En algunos países sí se ve una relación fuerte, en otros la evidencia es débil o nula. Así que, aunque invertir en salud es importante, no es un boleto automático para vivir más; cada país tiene su propia historia.",
+    "charts": "2026-11-20-19-49",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5910,
+        "after": 4526,
+        "cutChars": 4063
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8013,
+        "after": 5571,
+        "cutChars": 7308
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5777,
+        "after": 4511,
+        "cutChars": 3842
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7817,
+        "after": 5485,
+        "cutChars": 7190
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5660,
+        "after": 4528,
+        "cutChars": 3510
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7614,
+        "after": 5095,
+        "cutChars": 7901
+      },
+      {
+        "stage": "EDIT",
+        "model": "openai/gpt-oss-20b",
+        "outputTruncated": true,
+        "maxTokens": 2869
+      },
+      {
+        "stage": "EDIT",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      }
+    ],
+    "ts": "2026-11-20T19:57:20.236Z"
+  },
+  {
     "file": "2026-11-19_reconsideraci-n-de-myanmar-de-la-relaci-.md",
     "date": "2026-11-19",
     "topic": "Reconsideración de Myanmar de la relación con la ASEAN y su posible efecto en la participación del comercio y el crecimiento del PIB latinoamericano",
