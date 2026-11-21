@@ -1,0 +1,76 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la represión a profesionales del derecho en la inversión extranjera en América Latina",
+      "noticia_inspiradora": "Repression against Iranian lawyers increases",
+      "afirmacion_noticia": "El aumento de medidas represivas contra abogados sugiere un clima de inseguridad jurídica que podría desalentar la inversión extranjera directa",
+      "verificable_con_datos": "Se puede verificar la relación entre la percepción de inseguridad jurídica (implícita en la noticia) y los niveles de IED neto (% del PIB); no se pueden medir directamente las represiones ni la percepción jurídica con los indicadores disponibles",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "IED vs Trade (% of GDP)"
+      ],
+      "justificacion": "La noticia trata de clima institucional; el indicador de IED captura la respuesta de los inversionistas a dicho clima, mientras que el comercio puede servir como control de apertura económica",
+      "pregunta": "¿Los países latinoamericanos con mayores índices de represión institucional presentan menores flujos netos de IED como porcentaje del PIB?",
+      "hipotesis": "Los países con mayores niveles de represión institucional registran menores IED netos (% del PIB)",
+      "keywords_en": "institutional repression foreign direct investment Latin America"
+    },
+    {
+      "titulo": "Digitalización y desempleo juvenil en contextos de crisis política",
+      "noticia_inspiradora": "White House taps Kirsten Davies as cyber chief after outages rattle Americans",
+      "afirmacion_noticia": "Los frecuentes apagones y vulnerabilidades cibernéticas pueden afectar la adopción digital y, por ende, el empleo juvenil en sectores tecnológicos",
+      "verificable_con_datos": "Se pueden correlacionar usuarios de internet y desempleo juvenil; no se pueden medir los apagones ni la confianza en ciberseguridad con los indicadores disponibles",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet penetration vs Youth unemployment"
+      ],
+      "justificacion": "El vínculo entre penetración de internet y oportunidades laborales para jóvenes es directo y está respaldado por datos previos en la base",
+      "pregunta": "¿Una mayor penetración de internet está asociada a menores tasas de desempleo juvenil en América Latina?",
+      "hipotesis": "Mayor porcentaje de usuarios de internet reduce el desempleo juvenil (%)",
+      "keywords_en": "internet penetration youth unemployment Latin America"
+    },
+    {
+      "titulo": "Gasto en salud y esperanza de vida en contextos de migración forzada",
+      "noticia_inspiradora": "Rohingya in Bangladesh welcome UN court's genocide verdict but say they want to go home to Myanmar",
+      "afirmacion_noticia": "Los desplazados que buscan regresar a sus países de origen pueden beneficiarse de sistemas de salud más fuertes en sus destinos, lo que influye en la esperanza de vida",
+      "verificable_con_datos": "Se pueden analizar la relación entre gasto en salud (% del PIB) y esperanza de vida; no se pueden medir flujos migratorias específicas de rohingya con los indicadores disponibles",
+      "indicadores_respaldan": [
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ],
+      "correlaciones_relevantes": [
+        "Health expenditure vs Life expectancy"
+      ],
+      "justificacion": "Los indicadores permiten evaluar directamente cómo la inversión en salud afecta la longevidad, independientemente de la composición migratoria",
+      "pregunta": "¿Un mayor gasto en salud está asociado a una mayor esperanza de vida en los países latinoamericanos?",
+      "hipotesis": "Mayor gasto en salud (% del PIB) incrementa la esperanza de vida (años)",
+      "keywords_en": "health expenditure life expectancy Latin America"
+    },
+    {
+      "titulo": "Participación del sector servicios y vulnerabilidad del empleo juvenil",
+      "noticia_inspiradora": "Russian ornithologist jailed over small donations to Navalny's foundation",
+      "afirmacion_noticia": "La represión política puede reducir la expansión del sector servicios, aumentando la vulnerabilidad del empleo juvenil",
+      "verificable_con_datos": "Se pueden correlacionar empleo en servicios y empleo vulnerable; la dimensión de represión no es medible con los indicadores disponibles",
+      "indicadores_respaldan": [
+        "Employment in services (% of total employment)",
+        "Vulnerable employment (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Services employment vs Vulnerable employment"
+      ],
+      "justificacion": "El sector servicios es un motor de empleo formal; su contracción puede elevar la proporción de empleo vulnerable, observable con los datos",
+      "pregunta": "¿Una mayor participación del sector servicios está asociada a menores tasas de empleo vulnerable entre los jóvenes en América Latina?",
+      "hipotesis": "Mayor participación del sector servicios reduce el empleo vulnerable (%)",
+      "keywords_en": "services sector vulnerable employment youth Latin America"
+    }
+  ],
+  "topic": "Digitalización y desempleo juvenil en América Latina",
+  "angle": "Analizar cómo la penetración de internet influye en las tasas de desempleo juvenil, considerando el contexto de vulnerabilidades cibernéticas recientes",
+  "pregunta": "¿Una mayor penetración de internet está asociada a menores tasas de desempleo juvenil en los países latinoamericanos?",
+  "hipotesis": "Mayor porcentaje de usuarios de internet reduce el desempleo juvenil (%)"
+}

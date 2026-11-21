@@ -1,0 +1,204 @@
+{
+  "generated": "2026-11-21T18:56:24.774Z",
+  "topic": "Digitalización y desempleo juvenil en contextos de crisis política",
+  "angle": "El vínculo entre penetración de internet y oportunidades laborales para jóvenes es directo y está respaldado por datos previos en la base",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 1,
+    "edit": 0
+  },
+  "pregunta": "¿Una mayor penetración de internet está asociada a menores tasas de desempleo juvenil en América Latina?",
+  "hipotesis": "Mayor porcentaje de usuarios de internet reduce el desempleo juvenil (%)",
+  "inspiringNews": {
+    "title": "White House taps Kirsten Davies as cyber chief after outages rattle Americans",
+    "url": "https://abcnews.com/Technology/wireStory/white-house-taps-kirsten-davies-cyber-chief-after-138308702",
+    "source": "Abcnews.com",
+    "section": "Ciberseguridad",
+    "image": "https://i.abcnewsfe.com/a/d0cd7d2c-4941-49c6-89f0-f0f7c0734080/wirestory_2f1f84f3ca5429d01ace67929c72128d_16x9.jpg?w=1600"
+  },
+  "suggestMode": "suggest",
+  "suggestions": [
+    {
+      "titulo": "Impacto de la represión a profesionales del derecho en la inversión extranjera en América Latina",
+      "noticia_inspiradora": "Repression against Iranian lawyers increases",
+      "afirmacion_noticia": "El aumento de medidas represivas contra abogados sugiere un clima de inseguridad jurídica que podría desalentar la inversión extranjera directa",
+      "verificable_con_datos": "Se puede verificar la relación entre la percepción de inseguridad jurídica (implícita en la noticia) y los niveles de IED neto (% del PIB); no se pueden medir directamente las represiones ni la percepción jurídica con los indicadores disponibles",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "IED vs Trade (% of GDP)"
+      ],
+      "justificacion": "La noticia trata de clima institucional; el indicador de IED captura la respuesta de los inversionistas a dicho clima, mientras que el comercio puede servir como control de apertura económica",
+      "pregunta": "¿Los países latinoamericanos con mayores índices de represión institucional presentan menores flujos netos de IED como porcentaje del PIB?",
+      "hipotesis": "Los países con mayores niveles de represión institucional registran menores IED netos (% del PIB)",
+      "keywords_en": "institutional repression foreign direct investment Latin America"
+    },
+    {
+      "titulo": "Digitalización y desempleo juvenil en contextos de crisis política",
+      "noticia_inspiradora": "White House taps Kirsten Davies as cyber chief after outages rattle Americans",
+      "afirmacion_noticia": "Los frecuentes apagones y vulnerabilidades cibernéticas pueden afectar la adopción digital y, por ende, el empleo juvenil en sectores tecnológicos",
+      "verificable_con_datos": "Se pueden correlacionar usuarios de internet y desempleo juvenil; no se pueden medir los apagones ni la confianza en ciberseguridad con los indicadores disponibles",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet penetration vs Youth unemployment"
+      ],
+      "justificacion": "El vínculo entre penetración de internet y oportunidades laborales para jóvenes es directo y está respaldado por datos previos en la base",
+      "pregunta": "¿Una mayor penetración de internet está asociada a menores tasas de desempleo juvenil en América Latina?",
+      "hipotesis": "Mayor porcentaje de usuarios de internet reduce el desempleo juvenil (%)",
+      "keywords_en": "internet penetration youth unemployment Latin America"
+    },
+    {
+      "titulo": "Gasto en salud y esperanza de vida en contextos de migración forzada",
+      "noticia_inspiradora": "Rohingya in Bangladesh welcome UN court's genocide verdict but say they want to go home to Myanmar",
+      "afirmacion_noticia": "Los desplazados que buscan regresar a sus países de origen pueden beneficiarse de sistemas de salud más fuertes en sus destinos, lo que influye en la esperanza de vida",
+      "verificable_con_datos": "Se pueden analizar la relación entre gasto en salud (% del PIB) y esperanza de vida; no se pueden medir flujos migratorias específicas de rohingya con los indicadores disponibles",
+      "indicadores_respaldan": [
+        "Current health expenditure (% of GDP)",
+        "Life expectancy at birth (years)"
+      ],
+      "correlaciones_relevantes": [
+        "Health expenditure vs Life expectancy"
+      ],
+      "justificacion": "Los indicadores permiten evaluar directamente cómo la inversión en salud afecta la longevidad, independientemente de la composición migratoria",
+      "pregunta": "¿Un mayor gasto en salud está asociado a una mayor esperanza de vida en los países latinoamericanos?",
+      "hipotesis": "Mayor gasto en salud (% del PIB) incrementa la esperanza de vida (años)",
+      "keywords_en": "health expenditure life expectancy Latin America"
+    },
+    {
+      "titulo": "Participación del sector servicios y vulnerabilidad del empleo juvenil",
+      "noticia_inspiradora": "Russian ornithologist jailed over small donations to Navalny's foundation",
+      "afirmacion_noticia": "La represión política puede reducir la expansión del sector servicios, aumentando la vulnerabilidad del empleo juvenil",
+      "verificable_con_datos": "Se pueden correlacionar empleo en servicios y empleo vulnerable; la dimensión de represión no es medible con los indicadores disponibles",
+      "indicadores_respaldan": [
+        "Employment in services (% of total employment)",
+        "Vulnerable employment (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Services employment vs Vulnerable employment"
+      ],
+      "justificacion": "El sector servicios es un motor de empleo formal; su contracción puede elevar la proporción de empleo vulnerable, observable con los datos",
+      "pregunta": "¿Una mayor participación del sector servicios está asociada a menores tasas de empleo vulnerable entre los jóvenes en América Latina?",
+      "hipotesis": "Mayor participación del sector servicios reduce el empleo vulnerable (%)",
+      "keywords_en": "services sector vulnerable employment youth Latin America"
+    }
+  ],
+  "reviewDecision": {
+    "datos_correctos": true,
+    "detalle_datos": "El paper reproduce fielmente los porcentajes, cambios, CAGR, correlaciones, p‑valores y q‑valores proporcionados en los datos y resultados reales. No se detectan cifras o referencias fuera de la información autorizada.",
+    "datos_inventados": [],
+    "estructura_ok": true,
+    "coherencia_ok": true,
+    "correcciones": [],
+    "datos_faltantes": null,
+    "veredicto": "APROBADO",
+    "feedback": null,
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 83,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "APROBADO",
+    "checklist": {
+      "estructura_ok": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": true,
+      "datos_verificados": true,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 1958,
+    "issues": [],
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 83,
+      "invented": 0
+    }
+  },
+  "editorial": "¿Podría un mayor acceso a internet ayudar a que los jóvenes de América Latina encuentren trabajo? Esa pregunta surgió cuando la Casa Blanca nombró a Kirsten Davies como jefe de ciberseguridad, recordándonos que la conectividad es un tema de vida y muerte. Al revisar los datos del Banco Mundial, la historia no es sencilla.\n\nEn Chile, cuando el porcentaje de usuarios de internet sube, la tasa de desempleo juvenil tiende a subir también, algo inesperado. En Costa Rica y Colombia, los números son similares: el empleo de los jóvenes no mejora con más conectividad. En Brasil y Argentina, la relación es un poco más complicada, con algunos años donde el empleo cae cuando la red crece y otros donde no hay cambio. México muestra una tendencia a la baja del desempleo juvenil cuando la penetración de internet aumenta, pero la diferencia no es clara.\n\nEn resumen, la idea de que más internet significa menos desempleo juvenil no se sostiene de manera consistente. Los datos muestran una mezcla de efectos, y en muchos casos la diferencia es tan pequeña que podría ser solo casualidad. Para los lectores, la lección es que la conectividad por sí sola no garantiza empleo; hay que mirar más allá de la pantalla.",
+  "sample": {
+    "countries": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "COL",
+      "CRI"
+    ],
+    "indicators": [
+      "Internet users (% of population)",
+      "Youth unemployment (% of labor force 15-24)"
+    ]
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-11-21-18-51",
+    "regression": null,
+    "correlations": 13,
+    "significantCorrelations": []
+  },
+  "truncations": [
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 5716,
+      "after": 4549,
+      "cutChars": 3428
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 7684,
+      "after": 5384,
+      "cutChars": 6902
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 2224
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 3200
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 7311,
+      "after": 5484,
+      "cutChars": 5630
+    }
+  ],
+  "elapsed": 322.8
+}

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-20T19:57:26+00:00",
+  "generated": "2026-11-21T18:56:31+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 42
+    "papers": 43
   },
   "countries": [
     {
@@ -66,6 +66,26 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-21",
+      "file": "2026-11-21_digitalizaci-n-y-desempleo-juvenil-en-co.md",
+      "topic": "Digitalización y desempleo juvenil en contextos de crisis política",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)"
+      ],
+      "indicators": [
+        "Internet users (% of population)",
+        "Youth unemployment (% of labor force 15-24)"
+      ]
+    },
     {
       "date": "2026-11-20",
       "file": "2026-11-20_impacto-de-la-expansi-n-de-la-cooperaci-.md",
@@ -164,8 +184,8 @@
       ],
       "indicators": [
         "Internet users (% of population)",
-        "Employment in services (% of total employment)",
-        "Youth unemployment (% of labor force 15-24)"
+        "Youth unemployment (% of labor force 15-24)",
+        "Employment in services (% of total employment)"
       ]
     },
     {
@@ -250,8 +270,8 @@
       ],
       "indicators": [
         "Internet users (% of population)",
-        "Employment in services (% of total employment)",
-        "Youth unemployment (% of labor force 15-24)"
+        "Youth unemployment (% of labor force 15-24)",
+        "Employment in services (% of total employment)"
       ]
     },
     {
@@ -395,8 +415,8 @@
         "Youth unemployment (% of labor force 15-24)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
         "Youth unemployment (% of labor force 15-24)",
+        "GDP growth (annual %)",
         "Poverty headcount ratio at $2.15 a day (2017 PPP, % of population)"
       ]
     },
@@ -417,8 +437,8 @@
         "GDP growth (annual %)"
       ],
       "indicators": [
-        "GDP growth (annual %)",
         "Internet users (% of population)",
+        "GDP growth (annual %)",
         "Personal remittances received (current US$)"
       ]
     },
@@ -654,8 +674,8 @@
       ],
       "indicators": [
         "Internet users (% of population)",
-        "Employment in services (% of total employment)",
-        "Youth unemployment (% of labor force 15-24)"
+        "Youth unemployment (% of labor force 15-24)",
+        "Employment in services (% of total employment)"
       ]
     },
     {
@@ -1331,6 +1351,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-21",
+              "file": "2026-11-21_digitalizaci-n-y-desempleo-juvenil-en-co.md",
+              "topic": "Digitalización y desempleo juvenil en contextos de crisis política"
+            },
             {
               "date": "2026-11-15",
               "file": "2026-11-15_relaci-n-entre-digitalizaci-n--sector-se.md",
@@ -2201,6 +2226,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-21",
+              "file": "2026-11-21_digitalizaci-n-y-desempleo-juvenil-en-co.md",
+              "topic": "Digitalización y desempleo juvenil en contextos de crisis política"
+            },
             {
               "date": "2026-11-15",
               "file": "2026-11-15_relaci-n-entre-digitalizaci-n--sector-se.md",

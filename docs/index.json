@@ -1,5 +1,64 @@
 [
   {
+    "file": "2026-11-21_digitalizaci-n-y-desempleo-juvenil-en-co.md",
+    "date": "2026-11-21",
+    "topic": "Digitalización y desempleo juvenil en contextos de crisis política",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://i.abcnewsfe.com/a/d0cd7d2c-4941-49c6-89f0-f0f7c0734080/wirestory_2f1f84f3ca5429d01ace67929c72128d_16x9.jpg?w=1600",
+    "section": "Ciberseguridad",
+    "news_url": "https://abcnews.com/Technology/wireStory/white-house-taps-kirsten-davies-cyber-chief-after-138308702",
+    "pregunta": "¿Una mayor penetración de internet está asociada a menores tasas de desempleo juvenil en América Latina?",
+    "editorial": "¿Podría un mayor acceso a internet ayudar a que los jóvenes de América Latina encuentren trabajo? Esa pregunta surgió cuando la Casa Blanca nombró a Kirsten Davies como jefe de ciberseguridad, recordándonos que la conectividad es un tema de vida y muerte. Al revisar los datos del Banco Mundial, la historia no es sencilla.\n\nEn Chile, cuando el porcentaje de usuarios de internet sube, la tasa de desempleo juvenil tiende a subir también, algo inesperado. En Costa Rica y Colombia, los números son similares: el empleo de los jóvenes no mejora con más conectividad. En Brasil y Argentina, la relación es un poco más complicada, con algunos años donde el empleo cae cuando la red crece y otros donde no hay cambio. México muestra una tendencia a la baja del desempleo juvenil cuando la penetración de internet aumenta, pero la diferencia no es clara.\n\nEn resumen, la idea de que más internet significa menos desempleo juvenil no se sostiene de manera consistente. Los datos muestran una mezcla de efectos, y en muchos casos la diferencia es tan pequeña que podría ser solo casualidad. Para los lectores, la lección es que la conectividad por sí sola no garantiza empleo; hay que mirar más allá de la pantalla.",
+    "charts": "2026-11-21-18-51",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5716,
+        "after": 4549,
+        "cutChars": 3428
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7684,
+        "after": 5384,
+        "cutChars": 6902
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 2224
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 3200
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 7311,
+        "after": 5484,
+        "cutChars": 5630
+      }
+    ],
+    "ts": "2026-11-21T18:56:24.774Z"
+  },
+  {
     "file": "2026-11-20_impacto-de-la-expansi-n-de-la-cooperaci-.md",
     "date": "2026-11-20",
     "topic": "Impacto de la expansión de la cooperación sanitaria en Emiratos Árabes Unidos sobre la salud pública en América Latina",
