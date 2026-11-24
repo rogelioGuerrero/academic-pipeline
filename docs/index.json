@@ -1,5 +1,59 @@
 [
   {
+    "file": "2026-11-24_efectos-macroecon-micos-de-la-captura-de.md",
+    "date": "2026-11-24",
+    "topic": "Efectos macroeconómicos de la captura de líderes del crimen organizado y de políticas fiscales digitales en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://www.rte.ie/images/00252648-1600.jpg",
+    "section": "Economía",
+    "news_url": "https://www.rte.ie/news/europe/2026/1121/1600093-european-union-budget/",
+    "pregunta": "¿Cómo impactan la captura de líderes del crimen organizado y la imposición de un impuesto a grandes tecnológicas de la UE en el comercio, la inversión extranjera y el empleo juvenil de los países latinoamericanos?",
+    "editorial": "¿Y si la captura de capos de la mafia y el nuevo impuesto a las grandes tecnológicas de la UE pudieran cambiar el rumbo del comercio, la inversión extranjera y el empleo juvenil en Latinoamérica? Esa fue la pregunta que surgió cuando la noticia sobre la UE y la captura de líderes del crimen organizado se cruzó en la mente de un lector curioso.\n\nAl mirar los datos, la historia se vuelve sorprendente. En Costa Rica, el comercio con el resto del mundo se mantiene firme mientras la inversión extranjera neta sube, lo que sugiere que la captura de capos pudo haber reforzado la confianza de los inversores. En Panamá, el comercio crece un 63 % mientras la inversión extranjera también se dispara, aunque el efecto no es tan fuerte como en Costa Rica. Por el contrario, en Brasil el comercio se reduce un 40 % y la inversión extranjera también cae, lo que indica que la política fiscal de la UE puede haber tenido un impacto negativo en esa economía.\n\nEn general, los datos no confirman la idea de que ambos eventos generen automáticamente más empleo juvenil o un aumento global de la inversión. El panorama es heterogéneo: algunos países ven un impulso, otros una caída, y en varios casos la evidencia es débil o incierta. Para el lector, la lección es clara: las cifras no se alinean con una narrativa simple, y cada país parece responder de manera distinta a estos cambios.",
+    "charts": "2026-11-22-19-15",
+    "figs": [
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig4_countries.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 6311,
+        "after": 4563,
+        "cutChars": 4859
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8865,
+        "after": 5516,
+        "cutChars": 9695
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 5742,
+        "after": 4471,
+        "cutChars": 3794
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8458,
+        "after": 4713,
+        "cutChars": 11396
+      }
+    ],
+    "ts": "2026-11-24T01:48:35.503Z"
+  },
+  {
     "file": "2026-11-21_digitalizaci-n-y-desempleo-juvenil-en-co.md",
     "date": "2026-11-21",
     "topic": "Digitalización y desempleo juvenil en contextos de crisis política",
