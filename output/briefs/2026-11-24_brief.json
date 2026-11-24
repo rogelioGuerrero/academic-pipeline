@@ -1,0 +1,85 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la expansión agrícola en el empleo juvenil y la vulnerabilidad laboral en América Latina",
+      "noticia_inspiradora": "Kenya to distribute 6.16 million fruit seedlings in 2027/28",
+      "afirmacion_noticia": "La distribución masiva de plántulas de árboles frutales impulsa la actividad agrícola y podría generar empleos para jóvenes en áreas rurales.",
+      "verificable_con_datos": "Se pueden verificar cambios en el empleo juvenil (% de la fuerza laboral 15-24) y en el empleo vulnerable (% de empleo total) a nivel nacional; no se dispone de datos específicos de distribución de plántulas ni de su efecto directo.",
+      "indicadores_respaldan": [
+        "Youth unemployment (% of labor force 15-24)",
+        "Vulnerable employment (% of total employment)",
+        "Employment in agriculture (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Youth unemployment vs Employment in agriculture",
+        "Vulnerable employment vs Employment in agriculture"
+      ],
+      "justificacion": "La noticia habla de una política agrícola que típicamente afecta la demanda de mano de obra en el sector rural; los indicadores disponibles permiten medir si hay disminución del desempleo juvenil y reducción del empleo vulnerable, lo que refleja la calidad del empleo generado.",
+      "pregunta": "¿La expansión de la agricultura de pequeña escala está asociada a una reducción del desempleo juvenil y del empleo vulnerable en los países latinoamericanos?",
+      "hipotesis": "Un mayor peso del empleo agrícola se relaciona con menores tasas de desempleo juvenil y menor proporción de empleo vulnerable.",
+      "keywords_en": "agricultural expansion youth unemployment vulnerable employment Latin America"
+    },
+    {
+      "titulo": "Adopción de IA de consumo y su relación con la inclusión digital y el empleo en servicios",
+      "noticia_inspiradora": "Meta Muse can now do your Black Friday shopping at Walmart",
+      "afirmacion_noticia": "La integración de asistentes de IA en plataformas de comercio electrónico aumenta la interacción digital y podría crear nuevos puestos de trabajo en el sector de servicios.",
+      "verificable_con_datos": "Se pueden medir niveles de usuarios de internet y suscripciones móviles como proxies de inclusión digital; el indicador de empleo en servicios permite observar cambios en la participación del sector; no hay datos directos sobre creación de empleos por IA.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs Employment in services",
+        "Mobile subscriptions vs Employment in services"
+      ],
+      "justificacion": "La noticia se centra en IA aplicada al comercio, lo que depende de la penetración digital; los indicadores disponibles capturan la amplitud de la infraestructura digital y la participación del sector servicios, permitiendo analizar si mayor digitalización se traduce en mayor empleo en servicios.",
+      "pregunta": "¿Mayor adopción de tecnologías digitales (internet y móviles) está asociada a un aumento del empleo en el sector servicios en América Latina?",
+      "hipotesis": "Los países con mayor porcentaje de usuarios de internet y suscripciones móviles presentan una mayor participación del empleo en servicios.",
+      "keywords_en": "digital inclusion services employment internet mobile adoption Latin America"
+    },
+    {
+      "titulo": "Efectos de la ciberseguridad en la confianza del consumidor y la actividad económica digital",
+      "noticia_inspiradora": "LaLiga data extracted in cyber attack",
+      "afirmacion_noticia": "Los ciberataques a grandes plataformas pueden reducir la confianza del consumidor y afectar la actividad económica digital.",
+      "verificable_con_datos": "Se pueden observar tendencias en usuarios de internet y suscripciones móviles como indicadores de confianza digital; sin embargo, no hay datos directos sobre percepción de seguridad ni sobre transacciones digitales específicas.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "Trade (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users vs Trade",
+        "Mobile subscriptions vs Trade"
+      ],
+      "justificacion": "Aunque la noticia es sobre un incidente de ciberseguridad, su posible repercusión macroeconómica se refleja en la actividad comercial digital, que está parcialmente capturada por el indicador de comercio como proporción del PIB y por la difusión digital de la población.",
+      "pregunta": "¿Los países con mayor penetración digital experimentan menores caídas en el comercio cuando ocurren incidentes de ciberseguridad?",
+      "hipotesis": "Una mayor base de usuarios de internet y suscripciones móviles amortigua el impacto negativo de ciberataques en el comercio (% del PIB).",
+      "keywords_en": "cybersecurity consumer confidence digital economy trade Latin America"
+    },
+    {
+      "titulo": "Relación entre la expansión de la energía renovable y la esperanza de vida en contextos urbanos latinoamericanos",
+      "noticia_inspiradora": "‘Worst COP ever’: Climate talks collapse after draft deal fails to include fossil fuels",
+      "afirmacion_noticia": "El estancamiento de los acuerdos climáticos podría retrasar la adopción de energías renovables, afectando la salud pública urbana.",
+      "verificable_con_datos": "Se pueden medir la proporción de energía renovable y la esperanza de vida, así como la población urbana; no hay datos directos sobre la negociación climática ni su efecto inmediato.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "Life expectancy at birth (years)",
+        "Urban population (% of total)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy vs Life expectancy",
+        "Urban population vs Life expectancy",
+        "Renewable energy vs Urban population"
+      ],
+      "justificacion": "La noticia aborda la política climática; el indicador de consumo de energía renovable permite evaluar el progreso ambiental, mientras que la esperanza de vida y la urbanización son métricas de salud que pueden estar influenciadas por la calidad del aire y la infraestructura energética.",
+      "pregunta": "¿Un mayor consumo de energía renovable está asociado a mayores esperanzas de vida en áreas urbanas de América Latina?",
+      "hipotesis": "Los países con mayor participación de energías renovables presentan una mayor esperanza de vida en su población urbana.",
+      "keywords_en": "renewable energy life expectancy urban health Latin America"
+    }
+  ],
+  "topic": "Relación entre la expansión de la energía renovable y la esperanza de vida en contextos urbanos latinoamericanos",
+  "angle": "Analizar si la mayor adopción de energías renovables se traduce en mejoras de la salud pública urbana, usando esperanza de vida como proxy de bienestar.",
+  "pregunta": "¿Un mayor consumo de energía renovable está asociado a mayores esperanzas de vida en áreas urbanas de América Latina?",
+  "hipotesis": "Los países latinoamericanos con mayor proporción de energía renovable en su consumo energético presentan una esperanza de vida más alta en su población urbana."
+}
