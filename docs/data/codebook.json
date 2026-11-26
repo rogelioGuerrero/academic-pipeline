@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-25T21:26:37+00:00",
+  "generated": "2026-11-26T21:11:29+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 44
+    "papers": 45
   },
   "countries": [
     {
@@ -66,6 +66,28 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-26",
+      "file": "2026-11-26_adopci-n-de-ia-de-consumo-y-su-relaci-n-.md",
+      "topic": "Adopción de IA de consumo y su relación con la inclusión digital y el empleo en servicios",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "Employment in services (% of total employment)"
+      ],
+      "indicators": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "Employment in services (% of total employment)"
+      ]
+    },
     {
       "date": "2026-11-24",
       "file": "2026-11-24_efectos-macroecon-micos-de-la-captura-de.md",
@@ -204,8 +226,8 @@
       ],
       "indicators": [
         "Internet users (% of population)",
-        "Youth unemployment (% of labor force 15-24)",
-        "Employment in services (% of total employment)"
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
       ]
     },
     {
@@ -290,8 +312,8 @@
       ],
       "indicators": [
         "Internet users (% of population)",
-        "Youth unemployment (% of labor force 15-24)",
-        "Employment in services (% of total employment)"
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
       ]
     },
     {
@@ -694,8 +716,8 @@
       ],
       "indicators": [
         "Internet users (% of population)",
-        "Youth unemployment (% of labor force 15-24)",
-        "Employment in services (% of total employment)"
+        "Employment in services (% of total employment)",
+        "Youth unemployment (% of labor force 15-24)"
       ]
     },
     {
@@ -968,8 +990,8 @@
       ],
       "indicators": [
         "Internet users (% of population)",
-        "Vulnerable employment (% of total employment)",
-        "Mobile cellular subscriptions (per 100 people)"
+        "Mobile cellular subscriptions (per 100 people)",
+        "Vulnerable employment (% of total employment)"
       ]
     }
   ],
@@ -1068,6 +1090,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-26",
+              "file": "2026-11-26_adopci-n-de-ia-de-consumo-y-su-relaci-n-.md",
+              "topic": "Adopción de IA de consumo y su relación con la inclusión digital y el empleo en servicios"
+            },
             {
               "date": "2026-11-15",
               "file": "2026-11-15_relaci-n-entre-digitalizaci-n--sector-se.md",
@@ -2257,6 +2284,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-26",
+              "file": "2026-11-26_adopci-n-de-ia-de-consumo-y-su-relaci-n-.md",
+              "topic": "Adopción de IA de consumo y su relación con la inclusión digital y el empleo en servicios"
+            },
+            {
               "date": "2026-11-21",
               "file": "2026-11-21_digitalizaci-n-y-desempleo-juvenil-en-co.md",
               "topic": "Digitalización y desempleo juvenil en contextos de crisis política"
@@ -2362,6 +2394,11 @@
           "n_observations": 129,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-26",
+              "file": "2026-11-26_adopci-n-de-ia-de-consumo-y-su-relaci-n-.md",
+              "topic": "Adopción de IA de consumo y su relación con la inclusión digital y el empleo en servicios"
+            },
             {
               "date": "2026-09-13",
               "file": "2026-09-13_penetraci-n-digital-y-empleo-vulnerable-.md",

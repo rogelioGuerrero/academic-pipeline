@@ -1,5 +1,78 @@
 [
   {
+    "file": "2026-11-26_adopci-n-de-ia-de-consumo-y-su-relaci-n-.md",
+    "date": "2026-11-26",
+    "topic": "Adopción de IA de consumo y su relación con la inclusión digital y el empleo en servicios",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "APROBADO",
+    "qa": "APROBADO",
+    "image": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/Walmart-Meta-Muse-Agent-Gateway.jpg?quality=90&strip=all&crop=0,10.732984293194,100,78.534031413613",
+    "section": "IA & Tech",
+    "news_url": "https://www.theverge.com/ai-artificial-intelligence/1039874/walmart-agent-gateway-meta-muse-black-friday",
+    "pregunta": "¿Mayor adopción de tecnologías digitales (internet y móviles) está asociada a un aumento del empleo en el sector servicios en América Latina?",
+    "editorial": "¿Si la gente pasa más tiempo en internet y en sus teléfonos, se crean más trabajos en el sector servicios de América Latina? Esa pregunta surgió cuando Meta Muse anunció que ahora puede hacer tus compras de Black Friday en Walmart, como si un asistente virtual se encargara de todo el proceso.  \n\nAl mirar los datos, vemos que en los diez países analizados, el porcentaje de usuarios de internet creció de manera similar a la participación del empleo en servicios, pero con un giro inesperado: cuando el número de suscripciones móviles aumentó, el empleo en servicios no mostró un cambio claro, ni subió ni bajó de forma consistente. En países como Chile y México, el empleo en servicios se disparó entre 2015 y 2020, mientras que en Perú y Colombia el crecimiento fue más moderado.  \n\nEn el análisis por país y año, la relación entre el empleo en servicios y la penetración de internet se volvió más fuerte, sugiriendo que el aumento de la conectividad puede estar impulsando la creación de empleos en sectores como la hostelería, el turismo y el comercio minorista. Sin embargo, la evidencia no es absoluta; en algunos casos la variación es tan pequeña que podría ser solo un efecto de ruido. En resumen, la tecnología parece abrir puertas a más trabajos, pero la magnitud de ese efecto varía y no podemos afirmar con certeza que cada nuevo usuario de internet genere automáticamente un empleo.",
+    "charts": "2026-11-24-22-03",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "openai/gpt-oss-120b",
+        "before": 6781,
+        "after": 5513,
+        "cutChars": 3423
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7853,
+        "after": 4529,
+        "cutChars": 9234
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 10173,
+        "after": 5430,
+        "cutChars": 13364
+      },
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "openai/gpt-oss-120b",
+        "before": 6359,
+        "after": 5338,
+        "cutChars": 2913
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7448,
+        "after": 4537,
+        "cutChars": 8460
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9434,
+        "after": 5508,
+        "cutChars": 11480
+      }
+    ],
+    "ts": "2026-11-26T21:11:23.299Z"
+  },
+  {
     "file": "2026-11-24_efectos-macroecon-micos-de-la-captura-de.md",
     "date": "2026-11-24",
     "topic": "Efectos macroeconómicos de la captura de líderes del crimen organizado y de políticas fiscales digitales en América Latina",
