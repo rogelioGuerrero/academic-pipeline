@@ -1,5 +1,102 @@
 [
   {
+    "file": "2026-11-27_impacto-de-la-conectividad-digital-en-la.md",
+    "date": "2026-11-27",
+    "topic": "Impacto de la conectividad digital en la estructuración del empleo de servicios en América Latina",
+    "nodes": 7,
+    "mode": "suggest",
+    "review": "REESCRIBIR",
+    "qa": "APROBADO",
+    "image": "https://dam.mediacorp.sg/image/upload/s--QoslOzOZ--/c_fill,g_auto,h_676,w_1200/fl_relative,g_south_east,l_mediacorp:cna:watermark:2024-04:reuters_1,w_0.1/f_auto,q_auto/v1/one-cms/core/2026-11-26T090755Z_1_LYNXNPEMAP0PQ_RTROPTP_3_META-PLATFORMS-MESSAGING-WHATSAPP.JPG?itok=XNQlchdI",
+    "section": "Política",
+    "news_url": "https://www.channelnewsasia.com/business/meta-battles-political-storm-in-india-congress-party-sues-stages-protests-6584706",
+    "pregunta": "¿En los países latinoamericanos, un mayor nivel de conectividad digital (usuarios de internet y suscripciones móviles) se asocia a una mayor proporción de empleo en servicios?",
+    "editorial": "¿Y si en Latinoamérica, cuando más gente tiene internet y más teléfonos móviles, también crece el trabajo en servicios? Esa pregunta surgió cuando la noticia sobre Meta y el Congreso en India nos hizo pensar en la relación entre conectividad y empleo.\n\nAl revisar los datos, vemos que en los diez países analizados el porcentaje de usuarios de internet aumentó de manera moderada, pero la relación con el empleo en servicios no es tan directa. Cuando las suscripciones móviles suben, el empleo en servicios tiende a bajar un poco, aunque esa tendencia no es muy fuerte. En cambio, cuando el empleo en servicios crece, la penetración de internet también aumenta, y esa asociación parece más sólida. En el panel de 12 países y 119 observaciones, el efecto del empleo en servicios sigue siendo fuerte y consistente, mientras que el de las suscripciones móviles desaparece.\n\nEn resumen, la historia no confirma la idea de que más conectividad digital impulse automáticamente más empleo en servicios. La evidencia sugiere que el empleo en servicios puede estar impulsando la adopción de internet, pero la relación no es una regla universal. Para los lectores, esto significa que la conectividad no garantiza un auge de empleos en servicios; la realidad es más compleja y varía según cada país.",
+    "charts": "2026-11-27-20-51",
+    "figs": [
+      "fig10_panels.png",
+      "fig11_anomaly.png",
+      "fig1_trends.png",
+      "fig2_correlation.png",
+      "fig3_regression.png",
+      "fig4_countries.png",
+      "fig5_forest.png",
+      "fig6_heatmap.png",
+      "fig7_boxplot.png",
+      "fig8_bootdist.png",
+      "fig9_residuals.png"
+    ],
+    "truncations": [
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 1455
+      },
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 2200
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7491,
+        "after": 4528,
+        "cutChars": 8601
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9230,
+        "after": 5489,
+        "cutChars": 10940
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7361,
+        "after": 4472,
+        "cutChars": 8615
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 8764,
+        "after": 5458,
+        "cutChars": 9894
+      },
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "openai/gpt-oss-120b",
+        "outputTruncated": true,
+        "maxTokens": 1570
+      },
+      {
+        "stage": "WRITE:apertura_metodologia",
+        "model": "gemini-2.5-flash",
+        "outputTruncated": true,
+        "maxTokens": 2200
+      },
+      {
+        "stage": "WRITE:analisis_cierre",
+        "model": "openai/gpt-oss-120b",
+        "before": 7397,
+        "after": 4509,
+        "cutChars": 8571
+      },
+      {
+        "stage": "REVIEW",
+        "model": "openai/gpt-oss-120b",
+        "before": 9485,
+        "after": 5361,
+        "cutChars": 12295
+      }
+    ],
+    "ts": "2026-11-27T20:59:45.968Z"
+  },
+  {
     "file": "2026-11-26_adopci-n-de-ia-de-consumo-y-su-relaci-n-.md",
     "date": "2026-11-26",
     "topic": "Adopción de IA de consumo y su relación con la inclusión digital y el empleo en servicios",

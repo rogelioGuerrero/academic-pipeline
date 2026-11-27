@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-26T21:11:29+00:00",
+  "generated": "2026-11-27T20:59:51+00:00",
   "window": {
     "from": 2015,
     "to": 2024
@@ -9,7 +9,7 @@
     "countries": 13,
     "series": 387,
     "observations": 3629,
-    "papers": 45
+    "papers": 46
   },
   "countries": [
     {
@@ -66,6 +66,28 @@
     }
   ],
   "papers": [
+    {
+      "date": "2026-11-27",
+      "file": "2026-11-27_impacto-de-la-conectividad-digital-en-la.md",
+      "topic": "Impacto de la conectividad digital en la estructuración del empleo de servicios en América Latina",
+      "sample_countries": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "COL",
+        "CRI"
+      ],
+      "sample_indicators": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "Employment in services (% of total employment)"
+      ],
+      "indicators": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "Employment in services (% of total employment)"
+      ]
+    },
     {
       "date": "2026-11-26",
       "file": "2026-11-26_adopci-n-de-ia-de-consumo-y-su-relaci-n-.md",
@@ -1090,6 +1112,11 @@
           "n_observations": 130,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-27",
+              "file": "2026-11-27_impacto-de-la-conectividad-digital-en-la.md",
+              "topic": "Impacto de la conectividad digital en la estructuración del empleo de servicios en América Latina"
+            },
             {
               "date": "2026-11-26",
               "file": "2026-11-26_adopci-n-de-ia-de-consumo-y-su-relaci-n-.md",
@@ -2284,6 +2311,11 @@
           "n_observations_expected": 130,
           "papers": [
             {
+              "date": "2026-11-27",
+              "file": "2026-11-27_impacto-de-la-conectividad-digital-en-la.md",
+              "topic": "Impacto de la conectividad digital en la estructuración del empleo de servicios en América Latina"
+            },
+            {
               "date": "2026-11-26",
               "file": "2026-11-26_adopci-n-de-ia-de-consumo-y-su-relaci-n-.md",
               "topic": "Adopción de IA de consumo y su relación con la inclusión digital y el empleo en servicios"
@@ -2394,6 +2426,11 @@
           "n_observations": 129,
           "n_observations_expected": 130,
           "papers": [
+            {
+              "date": "2026-11-27",
+              "file": "2026-11-27_impacto-de-la-conectividad-digital-en-la.md",
+              "topic": "Impacto de la conectividad digital en la estructuración del empleo de servicios en América Latina"
+            },
             {
               "date": "2026-11-26",
               "file": "2026-11-26_adopci-n-de-ia-de-consumo-y-su-relaci-n-.md",

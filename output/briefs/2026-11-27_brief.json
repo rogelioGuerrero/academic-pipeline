@@ -1,0 +1,83 @@
+{
+  "suggestions": [
+    {
+      "titulo": "Impacto de la expansión de la conectividad digital en el empleo de servicios en América Latina",
+      "noticia_inspiradora": "Meta battles political storm in India as Congress party sues, stages protests",
+      "afirmacion_noticia": "Las tensiones regulatorias sobre plataformas digitales pueden afectar la oferta de empleo en sectores de servicios digitales.",
+      "verificable_con_datos": "Se pueden verificar relaciones entre la penetración de internet y suscripciones móviles (indicadores de conectividad) y la participación del empleo en servicios; no se pueden medir directamente los efectos regulatorios específicos de Meta en la región.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Employment in services",
+        "Mobile subscriptions ↔ Employment in services"
+      ],
+      "justificacion": "Los indicadores disponibles permiten analizar cómo la digitalización (internet y móvil) se asocia con la estructura del empleo, replicando la hipótesis evaluada previamente (2026-11-26) pero enfocada en el contexto de presión regulatoria reciente.",
+      "pregunta": "¿En los países latinoamericanos, un mayor nivel de conectividad digital (usuarios de internet y suscripciones móviles) se asocia a una mayor proporción de empleo en servicios?",
+      "hipotesis": "Los países con mayor penetración de internet y suscripciones móviles presentan una mayor participación del empleo en servicios.",
+      "keywords_en": "digital connectivity employment services Latin America"
+    },
+    {
+      "titulo": "Efectos de la inflación y el gasto en educación sobre la tasa de NEET juvenil",
+      "noticia_inspiradora": "Iranian twins sentenced to death, 25 years in jail over protests",
+      "afirmacion_noticia": "La inestabilidad política y social puede aumentar la proporción de jóvenes fuera del sistema educativo y laboral.",
+      "verificable_con_datos": "Se pueden contrastar la inflación y el gasto público en educación con la tasa de NEET juvenil; la causa política directa no es medible con los indicadores.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Government expenditure on education (% of GDP)",
+        "Share of youth not in education, employment or training (NEET, % of youth population)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflation ↔ NEET",
+        "Education expenditure ↔ NEET"
+      ],
+      "justificacion": "Los indicadores permiten explorar si entornos macroeconómicos inflacionarios y bajos niveles de inversión en educación están vinculados a mayores tasas de jóvenes descolocados, un vínculo plausible dado el contexto de protestas sociales.",
+      "pregunta": "¿Existe una relación negativa entre el gasto público en educación y la tasa de NEET, y una relación positiva entre la inflación y la tasa de NEET en América Latina?",
+      "hipotesis": "Mayor gasto en educación reduce la proporción de jóvenes NEET, mientras que mayor inflación la incrementa.",
+      "keywords_en": "inflation education expenditure NEET youth Latin America"
+    },
+    {
+      "titulo": "Relación entre inversión extranjera directa y crecimiento del PIB en contextos de conflicto geopolítico",
+      "noticia_inspiradora": "Israeli strikes kill nine in Gaza, including Hamas-appointed deputy education minister, officials say",
+      "afirmacion_noticia": "Los conflictos internacionales pueden reducir la IED neta y, por ende, el crecimiento económico regional.",
+      "verificable_con_datos": "Se pueden medir la IED neta y el crecimiento del PIB; el impacto directo del conflicto en América Latina no es observable, pero se puede analizar la asociación general entre IED y crecimiento en el periodo reciente.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI inflows ↔ GDP growth"
+      ],
+      "justificacion": "Aunque la noticia es sobre Oriente Medio, el puente analítico es la posible repercusión de tensiones geopolíticas en los flujos de IED hacia América Latina, un tema medible con los indicadores disponibles.",
+      "pregunta": "¿La variación de la IED neta está positivamente asociada al crecimiento del PIB en los países latinoamericanos durante los últimos años?",
+      "hipotesis": "Un mayor porcentaje de IED neta respecto al PIB se asocia a mayores tasas de crecimiento económico en América Latina.",
+      "keywords_en": "foreign direct investment GDP growth Latin America geopolitics"
+    },
+    {
+      "titulo": "Impacto de la expansión de la energía renovable en la esperanza de vida y la salud pública",
+      "noticia_inspiradora": "Indonesia taps Coral Bond to expand marine conservation areas",
+      "afirmacion_noticia": "Iniciativas de conservación y energía verde pueden mejorar indicadores de salud poblacional.",
+      "verificable_con_datos": "Se pueden correlacionar el consumo de energía renovable con la esperanza de vida y el gasto en salud; la causalidad de la política indonesia no es directamente medible en América Latina.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "Life expectancy at birth (years)",
+        "Current health expenditure (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy ↔ Life expectancy",
+        "Renewable energy ↔ Health expenditure"
+      ],
+      "justificacion": "Los indicadores permiten explorar si los países con mayor participación de energías renovables presentan mejores resultados de salud, alineado con la tendencia global de sostenibilidad.",
+      "pregunta": "¿Existe una asociación positiva entre la proporción de energía renovable en la matriz energética y la esperanza de vida en América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayor consumo de energía renovable presentan una mayor esperanza de vida.",
+      "keywords_en": "renewable energy life expectancy health expenditure Latin America"
+    }
+  ],
+  "topic": "Impacto de la conectividad digital en la estructuración del empleo de servicios en América Latina",
+  "angle": "Analizar cómo la expansión de usuarios de internet y suscripciones móviles está correlacionada con la participación del empleo en el sector servicios, considerando la presión regulatoria sobre plataformas digitales como contexto contemporáneo.",
+  "pregunta": "¿En los países latinoamericanos, un mayor nivel de conectividad digital (usuarios de internet y suscripciones móviles) se asocia a una mayor proporción de empleo en servicios?",
+  "hipotesis": "Los países con mayor penetración de internet y suscripciones móviles presentan una mayor participación del empleo en servicios.",
+  "keywords_en": "digital connectivity employment services Latin America"
+}

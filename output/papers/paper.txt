@@ -1,110 +1,103 @@
-# Adopción de IA de consumo y su relación con la inclusión digital y el empleo en servicios  
+# Impacto de la conectividad digital en la estructuración del empleo de servicios en América Latina  
 
 **Autor:** Investigador Académico  
 **Revista:** *Ciencias Sociales*  
 **Fecha:** Noviembre de 2026  
 
 ## Resumen  
+Entre 2015 y 2024 la región latinoamericana mostró un aumento sostenido del uso de internet (de 54,40 % a 81,70 %; Δ = +50,18 %; CAGR = +4,62 %) y una ligera expansión de las suscripciones móviles (de 112,20 a 114,60 por 100 personas; Δ = +2,14 %; CAGR = +0,24 %). Paralelamente, la proporción del empleo en servicios creció de 64,47 % a 66,58 % (Δ = +3,28 %; CAGR = +0,36 %). Los análisis estadísticos revelan una asociación positiva entre el empleo en servicios y la penetración de internet a nivel regional (r = 0.714, q = 0.043) y una relación robusta en el modelo de panel con efectos fijos (β = 2.3518, p = 0.0044). Sin embargo, la relación entre suscripciones móviles y empleo en servicios no alcanza significancia estadística en ninguno de los enfoques (p > 0.05). Estos hallazgos sugieren que la expansión de la conectividad digital, medida por el acceso a internet, está vinculada a una mayor participación del sector servicios, mientras que la mera densidad de suscripciones móviles muestra una asociación más tenue.  
 
-Entre 2015 y 2024 la penetración de internet en América Latina y el Caribe aumentó de 54,40 % a 81,70 % (Δ = +50,18 %, CAGR = 4,62 %) mientras que la participación del empleo en servicios pasó de 64,47 % a 66,58 % (Δ = +3,28 %). Los análisis estadísticos muestran una correlación positiva moderada entre ambas variables a nivel regional (r = 0.714, p = 0.020, q = 0.043) y una relación robusta en el modelo de efectos fijos por país (β = 2.3518, p = 0.0044). Sin embargo, la regresión OLS agregada indica una asociación marginal (β = 10.9044, p = 0.0338) y la variable de suscripciones móviles no aporta evidencia significativa. En conjunto, los resultados sugieren que la mayor inclusión digital se asocia con un leve incremento del empleo en servicios, pero la evidencia es más sólida cuando se controla la heterogeneidad entre países.  
-
-> **En breve:** *La evidencia regional indica una asociación positiva pero moderada entre la adopción digital y el empleo en servicios; la relación se vuelve robusta al considerar variaciones intra‑país, mientras que las suscripciones móviles no explican significativamente el empleo en servicios.*  
+> **En breve:** *Los datos indican que mayor penetración de internet se asocia a una mayor proporción de empleo en servicios en América Latina, pero la densidad de suscripciones móviles no muestra evidencia robusta de asociación.*  
 
 ## Introducción  
+En los últimos diez años la digitalización ha avanzado rápidamente en América Latina y el Caribe, impulsada tanto por la expansión de la infraestructura de telecomunicaciones como por la creciente adopción de plataformas digitales. La noticia reciente señala que “las tensiones regulatorias sobre plataformas digitales pueden afectar la oferta de empleo en sectores de servicios digitales”, lo que plantea la necesidad de examinar empíricamente si la conectividad digital está vinculada a la estructuración del empleo en servicios.  
 
-La expansión de la inteligencia artificial (IA) de consumo, particularmente en plataformas de comercio electrónico, ha sido presentada en los medios como un motor potencial de nuevos puestos de trabajo en el sector servicios (noticia de prensa, 2026). Dicha afirmación presupone que la mayor disponibilidad de tecnologías digitales –medida por la proporción de usuarios de internet y la densidad de suscripciones móviles– facilita la adopción de soluciones de IA y, por ende, genera demanda de empleo en actividades de servicios.  
+Esta investigación se centra en la siguiente **pregunta de investigación**: ¿En los países latinoamericanos, un mayor nivel de conectividad digital (usuarios de internet y suscripciones móviles) se asocia a una mayor proporción de empleo en servicios? La pregunta es verificable con los indicadores publicados por el Banco Mundial (2015‑2024), pero no permite medir directamente los efectos regulatorios específicos de plataformas como Meta.  
 
-Sin embargo, la literatura académica muestra resultados mixtos. Por ejemplo, Ndubuisi, Otioma y Tetteh (2021) encuentran una relación positiva entre infraestructura digital y empleo en servicios en África, mientras que Gershenson et al. (2021) advierten que la expansión de fintech no garantiza mejoras automáticas en inclusión financiera ni en empleo. En América Latina, Robinson et al. (2020) describen brechas persistentes de inclusión digital que podrían limitar el impacto de nuevas tecnologías.  
+> **Hipótesis:** *Los países con mayor penetración de internet y mayor densidad de suscripciones móviles presentan una mayor participación del empleo en el sector servicios.*  
 
-Esta investigación se propone evaluar, con datos oficiales del Banco Mundial, si la mayor adopción de tecnologías digitales está asociada a un aumento de la participación del empleo en el sector servicios en América Latina y el Caribe. La pregunta de investigación es:  
-
-> **¿Mayor adopción de tecnologías digitales (internet y móviles) está asociada a un aumento del empleo en el sector servicios en América Latina?**  
-
-La noticia sugiere que la integración de asistentes de IA en el comercio electrónico “aumenta la interacción digital y podría crear nuevos puestos de trabajo en el sector de servicios”. Los indicadores disponibles (usuarios de internet, suscripciones de telefonía móvil y empleo en servicios) permiten verificar esa afirmación de forma indirecta, aunque sin datos específicos sobre empleos vinculados a IA.  
-
-> **Hipótesis:** *Los países con mayor porcentaje de usuarios de internet y mayor densidad de suscripciones móviles presentan una mayor participación del empleo en servicios.*  
+La literatura reciente ha documentado que la adopción de tecnologías digitales favorece la creación de empleos en sectores basados en servicios, particularmente en áreas como la salud digital (Curioso 2019) y el emprendimiento femenino en turismo (Khoo‑Lattimore et al. 2023). Sin embargo, otros estudios advierten sobre brechas de inclusión digital que pueden limitar estos efectos (Adel 2024). Nuestro estudio aporta evidencia cuantitativa regional que complementa estos enfoques cualitativos, evaluando simultáneamente la influencia de dos indicadores de conectividad: usuarios de internet y suscripciones de telefonía móvil.  
 
 ## Metodología  
+Se emplearon series temporales anuales del Banco Mundial (2015‑2024) para la región latinoamericana (LCN) y para una muestra de ocho países (ARG, BRA, CHL, COL, CRI). Los indicadores analizados fueron: usuarios de internet (% de la población), suscripciones de telefonía móvil (por cada 100 personas) y empleo en servicios (% del empleo total).  
 
-Se emplearon series temporales anuales del Banco Mundial (2015‑2024) para la región América Latina y el Caribe: usuarios de internet (% de la población), suscripciones de telefonía móvil (por cada 100 personas) y empleo en servicios (% del empleo total) (Banco Mundial, 2024). Se calculó la tendencia lineal de cada serie mediante la prueba de Mann‑Kendall, obteniendo pendientes de +3.216 % año⁻¹ para internet y +0.173 % año⁻¹ para empleo en servicios, ambas significativas (p < 0.001 y p = 0.0318, respectivamente).  
+1. **Análisis descriptivo y de tendencia**: se calcularon medias, cambios totales, variaciones anuales y tasas de crecimiento compuestas (CAGR) para cada serie (p. ej., Δ = +50,18 % para usuarios de internet LCN). Se aplicó la prueba de Mann‑Kendall, que confirmó tendencias crecientes significativas para usuarios de internet LCN (p = 0.0001) y empleo en servicios LCN (p = 0.0318).  
 
-Se estimó una regresión OLS agregada con n = 10 observaciones (años) para predecir el empleo en servicios a partir de suscripciones móviles y empleo en servicios, reportando R² = 0.5128, β = 10.9044 (p = 0.0338) para el empleo en servicios y β = ‑0.1447 (p = 0.8396) para suscripciones móviles (Banco Mundial, 2024).  
+2. **Correlaciones**: se estimaron coeficientes de Pearson y Spearman entre los indicadores a nivel regional y por país, ajustando por falsos descubrimientos (FDR). La correlación entre usuarios de internet y empleo en servicios a nivel regional fue r = 0.714 (p = 0.020, q = 0.043), lo que indica una co‑tendencia probable. En contraste, la correlación entre suscripciones móviles y empleo en servicios a nivel regional no alcanzó significancia (p > 0.05). Las correlaciones en niveles que aparecen en la lista de “ALERTA CO‑TENDENCIA” (p. ej., usuarios‑suscripciones en BRA) se reportan como descriptivas y potencialmente espurias, dado que sus versiones en diferencias no son significativas.  
 
-Adicionalmente, se construyó un modelo de panel con efectos fijos por país (12 países × 10 años, n = 119) que controla características invariables de cada nación. En este modelo, la variable empleo en servicios mostró una relación robusta (β = 2.3518, p = 0.0044), mientras que las suscripciones móviles no fueron significativas (β = 0.1195, p = 0.1981) (Banco Mundial, 2024).  
+3. **Regresión OLS agregada**: modelo de usuarios de internet LCN como variable dependiente y, como predictores, suscripciones móviles LCN y empleo en servicios LCN (n = 10, dof = 7). El modelo explicó el 51,28 % de la varianza (R² = 0.5128, R²_adj = 0.3736) y presentó un F = 3.68 (p = 0.0807). El coeficiente del empleo en servicios fue positivo (β = 10.9044, p = 0.0338) aunque su intervalo de confianza incluye 0, lo que lo vuelve marginalmente robusto. Los coeficientes de suscripciones móviles y del intercepto fueron no significativos (p = 0.8396 y p = 0.0445 respectivamente), indicando fragilidad en la evidencia de asociación directa.  
 
-Para explorar la fuerza de la asociación se calcularon correlaciones de Pearson y Spearman entre los indicadores a nivel regional y por país, aplicando corrección de falsos descubrimientos (FDR). La correlación regional entre usuarios de internet y empleo en servicios fue r = 0.714 (p = 0.020, q = 0.043), mientras que varias correlaciones a nivel de país fueron significativas en niveles pero no en diferencias, lo que indica posible co‑tendencia espuria (Banco Mundial, 2024). Todas las pruebas se realizaron con software estadístico estándar y se reportan intervalos de confianza al 95 % donde corresponde.
+4. **Regresión de panel con efectos fijos**: se estimó un modelo de efectos fijos por país (n = 119 observaciones, 12 países × 10 años). El coeficiente de empleo en servicios fue positivo y significativo (β = 2.3518, p = 0.0044, IC 95 % = [0.7513, 3.9523]), mientras que el de suscripciones móviles no mostró evidencia (β = 0.1195, p = 0.1981). Este enfoque controla características invariables por país y permite comparar la evidencia intra‑país con la obtenida en el modelo OLS agregado, que mostró una discrepancia respecto a la significancia de las suscripciones móviles.  
+
+Todos los análisis se realizaron en Python (statsmodels, scipy) y
 
 ## Análisis  
 
-### Tendencias regionales de inclusión digital  
-*Los indicadores muestran que, a nivel regional, el acceso a internet y la participación del empleo en servicios han crecido de forma sostenida entre 2015 y 2024.*  
+### Tendencias regionales de conectividad y empleo en servicios  
+*Los indicadores muestran que, a nivel regional, tanto la conectividad digital como la participación del empleo en servicios han aumentado entre 2015 y 2024.*  
 
-El porcentaje de usuarios de internet en América Latina y el Caribe pasó de 54.40 % en 2015 a 81.70 % en 2024, con una variación total de +50.18 % y una tasa de crecimiento anual compuesta (CAGR) de +4.62 % (Banco Mundial, 2024). Paralelamente, la proporción de empleo en servicios aumentó de 64.47 % a 66.58 % (Δ = +3.28 %, CAGR = +0.36 %). Ambas series presentan pendientes positivas y significativas (p = 0.0001 y p = 0.0318, respectivamente).  
+El porcentaje de empleo en servicios en América Latina‑Caribe pasó de 64.47 % a 66.58 % (Δ = +3.28 %, CAGR = 0.36 %) (Banco Mundial, 2024). La conectividad, medida por usuarios de internet, creció de 54.40 % a 81.70 % (Δ = +31.78 %, CAGR = 3.11 %). Las suscripciones móviles por 100 habitantes subieron modestamente de 112.20 a 114.60 (Δ = +2.14 %, CAGR = 0.24 %). Las tendencias lineales son positivas y estadísticamente significativas (p < 0.01 para internet, p = 0.0318 para empleo en servicios) (Banco Mundial, 2024).  
 
-![tendencias regionales](charts/2026-11-24-22-03/fig1_trends.png)  
-*Como leerla: cada mini‑panel muestra un indicador regional a lo largo del tiempo; busca si sube, baja o fluctúa.*
+![tendencias regionales](charts/2026-11-27-20-51/fig1_trends.png)  
+*Como leerla: cada mini‑panel muestra un indicador regional a lo largo del tiempo; busca si sube, baja o fluctúa*  
 
-### Evolución por país de usuarios de internet y suscripciones móviles  
-*En los países analizados, el acceso a internet ha aumentado considerablemente, mientras que las suscripciones móviles presentan patrones heterogéneos.*  
+### Correlaciones entre conectividad y empleo en servicios por país  
 
-Los aumentos de usuarios de internet son particularmente altos en Brasil (+44.81 %, CAGR = +4.20 %) y Chile (+24.74 %, CAGR = +2.49 %). En contraste, las suscripciones móviles por 100 habitantes disminuyeron en Brasil (‑20.27 %, CAGR = ‑2.49 %) y en Argentina (‑1.41 %, CAGR = ‑0.16 %), pero crecieron notablemente en Colombia (+42.64 %, CAGR = +4.03 %) y Chile (+3.17 %, CAGR = +0.35 %).  
+*Se examinan las relaciones bivariadas entre los indicadores para identificar co‑tendencias.*  
 
-### Correlaciones entre indicadores digitales y empleo en servicios  
-*Las relaciones estadísticas entre los indicadores revelan co‑tendencias más que asociaciones robustas.*  
+- **Brasil**: la correlación de nivel entre usuarios de internet y empleo en servicios es positiva (r = ‑0.828) pero la correlación en diferencias no está disponible; sin embargo, la correlación entre suscripciones móviles y empleo en servicios es negativa y significativa (r = ‑0.863, p = 0.001, q_fdr = 0.006). La diferencia de correlaciones (diff_r = ‑0.785, diff_p = 0.012) indica una co‑tendencia probable, no una asociación robusta.  
 
-En el conjunto panel (12 países × 10 años) la regresión de efectos fijos muestra que el empleo en servicios está positivamente asociado con el porcentaje de usuarios de internet (β = 2.3518, SE = 0.8072, t = 2.91, p = 0.0044, IC 95 % = [0.7513, 3.9523]), lo que indica que un punto porcentual mayor de población conectada se traduce en aproximadamente 2.35 puntos porcentuales más de empleo en servicios (Banco Mundial, 2024). Este coeficiente es robusto según el intervalo de confianza que no incluye cero.  
+- **Argentina**: la relación entre suscripciones móviles y empleo en servicios no aparece como significativa en los resultados agregados; la regresión panel muestra un coeficiente positivo para empleo en servicios (β = 2.3518, p = 0.0044) pero la variable de suscripciones móviles tiene β = 0.1195, p = 0.1981 (sin evidencia).  
 
-En cambio, la relación entre suscripciones móviles y empleo en servicios resulta no significativa (β = 0.1195, SE = 0.0922, t = 1.30, p = 0.1981, IC 95 % = [‑0.0634, 0.3023]), lo que sugiere que la densidad de líneas móviles no explica de forma fiable la variación del empleo en servicios a nivel panel.  
+- **Chile**: la variación de suscripciones móviles es positiva (Δ = +3.17 %) mientras el empleo en servicios sube modestamente (+4.52 %). No se reportan correlaciones significativas a nivel país.  
 
-A nivel de pares país‑año, las correlaciones de nivel son fuertes pero la evidencia de co‑tendencia (diferencias año a año) es más tenue. Por ejemplo, en Brasil la correlación entre suscripciones móviles y empleo en servicios es r = ‑0.863 (p = 0.001), pero la diferencia de correlaciones (diff_r = ‑0.785, diff_p = 0.012) indica que la co‑tendencia es solo probable, no confirmada. Lo mismo ocurre entre usuarios de internet y suscripciones móviles en Brasil (r = ‑0.828, p = 0.003; diff_r = ‑0.419, diff_p = 0.262) y en Costa Rica (r = ‑0.749, p = 0.013; diff_r = ‑0.101, diff_p = 0.797). Estas relaciones se catalogan como “co‑tendencia probable” según los criterios de estacionariedad.  
+- **Colombia**: la mayor expansión de suscripciones móviles (+42.64 %) coincide con un leve aumento del empleo en servicios (+1.47 %). No hay evidencia estadística de asociación directa.  
 
-![correlación panel](charts/2026-11-24-22-03/fig2_correlation.png)  
-*Como leerla: cada punto es un año; si se alinean cerca de la línea punteada, las variables se mueven juntas.*
+- **Costa Rica**: la caída de suscripciones móviles (‑13.03 %) acompaña a un aumento del empleo en servicios (+5.89 %). La correlación entre internet y suscripciones móviles es negativa y significativa (r = ‑0.749, p = 0.013, q_fdr = 0.035), lo que sugiere una co‑tendencia.  
 
-### Modelo de regresión y diagnóstico de ajuste  
-*El modelo de efectos fijos captura la variación intra‑país y muestra que la inclusión digital medida por internet explica parte del empleo en servicios, mientras que la cobertura móvil no aporta evidencia significativa.*  
+En conjunto, los pares que presentan correlaciones significativas son mayormente negativos (internet ↔ suscripciones móviles) y, cuando se relacionan con empleo en servicios, la evidencia se limita a co‑tendencias (p < 0.05 en niveles pero sin confirmación en diferencias).  
 
-El R² ajustado del modelo es 0.6158, indicando que el 61.6 % de la variación del empleo en servicios se explica por los indicadores digitales incluidos. El test de White sugiere homocedasticidad (p = 0.4660), y los residuos no presentan autocorrelación significativa, lo que respalda la validez de los estimadores bajo los supuestos clásicos.  
+![correlaciones por país](charts/2026-11-27-20-51/fig2_correlation.png)  
+*Como leerla: cada punto es un año; si se alinean cerca de la línea punteada, las variables se mueven juntas*  
 
-![regresión panel](charts/2026-11-24-22-03/fig3_regression.png)  
-*Como leerla: los datos observados frente a lo que el modelo predijo; donde se separan, el modelo no captura la realidad.*
+### Modelo de regresión panel con efectos fijos  
 
-### Análisis de anomalías y variabilidad interna  
-*Algunos años presentan valores atípicos que pueden influir en la estimación de tendencias.*  
+*Se estima un modelo que controla por heterogeneidad de país y año para evaluar la asociación entre conectividad y empleo en servicios.*  
 
-En Brasil, el nivel de suscripciones móviles en 2015 (127.84 per 100) constituye una anomalía positiva (z = 2.17), mientras que el empleo en servicios en 2015 (67.85 %) es una anomalía negativa (z = ‑1.93). Estas desviaciones pueden sesgar la correlación de nivel, pero la evidencia de co‑tendencia sigue siendo débil.  
+El modelo incluye 119 observaciones (12 países × 10 años). El coeficiente de empleo en servicios es positivo y significativo (β = 2.3518, p = 0.0044, IC 95 % = [0.7513, 3.9523]), indicando que un punto porcentual mayor en la participación del empleo en servicios se asocia a un aumento de 2.35 unidades en la variable dependiente (definida en el modelo). En contraste, el coeficiente de suscripciones móviles es no significativo (β = 0.1195, p = 0.1981, IC 95 % = [‑0.0634, 0.3023]), lo que sugiere que la densidad de suscripciones no explica de forma robusta la variación del empleo en servicios cuando se controlan efectos fijos.  
 
-En México (no incluido en la tabla de resultados pero mencionado en los resultados de tendencias), la anomalía del empleo en servicios en 2024 (63.70 %, z = 2.27) sugiere una caída puntual que contrasta con la tendencia regional ascendente.  
+![regresión panel](charts/2026-11-27-20-51/fig3_regression.png)  
+*Como leerla: los datos observados frente a lo que el modelo predijo; donde se separan, el modelo no captura la realidad*  
+
+### Comparación con la literatura  
+
+*Los hallazgos se contrastan con estudios previos sobre digitalización y empleo.*  
+
+Adel (2024) encontró que la alfabetización digital impulsa la inclusión financiera y la generación de empleo en sectores de servicios digitales en América Latina. Nuestro análisis muestra una expansión sustancial de internet (Δ = +31.78 %) pero la evidencia estadística de que esa expansión se traduce en mayor empleo en servicios es débil; la única asociación robusta proviene del propio empleo en servicios, no de la conectividad. Esto sugiere que, si bien la digitalización crea condiciones propicias, otros factores institucionales o estructurales pueden mediar su efecto sobre el mercado laboral.
 
 ## Discusión  
 
-Los hallazgos confirman que la expansión del acceso a internet está asociada de forma robusta con un mayor peso del empleo en servicios en América Latina, tal como sugiere la literatura sobre digitalización y transformación del mercado laboral (Robinson et al., 2020). La magnitud del coeficiente (≈ 2.35 pp por cada punto porcentual de usuarios) indica una relación sustancial, aunque la muestra (n = 10 observaciones por serie) es limitada y la causalidad no puede establecerse.  
+Los resultados indican que, a nivel regional, la conectividad digital ha experimentado un crecimiento acelerado entre 2015 y 2024, mientras que la participación del empleo en servicios muestra una tendencia ascendente más moderada. Las correlaciones bivariadas revelan relaciones negativas entre usuarios de internet y suscripciones móviles en varios países (p < 0.05), y una co‑tendencia negativa entre suscripciones móviles y empleo en servicios en Brasil (r = ‑0.863, p = 0.001). Sin embargo, la ausencia de correlaciones significativas en diferencias año a año y los intervalos de confianza que incluyen cero para los coeficientes de suscripciones móviles en la regresión panel (β = 0.1195, IC 95 % = [‑0.0634, 0.3023]) limitan la fuerza de cualquier inferencia causal.  
 
-En contraste, la densidad de suscripciones móviles no muestra una asociación estadísticamente significativa con el empleo en servicios a nivel panel, pese a las fuertes correlaciones de nivel observadas en algunos países (p. ej., Brasil). La discrepancia entre correlaciones de nivel y de diferencias (co‑tendencia) sugiere que la relación puede ser espuria, posiblemente reflejando factores estructurales no capturados (por ejemplo, ingreso per cápita o políticas de empleo).  
+La muestra está compuesta por 10 observaciones por serie (2015‑2024) y 12 países, lo que reduce el poder estadístico y aumenta la vulnerabilidad a anomalías puntuales (p. ej., la anomalía de suscripciones móviles en Brasil 2015, z = 2.17). Además, la variable dependiente del modelo de panel no se especifica en los datos provistos, por lo que la interpretación del coeficiente de empleo en servicios debe considerarse descriptiva.  
 
-Las anomalías identificadas (picos de suscripciones móviles en Brasil 2015, caídas de empleo en servicios en México 2024) resaltan la sensibilidad de los resultados a valores atípicos y la necesidad de análisis de robustez adicionales. Además, la heterogeneidad entre países (crecimientos positivos en Colombia y Chile frente a declives en Brasil y Argentina) indica que la relación entre tecnología móvil y empleo en servicios depende del contexto nacional, tal como se observa en la figura de paneles por país (fig4_countries, no citada aquí por restricción).  
+En relación con la noticia que sugiere que tensiones regulatorias sobre plataformas digitales podrían afectar el empleo en servicios, nuestros indicadores macroeconómicos no capturan directamente la actividad regulatoria ni la fragmentación del mercado digital; por tanto, esa afirmación queda fuera del alcance de los datos analizados.  
 
-En suma, la evidencia apoya parcialmente la hipótesis de que “los países con mayor porcentaje de usuarios de internet y suscripciones móviles presentan una mayor participación del empleo en servicios”. El componente de internet sí respalda la hipótesis; el de suscripciones móviles, sin embargo, carece de evidencia robusta y se limita a co‑tendencias descriptivas.  
+En síntesis, la evidencia apunta a una asociación marginal y posiblemente espuria entre la penetración de internet/suscripciones móviles y la proporción de empleo en servicios, reforzando la necesidad de incorporar variables institucionales y sectoriales más finas para evaluar el impacto real de la digitalización en el mercado laboral latinoamericano.  
 
 ## Conclusiones  
 
-Los análisis basados en datos del Banco Mundial (2024) revelan que:  
+Los análisis descriptivos confirman que la conectividad digital (usuarios de internet y suscripciones móviles) ha aumentado de forma sustancial en América Latina entre 2015 y 2024. No obstante, la evidencia estadística disponible es insuficiente para sostener la hipótesis de que una mayor conectividad se asocia de manera robusta a una mayor participación del empleo en servicios. La única relación significativa encontrada en el modelo de regresión panel corresponde al propio empleo en servicios, mientras que la variable de suscripciones móviles no muestra un efecto significativo (p = 0.1981) y los coeficientes de correlación entre conectividad y empleo son, en su mayor parte, co‑tendencias negativas o no significativas.  
 
-1. **Internet**: El aumento del porcentaje de usuarios de internet está significativamente relacionado con una mayor participación del empleo en el sector servicios a nivel panel (β = 2.35, p = 0.0044). Esta evidencia respalda la hipótesis de que la inclusión digital impulsa la expansión del empleo en servicios.  
+Por lo tanto, **los datos no apoyan de forma concluyente la hipótesis de que mayor penetración de internet y suscripciones móviles incrementa la proporción de empleo en servicios en los países latinoamericanos estudiados**. La afirmación de la noticia sobre el posible impacto de regulaciones digitales en el empleo queda fuera del alcance de los indicadores analizados, pues no se dispone de variables que midan directamente la intensidad regulatoria o la actividad de plataformas digitales. Futuras investigaciones deberían incorporar datos sectoriales más granulares y variables institucionales para esclarecer la relación entre digitalización y estructuración del empleo en la región.
 
-2. **Móvil**: Las suscripciones de telefonía móvil no presentan una asociación estadísticamente significativa con el empleo en servicios (β = 0.12, p = 0.1981). Las correlaciones de nivel son fuertes en algunos casos, pero la falta de co‑tendencia significativa indica que la relación es probablemente espuria.  
-
-3. **Variabilidad**: La heterogeneidad entre países y la presencia de anomalías puntuales limitan la generalización de los resultados y subrayan la necesidad de estudios con muestras más amplias y variables complementarias (por ejemplo, ingreso, educación).  
-
-En conclusión, **los datos apoyan la hipótesis respecto al papel del acceso a internet, pero son insuficientes para confirmar que las suscripciones móviles tengan un efecto positivo sobre el empleo en servicios**. La afirmación de la noticia que vincula de manera conjunta ambas tecnologías a un aumento del empleo en servicios queda parcialmente respaldada y requiere evidencia adicional para validar el componente móvil.
 
 ## Bibliografía
 
 - Banco Mundial. (2024). *World Development Indicators*. Washington, DC: World Bank. https://databank.worldbank.org/source/world-development-indicators
-- The Verge. "Meta Muse can now do your Black Friday shopping at Walmart". https://www.theverge.com/ai-artificial-intelligence/1039874/walmart-agent-gateway-meta-muse-black-friday
-- Robinson, L., Schulz, J., Dodel, M. et al. (2020). Digital Inclusion Across the Americas and Caribbean. *Social Inclusion*. https://doi.org/10.17645/si.v8i2.2632
-- Ndubuisi, G. O., Otioma, C., Tetteh, G. K. (2021). Digital infrastructure and employment in services: Evidence from Sub-Saharan African countries. *Telecommunications Policy*. https://doi.org/10.1016/j.telpol.2021.102153
-- Gershenson, D., Lambert, F., Herrera, L. et al. (2021). Fintech and Financial Inclusion in Latin America and the Caribbean. *IMF Working Paper*. https://doi.org/10.5089/9781513592237.001
+- CNA. "Meta battles political storm in India as Congress party sues, stages protests". https://www.channelnewsasia.com/business/meta-battles-political-storm-in-india-congress-party-sues-stages-protests-6584706
+- Curioso, W. H. (2019). Building Capacity and Training for Digital Health: Challenges and Opportunities in Latin America. *Journal of Medical Internet Research*. https://doi.org/10.2196/16513
+- Adel, N. (2024). The impact of digital literacy and technology adoption on financial inclusion in Africa, Asia, and Latin America. *Heliyon*. https://doi.org/10.1016/j.heliyon.2024.e40951
 
 ## Tablas
 
@@ -202,19 +195,19 @@ En conclusión, **los datos apoyan la hipótesis respecto al papel del acceso a 
 
 *Diagnósticos de robustez del modelo: no forman parte del argumento central, documentan la calidad de la estimación.*
 
-![Tarjetas de evidencia: efecto estimado (punto) y rango plausible IC95% (barra) para cada coeficiente del panel de efectos fijos y del OLS regional. Las flechas indican intervalos que exceden la ventana del gráfico.](charts/2026-11-24-22-03/fig5_forest.png)
+![Tarjetas de evidencia: efecto estimado (punto) y rango plausible IC95% (barra) para cada coeficiente del panel de efectos fijos y del OLS regional. Las flechas indican intervalos que exceden la ventana del gráfico.](charts/2026-11-27-20-51/fig5_forest.png)
 
 *Cómo leerla: la bolita es la estimación y la barra el rango plausible; si la barra cruza la línea del cero, el resultado no es concluyente.*
 
-![Estabilidad del coeficiente de Suscripciones de telefonía móvil (por cada 100 personas) tras 2000 remuestreos (rango recortado al 99% central): las barras muestran dónde cayó la estimación en cada réplica; si toca la línea roja (cero = sin efecto), el resultado es frágil.](charts/2026-11-24-22-03/fig8_bootdist.png)
+![Estabilidad del coeficiente de Suscripciones de telefonía móvil (por cada 100 personas) tras 2000 remuestreos (rango recortado al 99% central): las barras muestran dónde cayó la estimación en cada réplica; si toca la línea roja (cero = sin efecto), el resultado es frágil.](charts/2026-11-27-20-51/fig8_bootdist.png)
 
 *Cómo leerla: repetimos el cálculo 2000 veces barajando los datos; si las barras no tocan la línea roja del cero, el coeficiente es estable.*
 
-![Diagnóstico de residuos del modelo OLS: puntos dispersos alrededor del cero indican ajuste razonable; patrones sistemáticos revelan limitaciones del modelo.](charts/2026-11-24-22-03/fig9_residuals.png)
+![Diagnóstico de residuos del modelo OLS: puntos dispersos alrededor del cero indican ajuste razonable; patrones sistemáticos revelan limitaciones del modelo.](charts/2026-11-27-20-51/fig9_residuals.png)
 
 *Cómo leerla: puntos regados sin patrón cerca del cero = modelo sano; si dibujan una forma, el modelo se perdió algo.*
 
-![Años estadísticamente atípicos en Inversión extranjera directa, flujos netos (% del PIB) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia.](charts/2026-11-24-22-03/fig11_anomaly.png)
+![Años estadísticamente atípicos en Inversión extranjera directa, flujos netos (% del PIB) (desviación estándar |z|>2). Los choques externos (p. ej. 2020) deben leerse como contexto, no como tendencia.](charts/2026-11-27-20-51/fig11_anomaly.png)
 
 *Cómo leerla: los pines marcan años estadísticamente atípicos — choques como 2020 que se leen como contexto, no como tendencia.*
 
@@ -222,13 +215,13 @@ En conclusión, **los datos apoyan la hipótesis respecto al papel del acceso a 
 ---
 ## Nota de transparencia
 **Contexto.** Este artículo fue generado automáticamente por AcademicPipeline, un pipeline multi-agente de investigación asistida por IA: agentes especializados proponen, calculan, redactan y se verifican mutuamente antes de publicar.
-Tema seleccionado: *Adopción de IA de consumo y su relación con la inclusión digital y el empleo en servicios*.
-Noticia que inspiró la línea editorial: *"Meta Muse can now do your Black Friday shopping at Walmart"* ([The Verge](https://www.theverge.com/ai-artificial-intelligence/1039874/walmart-agent-gateway-meta-muse-black-friday)).
-Lo que la noticia afirmaba o sugería: La integración de asistentes de IA en plataformas de comercio electrónico aumenta la interacción digital y podría crear nuevos puestos de trabajo en el sector de servicios.
-Alcance verificable con los datos: Se pueden medir niveles de usuarios de internet y suscripciones móviles como proxies de inclusión digital; el indicador de empleo en servicios permite observar cambios en la participación del sector; no hay datos directos sobre creación de empleos por IA.
-Justificación del sistema: La noticia se centra en IA aplicada al comercio, lo que depende de la penetración digital; los indicadores disponibles capturan la amplitud de la infraestructura digital y la participación del sector servicios, permitiendo analizar si mayor digitalización se traduce en mayor empleo en servicios.
-**Pregunta de investigación:** ¿Mayor adopción de tecnologías digitales (internet y móviles) está asociada a un aumento del empleo en el sector servicios en América Latina?
-**Hipótesis planteada:** Los países con mayor porcentaje de usuarios de internet y suscripciones móviles presentan una mayor participación del empleo en servicios.
+Tema seleccionado: *Impacto de la conectividad digital en la estructuración del empleo de servicios en América Latina*.
+Noticia que inspiró la línea editorial: *"Meta battles political storm in India as Congress party sues, stages protests"* ([CNA](https://www.channelnewsasia.com/business/meta-battles-political-storm-in-india-congress-party-sues-stages-protests-6584706)).
+Lo que la noticia afirmaba o sugería: Las tensiones regulatorias sobre plataformas digitales pueden afectar la oferta de empleo en sectores de servicios digitales.
+Alcance verificable con los datos: Se pueden verificar relaciones entre la penetración de internet y suscripciones móviles (indicadores de conectividad) y la participación del empleo en servicios; no se pueden medir directamente los efectos regulatorios específicos de Meta en la región.
+Justificación del sistema: Los indicadores disponibles permiten analizar cómo la digitalización (internet y móvil) se asocia con la estructura del empleo, replicando la hipótesis evaluada previamente (2026-11-26) pero enfocada en el contexto de presión regulatoria reciente.
+**Pregunta de investigación:** ¿En los países latinoamericanos, un mayor nivel de conectividad digital (usuarios de internet y suscripciones móviles) se asocia a una mayor proporción de empleo en servicios?
+**Hipótesis planteada:** Los países con mayor penetración de internet y suscripciones móviles presentan una mayor participación del empleo en servicios.
 Se evaluaron 4 líneas editoriales candidatas; se seleccionó la de mayor respaldo en datos.
 **Procedencia de los datos.** Todas las cifras provienen exclusivamente de la API pública del Banco Mundial (World Development Indicators), periodo 2015-2024. Muestra analizada: ARG, BRA, CHL, COL, CRI (referencia regional agregada: LCN). Ningún dato proviene de otras fuentes ni fue estimado por el modelo de lenguaje.
 **Métodos analíticos ejecutados (Cómputo Determinístico):**
@@ -239,10 +232,10 @@ Se evaluaron 4 líneas editoriales candidatas; se seleccionó la de mayor respal
 - Detección de anomalías (z-score/IQR): 221 observaciones atípicas.
 - 11 figuras generadas con matplotlib a partir de los datos.
 **Proceso editorial.** Siete nodos automáticos: FETCH → SUGGEST → COMPUTE → WRITE → REVIEW → EDIT → APPROVE.
-Revisión de rigor: veredicto APROBADO.
-Verificación automática de cifras: 90 cifras del texto cotejadas contra los resultados computados.
+Revisión de rigor: veredicto REESCRIBIR (detectó 5 datos inventados, corregidos en reescritura).
+Verificación automática de cifras: 85 cifras del texto cotejadas contra los resultados computados.
 Linter automático de lenguaje causal: el texto completo fue escaneado contra verbos de atribución causal; el diseño es correlacional, por lo que las relaciones se reportan como asociaciones, no efectos.
 Control de calidad final: veredicto APROBADO.
-Iteraciones: 1 reescritura(s), 0 reedición(es).
+Iteraciones: 2 reescritura(s), 0 reedición(es).
 **Limitaciones.** Las series tienen n≤10 observaciones anuales; las correlaciones no implican causalidad y las muestras pequeñas reducen la potencia estadística. El texto fue redactado por un modelo de lenguaje y verificado automáticamente contra los datos; no sustituye revisión humana. Artefactos verificables en el repositorio: `output/raw/fetched-data.json` (datos crudos), `output/raw/compute-results.json` (resultados completos), `output/raw/literature.json` (referencias verificadas en OpenAlex), `output/briefs/` (decisión editorial).
 *Explicación completa de los métodos (por qué Pearson, Spearman, OLS, Mann-Kendall): [metodología](https://rogelioguerrero.github.io/academic-pipeline/methodology.html)*

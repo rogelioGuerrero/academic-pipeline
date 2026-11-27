@@ -1,0 +1,344 @@
+{
+  "generated": "2026-11-27T20:59:45.968Z",
+  "topic": "Impacto de la conectividad digital en la estructuración del empleo de servicios en América Latina",
+  "angle": "Analizar cómo la expansión de usuarios de internet y suscripciones móviles está correlacionada con la participación del empleo en el sector servicios, considerando la presión regulatoria sobre plataformas digitales como contexto contemporáneo.",
+  "nodes": [
+    "FETCH",
+    "SUGGEST",
+    "COMPUTE",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "WRITE",
+    "REVIEW",
+    "EDIT",
+    "APPROVE"
+  ],
+  "iterations": {
+    "rewrite": 2,
+    "edit": 0
+  },
+  "pregunta": "¿En los países latinoamericanos, un mayor nivel de conectividad digital (usuarios de internet y suscripciones móviles) se asocia a una mayor proporción de empleo en servicios?",
+  "hipotesis": "Los países con mayor penetración de internet y suscripciones móviles presentan una mayor participación del empleo en servicios.",
+  "inspiringNews": {
+    "title": "Meta battles political storm in India as Congress party sues, stages protests",
+    "url": "https://www.channelnewsasia.com/business/meta-battles-political-storm-in-india-congress-party-sues-stages-protests-6584706",
+    "source": "CNA",
+    "section": "Política",
+    "image": "https://dam.mediacorp.sg/image/upload/s--QoslOzOZ--/c_fill,g_auto,h_676,w_1200/fl_relative,g_south_east,l_mediacorp:cna:watermark:2024-04:reuters_1,w_0.1/f_auto,q_auto/v1/one-cms/core/2026-11-26T090755Z_1_LYNXNPEMAP0PQ_RTROPTP_3_META-PLATFORMS-MESSAGING-WHATSAPP.JPG?itok=XNQlchdI"
+  },
+  "suggestMode": "suggest",
+  "suggestions": [
+    {
+      "titulo": "Impacto de la expansión de la conectividad digital en el empleo de servicios en América Latina",
+      "noticia_inspiradora": "Meta battles political storm in India as Congress party sues, stages protests",
+      "afirmacion_noticia": "Las tensiones regulatorias sobre plataformas digitales pueden afectar la oferta de empleo en sectores de servicios digitales.",
+      "verificable_con_datos": "Se pueden verificar relaciones entre la penetración de internet y suscripciones móviles (indicadores de conectividad) y la participación del empleo en servicios; no se pueden medir directamente los efectos regulatorios específicos de Meta en la región.",
+      "indicadores_respaldan": [
+        "Internet users (% of population)",
+        "Mobile cellular subscriptions (per 100 people)",
+        "Employment in services (% of total employment)"
+      ],
+      "correlaciones_relevantes": [
+        "Internet users ↔ Employment in services",
+        "Mobile subscriptions ↔ Employment in services"
+      ],
+      "justificacion": "Los indicadores disponibles permiten analizar cómo la digitalización (internet y móvil) se asocia con la estructura del empleo, replicando la hipótesis evaluada previamente (2026-11-26) pero enfocada en el contexto de presión regulatoria reciente.",
+      "pregunta": "¿En los países latinoamericanos, un mayor nivel de conectividad digital (usuarios de internet y suscripciones móviles) se asocia a una mayor proporción de empleo en servicios?",
+      "hipotesis": "Los países con mayor penetración de internet y suscripciones móviles presentan una mayor participación del empleo en servicios.",
+      "keywords_en": "digital connectivity employment services Latin America"
+    },
+    {
+      "titulo": "Efectos de la inflación y el gasto en educación sobre la tasa de NEET juvenil",
+      "noticia_inspiradora": "Iranian twins sentenced to death, 25 years in jail over protests",
+      "afirmacion_noticia": "La inestabilidad política y social puede aumentar la proporción de jóvenes fuera del sistema educativo y laboral.",
+      "verificable_con_datos": "Se pueden contrastar la inflación y el gasto público en educación con la tasa de NEET juvenil; la causa política directa no es medible con los indicadores.",
+      "indicadores_respaldan": [
+        "Inflation, consumer prices (annual %)",
+        "Government expenditure on education (% of GDP)",
+        "Share of youth not in education, employment or training (NEET, % of youth population)"
+      ],
+      "correlaciones_relevantes": [
+        "Inflation ↔ NEET",
+        "Education expenditure ↔ NEET"
+      ],
+      "justificacion": "Los indicadores permiten explorar si entornos macroeconómicos inflacionarios y bajos niveles de inversión en educación están vinculados a mayores tasas de jóvenes descolocados, un vínculo plausible dado el contexto de protestas sociales.",
+      "pregunta": "¿Existe una relación negativa entre el gasto público en educación y la tasa de NEET, y una relación positiva entre la inflación y la tasa de NEET en América Latina?",
+      "hipotesis": "Mayor gasto en educación reduce la proporción de jóvenes NEET, mientras que mayor inflación la incrementa.",
+      "keywords_en": "inflation education expenditure NEET youth Latin America"
+    },
+    {
+      "titulo": "Relación entre inversión extranjera directa y crecimiento del PIB en contextos de conflicto geopolítico",
+      "noticia_inspiradora": "Israeli strikes kill nine in Gaza, including Hamas-appointed deputy education minister, officials say",
+      "afirmacion_noticia": "Los conflictos internacionales pueden reducir la IED neta y, por ende, el crecimiento económico regional.",
+      "verificable_con_datos": "Se pueden medir la IED neta y el crecimiento del PIB; el impacto directo del conflicto en América Latina no es observable, pero se puede analizar la asociación general entre IED y crecimiento en el periodo reciente.",
+      "indicadores_respaldan": [
+        "Foreign direct investment, net inflows (% of GDP)",
+        "GDP growth (annual %)"
+      ],
+      "correlaciones_relevantes": [
+        "FDI inflows ↔ GDP growth"
+      ],
+      "justificacion": "Aunque la noticia es sobre Oriente Medio, el puente analítico es la posible repercusión de tensiones geopolíticas en los flujos de IED hacia América Latina, un tema medible con los indicadores disponibles.",
+      "pregunta": "¿La variación de la IED neta está positivamente asociada al crecimiento del PIB en los países latinoamericanos durante los últimos años?",
+      "hipotesis": "Un mayor porcentaje de IED neta respecto al PIB se asocia a mayores tasas de crecimiento económico en América Latina.",
+      "keywords_en": "foreign direct investment GDP growth Latin America geopolitics"
+    },
+    {
+      "titulo": "Impacto de la expansión de la energía renovable en la esperanza de vida y la salud pública",
+      "noticia_inspiradora": "Indonesia taps Coral Bond to expand marine conservation areas",
+      "afirmacion_noticia": "Iniciativas de conservación y energía verde pueden mejorar indicadores de salud poblacional.",
+      "verificable_con_datos": "Se pueden correlacionar el consumo de energía renovable con la esperanza de vida y el gasto en salud; la causalidad de la política indonesia no es directamente medible en América Latina.",
+      "indicadores_respaldan": [
+        "Renewable energy consumption (% of total final energy)",
+        "Life expectancy at birth (years)",
+        "Current health expenditure (% of GDP)"
+      ],
+      "correlaciones_relevantes": [
+        "Renewable energy ↔ Life expectancy",
+        "Renewable energy ↔ Health expenditure"
+      ],
+      "justificacion": "Los indicadores permiten explorar si los países con mayor participación de energías renovables presentan mejores resultados de salud, alineado con la tendencia global de sostenibilidad.",
+      "pregunta": "¿Existe una asociación positiva entre la proporción de energía renovable en la matriz energética y la esperanza de vida en América Latina?",
+      "hipotesis": "Los países latinoamericanos con mayor consumo de energía renovable presentan una mayor esperanza de vida.",
+      "keywords_en": "renewable energy life expectancy health expenditure Latin America"
+    }
+  ],
+  "reviewDecision": {
+    "datos_correctos": false,
+    "detalle_datos": "El paper cita cifras regionales de usuarios de internet (54.40 %→81.70 %) y suscripciones móviles (112.20→114.60) que no aparecen en los datos reales, además incluye un valor de correlación para Brasil indicado como r = 0.?? y porcentajes de variación y CAGR no respaldados.",
+    "datos_inventados": [
+      "Internet regional 54.40 % a 81.70 %",
+      "Suscripciones móviles regional 112.20 a 114.60",
+      "CAGR regional de internet 4.62 % y de móviles 0.24 %",
+      "Δ% regional de internet 50.18 % y de móviles 2.14 %",
+      "Correlación Brasil r = 0.?? sin dato real"
+    ],
+    "estructura_ok": true,
+    "coherencia_ok": true,
+    "correcciones": [
+      "Reemplazar las cifras regionales por los valores agregados LCN provistos (p. ej. internet LCN 81.09 % media, móvil LCN 134.46 % media).",
+      "Eliminar o completar el valor de correlación de Brasil con un número real (p. ej. r = ‑0.828 según resultados).",
+      "Corregir los porcentajes de variación y CAGR a los calculados en los resultados (p. ej. Δ total internet +31.78 %, CAGR = 3.11 %).",
+      "Ajustar la descripción de suscripciones móviles regional a los datos reales (p. ej. promedio 134.46 %).",
+      "Asegurarse de que todas las cifras citadas provengan de las tablas y resultados suministrados.",
+      "Marcador sin valor: \"??\" — reemplazar por la cifra computada real o eliminar la afirmación."
+    ],
+    "datos_faltantes": null,
+    "veredicto": "REESCRIBIR",
+    "feedback": "El manuscrito contiene varios números que no aparecen en la base de datos oficial. Sustituya esas cifras por los valores reales y verifique que todas las estadísticas estén respaldadas por los resultados proporcionados.; Placeholder sin valor detectado (??).",
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 85,
+      "invented": 0
+    }
+  },
+  "qaDecision": {
+    "veredicto": "APROBADO",
+    "checklist": {
+      "estructura_ok": true,
+      "resumen_ok": true,
+      "bibliografia_ok": true,
+      "citas_apa_ok": true,
+      "coherencia_ok": true,
+      "datos_verificados": true,
+      "tono_academico": true,
+      "extension_ok": true
+    },
+    "palabras": 2136,
+    "issues": [],
+    "causal_check": {
+      "hard": 0,
+      "soft": 0
+    },
+    "number_check": {
+      "checked": 86,
+      "invented": 0
+    }
+  },
+  "editorial": "¿Y si en Latinoamérica, cuando más gente tiene internet y más teléfonos móviles, también crece el trabajo en servicios? Esa pregunta surgió cuando la noticia sobre Meta y el Congreso en India nos hizo pensar en la relación entre conectividad y empleo.\n\nAl revisar los datos, vemos que en los diez países analizados el porcentaje de usuarios de internet aumentó de manera moderada, pero la relación con el empleo en servicios no es tan directa. Cuando las suscripciones móviles suben, el empleo en servicios tiende a bajar un poco, aunque esa tendencia no es muy fuerte. En cambio, cuando el empleo en servicios crece, la penetración de internet también aumenta, y esa asociación parece más sólida. En el panel de 12 países y 119 observaciones, el efecto del empleo en servicios sigue siendo fuerte y consistente, mientras que el de las suscripciones móviles desaparece.\n\nEn resumen, la historia no confirma la idea de que más conectividad digital impulse automáticamente más empleo en servicios. La evidencia sugiere que el empleo en servicios puede estar impulsando la adopción de internet, pero la relación no es una regla universal. Para los lectores, esto significa que la conectividad no garantiza un auge de empleos en servicios; la realidad es más compleja y varía según cada país.",
+  "sample": {
+    "countries": [
+      "ARG",
+      "BRA",
+      "CHL",
+      "COL",
+      "CRI"
+    ],
+    "indicators": [
+      "Internet users (% of population)",
+      "Mobile cellular subscriptions (per 100 people)",
+      "Employment in services (% of total employment)"
+    ]
+  },
+  "dataSources": {
+    "source": "World Bank API",
+    "url": "https://api.worldbank.org",
+    "indicators": 30,
+    "countries": 13,
+    "latestYear": 2024
+  },
+  "computeResults": {
+    "chartsDir": "2026-11-27-20-51",
+    "regression": {
+      "r_squared": 0.5128196723911,
+      "n": 10
+    },
+    "correlations": 39,
+    "significantCorrelations": [
+      {
+        "x": "Internet users (% of population) [BRA]",
+        "y": "Mobile cellular subscriptions (per 100 people) [BRA]",
+        "r": -0.8280128899647679,
+        "p": 0.0030931110984291936,
+        "q": 0.011467236900175272,
+        "diff_r": -0.4187247905836885,
+        "diff_p": 0.26198987172319993,
+        "country": "BRA"
+      },
+      {
+        "x": "Internet users (% of population) [MEX]",
+        "y": "Mobile cellular subscriptions (per 100 people) [MEX]",
+        "r": 0.8716162889411965,
+        "p": 0.0010150575720795228,
+        "q": 0.005928993694353644,
+        "diff_r": -0.0753446178617346,
+        "diff_p": 0.8472334664857591,
+        "country": "MEX"
+      },
+      {
+        "x": "Internet users (% of population) [COL]",
+        "y": "Mobile cellular subscriptions (per 100 people) [COL]",
+        "r": 0.9419396209143995,
+        "p": 0.00004633540934599649,
+        "q": 0.001807080964493863,
+        "diff_r": 0.05661587229866043,
+        "diff_p": 0.884970727809946,
+        "country": "COL"
+      },
+      {
+        "x": "Internet users (% of population) [CHL]",
+        "y": "Mobile cellular subscriptions (per 100 people) [CHL]",
+        "r": 0.7144390618332248,
+        "p": 0.02026070425452539,
+        "q": 0.043064041143382054,
+        "diff_r": 0.29504380294855803,
+        "diff_p": 0.4408537247912966,
+        "country": "CHL"
+      },
+      {
+        "x": "Internet users (% of population) [ECU]",
+        "y": "Mobile cellular subscriptions (per 100 people) [ECU]",
+        "r": 0.8612120047351156,
+        "p": 0.00136822931408161,
+        "q": 0.005928993694353644,
+        "diff_r": -0.7224725212619535,
+        "diff_p": 0.02790808371230924,
+        "country": "ECU"
+      },
+      {
+        "x": "Internet users (% of population) [CRI]",
+        "y": "Mobile cellular subscriptions (per 100 people) [CRI]",
+        "r": -0.7494410806721157,
+        "p": 0.012580553182783056,
+        "q": 0.03514769194317154,
+        "diff_r": -0.10062222693360885,
+        "diff_p": 0.796735752037993,
+        "country": "CRI"
+      },
+      {
+        "x": "Internet users (% of population) [LCN]",
+        "y": "Employment in services (% of total employment) [LCN]",
+        "r": 0.713967736448553,
+        "p": 0.02038193904926376,
+        "q": 0.043064041143382054,
+        "diff_r": -0.6601618307622145,
+        "diff_p": 0.05297548166035751,
+        "country": "LCN"
+      },
+      {
+        "x": "Internet users (% of population) [BRA]",
+        "y": "Employment in services (% of total employment) [BRA]",
+        "r": 0.8661447562276412,
+        "p": 0.001191236302532572,
+        "q": 0.005928993694353644,
+        "diff_r": 0.0950495522038479,
+        "diff_p": 0.8078185257851289,
+        "country": "BRA"
+      }
+    ]
+  },
+  "truncations": [
+    {
+      "stage": "WRITE:apertura_metodologia",
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 1455
+    },
+    {
+      "stage": "WRITE:apertura_metodologia",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 2200
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7491,
+      "after": 4528,
+      "cutChars": 8601
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 9230,
+      "after": 5489,
+      "cutChars": 10940
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7361,
+      "after": 4472,
+      "cutChars": 8615
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 8764,
+      "after": 5458,
+      "cutChars": 9894
+    },
+    {
+      "stage": "WRITE:apertura_metodologia",
+      "model": "openai/gpt-oss-120b",
+      "outputTruncated": true,
+      "maxTokens": 1570
+    },
+    {
+      "stage": "WRITE:apertura_metodologia",
+      "model": "gemini-2.5-flash",
+      "outputTruncated": true,
+      "maxTokens": 2200
+    },
+    {
+      "stage": "WRITE:analisis_cierre",
+      "model": "openai/gpt-oss-120b",
+      "before": 7397,
+      "after": 4509,
+      "cutChars": 8571
+    },
+    {
+      "stage": "REVIEW",
+      "model": "openai/gpt-oss-120b",
+      "before": 9485,
+      "after": 5361,
+      "cutChars": 12295
+    }
+  ],
+  "elapsed": 518
+}
